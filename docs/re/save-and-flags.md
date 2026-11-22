@@ -30,9 +30,9 @@ All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX,
 | Toolkit slot | Offset in block | Size | What it is | Status |
 |---|---|---|---|---|
 | `+0x40` | `+0x0000` | `0x84` | Game state: map/mode bytes (`+4`, `+5` heavily read), `BN4_MAP_STATES` index at `+0` | V (fields T) |
-| `+0x44` | `+0x0084` | `0x94` | Progress: playthrough `+0x0D`, game time `+0x2C`, checksum `+0x34`, magic `+0x54` | V |
+| `+0x44` | `+0x0084` | `0x94` | Progress: playthrough `+0x0D`, HP `+0x14` and `+0x16` (100/100 on a new game; which is current and which max is T), game time `+0x2C`, checksum `+0x34`, magic `+0x54` | V, R |
 | `+0x48` | `+0x0118` | `0x3E4` | **Event flags**, `0x3E0` bytes = 7,936 flags (§2) | V |
-| `+0x4C` | `+0x04FC` | `0xB8` | | |
+| `+0x4C` | `+0x04FC` | `0xB8` | **Folders**: 3 × 30 u16 `chip \| code << 9` (code 26 = `*`), then 4 bytes. A new game has folder 1 = the 30 starting chips (Cannon A/B first) and folders 2–3 filled with chip 0 | R |
 | `+0x50` | `+0x05B4` | `0xF04` | (large: likely chip/pack data) | T |
 | `+0x54` | `+0x14B8` | `0x194` | | |
 | `+0x58` | `+0x164C` | `0xDC4` | | |
@@ -45,13 +45,13 @@ All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX,
 | `+0x74` | `+0x252C` | `0x804` | | |
 | `+0x78` | `+0x2D30` | `0x204` | | |
 | `+0x7C` | `+0x2F34` | `0x704` | | |
-| `+0x80` | `+0x3638` | `0x194` | | |
+| `+0x80` | `+0x3638` | `0x194` | Random-looking bytes on a new game: probably anti-cheat key tables like `+0x84` | T |
 | `+0x84` | `+0x37CC` | `0x204` | Chip keys mirror: CE's `BN4_CHIP_GATE` compares `eToolkit[+0x84] + id` with `0x02000670 + id XOR 0x64` | T (from CE) |
-| `+0x88` | `+0x39D0` | `0x204` | | |
-| `+0x8C` | `+0x3BD4` | `0x8` | | |
-| `+0x90` | `+0x3BDC` | `0x8` | | |
-| `+0x94` | `+0x3BE4` | `0x104` | | |
-| `+0x98` | `+0x3CE8` | `0x8` | | |
+| `+0x88` | `+0x39D0` | `0x204` | Random-looking, same size as `+0x84`: a second key table | T |
+| `+0x8C` | `+0x3BD4` | `0x8` | Holds a ROM code pointer on a new game (`0x080B140C`) | R (meaning T) |
+| `+0x90` | `+0x3BDC` | `0x8` | ROM pointer (`0x0804BC8B`, Thumb) | R (meaning T) |
+| `+0x94` | `+0x3BE4` | `0x104` | Random-looking: key table | T |
+| `+0x98` | `+0x3CE8` | `0x8` | ROM pointer (`0x0812A741`, Thumb) | R (meaning T) |
 
 Sizes are the gap to the next slot. The slot boundaries are **V**. Naming the unnamed slots is the next RE step; a field-usage scan is in §5.
 
@@ -159,7 +159,7 @@ The field scan of §3 and of the slot table comes from a throwaway script (read-
 ## 6. Next steps
 
 1. Watch flags `0x17`–`0x1C` across a Soul event; this needs a late-game state.
-2. Name the remaining save slots (`+0x4C` to `+0x98`) from their readers: folder, pack, Library, NaviCust, Zenny, BugFrags, mail, key items.
+2. Name the remaining save slots from their readers and from diffs across in-game actions: pack, Library, NaviCust, Zenny, BugFrags, mail, key items. On a new game, `+0x5C`–`+0x6C` are all zero, `+0x58` holds about 440 8-byte records, and `+0x70` is 14 bytes of `0xFF`. The bulk of the Zenny and chip work (Phase 1 economy) depends on this step.
 3. RE-05 second half: the script flag opcode and the scripts that set `0x17`–`0x22`.
 4. RE-03 completion: read the six tier readers and the `sub_0803A3xx` group.
 5. RE-04: CE already names `BN4_START_TOURNAMENT`, `BN4_ADVANCE_ROUND` and `BN4_NEXT_OPPONENT`; follow the pool fill (`0x08043FE4`, `0x08044058`, `0x0804422C`, `0x0804428C`) to the RNG.
