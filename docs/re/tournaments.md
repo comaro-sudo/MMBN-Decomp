@@ -64,7 +64,7 @@ New Game+ keeps the pools only when flag `0x18` is set (`sub_08001350`; see [com
   Both use `GetTertiaryRNG` (`sub_08001B60`). A patch can make the pair order follow the playthrough count (both Souls of a tournament over two runs), or let the player choose. And it can drop the shuffle.
 - **WP-D4, the merge.** Tournament ids already cover all twelve Soul Navis, and Red Sun already enters Blue Moon's Navis when the traded list holds them. Red Sun must therefore contain enough of Blue Moon's Navis to fight them. Red Sun save `22565` has Blue Moon's Soul flags set and all 36 secret chips, which fits. CE's `bn4_souls.py` also reads all twelve Souls' form tables from Red Sun.
   - **If true, the merge is far smaller than planned:** fill the traded list (or rewrite the entrant tables), then open the Soul flag table (`souls.md`).
-  - **First test (T → R):** in Red Sun, with a patched 12-entry Soul flag table and save `22565`, try to unite with ProtoSoul in battle.
+  - **Tested (R):** with the 12-entry Soul flag table and save `22565`, Red Sun unites WoodSoul ([soul-merge-experiment.md](soul-merge-experiment.md)).
 - **The secret chips** come through the same path: beating a traded Navi in the Free Tournament (§1, `sub_080448C0`).
 
 ## 6. Next

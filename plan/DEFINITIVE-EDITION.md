@@ -51,6 +51,8 @@ Red Sun and Blue Moon each contain only their own exclusives. The fingerprint su
 | B. Two-ROM runtime (Cyberworld Endless model) | The director loads both ROMs and pulls the other version's content in at runtime | PC / Wii U / 3DS only. **Not NDS, not GBA hardware** | Medium, but breaks C5 |
 | C. Two patched ROMs, each complete | Each version patched to include the other's exclusives | Every port | About the same as A, twice the testing |
 
+**Update 2026-11-22: much of A's data is already in both ROMs.** Both versions carry all twelve Souls' code, tables and sprites, and the chip table is identical. A Blue Moon Soul runs in Red Sun once a 12-byte table is filled ([docs/re/soul-merge-experiment.md](../docs/re/soul-merge-experiment.md)). Red Sun also fields Blue Moon's Navis in tournaments when it has their traded data ([docs/re/tournaments.md](../docs/re/tournaments.md)). What still has to move or be written is the grants, the encounters and the version-specific story data.
+
 **Recommendation: A.** It is the only option that satisfies C5 on NDS and hardware. The decompilation stops being optional: DC-1 (done: RS/BM map), DC-2/DC-3 (names) and DC-4 (BM variant = the list of what differs) feed the merge directly.
 
 Legal note: like everything else, the merged ROM is produced on the player's machine from **both** of their own ROMs (patch + build script). Nothing from either ROM is distributed.

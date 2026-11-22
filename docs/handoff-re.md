@@ -44,6 +44,7 @@
 
 ## Immediate Next Steps
 
+0b. **Confirmed:** WoodSoul (Blue Moon) unites in Red Sun with `wp_d4_twelve_souls.asm` (now in both builds). See `docs/re/soul-merge-experiment.md`. Next: the mirror test (a Red Sun Soul in Blue Moon), then the grant without a trade.
 0a. **13 community saves** (`ref/saves/`, local) decode with `python patch/tools/savetool.py`: [`docs/re/community-saves.md`](re/community-saves.md). RE-04 is half-mapped in [`docs/re/tournaments.md`](re/tournaments.md). The key lead: Red Sun can already field Blue Moon's Navis. Test it: 12-entry Soul flag table + save `22565` + unite ProtoSoul.
 
 0. The content inventory has started (commit `2938b52`): run `python patch/tools/inventory.py`; the conclusions are in `docs/completion/`. Its next step is RE-07/RE-09 (the ROM's own GMD, Mystery Data, shop and trader tables), which replace the guide- and map-based sources.
