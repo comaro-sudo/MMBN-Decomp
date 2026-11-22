@@ -64,6 +64,12 @@ dumps/
 *.sgm
 *.mgm
 *.vbm
+# Cheat-device and emulator save exports (GameShark SP / SharkPort, Action Replay, VBA)
+*.sps
+*.xps
+*.gsv
+*.duc
+*.dsv
 # Raw saves ignored everywhere except the curated test library.
 *.sav
 *.srm
