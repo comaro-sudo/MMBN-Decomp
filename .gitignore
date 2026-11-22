@@ -30,9 +30,10 @@ build/
 *.o
 *.map
 
-# --- Third-party tools and cloned reference repos ---
-tools/
-ext/
+# --- Third-party tools and cloned reference repos (repo root only;
+#     decomp/tools/ holds our own scripts and IS tracked) ---
+/tools/
+/ext/
 
 # --- Extracted / dumped game data (copyrighted; regenerate from your ROM) ---
 # TextPet dumps are tracked ONLY after editing, under src/scripts/.
