@@ -3,15 +3,21 @@
 # Rule #1: never commit Capcom ROMs or anything built from them.
 # ============================================================
 
-# --- Original ROMs (keep the folder, ignore the contents) ---
+# --- Original ROMs (keep the folder + README, ignore the contents) ---
 roms/*
 !roms/README.md
 *.gba
 *.agb
+*.mb
 *.nds
+*.dsi
 *.3ds
 *.cia
+*.cxi
 *.srl
+*.zip
+*.7z
+*.rar
 
 # --- Build output (patched ROMs, patches, intermediates) ---
 build/
@@ -28,37 +34,44 @@ build/
 tools/
 ext/
 
-# --- Extracted game data (copyrighted; regenerate from your ROM) ---
-# TextPet dumps are tracked ONLY once edited and moved into src/scripts/.
+# --- Extracted / dumped game data (copyrighted; regenerate from your ROM) ---
+# TextPet dumps are tracked ONLY after editing, under src/scripts/.
 extracted/
 dump/
+dumps/
 *.dump
+*.dmp
 
-# --- Emulator saves & states ---
-# Save states contain RAM/VRAM snapshots, so keep them local.
+# --- Emulator saves, states, recordings ---
+# Save states hold RAM/VRAM snapshots, so keep them local.
 *.ss[0-9]
 *.ss
 *.state
 *.st[0-9]
 *.sgm
-# Raw saves are ignored everywhere except the curated test library.
+*.mgm
+*.vbm
+# Raw saves ignored everywhere except the curated test library.
 *.sav
 *.srm
+*.fla
 !test/saves/*.sav
 !test/saves/*.srm
+# No$GBA writes saves into BATTERY/
+BATTERY/
 
 # --- Debugger / RE workspaces ---
+# Keep Ghidra projects under ghidra/ (repo root) so they're ignored as a whole.
+ghidra/
 *.gpr
 *.rep/
-*.lock
-*.lock~
-ghidra/
 *.no$gba
 
-# --- Future native ports (CMake / devkitPro / MSVC) ---
+# --- Future native ports (CMake / devkitPro / MSVC / clangd) ---
 out/
 cmake-build-*/
 CMakeUserPresets.json
+.cache/
 .vs/
 *.vcxproj.user
 *.pdb
@@ -71,12 +84,21 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Logs & temp ---
+*.log
+*.tmp
+*.bak
 
 # --- Editors & OS ---
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/extensions.json
+!.vscode/launch.json
 .idea/
 *.swp
 *~

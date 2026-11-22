@@ -95,7 +95,7 @@ Requirements:
 
 ## 6. Tasks (M0)
 
-- [ ] `git init` (`.gitignore` is already written)
+- [x] `git init` + initial commit (`.gitignore` included)
 - [x] Move the ROMs into `roms/`, verify hashes
 - [x] Move the design docs into `docs/`
 - [ ] Install the tools and record their versions in `docs/toolchain.md`
