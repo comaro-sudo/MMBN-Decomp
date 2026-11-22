@@ -1,0 +1,90 @@
+# ============================================================
+# MMBN4 Overhaul — .gitignore
+# Rule #1: never commit Capcom ROMs or anything built from them.
+# ============================================================
+
+# --- Original ROMs (keep the folder, ignore the contents) ---
+roms/*
+!roms/README.md
+*.gba
+*.agb
+*.nds
+*.3ds
+*.cia
+*.srl
+
+# --- Build output (patched ROMs, patches, intermediates) ---
+build/
+*.bps
+*.ips
+*.ups
+*.xdelta
+*.sym
+*.elf
+*.o
+*.map
+
+# --- Third-party tools and cloned reference repos ---
+tools/
+ext/
+
+# --- Extracted game data (copyrighted; regenerate from your ROM) ---
+# TextPet dumps are tracked ONLY once edited and moved into src/scripts/.
+extracted/
+dump/
+*.dump
+
+# --- Emulator saves & states ---
+# Save states contain RAM/VRAM snapshots, so keep them local.
+*.ss[0-9]
+*.ss
+*.state
+*.st[0-9]
+*.sgm
+# Raw saves are ignored everywhere except the curated test library.
+*.sav
+*.srm
+!test/saves/*.sav
+!test/saves/*.srm
+
+# --- Debugger / RE workspaces ---
+*.gpr
+*.rep/
+*.lock
+*.lock~
+ghidra/
+*.no$gba
+
+# --- Future native ports (CMake / devkitPro / MSVC) ---
+out/
+cmake-build-*/
+CMakeUserPresets.json
+.vs/
+*.vcxproj.user
+*.pdb
+*.ilk
+*.exe
+*.dll
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# --- Editors & OS ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*~
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- Local notes / secrets ---
+.claude/settings.local.json
+.env
+*.local.md
