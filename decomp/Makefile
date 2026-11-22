@@ -43,8 +43,15 @@ $(BUILD)/baserom.gba: $(BASEROM)
 	@echo "$(SHA1)  $<" | sha1sum -c --quiet - || (echo "baserom $< has the wrong SHA-1"; exit 1)
 	ln -sf $(abspath $<) $@
 
-$(OBJ): rom.s $(wildcard asm/*.s) $(wildcard data/*.s) $(wildcard include/*.inc) $(BUILD)/baserom.gba
+$(OBJ): rom.s $(wildcard asm/*.s) $(wildcard config/*.toml) $(wildcard data/*.s) $(wildcard include/*.inc) $(BUILD)/baserom.gba
 	$(AS) $(ASFLAGS) -o $@ rom.s
+
+# Function symbols for code still inside incbin ranges (section-relative, so
+# `as` resolves BL offsets itself). Regenerated with rom.s by tools/split.py.
+$(BUILD)/externs.inc: rom.s symbols/functions_$(VERSION).txt $(wildcard asm/*.s)
+	python3 tools/split.py $(VERSION)
+
+$(OBJ): $(BUILD)/externs.inc
 
 $(ELF): $(OBJ) ld_script.ld
 	$(LD) -T ld_script.ld -Map $(BUILD)/bn4_$(VERSION).map -o $@ $(OBJ)

@@ -90,6 +90,7 @@ class Survey:
         work, seen = [start], set()
         while work:
             a = work.pop()
+            prev = None
             while self.rom.in_rom(a) and a not in seen:
                 off = a - BASE
                 insn = next(md.disasm(self.rom.d[off:off + 4], a), None)
@@ -117,6 +118,13 @@ class Survey:
                     if t is not None:
                         work.append(t)
                 elif m == "bx":
+                    if prev == ("mov", "lr, pc"):
+                        # `mov lr, pc; bx rX` is a call through a register:
+                        # execution returns to the next instruction.
+                        self.unresolved["bx_call"] += 1
+                        prev = (m, ops)
+                        a = nxt
+                        continue
                     if not ops.startswith("lr"):
                         self.unresolved["bx_reg"] += 1
                     break
@@ -135,8 +143,41 @@ class Survey:
                             self.seed(v, True, "literal_ptr")
                         elif 0x02000000 <= v < 0x04000000 and v & 1:
                             self.ram_calls["literal_ram_code_ptr"] += 1
+                prev = (m, ops)
                 a = nxt
             # literal pools right after the function belong to it (rough)
+
+    def prologue_pass(self) -> int:
+        """Seed undecoded gaps that start (after 0x0000 padding) with a Thumb
+        `push {..., lr}`: functions nothing references directly (reached only
+        through data we don't parse yet). Repeat until nothing new decodes."""
+        added_total = 0
+        end = self.code_end or self.rom.end
+        for _ in range(8):
+            covered = set(self.code)
+            for l in self.literals:
+                covered |= {l, l + 2}
+            added = 0
+            a = BASE
+            while a < end:
+                if a in covered:
+                    a += 2
+                    continue
+                p = a
+                while p < end and p not in covered and struct.unpack_from("<H", self.rom.d, p - BASE)[0] == 0:
+                    p += 2
+                if p < end and p not in covered and \
+                        (struct.unpack_from("<H", self.rom.d, p - BASE)[0] & 0xFF00) == 0xB500 and \
+                        p not in self.funcs:
+                    self.seed(p | 1, True, "prologue")
+                    added += 1
+                while a < end and a not in covered:
+                    a += 2
+            if not added:
+                break
+            self.run()
+            added_total += added
+        return added_total
 
     def pointer_tables(self, min_run: int = 4) -> int:
         """Seed from runs of >= min_run words that are odd ROM pointers."""
@@ -196,6 +237,8 @@ def main() -> None:
 
     tables = s.pointer_tables()
     s.run()
+    prologues = s.prologue_pass()
+    print(f"prologue pass: {prologues} gap-start functions seeded")
 
     ok = sum(1 for f in s.funcs.values() if f["ok"])
     code_bytes = len(s.code) * 2
