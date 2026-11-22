@@ -40,11 +40,11 @@
 - The Navi-stat shadow (`+0x98`) and the `+0x94` shadows don't match on a new game, so it's unknown when they're written.
 - Unnamed save slots: `+0x50` (`0xF04` bytes, probably the pack), `+0x54`, `+0x58` (about 440 8-byte records), `+0x5C`–`+0x74`, `+0x80`.
 - Flag ranges `0x18C0` and `0x1AC0`: chip-related, meaning unknown.
-- It's unconfirmed which AddZenny caller is the battle reward (needed before WP-A2 Zenny ×1.75).
+- The battle-reward caller (`sub_08021684`) is identified from code; it hasn't been confirmed in a real battle yet.
 
 ## Immediate Next Steps
 
-1. RE-08: read `sub_08021684`, the reward handler that calls AddZenny, against `BN4_REWARD_ROWS` (`0x080F5F50`). Confirm it's the battle reward and find the "no reward" flag for scripted battles.
+1. RE-08: the battle-reward grant is `sub_08021684` (§4b of the note). Still to do: find who fills the reward word at `[obj+0x10]` from `BN4_REWARD_ROWS`, which sets the Busting Level row, and the "no reward" rule for scripted battles. Confirm it in a real battle once the story allows jack-in.
 2. RE-05, second half: find the event-script opcode that sets a flag (TextPet script commands) and the scripts that use flags `0x17`–`0x22`.
 3. RE-04: follow `BN4_START_TOURNAMENT`'s pool fill (`0x08043FE4`, `0x08044058`, `0x0804422C`, `0x0804428C`) to the RNG.
 4. Name the remaining save slots: use the PC port test mode to diff saves around actions once the story allows jack-in. An alternative is reading the PET screens' code.

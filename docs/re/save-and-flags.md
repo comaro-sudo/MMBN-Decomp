@@ -176,7 +176,20 @@ AddZenny has four callers:
 - **`sub_080501B8` and `sub_0805081C`:** the amount is a 4-byte little-endian value read from data, probably a script command or Mystery Data.
 - **`sub_08090698`:** a fixed amount from a literal.
 
-The Zenny ×1.75 package (WP-A2) can scale at the battle-reward caller only, so shop refunds and scripted gifts stay as they are. That needs RE-08 to confirm which caller is the battle one.
+**Battle reward path (RE-08).**
+
+- **Reward word.** u16 `0xFFFF` = none; bits 14–15 = kind, decoded by `sub_08021A98`:
+  - kind 0 = chip, id in bits 0–8 and code in bits 9–13;
+  - kinds 1, 2 and 3 = Zenny, an unknown kind, and BugFrags, each with a 14-bit amount (≤16,383).
+- **Format.** It matches CE's `BN4_REWARD_ROWS` (`0x080F5F50`: 20 rewards per row, rows 0–9 when MegaMan's HP is above 3/8, rows 10–19 at or below). **V**
+- **Results screen.** Two small state machines share the handlers:
+  - `sub_08021470`, with states at ROM `0x08021484`;
+  - `sub_0802152C`, with states at ROM `0x08021540`: init `sub_0802154C`, then `sub_08021624`, then `sub_08021684`.
+- **Init.** It shuffles 42 tile indices (`0x2A`) and loads the reward's picture by kind (the chip's own image, the Zenny picture, two variants for kind 2, four BugFrag sizes by amount) into VRAM `0x0600B900`. This is the results screen's tile-by-tile reveal.
+- **Grant.** `sub_08021684` then grants the reward: chip → `sub_08021CA8` (sound `0x99`), Zenny → AddZenny, kind 2 → `sub_08021B92`, BugFrags → AddBugFrags.
+- **Status.** **V** for the code; that this is the battle results screen is **T** (strongly suggested by the reveal), to confirm in a battle.
+
+The Zenny ×1.75 package (WP-A2) can scale at the battle-reward caller only, so shop refunds and scripted gifts stay as they are. The battle caller is `sub_08021684` (above), so the patch hook is its `bl sub_0802D59A` at `0x08021704` (RS).
 
 The HP Memory effect is `sub_0802D508` (T: the name comes from its body). It adds 20 HP, or 10 when flag `0xC49` is set, to game state `+0x20` and `+0x22` and to progress `+0x14`, each capped at 9999.
 
