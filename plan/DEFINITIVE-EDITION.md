@@ -25,7 +25,7 @@ The completion lists are **generated from the ROMs, not written from memory**:
 - **Chips:** both chip tables (verified byte-identical with `mmbn-chip-tables`, about 389 entries each), merged and deduplicated. Flag which ones each version can actually obtain (GMD tables, shops, traders, battle drops, scripts) and which have no in-game source.
 - **Souls:** from the Soul-grant logic and flags (RE-05), per version.
 - **Bosses:** from the enemy/Navi records and encounter tables (RE-06; Cyberworld Endless maps BN4's enemy records), per version and tier.
-- Output: `docs/completion/inventory.csv` (item, kind, RS source, BM source, "missing in-game" flag) and a generated checklist. This gives C1–C3 their exact contents.
+- Output (started 2026-11-22): `patch/tools/inventory.py` writes `build/inventory/chips.csv` (item, kind, codes per version, sources, status). The CSV stays local because it holds game text and third-party facts. The conclusions are tracked in [docs/completion/](../docs/completion/README.md). This gives C1–C3 their exact contents.
 
 ## 3. What blocks completion today, and the fix for each
 
