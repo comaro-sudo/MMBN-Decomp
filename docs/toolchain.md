@@ -48,6 +48,7 @@ Deferred to M1: **Ghidra + GhidraGBA** (GhidraGBA was last updated in 2021 and m
 | saschb2b/Mega-Man-Battle-Network-Cyberworld-Endless | f2049e7 | 2026-11-19 |
 | mgba-emu/mgba (tag 0.10.5; **built** as a static libmgba for the PC port, `build/mgba-<arch>`) | 26b7884 | 2025-03-08 |
 | rhemfur/Cemu (ARM64 fork, source of `tools/cemu`) | e488d8c | 2026-10-08 |
+| dism-exe/exe4rs (JP Red Sun disassembly, IDA-generated, dormant; reference for function boundaries only) | 1d82058 | 2018-07-27 |
 
 ## ROM verification
 

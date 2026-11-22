@@ -13,7 +13,7 @@ Effort estimates assume one person working part-time. Treat them as order-of-mag
 | **M6 Handheld & console deployment** | GBARunner3 / open_agb_firm / Wii U VC (UWUVCI) testing, bezel, install guides | v0.1+ (can run in parallel from M2) | 1–2 weeks | docs |
 | **— Gate G2 —** | Decide whether to do Tier C content and/or Phase 3 | v1.0 | — | — |
 | **M7 Narrative content** | Tier C (C1–C6) | G2, RE-16 | 6–12+ months | v2.0 |
-| **M8 Decomp / recomp** | Phase 3 (community-coordinated) | G2/G3 | years | — |
+| **M8 Decomp** | Matching disassembly DC-0..DC-4, then functional C DC-5+ ([decomp/](decomp/README.md)). DC-0..DC-3 double as the M1 RE baseline | G-A gate after DC-4 | 3–5 months to G-A, then open-ended | — |
 | **M9 PC port (ThinkPad)** | Embedded mGBA core (option E) + SDL3, PET window. See [10](10-pc-port.md). **Started 2026-11-21, PC-1 done** | ~~M8~~ none (option E) | months | PC build |
 | **M10 NDS native** | Phase 4b | M9 | months | NDS build |
 | **M11 3DS native** | Phase 4c | M9 (+M10 UI) | months | 3DS build |

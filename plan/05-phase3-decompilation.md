@@ -1,5 +1,7 @@
 # 05 — Phase 3: Decompilation (prerequisite for native ports)
 
+> **Superseded by the concrete plan in [decomp/](decomp/README.md) (2026-11-21).** Key finding: BN4's engine is hand-written assembly (r10 toolkit, flag returns), so option A (matching C) is out. The plan is a matching *disassembly* (option C) plus *functional* C verified by differential tests, run inside the PC port (option E). This file keeps the original option analysis.
+
 The design doc's native NDS and 3DS ports assume "recompile the C/C++ codebase". **That codebase doesn't exist.** This phase creates it. It is the largest and most uncertain part of the whole project. Decide explicitly whether to start it (gate G3 in [09](09-milestones.md)).
 
 ## 1. Options
