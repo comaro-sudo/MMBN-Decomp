@@ -1,5 +1,7 @@
 # 06 — Phase 4: Native Ports (PC → NDS → 3DS, + Wii U)
 
+> **Port strategy updated 2026-11-22:** every port runs on an emulation layer first. See [emulation-layer/](emulation-layer/README.md) (mGBA on PC/Wii U/New 3DS, GBARunner hypervisor on NDS). This file describes the *native* (decomp-based) end state, which is now optional and per feature.
+
 Depends on Phase 3 (decomp, or option E: embedded mGBA core). Covers the design doc's Parts II and III and [docs/wii-u-blueprint.md](../docs/wii-u-blueprint.md).
 
 ## 1. Architecture: platform abstraction layer (PAL)
