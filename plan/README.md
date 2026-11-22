@@ -9,6 +9,8 @@ This folder turns the two source documents into an ordered, executable plan:
 
 M0 (setup, build pipeline, hello-world patch) is done. Write no overhaul code until the decisions in [00](00-decisions-and-feasibility.md) are confirmed.
 
+> **Project goal:** a definitive version on every port: every Soul, every chip, every boss in one save. See [DEFINITIVE-EDITION.md](DEFINITIVE-EDITION.md).
+
 ## Plan files
 
 | # | File | What it covers |
