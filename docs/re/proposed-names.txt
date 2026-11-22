@@ -43,3 +43,19 @@
 080489FC 08048A04 code   CLAUDE       SaveSystemBlock                  0x020073E0, 0x1C bytes, to SRAM 0x0E007F00 (flag 0x1188 on failure)
 08048A5A 08048A62 code   CLAUDE       LoadSystemBlock                  SRAM 0x0E007F00 to 0x020073E0, magic and sum check
 0800045E 0800045E code   CLAUDE       GameInit?                        CHECK: names.txt has HBlankIntr, but it calls the toolkit setup (0x080060CC) then RelocateSaveBlock; looks like boot/soft-reset init
+08006498 08006498 code   CLAUDE       WriteZennyShadow                 [eToolkit+0x8C] = Zenny XOR [0x02000180]
+080064B0 080064B0 code   CLAUDE       CheckZennyShadow                 r0 1 when Zenny no longer matches its shadow (tampered)
+080064D4 080064D4 code   CLAUDE       WriteBugFragShadow               [eToolkit+0x90] = BugFrags XOR [0x02001E94]
+080064EC 080064EC code   CLAUDE       CheckBugFragShadow               r0 1 when tampered
+08006558 08006558 code   CLAUDE       WriteNaviStatShadow              [eToolkit+0x98] = Navi stat +0x36 XOR [0x02001BA0]
+08006570 08006570 code   CLAUDE       CheckNaviStatShadow              r0 1 when tampered
+080065E2 080065E2 code   CLAUDE       CheckChipKeys                    for set flags in 0x18C0/0x1AC0/0x16C0 + i (0x200 each): chip key checks; r0 1 on a mismatch
+0802D59A 0802D59E code   CLAUDE       AddZenny                         r0 amount; r0 0 ok, 1 at cap/tampered, 2 clamped (cap 999999)
+0802D5D0 0802D5D4 code   CLAUDE       SetZenny                         r0 amount
+0802D5E4 0802D5E8 code   CLAUDE       SubZenny                         r0 amount; r0 0 ok, 1 none, 2 not enough/tampered
+0802D610 0802D614 code   CLAUDE       GetZenny                         r0 Zenny (game state +0x74), 0 if tampered
+0802D624 0802D628 code   CLAUDE       AddBugFrags                      as AddZenny, cap 9999 (game state +0x78)
+0802D658 0802D65C code   CLAUDE       SetBugFrags                      r0 amount
+0802D66C 0802D670 code   CLAUDE       SubBugFrags                      as SubZenny
+0802D698 0802D69C code   CLAUDE       GetBugFrags                      r0 BugFrags, 0 if tampered
+0800D7A2 0800D7A2 code   CLAUDE       GetNaviStat16                    r0 field offset: u16 at [eToolkit+0x78] + r0

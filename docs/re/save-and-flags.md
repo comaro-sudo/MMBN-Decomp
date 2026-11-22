@@ -29,7 +29,7 @@ All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX,
 
 | Toolkit slot | Offset in block | Size | What it is | Status |
 |---|---|---|---|---|
-| `+0x40` | `+0x0000` | `0x84` | Game state: map/mode bytes (`+4`, `+5` heavily read), `BN4_MAP_STATES` index at `+0` | V (fields T) |
+| `+0x40` | `+0x0000` | `0x84` | Game state: `BN4_MAP_STATES` index at `+0`, map/mode bytes `+4` and `+5` (heavily read), HP `+0x20` and `+0x22` (u16, cap 9999), **Zenny `+0x74`** (u32, cap 999999), **BugFrags `+0x78`** (u32, cap 9999) | V, R (Zenny and BugFrags) |
 | `+0x44` | `+0x0084` | `0x94` | Progress: playthrough `+0x0D`, HP `+0x14` and `+0x16` (100/100 on a new game; which is current and which max is T), game time `+0x2C`, checksum `+0x34`, magic `+0x54` | V, R |
 | `+0x48` | `+0x0118` | `0x3E4` | **Event flags**, `0x3E0` bytes = 7,936 flags (§2) | V |
 | `+0x4C` | `+0x04FC` | `0xB8` | **Folders**: 3 × 30 u16 `chip \| code << 9` (code 26 = `*`), then 4 bytes. A new game has folder 1 = the 30 starting chips (Cannon A/B first) and folders 2–3 filled with chip 0 | R |
@@ -43,15 +43,15 @@ All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX,
 | `+0x6C` | `+0x2518` | `0x4` | | |
 | `+0x70` | `+0x251C` | `0x10` | | |
 | `+0x74` | `+0x252C` | `0x804` | | |
-| `+0x78` | `+0x2D30` | `0x204` | | |
+| `+0x78` | `+0x2D30` | `0x204` | Navi stats (read as u16 by `sub_0800D7A2`, `r0` = field offset). A new game has 100 at `+0x30`, `+0x32` and `+0x34`, and 500 at `+0x36` | R (fields T) |
 | `+0x7C` | `+0x2F34` | `0x704` | | |
 | `+0x80` | `+0x3638` | `0x194` | Random-looking bytes on a new game: probably anti-cheat key tables like `+0x84` | T |
 | `+0x84` | `+0x37CC` | `0x204` | Chip keys mirror: CE's `BN4_CHIP_GATE` compares `eToolkit[+0x84] + id` with `0x02000670 + id XOR 0x64` | T (from CE) |
-| `+0x88` | `+0x39D0` | `0x204` | Random-looking, same size as `+0x84`: a second key table | T |
-| `+0x8C` | `+0x3BD4` | `0x8` | Holds a ROM code pointer on a new game (`0x080B140C`) | R (meaning T) |
-| `+0x90` | `+0x3BDC` | `0x8` | ROM pointer (`0x0804BC8B`, Thumb) | R (meaning T) |
-| `+0x94` | `+0x3BE4` | `0x104` | Random-looking: key table | T |
-| `+0x98` | `+0x3CE8` | `0x8` | ROM pointer (`0x0812A741`, Thumb) | R (meaning T) |
+| `+0x88` | `+0x39D0` | `0x204` | Chip key table: for each set Library flag `0x18C0 + i`, byte `i` = `[0x020019A0 + i] XOR 0x38` (`sub_08006594`) | V, R |
+| `+0x8C` | `+0x3BD4` | `0x8` | **Zenny shadow**: Zenny XOR `[0x02000180]`. With 0 Zenny it equals the key, which looked like a ROM pointer | V, R |
+| `+0x90` | `+0x3BDC` | `0x8` | **BugFrag shadow**: BugFrags XOR `[0x02001E94]` | V, R |
+| `+0x94` | `+0x3BE4` | `0x104` | Byte shadows of `0x020003D0[i] XOR 0x43`, written per entry (`sub_08006510`; `sub_08006524` writes the complement; `sub_0800653A` checks). Not all entries match on a new game | V (contents T) |
+| `+0x98` | `+0x3CE8` | `0x8` | Navi-stat shadow: stat `+0x36` XOR `[0x02001BA0]` (`sub_08006558`, check `sub_08006570`). Didn't match on a new game, so it's probably written only at certain events | V (timing T) |
 
 Sizes are the gap to the next slot. The slot boundaries are **V**. Naming the unnamed slots is the next RE step; a field-usage scan is in §5.
 
@@ -110,6 +110,8 @@ Code calls these at about 186 set sites and 373 test sites; most story flags are
 | `0x1D`–`0x22` | Blue Moon's six Double Souls obtained (Souls 7–12) | V |
 | `0x31D` | Lan has picked up the PET (opening, Lan's room); the START menu stays locked until then | R |
 | `0x1130`, `0x1151` | Cleared at the same moment as the PET pickup: temporary scene flags in the `0x1100`–`0x115F` ranges | R |
+| `0x16C0 + id` | **Library: chip `id` obtained** (512 flags). A new game sets exactly the ten distinct chips of folder 1 (1, 4, 15, 29, 48, 49, 91, 107, 117, 149), matching the save screen's "Library S10" | R |
+| `0x18C0 + i`, `0x1AC0 + i` | Two more 512-flag chip ranges checked by the chip-key routine `sub_080065E2`, all clear on a new game. Possibly Mega/Giga or per-code records | V (meaning T) |
 | `0x1166` | Last save or load succeeded | V, R |
 | `0x1188` | Second block (`0x0E007F00`) last written or read successfully | V |
 | `0x118A` | Saving refused | V (when it is set: T) |
@@ -151,6 +153,32 @@ The unite check matches the sacrificed chip's kind against the table, then refus
 **So both ROMs already have code paths for all 12 Souls.** The other version's Souls are blocked only by `0xFF` entries in this table and by the missing data behind them (graphics, AI, forms). For WP-D4/Option A, the first concrete patch step is to write `1D`–`22` into Red Sun's table, then supply the Blue Moon Soul data and its grant events. Which Soul is which index (CE: Soul 1 = Roll, Soul 12 = Wood) needs a check against the in-game list.
 
 **Who sets `0x17`–`0x22`.** No code does it with an immediate value: a search for `movs r0, #0x17..0x22` before a set call found nothing. The flags are set by event scripts, so the second half of RE-05 means finding the script opcode that sets a flag (TextPet's script commands) and the scripts that use these IDs.
+
+## 4b. Economy (for Phase 1 Tier A)
+
+| RS | BM | Routine | Returns |
+|---|---|---|---|
+| `0x0802D59A` | `0x0802D59E` | AddZenny(`r0`) | 0 ok, 1 already at the cap or tampered, 2 clamped to 999999 |
+| `0x0802D5D0` | `0x0802D5D4` | SetZenny(`r0`) | |
+| `0x0802D5E4` | `0x0802D5E8` | SubZenny(`r0`) | 0 ok, 1 Zenny is 0, 2 not enough (unchanged) or tampered |
+| `0x0802D610` | `0x0802D614` | GetZenny | 0 if tampered |
+| `0x0802D624` | `0x0802D628` | AddBugFrags(`r0`) | as AddZenny, cap 9999 |
+| `0x0802D658` | `0x0802D65C` | SetBugFrags | |
+| `0x0802D66C` | `0x0802D670` | SubBugFrags | as SubZenny |
+| `0x0802D698` | `0x0802D69C` | GetBugFrags | |
+| `0x08006498` / `0x080064B0` | same | Zenny shadow: write / check (Z set when OK) | |
+| `0x080064D4` / `0x080064EC` | same | BugFrag shadow: write / check | |
+
+Every change goes through these routines, which update the shadow, so a patch that changes Zenny must call them instead of writing `+0x74` directly. Otherwise the next check reads as tampering and the routines refuse to work.
+
+AddZenny has four callers:
+- **`sub_08021684`:** a reward handler (kind 1 = Zenny, sound `0x99`). This is the likely battle-reward path; check it against `BN4_REWARD_ROWS`.
+- **`sub_080501B8` and `sub_0805081C`:** the amount is a 4-byte little-endian value read from data, probably a script command or Mystery Data.
+- **`sub_08090698`:** a fixed amount from a literal.
+
+The Zenny ×1.75 package (WP-A2) can scale at the battle-reward caller only, so shop refunds and scripted gifts stay as they are. That needs RE-08 to confirm which caller is the battle one.
+
+The HP Memory effect is `sub_0802D508` (T: the name comes from its body). It adds 20 HP, or 10 when flag `0xC49` is set, to game state `+0x20` and `+0x22` and to progress `+0x14`, each capped at 9999.
 
 ## 5. Tool used
 
