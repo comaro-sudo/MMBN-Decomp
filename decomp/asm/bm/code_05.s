@@ -146,7 +146,7 @@ _08071532:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
 
     .global sub_08071542
@@ -163,7 +163,7 @@ _0807154E:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
 
     .global sub_0807155E
@@ -180,7 +180,7 @@ _0807156A:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
     .hword 0x0000
 _0807157C:
@@ -202,200 +202,7 @@ _08071594:
     .word dat_08071598
     .global dat_08071598
 dat_08071598:
-    incrom 0x71598, 0x908
-
-    .global sub_08071EA0
-    .thumb_func
-sub_08071EA0:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x71EA4, 0x4E
-
-    .global sub_08071EF2
-    .thumb_func
-sub_08071EF2:
-    lsls r0, r0, #8
-    ldr r7, _08071FF8
-    .hword 0x1EFF   @ subs r7, r7, #3
-    lsrs r7, r0, #0x20
-    str r1, [r0, #0x30]
-    lsls r7, r3, #0x1c
-    lsls r0, r1, #8
-    ldr r4, _08072034
-    subs r3, r1, #4
-    lsrs r7, r0, #0x20
-    str r1, [r0, #0x30]
-    lsls r7, r3, #0x1c
-    lsls r0, r1, #0x14
-    ldr r2, _0807230C
-    adds r1, #8
-    lsls r7, r3, #0x1c
-    movs r7, #8
-    lsls r0, r1, #0x1c
-    bmi _08071F66
-    lsls r6, r6, #2
-    lsls r2, r0, #4
-    lsls r4, r0, #4
-    adds r0, r4, #0
-    str r7, [r7, r7]
-    movs r3, #0x11
-    ldr r3, _08071F28
-    lsrs r1, r1, #0x20
-_08071F28:
-    .word 0x00000000
-    incrom 0x71F2C, 0x3A
-_08071F66:
-    asrs r0, r0, #4
-    incrom 0x71F68, 0xC
-
-    .global sub_08071F74
-    .thumb_func
-sub_08071F74:
-    movs r0, r0
-    movs r0, r0
-    strb r2, [r0]
-    strh r7, [r7, #0x22]
-    lsls r7, r3, #0x1c
-    lsls r0, r1, #4
-    movs r0, #0x24
-    lsrs r7, r0, #0x20
-    strb r2, [r0]
-    str r0, [sp, #0x1c0]
-    lsls r7, r3, #0x1c
-    lsls r0, r1, #4
-    movs r0, #0x24
-    lsrs r7, r0, #0x20
-    incrom 0x71F90, 0x68
-_08071FF8:
-    .word 0x24010000
-    incrom 0x71FFC, 0x28
-
-    .global sub_08072024
-    .thumb_func
-sub_08072024:
-    lsls r0, r0, #8
-    ldrb r0, [r6, #0x1d]
-    movs r0, #0x31
-    lsrs r7, r0, #0x20
-    push {r0, lr}
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #8
-    strb r0, [r6, #1]
-_08072034:
-    .word sub_0807203C
-    .word 0x0720B501
-
-    .global sub_0807203C
-    .thumb_func
-sub_0807203C:
-    lsls r0, r1, #0x14
-    bhi _08072040
-_08072040:
-    ldrh r2, [r1, r4]
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0xc
-    bgt _08072048
-_08072048:
-    ldrh r2, [r1, r4]
-    lsls r0, r4, #0x1c
-    movs r3, #8
-    bvs _0807209A
-    lsrs r1, r1, #0x20
-    lsls r5, r0, #6
-    lsls r7, r7, #3
-    push {r0, lr}
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0x14
-    bls _0807205E
-_0807205E:
-    ldrb r2, [r1, #4]
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0xc
-    ble _08072066
-_08072066:
-    ldrb r2, [r1, #4]
-    lsls r0, r4, #0x1c
-    movs r3, #8
-    .hword 0xD624   @ bvs #0x80720b8
-    lsrs r1, r1, #0x20
-    lsls r6, r0, #6
-    lsls r7, r7, #3
-    push {r0, lr}
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0x14
-    bge _0807207C
-_0807207C:
-    str r7, [sp, #0x28]
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0xc
-    udf #0xff
-    str r7, [sp, #0x28]
-    lsls r0, r4, #0x1c
-    movs r3, #8
-    bvs _080720D6
-    lsrs r1, r1, #0x20
-    lsls r7, r0, #6
-    lsls r7, r7, #3
-    push {r0, lr}
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0x14
-    blt _0807209A
-_0807209A:
-    push {r1, r3, lr}
-    lsls r0, r4, #0x1c
-    lsls r0, r1, #0xc
-    svc #0xff
-    push {r1, r3, lr}
-    lsls r0, r4, #0x1c
-    movs r3, #8
-    bvs _080720F4
-    lsrs r1, r1, #0x20
-    lsls r0, r1, #6
-    lsls r7, r7, #3
-    push {r0, lr}
-    lsls r0, r4, #0x1c
-    movs r0, r1
-    movs r0, r0
-_080720B8:
-    incrom 0x720B8, 0x10
-
-    .global sub_080720C8
-    .thumb_func
-sub_080720C8:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x720CC, 0xA
-_080720D6:
-    asrs r2, r0, #4
-    .word 0x1120FF1C
-
-    .global sub_080720DC
-    .thumb_func
-sub_080720DC:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x720E0, 0x10
-
-    .global sub_080720F0
-    .thumb_func
-sub_080720F0:
-    movs r0, r0
-    movs r0, r0
-_080720F4:
-    movs r1, #0
-    lsrs r7, r0, #0x20
-    movs r1, #0x13
-    lsrs r7, r0, #0x20
-    lsls r7, r7, #3
-    movs r0, r0
-    adds r0, r1, r0
-    asrs r0, r0, #0x1c
-    asrs r0, r1, #0x11
-    movs r0, r7
-    incrom 0x72108, 0x204
-_0807230C:
-    .word 0xF4360516
-    incrom 0x72310, 0xCD0
+    incrom 0x71598, 0x1A48
 
     .global sub_08072FE0
     .thumb_func
@@ -476,12 +283,12 @@ _080733FE:
     adds r6, r0, #0
     movs r0, #8
     movs r1, #0x4c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0807344A
     movs r7, #4
     movs r0, #8
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0807344A
     movs r7, #3
 _0807344A:
@@ -493,12 +300,12 @@ _0807344A:
     beq _08073460
     movs r0, #8
     movs r1, #0x53
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     b _08073468
 _08073460:
     movs r0, #8
     movs r1, #0x53
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _08073468:
     bl sub_080A9044
     pop {r4, r5, r6, r7, pc}
@@ -714,416 +521,7 @@ _08073BA8:
     .word dat_08073BAC
     .global dat_08073BAC
 dat_08073BAC:
-    incrom 0x73BAC, 0x1106
-_08074CB2:
-    lsrs r7, r0, #0x20
-    ldr r4, _08075004
-    lsrs r7, r0, #0x20
-    ldr r5, _08074D18
-    lsrs r7, r0, #0x20
-    ldr r5, _08074E2C
-    lsrs r7, r0, #0x20
-    ldr r5, _08074F40
-    lsrs r7, r0, #0x20
-    lsls r7, r7, #3
-    movs r0, r0
-    movs r5, #8
-    adds r0, r1, #0
-    ldr r1, [r5]
-    .hword 0x4510   @ cmp r0, r2
-    asrs r0, r5, #1
-
-    .global sub_08074CD2
-    .thumb_func
-sub_08074CD2:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r4, _08075054
-    lsrs r7, r0, #0x20
-    asrs r2, r0, #0x18
-    lsls r5, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r3, r3, #0xd
-    ldr r5, _08074D3C
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r0, r0, #0x10
-    incrom 0x74CEE, 0x28
-
-    .global sub_08074D16
-    .thumb_func
-sub_08074D16:
-    subs r3, #3
-_08074D18:
-    .word 0x4D237676
-    lsrs r7, r0, #0x20
-    ldrh r2, [r0, r0]
-    lsls r5, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r4, r3, #0xd
-    ldr r5, _08074E90
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r1, r0, #0x10
-    lsls r4, r4, #1
-    incrom 0x74D34, 0x8
-_08074D3C:
-    .word 0x3A0B5C05
-    incrom 0x74D40, 0x1A
-
-    .global sub_08074D5A
-    .thumb_func
-sub_08074D5A:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r5, _08074EFC
-    lsrs r7, r0, #0x20
-    ldr r6, [sp, #8]
-    lsls r5, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r5, r3, #0xd
-    ldr r5, _08074FE4
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r2, r0, #0x10
-    lsls r4, r4, #1
-    movs r4, r7
-    movs r0, r0
-    lsls r6, r2, #0xc
-    lsls r0, r2, #4
-    ldrb r5, [r0, r4]
-    ldrb r3, [r1, #0x18]
-    lsls r5, r1, #0x1d
-    asrs r0, r1, #0x20
-    lsls r1, r0, #0x14
-    lsrs r6, r5, #0xd
-    ldr r5, _08074FAC
-    lsrs r7, r0, #0x20
-    tst r0, r5
-    asrs r1, r0, #0x18
-    cmp r2, #4
-    asrs r0, r0, #0x1b
-    cmp r2, #5
-    lsls r0, r0, #0x1b
-    lsrs r7, r5, #0xd
-
-    .global sub_08074D9E
-    .thumb_func
-sub_08074D9E:
-    lsrs r3, r0, #0x20
-    ldr r0, _08074E00
-    strb r3, [r7, #0x18]
-    stm r1!, {r1, r2, r4, r5, r6}
-    lsls r5, r1, #0x1d
-_08074DA8:
-    .word 0xFF263B08
-    incrom 0x74DAC, 0x3A
-
-    .global sub_08074DE6
-    .thumb_func
-sub_08074DE6:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r5, _080751B8
-    lsrs r7, r0, #0x20
-    cmp r2, #2
-    lsls r6, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r6, r3, #0xd
-    ldr r6, _08074EA0
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-_08074E00:
-    .word 0xFF841400
-    incrom 0x74E04, 0x26
-
-    .global sub_08074E2A
-    .thumb_func
-sub_08074E2A:
-    subs r3, #3
-_08074E2C:
-    .word 0x4E377676
-    lsrs r7, r0, #0x20
-    ldr r2, [r0, #0x60]
-    lsls r6, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r7, r3, #0xd
-    ldr r6, _08074FF4
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r1, r0, #0x10
-    incrom 0x74E46, 0x28
-
-    .global sub_08074E6E
-    .thumb_func
-sub_08074E6E:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r6, _08075060
-    lsrs r7, r0, #0x20
-    .hword 0xB202   @ sxth r2, r0
-    lsls r6, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r0, r4, #0xd
-    ldr r6, _08075148
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r2, r0, #0x10
-    lsls r4, r0, #2
-    .word 0x0000FFFC
-_08074E90:
-    .word 0x01100316
-    .word 0x920B6005
-    .hword 0x074E
-
-    .global sub_08074E9A
-    .thumb_func
-sub_08074E9A:
-    asrs r0, r1, #0x20
-    lsls r1, r0, #0x14
-    lsrs r6, r5, #0xd
-_08074EA0:
-    .word sub_08074E9A
-    incrom 0x74EA4, 0xE
-
-    .global sub_08074EB2
-    .thumb_func
-sub_08074EB2:
-    lsrs r3, r0, #0x20
-    ldr r0, _08074F14
-    strb r3, [r7, #0x18]
-    bpl _08074FA8
-    lsls r6, r1, #0x1d
-    subs r3, #8
-    incrom 0x74EBE, 0x3E
-_08074EFC:
-    .word 0x3B03106C
-    strb r6, [r6, #0x19]
-    ldr r7, _08074F30
-    lsrs r7, r0, #0x20
-    tst r2, r0
-    lsls r7, r1, #0x1d
-    lsls r0, r1, #0x10
-_08074F0C:
-    .word 0x4F420B61
-    .word 0x13080807
-_08074F14:
-    .word 0x181C5925
-    incrom 0x74F18, 0x12
-
-    .global sub_08074F2A
-    .thumb_func
-sub_08074F2A:
-    asrs r0, r1, #0x20
-    lsls r1, r0, #0x14
-    lsrs r6, r5, #0xd
-_08074F30:
-    .word sub_08074F2A
-    incrom 0x74F34, 0xC
-_08074F40:
-    .word 0x3B030B6F
-    strb r6, [r6, #0x19]
-    ldr r7, _08075084
-    lsrs r7, r0, #0x20
-    strh r2, [r0, #0x30]
-    lsls r7, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r2, r4, #0xd
-    ldr r7, _0807516C
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r1, r0, #0x10
-    incrom 0x74F5E, 0x28
-
-    .global sub_08074F86
-    .thumb_func
-sub_08074F86:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r7, _080751D8
-    lsrs r7, r0, #0x20
-    ldm r2!, {r1}
-    lsls r7, r1, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r3, r4, #0xd
-    ldr r7, _080752C0
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r2, r0, #0x10
-    lsls r4, r0, #2
-    .word 0x0000FF7C
-_08074FA8:
-    lsls r6, r2, #0xc
-    lsls r0, r2, #4
-_08074FAC:
-    .word 0xAA0B6305
-    incrom 0x74FB0, 0x1A
-
-    .global sub_08074FCA
-    .thumb_func
-sub_08074FCA:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    ldr r7, _0807532C
-    lsrs r7, r0, #0x20
-    lsrs r2, r0, #0x18
-    lsls r0, r2, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r4, r4, #0xd
-    str r6, [r1, r0]
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-_08074FE4:
-    .word 0x00841403
-    incrom 0x74FE8, 0xC
-_08074FF4:
-    .word 0x1008074F
-    incrom 0x74FF8, 0xC
-_08075004:
-    .word 0x16C02A04
-    .word 0x06C02A05
-    .hword 0x0B6F
-
-    .global sub_0807500E
-    .thumb_func
-sub_0807500E:
-    lsrs r3, r0, #0x20
-    ldr r0, _08075070
-    strb r3, [r7, #0x18]
-    adds r1, #0x76
-    lsls r0, r2, #0x1d
-    subs r3, #8
-    incrom 0x7501A, 0x3A
-_08075054:
-    .word 0x1C082508
-    .word 0x45106E29
-    .hword 0x106E
-
-    .global sub_0807505E
-    .thumb_func
-sub_0807505E:
-    subs r3, #3
-_08075060:
-    .word 0x506B7676
-    incrom 0x75064, 0xC
-_08075070:
-    .word 0x13080807
-    incrom 0x75074, 0x10
-_08075084:
-    .word 0x820B6505
-    incrom 0x75088, 0x1A
-
-    .global sub_080750A2
-    .thumb_func
-sub_080750A2:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    str r7, [r5, r2]
-    lsrs r7, r0, #0x20
-    b _08074CB2
-    incrom 0x750AC, 0x3A
-
-    .global sub_080750E6
-    .thumb_func
-sub_080750E6:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    str r3, [r6, r3]
-    lsrs r7, r0, #0x20
-    cmp r2, #2
-    lsls r1, r2, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r7, r4, #0xd
-    str r2, [r5, r4]
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r2, r0, #0x10
-    lsls r4, r0, #2
-    incrom 0x75104, 0x26
-
-    .global sub_0807512A
-    .thumb_func
-sub_0807512A:
-    subs r3, #3
-    strb r6, [r6, #0x19]
-    str r7, [r6, r4]
-    lsrs r7, r0, #0x20
-    ldr r2, [r0, #0x60]
-    lsls r1, r2, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r0, r5, #0xd
-    str r6, [r5, r5]
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r3, r0, #0x10
-    lsls r4, r0, #2
-_08075148:
-    .word 0x0000007C
-    incrom 0x7514C, 0x20
-_0807516C:
-    .word 0x3B030B6F
-    strb r6, [r6, #0x19]
-    str r3, [r7, r5]
-    lsrs r7, r0, #0x20
-    .hword 0xB202   @ sxth r2, r0
-    lsls r1, r2, #0x1d
-    lsls r0, r1, #0x10
-    lsrs r1, r5, #0xd
-    str r2, [r6, r6]
-    lsrs r7, r0, #0x20
-    asrs r0, r1, #0xc
-    ldr r5, [r4, r4]
-    adds r4, r3, r0
-    asrs r4, r0, #0x10
-    lsls r4, r0, #2
-    incrom 0x7518C, 0x26
-
-    .global sub_080751B2
-    .thumb_func
-sub_080751B2:
-    lsrs r3, r0, #0x20
-    ldr r0, _08075214
-    strb r3, [r7, #0x18]
-_080751B8:
-    .word 0x0751D576
-    incrom 0x751BC, 0x1C
-_080751D8:
-    .word dat_080751E4
-    incrom 0x751DC, 0x8
-    .global dat_080751E4
-dat_080751E4:
-    incrom 0x751E4, 0x30
-_08075214:
-    .word 0x3B491708
-    incrom 0x75218, 0xA8
-_080752C0:
-    .word 0x07083C04
-    incrom 0x752C4, 0x68
-_0807532C:
-    .word 0x0000080A
-    incrom 0x75330, 0x1F4
+    incrom 0x73BAC, 0x1978
     .global dat_08075524
 dat_08075524:
     incrom 0x75524, 0x340
@@ -1273,111 +671,7 @@ _08075BE4:
     .word dat_08075BE8
     .global dat_08075BE8
 dat_08075BE8:
-    incrom 0x75BE8, 0x6B0
-
-    .global sub_08076298
-    .thumb_func
-sub_08076298:
-    lsls r0, r0, #0x14
-    adds r2, #0xff
-    .hword 0xBF0B   @ itete eq
-    lsls r2, r4, #0x1d
-    lsls r0, r1, #0xc
-    adds r3, #0xff
-    .hword 0xBF0B   @ itete eq
-    lsls r2, r4, #0x1d
-    adds r0, r1, #0
-    adds r3, #0xff
-    adds r3, r1, #0
-    strb r7, [r7, #0x17]
-    movs r3, #0x11
-    .hword 0xBA2C   @ rev r4, r5
-    lsrs r1, r1, #0x20
-    movs r0, r0
-    movs r0, r0
-    .hword 0xBF01   @ itttt eq
-    lsls r2, r4, #0x1d
-    movs r0, r1
-    incrom 0x762C0, 0x8
-
-    .global sub_080762C8
-    .thumb_func
-sub_080762C8:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x762CC, 0x8
-
-    .global sub_080762D4
-    .thumb_func
-sub_080762D4:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x762D8, 0x10
-
-    .global sub_080762E8
-    .thumb_func
-sub_080762E8:
-    lsls r0, r0, #0x14
-    adds r2, #0xff
-    lsrs r3, r1, #0x1c
-    lsls r3, r4, #0x1d
-    lsls r0, r1, #0xc
-    adds r3, #0xff
-    lsrs r3, r1, #0x1c
-    lsls r3, r4, #0x1d
-    adds r0, r1, #0
-    adds r3, #0xff
-    adds r3, r1, #0
-    strb r7, [r7, #0x17]
-    movs r3, #0x11
-    .hword 0xBA2C   @ rev r4, r5
-    lsrs r1, r1, #0x20
-    movs r0, r0
-    movs r0, r0
-    lsrs r1, r0, #0x1c
-    lsls r3, r4, #0x1d
-    movs r0, r1
-    incrom 0x76310, 0x8
-
-    .global sub_08076318
-    .thumb_func
-sub_08076318:
-    movs r0, r0
-    movs r0, r0
-    incrom 0x7631C, 0x8
-
-    .global sub_08076324
-    .thumb_func
-sub_08076324:
-    lsls r0, r0, #0x14
-    adds r2, #0xff
-    ldr r3, _08076358
-    lsls r3, r4, #0x1d
-    lsls r0, r1, #0xc
-    adds r3, #0xff
-    ldr r3, _08076360
-    lsls r3, r4, #0x1d
-    adds r0, r1, #0
-    adds r3, #0xff
-    adds r3, r1, #0
-    strb r7, [r7, #0x17]
-    movs r3, #0x11
-    .hword 0xBA2C   @ rev r4, r5
-    lsrs r1, r1, #0x20
-    movs r0, r0
-    movs r0, r0
-    ldr r3, _0807634C
-    lsls r3, r4, #0x1d
-    movs r0, r1
-_0807634C:
-    .word 0x1100FF1C
-    incrom 0x76350, 0x8
-_08076358:
-    .word 0x0B29FF05
-    .word 0x08076380
-_08076360:
-    .word 0x0B2AFF03
-    incrom 0x76364, 0xB28
+    incrom 0x75BE8, 0x12A4
     .global dat_08076E8C
 dat_08076E8C:
     incrom 0x76E8C, 0x38C
@@ -1502,22 +796,7 @@ _08077394:
     .word dat_08077398
     .global dat_08077398
 dat_08077398:
-    incrom 0x77398, 0xC
-
-    .global sub_080773A4
-    .thumb_func
-sub_080773A4:
-    mov pc, lr
-
-    .global sub_080773A6
-    .thumb_func
-sub_080773A6:
-    mov pc, lr
-
-    .global sub_080773A8
-    .thumb_func
-sub_080773A8:
-    mov pc, lr
+    incrom 0x77398, 0x12
 
     .global sub_080773AA
     .thumb_func
@@ -2128,22 +1407,7 @@ _0807CC64:
     .word dat_0807CC68
     .global dat_0807CC68
 dat_0807CC68:
-    incrom 0x7CC68, 0xC
-
-    .global sub_0807CC74
-    .thumb_func
-sub_0807CC74:
-    mov pc, lr
-
-    .global sub_0807CC76
-    .thumb_func
-sub_0807CC76:
-    mov pc, lr
-
-    .global sub_0807CC78
-    .thumb_func
-sub_0807CC78:
-    mov pc, lr
+    incrom 0x7CC68, 0x12
 
     .global sub_0807CC7A
     .thumb_func
@@ -2162,224 +1426,7 @@ _0807CC90:
     .word dat_0807CC94
     .global dat_0807CC94
 dat_0807CC94:
-    incrom 0x7CC94, 0xC7A
-
-    .global sub_0807D90E
-    .thumb_func
-sub_0807D90E:
-    lsrs r3, r0, #0x20
-    ldr r1, _0807D970
-    ldr r7, _0807DA00
-    subs r1, r2, r1
-    lsls r1, r3, #0x1f
-    lsls r0, r1, #0xc
-    ldr r0, [r3]
-    ldrh r4, [r2, #0x10]
-    adds r2, #0
-    ands r0, r0
-    asrs r0, r0, #0x18
-    subs r0, #7
-    asrs r7, r0, #8
-    cmp r4, #8
-    lsrs r7, r1, #0xa
-
-    .global sub_0807D92C
-    .thumb_func
-sub_0807D92C:
-    lsrs r0, r1, #0x20
-    orrs r7, r2
-    ldr r3, _0807DA20
-    subs r7, #0x4b
-    lsls r1, r3, #0x1f
-    subs r3, #8
-_0807D938:
-    asrs r2, r2, #0x10
-    bls _0807D9DC
-    lsrs r7, r0, #0x20
-    adds r3, r0, r0
-    asrs r6, r5, #0x11
-    incrom 0x7D942, 0x1A
-_0807D95C:
-    .word 0x0A8EF436
-
-    .global sub_0807D960
-    .thumb_func
-sub_0807D960:
-    lsrs r0, r1, #0x20
-    ldr r6, _0807D9C0
-    movs r7, #0x3b
-    movs r2, #0x27
-    lsls r2, r3, #0x1f
-_0807D96A:
-    subs r3, #8
-    movs r6, #0x26
-    bge _0807D994
-_0807D970:
-    .word 0x02420807
-    incrom 0x7D974, 0xC
-_0807D980:
-    lsls r2, r0, #9
-    incrom 0x7D982, 0x12
-_0807D994:
-    tst r0, r1
-    lsls r1, r0, #8
-    .hword 0xD9E0   @ bls #0x807d95c
-    lsrs r7, r0, #0x20
-    lsls r2, r0, #5
-    b _0807D9A4
-    .word 0x420807D9
-_0807D9A4:
-    movs r1, r0
-    bls _0807D96A
-    lsrs r7, r0, #0x20
-    asrs r3, r7, #0x18
-    beq _0807D9DC
-    lsls r1, r3, #0x1f
-    subs r3, #8
-    asrs r5, r2, #0x14
-    bls _0807D938
-    lsrs r7, r0, #0x20
-    asrs r3, r7, #8
-_0807D9BA:
-    adds r2, #0x13
-    lsls r2, r3, #0x1f
-    lsls r0, r1, #0xc
-_0807D9C0:
-    .word 0xCA140B18
-    incrom 0x7D9C4, 0x18
-_0807D9DC:
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-    subs r0, r3, #4
-    ldm r2, {r2, r4}
-    lsrs r7, r7, #0x1b
-    movs r0, r0
-    asrs r0, r0, #0x18
-    adds r6, #5
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-    lsrs r0, r3, #0x10
-    stm r4!, {r2, r4}
-    .hword 0x1CFF   @ adds r7, r7, #3
-    lsls r7, r7, #3
-    asrs r0, r0, #0x18
-    adds r6, #5
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-_0807DA00:
-    .word 0x140C1813
-    incrom 0x7DA04, 0x1C
-_0807DA20:
-    .word 0x2518080A
-    incrom 0x7DA24, 0x1E
-
-    .global sub_0807DA42
-    .thumb_func
-sub_0807DA42:
-    lsrs r3, r0, #0x20
-    ldr r4, _0807DAA4
-    cmp r1, #0x3b
-    stm r7!, {r1, r3, r5}
-    lsls r2, r3, #0x1f
-    subs r3, #8
-    cmp r0, #0x28
-    bge _0807D9BA
-    lsrs r7, r0, #0x20
-    movs r7, #0x3b
-    .hword 0xA027   @ adr r0, #0x9c
-    lsls r2, r3, #0x1f
-    subs r3, #8
-    movs r6, #0x26
-    bge _0807D980
-    lsrs r7, r0, #0x20
-    lsls r2, r0, #9
-    ldrb r2, [r0, #0x1c]
-    lsls r2, r3, #0x1f
-    tst r0, r1
-    lsls r2, r0, #4
-    bge _0807DB6E
-    lsrs r7, r0, #0x20
-    lsls r2, r0, #9
-    ldrb r0, [r0, #0x1c]
-    lsls r2, r3, #0x1f
-    subs r3, #8
-    movs r2, #0x20
-    bge _0807DB7C
-    lsrs r7, r0, #0x20
-    adds r3, r0, r0
-    asrs r3, r1, #0x10
-    lsls r0, r1, #2
-    movs r6, r1
-    lsls r0, r0, #1
-    lsls r6, r2, #4
-    incrom 0x7DA8A, 0x1A
-_0807DAA4:
-    .word 0x400042FF
-    incrom 0x7DAA8, 0x64
-
-    .global sub_0807DB0C
-    .thumb_func
-sub_0807DB0C:
-    lsrs r0, r1, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r0, r0, #0x16
-    strh r5, [r0, #2]
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    strh r1, [r5, #8]
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r1, r0, #0x16
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r2, r0, #0x16
-    strh r5, [r0, #0x12]
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    strh r1, [r5, #0x18]
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r3, r0, #0x16
-    lsrs r3, r0, #0x20
-    ldrsh r7, [r2, r4]
-    strh r3, [r7, r0]
-    add r2, sl
-    lsls r3, r3, #0x1f
-    lsls r0, r1, #0xc
-    lsls r5, r0, #4
-    str r1, [r1, #0x10]
-    lsls r3, r3, #0x1f
-    lsls r0, r1, #0x10
-    lsrs r2, r0, #4
-    blt _0807DC14
-    lsrs r7, r0, #0x20
-    asrs r6, r1, #0x10
-    movs r6, r7
-    incrom 0x7DB56, 0x18
-_0807DB6E:
-    ldrh r2, [r2, #0x30]
-    lsls r3, r3, #0x1f
-    subs r3, #8
-    asrs r1, r2, #4
-    blt _0807DC70
-    lsrs r7, r0, #0x20
-    adds r3, r0, r0
-_0807DB7C:
-    asrs r2, r0, #0x10
-    incrom 0x7DB7E, 0x96
-_0807DC14:
-    lsls r6, r1, #5
-    incrom 0x7DC16, 0x5A
-_0807DC70:
-    lsrs r6, r7, #0x20
-    asrs r1, r1, #0x18
-    cmp r2, #0x1e
-    asrs r0, r0, #3
-    subs r4, #0x5a
-    lsrs r0, r1, #8
-    incrom 0x7DC7C, 0x128
+    incrom 0x7CC94, 0x1110
 
     .global sub_0807DDA4
     .thumb_func
@@ -2411,40 +1458,7 @@ sub_0807DDB4:
     bl sub_080A9044
 _0807DDD2:
     pop {r4, r5, r6, r7, pc}
-    incrom 0x7DDD4, 0xC8
-
-    .global sub_0807DE9C
-    .thumb_func
-sub_0807DE9C:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r2, _0807DF38
-    asrs r4, r3, #0x10
-    movs r4, r5
-    incrom 0x7DEA8, 0x24
-
-    .global sub_0807DECC
-    .thumb_func
-sub_0807DECC:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r2, _0807DF68
-    asrs r4, r3, #0x10
-    movs r4, r5
-    incrom 0x7DED8, 0x1E
-
-    .global sub_0807DEF6
-    .thumb_func
-sub_0807DEF6:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r2, _0807DF94
-    asrs r4, r3, #0x10
-    movs r4, r5
-    incrom 0x7DF02, 0x22
+    incrom 0x7DDD4, 0x150
 
     .global sub_0807DF24
     .thumb_func
@@ -2458,320 +1472,15 @@ sub_0807DF24:
     movs r1, #0xff
     lsls r1, r1, #0x10
     cmp r0, r1
-    .hword 0xDA00   @ bge #0x807df3a
-_0807DF38:
-    .word 0xF02BBDF0
-    .hword 0xF883
+    bge _0807DF3A
     pop {r4, r5, r6, r7, pc}
-    incrom 0x7DF40, 0x28
-_0807DF68:
-    .word 0x0D160000
-    incrom 0x7DF6C, 0x28
-_0807DF94:
-    .word 0x18271F09
-    incrom 0x7DF98, 0xFC
-
-    .global sub_0807E094
-    .thumb_func
-sub_0807E094:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    lsls r0, r3, #4
-    ldrh r4, [r2, r0]
-    bhs _0807E09E
-_0807E09E:
-    lsls r7, r7, #3
-    subs r6, #0
-    lsls r1, r1, #4
-    lsls r0, r7, #4
-    lsls r0, r1, #0x10
-    lsrs r0, r6, #0x1c
-    lsrs r2, r1, #0x20
-    lsls r0, r7, #0xc
-    lsrs r0, r1, #8
-    lsrs r0, r1, #0x1d
-    lsrs r2, r1, #0x20
-    .word 0x0A8EF436
-
-    .global sub_0807E0B8
-    .thumb_func
-sub_0807E0B8:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    lsls r0, r3, #4
-    ldr r4, [sp, #0x50]
-    incrom 0x7E0C0, 0x1C
-
-    .global sub_0807E0DC
-    .thumb_func
-sub_0807E0DC:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    lsls r0, r3, #4
-    ldr r4, [sp, #0x50]
-    bgt _0807E0E6
-_0807E0E6:
-    movs r0, r0
-    subs r6, #0
-    lsls r1, r1, #8
-    lsls r0, r7, #0x1c
-    lsls r0, r1, #8
-    lsrs r4, r2, #0x1d
-    lsrs r2, r1, #0x20
-    lsls r0, r7, #0xc
-    lsls r0, r1, #8
-    lsrs r0, r1, #0x1d
-    lsrs r2, r1, #0x20
-    .word 0x07E0EC02
-
-    .global sub_0807E100
-    .thumb_func
-sub_0807E100:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    lsls r0, r3, #4
-    subs r4, r2, #0
-    str r2, [sp, #4]
-    movs r0, r0
-    subs r6, #0
-    lsls r1, r1, #0xc
-    lsls r6, r2, #4
-    subs r4, #0x10
-    lsls r0, r7, #0x14
-    lsrs r0, r1, #8
-    lsrs r4, r7, #0x1c
-    lsrs r2, r1, #0x20
-    .word 0x0A8EF436
-
-    .global sub_0807E120
-    .thumb_func
-sub_0807E120:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    lsls r0, r3, #4
-    subs r4, r2, #0
-    ldr r1, [r0, r0]
-    movs r0, r0
-    subs r6, #0
-    lsls r1, r1, #0xc
-    lsls r0, r7, #4
-    lsls r0, r1, #8
-    lsrs r0, r6, #0x1c
-    lsrs r2, r1, #0x20
-    incrom 0x7E138, 0x22E
-_0807E366:
-    b _0807EB12
-    incrom 0x7E368, 0x16C
-_0807E4D4:
-    adds r2, #0
-    lsrs r7, r7
-    asrs r0, r0, #0x18
-    subs r6, #5
-    lsls r0, r1, #4
-    lsrs r4, r7, #0x20
-    cmp r0, #2
-    lsls r6, r6, #1
-    lsrs r6, r2, #0x18
-    stm r0!, {r1, r3, r5}
-    lsls r5, r4, #0x18
-    asrs r4, r3, #0x18
-    cmp r2, #0
-    subs r6, #0xc0
-    lsls r0, r1, #0xc
-    incrom 0x7E4F2, 0x102
+_0807DF3A:
+    bl sub_080A9044
+    pop {r4, r5, r6, r7, pc}
+    incrom 0x7DF40, 0x6B4
     .global dat_0807E5F4
 dat_0807E5F4:
-    incrom 0x7E5F4, 0x5E
-
-    .global sub_0807E652
-    .thumb_func
-sub_0807E652:
-    lsrs r3, r0, #0x20
-    ldr r0, _0807E6B4
-    lsls r2, r0, #9
-    strh r2, [r0, #8]
-    lsls r6, r4, #0x1f
-    tst r0, r1
-    lsls r2, r0, #4
-    b _0807E366
-    incrom 0x7E662, 0x36
-_0807E698:
-    lsls r6, r4, #0x1f
-    asrs r0, r1, #0x1c
-    adds r0, r1, r1
-    asrs r3, r3, #0x11
-    incrom 0x7E6A0, 0x14
-_0807E6B4:
-    .word 0x03160080
-    incrom 0x7E6B8, 0x8
-
-    .global sub_0807E6C0
-    .thumb_func
-sub_0807E6C0:
-    tst r3, r0
-    lsls r2, r0, #8
-    b _0807E4D4
-    incrom 0x7E6C6, 0x70
-
-    .global sub_0807E736
-    .thumb_func
-sub_0807E736:
-    lsrs r3, r0, #0x20
-    ldr r0, _0807E798
-    movs r6, #0x3b
-    .hword 0xBF2A   @ itet hs
-    lsls r7, r4, #0x1f
-    tst r0, r1
-    lsls r2, r0, #8
-    b _0807E698
-    incrom 0x7E746, 0x52
-_0807E798:
-    .word 0xC8141E18
-    incrom 0x7E79C, 0x38
-
-    .global sub_0807E7D4
-    .thumb_func
-sub_0807E7D4:
-    lsrs r0, r1, #0x20
-    ldr r3, [r7, r4]
-    incrom 0x7E7D8, 0xE0
-
-    .global sub_0807E8B8
-    .thumb_func
-sub_0807E8B8:
-    lsrs r3, r0, #0x20
-    ldr r3, _0807E918
-    ldr r3, [r7, r4]
-    ldr r1, [r3, #0x24]
-    lsls r1, r5, #0x1f
-    subs r3, #8
-    strb r5, [r2, r5]
-    incrom 0x7E8C6, 0x52
-_0807E918:
-    .word dat_080A8EF4
-    incrom 0x7E91C, 0x4E
-
-    .global sub_0807E96A
-    .thumb_func
-sub_0807E96A:
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r0, r2, #0x16
-    str r0, [sp, #0x114]
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    str r1, [sp, #0xa4]
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r1, r2, #0x16
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r2, r2, #0x16
-    str r2, [sp, #0x114]
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    str r3, [sp, #0xa4]
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r3, r2, #0x16
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r4, r2, #0x16
-    str r4, [sp, #0x114]
-    lsls r5, r1, #0xc
-    strh r5, [r0, #0x20]
-    stm r1!, {r0, r3}
-    lsls r1, r5, #0x1f
-    lsls r0, r1, #0x10
-    lsrs r5, r0, #6
-    incrom 0x7E9AC, 0x162
-
-    .global sub_0807EB0E
-    .thumb_func
-sub_0807EB0E:
-    subs r6, #3
-    lsls r0, r1, #4
-_0807EB12:
-    ldr r4, _0807EB54
-    lsls r0, r2, #0x10
-    movs r5, #8
-    adds r1, r3, #0
-    ldr r0, [sp, #0x50]
-    lsrs r1, r0, #0x10
-    asrs r7, r7, #3
-    cmp r6, #0
-    cmp r2, #0
-    subs r5, #0xc0
-    movs r1, r1
-    .word 0x0807EB21
-
-    .global sub_0807EB2C
-    .thumb_func
-sub_0807EB2C:
-    lsrs r3, r0, #0x20
-    cmp r7, #0x25
-    asrs r4, r3, #0x10
-    lsls r0, r4, #6
-    incrom 0x7EB34, 0x20
-_0807EB54:
-    .word 0x33083101
-    incrom 0x7EB58, 0xE
-
-    .global sub_0807EB66
-    .thumb_func
-sub_0807EB66:
-    lsrs r4, r6, #0x20
-    cmp r7, #0x25
-    asrs r4, r3, #0x10
-    lsls r4, r4, #6
-    incrom 0x7EB6E, 0x32
-
-    .global sub_0807EBA0
-    .thumb_func
-sub_0807EBA0:
-    lsrs r4, r6, #0x20
-    .hword 0x4617   @ mov r7, r2
-    .hword 0x4414   @ add r4, r2
-    push {r0}
-    lsls r7, r7, #3
-    asrs r0, r0, #0x18
-    subs r6, #0xb
-    lsls r3, r1, #4
-    lsls r5, r2, #0x1c
-    asrs r0, r2, #0x14
-    lsrs r6, r2, #0x20
-    lsls r5, r2, #4
-    lsls r0, r2, #0x18
-    lsls r6, r2, #4
-    .word 0x0A8EF436
-
-    .global sub_0807EBC0
-    .thumb_func
-sub_0807EBC0:
-    lsrs r0, r1, #0x20
-    .hword 0x4617   @ mov r7, r2
-    .hword 0x4414   @ add r4, r2
-    stm r4!, {r0}
-    lsls r7, r7, #3
-    asrs r0, r0, #0x18
-    subs r6, #0xb
-    lsls r3, r1, #4
-    lsrs r6, r2, #0xc
-    lsls r5, r2, #0x1c
-    asrs r0, r2, #0x1c
-    lsrs r6, r2, #0x20
-    lsls r5, r2, #4
-    lsls r0, r2, #0x10
-    lsls r6, r2, #4
-    lsrs r4, r7, #0xc
-    adds r6, #2
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-    movs r0, r0
-    incrom 0x7EBE8, 0x490
+    incrom 0x7E5F4, 0xA84
 
     .global sub_0807F078
     .thumb_func
@@ -2983,16 +1692,7 @@ _0807FD04:
     .word dat_0807FD08
     .global dat_0807FD08
 dat_0807FD08:
-    incrom 0x7FD08, 0xAFE
-
-    .global sub_08080806
-    .thumb_func
-sub_08080806:
-    lsls r2, r3, #2
-    lsls r0, r4, #3
-    movs r0, r0
-    lsls r6, r2, #0xc
-    incrom 0x8080E, 0x546
+    incrom 0x7FD08, 0x104C
 
     .global sub_08080D54
     .thumb_func
@@ -3021,90 +1721,7 @@ _08080D74:
     str r0, [r5, #0x2c]
     bl sub_080A9044
     pop {r4, r5, r6, r7, pc}
-    incrom 0x80D7E, 0xBA8
-
-    .global sub_08081926
-    .thumb_func
-sub_08081926:
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r0, r2, #0x17
-    beq _080819BC
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    .hword 0xD129   @ bne #0x808198c
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r1, r2, #0x17
-    lsrs r3, r0, #0x20
-    lsrs r5, r4, #0x20
-    cmp r1, #0x1c
-    lsrs r2, r2, #0x17
-    bhs _080819D2
-    lsls r5, r1, #0xc
-    movs r5, #8
-    adds r0, r1, #0
-    .hword 0xD329   @ blo #0x80819a2
-    .hword 0x450D   @ cmp r5, r1
-    lsrs r3, r2, #0x17
-    lsrs r3, r0, #0x20
-    ldr r1, _080819B4
-    adds r2, #0x18
-    stm r6!, {r2, r4}
-    ldrb r0, [r0]
-    lsls r6, r7, #3
-    asrs r0, r0, #0x18
-    adds r6, #5
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-    movs r3, r0
-    adds r4, r0, r6
-    lsrs r0, r1, #0x20
-    adds r7, r4, r6
-    lsrs r0, r1, #0x20
-    adds r7, r4, r4
-    lsrs r0, r1, #0x20
-    adds r2, r6, r4
-    lsrs r0, r1, #0x20
-    adds r5, r7, r4
-    lsrs r0, r1, #0x20
-    adds r0, r1, r5
-    lsrs r0, r1, #0x20
-    lsls r7, r7, #3
-    movs r0, r0
-    subs r0, r1, #4
-    adds r7, r4, r0
-    asrs r0, r0, #0x1c
-    asrs r0, r0, #0x11
-_0808198C:
-    incrom 0x8198C, 0x16
-_080819A2:
-    incrom 0x819A2, 0x12
-_080819B4:
-    .word 0x02160000
-    .word 0x0301083E
-_080819BC:
-    adds r0, r3, r7
-    lsrs r0, r1, #0x20
-    adds r3, r7, r7
-    lsrs r0, r1, #0x20
-    adds r7, r4, r4
-    lsrs r0, r1, #0x20
-    adds r2, r6, r4
-    lsrs r0, r1, #0x20
-    adds r5, r7, r4
-    lsrs r0, r1, #0x20
-    adds r0, r1, r5
-_080819D2:
-    lsrs r0, r1, #0x20
-    lsls r7, r7, #3
-    movs r0, r0
-    subs r0, r1, #4
-    adds r7, r4, r0
-    asrs r0, r0, #0x1c
-    asrs r0, r0, #0x11
-    incrom 0x819E0, 0x348
+    incrom 0x80D7E, 0xFAA
 
     .global sub_08081D28
     .thumb_func
@@ -3177,175 +1794,10 @@ sub_08081D7C:
 _08081D92:
     bl sub_080A9044
     pop {r4, r5, r6, r7, pc}
-    incrom 0x81D98, 0x66
-
-    .global sub_08081DFE
-    .thumb_func
-sub_08081DFE:
-    lsrs r0, r1, #0x20
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r4, _08081E64
-    ldrsb r4, [r2, r0]
-    .hword 0xA4FF   @ adr r4, #0x3fc
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r6, #5
-    lsls r0, r1, #8
-    lsls r6, r2, #4
-    lsrs r4, r7, #0x20
-    subs r6, #3
-    lsls r0, r1, #0x10
-    lsls r6, r2, #0x14
-    lsrs r4, r7, #0x20
-    subs r6, #5
-    lsls r0, r1, #0x18
-    .hword 0xF436
-    .hword 0x0A8E
-
-    .global sub_08081E26
-    .thumb_func
-sub_08081E26:
-    lsrs r0, r1, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r1, _08081E8C
-    subs r6, #0x14
-    strh r7, [r7, #0x26]
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r6, #1
-    lsls r0, r1, #4
-    subs r6, #8
-    lsls r0, r1, #0x18
-    asrs r2, r4, #4
-    bgt _08081F04
-    subs r6, #0x21
-    lsrs r0, r1, #0x20
-    .hword 0xF436
-    .hword 0x0A8E
-
-    .global sub_08081E4A
-    .thumb_func
-sub_08081E4A:
-    lsrs r0, r1, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r3, _08081EB0
-    adds r0, #0x14
-    str r4, [sp, #0x3fc]
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r6, #1
-    lsls r0, r1, #4
-    subs r6, #8
-    lsls r0, r1, #0x18
-    asrs r2, r4, #4
-_08081E64:
-    .word 0x3E21DC60
-    .word 0xF4360808
-    .hword 0x0A8E
-
-    .global sub_08081E6E
-    .thumb_func
-sub_08081E6E:
-    lsrs r0, r1, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r2, _08081ED4
-    subs r6, #0x14
-    sub sp, #0x1fc
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r6, #1
-    lsls r0, r1, #4
-    subs r6, #8
-    lsls r0, r1, #0x18
-    asrs r2, r4, #4
-    bgt _08081F4C
-    subs r6, #0x21
-_08081E8C:
-    .word 0xF4360808
-    .hword 0x0A8E
-
-    .global sub_08081E92
-    .thumb_func
-sub_08081E92:
-    lsrs r0, r1, #4
-    movs r7, #0x1f
-    movs r0, r3
-    ldr r6, _08081EF8
-    adds r2, #0x14
-    .hword 0xA4FF   @ adr r4, #0x3fc
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r6, #1
-    lsls r0, r1, #4
-    subs r6, #8
-    lsls r0, r1, #0x18
-    asrs r2, r4, #4
-    bgt _08081F70
-    subs r6, #0x21
-_08081EB0:
-    .word 0xF4360808
-    incrom 0x81EB4, 0x20
-_08081ED4:
-    .word dat_08081FAA
-    incrom 0x81ED8, 0x20
-_08081EF8:
-    .word 0xF4360316
-    incrom 0x81EFC, 0x8
-_08081F04:
-    strh r4, [r2]
-    b _08082106
-    incrom 0x81F08, 0x44
-_08081F4C:
-    lsls r2, r4, #5
-    movs r0, r0
-    movs r6, r2
-    incrom 0x81F52, 0x1E
-_08081F70:
-    strh r0, [r0, #0x10]
-    movs r0, r0
-    asrs r0, r0, #0x18
-    asrs r0, r0, #0x20
-    lsls r1, r0, #0x14
-    lsrs r0, r3, #0xc
-    subs r7, r6, #5
-    lsrs r0, r1, #0x20
-    lsrs r3, r0, #0x20
-    ldr r4, _08081FE0
-    movs r6, #0x3b
-    ldrh r2, [r5, #0x20]
-    lsrs r7, r3, #0x20
-    lsls r0, r1, #0xc
-    asrs r0, r3, #0x10
-    strb r4, [r2, #0x18]
-    ldr r4, [sp, #0x3fc]
-    movs r0, r0
-    asrs r0, r0, #0x18
-    subs r0, #1
-    lsls r1, r0, #0x18
-    incrom 0x81F9A, 0x10
-    .global dat_08081FAA
-dat_08081FAA:
-    incrom 0x81FAA, 0x36
-_08081FE0:
-    .word 0xE872723B
-    incrom 0x81FE4, 0xD8
+    incrom 0x81D98, 0x324
     .global dat_080820BC
 dat_080820BC:
-    incrom 0x820BC, 0x4A
-_08082106:
-    lsls r0, r3, #6
-    movs r0, r0
-    movs r0, r0
-    lsls r3, r2, #0xe
-    lsls r0, r0, #0xc
-    movs r0, r0
-    lsls r4, r5, #5
-    movs r0, r0
-    incrom 0x82116, 0x346
+    incrom 0x820BC, 0x3A0
 
     .global sub_0808245C
     .thumb_func
@@ -3525,68 +1977,7 @@ _08082744:
     .word dat_08082748
     .global dat_08082748
 dat_08082748:
-    incrom 0x82748, 0x38C
-
-    .global sub_08082AD4
-    .thumb_func
-sub_08082AD4:
-    lsls r0, r0, #8
-    ldrb r0, [r6, #0x1d]
-    cmp r2, #0xe1
-    lsrs r0, r1, #0x20
-    .hword 0x4401   @ add r1, r0
-    lsrs r3, r5, #0x20
-    lsls r0, r1, #8
-    ldrb r1, [r7, #5]
-    cmp r2, #0xf4
-    lsrs r0, r1, #0x20
-    ldrb r2, [r0, #0xc]
-    adds r3, r7, #1
-    lsrs r3, r5, #0x20
-    lsls r0, r1, #4
-    cmp r3, #0x44
-    lsrs r0, r1, #0x20
-    asrs r5, r1, #0x20
-    cmp r3, #0x44
-    lsrs r0, r1, #0x20
-    incrom 0x82AFA, 0x4E
-
-    .global sub_08082B48
-    .thumb_func
-sub_08082B48:
-    movs r0, r0
-    movs r0, r0
-
-    .global sub_08082B4C
-    .thumb_func
-sub_08082B4C:
-    movs r0, r0
-    movs r0, r0
-
-    .global sub_08082B50
-    .thumb_func
-sub_08082B50:
-    lsls r0, r0, #0x14
-    adds r7, r7, r7
-    strb r4, [r1, #0x1c]
-    lsrs r3, r5, #0x20
-    lsls r0, r1, #0xc
-    asrs r7, r7, #0x1b
-    strb r4, [r1, #0x1c]
-    lsrs r3, r5, #0x20
-    adds r0, r1, #0
-    asrs r7, r7, #0x1b
-    adds r4, r1, #0
-    strb r7, [r7, #0x17]
-    movs r3, #0x11
-    ldm r2!, {r3, r5, r6}
-    lsrs r1, r1, #0x20
-    movs r0, r0
-    movs r0, r0
-    strb r1, [r0, #0x1c]
-    lsrs r3, r5, #0x20
-    movs r0, r1
-    incrom 0x82B78, 0xE88
+    incrom 0x82748, 0x12B8
 
     .global sub_08083A00
     .thumb_func
@@ -3749,162 +2140,7 @@ sub_080843DC:
 _080843F6:
     bl sub_080A9044
     pop {r4, r5, r6, r7, pc}
-    incrom 0x843FC, 0xDA
-
-    .global sub_080844D6
-    .thumb_func
-sub_080844D6:
-    subs r3, #3
-    ldrb r0, [r7, #9]
-    add fp, ip
-    lsrs r0, r1, #0x20
-    lsls r2, r0, #0x10
-    lsrs r5, r0, #1
-    lsls r0, r1, #0x14
-    lsrs r4, r0, #0xe
-    .hword 0x4504   @ cmp r4, r0
-    lsrs r0, r1, #0x20
-    strh r4, [r0, #0x28]
-    lsls r3, r1, #0x10
-    lsrs r5, r0, #1
-    lsrs r0, r1, #0x20
-    str r6, [sp, #0x60]
-    .hword 0x4617   @ mov r7, r2
-    subs r2, #0x14
-    bvs _080844FA
-_080844FA:
-    lsls r6, r7, #3
-    asrs r0, r0, #0x18
-    adds r6, #3
-    ldrh r4, [r6, #0x36]
-    lsrs r2, r1, #0x20
-
-    .global sub_08084504
-    .thumb_func
-sub_08084504:
-    subs r3, #3
-    ldrb r3, [r7, #0x15]
-    .hword 0x4511   @ cmp r1, r2
-    lsrs r0, r1, #0x20
-    adds r6, #2
-    lsrs r5, r0, #1
-    lsls r0, r1, #0x14
-    lsrs r4, r0, #0xf
-    .hword 0x4536   @ cmp r6, r6
-    lsrs r0, r1, #0x20
-    ldm r7!, {r2}
-    adds r6, #0xb
-    lsrs r5, r0, #1
-    lsrs r0, r1, #0x20
-    .hword 0xA018   @ adr r0, #0x60
-    ldr r5, _08084580
-    movs r4, r2
-    incrom 0x84526, 0x10
-
-    .global sub_08084536
-    .thumb_func
-sub_08084536:
-    lsrs r3, r0, #0x20
-    .hword 0x4617   @ mov r7, r2
-    asrs r4, r0, #0x18
-    strh r4, [r1, #0x30]
-    lsrs r5, r0, #1
-    subs r3, #8
-    cmp r2, #0x27
-    cmp r4, sp
-    lsrs r0, r1, #0x20
-    movs r6, #0x3b
-    ldr r6, [r4, #0x40]
-    lsrs r5, r0, #1
-    tst r0, r1
-    lsls r2, r0, #8
-    cmp r4, sp
-    lsrs r0, r1, #0x20
-    lsls r2, r0, #9
-    ldr r1, [r0, #0x40]
-    lsrs r5, r0, #1
-    tst r0, r1
-    movs r2, r0
-    cmp r4, sp
-    lsrs r0, r1, #0x20
-    movs r0, #0x3b
-    ldr r2, [r4, #0x40]
-    lsrs r5, r0, #1
-    lsls r0, r1, #0xc
-    .hword 0x4705   @ bxns r0
-    strh r4, [r1, #0x30]
-    lsrs r5, r0, #1
-    adds r0, r1, r0
-    asrs r2, r1, #0x10
-    incrom 0x84576, 0xA
-_08084580:
-    .word 0x8F140806
-    .hword 0x080A
-
-    .global sub_08084586
-    .thumb_func
-sub_08084586:
-    lsrs r3, r0, #0x20
-    ldr r5, _080845E8
-    lsls r0, r3, #4
-    ldr r2, _080845E0
-    incrom 0x8458E, 0x52
-_080845E0:
-    .word 0x160C083E
-    .word 0x0F083E00
-_080845E8:
-    .word 0x083E0416
-    incrom 0x845EC, 0x64
-
-    .global sub_08084650
-    .thumb_func
-sub_08084650:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    lsls r5, r4, #0x18
-    asrs r4, r3, #0x10
-    incrom 0x8465A, 0x2C
-
-    .global sub_08084686
-    .thumb_func
-sub_08084686:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    lsls r5, r4, #0x18
-    asrs r4, r3, #0x10
-    incrom 0x84690, 0x2C
-
-    .global sub_080846BC
-    .thumb_func
-sub_080846BC:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    lsls r5, r4, #0x18
-    asrs r4, r3, #0x10
-    incrom 0x846C6, 0x32
-
-    .global sub_080846F8
-    .thumb_func
-sub_080846F8:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    movs r3, #0x25
-    asrs r0, r2, #0x10
-    incrom 0x84702, 0x1A
-
-    .global sub_0808471C
-    .thumb_func
-sub_0808471C:
-    lsrs r3, r0, #4
-    movs r7, #0x1f
-    movs r0, r3
-    movs r3, #0x25
-    asrs r0, r2, #0x10
-    incrom 0x84726, 0xCDE
+    incrom 0x843FC, 0x1008
 
     .global sub_08085404
     .thumb_func
@@ -4028,12 +2264,12 @@ sub_08085ECC:
     movs r7, #0
 _08085ED6:
     adds r0, r4, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _08085EEA
     adds r0, r5, #0
-    bl sub_08025172
+    bl sub_08025172   @ SetEventFlagLogged15C0
     adds r0, r6, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _08085EEA:
     adds r4, #1
     adds r5, #1
@@ -4043,23 +2279,23 @@ _08085EEA:
     ble _08085ED6
     movs r0, #0
     movs r1, #0x81
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _08085F0E
     ldr r0, _08085F38
-    bl sub_08025172
+    bl sub_08025172   @ SetEventFlagLogged15C0
     movs r0, #0x16
     movs r1, #0x40
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _08085F0E:
     movs r0, #0
     movs r1, #0x82
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _08085F26
     ldr r0, _08085F3C
-    bl sub_08025172
+    bl sub_08025172   @ SetEventFlagLogged15C0
     movs r0, #0x16
     movs r1, #0x4c
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _08085F26:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -4104,14 +2340,7 @@ sub_080870B8:
     bl sub_080056C0
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
-    incrom 0x870C2, 0xFA4
-
-    .global sub_08088066
-    .thumb_func
-sub_08088066:
-    lsrs r0, r1, #4
-    lsls r0, r1, #4
-    incrom 0x8806A, 0x64E
+    incrom 0x870C2, 0x15F6
 
     .global sub_080886B8
     .thumb_func
@@ -4175,11 +2404,11 @@ sub_08088F58:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0xa2
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08088F72
     movs r0, #0
     movs r1, #0xa2
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #0x11
     bl sub_080430B4
 _08088F72:
@@ -4215,28 +2444,28 @@ sub_08089648:
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     bl sub_0809F284
     subs r2, r4, r1
     cmp r7, #3
     bne _08089692
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     cmp r2, #3
     bne _08089686
     movs r0, #0x11
     movs r1, #0
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _08089686:
     cmp r2, #4
     bne _08089692
     movs r0, #0x11
     movs r1, #1
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _08089692:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -4284,7 +2513,7 @@ sub_080896D0:
     bne _080896F6
     movs r0, #4
     movs r1, #0x58
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080896F6
     movs r5, #9
 _080896F6:
@@ -4297,7 +2526,7 @@ _080896F6:
     adds r0, r0, r5
     subs r0, #1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _08089710
     movs r4, #0
 _08089710:
@@ -4326,7 +2555,7 @@ sub_0808972C:
     push {lr}
     movs r0, #1
     movs r1, #0x3d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808974C
     ldrh r0, [r5, #0xc]
     subs r0, #1
@@ -4335,7 +2564,7 @@ sub_0808972C:
     bne _0808974C
     movs r0, #1
     movs r1, #0x3e
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0
 _0808974C:
     pop {pc}
@@ -4360,11 +2589,11 @@ _08089762:
     bne _0808977C
     movs r0, #4
     movs r1, #0x3b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808977C
     movs r0, #1
     movs r1, #0x61
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808977C:
     movs r0, #0
     pop {r7, pc}
@@ -4375,21 +2604,21 @@ _08089780:
     bne _0808979A
     movs r0, #4
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080897B0
     movs r0, #1
     movs r1, #0x63
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808979A:
     cmp r2, #3
     bne _080897B0
     movs r0, #4
     movs r1, #0x4f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080897B0
     movs r0, #1
     movs r1, #0x66
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080897B0:
     movs r0, #0
     pop {r7, pc}
@@ -4398,33 +2627,33 @@ _080897B4:
     bne _080897CA
     movs r0, #4
     movs r1, #0x50
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080897FA
     movs r0, #1
     movs r1, #0x69
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080897CA:
     cmp r2, #4
     bne _080897E4
     movs r0, #4
     movs r1, #0x58
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080897FA
     ldr r0, _08089800
     movs r1, #6
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250BE
+    bl sub_080250BE   @ SetEventFlagRange
 _080897E4:
     cmp r2, #0xa
     bne _080897FA
     movs r0, #4
     movs r1, #0x56
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080897FA
     movs r0, #1
     movs r1, #0x73
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080897FA:
     movs r0, #0
     pop {r7, pc}
@@ -4524,14 +2753,14 @@ sub_080899AC:
     lsls r2, r2, #1
     ldrh r0, [r0, r2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldr r0, _080899E0
     ldrh r0, [r0, r2]
     ldr r1, _080899EC
     cmp r0, r1
     beq _080899CC
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080899CC:
     movs r0, #0
     pop {r0, r1, pc}
@@ -4677,12 +2906,12 @@ sub_08089C28:
     ldrb r2, [r2, #5]
     adds r0, r0, r2
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldr r4, _08089C4C
     ldrh r0, [r4, #2]
     adds r0, r0, r2
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #0
     pop {r4, pc}
 _08089C4C:
@@ -4703,7 +2932,7 @@ sub_08089D18:
     adds r0, r0, r4
     pop {r4, r5, r7}
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _08089D34
     movs r2, #0
 _08089D34:
@@ -4758,7 +2987,7 @@ sub_08089E24:
     adds r0, r0, r6
     subs r0, #1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #0
     pop {r0, r1, r4, r5, r6, r7, pc}
 _08089E44:
@@ -4780,7 +3009,7 @@ sub_08089E4C:
     movs r2, #1
     mov r8, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _08089E84
     mov r1, r8
     subs r6, r4, r1
@@ -4865,7 +3094,15 @@ _08089F18:
     .word dat_08089F1C
     .global dat_08089F1C
 dat_08089F1C:
-    incrom 0x89F1C, 0x8C
+    incrom 0x89F1C, 0x70
+
+    .global sub_08089F8C
+    .thumb_func
+sub_08089F8C:
+    push {r0, r1, r2, r6, lr}
+    lsrs r4, r6, #7
+    bx r1
+    incrom 0x89F92, 0x16
 
     .global sub_08089FA8
     .thumb_func
@@ -4897,28 +3134,28 @@ sub_08089FC4:
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     bl sub_0809F284
     subs r2, r4, r1
     cmp r7, #3
     bne _0808A00E
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     cmp r2, #3
     bne _0808A002
     movs r0, #0x11
     movs r1, #0
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A002:
     cmp r2, #4
     bne _0808A00E
     movs r0, #0x11
     movs r1, #1
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A00E:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -4942,7 +3179,7 @@ sub_0808A020:
     adds r0, r0, r2
     lsls r2, r2, #1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0808A046
     ldr r0, _0808A068
     ldr r0, [r0, r2]
@@ -4989,7 +3226,7 @@ sub_0808A088:
     bne _0808A0AE
     movs r0, #4
     movs r1, #0x58
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A0AE
     movs r5, #9
 _0808A0AE:
@@ -5002,7 +3239,7 @@ _0808A0AE:
     adds r0, r0, r5
     subs r0, #1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0808A0C8
     movs r4, #0
 _0808A0C8:
@@ -5031,7 +3268,7 @@ sub_0808A0E4:
     push {lr}
     movs r0, #1
     movs r1, #0x3d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A102
     ldrh r0, [r5, #0xc]
     subs r0, #1
@@ -5040,7 +3277,7 @@ sub_0808A0E4:
     bne _0808A106
     movs r0, #1
     movs r1, #0x3e
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _0808A102:
     movs r0, #0
     pop {pc}
@@ -5068,11 +3305,11 @@ _0808A11E:
     bne _0808A138
     movs r0, #4
     movs r1, #0x3b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A138
     movs r0, #1
     movs r1, #0x61
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A138:
     movs r0, #0
     pop {r7, pc}
@@ -5083,21 +3320,21 @@ _0808A13C:
     bne _0808A156
     movs r0, #4
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A16C
     movs r0, #1
     movs r1, #0x63
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A156:
     cmp r2, #3
     bne _0808A16C
     movs r0, #4
     movs r1, #0x4f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A16C
     movs r0, #1
     movs r1, #0x66
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A16C:
     movs r0, #0
     pop {r7, pc}
@@ -5106,33 +3343,33 @@ _0808A170:
     bne _0808A186
     movs r0, #4
     movs r1, #0x50
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A1B6
     movs r0, #1
     movs r1, #0x69
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A186:
     cmp r2, #4
     bne _0808A1A0
     movs r0, #4
     movs r1, #0x58
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A1B6
     ldr r0, _0808A1BC
     movs r1, #6
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250BE
+    bl sub_080250BE   @ SetEventFlagRange
 _0808A1A0:
     cmp r2, #0xa
     bne _0808A1B6
     movs r0, #4
     movs r1, #0x56
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0808A1B6
     movs r0, #1
     movs r1, #0x73
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0808A1B6:
     movs r0, #0
     pop {r7, pc}
@@ -5207,7 +3444,7 @@ sub_0808BFB8:
 sub_0808C4AC:
     push {r4, r5, r6, r7, lr}
     movs r4, #0
-    bl sub_08000D28
+    bl sub_08000D28   @ GetCompletionStars
     cmp r0, #7
     blt _0808C4BA
     movs r4, #1
@@ -5265,16 +3502,7 @@ sub_0808CFDC:
     bl sub_080058BE
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
-    incrom 0x8CFE6, 0x1AA
-_0808D190:
-    subs r3, #8
-    subs r3, #0x18
-    movs r4, r0
-    movs r0, r7
-    asrs r0, r0, #0x11
-    bne _0808D28C
-    lsrs r0, r1, #0x20
-    movs r0, r0
+    incrom 0x8CFE6, 0x1BA
 
     .global sub_0808D1A0
     .thumb_func
@@ -5299,7 +3527,7 @@ _0808D1B8:
     .thumb_func
 sub_0808D1BC:
     push {r4, r5, r6, r7, lr}
-    bl sub_08000D28
+    bl sub_08000D28   @ GetCompletionStars
     cmp r0, #7
     blt _0808D1CC
     bl sub_080056C0
@@ -5309,79 +3537,8 @@ _0808D1CC:
 _0808D1D0:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
-
-    .global sub_0808D1D4
-    .thumb_func
-sub_0808D1D4:
-    subs r3, #8
-    lsls r0, r0, #0x18
-    ldrb r2, [r7, r0]
-    ldrb r4, [r6, #0x10]
-    lsls r0, r1, #0x10
-    lsls r0, r0, #0xa
-    cmp r0, #0xff
-    lsls r0, r2, #1
-    bne _0808D190
-    lsrs r0, r1, #0x20
-    .hword 0xA156   @ adr r1, #0x158
-    asrs r7, r7, #3
-    stm r5!, {r3}
-    asrs r7, r7, #3
-    movs r0, r1
-    movs r0, r0
-    lsls r0, r0, #8
-    subs r4, #0xff
-    incrom 0x8D1F8, 0x94
-_0808D28C:
-    movs r0, r0
-    movs r0, #0x10
-    movs r0, r1
-    lsrs r0, r0, #0x20
-    b _0808D298
-    .hword 0x2007
-_0808D298:
-    movs r3, r0
-    lsrs r0, r0, #0x20
-    b _0808D2A0
-    .hword 0x2007
-_0808D2A0:
-    movs r3, r1
-    lsrs r0, r0, #0x20
-    b _0808D2A8
-    .hword 0x2007
-_0808D2A8:
-    lsls r5, r6, #3
-    lsrs r0, r0, #0x20
-    b _0808D2B0
-    .hword 0x20FB
-_0808D2B0:
-    lsls r1, r7, #3
-    lsrs r0, r0, #0x20
-    movs r0, r0
-    lsrs r7, r7
-    movs r1, r0
-    lsrs r0, r0, #0x20
-    str r0, [r0]
-    .hword 0xA00A   @ adr r0, #0x28
-    movs r3, r0
-    lsrs r0, r0, #0x20
-    str r0, [r0]
-    .hword 0xA0FA   @ adr r0, #0x3e8
-    lsls r7, r6, #3
-    lsrs r0, r0, #0x20
-    str r0, [r0]
-    .hword 0xA006   @ adr r0, #0x18
-    movs r5, r1
-    lsrs r0, r0, #0x20
-    str r0, [r0]
-    .hword 0xA008   @ adr r0, #0x20
-    lsls r7, r6, #3
-    lsrs r0, r0, #0x20
-    strh r0, [r0]
-    stm r0!, {r0, r1, r2, r4}
-    movs r3, r0
-    lsrs r0, r0, #0x20
-    incrom 0x8D2E4, 0x314
+    .word 0x06003B08
+    incrom 0x8D1D8, 0x420
 
     .global sub_0808D5F8
     .thumb_func
@@ -5434,14 +3591,14 @@ sub_0808EBD0:
     ldr r1, _0808EC1C
     adds r1, r1, r0
     adds r0, r1, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldr r1, _0808EC0C
     lsls r4, r4, #2
     ldr r0, [r1, r4]
     mov r1, sl
     ldr r1, [r1, #0x44]
     str r0, [r1, #0x50]
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     ldr r1, _0808EC20
     ldrb r0, [r1, r0]
     bl sub_080430B4
@@ -5568,7 +3725,7 @@ sub_0808FEC0:
 sub_080906A4:
     push {r4, r5, r6, r7, lr}
     ldr r0, _080906B0
-    bl sub_0802D59E
+    bl sub_0802D59E   @ AddZenny
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _080906B0:
@@ -5580,7 +3737,7 @@ _080906B0:
 sub_0809096C:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
-    bl sub_0802D628
+    bl sub_0802D628   @ AddBugFrags
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     incrom 0x90978, 0x6D4

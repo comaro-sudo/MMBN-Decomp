@@ -71,6 +71,7 @@ class Segment:
                 w = struct.unpack_from("<I", self.rom, off)[0]
                 targets.append(w)
             self.jumptables[jt_addr] = targets
+        self.arm_ranges: list[tuple[int, int]] = [(r["start"], r["end"]) for r in s.get("arm_ranges", [])]
         self.md = {True: Cs(CS_ARCH_ARM, CS_MODE_THUMB), False: Cs(CS_ARCH_ARM, CS_MODE_ARM)}
         self.funcs: dict[int, bool] = {}       # start -> thumb (inside this segment)
         self.allfuncs: dict[int, bool] = {}    # every known function start (for externs)
@@ -121,6 +122,20 @@ class Segment:
         insn = next(self.md[thumb].disasm(self.rom[off:off + 4], a), None)
         if insn is None or (thumb and insn.size == 4 and insn.mnemonic != "bl"):
             return None
+        if thumb:
+            hw = struct.unpack_from("<H", self.rom, off)[0]
+            if (hw & 0xFFC0) == 0x0800:
+                return None
+            m, ops = insn.mnemonic, insn.op_str
+            if m in ("bkpt", "udf"):
+                return None
+            if m == "cmp" and ("pc" in ops or "sp" in ops):
+                return None
+            if m == "stm" and "!" in ops and "{" in ops:
+                base_r = ops.split("!")[0].strip()
+                rlist = [r.strip() for r in ops.split("{")[1].rstrip("}").split(",")]
+                if base_r in rlist and rlist[0] != base_r:
+                    return None
         return insn
 
     def classify(self) -> None:
@@ -143,29 +158,43 @@ class Segment:
 
         for f, thumb in sorted(self.funcs.items()):
             work = [f]
+            seen = set()
             while work:
                 a = work.pop()
                 prev = None
-                while self.inside(a) and a not in self.insns:
+                while self.inside(a) and a not in seen:
                     insn = self.decode(a, thumb)
                     if insn is None or a in self.literals:
                         break
+                    seen.add(a)
                     self.insns[a] = (insn, thumb)
                     self.note_refs(insn, thumb)
                     m, ops = insn.mnemonic, insn.op_str
                     if m == "b" or (m[0] == "b" and m[1:] in COND):
                         t = self.target(ops)
-                        if t is not None and self.inside(t):
+                        if t is not None and self.inside(t) and t not in seen:
                             work.append(t)
                         if m == "b":
                             break
                     elif m == "bx" and prev == ("mov", "lr, pc"):
                         pass                # call through a register: returns here
+                    elif m == "bx" and prev and prev[0] == "adr" and (a + insn.size) in {s for s, _ in self.arm_ranges}:
+                        pass                # Thumb-to-ARM inline switch (m4a SoundMainRAM): returns after arm_range
                     elif m == "bx" or (m == "pop" and "pc" in ops) or \
                             (m in ("mov", "add", "ldr") and ops.startswith("pc")):
                         break
                     prev = (m, ops)
                     a += insn.size
+                    for arm_s, arm_e in self.arm_ranges:
+                        if a == arm_s:
+                            a = arm_e
+                            break
+            # Include trailing alignment nop (mov r8, r8 = 0x46C0) on _call_via_rX 2-byte bx trampolines
+            if f in self.insns and self.insns[f][0].mnemonic == "bx" and (f + 2) not in self.insns and (f + 2) < self.data_from:
+                if struct.unpack_from("<H", self.rom, f + 2 - BASE)[0] == 0x46C0:
+                    nop_insn = self.decode(f + 2, thumb)
+                    if nop_insn is not None:
+                        self.insns[f + 2] = (nop_insn, thumb)
 
         # Trace jump table targets within this segment
         work = sorted(jt_targets)
@@ -192,6 +221,46 @@ class Segment:
                         (m in ("mov", "add", "ldr") and ops.startswith("pc")):
                     break
                 prev = (m, ops)
+                a += insn.size
+        # Linearly decode explicit ARM ranges (e.g. m4a SoundMainRAM mixer loops)
+        for arm_s, arm_e in self.arm_ranges:
+            a = arm_s
+            while a < arm_e:
+                insn = self.decode(a, False)
+                if insn is None:
+                    break
+                self.insns[a] = (insn, False)
+                self.note_refs(insn, False)
+                if insn.mnemonic == "bx" and (a + 4) == arm_e and self.inside(arm_e):
+                    # Thumb continuation right after ARM block
+                    work = [arm_e]
+                    seen_cont = set()
+                    while work:
+                        ca = work.pop()
+                        cprev = None
+                        while self.inside(ca) and ca not in seen_cont and ca not in self.insns:
+                            if any(rs <= ca < re for rs, re in self.arm_ranges):
+                                break
+                            cinsn = self.decode(ca, True)
+                            if cinsn is None or ca in self.literals:
+                                break
+                            seen_cont.add(ca)
+                            self.insns[ca] = (cinsn, True)
+                            self.note_refs(cinsn, True)
+                            cm, cops = cinsn.mnemonic, cinsn.op_str
+                            if cm == "b" or (cm[0] == "b" and cm[1:] in COND):
+                                ct = self.target(cops)
+                                if ct is not None and self.inside(ct) and ct not in seen_cont:
+                                    work.append(ct)
+                                if cm == "b":
+                                    break
+                            elif cm == "bx" and cprev == ("mov", "lr, pc"):
+                                pass
+                            elif cm == "bx" or (cm == "pop" and "pc" in cops) or \
+                                    (cm in ("mov", "add", "ldr") and cops.startswith("pc")):
+                                break
+                            cprev = (cm, cops)
+                            ca += cinsn.size
                 a += insn.size
         # Drop instructions that overlap a literal (descent ran into a pool).
         for a in list(self.insns):
@@ -257,7 +326,7 @@ class Segment:
                 reg = ops.split(",")[0]
                 return f"    ldr {reg}, {lname(lit)}"
             return raw
-        if "pc" in ops and m in ("add", "adr", "sub"):
+        if ("pc" in ops and m in ("add", "adr", "sub")) or m == "adr":
             return raw
         if thumb and m == "add":
             # Thumb-1 hi-register/SP add (ADD Rdn, Rm): Capstone prints three

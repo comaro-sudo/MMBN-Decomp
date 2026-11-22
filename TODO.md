@@ -23,12 +23,25 @@ This is the short, execution-oriented backlog. The detailed plans remain in
 - [x] Claude's reverse-engineering lane, approved and recorded in `AGENTS.md` (`31e92a0`). Claude reads
   Gemini's asm without editing it, writes findings in [`docs/re/`](docs/re/save-and-flags.md), and proposes
   names in `docs/re/proposed-names.txt`.
-- [ ] **Gemini: merge `docs/re/proposed-names.txt`** (about 70 names) into `symbols/names.txt`, then delete
-  the merged lines. Also from Claude's notes:
-  - `0x0800045E` is labelled `HBlankIntr`, but it looks like boot or soft-reset init;
-  - six `code_04` "functions" are data disassembled as code (`sub_0805A58C`, `sub_0805A674`,
-    `sub_0805A6AE`, `sub_08061836`, `sub_08066C0A`, `sub_08068B1C`);
-  - see [`docs/re/completion-and-new-game-plus.md`](docs/re/completion-and-new-game-plus.md) §4.
+- [x] **Gemini: merge `docs/re/proposed-names.txt`** (76 names) into `symbols/names.txt` (now 827 symbols),
+  filled the 4 missing Blue Moon addresses (`080373B0`, `080373F8`, `08037458`, `080374F8`), promoted
+  274 verified function entry points from `rom`/`data` to `code`, and cleared the merged lines from
+  `docs/re/proposed-names.txt`. Also resolved Claude's code notes:
+  - Fixed `0x0800045E` from `HBlankIntr` to `GameInit` (plus `0x0800025C` -> `InitInterruptVectorTable`,
+    `0x08000284` -> `SetInterruptCallback`, `0x08000418` -> `CheckSoftReset`, `0x08000504` ->
+    `InitSoundAndVCountIntr`, `0x080060CC` -> `InitToolkit`, and removed the bogus `SerialIntr` alias at
+    `0x08000568`).
+  - Upgraded `tools/survey.py` and `tools/disasm.py` with control-flow validation (`verify_clean_thumb_func`,
+    `verify_leaf_thumb_func`, `leaf_gap_pass`, and `is_bad_thumb_insn`) to reject data signatures (`lsrs Rd, Rm, #0x20`
+    pointer upper halfwords, `bkpt`, `cmp ..., sp/pc`, `add/mov pc, pc`, invalid `stm` encodings, and linear
+    fallthrough into existing function headers), formalized the exact end of ROM code in `code_10` (`data_from =
+    0x08113CB8` RS / `0x08113CCC` BM before the build timestamp and `m4a` PCM audio samples), recovered 70
+    unreferenced leaf functions and `_call_via_rX` trampolines plus `SoundMainBTM` (`0x081121B4` RS / `0x081121C8` BM)
+    and shared-epilogue sibling functions across RS and BM, reclassified 8 `BN4_PLATE_*` / `BN4_PANEL_TILES` data
+    tables from `code` to `data`, prevented mid-function CE hook labels from splitting enclosing functions, purged the
+    6 bogus `code_04` "functions" (`sub_0805A58C`, `sub_0805A674`, `sub_0805A6AE`, `sub_08061836`, `sub_08066C0A`,
+    `sub_08068B1C`) along with ~380 other bogus data blocks across all segments, and eliminated 100% of GNU `as`
+    warnings on both Red Sun and Blue Moon.
 - [ ] Owner, later: rename `C:\proyectos\MMBN4` to `C:\proyectos\MMBN-Decomp` when no agent is running;
   then fix the absolute `/mnt/c/proyectos/MMBN4` paths in the docs.
 
@@ -43,10 +56,14 @@ This is the short, execution-oriented backlog. The detailed plans remain in
 - [x] Source-ownership reporting is available through
   `python decomp/tools/coverage.py rs` and `bm`.
 
-Current source ownership (re-measured 04:40): RS **52.4%** (618,326 / 1,179,456 code bytes) and
-BM **52.0%** (613,330 / 1,179,476 code bytes). This measures bytes represented
-by source rather than `incrom`; it does not mean every represented function is
-understood or named.
+Current source ownership (re-measured after purging bogus data blocks, formalizing `code_10` `data_from` at
+`0x08113CB8` RS / `0x08113CCC` BM, recovering gap leaf functions, `_call_via_rX` trampolines, `noop_stub`
+callbacks, `SoundMainBTM`, shared-epilogue sibling functions, and anchored 2-3 entry leaf tables, and disassembling
+the 3 inline ARM ranges in `code_10` `m4a` `SoundMainRAM` / `umull`): RS **50.8%** (598,812 / 1,179,456 code-segment
+bytes, or **53.0%** of the actual `0x08000000..0x08113CB8` `.text` region; 11,214 functions, 100% clean; 519 / 519 CE
+code symbols reached) and BM **50.8%** (598,836 / 1,179,476 code-segment bytes, or **53.0%** of `0x08000000..0x08113CCC`;
+11,212 functions, 100% clean; 519 / 519 CE code symbols reached). Both ROMs now assemble with zero GNU `as` warnings
+and identical literal/external reference counts across all 11 code segments.
 
 ## Do next: disassembly (DC-2)
 
@@ -77,9 +94,16 @@ understood or named.
   configuration and tracing in `disasm.py`, resolving both major switch dispatch sites in `code_10`
   (`0x08110DA4` / `0x08113A70` RS, `0x08110DB8` / `0x08113A84` BM) and reclaiming all 428 bytes
   of `incrom` as clean, structured, symbolic assembly.
-- [ ] Prioritize remaining lower-coverage segments: `code_04` (RS 13.6%, BM 13.6%),
-  `code_06` (28.3% / 28.2%), `code_09` (43.1%), and `code_10` (47.3% / 43.9%).
-  Notice `code_07` (90.1%) and `code_08` (89.9%) have achieved near-complete code
+- [x] Formalize the exact ROM `.text` end in `code_10` (`data_from = 0x08113CB8` RS / `0x08113CCC` BM
+  immediately before the `"Apr 16 2004 ..."` build timestamp and `m4a` `WaveData` PCM samples), add
+  `leaf_gap_pass()` (`verify_leaf_thumb_func`) to `tools/survey.py` (recovering 58 unreferenced leaf
+  functions, 12 `_call_via_r0`..`_call_via_lr` trampolines, and `SoundMainBTM`), and add `arm_ranges`
+  support to `tools/disasm.py` to disassemble the 3 inline Thumb-to-ARM `m4a` blocks (`umull` helper and
+  `SoundMainRAM` PCM mixer loops, +944 bytes of assembly in `code_10`, bringing `code_10` `.text` coverage
+  up to **86.2%**).
+- [ ] Prioritize remaining lower-coverage segments: `code_04` (RS 10.5%, BM 10.5%),
+  `code_06` (28.2%), `code_09` (42.7%), and `code_10` (38.1% of full segment, **86.2%** of `.text` up to `data_from`).
+  Notice `code_07` (90.0%) and `code_08` (89.6%) have achieved near-complete code
   carving.
 - [ ] Add verified function starts to `symbols/functions_rs.txt` and
   `symbols/functions_bm.txt`; regenerate only the affected segment with the
@@ -96,8 +120,8 @@ understood or named.
 
 ## Then: names, RE, and the Blue Moon variant
 
-- [x] Establish unified symbolic naming database in `symbols/names.txt` (753 symbols)
-  cross-referencing Cyberworld Endless (CE), `bn6f`, and `exe4rs`.
+- [x] Establish unified symbolic naming database in `symbols/names.txt` (827 symbols)
+  cross-referencing Cyberworld Endless (CE), `bn6f`, `exe4rs`, and Claude's RE lane.
 - [x] Port 100% of addressable CE symbols (685 / 685) from Red Sun to Blue Moon,
   proving EWRAM/IWRAM address symmetry and documenting the 7 piecewise ROM code
   shift deltas (`+0x0`, `+0x4`, `+0x8`, `+0xC`, `+0x18`, `+0x14`, `+0xC`, `+0x14`).
@@ -117,7 +141,7 @@ understood or named.
   - [ ] free ROM space.
 - [x] Promote those findings into versioned symbol tables and generate labels
   for the patch project, mGBA, and the PC port: `tools/split.py` emits `build/<v>/symbols.inc`
-  exporting all 753 canonical symbols (`.global` and `.set`/`.thumb_set`), populating the ELF
+  exporting all 827 canonical symbols (`.global` and `.set`/`.thumb_set`), populating the ELF
   symbol table with accurate Thumb functions, RAM structures, and data labels.
 - [ ] Compare exact RS/BM function pairs from `symbols/map_rs_bm.txt`; merge
   only verified-identical functions into shared source with explicit

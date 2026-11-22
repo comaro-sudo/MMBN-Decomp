@@ -1306,10 +1306,6 @@ sub_080D0AA0:
     pop {r7, pc}
 _080D0B06:
     ldrb r1, [r7, #3]
-
-    .global sub_080D0B08
-    .thumb_func
-sub_080D0B08:
     movs r2, #5
     movs r3, #0x21
     bl sub_080129AC
@@ -23319,16 +23315,9 @@ sub_080DB54C:
     .hword 0x0000
 _080DB560:
     .word dat_080DB564
-
-    .global sub_080DB564
-    .thumb_func
-sub_080DB564:
-    push {r0, r4, r5, r6, lr}
-    lsrs r5, r1, #0x20
-    push {r0, r1, r3, r4, r6, r7, lr}
-    lsrs r5, r1, #0x20
-    lsls r1, r4, #0x15
-    lsrs r1, r0, #0x20
+    .global dat_080DB564
+dat_080DB564:
+    incrom 0xDB564, 0xC
 
     .global sub_080DB570
     .thumb_func
@@ -24123,18 +24112,12 @@ dat_080DBB70:
 _080DBB7C:
     .word dat_080DBB84
 _080DBB80:
-    .word sub_080DBB88
+    .word dat_080DBB89
     .global dat_080DBB84
 dat_080DBB84:
     .word 0xFE02FF01
-
-    .global sub_080DBB88
-    .thumb_func
-sub_080DBB88:
-    lsls r7, r7, #5
-    lsls r1, r0, #8
-    ldrb r2, [r0, #0x1c]
-    movs r0, r0
+    .word 0x0201017F
+    .word 0x00007F02
 
     .global sub_080DBB90
     .thumb_func
@@ -34923,10 +34906,6 @@ sub_080E0DF0:
     movs r1, #1
     strb r1, [r7]
     ldrb r2, [r0]
-
-    .global sub_080E0E0C
-    .thumb_func
-sub_080E0E0C:
     movs r1, #0x10
     orrs r2, r1
     strb r2, [r0]
@@ -37394,8 +37373,13 @@ sub_080E23BE:
     str r0, [r7]
 _080E23D8:
     pop {pc}
-    .hword 0x2108
-    .word 0x46F76081
+
+    .global sub_080E23DA
+    .thumb_func
+sub_080E23DA:
+    movs r1, #8
+    str r1, [r0, #8]
+    mov pc, lr
 _080E23E0:
     .word dat_080E22C4
     .global dat_080E23E4
@@ -38053,7 +38037,14 @@ sub_080E28F8:
     strb r1, [r0]
 _080E2916:
     pop {pc}
-    incrom 0xE2918, 0x8
+
+    .global sub_080E2918
+    .thumb_func
+sub_080E2918:
+    movs r1, #8
+    str r1, [r0, #8]
+    mov pc, lr
+    .hword 0x0000
 
     .global sub_080E2920
     .thumb_func
@@ -43757,7 +43748,7 @@ _080E52D4:
 _080E52D8:
     .word dat_080E5326
 _080E52DC:
-    .word sub_080E532A
+    .word dat_080E532B
 _080E52E0:
     .word dat_080E531C
     .global dat_080E52E4
@@ -43772,14 +43763,12 @@ dat_080E531C:
     .global dat_080E5326
 dat_080E5326:
     .hword 0x0303
-    .hword 0x0200
+    .word 0x82040200
+    .word 0x00000081
 
-    .global sub_080E532A
+    .global sub_080E5330
     .thumb_func
-sub_080E532A:
-    strh r4, [r0, #0x10]
-    lsls r1, r0, #2
-    movs r0, r0
+sub_080E5330:
     push {r4, r6, r7, lr}
     sub sp, #0x18
     ldrb r0, [r5, #0x16]
@@ -47971,7 +47960,24 @@ sub_080E710C:
     strb r1, [r0]
 _080E7128:
     pop {pc}
-    incrom 0xE712A, 0x12
+
+    .global sub_080E712A
+    .thumb_func
+sub_080E712A:
+    movs r1, #8
+    str r1, [r0, #8]
+    mov pc, lr
+
+    .global sub_080E7130
+    .thumb_func
+sub_080E7130:
+    tst r0, r0
+    beq _080E7138
+    movs r1, #0xff
+    strb r1, [r0, #0x11]
+_080E7138:
+    mov pc, lr
+    .hword 0x0000
     .global dat_080E713C
 dat_080E713C:
     .word 0x470C3C0C
@@ -48758,7 +48764,16 @@ sub_080E7718:
     movs r1, #8
     str r1, [r0, #8]
     mov pc, lr
-    incrom 0xE771E, 0xA
+
+    .global sub_080E771E
+    .thumb_func
+sub_080E771E:
+    tst r0, r0
+    beq _080E7726
+    movs r1, #0xff
+    strb r1, [r0, #0x11]
+_080E7726:
+    mov pc, lr
 
     .global sub_080E7728
     .thumb_func
@@ -50026,10 +50041,6 @@ dat_080E8054:
     .thumb_func
 sub_080E8064:
     push {lr}
-
-    .global sub_080E8066
-    .thumb_func
-sub_080E8066:
     ldr r1, _080E8074
     ldrb r0, [r5, #0xa]
     ldr r1, [r1, r0]
@@ -56971,13 +56982,7 @@ _080EB41C:
     .word dat_080EB420
     .global dat_080EB420
 dat_080EB420:
-    .word 0x080EB429
-
-    .global sub_080EB424
-    .thumb_func
-sub_080EB424:
-    push {r0, r2, r3, lr}
-    lsrs r6, r1, #0x20
+    incrom 0xEB420, 0x8
 
     .global sub_080EB428
     .thumb_func
@@ -57105,15 +57110,9 @@ sub_080EB52A:
     pop {r7, pc}
 _080EB53C:
     .word dat_080EB540
-
-    .global sub_080EB540
-    .thumb_func
-sub_080EB540:
-    push {r0, r2, r4, r6, lr}
-    lsrs r6, r1, #0x20
-    push {r0, r4, r5, r6, r7, lr}
-    lsrs r6, r1, #0x20
-    incrom 0xEB548, 0xC
+    .global dat_080EB540
+dat_080EB540:
+    incrom 0xEB540, 0x14
 
     .global sub_080EB554
     .thumb_func
@@ -57623,7 +57622,7 @@ _080EB9A6:
 _080EB9A8:
     .word dat_080EB9C0
 _080EB9AC:
-    .word sub_080EB9C6
+    .word dat_080EB9C7
 _080EB9B0:
     .word 0x00008318
 _080EB9B4:
@@ -57635,16 +57634,8 @@ _080EB9BC:
     .global dat_080EB9C0
 dat_080EB9C0:
     .word 0x30020100
-    .hword 0x0100
-
-    .global sub_080EB9C6
-    .thumb_func
-sub_080EB9C6:
-    lsls r2, r0, #4
-    lsls r1, r0, #4
-    lsrs r1, r0, #0x10
-    lsrs r4, r1, #0x10
-    movs r0, r0
+    .word 0x01020100
+    incrom 0xEB9C8, 0x8
 
     .global sub_080EB9D0
     .thumb_func
@@ -59688,18 +59679,12 @@ _080EC934:
 _080EC938:
     .word dat_080EC940
 _080EC93C:
-    .word sub_080EC944
+    .word dat_080EC945
     .global dat_080EC940
 dat_080EC940:
     .word 0x0C070503
-
-    .global sub_080EC944
-    .thumb_func
-sub_080EC944:
-    lsrs r0, r3, #0x20
-    adds r0, r2, r0
-    movs r0, r4
-    movs r0, r0
+    .word 0x18100818
+    .word 0x00000020
 
     .global sub_080EC94C
     .thumb_func
@@ -63222,7 +63207,7 @@ _080EE3CC:
 _080EE3D0:
     .word dat_080EE3F6
 _080EE3D4:
-    .word sub_080EE3FA
+    .word dat_080EE3FB
 _080EE3D8:
     .word dat_080EE400
     .global dat_080EE3DC
@@ -63231,18 +63216,11 @@ dat_080EE3DC:
     .global dat_080EE3F6
 dat_080EE3F6:
     .hword 0x0100
-    .hword 0x0302
-
-    .global sub_080EE3FA
-    .thumb_func
-sub_080EE3FA:
-    lsrs r4, r0, #0x20
-    lsls r7, r0, #0x18
-    lsls r2, r1, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #1
-    movs r0, r0
+    .word 0x08040302
+    .word 0x040A0607
+    .global dat_080EE400
+dat_080EE400:
+    incrom 0xEE400, 0x8
 
     .global sub_080EE408
     .thumb_func
@@ -65682,20 +65660,13 @@ sub_080EF6FC:
 _080EF728:
     .word dat_080EF730
 _080EF72C:
-    .word sub_080EF73A
+    .word dat_080EF73B
     .global dat_080EF730
 dat_080EF730:
-    incrom 0xEF730, 0xA
-
-    .global sub_080EF73A
-    .thumb_func
-sub_080EF73A:
-    lsrs r4, r2, #8
-    lsrs r2, r1, #8
-    asrs r2, r1, #0x10
-    asrs r4, r2, #0x10
-    cmp r0, #0x28
-    cmp r0, #0x28
+    incrom 0xEF730, 0xB
+    .global dat_080EF73B
+dat_080EF73B:
+    incrom 0xEF73B, 0xB
 
     .global sub_080EF746
     .thumb_func
@@ -65724,34 +65695,13 @@ sub_080EF746:
 _080EF774:
     .word dat_080EF77C
 _080EF778:
-    .word sub_080EF786
+    .word dat_080EF787
     .global dat_080EF77C
 dat_080EF77C:
-    incrom 0xEF77C, 0xA
-
-    .global sub_080EF786
-    .thumb_func
-sub_080EF786:
-    subs r0, r1, #0
-    subs r6, r3, #0
-    subs r4, #0x1e
-    subs r4, #0x3c
-    ldrb r0, [r7, #1]
-    ldrb r0, [r7, #1]
-    movs r0, r0
-    movs r0, #0x60
-    adds r0, r0, r5
-    ldr r1, [r0]
-    tst r1, r1
-    beq _080EF7AA
-    movs r0, #0x64
-    adds r0, r0, r5
-    ldr r1, [r0]
-    tst r1, r1
-    beq _080EF7AA
-    movs r0, #0
-_080EF7AA:
-    mov pc, lr
+    incrom 0xEF77C, 0xB
+    .global dat_080EF787
+dat_080EF787:
+    incrom 0xEF787, 0x25
 
     .global sub_080EF7AC
     .thumb_func
@@ -65839,17 +65789,7 @@ _080EF844:
     .word dat_080EF848
     .global dat_080EF848
 dat_080EF848:
-    incrom 0xEF848, 0x30
-
-    .global sub_080EF878
-    .thumb_func
-sub_080EF878:
-    lsls r6, r1, #0xc
-    lsrs r3, r0, #0x1c
-    lsls r1, r7, #8
-    asrs r4, r0, #0x20
-    movs r2, r7
-    movs r0, r0
+    incrom 0xEF848, 0x3C
 _080EF884:
     .word sub_080EF7CA
 

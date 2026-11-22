@@ -126,7 +126,13 @@ start = 0x0810A1B4
 end = 0x08120000
 kind = "code"
 mode = "thumb"
+data_from = 0x08113CB8   # build timestamp ("Apr 16 2004 14:40:18") + m4a PCM audio samples
 jumptables = [
     { addr = 0x08110DA4, count = 5 },
     { addr = 0x08113A70, count = 18 },
+]
+arm_ranges = [
+    { start = 0x08111B08, end = 0x08111B14 },
+    { start = 0x08111BA4, end = 0x08111BF8 },
+    { start = 0x08111D30, end = 0x08111F18 },
 ]

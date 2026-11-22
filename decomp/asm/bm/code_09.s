@@ -219,7 +219,10 @@ _080F01CC:
     .word 0x0000FFFF
     .global dat_080F01D0
 dat_080F01D0:
-    incrom 0xF01D0, 0x16
+    incrom 0xF01D0, 0xB
+    .global dat_080F01DB
+dat_080F01DB:
+    incrom 0xF01DB, 0xB
     .global dat_080F01E6
 dat_080F01E6:
     incrom 0xF01E6, 0xE
@@ -467,7 +470,7 @@ _080F03BA:
 _080F03BC:
     .word dat_080F03C4
 _080F03C0:
-    .word sub_080F01DA
+    .word dat_080F01DB
     .global dat_080F03C4
 dat_080F03C4:
     .word 0x00030300
@@ -1371,23 +1374,15 @@ _080F0A4C:
 _080F0A72:
     pop {pc}
 _080F0A74:
-    .word sub_080F0A86
+    .word dat_080F0A87
 _080F0A78:
     .word dat_080F0A7C
     .global dat_080F0A7C
 dat_080F0A7C:
-    incrom 0xF0A7C, 0xA
-
-    .global sub_080F0A86
-    .thumb_func
-sub_080F0A86:
-    subs r4, #0x20
-    subs r4, #0x3c
-    adds r2, #0x3c
-    adds r2, #0x32
-    cmp r0, #0x28
-    cmp r0, #0x28
-    movs r0, r0
+    incrom 0xF0A7C, 0xB
+    .global dat_080F0A87
+dat_080F0A87:
+    incrom 0xF0A87, 0xD
 
     .global sub_080F0A94
     .thumb_func
@@ -4030,24 +4025,13 @@ dat_080F1DC0:   @ BN4_FIREMAN_MASKS
     incrom 0xF1DC0, 0x10
     .global dat_080F1DD0
 dat_080F1DD0:
-    incrom 0xF1DD0, 0xA
-
-    .global sub_080F1DDA
-    .thumb_func
-sub_080F1DDA:
-    asrs r6, r1, #0x18
-    asrs r6, r2, #0x18
-    asrs r6, r2, #8
-    asrs r2, r2, #8
-    lsrs r6, r1, #0x18
-    lsrs r6, r1, #0x18
-    movs r0, r0
-    movs r0, r0
-    lsls r1, r0, #4
-    lsls r1, r0, #8
-    lsls r2, r0, #8
-    movs r2, r0
-    movs r0, r0
+    incrom 0xF1DD0, 0xB
+    .global dat_080F1DDB
+dat_080F1DDB:
+    incrom 0xF1DDB, 0xB
+    .global dat_080F1DE6
+dat_080F1DE6:
+    incrom 0xF1DE6, 0xE
 
     .global sub_080F1DF4
     .thumb_func
@@ -4309,7 +4293,7 @@ sub_080F1FA8:
     pop {pc}
     .hword 0x0000
 _080F1FD4:
-    .word sub_080F1DDA
+    .word dat_080F1DDB
 _080F1FD8:
     .word dat_080F1DE6
 
@@ -9248,17 +9232,11 @@ sub_080F440C:
 _080F4430:
     .word dat_080F4438
 _080F4434:
-    .word sub_080F443A
+    .word dat_080F443B
     .global dat_080F4438
 dat_080F4438:
-    .hword 0x1E14
-
-    .global sub_080F443A
-    .thumb_func
-sub_080F443A:
-    subs r4, r2, #0
-    subs r0, r5, #0
-    movs r0, r0
+    .word 0x1E141E14
+    .word 0x00001E28
 
     .global sub_080F4440
     .thumb_func
@@ -11643,14 +11621,14 @@ sub_080F5574:
     adds r4, r1, #0
     movs r0, #1
     movs r1, #0xc9
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5586
     movs r0, #0x20
     pop {r4, pc}
 _080F5586:
     movs r0, #1
     movs r1, #0xcb
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5594
     movs r0, #0x30
     pop {r4, pc}
@@ -11659,7 +11637,7 @@ _080F5594:
     bne _080F55A6
     movs r0, #0
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F55CA
     movs r0, #0x10
     pop {r4, pc}
@@ -11668,7 +11646,7 @@ _080F55A6:
     bne _080F55B8
     movs r0, #0
     movs r1, #0x44
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F55CA
     movs r0, #0x10
     pop {r4, pc}
@@ -11677,7 +11655,7 @@ _080F55B8:
     bne _080F55CA
     movs r0, #0
     movs r1, #0x50
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F55CA
     movs r0, #0x10
     pop {r4, pc}
@@ -11692,7 +11670,7 @@ sub_080F55CE:
     adds r4, r1, #0
     movs r0, #1
     movs r1, #0xc9
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F55E0
     movs r0, #0x20
     pop {r4, pc}
@@ -11701,7 +11679,7 @@ _080F55E0:
     bne _080F55F2
     movs r0, #0
     movs r1, #0x4f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5628
     movs r0, #0x10
     pop {r4, pc}
@@ -11710,7 +11688,7 @@ _080F55F2:
     bne _080F5604
     movs r0, #0
     movs r1, #0x47
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5628
     movs r0, #0x10
     pop {r4, pc}
@@ -11719,7 +11697,7 @@ _080F5604:
     bne _080F5616
     movs r0, #0
     movs r1, #0x43
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5628
     movs r0, #0x10
     pop {r4, pc}
@@ -11728,7 +11706,7 @@ _080F5616:
     bne _080F5628
     movs r0, #0
     movs r1, #0x4a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5628
     movs r0, #0x10
     pop {r4, pc}
@@ -11743,14 +11721,14 @@ sub_080F562C:
     adds r4, r1, #0
     movs r0, #1
     movs r1, #0xca
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F563E
     movs r0, #0x20
     pop {r4, pc}
 _080F563E:
     movs r0, #1
     movs r1, #0xcb
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F564C
     movs r0, #0x30
     pop {r4, pc}
@@ -11759,7 +11737,7 @@ _080F564C:
     bne _080F565E
     movs r0, #0
     movs r1, #0x4e
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5682
     movs r0, #0x10
     pop {r4, pc}
@@ -11768,7 +11746,7 @@ _080F565E:
     bne _080F5670
     movs r0, #0
     movs r1, #0x51
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5682
     movs r0, #0x10
     pop {r4, pc}
@@ -11777,7 +11755,7 @@ _080F5670:
     bne _080F5682
     movs r0, #0
     movs r1, #0x52
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F5682
     movs r0, #0x10
     pop {r4, pc}
@@ -11794,7 +11772,7 @@ sub_080F5686:
     bne _080F569C
     movs r0, #0
     movs r1, #0x45
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F56D2
     movs r0, #0x10
     pop {r4, pc}
@@ -11803,7 +11781,7 @@ _080F569C:
     bne _080F56AE
     movs r0, #0
     movs r1, #0x48
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F56D2
     movs r0, #0x10
     pop {r4, pc}
@@ -11812,7 +11790,7 @@ _080F56AE:
     bne _080F56C0
     movs r0, #0
     movs r1, #0x54
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F56D2
     movs r0, #0x10
     pop {r4, pc}
@@ -11821,7 +11799,7 @@ _080F56C0:
     bne _080F56D2
     movs r0, #0
     movs r1, #0x53
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F56D2
     movs r0, #0x10
     pop {r4, pc}
@@ -11838,7 +11816,7 @@ sub_080F56D6:
     bne _080F56EC
     movs r0, #0
     movs r1, #0x46
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11847,7 +11825,7 @@ _080F56EC:
     bne _080F56FE
     movs r0, #0
     movs r1, #0x4c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11856,7 +11834,7 @@ _080F56FE:
     bne _080F5710
     movs r0, #0
     movs r1, #0x4b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11865,7 +11843,7 @@ _080F5710:
     bne _080F5722
     movs r0, #0
     movs r1, #0x55
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11874,7 +11852,7 @@ _080F5722:
     bne _080F5734
     movs r0, #0
     movs r1, #0x56
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11883,7 +11861,7 @@ _080F5734:
     bne _080F5746
     movs r0, #0
     movs r1, #0x49
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     movs r0, #0x10
     pop {r4, pc}
@@ -11897,7 +11875,7 @@ _080F574E:
     bne _080F576C
     movs r0, #0
     movs r1, #0x9f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080F576C
     bl sub_08035004
     tst r0, r0
@@ -12272,7 +12250,7 @@ _080F5A08:
     add sp, #0x18
     pop {r4, pc}
 _080F5A0C:
-    .word sub_0801881C
+    .word dat_0801881D   @ BN4_BUSTING_TABLE
 
     .global sub_080F5A10
     .thumb_func
@@ -12348,7 +12326,7 @@ sub_080F5A74:
     pop {r4, pc}
     .hword 0x0000
 _080F5A90:
-    .word sub_0801881C
+    .word dat_0801881D   @ BN4_BUSTING_TABLE
 
     .global sub_080F5A94
     .thumb_func
@@ -13103,23 +13081,13 @@ _0810307C:
 _08103084:
     .word dat_0810308C
 _08103088:
-    .word sub_0810309A
+    .word dat_0810309B
     .global dat_0810308C
 dat_0810308C:
-    incrom 0x10308C, 0xE
-
-    .global sub_0810309A
-    .thumb_func
-sub_0810309A:
-    lsls r0, r0, #4
-    lsls r1, r0, #4
-    lsls r1, r0, #4
-    lsls r1, r0, #8
-    lsls r1, r0, #4
-    lsls r1, r0, #4
-    lsls r1, r0, #4
-    lsls r1, r0, #8
-    movs r0, r0
+    incrom 0x10308C, 0xF
+    .global dat_0810309B
+dat_0810309B:
+    incrom 0x10309B, 0x11
 
     .global sub_081030AC
     .thumb_func
@@ -13179,7 +13147,7 @@ _08103104:
 _08103108:
     .word dat_08103368
 _0810310C:
-    .word sub_08103376
+    .word dat_08103377
 _08103110:
     .word dat_08103386
 _08103114:
@@ -13198,149 +13166,13 @@ dat_0810334A:
     incrom 0x10334A, 0x1E
     .global dat_08103368
 dat_08103368:
-    incrom 0x103368, 0xE
-
-    .global sub_08103376
-    .thumb_func
-sub_08103376:
-    movs r0, r0
-    lsls r1, r0, #8
-    lsls r3, r0, #0x10
-    lsls r4, r1, #0x10
-    lsls r2, r1, #0x18
-    lsrs r0, r1, #4
-    lsls r5, r0, #0x1c
-    lsrs r4, r1, #0xc
-    .hword 0xA090   @ adr r0, #0x240
-    stm r0!, {r4, r5, r7}
-    str r0, [r2, #0xc]
-    strb r0, [r0]
-    .hword 0xA090   @ adr r0, #0x240
-    stm r0!, {r4, r5, r7}
-    str r0, [r2, #0xc]
-    incrom 0x103394, 0x8
-
-    .global sub_0810339C
-    .thumb_func
-sub_0810339C:
-    lsls r0, r0, #4
-    .hword 0xFFFF
-
-    .global sub_081033A0
-    .thumb_func
-sub_081033A0:
-    movs r3, r0
-    lsls r4, r0, #8
-
-    .global sub_081033A4
-    .thumb_func
-sub_081033A4:
-    lsls r7, r7, #0xf
-    lsls r7, r7, #0xb
-    incrom 0x1033A8, 0x14
-
-    .global sub_081033BC
-    .thumb_func
-sub_081033BC:
-    lsls r0, r0, #4
-    incrom 0x1033BE, 0xA
-
-    .global sub_081033C8
-    .thumb_func
-sub_081033C8:
-    lsls r0, r0, #4
-    .hword 0xFFFF
-
-    .global sub_081033CC
-    .thumb_func
-sub_081033CC:
-    movs r3, r0
-    lsls r7, r7, #0xb
-    .word 0xFFFFFFFF
-
-    .global sub_081033D4
-    .thumb_func
-sub_081033D4:
-    lsls r7, r7, #7
-    .hword 0xFFFF
-    .word 0xFF00FFFF
-
-    .global sub_081033DC
-    .thumb_func
-sub_081033DC:
-    lsls r7, r7, #7
-    lsls r7, r7, #0xb
-    .word 0x0200FFFF
-
-    .global sub_081033E4
-    .thumb_func
-sub_081033E4:
-    lsls r7, r7, #7
-    .hword 0xFFFF
-
-    .global sub_081033E8
-    .thumb_func
-sub_081033E8:
-    lsls r0, r0, #4
-    incrom 0x1033EA, 0xA
-
-    .global sub_081033F4
-    .thumb_func
-sub_081033F4:
-    lsls r0, r0, #8
-    .hword 0xFFFF
-
-    .global sub_081033F8
-    .thumb_func
-sub_081033F8:
-    lsls r0, r0, #4
-    lsls r3, r0, #8
-    .word 0x0400FFFF
-
-    .global sub_08103400
-    .thumb_func
-sub_08103400:
-    lsls r7, r7, #0x13
-    .hword 0xFF03
-
-    .global sub_08103404
-    .thumb_func
-sub_08103404:
-    lsls r0, r0, #8
-    .hword 0xFFFF
-    .word 0x0202FF00
-
-    .global sub_0810340C
-    .thumb_func
-sub_0810340C:
-    lsls r1, r0, #4
-    lsls r3, r0, #8
-    .word 0x0400FF05
-
-    .global sub_08103414
-    .thumb_func
-sub_08103414:
-    lsls r5, r0, #0x10
-    lsls r3, r0, #0xc
-
-    .global sub_08103418
-    .thumb_func
-sub_08103418:
-    lsls r0, r0, #8
-    .hword 0xFFFF
-    .word 0x0202FF02
-
-    .global sub_08103420
-    .thumb_func
-sub_08103420:
-    lsls r1, r0, #4
-    lsls r7, r7, #3
-    lsls r7, r7, #3
-    lsls r1, r0, #8
-    lsls r3, r0, #0x10
-    lsls r6, r0, #4
-    lsls r2, r0, #0xc
-    lsrs r7, r0, #0x20
+    incrom 0x103368, 0xF
+    .global dat_08103377
+dat_08103377:
+    incrom 0x103377, 0xF
+    .global dat_08103386
+dat_08103386:
+    incrom 0x103386, 0xAA
 
     .global sub_08103430
     .thumb_func
@@ -13693,7 +13525,7 @@ sub_081039AC:
     lsls r0, r0, #1
     ldrh r0, [r1, r0]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _081039CA
     movs r1, #2
     ldrb r0, [r5]
@@ -13763,7 +13595,7 @@ sub_08103A44:
     beq _08103AC8
     movs r0, #0
     movs r1, #0x6d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _08103A58
     pop {pc}
 _08103A58:
@@ -13781,7 +13613,7 @@ _08103A68:
     cmp r0, r1
     beq _08103A7C
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _08103A7C
     adds r2, #2
     b _08103A68
@@ -13915,7 +13747,7 @@ _08103B5E:
     ldrh r4, [r2, r3]
     push {r1}
     adds r0, r4, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r1}
     beq _08103B58
     strb r1, [r5, #0x1f]
@@ -13939,7 +13771,7 @@ _08103B8C:
     ldrh r4, [r2, r3]
     push {r1}
     adds r0, r4, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r1}
     beq _08103B84
     strb r1, [r5, #0x1f]
@@ -14498,59 +14330,25 @@ _081040D6:
 _08104100:
     .word dat_08104152   @ BN4_PLATE_SPECIAL
 _08104104:
-    .word sub_08104158
+    .word dat_08104159   @ BN4_PLATE_FRAMES
 _08104108:
     .word dat_08104114   @ BN4_PLATE_PALETTES
 _0810410C:
-    .word sub_08104132
+    .word dat_08104133   @ BN4_PLATE_SHEETS
 _08104110:
     .word 0x00000040
     .global dat_08104114
 dat_08104114:   @ BN4_PLATE_PALETTES
-    incrom 0x104114, 0x1E
-
-    .global sub_08104132
-    .thumb_func
-sub_08104132:
-    movs r0, r2
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    asrs r0, r0, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    asrs r1, r2, #4
-    lsls r0, r0, #4
-    lsls r4, r0, #0x14
-    lsrs r0, r1, #4
-
-    .global sub_08104158
-    .thumb_func
-sub_08104158:
-    lsls r7, r7, #3
-    lsls r1, r0, #8
-    lsls r3, r0, #0x10
-    lsls r5, r0, #0x18
-    lsrs r7, r0, #0x20
-    lsrs r1, r1, #8
-    lsrs r3, r1, #0x10
-    lsrs r5, r1, #0x18
-    movs r7, r1
-    lsls r1, r0, #8
-    lsls r3, r0, #0x10
-    lsls r5, r0, #0x10
-    lsls r5, r0, #0x10
-    lsls r5, r0, #0x10
-    lsls r5, r0, #0x10
-    lsls r5, r0, #0x18
+    incrom 0x104114, 0x1F
+    .global dat_08104133
+dat_08104133:   @ BN4_PLATE_SHEETS
+    incrom 0x104133, 0x1F
+    .global dat_08104152
+dat_08104152:   @ BN4_PLATE_SPECIAL
+    .hword 0x0100
+    .word 0x09080504
+    .word 0x020100FF
+    incrom 0x10415C, 0x1C
 
     .global sub_08104178
     .thumb_func
@@ -14743,7 +14541,7 @@ _081042F8:
 _081042FC:
     .word dat_08104318
 _08104300:
-    .word sub_0810434A
+    .word dat_0810434B   @ BN4_PLATE_SPRITES
     .word 0x0810435D
 _08104308:
     .word dat_0810436E
@@ -14756,42 +14554,13 @@ dat_08104318:
     incrom 0x104318, 0x22
     .global dat_0810433A
 dat_0810433A:
-    incrom 0x10433A, 0x10
-
-    .global sub_0810434A
-    .thumb_func
-sub_0810434A:
-    lsls r6, r0, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0xc
-    lsls r3, r0, #8
-    lsls r2, r0, #8
-    lsls r2, r0, #8
-    lsls r2, r0, #8
-
-    .global sub_0810435C
-    .thumb_func
-sub_0810435C:
-    movs r5, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    lsls r0, r0, #0xc
-    movs r4, r0
-    movs r0, r0
-    lsls r0, r0, #4
-    lsls r1, r0, #8
-    asrs r0, r0, #0x20
-    adds r0, #0x20
-    str r0, [r0, r1]
-    strb r0, [r4, #1]
-    strh r0, [r0, #4]
-    .hword 0xA090   @ adr r0, #0x240
-    stm r0!, {r4, r5, r7}
-    b _08104520
-    incrom 0x10437E, 0x12
+    incrom 0x10433A, 0x11
+    .global dat_0810434B
+dat_0810434B:   @ BN4_PLATE_SPRITES
+    incrom 0x10434B, 0x23
+    .global dat_0810436E
+dat_0810436E:
+    incrom 0x10436E, 0x22
     .global dat_08104390
 dat_08104390:
     incrom 0x104390, 0x24
@@ -15004,7 +14773,6 @@ _08104518:
 sub_0810451C:
     push {lr}
     ldrb r0, [r5, #4]
-_08104520:
     lsls r0, r0, #2
     mov r2, sl
     ldr r2, [r2, #0x3c]
@@ -15299,7 +15067,7 @@ sub_081047A4:
     movs r4, #0x23
     movs r0, #0x11
     movs r1, #0x7d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _081047B4
     movs r4, #0x21
 _081047B4:
@@ -15448,7 +15216,7 @@ _081048A0:
 _081048B6:
     movs r0, #0x11
     movs r1, #0x65
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _081048C6
     movs r0, #0x1e
     strb r0, [r5, #5]
@@ -16854,7 +16622,7 @@ sub_08105360:
     ldr r2, _081053BC
     adds r2, r2, r1
     adds r0, r2, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     push {r5}
     movs r0, #7
     movs r1, #1
@@ -17247,7 +17015,7 @@ sub_08105668:
     ldrb r4, [r4]
     adds r0, r0, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _081056CC
     bl sub_08003004
     movs r1, #0
@@ -17728,7 +17496,7 @@ sub_08105A08:
     beq _08105A2E
     movs r0, #0x11
     movs r1, #0x7d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08105A30
     mov r0, sl
     ldr r0, [r0, #0x40]
@@ -19478,7 +19246,7 @@ _0810668C:
 _081066D8:
     .word dat_08106718
 _081066DC:
-    .word sub_0810671C
+    .word dat_0810671D
 _081066E0:
     .word dat_08106722
 _081066E4:
@@ -19495,66 +19263,9 @@ dat_08106704:
     .global dat_08106718
 dat_08106718:
     .word 0x0A0A0A09
-
-    .global sub_0810671C
-    .thumb_func
-sub_0810671C:
-    movs r0, #0xa
-    movs r0, #0x20
-    movs r0, #0x20
-    movs r0, r4
-    lsls r0, r0, #6
-    lsls r0, r0, #6
-    lsls r0, r0, #6
-    lsls r0, r6, #2
-    movs r6, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0x10
-    lsls r4, r0, #0x10
-    movs r4, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    lsls r3, r0, #0xc
-    movs r3, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
+    .word 0x2020200A
+    .word 0x00202020
+    incrom 0x106724, 0x68
 
     .global sub_0810678C
     .thumb_func
@@ -20042,10 +19753,6 @@ _08106B12:
     ldr r1, _08106BD0
     adds r0, r0, r1
     ldr r1, _08106BD4
-
-    .global sub_08106B1C
-    .thumb_func
-sub_08106B1C:
     movs r2, #0x80
     bl sub_08000878
     pop {r0}
@@ -21209,7 +20916,7 @@ sub_08107418:
     push {r7, lr}
     adds r7, r0, #0
     movs r0, #0x36
-    bl sub_0800D7A2
+    bl sub_0800D7A2   @ GetNaviStat16
     bl sub_0800C052
     adds r0, r0, r7
     cmp r0, r7
@@ -21609,10 +21316,6 @@ _081076F4:
     movs r0, #0xe
     bl sub_0800290C
     ldrb r0, [r5, #4]
-
-    .global sub_08107712
-    .thumb_func
-sub_08107712:
     bl sub_08002E10
     bl sub_0800283C
     bl sub_08002FE2
@@ -21759,7 +21462,7 @@ _0810783A:
     bl sub_0810787C
     pop {pc}
 _08107840:
-    .word sub_08107874
+    .word dat_08107875
 _08107844:
     .word dat_08107850
 _08107848:
@@ -21775,14 +21478,8 @@ dat_0810785C:
     .global dat_08107870
 dat_08107870:
     .word 0xFF0B0809
-
-    .global sub_08107874
-    .thumb_func
-sub_08107874:
-    lsls r2, r1, #8
-    lsls r7, r0, #4
-    lsrs r0, r0, #0x20
-    movs r0, r0
+    .word 0x0107020A
+    .word 0x00000800
 
     .global sub_0810787C
     .thumb_func
@@ -24038,10 +23735,6 @@ sub_08108B08:
 sub_08108B10:
     push {lr}
     adds r7, r5, #0
-
-    .global sub_08108B14
-    .thumb_func
-sub_08108B14:
     adds r7, #0x20
     mov r6, sl
     ldr r6, [r6, #0x34]
@@ -25361,7 +25054,7 @@ _08109588:
 _0810958C:
     .word dat_081095B0
 _08109590:
-    .word sub_081095B2
+    .word dat_081095B3
 _08109594:
     .word dat_081095B6
 _08109598:
@@ -25376,34 +25069,15 @@ dat_081095AC:
     .word 0x00000100
     .global dat_081095B0
 dat_081095B0:
-    .hword 0x0A0A
-
-    .global sub_081095B2
-    .thumb_func
-sub_081095B2:
-    movs r0, #9
-    movs r0, #0x20
-    lsls r0, r0, #6
-    lsls r0, r0, #3
-    movs r0, r6
-    movs r6, r0
-    lsls r3, r0, #0x10
-    lsls r4, r0, #0x10
-    movs r4, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    movs r0, r0
-    lsls r2, r0, #8
-    lsls r1, r0, #4
+    .word 0x20090A0A
+    .word 0x01802020
+    .word 0x003000C0
+    .global dat_081095BC
+dat_081095BC:
+    incrom 0x1095BC, 0x20
+    .global dat_081095DC
+dat_081095DC:
+    .word 0x01010202
 
     .global sub_081095E0
     .thumb_func

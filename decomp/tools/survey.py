@@ -35,6 +35,30 @@ COND_B = {"beq", "bne", "bcs", "bhs", "bcc", "blo", "bmi", "bpl", "bvs", "bvc",
           "bhi", "bls", "bge", "blt", "bgt", "ble"}
 
 
+def is_bad_thumb_insn(insn, hw: int) -> bool:
+    """Return True for Thumb encodings that only occur when data is decoded as code."""
+    if (hw & 0xFFC0) == 0x0800:  # lsrs Rd, Rm, #0x20 (upper halfword of 0x08XXXXXX pointer or 0x08 data)
+        return True
+    m, ops = insn.mnemonic, insn.op_str
+    if m in ("bkpt", "udf"):
+        return True
+    if m == "svc":
+        t = imm_target(ops)
+        if t is None or t > 0x2A:
+            return True
+    if m == "cmp" and ("pc" in ops or "sp" in ops):
+        return True
+    if m == "stm" and "!" in ops and "{" in ops:
+        base_r = ops.split("!")[0].strip()
+        rlist = [r.strip() for r in ops.split("{")[1].rstrip("}").split(",")]
+        if base_r in rlist and rlist[0] != base_r:
+            return True
+    if m in ("add", "mov", "ldr") and ops.startswith("pc"):
+        if not (m == "mov" and ops != "pc, pc"):
+            return True
+    return False
+
+
 class Rom:
     def __init__(self, path: Path):
         self.d = path.read_bytes()
@@ -105,7 +129,8 @@ class Survey:
             while self.rom.in_rom(a) and a not in seen:
                 off = a - BASE
                 insn = next(md.disasm(self.rom.d[off:off + 4], a), None)
-                if insn is None or (thumb and insn.size == 4 and insn.mnemonic != "bl"):
+                hw = struct.unpack_from("<H", self.rom.d, off)[0]
+                if insn is None or (thumb and insn.size == 4 and insn.mnemonic != "bl") or (thumb and is_bad_thumb_insn(insn, hw)):
                     info["ok"] = False
                     self.note_unresolved("invalid", a, start)
                     break
@@ -155,7 +180,8 @@ class Survey:
                         self.literals.add(lit)
                         v = self.rom.u32(lit)
                         self.lit_values.add(v)
-                        if self.rom.in_rom(v) and v & 1:
+                        code_limit = self.code_end or self.rom.end
+                        if self.rom.in_rom(v) and v & 1 and BASE + 0x25C <= (v & ~1) < code_limit and (struct.unpack_from("<H", self.rom.d, (v & ~1) - BASE)[0] & 0xFF00) == 0xB500 and self.verify_clean_thumb_func(v & ~1):
                             self.seed(v, True, "literal_ptr")
                         elif 0x02000000 <= v < 0x04000000 and v & 1:
                             self.ram_calls["literal_ram_code_ptr"] += 1
@@ -184,7 +210,7 @@ class Survey:
                     p += 2
                 if p < end and p not in covered and \
                         (struct.unpack_from("<H", self.rom.d, p - BASE)[0] & 0xFF00) == 0xB500 and \
-                        p not in self.funcs:
+                        p not in self.funcs and self.verify_clean_thumb_func(p):
                     self.seed(p | 1, True, "prologue")
                     added += 1
                 while a < end and a not in covered:
@@ -195,30 +221,194 @@ class Survey:
             added_total += added
         return added_total
 
-    def verify_clean_thumb_func(self, addr: int, max_insns: int = 500) -> bool:
-        """Verify that addr points to a valid Thumb function:
-        all instructions are valid ARMv4T Thumb, and execution reaches
-        a standard function return (pop {..., pc}, mov pc, lr, or bx lr)."""
-        a = addr
-        insn_cnt = 0
+    def verify_clean_thumb_func(self, addr: int, max_insns: int = 1500) -> bool:
+        """Verify by control-flow walk that addr points to a valid Thumb function:
+        all reachable instructions are valid ARMv4T Thumb (no data signatures or
+        undefined encodings), and execution reaches a standard function return."""
         d = self.rom.d
-        while insn_cnt < max_insns:
-            o = a - BASE
-            if not (0 <= o <= len(d) - 4):
-                return False
-            insn = next(self.thumb.disasm(d[o:o+4], a), None)
-            if insn is None or (insn.size == 4 and insn.mnemonic != "bl"):
-                return False
-            insn_cnt += 1
-            m, ops = insn.mnemonic, insn.op_str
-            if m == "pop" and "pc" in ops:
-                return True
-            if m == "mov" and ops == "pc, lr":
-                return True
-            if m == "bx" and ops.startswith("lr"):
-                return True
-            a += insn.size
-        return False
+        code_limit = self.code_end or self.rom.end
+        if not (BASE + 0x25C <= addr < code_limit):
+            return False
+        if addr in self.lit_values or struct.unpack_from("<H", d, addr - BASE)[0] == 0:
+            return False
+        work, seen = [addr], set()
+        has_ret = False
+        while work and len(seen) < max_insns:
+            a = work.pop()
+            prev = None
+            while len(seen) < max_insns:
+                if a in seen:
+                    has_ret = True
+                    break
+                if a != addr and a in self.funcs:
+                    if not (prev and prev[0] == "pop" and (struct.unpack_from("<H", d, a - BASE)[0] & 0xFF87) == 0x4700):
+                        return False
+                if a != addr and a in self.code:
+                    if not any(struct.unpack_from("<H", d, s_addr - BASE)[0] >> 8 == 0xB5 or
+                               (struct.unpack_from("<H", d, s_addr - BASE)[0] & 0xF800) == 0xF000
+                               for s_addr in seen):
+                        return False
+                    has_ret = True
+                    break
+                if a in self.literals:
+                    return False
+                o = a - BASE
+                if not (0 <= o <= len(d) - 4):
+                    return False
+                hw = struct.unpack_from("<H", d, o)[0]
+                insn = next(self.thumb.disasm(d[o:o+4], a), None)
+                if insn is None or (insn.size == 4 and insn.mnemonic != "bl") or is_bad_thumb_insn(insn, hw):
+                    return False
+                seen.add(a)
+                m, ops = insn.mnemonic, insn.op_str
+                if m == "b":
+                    t = imm_target(ops)
+                    if t is not None and BASE + 0x25C <= t < code_limit:
+                        if t in self.funcs or t in self.code or t in seen:
+                            has_ret = True
+                        else:
+                            work.append(t)
+                    else:
+                        return False
+                    break
+                if m in COND_B:
+                    t = imm_target(ops)
+                    if t is not None and BASE + 0x25C <= t < code_limit:
+                        if t in self.funcs or t in self.code or t in seen:
+                            has_ret = True
+                        else:
+                            work.append(t)
+                    else:
+                        return False
+                elif m == "pop" and "pc" in ops:
+                    has_ret = True
+                    break
+                elif m == "mov" and ops.startswith("pc,") and ops != "pc, pc":
+                    has_ret = True
+                    break
+                elif m == "bx":
+                    if prev == ("mov", "lr, pc"):
+                        prev = (m, ops)
+                        a += insn.size
+                        continue
+                    has_ret = True
+                    break
+                elif m in ("mov", "add", "ldr") and ops.startswith("pc"):
+                    return False
+                prev = (m, ops)
+                a += insn.size
+        return has_ret
+
+    def verify_leaf_thumb_func(self, addr: int, max_insns: int = 48) -> bool:
+        """Verify by control-flow walk that addr is a clean leaf Thumb function:
+        no BL calls, no unpushed pop {..., pc}, all paths return via mov pc, lr
+        (0x46F7) or bx lr (0x4770), and never walks linearly into existing code."""
+        d = self.rom.d
+        code_limit = self.code_end or self.rom.end
+        if not (BASE + 0x25C <= addr < code_limit):
+            return False
+        if addr in self.lit_values or addr in self.literals or addr in self.funcs or addr in self.code:
+            return False
+        first_hw = struct.unpack_from("<H", d, addr - BASE)[0]
+        if first_hw == 0 or first_hw in (0x46F7, 0x4770, 0x46C0):
+            return False
+        work, seen = [addr], set()
+        has_ret = False
+        while work and len(seen) < max_insns:
+            a = work.pop()
+            while len(seen) < max_insns:
+                if a in seen:
+                    break
+                if a != addr and (a in self.funcs or a in self.code):
+                    return False
+                if a in self.literals:
+                    return False
+                o = a - BASE
+                if not (0 <= o <= len(d) - 4):
+                    return False
+                hw = struct.unpack_from("<H", d, o)[0]
+                insn = next(self.thumb.disasm(d[o:o+4], a), None)
+                if insn is None or insn.size == 4 or is_bad_thumb_insn(insn, hw):
+                    return False
+                seen.add(a)
+                m, ops = insn.mnemonic, insn.op_str
+                if m == "b":
+                    t = imm_target(ops)
+                    if t is not None and addr <= t < addr + max_insns * 2:
+                        if t not in seen:
+                            work.append(t)
+                    else:
+                        return False
+                    break
+                if m in COND_B:
+                    t = imm_target(ops)
+                    if t is not None and addr <= t < addr + max_insns * 2:
+                        if t not in seen:
+                            work.append(t)
+                    else:
+                        return False
+                elif m == "pop" and "pc" in ops:
+                    return False
+                elif hw in (0x46F7, 0x4770):
+                    has_ret = True
+                    break
+                elif m == "bx" or (m in ("mov", "add", "ldr") and ops.startswith("pc")):
+                    return False
+                a += insn.size
+        return has_ret and len(seen) >= 2
+
+    def leaf_gap_pass(self) -> int:
+        """Seed unreferenced leaf functions (returning via `mov pc, lr` or `bx lr`)
+        and `_call_via_rX` trampolines (`bx rX; nop`) that sit at the start of an
+        undecoded gap (immediately following a previous function/literal pool and
+        optional 0x0000 alignment padding)."""
+        added_total = 0
+        end = self.code_end or self.rom.end
+        d = self.rom.d
+        for _ in range(16):
+            covered = set(self.code)
+            for l in self.literals:
+                covered |= {l, l + 2}
+            added = 0
+            a = BASE + 0x25C
+            while a < end:
+                if a in covered:
+                    a += 2
+                    continue
+                gs = a
+                ge = a + 2
+                while ge < end and ge not in covered:
+                    ge += 2
+                p = gs
+                while p < ge and struct.unpack_from("<H", d, p - BASE)[0] in (0, 0x46C0):
+                    p += 2
+                if p < ge:
+                    hw0 = struct.unpack_from("<H", d, p - BASE)[0]
+                    hw1 = struct.unpack_from("<H", d, p - BASE + 2)[0] if p + 2 < ge else 0
+                    if (hw0 & 0xFF87) == 0x4700 and hw1 == 0x46C0 and p not in self.funcs:
+                        self.seed(p | 1, True, "call_via_rx")
+                        self.code.add(p + 2)
+                        added += 1
+                    elif hw0 == 0x46F7 and p not in self.funcs and p not in self.literals and p not in self.lit_values and \
+                            struct.unpack_from("<I", d, 0)[0] and (d.find(struct.pack("<I", p | 1)) != -1):
+                        self.seed(p | 1, True, "noop_stub")
+                        added += 1
+                    elif self.verify_leaf_thumb_func(p):
+                        self.seed(p | 1, True, "leaf_gap")
+                        added += 1
+                    elif any((struct.unpack_from("<H", d, x - BASE)[0] & 0xF800) == 0xF000 and
+                             (struct.unpack_from("<H", d, x - BASE + 2)[0] & 0xF800) == 0xF800
+                             for x in range(p, min(ge - 2, p + 64), 2)) and \
+                            any(struct.unpack_from("<H", d, x - BASE)[0] >> 8 == 0xB5 for x in range(p, min(ge, p + 32), 2)) and \
+                            self.verify_clean_thumb_func(p):
+                        self.seed(p | 1, True, "late_push_gap")
+                        added += 1
+                a = ge
+            if not added:
+                break
+            self.run()
+            added_total += added
+        return added_total
 
     def clean_gap_prologue_pass(self) -> int:
         """Scan undecoded gaps for Thumb push {..., lr} or preceded push {r...}
@@ -256,12 +446,13 @@ class Survey:
         return added_total
 
     def pointer_tables(self, min_run: int = 4) -> int:
-        """Seed from runs of >= min_run words that are odd ROM pointers."""
+        """Seed from runs of >= min_run words that are clean odd ROM code pointers."""
         d, n, found = self.rom.d, len(self.rom.d) // 4, 0
+        code_limit = self.code_end or self.rom.end
         run: list[int] = []
         for i in range(n + 1):
             v = struct.unpack_from("<I", d, i * 4)[0] if i < n else 0
-            if self.rom.in_rom(v) and v & 1 and (v - 1) % 2 == 0:
+            if (BASE + 0x25C <= (v & ~1) < code_limit) and (v & 1) and (v & ~1) not in self.literals and self.verify_clean_thumb_func(v & ~1):
                 run.append(v)
                 continue
             if len(run) >= min_run:
@@ -296,10 +487,21 @@ class Survey:
             if 2 <= len(run) <= 3:
                 starts = [p & ~1 for p in run]
                 code_limit = self.code_end or self.rom.end
-                valid = all(
+                has_anchor = any(
                     BASE + 0x25C <= start < code_limit
                     and start not in self.literals
-                    and self.verify_clean_thumb_func(start)
+                    and (start in self.funcs or ((struct.unpack_from("<H", d, start - BASE)[0] & 0xFF00) == 0xB500 and self.verify_clean_thumb_func(start)))
+                    for start in starts
+                )
+                valid = has_anchor and all(
+                    BASE + 0x25C <= start < code_limit
+                    and start not in self.literals
+                    and (
+                        start in self.funcs
+                        or ((struct.unpack_from("<H", d, start - BASE)[0] & 0xFF00) == 0xB500 and self.verify_clean_thumb_func(start))
+                        or self.verify_leaf_thumb_func(start)
+                        or struct.unpack_from("<H", d, start - BASE)[0] == 0x46F7
+                    )
                     for start in starts
                 ) and any(start not in self.funcs for start in starts)
                 if valid:
@@ -343,28 +545,35 @@ class Survey:
         return tables, targets
 
 
-def ce_code_symbols() -> list[tuple[int, str]]:
-    if not CE_CSV.exists():
-        return []
+def ce_code_symbols(version: str = "rs") -> list[tuple[int, str]]:
     out = []
-    with CE_CSV.open(encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["kind"] == "code":
+    seen = set()
+    names_path = DECOMP / "symbols" / "names.txt"
+    if names_path.exists():
+        for line in names_path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("#") or not line.strip():
+                continue
+            parts = line.split()
+            if len(parts) >= 5 and parts[2] == "code":
+                addr_str = parts[0] if version == "rs" else parts[1]
                 try:
-                    a = int(row["address"], 16)
+                    a = int(addr_str, 16)
                 except ValueError:
                     continue
-                if BASE <= a < BASE + 0x800000:
-                    out.append((a, row["name"]))
+                if BASE <= a < BASE + 0x800000 and a not in seen:
+                    seen.add(a)
+                    out.append((a, parts[4]))
     return out
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("version", nargs="?", default="rs", choices=list(ROMS))
-    ap.add_argument("--code-end", type=lambda x: int(x, 0), default=0x08120000,
-                    help="seeds at/after this address are rejected as data (DC-1: 0x08120000)")
+    ap.add_argument("--code-end", type=lambda x: int(x, 0), default=None,
+                    help="seeds at/after this address are rejected as data (0x08113CB8 RS / 0x08113CCC BM)")
     args = ap.parse_args()
+    if args.code_end is None:
+        args.code_end = 0x08113CCC if args.version == "bm" else 0x08113CB8
 
     rom = Rom(ROMS[args.version])
     s = Survey(rom)
@@ -376,12 +585,6 @@ def main() -> None:
     s.run()
     after_entry = len(s.funcs)
 
-    ce = ce_code_symbols() if args.version == "rs" else []
-    for a, name in ce:
-        s.seed(a | 1, True, "ce_symbol")
-    s.run()
-    after_ce = len(s.funcs)
-
     tables = s.pointer_tables()
     s.run()
     short_tables, short_targets = s.short_prologue_pointer_tables()
@@ -392,6 +595,33 @@ def main() -> None:
     print(f"prologue pass: {prologues} gap-start functions seeded")
     clean_prologues = s.clean_gap_prologue_pass()
     print(f"clean gap prologue pass: {clean_prologues} functions seeded")
+    leaf_gaps = s.leaf_gap_pass()
+    print(f"leaf gap pass: {leaf_gaps} functions seeded")
+    short_tables2, short_targets2 = s.short_prologue_pointer_tables()
+    if short_targets2:
+        s.run()
+        short_tables += short_tables2
+        short_targets += short_targets2
+        leaf_gaps += s.leaf_gap_pass()
+
+    # Seed named code symbols only when they are not mid-function instruction hooks
+    # inside an already-decoded function.
+    before_ce = len(s.funcs)
+    ce = ce_code_symbols(args.version)
+    for a, name in ce:
+        start = a & ~1
+        if start not in s.code and start not in s.literals and s.verify_clean_thumb_func(start):
+            s.seed(start | 1, True, "ce_symbol")
+    s.run()
+    after_ce = len(s.funcs)
+    if after_ce > before_ce:
+        prologues += s.prologue_pass()
+        clean_prologues += s.clean_gap_prologue_pass()
+        leaf_gaps += s.leaf_gap_pass()
+
+    # Drop any seed that hit an invalid instruction during descent.
+    for a in [a for a, fi in s.funcs.items() if not fi["ok"]]:
+        del s.funcs[a]
 
     ok = sum(1 for f in s.funcs.values() if f["ok"])
     code_bytes = len(s.code) * 2
@@ -420,10 +650,10 @@ def main() -> None:
             f.write(f"{v:08X}\n")
     print(f"data references into the code region: {len(datarefs)} -> {dpath.relative_to(ROOT)}")
 
-    ce_hit = sum(1 for a, _ in ce if a in s.funcs)
+    ce_hit = sum(1 for a, _ in ce if (a & ~1) in s.funcs or (a & ~1) in s.code)
     print(f"version={args.version}")
-    print(f"functions={len(s.funcs)} (clean={ok}); from entry={after_entry}, +CE={after_ce - after_entry}, "
-          f"+ptr tables={len(s.funcs) - after_ce} ({tables} long tables, "
+    print(f"functions={len(s.funcs)} (clean={ok}); from entry={after_entry}, +CE={after_ce - before_ce}, "
+          f"+tables/prologues={before_ce - after_entry} ({tables} long tables, "
           f"{short_tables} short tables/{short_targets} new targets, "
           f"{sparse_tables} sparse tables/{sparse_targets} new targets)")
     print(f"by source: {dict(by_source)}")

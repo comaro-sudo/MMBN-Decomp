@@ -57,7 +57,7 @@ sub_08094794:
     ldr r3, _080947C4
     adds r3, r3, r0
     adds r0, r3, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #1
     pop {pc}
     .hword 0x0000
@@ -178,7 +178,7 @@ sub_0809486C:
 _08094878:
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     movs r0, #0xff
     ldr r1, _080948A0
     strb r0, [r1]
@@ -287,12 +287,12 @@ sub_08094B70:
     movs r4, #2
     movs r0, #8
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08094B8C
     movs r4, #1
     movs r0, #8
     movs r1, #0x4c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08094B8C
     movs r4, #0
 _08094B8C:
@@ -320,12 +320,12 @@ sub_08094BB4:
     movs r2, #2
     movs r0, #8
     movs r1, #0x4d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08094BD0
     movs r2, #1
     movs r0, #8
     movs r1, #0x4c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _08094BD0
     movs r2, #0
 _08094BD0:
@@ -406,7 +406,7 @@ sub_080960D0:
     push {r4, lr}
     movs r0, #9
     movs r1, #0x84
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080960E6
     movs r4, #3
 _080960DE:
@@ -559,7 +559,7 @@ sub_08098578:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0xad
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     incrom 0x98586, 0x10E
@@ -570,7 +570,7 @@ sub_08098694:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0xad
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     incrom 0x986A2, 0x2B0E
@@ -667,7 +667,7 @@ dat_0809C194:
     .thumb_func
 sub_0809C198:
     push {r4, r5, r6, r7, lr}
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     ldr r3, _0809C1C0
     ldrb r3, [r3, r0]
     mov r1, sl
@@ -727,7 +727,7 @@ sub_0809C9D0:
     push {lr}
     movs r0, #0
     movs r1, #0x9f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809C9E6
     ldr r0, _0809C9F4
     movs r1, #1
@@ -736,7 +736,7 @@ sub_0809C9D0:
 _0809C9E6:
     movs r0, #0
     movs r1, #0x9f
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -750,7 +750,7 @@ sub_0809CCEC:
     push {r4, lr}
     movs r0, #0
     movs r1, #0x9e
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809CD0A
     ldr r0, _0809CD10
     movs r1, #6
@@ -758,7 +758,7 @@ sub_0809CCEC:
     bl sub_0801913E
     movs r0, #0
     movs r1, #0x9e
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0809CD0A:
     movs r0, #0
     pop {r4, pc}
@@ -802,20 +802,10 @@ dat_0809D364:
     incrom 0x9D364, 0x32
     .global dat_0809D396
 dat_0809D396:
-    incrom 0x9D396, 0x18
-
-    .global sub_0809D3AE
-    .thumb_func
-sub_0809D3AE:
-    subs r3, #0
-    lsls r0, r0, #0x18
-    lsls r3, r0, #1
-    .hword 0x1EFF   @ subs r7, r7, #3
-    strb r1, [r1, #0x19]
-    lsls r0, r0, #8
-    lsls r7, r7, #7
-    strh r5, [r0]
-    incrom 0x9D3BE, 0x26
+    incrom 0x9D396, 0x19
+    .global dat_0809D3AF
+dat_0809D3AF:
+    incrom 0x9D3AF, 0x35
     .global dat_0809D3E4
 dat_0809D3E4:
     incrom 0x9D3E4, 0x60
@@ -857,7 +847,7 @@ sub_0809D4AC:
     ldr r0, _0809D4D0
     ldrb r1, [r5, #6]
     adds r0, r0, r1
-    bl sub_08025172
+    bl sub_08025172   @ SetEventFlagLogged15C0
     ldrb r0, [r5, #7]
     tst r0, r0
     beq _0809D4CA
@@ -865,7 +855,7 @@ sub_0809D4AC:
     ldrb r1, [r5, #6]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _0809D4CA:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -906,13 +896,13 @@ _0809D602:
     tst r0, r0
     beq _0809D60E
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _0809D60E:
     ldrh r0, [r4, #0x16]
     tst r0, r0
     beq _0809D61A
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _0809D61A:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -943,7 +933,7 @@ sub_0809D654:
     bne _0809D67E
     movs r0, #0x11
     movs r1, #0x82
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0809D67E:
     ldrb r0, [r5, #4]
     bl sub_0802A4CC
@@ -1028,7 +1018,7 @@ _0809DA1C:
     bl sub_08025FD8
     movs r0, #0x11
     movs r1, #0x75
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _0809DA4E:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -1126,7 +1116,7 @@ sub_0809DBEC:
     bl sub_0809DE0C
     strb r1, [r5, #8]
     strb r1, [r5, #4]
-    bl sub_0802D69C
+    bl sub_0802D69C   @ GetBugFrags
     str r0, [r5, #0x64]
     bl sub_08003878
     movs r0, #0
@@ -1198,8 +1188,8 @@ sub_0809DC54:
     movs r2, #1
     bl sub_0801913E
     movs r0, #0xa
-    bl sub_0802D670
-    bl sub_08048860
+    bl sub_0802D670   @ SubBugFrags
+    bl sub_08048860   @ SaveGameKeepPlace
     mov r6, sl
     ldr r6, [r6, #0x2c]
     ldrh r2, [r7, #4]
@@ -1268,7 +1258,7 @@ sub_0809DD04:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0x2b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809DD52
     ldr r0, [r5, #0xc]
     subs r0, #1
@@ -1283,11 +1273,11 @@ sub_0809DD04:
     str r0, [r5, #0x64]
     b _0809DD52
 _0809DD28:
-    bl sub_0802D69C
+    bl sub_0802D69C   @ GetBugFrags
     str r0, [r5, #0x64]
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809DD52
     movs r0, #0x20
     strb r0, [r5, #4]
@@ -1296,7 +1286,7 @@ _0809DD28:
     bl sub_08053F98
     movs r0, #0
     movs r1, #0x2b
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _0809DD52:
@@ -1330,7 +1320,7 @@ _0809DD78:
     bl sub_0809DE80
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809DD96
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -1355,7 +1345,7 @@ _0809DDA8:
     movs r0, #8
     bl sub_08053924
     beq _0809DDE6
-    bl sub_0802D69C
+    bl sub_0802D69C   @ GetBugFrags
     adds r7, r0, #0
     cmp r7, #0xa
     blt _0809DDCC
@@ -1539,7 +1529,7 @@ sub_0809DF50:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809DF6A
     movs r0, #0x20
     strb r0, [r5, #4]
@@ -1575,7 +1565,7 @@ _0809DF8C:
     bl sub_08053FF0
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809DFA4
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -1655,7 +1645,7 @@ sub_0809E07C:
     strb r0, [r5, #8]
     movs r0, #0x11
     movs r1, #0x8c
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #8
     str r0, [r5, #0x78]
     movs r0, #0
@@ -1677,7 +1667,7 @@ sub_0809E0BC:
     push {r4, r5, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x8c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809E0F2
     ldr r0, [r5, #0x78]
     tst r0, r0
@@ -1832,7 +1822,7 @@ sub_0809E1E4:
     push {r4, r5, r6, r7, lr}
     ldr r0, [r5, #0x6c]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     ldr r0, _0809E2B8
     ldr r1, [r5, #0x68]
     bl sub_0804E3BC
@@ -1907,7 +1897,7 @@ sub_0809E264:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809E27C
     ldrb r0, [r5, #4]
     subs r0, #0x10
@@ -1934,10 +1924,10 @@ sub_0809E294:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0x2a
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #0x8c
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #1
     bl sub_080297B0
     bl sub_08003856
@@ -1989,7 +1979,7 @@ sub_0809E360:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809E37C
     ldrb r0, [r5, #7]
     tst r0, r0
@@ -2026,7 +2016,7 @@ _0809E39C:
     bl sub_08053FF0
     movs r0, #0
     movs r1, #0x2a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809E3BE
     ldrh r0, [r5, #6]
     ldrb r1, [r5, #5]
@@ -2129,7 +2119,7 @@ sub_0809EC1C:
     adds r4, r0, #0
     movs r0, #1
     movs r1, #0x4a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809EC2C
     pop {r4, pc}
 _0809EC2C:
@@ -2143,10 +2133,10 @@ _0809EC2C:
     beq _0809EC4E
     movs r0, #1
     movs r1, #0x4a
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #1
     movs r1, #0x49
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     pop {r4, pc}
 _0809EC4E:
     movs r0, #0
@@ -2164,7 +2154,7 @@ sub_0809EC64:
     push {lr}
     movs r0, #1
     movs r1, #0x4a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809EC72
     pop {pc}
 _0809EC72:
@@ -2239,10 +2229,10 @@ sub_0809ED0C:
     push {lr}
     movs r0, #1
     movs r1, #0x4a
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #1
     movs r1, #0x49
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0xe
     bl sub_08002098
     movs r0, #0xf
@@ -2260,11 +2250,11 @@ sub_0809ED30:
     bne _0809ED52
     movs r0, #1
     movs r1, #0x49
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     bl sub_0809ECEC
     movs r0, #1
     movs r1, #0x4c
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0809ED52:
     pop {r7, pc}
 
@@ -2274,7 +2264,7 @@ sub_0809ED54:
     push {r4, r5, r6, lr}
     movs r0, #1
     movs r1, #0x4a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809ED62
     pop {r4, r5, r6, pc}
 _0809ED62:
@@ -2284,7 +2274,7 @@ _0809ED62:
     bne _0809EDE4
     movs r0, #1
     movs r1, #0x49
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809ED7A
     bl sub_0809EEB0
 _0809ED7A:
@@ -2479,7 +2469,7 @@ sub_0809F0CC:
     lsls r7, r7, #1
     ldrh r0, [r0, r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809F0FA
     bl sub_0809F250
     adds r5, r5, r1
@@ -2507,21 +2497,21 @@ _0809F106:
     bne _0809F138
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     cmp r2, #3
     bne _0809F12C
     movs r0, #0x11
     movs r1, #0
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0809F12C:
     cmp r2, #4
     bne _0809F138
     movs r0, #0x11
     movs r1, #1
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _0809F138:
     movs r0, #0
     pop {r1}
@@ -2543,12 +2533,12 @@ sub_0809F140:
 _0809F152:
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250BE
+    bl sub_080250BE   @ SetEventFlagRange
     ldr r0, _0809F1C0
     lsls r7, r7, #1
     ldrh r0, [r0, r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809F184
     bl sub_0809F250
     subs r4, r4, r1
@@ -2562,7 +2552,7 @@ _0809F17A:
     subs r1, r1, r4
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
 _0809F184:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -2580,7 +2570,7 @@ sub_0809F18C:
     lsls r7, r7, #1
     ldrh r0, [r0, r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809F1B6
     mov r4, sl
     ldr r4, [r4, #0x40]
@@ -2685,7 +2675,7 @@ _0809F260:
 _0809F264:
     adds r0, r2, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0809F274
     adds r4, #1
     cmp r4, r5
@@ -2716,7 +2706,7 @@ sub_0809F284:
 _0809F298:
     adds r0, r2, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0809F2A8
     adds r4, #1
     cmp r4, r5
@@ -2750,7 +2740,7 @@ sub_0809F2C0:
 _0809F2D4:
     adds r0, r2, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0809F2E4
     adds r4, #1
     cmp r4, r5
@@ -2779,7 +2769,7 @@ sub_0809F308:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0x40
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     mov r6, sl
     ldr r6, [r6, #0x40]
     ldrb r7, [r6, #5]
@@ -2824,11 +2814,11 @@ sub_0809F358:
     movs r1, #4
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     ldr r0, _0809F4B0
     adds r0, r0, r7
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809F40E
     bl sub_0809F284
     subs r4, r4, r1
@@ -2844,19 +2834,19 @@ sub_0809F358:
     ldrh r0, [r6, #6]
     adds r0, r0, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _0809F3A8:
     ldr r0, _0809F4B0
     adds r0, r0, r7
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809F40E
     ldr r6, _0809F450
     ldrh r0, [r6, #2]
     movs r1, #0xc
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     lsls r0, r7, #2
     ldr r5, _0809F45C
     adds r5, r5, r0
@@ -2871,14 +2861,14 @@ _0809F3A8:
     push {r2}
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     pop {r2}
     pop {r0}
     tst r2, r2
     beq _0809F3F2
     .hword 0x1C00   @ adds r0, r0, #0
     .hword 0x1C12   @ adds r2, r2, #0
-    bl sub_080250BE
+    bl sub_080250BE   @ SetEventFlagRange
 _0809F3F2:
     pop {r1}
     ldr r3, _0809F498
@@ -2899,18 +2889,18 @@ _0809F40E:
     movs r1, #0xc
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250BE
+    bl sub_080250BE   @ SetEventFlagRange
 _0809F41A:
     ldr r0, _0809F44C
     adds r0, r0, r7
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     ldr r6, _0809F450
     movs r1, #0xc
     ldrh r0, [r6]
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     lsls r0, r7, #2
     ldr r6, _0809F484
     ldrh r2, [r6, r0]
@@ -2918,7 +2908,7 @@ _0809F41A:
     ldrh r1, [r6, r0]
     adds r0, r2, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     movs r0, #0
     pop {r1}
     mov r8, r1
@@ -3008,22 +2998,22 @@ sub_0809F510:
     movs r1, #4
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     ldr r0, _0809F54C
     movs r1, #4
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     ldr r0, _0809F550
     movs r1, #4
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     ldr r0, _0809F554
     movs r1, #0xc
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0
-    bl sub_080250E8
+    bl sub_080250E8   @ ClearEventFlagRange
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
@@ -3372,7 +3362,7 @@ sub_0809F89C:
     ldr r5, _0809F940
     movs r0, #6
     movs r1, #0x5b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809F8F6
     mov r7, sl
     ldr r7, [r7, #0x40]
@@ -3382,7 +3372,7 @@ sub_0809F89C:
     bne _0809F8C8
     movs r0, #6
     movs r1, #0x5a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809F8FA
     ldr r0, _0809F900
     bl sub_080034E4
@@ -3390,18 +3380,18 @@ sub_0809F89C:
 _0809F8C8:
     movs r0, #6
     movs r1, #0x5a
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #6
     movs r1, #0x64
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #6
     movs r1, #0x5c
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #6
     movs r1, #0x60
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     adds r0, r5, #0
     movs r1, #0x28
     bl sub_08000938   @ ZeroFillByWord
@@ -3422,11 +3412,11 @@ sub_0809F904:
     ldr r5, _0809F940
     movs r0, #6
     movs r1, #0x5b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809F926
     movs r0, #6
     movs r1, #0x5a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _0809F926
     ldr r0, _0809F92C
     ldrb r1, [r5]
@@ -3509,7 +3499,7 @@ _0809F9A0:
     strb r2, [r6, #0xa]
     strb r2, [r6, #0xb]
     push {r1}
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     pop {r1}
     ldr r2, _0809FA20
     ldrb r1, [r1]
@@ -3531,11 +3521,11 @@ _0809F9A0:
     movs r0, #6
     movs r1, #0x5c
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #6
     movs r1, #0x60
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xa0
     bl sub_08000560   @ PlaySoundEffect
     ldr r0, _0809FA1C
@@ -3570,7 +3560,7 @@ _0809FA36:
     adds r7, r5, #0
 _0809FA3E:
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _0809FA6A
     movs r0, #0
     strb r0, [r7, #0xa]
@@ -3580,11 +3570,11 @@ _0809FA3E:
     beq _0809FA6A
     movs r0, #6
     movs r1, #0x64
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _0809FA6A
     movs r0, #6
     movs r1, #0x64
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     ldrb r0, [r5, #3]
     adds r0, #1
     strb r0, [r5, #3]
@@ -3620,10 +3610,10 @@ _0809FA9C:
     movs r0, #0
     strb r0, [r7, #9]
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _0809FAD8
     adds r0, r6, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrb r0, [r5, #2]
     adds r0, #1
     strb r0, [r5, #2]
@@ -3631,7 +3621,7 @@ _0809FA9C:
     ldr r6, _0809FB20
     adds r6, r6, r4
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r6}
     bne _0809FAD8
     bl sub_0802BDA6
@@ -3703,15 +3693,15 @@ sub_0809FB30:
     strb r0, [r5]
     movs r0, #6
     movs r1, #0x64
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #6
     movs r1, #0x5c
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #6
     movs r1, #0x60
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
 _0809FB5A:
     pop {r4, r5, r6, r7, pc}
 
@@ -3728,21 +3718,21 @@ sub_0809FB64:
     push {r4, r5, r6, r7, lr}
     movs r0, #6
     movs r1, #0x5b
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #6
     movs r1, #0x5a
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #6
     movs r1, #0x64
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #6
     movs r1, #0x5c
     movs r2, #4
-    bl sub_080250BA
+    bl sub_080250BA   @ SetEventFlagRangeHL
     movs r0, #6
     movs r1, #0x60
     movs r2, #4
-    bl sub_080250BA
+    bl sub_080250BA   @ SetEventFlagRangeHL
     adds r0, r5, #0
     movs r1, #0x28
     bl sub_08000938   @ ZeroFillByWord
@@ -4349,7 +4339,7 @@ _080A033E:
     cmp r0, #1
     beq _080A0364
     push {r0, r1}
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     ldr r3, _080A03FC
     ldrb r3, [r3, r0]
     pop {r0, r1}
@@ -4739,7 +4729,7 @@ sub_080A0620:
     bne _080A0636
     movs r0, #1
     movs r1, #0x8a
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A0636:
     pop {r7, pc}
 
@@ -4749,11 +4739,11 @@ sub_080A0638:
     push {lr}
     movs r0, #1
     movs r1, #0xa1
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A0668
     movs r0, #1
     movs r1, #0x84
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A0668
     mov r0, sl
     ldr r0, [r0, #4]
@@ -4806,7 +4796,7 @@ sub_080A06A4:
     push {r4, r5, r6, lr}
     movs r0, #1
     movs r1, #0x85
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A06B2
     pop {r4, r5, r6, pc}
 _080A06B2:
@@ -4816,14 +4806,14 @@ _080A06B2:
     bne _080A0794
     movs r0, #1
     movs r1, #0x84
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A06D8
     bl sub_0809EEB0
     bl sub_0809EE9C
     bne _080A06D8
     movs r0, #1
     movs r1, #0x84
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A06D8:
     bl sub_08053FB4
     bl sub_08053FF0
@@ -4864,7 +4854,7 @@ _080A0714:
     bne _080A073C
     movs r0, #1
     movs r1, #0x84
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A073C
     ldr r0, _080A080C
     cmp r6, #0x3c
@@ -5032,7 +5022,7 @@ sub_080A0B60:
     ldr r1, _080A0BBC
     adds r1, r1, r6
     adds r0, r1, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     adds r0, r6, #0
     bl sub_080A8E9E
     adds r7, r0, #0
@@ -5119,7 +5109,7 @@ sub_080A0C04:
     ldr r6, _080A0C24
     adds r6, r6, r0
     adds r0, r6, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     bl sub_080A9044
     pop {r6, pc}
     .hword 0x0000
@@ -5151,11 +5141,11 @@ sub_080A0C40:
     ldrb r7, [r7, #5]
     movs r0, #8
     movs r1, #3
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A0C8C
     movs r0, #8
     movs r1, #5
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A0C8C
     mov r4, sl
     ldr r4, [r4, #0x40]
@@ -5185,10 +5175,10 @@ _080A0C8C:
     bne _080A0CA0
     movs r0, #0x11
     movs r1, #2
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #0x22
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A0CA0:
     movs r0, #0
     pop {r4, r7, pc}
@@ -5209,15 +5199,15 @@ sub_080A0CB4:
     bne _080A0CDC
     movs r0, #8
     movs r1, #3
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A0CDC
     movs r0, #8
     movs r1, #5
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A0CDC
     movs r0, #0x11
     movs r1, #0x81
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A0CDC:
     movs r0, #0
     pop {pc}
@@ -5232,13 +5222,13 @@ sub_080A0CE0:
     push {r0}
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A0CF6
     b _080A0E18
 _080A0CF6:
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A0D02
     b _080A0E18
 _080A0D02:
@@ -5379,7 +5369,7 @@ _080A0DF6:
 _080A0DFA:
     movs r0, #1
     movs r1, #0x83
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     ldrb r0, [r7]
     movs r1, #1
     bics r0, r1
@@ -5430,7 +5420,7 @@ sub_080A13D4:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0x83
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A1408
     bl sub_080A1410
     movs r4, #0xff
@@ -5519,11 +5509,11 @@ sub_080A146C:
     adds r2, r0, #0
     movs r0, #8
     movs r1, #0x87
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A14BC
     movs r0, #8
     movs r1, #0x88
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A14BC
     mov r4, sl
     ldr r4, [r4, #0x40]
@@ -5576,15 +5566,15 @@ sub_080A14D8:
     bne _080A1500
     movs r0, #8
     movs r1, #0x87
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A1500
     movs r0, #8
     movs r1, #0x88
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A1500
     movs r0, #0x11
     movs r1, #0x81
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A1500:
     movs r0, #0
     pop {pc}
@@ -5638,7 +5628,7 @@ _080A154A:
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #1
     movs r1, #0x83
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     b _080A156A
 _080A1564:
     adds r7, #0xd8
@@ -5747,7 +5737,7 @@ _080A1BDA:
     bgt _080A1C0C
     movs r0, #0x3c
     strb r0, [r7, #1]
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     ldr r6, _080A1C14
     ldrb r6, [r6, r0]
     mov r4, sl
@@ -5817,11 +5807,11 @@ sub_080A2046:
     push {r4, r5, r6, r7, lr}
     movs r0, #9
     movs r1, #0x53
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A20A2
     movs r0, #9
     movs r1, #0x52
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A20A2
     mov r7, sl
     ldr r7, [r7, #0x40]
@@ -5947,11 +5937,11 @@ sub_080A23E8:
     push {r4, r5, r6, r7, lr}
     movs r0, #9
     movs r1, #2
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A241A
     movs r0, #9
     movs r1, #3
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A241A
     mov r0, sl
     ldr r0, [r0, #0x40]
@@ -6006,7 +5996,7 @@ sub_080A2768:
     cmp r0, r1
     beq _080A2788
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A2788
     bl sub_080A291A
 _080A2788:
@@ -6015,7 +6005,7 @@ _080A2788:
     ldr r7, [r7, r4]
     movs r5, #0
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080A279A
     movs r5, #1
 _080A279A:
@@ -6039,16 +6029,16 @@ _080A279E:
     pop {r0, r1, r2, r3, r4, r5}
     push {r0}
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r0}
     bne _080A27D2
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A27DA
 _080A27D2:
     ldrh r0, [r7, #6]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A27DA:
     adds r4, #1
     adds r7, #8
@@ -6072,7 +6062,7 @@ sub_080A27EC:
     ldr r6, _080A2810
     adds r6, r6, r4
     adds r0, r6, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A280E
     bl sub_080A2814
     bl sub_080A287C
@@ -6133,10 +6123,10 @@ _080A285C:
     adds r4, r0, #0
     ldrh r0, [r4, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrh r0, [r4, #6]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     pop {r4, r5, r6, r7, pc}
 
     .global sub_080A287C
@@ -6208,7 +6198,7 @@ _080A28FC:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A2900:
-    .word sub_0808D1D4
+    .word dat_0808D1D5
 
     .global sub_080A2904
     .thumb_func
@@ -6242,10 +6232,10 @@ _080A292A:
     beq _080A2946
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     ldrh r0, [r7, #6]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     adds r4, #1
     adds r7, #8
     b _080A292A
@@ -6801,11 +6791,11 @@ sub_080A2D16:
     push {r4, r5, r6, r7, lr}
     movs r0, #0xb
     movs r1, #0x44
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A2D30
     movs r0, #0xb
     movs r1, #0x45
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2D30
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -6821,11 +6811,11 @@ sub_080A2D34:
     beq _080A2D68
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2D68
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2D68
     movs r0, #1
     bl sub_0802DA20
@@ -6876,81 +6866,81 @@ sub_080A2DA0:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0xae
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #1
     movs r1, #0x7e
     movs r2, #4
-    bl sub_080250BA
+    bl sub_080250BA   @ SetEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x6a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2DDA
     movs r0, #0xb
     movs r1, #0x4c
     movs r2, #3
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x5b
     movs r2, #3
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #1
     movs r1, #0x7e
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A2DDA:
     movs r0, #0xb
     movs r1, #0x6b
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2E00
     movs r0, #0xb
     movs r1, #0x4f
     movs r2, #3
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x5e
     movs r2, #3
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #1
     movs r1, #0x7f
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A2E00:
     movs r0, #0xb
     movs r1, #0x6c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2E26
     movs r0, #0xb
     movs r1, #0x52
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x61
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #1
     movs r1, #0x80
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A2E26:
     movs r0, #0xb
     movs r1, #0x6d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A2E4C
     movs r0, #0xb
     movs r1, #0x56
     movs r2, #5
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x65
     movs r2, #5
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #1
     movs r1, #0x81
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080A2E4C:
     movs r0, #0xb
     movs r1, #0x6e
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0xb
     movs r1, #0x6f
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
     .global dat_080A2E60
@@ -7027,7 +7017,7 @@ sub_080A2F60:
     strh r0, [r5, #4]
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #4
     strb r0, [r5]
     movs r0, #1
@@ -7525,7 +7515,7 @@ sub_080A335A:
     strb r0, [r3, #7]
     movs r0, #9
     movs r1, #0xd7
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 
@@ -7583,7 +7573,7 @@ sub_080A33B0:
     strb r0, [r3, #7]
     movs r0, #9
     movs r1, #0xda
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A33D6:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -7823,19 +7813,11 @@ _080A35D6:
 _080A3600:
     .word dat_080A3608
 _080A3604:
-    .word sub_080A360A
+    .word dat_080A360B
     .global dat_080A3608
 dat_080A3608:
-    .hword 0xCAC9
-
-    .global sub_080A360A
-    .thumb_func
-sub_080A360A:
-    adds r2, #0xca
-    str r4, [r4, #0x44]
-    str r6, [sp, #0x190]
-    lsls r6, r2, #2
-    movs r0, r0
+    .word 0x32CACAC9
+    incrom 0xA360C, 0x8
 
     .global sub_080A3614
     .thumb_func
@@ -8274,7 +8256,7 @@ sub_080A391C:
     ldr r3, _080A3978
     ldrh r0, [r3, r0]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A3946:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -8638,7 +8620,7 @@ _080A3C1A:
     ldr r3, _080A3C48
     ldrh r0, [r3, r2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A3C3E:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -9208,11 +9190,11 @@ sub_080A427C:
     push {r4, r5, r6, r7, lr}
     movs r0, #0xb
     movs r1, #0x84
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A4296
     movs r0, #0xb
     movs r1, #0x85
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A4296
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -9257,11 +9239,11 @@ sub_080A42CA:
     beq _080A42FE
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A42FE
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A42FE
     movs r0, #1
     bl sub_0802DA20
@@ -9626,7 +9608,7 @@ sub_080A4BE4:
     movs r0, #9
     movs r1, #0xa0
     movs r2, #0x10
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     mov r7, sl
     ldr r7, [r7, #0x40]
     ldrh r7, [r7, #4]
@@ -9641,11 +9623,11 @@ _080A4C02:
     ldr r5, [r6, #0x10]
     ldr r0, [r6, #8]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080A4C2C
     ldr r0, [r6, #0xc]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A4C2C
     ldr r6, [r6, #4]
     b _080A4C42
@@ -9658,7 +9640,7 @@ _080A4C2C:
     ldr r7, _080A4CC8
 _080A4C30:
     adds r0, r7, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     adds r7, #1
     adds r4, #1
     cmp r4, #0x10
@@ -9674,7 +9656,7 @@ _080A4C44:
     beq _080A4C9E
     push {r0}
     adds r0, r5, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r0}
     bne _080A4C66
     ldr r7, _080A4CC8
@@ -9682,14 +9664,14 @@ _080A4C44:
     ldr r1, _080A4CC4
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A4C92
 _080A4C66:
     ldrb r0, [r6, #6]
     ldr r1, _080A4CC4
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     push {r4, r5, r6, r7}
     ldrb r4, [r6, #7]
     ldrb r0, [r6, #6]
@@ -9707,7 +9689,7 @@ _080A4C66:
     b _080A4C98
 _080A4C92:
     adds r0, r7, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A4C98:
     adds r6, #8
     adds r4, #1
@@ -9716,7 +9698,7 @@ _080A4C9E:
     tst r5, r5
     beq _080A4CA8
     adds r0, r5, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _080A4CA8:
     ldr r0, _080A4CCC
     bl sub_08002048   @ BN4_PALETTE_ANIM
@@ -9751,7 +9733,7 @@ sub_080A4CD8:
     movs r0, #9
     movs r1, #0xa0
     movs r2, #0x10
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 
@@ -9838,11 +9820,11 @@ sub_080A4DA8:
     movs r4, #6
     movs r0, #9
     movs r1, #0xb2
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A4DCE
     movs r0, #9
     movs r1, #0xb2
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     movs r4, #1
 _080A4DCE:
     adds r0, r4, #0
@@ -9985,11 +9967,11 @@ sub_080A4EC0:
 _080A4ED6:
     adds r0, r6, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A4EEC
     adds r0, r6, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     subs r7, #1
     b _080A4EF2
 _080A4EEC:
@@ -10046,11 +10028,11 @@ sub_080A4F38:
 _080A4F4C:
     adds r0, r6, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A4F5E
     adds r0, r6, r4
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A4F5E:
     adds r4, #1
     cmp r4, #0x10
@@ -10139,12 +10121,12 @@ sub_080A4FE2:
     ldrb r1, [r5, #2]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldr r0, _080A5020
     ldrb r1, [r5, #2]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #0x34
     strb r0, [r5]
 _080A5010:
@@ -10171,7 +10153,7 @@ sub_080A5024:
     movs r0, #0xb1
     bl sub_08000560   @ PlaySoundEffect
 _080A503A:
-    bl sub_08000C4C
+    bl sub_08000C4C   @ GetPlaythroughTier
     ldr r3, _080A506C
     ldrb r3, [r3, r0]
     mov r1, sl
@@ -10252,7 +10234,7 @@ sub_080A50AC:
     movs r0, #9
     movs r1, #0xa0
     movs r2, #0x10
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _080A50E6:
@@ -10393,7 +10375,7 @@ _080A51B4:
     ldr r1, _080A51E8
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A51D0
     adds r7, #1
 _080A51D0:
@@ -10514,7 +10496,7 @@ sub_080A527C:
     bl sub_080009BC   @ ByteFill
     movs r0, #0
     strb r0, [r5]
-    bl sub_08000C44
+    bl sub_08000C44   @ GetPlaythrough
     cmp r0, #2
     ble _080A529A
     movs r0, #2
@@ -10548,16 +10530,16 @@ sub_080A52C2:
     movs r0, #0xb
     movs r1, #0x2e
     movs r2, #4
-    bl sub_080250E4
+    bl sub_080250E4   @ ClearEventFlagRangeHL
     movs r0, #0xb
     movs r1, #0x32
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0xb
     movs r1, #0x33
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0xb
     movs r1, #0x2d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A5322
     ldrb r0, [r5]
     cmp r0, #5
@@ -10581,7 +10563,7 @@ sub_080A52C2:
     ldr r1, _080A5324
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080A5320:
     add sp, #0x40
 _080A5322:
@@ -11474,11 +11456,11 @@ _080A5DB0:
 _080A5DC2:
     movs r0, #0x11
     movs r1, #0x79
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A5DD8
     movs r0, #0x11
     movs r1, #0x79
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     bl sub_080A6D16
 _080A5DD8:
     ldrb r0, [r5, #0x16]
@@ -12200,10 +12182,10 @@ sub_080A634C:
     strb r0, [r7, #1]
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x14
     bl sub_080A6C78
 _080A637A:
@@ -12344,7 +12326,7 @@ sub_080A646E:
     strb r0, [r5, #0xa]
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A64A2
     bl sub_080A64C0
     b _080A64A8
@@ -12354,7 +12336,7 @@ _080A64A2:
 _080A64A8:
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
     .hword 0x0000
 _080A64B4:
@@ -12470,10 +12452,10 @@ sub_080A6570:
     push {lr}
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0
     strb r0, [r5, #9]
     movs r0, #0
@@ -12550,7 +12532,7 @@ sub_080A65E8:
     strb r0, [r7, #1]
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0x14
     bl sub_080A6C78
 _080A660E:
@@ -12654,7 +12636,7 @@ sub_080A6698:
 _080A66BC:
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #0
     strb r0, [r5, #9]
     movs r0, #0
@@ -12683,16 +12665,16 @@ sub_080A66D8:
     push {r0}
     movs r0, #0x11
     movs r1, #0x74
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     pop {r0}
     beq _080A679C
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A67AE
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A67AE
     bl sub_0802BDA6
     bne _080A67AE
@@ -12907,14 +12889,14 @@ sub_080A689A:
     push {lr}
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080A68AA
     movs r0, #0
     b _080A68B2
 _080A68AA:
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
 _080A68B2:
     pop {pc}
 
@@ -12924,7 +12906,7 @@ sub_080A68B4:
     push {lr}
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A68C2
     movs r0, #0
 _080A68C2:
@@ -13125,15 +13107,7 @@ sub_080A6BB8:
     adds r0, r3, #0
     adds r1, r4, #0
     pop {pc}
-    .hword 0x0000
-
-    .global sub_080A6BD0
-    .thumb_func
-sub_080A6BD0:
-    push {r2, lr}
-    movs r0, r0
-    ldr r2, _080A6FC8
-    incrom 0xA6BD6, 0x3A
+    incrom 0xA6BCE, 0x42
     .global dat_080A6C10
 dat_080A6C10:
 _080A6C10:
@@ -13276,7 +13250,7 @@ sub_080A6CE6:
     push {lr}
     movs r0, #0x11
     movs r1, #0x74
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
 
     .global sub_080A6CF2
@@ -13285,7 +13259,7 @@ sub_080A6CF2:
     push {lr}
     movs r0, #0x11
     movs r1, #0x74
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     pop {pc}
 
     .global sub_080A6CFE
@@ -13297,7 +13271,7 @@ sub_080A6CFE:
     push {lr}
     movs r0, #0x11
     movs r1, #0x79
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     bl sub_080A6CF2
     pop {pc}
     .hword 0x46F7
@@ -13319,7 +13293,7 @@ sub_080A6D16:
     push {r3}
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     pop {r3}
     bne _080A6D48
     mov r2, sl
@@ -13368,7 +13342,7 @@ sub_080A6D6E:
     bl sub_080A6CE6
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     pop {pc}
 _080A6D84:
     .word 0x0200B1F0
@@ -13381,7 +13355,7 @@ sub_080A6D88:
     strb r0, [r3, #2]
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
 
     .global sub_080A6D98
@@ -13397,7 +13371,7 @@ sub_080A6D98:
     strb r0, [r3, #0x15]
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
     pop {pc}
 
     .global sub_080A6DB2
@@ -13656,7 +13630,15 @@ sub_080A6EF8:
     strb r1, [r3, #1]
     strb r2, [r3, #2]
     mov pc, lr
-    incrom 0xA6F02, 0xA
+
+    .global sub_080A6F02
+    .thumb_func
+sub_080A6F02:
+    ldr r3, _080A6F54
+    ldrb r0, [r3]
+    ldrb r1, [r3, #1]
+    ldrb r2, [r3, #2]
+    mov pc, lr
 
     .global sub_080A6F0C
     .thumb_func
@@ -13693,8 +13675,13 @@ sub_080A6F2C:
     ldr r3, _080A6F54
     strb r0, [r3, #3]
     mov pc, lr
-    .word 0x78D84B07
-    .hword 0x46F7
+
+    .global sub_080A6F34
+    .thumb_func
+sub_080A6F34:
+    ldr r3, _080A6F54
+    ldrb r0, [r3, #3]
+    mov pc, lr
 
     .global sub_080A6F3A
     .thumb_func
@@ -13769,7 +13756,7 @@ sub_080A6F92:
     push {r7, lr}
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A6FC2
     mov r7, sl
     ldr r7, [r7, #0x40]
@@ -13786,7 +13773,7 @@ sub_080A6F92:
     strh r0, [r7, r2]
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A6FC2:
     pop {r7, pc}
 
@@ -13795,12 +13782,30 @@ _080A6FC2:
 sub_080A6FC4:
     push {lr}
     movs r0, #0
-_080A6FC8:
-    .word 0x400A22F0
-    incrom 0xA6FCC, 0x1E
+    movs r2, #0xf0
+    ands r2, r1
+    beq _080A6FDA
+    lsrs r2, r2, #4
+    ldr r7, _080A6FFC
+    ldrb r2, [r7, r2]
+    orrs r0, r2
+    movs r1, #0x10
+    orrs r0, r1
+_080A6FDA:
+    movs r3, #0x54
+    strh r0, [r5, r3]
+    movs r1, #0xf
+    ands r1, r0
+    beq _080A6FE8
+    subs r1, #1
+    strb r1, [r5, #0x10]
+_080A6FE8:
+    pop {pc}
     .global dat_080A6FEA
 dat_080A6FEA:
-    incrom 0xA6FEA, 0x16
+    incrom 0xA6FEA, 0x12
+_080A6FFC:
+    .word dat_080A6FEA
 
     .global sub_080A7000
     .thumb_func
@@ -13838,11 +13843,11 @@ sub_080A7028:
     push {r7, lr}
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A709E
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A709E
     bl sub_080A6F86
     bne _080A709E
@@ -13881,7 +13886,7 @@ sub_080A7028:
     strh r1, [r7, r2]
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_0802504C
+    bl sub_0802504C   @ SetEventFlagHL
 _080A709E:
     pop {r7, pc}
 _080A70A0:
@@ -14680,7 +14685,7 @@ sub_080A8474:
     movs r7, #0x80
     ldr r0, [r5, r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080A84A8
     bl sub_080A8D78
     movs r0, #1
@@ -14806,7 +14811,7 @@ sub_080A8568:
     push {lr}
     movs r0, #0x11
     movs r1, #0x75
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A8586
     mov r7, sl
     ldr r7, [r7, #0x40]
@@ -14919,7 +14924,7 @@ sub_080A873E:
     adds r0, r6, #1
     bl sub_080A8E70
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080A8758
     adds r0, r6, #3
     bl sub_080A8E7A
@@ -14936,7 +14941,7 @@ sub_080A875C:
     adds r0, r6, #1
     bl sub_080A8E70
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080A8776
     adds r0, r6, #3
     bl sub_080A8E7A
@@ -14953,7 +14958,7 @@ sub_080A877A:
     adds r0, r6, #1
     bl sub_080A8E70
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     adds r6, #3
     pop {pc}
 
@@ -14964,7 +14969,7 @@ sub_080A878C:
     adds r0, r6, #1
     bl sub_080A8E70
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
     adds r6, #3
     pop {pc}
 
@@ -15887,7 +15892,7 @@ sub_080A8D16:
     push {lr}
     adds r0, r6, #1
     bl sub_080A8E70
-    bl sub_08000568   @ SerialIntr
+    bl sub_08000568   @ BN4_PLAY_MUSIC
     adds r6, #3
     pop {pc}
 
@@ -16178,10 +16183,7 @@ _080A8ED8:
     .word 0x00000D80
 _080A8EDC:
     .word 0x00000400
-    incrom 0xA8EE0, 0x14
-    .global dat_080A8EF4
-dat_080A8EF4:
-    incrom 0xA8EF4, 0x150
+    incrom 0xA8EE0, 0x164
 
     .global sub_080A9044
     .thumb_func
@@ -16197,7 +16199,7 @@ sub_080A904C:
     push {lr}
     movs r0, #0x11
     movs r1, #0x6a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A9060
     ldr r0, _080A9108
     movs r1, #0
@@ -16213,7 +16215,7 @@ sub_080A9064:
     push {r4, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x6a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A9082
     ldr r7, _080A910C
     ldrb r6, [r7]
@@ -16233,7 +16235,7 @@ sub_080A9084:
     push {r4, r5, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x6a
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080A90FE
     ldr r7, _080A9110
     ldrb r6, [r7]
@@ -16318,19 +16320,7 @@ dat_080ADD24:
     incrom 0xADD24, 0x1C
     .global dat_080ADD40
 dat_080ADD40:
-    incrom 0xADD40, 0x48
-
-    .global sub_080ADD88
-    .thumb_func
-sub_080ADD88:
-    push {r2, r4, lr}
-    lsrs r2, r1, #0x20
-    pop {r2, r3, r4, r5, r7}
-    lsrs r2, r1, #0x20
-    stm r6!, {r2, r3, r4, r6, r7}
-    lsrs r2, r1, #0x20
-    movs r1, r0
-    movs r0, r0
+    incrom 0xADD40, 0x58
 
     .global sub_080ADD98
     .thumb_func
@@ -16377,7 +16367,7 @@ _080ADDC0:
     bl sub_080ADE44
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _080ADDEA:
     adds r7, #0xc
     b _080ADDC0
@@ -16499,7 +16489,7 @@ _080ADE8A:
     bl sub_080ADE44
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _080ADEB0:
     adds r7, #0xc
     b _080ADE8A
@@ -16530,7 +16520,7 @@ sub_080ADEBE:
 _080ADED6:
     push {r6, r7}
     adds r0, r5, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     pop {r6, r7}
     beq _080ADF5C
     movs r4, #0
@@ -16578,7 +16568,7 @@ _080ADF22:
     adds r6, #8
     b _080ADF22
 _080ADF2E:
-    bl sub_08000C44
+    bl sub_08000C44   @ GetPlaythrough
     cmp r0, r4
     blt _080ADF38
     subs r0, r4, #1
@@ -16593,7 +16583,7 @@ _080ADF3C:
     adds r7, #8
     b _080ADF3C
 _080ADF48:
-    bl sub_08000C44
+    bl sub_08000C44   @ GetPlaythrough
     cmp r0, r4
     blt _080ADF52
     subs r0, r4, #1
@@ -16618,7 +16608,7 @@ sub_080ADF68:
     adds r4, r1, #0
     cmp r0, #5
     bne _080ADF88
-    bl sub_08000C44
+    bl sub_08000C44   @ GetPlaythrough
     cmp r0, #2
     ble _080ADF7A
     movs r0, #2
@@ -16827,7 +16817,7 @@ sub_080AE452:
     cmp r0, #0
     blt _080AE464
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AE468
 _080AE464:
     movs r4, #3
@@ -16841,7 +16831,7 @@ _080AE474:
     strb r4, [r5]
     movs r0, #0x11
     movs r1, #0x7c
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080AE484
     ldrb r0, [r7, #9]
     b _080AE486
@@ -17094,7 +17084,7 @@ sub_080AE6C0:
     push {lr}
     ldrh r0, [r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AE6FE
     movs r0, #3
     strb r0, [r5]
@@ -17117,10 +17107,10 @@ sub_080AE6C0:
 _080AE6FE:
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #0xc
     strb r0, [r5, #8]
     bl sub_080AE762
@@ -17132,7 +17122,7 @@ sub_080AE718:
     push {lr}
     ldrh r0, [r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AE740
     movs r0, #1
     bl sub_08002E10
@@ -17141,7 +17131,7 @@ sub_080AE718:
     bl sub_08000560   @ PlaySoundEffect
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #8
     strb r0, [r5, #8]
 _080AE740:
@@ -17157,7 +17147,7 @@ sub_080AE746:
     bne _080AE75C
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #0xc
     strb r0, [r5, #8]
 _080AE75C:
@@ -17204,7 +17194,7 @@ sub_080AE870:
     push {lr}
     ldrh r0, [r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AE8B6
     movs r0, #3
     strb r0, [r5]
@@ -17230,10 +17220,10 @@ sub_080AE870:
 _080AE8B6:
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #8
     strb r0, [r5, #8]
     bl sub_080AE8FC
@@ -17245,16 +17235,16 @@ sub_080AE8D0:
     push {lr}
     ldrh r0, [r7]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AE8F6
     movs r0, #0x74
     bl sub_08000560   @ PlaySoundEffect
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     movs r0, #8
     strb r0, [r5, #8]
 _080AE8F6:
@@ -17306,7 +17296,7 @@ sub_080AE948:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AE990
     ldrb r0, [r7, #8]
     bl sub_08002E10
@@ -17338,7 +17328,7 @@ sub_080AE99E:
     push {lr}
     ldrh r0, [r7, #2]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AE9B8
     bl sub_080AE9D4
     movs r0, #0x74
@@ -17386,10 +17376,10 @@ sub_080AE9D4:
     bl sub_080AE9C6
     ldrh r0, [r7, #4]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     ldrh r0, [r7, #6]
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
     pop {pc}
     .global dat_080AEA0C
 dat_080AEA0C:
@@ -17459,17 +17449,17 @@ sub_080AEF1E:
     tst r0, r0
     beq _080AEF30
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _080AEF30:
     ldrh r0, [r7, #0xc]
     tst r0, r0
     beq _080AEF3C
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_0802506C
+    bl sub_0802506C   @ ClearEventFlag
 _080AEF3C:
     ldrh r3, [r7, #8]
     adds r0, r3, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AEF62
     movs r6, #1
     strb r6, [r5]
@@ -17477,13 +17467,13 @@ _080AEF3C:
     tst r0, r0
     beq _080AEF56
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080AEF56:
     ldrh r0, [r7, #0xc]
     tst r0, r0
     beq _080AEF62
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_08025050
+    bl sub_08025050   @ SetEventFlag
 _080AEF62:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -17548,7 +17538,7 @@ sub_080AEFCA:
     bne _080AEFE6
     movs r0, #1
     movs r1, #0x49
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     bne _080AEFE6
     bl sub_080AF024
     pop {pc}
@@ -17640,13 +17630,13 @@ sub_080AF070:
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AF0C6
     ldr r0, _080AF21C
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AF0C6
     movs r0, #4
     strb r0, [r5, #8]
@@ -17711,7 +17701,7 @@ _080AF12C:
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AF186
     movs r0, #0x80
     movs r1, #0x14
@@ -17749,7 +17739,7 @@ _080AF186:
     ldrb r1, [r5, #4]
     adds r0, r0, r1
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     beq _080AF1C0
     movs r0, #0x10
     strb r0, [r5, #6]
@@ -18020,7 +18010,7 @@ sub_080AF448:
     cmp r0, #0
     blt _080AF45C
     .hword 0x1C00   @ adds r0, r0, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AF484
 _080AF45C:
     movs r6, #3
@@ -18032,11 +18022,11 @@ _080AF45C:
     bne _080AF486
     movs r0, #1
     movs r1, #0x3f
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080AF486
     movs r0, #1
     movs r1, #0x3f
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
     movs r0, #8
     strb r0, [r5, #8]
     b _080AF486
@@ -18247,7 +18237,7 @@ sub_080AFBA4:
     push {lr}
     movs r0, #1
     movs r1, #0x3e
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080AFBB4
     movs r0, #4
     strb r0, [r5, #9]
@@ -18386,7 +18376,7 @@ _080AFC9E:
     bne _080AFCC0
     movs r0, #1
     movs r1, #0x3d
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080AFCB2
     movs r0, #0x18
     strb r0, [r5, #9]
@@ -18466,7 +18456,7 @@ sub_080AFD22:
     bne _080AFD3C
     movs r0, #1
     movs r1, #0x3e
-    bl sub_08025068
+    bl sub_08025068   @ ClearEventFlagHL
 _080AFD3C:
     pop {r4, r7, pc}
 _080AFD3E:
@@ -18482,7 +18472,7 @@ _080AFD3E:
     adds r1, r1, r6
     subs r1, #1
     adds r0, r1, #0
-    bl sub_080250A4
+    bl sub_080250A4   @ TestEventFlag
     bne _080AFD68
     ldrb r0, [r5, #0x10]
     adds r0, #4
@@ -18506,7 +18496,7 @@ sub_080AFD7C:
     push {lr}
     movs r0, #1
     movs r1, #0x40
-    bl sub_080250A0
+    bl sub_080250A0   @ TestEventFlagHL
     beq _080AFD8C
     movs r0, #0x1c
     strb r0, [r5, #9]
