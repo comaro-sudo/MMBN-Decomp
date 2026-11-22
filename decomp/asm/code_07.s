@@ -15,7 +15,9 @@ sub_080B01DE:
     bl sub_0800285C
     pop {pc}
 _080B01F0:
-    .word 0x080B01F4
+    .word dat_080B01F4
+    .global dat_080B01F4
+dat_080B01F4:
     .incbin "baserom.gba", 0xB01F4, 0x78
 
     .global sub_080B026C
@@ -172,12 +174,17 @@ sub_080B0350:
 _080B0370:
     .word 0x0200AA84
 _080B0374:
-    .word 0x080AFDC8
+    .word dat_080AFDC8
 _080B0378:
     .word 0x0200AA88
 _080B037C:
     .word 0x0200AAB4
-    .incbin "baserom.gba", 0xB0380, 0x224
+    .global dat_080B0380
+dat_080B0380:
+    .incbin "baserom.gba", 0xB0380, 0xA8
+    .global dat_080B0428
+dat_080B0428:
+    .incbin "baserom.gba", 0xB0428, 0x17C
 
     .global sub_080B05A4
     .thumb_func
@@ -211,7 +218,9 @@ _080B05CA:
     pop {pc}
     .hword 0x0000
 _080B05E0:
-    .word 0x080B05E4
+    .word dat_080B05E4
+    .global dat_080B05E4
+dat_080B05E4:
     .incbin "baserom.gba", 0xB05E4, 0x8
 _080B05EC:
     .word 0x003E0000
@@ -268,7 +277,9 @@ sub_080B0628:
     pop {pc}
     .hword 0x0000
 _080B0658:
-    .word 0x080B065C
+    .word dat_080B065C
+    .global dat_080B065C
+dat_080B065C:
     .incbin "baserom.gba", 0xB065C, 0x20
 _080B067C:
     .word 0x0200AA90
@@ -397,9 +408,9 @@ sub_080B070C:
     pop {r5, pc}
     .hword 0x0000
 _080B0748:
-    .word 0x080B0380
+    .word dat_080B0380
 _080B074C:
-    .word 0x080B0428
+    .word dat_080B0428
 _080B0750:
     .word 0x0200AA8C
 _080B0754:
@@ -419,8 +430,13 @@ sub_080B075C:
     pop {pc}
     .hword 0x0000
 _080B076C:
-    .word 0x080B0770
-    .incbin "baserom.gba", 0xB0770, 0x68
+    .word dat_080B0770
+    .global dat_080B0770
+dat_080B0770:
+    .incbin "baserom.gba", 0xB0770, 0x64
+    .global dat_080B07D4
+dat_080B07D4:
+    .word 0x09060300
 
     .global sub_080B07D8
     .thumb_func
@@ -435,7 +451,9 @@ sub_080B07D8:
     pop {pc}
     .hword 0x0000
 _080B07EC:
-    .word 0x080B07F0
+    .word dat_080B07F0
+    .global dat_080B07F0
+dat_080B07F0:
     .incbin "baserom.gba", 0xB07F0, 0xE0
 
     .global sub_080B08D0
@@ -463,7 +481,7 @@ sub_080B08D0:
 _080B08FA:
     pop {pc}
 _080B08FC:
-    .word 0x080B07D4
+    .word dat_080B07D4
 
     .global sub_080B0900
     .thumb_func
@@ -593,7 +611,7 @@ sub_080B09A0:
 _080B09C2:
     pop {pc}
 _080B09C4:
-    .word 0x080B07D4
+    .word dat_080B07D4
 
     .global sub_080B09C8
     .thumb_func
@@ -693,7 +711,7 @@ _080B0A52:
     pop {pc}
     .hword 0x0000
 _080B0A6C:
-    .word 0x080B07D4
+    .word dat_080B07D4
 
     .global sub_080B0A70
     .thumb_func
@@ -711,7 +729,7 @@ sub_080B0A70:
     strb r0, [r5, #9]
     pop {pc}
 _080B0A8C:
-    .word 0x080B07D4
+    .word dat_080B07D4
 
     .global sub_080B0A90
     .thumb_func
@@ -777,7 +795,7 @@ _080B0AD6:
     pop {pc}
     .hword 0x0000
 _080B0AF8:
-    .word 0x080B07D4
+    .word dat_080B07D4
 
     .global sub_080B0AFC
     .thumb_func
@@ -813,7 +831,9 @@ sub_080B0B20:
     pop {pc}
     .hword 0x0000
 _080B0B34:
-    .word 0x080B0B38
+    .word dat_080B0B38
+    .global dat_080B0B38
+dat_080B0B38:
     .incbin "baserom.gba", 0xB0B38, 0x9C
 
     .global sub_080B0BD4
@@ -894,6 +914,8 @@ sub_080B0C3A:
     pop {r5, r6, pc}
 _080B0C50:
     .word 0x0200AAB8
+    .global dat_080B0C54
+dat_080B0C54:
     .incbin "baserom.gba", 0xB0C54, 0x18
 
     .global sub_080B0C6C
@@ -912,10 +934,12 @@ sub_080B0C6C:
     bx r0
     pop {pc}
 _080B0C84:
-    .word 0x080B0C88
+    .word dat_080B0C88
+    .global dat_080B0C88
+dat_080B0C88:
     .incbin "baserom.gba", 0xB0C88, 0xC
 _080B0C94:
-    .word 0x080B0C54
+    .word dat_080B0C54
 
     .global sub_080B0C98
     .thumb_func
@@ -995,7 +1019,9 @@ sub_080B0D20:
     pop {pc}
     .hword 0x0000
 _080B0D30:
-    .word 0x080B0D34
+    .word dat_080B0D34
+    .global dat_080B0D34
+dat_080B0D34:
     .incbin "baserom.gba", 0xB0D34, 0x94
 
     .global sub_080B0DC8
@@ -1010,7 +1036,9 @@ sub_080B0DC8:
     pop {pc}
     .hword 0x0000
 _080B0DD8:
-    .word 0x080B0DDC
+    .word dat_080B0DDC
+    .global dat_080B0DDC
+dat_080B0DDC:
     .incbin "baserom.gba", 0xB0DDC, 0x10
 
     .global sub_080B0DEC
@@ -1129,8 +1157,13 @@ sub_080B0EAC:
     pop {pc}
     .hword 0x0000
 _080B0EBC:
-    .word 0x080B0EC0
-    .incbin "baserom.gba", 0xB0EC0, 0xF4
+    .word dat_080B0EC0
+    .global dat_080B0EC0
+dat_080B0EC0:
+    .incbin "baserom.gba", 0xB0EC0, 0xCC
+    .global dat_080B0F8C
+dat_080B0F8C:
+    .incbin "baserom.gba", 0xB0F8C, 0x28
 
     .global sub_080B0FB4
     .thumb_func
@@ -1148,10 +1181,12 @@ sub_080B0FB4:
     bx r0
     pop {pc}
 _080B0FCC:
-    .word 0x080B0FD0
+    .word dat_080B0FD0
+    .global dat_080B0FD0
+dat_080B0FD0:
     .incbin "baserom.gba", 0xB0FD0, 0x10
 _080B0FE0:
-    .word 0x080B0F8C
+    .word dat_080B0F8C
 
     .global sub_080B0FE4
     .thumb_func
@@ -1290,7 +1325,9 @@ _080B10EA:
     bx r0
     pop {pc}
 _080B10F8:
-    .word 0x080B10FC
+    .word dat_080B10FC
+    .global dat_080B10FC
+dat_080B10FC:
     .incbin "baserom.gba", 0xB10FC, 0x10
 
     .global sub_080B110C
@@ -1369,9 +1406,11 @@ _080B11A2:
     bl sub_0800285C
     pop {pc}
 _080B11A8:
-    .word 0x08097334
+    .word dat_08097334
 _080B11AC:
-    .word 0x080B11B0
+    .word dat_080B11B0
+    .global dat_080B11B0
+dat_080B11B0:
     .word 0xFF5A3C1E
 
     .global sub_080B11B4
@@ -1439,7 +1478,9 @@ sub_080B120C:
     pop {pc}
     .hword 0x0000
 _080B121C:
-    .word 0x080B1220
+    .word dat_080B1220
+    .global dat_080B1220
+dat_080B1220:
     .incbin "baserom.gba", 0xB1220, 0xD0
 
     .global sub_080B12F0
@@ -1454,10 +1495,14 @@ sub_080B12F0:
     bx r0
     pop {pc}
 _080B1300:
-    .word 0x080B1304
+    .word dat_080B1304
+    .global dat_080B1304
+dat_080B1304:
     .incbin "baserom.gba", 0xB1304, 0xF8
 _080B13FC:
     .word 0x02010BA8
+    .global dat_080B1400
+dat_080B1400:
     .incbin "baserom.gba", 0xB1400, 0x24
 
     .global sub_080B1424
@@ -1472,7 +1517,9 @@ sub_080B1424:
     pop {pc}
     .hword 0x0000
 _080B1434:
-    .word 0x080B1438
+    .word dat_080B1438
+    .global dat_080B1438
+dat_080B1438:
     .incbin "baserom.gba", 0xB1438, 0x14
 
     .global sub_080B144C
@@ -1595,7 +1642,7 @@ sub_080B14F8:
     pop {r5, r7, pc}
     .hword 0x0000
 _080B1518:
-    .word 0x080B1400
+    .word dat_080B1400
 
     .global sub_080B151C
     .thumb_func
@@ -1612,7 +1659,9 @@ sub_080B151C:
     pop {pc}
     .hword 0x0000
 _080B1534:
-    .word 0x080B1538
+    .word dat_080B1538
+    .global dat_080B1538
+dat_080B1538:
     .incbin "baserom.gba", 0xB1538, 0x10
 
     .global sub_080B1548
@@ -1732,7 +1781,9 @@ sub_080B1624:
     pop {pc}
     .hword 0x0000
 _080B1634:
-    .word 0x080B1638
+    .word dat_080B1638
+    .global dat_080B1638
+dat_080B1638:
     .incbin "baserom.gba", 0xB1638, 0x64
 
     .global sub_080B169C
@@ -1747,7 +1798,9 @@ sub_080B169C:
     pop {pc}
     .hword 0x0000
 _080B16AC:
-    .word 0x080B16B0
+    .word dat_080B16B0
+    .global dat_080B16B0
+dat_080B16B0:
     .incbin "baserom.gba", 0xB16B0, 0x10
 
     .global sub_080B16C0
@@ -1833,7 +1886,9 @@ sub_080B1758:
     pop {pc}
     .hword 0x0000
 _080B1768:
-    .word 0x080B176C
+    .word dat_080B176C
+    .global dat_080B176C
+dat_080B176C:
     .incbin "baserom.gba", 0xB176C, 0x7C
 
     .global sub_080B17E8
@@ -1848,7 +1903,9 @@ sub_080B17E8:
     pop {pc}
     .hword 0x0000
 _080B17F8:
-    .word 0x080B17FC
+    .word dat_080B17FC
+    .global dat_080B17FC
+dat_080B17FC:
     .incbin "baserom.gba", 0xB17FC, 0x84
 
     .global sub_080B1880
@@ -1863,7 +1920,9 @@ sub_080B1880:
     pop {pc}
     .hword 0x0000
 _080B1890:
-    .word 0x080B1894
+    .word dat_080B1894
+    .global dat_080B1894
+dat_080B1894:
     .incbin "baserom.gba", 0xB1894, 0xF8
 
     .global sub_080B198C
@@ -1878,7 +1937,9 @@ sub_080B198C:
     pop {pc}
     .hword 0x0000
 _080B199C:
-    .word 0x080B19A0
+    .word dat_080B19A0
+    .global dat_080B19A0
+dat_080B19A0:
     .incbin "baserom.gba", 0xB19A0, 0x9C
 
     .global sub_080B1A3C
@@ -2109,7 +2170,9 @@ sub_080B1BA0:
     pop {pc}
     .hword 0x0000
 _080B1BB4:
-    .word 0x080B1BB8
+    .word dat_080B1BB8
+    .global dat_080B1BB8
+dat_080B1BB8:
     .incbin "baserom.gba", 0xB1BB8, 0xF0
 
     .global sub_080B1CA8
@@ -2124,7 +2187,9 @@ sub_080B1CA8:
     pop {pc}
     .hword 0x0000
 _080B1CB8:
-    .word 0x080B1CBC
+    .word dat_080B1CBC
+    .global dat_080B1CBC
+dat_080B1CBC:
     .incbin "baserom.gba", 0xB1CBC, 0x8C
 
     .global sub_080B1D48
@@ -2139,7 +2204,9 @@ sub_080B1D48:
     pop {pc}
     .hword 0x0000
 _080B1D58:
-    .word 0x080B1D5C
+    .word dat_080B1D5C
+    .global dat_080B1D5C
+dat_080B1D5C:
     .incbin "baserom.gba", 0xB1D5C, 0x66
 
     .global sub_080B1DC2
@@ -2170,7 +2237,9 @@ sub_080B1DDC:
     pop {pc}
     .hword 0x0000
 _080B1DEC:
-    .word 0x080B1DF0
+    .word dat_080B1DF0
+    .global dat_080B1DF0
+dat_080B1DF0:
     .incbin "baserom.gba", 0xB1DF0, 0x94
 
     .global sub_080B1E84
@@ -2213,9 +2282,11 @@ _080B1EC2:
 _080B1EC4:
     .word 0x000001C0
 _080B1EC8:
-    .word 0x08005E18
+    .word dat_08005E18
 _080B1ECC:
-    .word 0x080B1ED0
+    .word dat_080B1ED0
+    .global dat_080B1ED0
+dat_080B1ED0:
     .word 0x00E02060
 
     .global sub_080B1ED4
@@ -2256,7 +2327,9 @@ sub_080B1EF4:
 _080B1F12:
     pop {pc}
 _080B1F14:
-    .word 0x080B1F18
+    .word dat_080B1F18
+    .global dat_080B1F18
+dat_080B1F18:
     .word 0x001B1A1C
 
     .global sub_080B1F1C
@@ -2308,7 +2381,9 @@ sub_080B1F54:
     pop {pc}
     .hword 0x0000
 _080B1F64:
-    .word 0x080B1F68
+    .word dat_080B1F68
+    .global dat_080B1F68
+dat_080B1F68:
     .incbin "baserom.gba", 0xB1F68, 0x18
 
     .global sub_080B1F80
@@ -2463,7 +2538,9 @@ sub_080B2068:
     pop {pc}
     .hword 0x0000
 _080B2078:
-    .word 0x080B207C
+    .word dat_080B207C
+    .global dat_080B207C
+dat_080B207C:
     .incbin "baserom.gba", 0xB207C, 0x64
 
     .global sub_080B20E0
@@ -2510,13 +2587,15 @@ _080B2128:
 _080B212C:
     .word 0x00000500
 _080B2130:
-    .word 0x08005E18
+    .word dat_08005E18
 _080B2134:
-    .word 0x080B2140
+    .word dat_080B2140
 _080B2138:
     .word sub_080B2142
 _080B213C:
-    .word 0x080B2146
+    .word dat_080B2146
+    .global dat_080B2140
+dat_080B2140:
     .hword 0x4060
 
     .global sub_080B2142
@@ -2616,7 +2695,9 @@ sub_080B21BE:
     b _080B2228
     .hword 0x0000
 _080B21EC:
-    .word 0x080B21F0
+    .word dat_080B21F0
+    .global dat_080B21F0
+dat_080B21F0:
     .incbin "baserom.gba", 0xB21F0, 0x12
 
     .global sub_080B2202
@@ -2764,7 +2845,9 @@ sub_080B22EC:
     pop {pc}
     .hword 0x0000
 _080B22FC:
-    .word 0x080B2300
+    .word dat_080B2300
+    .global dat_080B2300
+dat_080B2300:
     .incbin "baserom.gba", 0xB2300, 0x9C
 
     .global sub_080B239C
@@ -2779,7 +2862,9 @@ sub_080B239C:
     pop {pc}
     .hword 0x0000
 _080B23AC:
-    .word 0x080B23B0
+    .word dat_080B23B0
+    .global dat_080B23B0
+dat_080B23B0:
     .incbin "baserom.gba", 0xB23B0, 0x68
 
     .global sub_080B2418
@@ -2837,9 +2922,11 @@ _080B2470:
 _080B2474:
     .word 0x000001C0
 _080B2478:
-    .word 0x08005E18
+    .word dat_08005E18
 _080B247C:
-    .word 0x080B2480
+    .word dat_080B2480
+    .global dat_080B2480
+dat_080B2480:
     .word 0x00E02060
 
     .global sub_080B2484
@@ -2880,7 +2967,9 @@ sub_080B24A0:
 _080B24C2:
     pop {pc}
 _080B24C4:
-    .word 0x080B24C8
+    .word dat_080B24C8
+    .global dat_080B24C8
+dat_080B24C8:
     .word 0x00464547
 
     .global sub_080B24CC
@@ -2935,7 +3024,9 @@ sub_080B2504:
     bl sub_080A6DD0
     pop {pc}
 _080B251C:
-    .word 0x080B2520
+    .word dat_080B2520
+    .global dat_080B2520
+dat_080B2520:
     .incbin "baserom.gba", 0xB2520, 0x14
 
     .global sub_080B2534
@@ -3078,7 +3169,9 @@ sub_080B2604:
     pop {pc}
     .hword 0x0000
 _080B2614:
-    .word 0x080B2618
+    .word dat_080B2618
+    .global dat_080B2618
+dat_080B2618:
     .incbin "baserom.gba", 0xB2618, 0x84
 
     .global sub_080B269C
@@ -3394,7 +3487,9 @@ sub_080B2890:
     pop {r4, r5, r6, pc}
     .hword 0x0000
 _080B28BC:
-    .word 0x080B28C0
+    .word dat_080B28C0
+    .global dat_080B28C0
+dat_080B28C0:
     .incbin "baserom.gba", 0xB28C0, 0x38
 
     .global sub_080B28F8
@@ -3409,7 +3504,9 @@ sub_080B28F8:
     pop {pc}
     .hword 0x0000
 _080B2908:
-    .word 0x080B290C
+    .word dat_080B290C
+    .global dat_080B290C
+dat_080B290C:
     .incbin "baserom.gba", 0xB290C, 0x74
 
     .global sub_080B2980
@@ -3668,7 +3765,9 @@ sub_080B2B30:
     pop {pc}
     .hword 0x0000
 _080B2B40:
-    .word 0x080B2B44
+    .word dat_080B2B44
+    .global dat_080B2B44
+dat_080B2B44:
     .incbin "baserom.gba", 0xB2B44, 0x78
 
     .global sub_080B2BBC
@@ -3683,7 +3782,9 @@ sub_080B2BBC:
     pop {pc}
     .hword 0x0000
 _080B2BCC:
-    .word 0x080B2BD0
+    .word dat_080B2BD0
+    .global dat_080B2BD0
+dat_080B2BD0:
     .incbin "baserom.gba", 0xB2BD0, 0x4C
 
     .global sub_080B2C1C
@@ -3701,7 +3802,9 @@ sub_080B2C1C:
     strb r0, [r5, #7]
     pop {pc}
 _080B2C34:
-    .word 0x080B2C38
+    .word dat_080B2C38
+    .global dat_080B2C38
+dat_080B2C38:
     .incbin "baserom.gba", 0xB2C38, 0x52
 
     .global sub_080B2C8A
@@ -3718,7 +3821,9 @@ sub_080B2C8A:
     bl sub_080B2E32
     pop {pc}
 _080B2CA0:
-    .word 0x080B2CA4
+    .word dat_080B2CA4
+    .global dat_080B2CA4
+dat_080B2CA4:
     .incbin "baserom.gba", 0xB2CA4, 0x48
 
     .global sub_080B2CEC
@@ -3736,7 +3841,9 @@ sub_080B2CEC:
     strb r0, [r5, #7]
     pop {pc}
 _080B2D04:
-    .word 0x080B2D08
+    .word dat_080B2D08
+    .global dat_080B2D08
+dat_080B2D08:
     .incbin "baserom.gba", 0xB2D08, 0x6A
 
     .global sub_080B2D72
@@ -3755,7 +3862,9 @@ sub_080B2D72:
     pop {pc}
     .hword 0x0000
 _080B2D8C:
-    .word 0x080B2D90
+    .word dat_080B2D90
+    .global dat_080B2D90
+dat_080B2D90:
     .incbin "baserom.gba", 0xB2D90, 0xA2
 
     .global sub_080B2E32
@@ -3785,7 +3894,9 @@ _080B2E4E:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080B2E5C:
-    .word 0x080B2E60
+    .word dat_080B2E60
+    .global dat_080B2E60
+dat_080B2E60:
     .incbin "baserom.gba", 0xB2E60, 0x30
 _080B2E90:
     .word 0x0200F980
@@ -3867,7 +3978,9 @@ sub_080B2F06:
     bl sub_080B3016
     pop {r4, r5, r6, r7, pc}
 _080B2F18:
-    .word 0x080B2F1C
+    .word dat_080B2F1C
+    .global dat_080B2F1C
+dat_080B2F1C:
     .incbin "baserom.gba", 0xB2F1C, 0xFA
 
     .global sub_080B3016
@@ -3916,8 +4029,13 @@ sub_080B3054:
     pop {pc}
     .hword 0x0000
 _080B3064:
-    .word 0x080B3068
-    .incbin "baserom.gba", 0xB3068, 0x178
+    .word dat_080B3068
+    .global dat_080B3068
+dat_080B3068:
+    .incbin "baserom.gba", 0xB3068, 0x148
+    .global dat_080B31B0
+dat_080B31B0:
+    .incbin "baserom.gba", 0xB31B0, 0x30
 
     .global sub_080B31E0
     .thumb_func
@@ -3935,10 +4053,12 @@ sub_080B31E0:
     bx r0
     pop {pc}
 _080B31F8:
-    .word 0x080B31FC
+    .word dat_080B31FC
+    .global dat_080B31FC
+dat_080B31FC:
     .incbin "baserom.gba", 0xB31FC, 0x18
 _080B3214:
-    .word 0x080B31B0
+    .word dat_080B31B0
 
     .global sub_080B3218
     .thumb_func
@@ -4055,6 +4175,8 @@ sub_080B3304:
     push {lr}
     bl sub_0800449A
     pop {pc}
+    .global dat_080B330C
+dat_080B330C:
     .incbin "baserom.gba", 0xB330C, 0x12
 
     .global sub_080B331E
@@ -4074,10 +4196,12 @@ sub_080B331E:
     pop {pc}
     .hword 0x0000
 _080B3338:
-    .word 0x080B333C
+    .word dat_080B333C
+    .global dat_080B333C
+dat_080B333C:
     .incbin "baserom.gba", 0xB333C, 0x10
 _080B334C:
-    .word 0x080B330C
+    .word dat_080B330C
 
     .global sub_080B3350
     .thumb_func
@@ -4174,7 +4298,9 @@ sub_080B33FC:
     pop {pc}
     .hword 0x0000
 _080B340C:
-    .word 0x080B3410
+    .word dat_080B3410
+    .global dat_080B3410
+dat_080B3410:
     .incbin "baserom.gba", 0xB3410, 0x58
 
     .global sub_080B3468
@@ -4189,7 +4315,9 @@ sub_080B3468:
     pop {pc}
     .hword 0x0000
 _080B3478:
-    .word 0x080B347C
+    .word dat_080B347C
+    .global dat_080B347C
+dat_080B347C:
     .incbin "baserom.gba", 0xB347C, 0x5C
 
     .global sub_080B34D8
@@ -4212,7 +4340,9 @@ sub_080B34E0:
     pop {pc}
     .hword 0x0000
 _080B34F4:
-    .word 0x080B34F8
+    .word dat_080B34F8
+    .global dat_080B34F8
+dat_080B34F8:
     .incbin "baserom.gba", 0xB34F8, 0x98
 
     .global sub_080B3590
@@ -4234,7 +4364,9 @@ sub_080B3594:
     pop {pc}
     .hword 0x0000
 _080B35A8:
-    .word 0x080B35AC
+    .word dat_080B35AC
+    .global dat_080B35AC
+dat_080B35AC:
     .incbin "baserom.gba", 0xB35AC, 0xAC
 
     .global sub_080B3658
@@ -4317,7 +4449,9 @@ _080B36D4:
     pop {r6, pc}
     .hword 0x0000
 _080B36D8:
-    .word 0x080B36DC
+    .word dat_080B36DC
+    .global dat_080B36DC
+dat_080B36DC:
     .incbin "baserom.gba", 0xB36DC, 0x19C
 
     .global sub_080B3878
@@ -4368,7 +4502,9 @@ sub_080B38B0:
     pop {r6, pc}
     .hword 0x0000
 _080B38C0:
-    .word 0x080B38C4
+    .word dat_080B38C4
+    .global dat_080B38C4
+dat_080B38C4:
     .incbin "baserom.gba", 0xB38C4, 0x10
 
     .global sub_080B38D4
@@ -4452,7 +4588,9 @@ _080B3964:
     pop {pc}
     .hword 0x0000
 _080B3968:
-    .word 0x080B396C
+    .word dat_080B396C
+    .global dat_080B396C
+dat_080B396C:
     .word 0x1E1E2828
     .hword 0x1414
 
@@ -4484,7 +4622,9 @@ sub_080B398A:
     bx r1
     pop {r6, pc}
 _080B3998:
-    .word 0x080B399C
+    .word dat_080B399C
+    .global dat_080B399C
+dat_080B399C:
     .incbin "baserom.gba", 0xB399C, 0x10
 
     .global sub_080B39AC
@@ -4658,10 +4798,14 @@ _080B3ADA:
 _080B3AEA:
     pop {r4, r6, pc}
 _080B3AEC:
-    .word 0x080B3AF0
+    .word dat_080B3AF0
+    .global dat_080B3AF0
+dat_080B3AF0:
     .incbin "baserom.gba", 0xB3AF0, 0x8
 _080B3AF8:
-    .word 0x080B3AFC
+    .word dat_080B3AFC
+    .global dat_080B3AFC
+dat_080B3AFC:
     .word 0x7850280A
     .hword 0xC8A0
 
@@ -4704,7 +4848,9 @@ sub_080B3B32:
     bx r1
     pop {r6, pc}
 _080B3B40:
-    .word 0x080B3B44
+    .word dat_080B3B44
+    .global dat_080B3B44
+dat_080B3B44:
     .incbin "baserom.gba", 0xB3B44, 0x6A
 
     .global sub_080B3BAE
@@ -4808,7 +4954,9 @@ sub_080B3C44:
     pop {pc}
     .hword 0x0000
 _080B3C58:
-    .word 0x080B3C5C
+    .word dat_080B3C5C
+    .global dat_080B3C5C
+dat_080B3C5C:
     .incbin "baserom.gba", 0xB3C5C, 0xB8
 
     .global sub_080B3D14
@@ -4827,7 +4975,9 @@ sub_080B3D14:
     pop {r6, r7, pc}
     .hword 0x0000
 _080B3D2C:
-    .word 0x080B3D30
+    .word dat_080B3D30
+    .global dat_080B3D30
+dat_080B3D30:
     .incbin "baserom.gba", 0xB3D30, 0x1C
 
     .global sub_080B3D4C
@@ -4842,7 +4992,9 @@ sub_080B3D4C:
     pop {pc}
     .hword 0x0000
 _080B3D5C:
-    .word 0x080B3D60
+    .word dat_080B3D60
+    .global dat_080B3D60
+dat_080B3D60:
     .incbin "baserom.gba", 0xB3D60, 0xE8
 
     .global sub_080B3E48
@@ -4857,7 +5009,9 @@ sub_080B3E48:
     pop {pc}
     .hword 0x0000
 _080B3E58:
-    .word 0x080B3E5C
+    .word dat_080B3E5C
+    .global dat_080B3E5C
+dat_080B3E5C:
     .incbin "baserom.gba", 0xB3E5C, 0xB4
 
     .global sub_080B3F10
@@ -4872,7 +5026,9 @@ sub_080B3F10:
     pop {pc}
     .hword 0x0000
 _080B3F20:
-    .word 0x080B3F24
+    .word dat_080B3F24
+    .global dat_080B3F24
+dat_080B3F24:
     .incbin "baserom.gba", 0xB3F24, 0x6C
 
     .global sub_080B3F90
@@ -4887,7 +5043,9 @@ sub_080B3F90:
     pop {pc}
     .hword 0x0000
 _080B3FA0:
-    .word 0x080B3FA4
+    .word dat_080B3FA4
+    .global dat_080B3FA4
+dat_080B3FA4:
     .incbin "baserom.gba", 0xB3FA4, 0x8C
 
     .global sub_080B4030
@@ -4964,7 +5122,9 @@ sub_080B40A0:
     ldrb r0, [r1, r0]
     mov pc, lr
 _080B40A8:
-    .word 0x080B40AC
+    .word dat_080B40AC
+    .global dat_080B40AC
+dat_080B40AC:
     .incbin "baserom.gba", 0xB40AC, 0x14
 _080B40C0:
     .word sub_080F338A
@@ -4984,7 +5144,9 @@ sub_080B40C8:
     pop {pc}
     .hword 0x0000
 _080B40DC:
-    .word 0x080B40E0
+    .word dat_080B40E0
+    .global dat_080B40E0
+dat_080B40E0:
     .incbin "baserom.gba", 0xB40E0, 0xD0
 
     .global sub_080B41B0
@@ -5031,7 +5193,9 @@ sub_080B41DC:
     pop {r6, pc}
     .hword 0x0000
 _080B41F0:
-    .word 0x080B41F4
+    .word dat_080B41F4
+    .global dat_080B41F4
+dat_080B41F4:
     .incbin "baserom.gba", 0xB41F4, 0x18
 
     .global sub_080B420C
@@ -5046,7 +5210,9 @@ sub_080B420C:
     pop {pc}
     .hword 0x0000
 _080B421C:
-    .word 0x080B4220
+    .word dat_080B4220
+    .global dat_080B4220
+dat_080B4220:
     .incbin "baserom.gba", 0xB4220, 0x9C
 
     .global sub_080B42BC
@@ -5135,7 +5301,9 @@ sub_080B433E:
     bx r0
     pop {pc}
 _080B434C:
-    .word 0x080B4350
+    .word dat_080B4350
+    .global dat_080B4350
+dat_080B4350:
     .incbin "baserom.gba", 0xB4350, 0x26
 
     .global sub_080B4376
@@ -5149,7 +5317,9 @@ sub_080B4376:
     bx r0
     pop {pc}
 _080B4384:
-    .word 0x080B4388
+    .word dat_080B4388
+    .global dat_080B4388
+dat_080B4388:
     .incbin "baserom.gba", 0xB4388, 0x24
 
     .global sub_080B43AC
@@ -5380,7 +5550,9 @@ _080B4556:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080B4560:
-    .word 0x080B4564
+    .word dat_080B4564
+    .global dat_080B4564
+dat_080B4564:
     .hword 0x02FF
 
     .global sub_080B4566
@@ -5393,7 +5565,9 @@ sub_080B4566:
     pop {r4, r6, pc}
     .hword 0x0000
 _080B4574:
-    .word 0x080B4578
+    .word dat_080B4578
+    .global dat_080B4578
+dat_080B4578:
     .incbin "baserom.gba", 0xB4578, 0x8
 
     .global sub_080B4580
@@ -5405,7 +5579,9 @@ sub_080B4580:
     bl sub_080B4598
     pop {r4, r6, pc}
 _080B458C:
-    .word 0x080B4590
+    .word dat_080B4590
+    .global dat_080B4590
+dat_080B4590:
     .incbin "baserom.gba", 0xB4590, 0x8
 
     .global sub_080B4598
@@ -5613,10 +5789,14 @@ sub_080B46EC:
     str r1, [r5, #0x44]
     mov pc, lr
 _080B4710:
-    .word 0x080B4714
+    .word dat_080B4714
+    .global dat_080B4714
+dat_080B4714:
     .incbin "baserom.gba", 0xB4714, 0xC
 _080B4720:
-    .word 0x080B4724
+    .word dat_080B4724
+    .global dat_080B4724
+dat_080B4724:
     .incbin "baserom.gba", 0xB4724, 0xC
 
     .global sub_080B4730
@@ -5664,7 +5844,9 @@ sub_080B4760:
     pop {r6, pc}
     .hword 0x0000
 _080B4770:
-    .word 0x080B4774
+    .word dat_080B4774
+    .global dat_080B4774
+dat_080B4774:
     .incbin "baserom.gba", 0xB4774, 0x10
 
     .global sub_080B4784
@@ -5782,7 +5964,9 @@ _080B485C:
     pop {pc}
     .hword 0x0000
 _080B4860:
-    .word 0x080B4864
+    .word dat_080B4864
+    .global dat_080B4864
+dat_080B4864:
     .word 0x0C141414
 
     .global sub_080B4868
@@ -5814,7 +5998,9 @@ sub_080B4880:
     pop {r6, pc}
     .hword 0x0000
 _080B4890:
-    .word 0x080B4894
+    .word dat_080B4894
+    .global dat_080B4894
+dat_080B4894:
     .incbin "baserom.gba", 0xB4894, 0x20
 
     .global sub_080B48B4
@@ -5925,7 +6111,9 @@ _080B497C:
     pop {pc}
     .hword 0x0000
 _080B4980:
-    .word 0x080B4984
+    .word dat_080B4984
+    .global dat_080B4984
+dat_080B4984:
     .word 0x0C141414
 
     .global sub_080B4988
@@ -6056,10 +6244,14 @@ _080B4A60:
     pop {r4, pc}
     .hword 0x0000
 _080B4A64:
-    .word 0x080B4A68
+    .word dat_080B4A68
+    .global dat_080B4A68
+dat_080B4A68:
     .word 0xC8643C14
 _080B4A6C:
-    .word 0x080B4A70
+    .word dat_080B4A70
+    .global dat_080B4A70
+dat_080B4A70:
     .incbin "baserom.gba", 0xB4A70, 0x8
 
     .global sub_080B4A78
@@ -6074,7 +6266,9 @@ sub_080B4A78:
     pop {r6, pc}
     .hword 0x0000
 _080B4A88:
-    .word 0x080B4A8C
+    .word dat_080B4A8C
+    .global dat_080B4A8C
+dat_080B4A8C:
     .incbin "baserom.gba", 0xB4A8C, 0x10
 
     .global sub_080B4A9C
@@ -6237,16 +6431,24 @@ _080B4BC0:
     pop {pc}
     .hword 0x0000
 _080B4BC4:
-    .word 0x080B4BC8
+    .word dat_080B4BC8
+    .global dat_080B4BC8
+dat_080B4BC8:
     .word 0xC8643C14
 _080B4BCC:
-    .word 0x080B4BD0
+    .word dat_080B4BD0
+    .global dat_080B4BD0
+dat_080B4BD0:
     .incbin "baserom.gba", 0xB4BD0, 0x8
 _080B4BD8:
-    .word 0x080B4BDC
+    .word dat_080B4BDC
+    .global dat_080B4BDC
+dat_080B4BDC:
     .incbin "baserom.gba", 0xB4BDC, 0x10
 _080B4BEC:
-    .word 0x080B4BF0
+    .word dat_080B4BF0
+    .global dat_080B4BF0
+dat_080B4BF0:
     .word 0x03030302
 
     .global sub_080B4BF4
@@ -6261,7 +6463,9 @@ sub_080B4BF4:
     pop {r6, pc}
     .hword 0x0000
 _080B4C04:
-    .word 0x080B4C08
+    .word dat_080B4C08
+    .global dat_080B4C08
+dat_080B4C08:
     .incbin "baserom.gba", 0xB4C08, 0x15A
 
     .global sub_080B4D62
@@ -6275,7 +6479,9 @@ sub_080B4D62:
     bx r1
     pop {r6, pc}
 _080B4D70:
-    .word 0x080B4D74
+    .word dat_080B4D74
+    .global dat_080B4D74
+dat_080B4D74:
     .incbin "baserom.gba", 0xB4D74, 0x18
 
     .global sub_080B4D8C
@@ -6420,7 +6626,7 @@ _080B4E9A:
 _080B4EA0:
     .word 0x00000000
 _080B4EA4:
-    .word 0x08000000
+    .word dat_08000000
 _080B4EA8:
     .word 0x03800000
 
@@ -6596,7 +6802,9 @@ sub_080B4FDC:
     pop {pc}
     .hword 0x0000
 _080B4FF0:
-    .word 0x080B4FF4
+    .word dat_080B4FF4
+    .global dat_080B4FF4
+dat_080B4FF4:
     .incbin "baserom.gba", 0xB4FF4, 0xC0
 
     .global sub_080B50B4
@@ -6621,7 +6829,9 @@ _080B50D4:
     pop {r6, pc}
     .hword 0x0000
 _080B50D8:
-    .word 0x080B50DC
+    .word dat_080B50DC
+    .global dat_080B50DC
+dat_080B50DC:
     .incbin "baserom.gba", 0xB50DC, 0x24
 
     .global sub_080B5100
@@ -6742,10 +6952,14 @@ _080B51D4:
 _080B51D8:
     .word 0x0000A000
 _080B51DC:
-    .word 0x080B51E0
+    .word dat_080B51E0
+    .global dat_080B51E0
+dat_080B51E0:
     .word 0x04020304
 _080B51E4:
-    .word 0x080B51E8
+    .word dat_080B51E8
+    .global dat_080B51E8
+dat_080B51E8:
     .word 0x02010202
 
     .global sub_080B51EC
@@ -6864,7 +7078,9 @@ _080B52CA:
     pop {r4, r6, pc}
     .hword 0x0000
 _080B52D0:
-    .word 0x080B52D4
+    .word dat_080B52D4
+    .global dat_080B52D4
+dat_080B52D4:
     .incbin "baserom.gba", 0xB52D4, 0x10
 
     .global sub_080B52E4
@@ -6915,7 +7131,9 @@ sub_080B5318:
     pop {pc}
     .hword 0x0000
 _080B5328:
-    .word 0x080B532C
+    .word dat_080B532C
+    .global dat_080B532C
+dat_080B532C:
     .incbin "baserom.gba", 0xB532C, 0x48
 
     .global sub_080B5374
@@ -7013,7 +7231,9 @@ _080B5422:
     bl sub_080B54F4
     pop {r4, r6, r7, pc}
 _080B5428:
-    .word 0x080B542C
+    .word dat_080B542C
+    .global dat_080B542C
+dat_080B542C:
     .incbin "baserom.gba", 0xB542C, 0x22
 
     .global sub_080B544E
@@ -7068,7 +7288,7 @@ sub_080B5462:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080B54B0:
-    .word 0x080220E0
+    .word dat_080220E0
 
     .global sub_080B54B4
     .thumb_func
@@ -7182,7 +7402,9 @@ _080B556E:
     pop {r7, pc}
     .hword 0x0000
 _080B5580:
-    .word 0x080B5584
+    .word dat_080B5584
+    .global dat_080B5584
+dat_080B5584:
     .incbin "baserom.gba", 0xB5584, 0x10
 
     .global sub_080B5594
@@ -7231,7 +7453,9 @@ _080B55E6:
     pop {r4, r7, pc}
     .hword 0x0000
 _080B55EC:
-    .word 0x080B55F0
+    .word dat_080B55F0
+    .global dat_080B55F0
+dat_080B55F0:
     .incbin "baserom.gba", 0xB55F0, 0x10
 _080B5600:
     .word 0x0000A000
@@ -7304,7 +7528,9 @@ _080B5684:
     pop {r4, r7, pc}
     .hword 0x0000
 _080B568C:
-    .word 0x080B5690
+    .word dat_080B5690
+    .global dat_080B5690
+dat_080B5690:
     .incbin "baserom.gba", 0xB5690, 0x10
 _080B56A0:
     .word 0x0000A000
@@ -7333,7 +7559,9 @@ _080B56CC:
     add sp, #0x18
     pop {r7, pc}
 _080B56D0:
-    .word 0x080B56D4
+    .word dat_080B56D4
+    .global dat_080B56D4
+dat_080B56D4:
     .incbin "baserom.gba", 0xB56D4, 0x10
 
     .global sub_080B56E4
@@ -7392,7 +7620,9 @@ _080B574C:
     add sp, #0x18
     pop {r4, r6, r7, pc}
 _080B575C:
-    .word 0x080B5760
+    .word dat_080B5760
+    .global dat_080B5760
+dat_080B5760:
     .incbin "baserom.gba", 0xB5760, 0x10
 
     .global sub_080B5770
@@ -7433,7 +7663,9 @@ sub_080B5794:
     pop {r6, pc}
     .hword 0x0000
 _080B57A4:
-    .word 0x080B57A8
+    .word dat_080B57A8
+    .global dat_080B57A8
+dat_080B57A8:
     .incbin "baserom.gba", 0xB57A8, 0x10
 
     .global sub_080B57B8
@@ -7523,10 +7755,14 @@ _080B5854:
     pop {pc}
     .hword 0x0000
 _080B5858:
-    .word 0x080B585C
+    .word dat_080B585C
+    .global dat_080B585C
+dat_080B585C:
     .word 0x3C0F142D
 _080B5860:
-    .word 0x080B5864
+    .word dat_080B5864
+    .global dat_080B5864
+dat_080B5864:
     .word 0x0F0A00F6
 
     .global sub_080B5868
@@ -7558,7 +7794,9 @@ sub_080B5880:
     pop {pc}
     .hword 0x0000
 _080B5890:
-    .word 0x080B5894
+    .word dat_080B5894
+    .global dat_080B5894
+dat_080B5894:
     .incbin "baserom.gba", 0xB5894, 0xC4
 
     .global sub_080B5958
@@ -7573,7 +7811,9 @@ sub_080B5958:
     pop {pc}
     .hword 0x0000
 _080B5968:
-    .word 0x080B596C
+    .word dat_080B596C
+    .global dat_080B596C
+dat_080B596C:
     .incbin "baserom.gba", 0xB596C, 0x18
 
     .global sub_080B5984
@@ -7748,13 +7988,19 @@ _080B5ABC:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080B5AC0:
-    .word 0x080B5AC4
+    .word dat_080B5AC4
+    .global dat_080B5AC4
+dat_080B5AC4:
     .incbin "baserom.gba", 0xB5AC4, 0x10
 _080B5AD4:
-    .word 0x080B5AD8
+    .word dat_080B5AD8
+    .global dat_080B5AD8
+dat_080B5AD8:
     .word 0x19171719
 _080B5ADC:
-    .word 0x080B5AE0
+    .word dat_080B5AE0
+    .global dat_080B5AE0
+dat_080B5AE0:
     .incbin "baserom.gba", 0xB5AE0, 0x8
 
     .global sub_080B5AE8
@@ -7797,7 +8043,9 @@ sub_080B5B16:
     bx r1
     pop {pc}
 _080B5B24:
-    .word 0x080B5B28
+    .word dat_080B5B28
+    .global dat_080B5B28
+dat_080B5B28:
     .incbin "baserom.gba", 0xB5B28, 0x14
 
     .global sub_080B5B3C
@@ -7942,10 +8190,14 @@ _080B5C34:
 _080B5C42:
     pop {r4, r6, r7, pc}
 _080B5C44:
-    .word 0x080B5C48
+    .word dat_080B5C48
+    .global dat_080B5C48
+dat_080B5C48:
     .word 0x03050403
 _080B5C4C:
-    .word 0x080B5C50
+    .word dat_080B5C50
+    .global dat_080B5C50
+dat_080B5C50:
     .word 0x0A643C14
 
     .global sub_080B5C54
@@ -8003,7 +8255,9 @@ _080B5CA2:
 _080B5CA6:
     pop {pc}
 _080B5CA8:
-    .word 0x080B5CAC
+    .word dat_080B5CAC
+    .global dat_080B5CAC
+dat_080B5CAC:
     .incbin "baserom.gba", 0xB5CAC, 0xC0
 
     .global sub_080B5D6C
@@ -8034,7 +8288,9 @@ sub_080B5D82:
     bx r0
     pop {r6, pc}
 _080B5D94:
-    .word 0x080B5D98
+    .word dat_080B5D98
+    .global dat_080B5D98
+dat_080B5D98:
     .incbin "baserom.gba", 0xB5D98, 0x10
 
     .global sub_080B5DA8
@@ -8055,7 +8311,9 @@ sub_080B5DA8:
 _080B5DC2:
     pop {pc}
 _080B5DC4:
-    .word 0x080B5DC8
+    .word dat_080B5DC8
+    .global dat_080B5DC8
+dat_080B5DC8:
     .word 0x0C080401
     .hword 0x1410
 
@@ -8156,7 +8414,9 @@ sub_080B5E64:
     pop {r6, pc}
     .hword 0x0000
 _080B5E74:
-    .word 0x080B5E78
+    .word dat_080B5E78
+    .global dat_080B5E78
+dat_080B5E78:
     .incbin "baserom.gba", 0xB5E78, 0x10
 
     .global sub_080B5E88
@@ -8213,7 +8473,9 @@ sub_080B5EBC:
 _080B5EEE:
     pop {pc}
 _080B5EF0:
-    .word 0x080B5EF4
+    .word dat_080B5EF4
+    .global dat_080B5EF4
+dat_080B5EF4:
     .incbin "baserom.gba", 0xB5EF4, 0x18
 
     .global sub_080B5F0C
@@ -8454,7 +8716,9 @@ sub_080B60E4:
     pop {r6, pc}
     .hword 0x0000
 _080B60F4:
-    .word 0x080B60F8
+    .word dat_080B60F8
+    .global dat_080B60F8
+dat_080B60F8:
     .incbin "baserom.gba", 0xB60F8, 0x10
 
     .global sub_080B6108
@@ -8611,7 +8875,9 @@ sub_080B6208:
     pop {pc}
     .hword 0x0000
 _080B621C:
-    .word 0x080B6220
+    .word dat_080B6220
+    .global dat_080B6220
+dat_080B6220:
     .incbin "baserom.gba", 0xB6220, 0xA8
 
     .global sub_080B62C8
@@ -8636,7 +8902,9 @@ _080B62E8:
     pop {r6, pc}
     .hword 0x0000
 _080B62EC:
-    .word 0x080B62F0
+    .word dat_080B62F0
+    .global dat_080B62F0
+dat_080B62F0:
     .incbin "baserom.gba", 0xB62F0, 0x13C
 
     .global sub_080B642C
@@ -8736,7 +9004,9 @@ _080B64D6:
     pop {r7, pc}
     .hword 0x0000
 _080B64E8:
-    .word 0x080B64EC
+    .word dat_080B64EC
+    .global dat_080B64EC
+dat_080B64EC:
     .incbin "baserom.gba", 0xB64EC, 0x10
 
     .global sub_080B64FC
@@ -8783,7 +9053,9 @@ _080B653E:
     pop {r7, pc}
     .hword 0x0000
 _080B6550:
-    .word 0x080B6554
+    .word dat_080B6554
+    .global dat_080B6554
+dat_080B6554:
     .incbin "baserom.gba", 0xB6554, 0x10
 _080B6564:
     .word 0x0000A000
@@ -8843,7 +9115,9 @@ sub_080B65A8:
     pop {r6, pc}
     .hword 0x0000
 _080B65B8:
-    .word 0x080B65BC
+    .word dat_080B65BC
+    .global dat_080B65BC
+dat_080B65BC:
     .incbin "baserom.gba", 0xB65BC, 0x14
 
     .global sub_080B65D0
@@ -8858,7 +9132,9 @@ sub_080B65D0:
     strh r0, [r5, #0xa]
     pop {pc}
 _080B65E0:
-    .word 0x080B65E4
+    .word dat_080B65E4
+    .global dat_080B65E4
+dat_080B65E4:
     .word 0x0C0C0F0F
     .hword 0x0808
 
@@ -8978,7 +9254,9 @@ sub_080B669A:
 _080B66C2:
     pop {pc}
 _080B66C4:
-    .word 0x080B66C8
+    .word dat_080B66C8
+    .global dat_080B66C8
+dat_080B66C8:
     .word 0x10101414
     .hword 0x0C0C
 
@@ -9008,7 +9286,9 @@ sub_080B66E2:
     bx r1
     pop {r6, pc}
 _080B66F0:
-    .word 0x080B66F4
+    .word dat_080B66F4
+    .global dat_080B66F4
+dat_080B66F4:
     .incbin "baserom.gba", 0xB66F4, 0x14
 
     .global sub_080B6708
@@ -9166,7 +9446,9 @@ sub_080B67F8:
     pop {r6, pc}
     .hword 0x0000
 _080B6808:
-    .word 0x080B680C
+    .word dat_080B680C
+    .global dat_080B680C
+dat_080B680C:
     .incbin "baserom.gba", 0xB680C, 0x44
 
     .global sub_080B6850
@@ -9203,10 +9485,14 @@ sub_080B6850:
     pop {r4, r6, r7, pc}
     .word 0x0000A000
 _080B6894:
-    .word 0x080B6898
+    .word dat_080B6898
+    .global dat_080B6898
+dat_080B6898:
     .incbin "baserom.gba", 0xB6898, 0x8
 _080B68A0:
-    .word 0x080B68A4
+    .word dat_080B68A4
+    .global dat_080B68A4
+dat_080B68A4:
     .incbin "baserom.gba", 0xB68A4, 0xC
 
     .global sub_080B68B0
@@ -9222,7 +9508,9 @@ sub_080B68B0:
     pop {pc}
     .hword 0x0000
 _080B68C4:
-    .word 0x080B68C8
+    .word dat_080B68C8
+    .global dat_080B68C8
+dat_080B68C8:
     .incbin "baserom.gba", 0xB68C8, 0x2A
 
     .global sub_080B68F2
@@ -9269,7 +9557,9 @@ sub_080B6934:
     pop {pc}
     .hword 0x0000
 _080B6948:
-    .word 0x080B694C
+    .word dat_080B694C
+    .global dat_080B694C
+dat_080B694C:
     .incbin "baserom.gba", 0xB694C, 0x30
 
     .global sub_080B697C
@@ -9301,7 +9591,9 @@ sub_080B6994:
     pop {r6, pc}
     .hword 0x0000
 _080B69A8:
-    .word 0x080B69AC
+    .word dat_080B69AC
+    .global dat_080B69AC
+dat_080B69AC:
     .incbin "baserom.gba", 0xB69AC, 0x10
 
     .global sub_080B69BC
@@ -9631,10 +9923,14 @@ _080B6C08:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080B6C0C:
-    .word 0x080B6C10
+    .word dat_080B6C10
+    .global dat_080B6C10
+dat_080B6C10:
     .incbin "baserom.gba", 0xB6C10, 0x10
 _080B6C20:
-    .word 0x080B6C24
+    .word dat_080B6C24
+    .global dat_080B6C24
+dat_080B6C24:
     .incbin "baserom.gba", 0xB6C24, 0x8
 
     .global sub_080B6C2C
@@ -9815,7 +10111,9 @@ sub_080B6D46:
     bx r1
     pop {r6, pc}
 _080B6D54:
-    .word 0x080B6D58
+    .word dat_080B6D58
+    .global dat_080B6D58
+dat_080B6D58:
     .incbin "baserom.gba", 0xB6D58, 0x10
 
     .global sub_080B6D68
@@ -9914,7 +10212,9 @@ sub_080B6DEE:
 _080B6E1E:
     pop {pc}
 _080B6E20:
-    .word 0x080B6E24
+    .word dat_080B6E24
+    .global dat_080B6E24
+dat_080B6E24:
     .incbin "baserom.gba", 0xB6E24, 0x18
 
     .global sub_080B6E3C
@@ -9944,7 +10244,9 @@ sub_080B6E50:
     pop {r6, pc}
     .hword 0x0000
 _080B6E60:
-    .word 0x080B6E64
+    .word dat_080B6E64
+    .global dat_080B6E64
+dat_080B6E64:
     .incbin "baserom.gba", 0xB6E64, 0x20
 
     .global sub_080B6E84
@@ -10086,7 +10388,9 @@ _080B6F7C:
     pop {pc}
     .hword 0x0000
 _080B6F84:
-    .word 0x080B6F88
+    .word dat_080B6F88
+    .global dat_080B6F88
+dat_080B6F88:
     .word 0x04040810
 
     .global sub_080B6F8C
@@ -10228,7 +10532,9 @@ sub_080B707A:
     bx r1
     pop {r6, pc}
 _080B7088:
-    .word 0x080B708C
+    .word dat_080B708C
+    .global dat_080B708C
+dat_080B708C:
     .incbin "baserom.gba", 0xB708C, 0x14
 
     .global sub_080B70A0
@@ -10444,7 +10750,9 @@ sub_080B71F8:
     pop {r6, pc}
     .hword 0x0000
 _080B7208:
-    .word 0x080B720C
+    .word dat_080B720C
+    .global dat_080B720C
+dat_080B720C:
     .incbin "baserom.gba", 0xB720C, 0x28
 
     .global sub_080B7234
@@ -10515,7 +10823,9 @@ _080B72B8:
 _080B72BC:
     .word 0x00009600
 _080B72C0:
-    .word 0x080B72C4
+    .word dat_080B72C4
+    .global dat_080B72C4
+dat_080B72C4:
     .incbin "baserom.gba", 0xB72C4, 0x8
 
     .global sub_080B72CC
@@ -10633,7 +10943,18 @@ _080B73A4:
     .word 0x00000010
 _080B73A8:
     .word 0x00000000
-    .incbin "baserom.gba", 0xB73AC, 0x1C
+    .global dat_080B73AC
+dat_080B73AC:
+    .word 0x1E242A32
+    .global dat_080B73B0
+dat_080B73B0:
+    .word 0x96783C0F
+    .global dat_080B73B4
+dat_080B73B4:
+    .incbin "baserom.gba", 0xB73B4, 0x8
+    .global dat_080B73BC
+dat_080B73BC:
+    .incbin "baserom.gba", 0xB73BC, 0xC
 
     .global sub_080B73C8
     .thumb_func
@@ -10648,7 +10969,9 @@ sub_080B73C8:
     pop {pc}
     .hword 0x0000
 _080B73DC:
-    .word 0x080B73E0
+    .word dat_080B73E0
+    .global dat_080B73E0
+dat_080B73E0:
     .incbin "baserom.gba", 0xB73E0, 0xA4
 
     .global sub_080B7484
@@ -10667,7 +10990,9 @@ sub_080B7484:
     pop {r6, r7, pc}
     .hword 0x0000
 _080B749C:
-    .word 0x080B74A0
+    .word dat_080B74A0
+    .global dat_080B74A0
+dat_080B74A0:
     .incbin "baserom.gba", 0xB74A0, 0x30
 
     .global sub_080B74D0
@@ -10780,12 +11105,17 @@ _080B75A0:
 _080B75A4:
     .word 0x0000A000
 _080B75A8:
-    .word 0x080B75B4
+    .word dat_080B75B4
 _080B75AC:
-    .word 0x080B75B8
+    .word dat_080B75B8
 _080B75B0:
-    .word 0x080B73BC
-    .incbin "baserom.gba", 0xB75B4, 0x8
+    .word dat_080B73BC
+    .global dat_080B75B4
+dat_080B75B4:
+    .word 0x02030405
+    .global dat_080B75B8
+dat_080B75B8:
+    .word 0x08080C10
 
     .global sub_080B75BC
     .thumb_func
@@ -10816,7 +11146,7 @@ _080B75EC:
     pop {pc}
     .hword 0x0000
 _080B75F0:
-    .word 0x080B73BC
+    .word dat_080B73BC
 
     .global sub_080B75F4
     .thumb_func
@@ -10841,9 +11171,9 @@ sub_080B75F4:
     bl sub_0800C9AC
     pop {pc}
 _080B761C:
-    .word 0x080B73B0
+    .word dat_080B73B0
 _080B7620:
-    .word 0x080B73B4
+    .word dat_080B73B4
 
     .global sub_080B7624
     .thumb_func
@@ -10871,7 +11201,7 @@ sub_080B7718:
     ldrb r0, [r1, r0]
     mov pc, lr
 _080B7720:
-    .word 0x080B73AC
+    .word dat_080B73AC
 _080B7724:
     .word sub_080F077C
 _080B7728:
@@ -10891,7 +11221,9 @@ sub_080B7734:
     pop {pc}
     .hword 0x0000
 _080B7748:
-    .word 0x080B774C
+    .word dat_080B774C
+    .global dat_080B774C
+dat_080B774C:
     .incbin "baserom.gba", 0xB774C, 0xA8
 
     .global sub_080B77F4
@@ -10908,7 +11240,9 @@ sub_080B77F4:
     pop {r6, pc}
     .hword 0x0000
 _080B7808:
-    .word 0x080B780C
+    .word dat_080B780C
+    .global dat_080B780C
+dat_080B780C:
     .incbin "baserom.gba", 0xB780C, 0x26
 
     .global sub_080B7832
@@ -11175,7 +11509,9 @@ _080B7A0E:
 _080B7A12:
     pop {r4, r6, r7, pc}
 _080B7A14:
-    .word 0x080B7A18
+    .word dat_080B7A18
+    .global dat_080B7A18
+dat_080B7A18:
     .incbin "baserom.gba", 0xB7A18, 0x10
 
     .global sub_080B7A28
@@ -11231,7 +11567,9 @@ sub_080B7A6C:
     pop {r6, pc}
     .hword 0x0000
 _080B7A7C:
-    .word 0x080B7A80
+    .word dat_080B7A80
+    .global dat_080B7A80
+dat_080B7A80:
     .incbin "baserom.gba", 0xB7A80, 0xC
 
     .global sub_080B7A8C
@@ -11286,7 +11624,9 @@ _080B7AEC:
     pop {pc}
     .hword 0x0000
 _080B7AF0:
-    .word 0x080B7AF4
+    .word dat_080B7AF4
+    .global dat_080B7AF4
+dat_080B7AF4:
     .incbin "baserom.gba", 0xB7AF4, 0x2C
 
     .global sub_080B7B20
@@ -11301,7 +11641,9 @@ sub_080B7B20:
     pop {r6, pc}
     .hword 0x0000
 _080B7B30:
-    .word 0x080B7B34
+    .word dat_080B7B34
+    .global dat_080B7B34
+dat_080B7B34:
     .incbin "baserom.gba", 0xB7B34, 0x98
 
     .global sub_080B7BCC
@@ -11316,7 +11658,9 @@ sub_080B7BCC:
     pop {r6, pc}
     .hword 0x0000
 _080B7BDC:
-    .word 0x080B7BE0
+    .word dat_080B7BE0
+    .global dat_080B7BE0
+dat_080B7BE0:
     .incbin "baserom.gba", 0xB7BE0, 0x14
 
     .global sub_080B7BF4
@@ -11421,7 +11765,9 @@ _080B7C8E:
 _080B7CA2:
     pop {pc}
 _080B7CA4:
-    .word 0x080B7CA8
+    .word dat_080B7CA8
+    .global dat_080B7CA8
+dat_080B7CA8:
     .word 0xC8643C14
 
     .global sub_080B7CAC
@@ -11451,7 +11797,9 @@ sub_080B7CC0:
     pop {r6, pc}
     .hword 0x0000
 _080B7CD0:
-    .word 0x080B7CD4
+    .word dat_080B7CD4
+    .global dat_080B7CD4
+dat_080B7CD4:
     .incbin "baserom.gba", 0xB7CD4, 0x14
 
     .global sub_080B7CE8
@@ -11545,7 +11893,9 @@ _080B7D76:
 _080B7D8A:
     pop {r4, r6, pc}
 _080B7D8C:
-    .word 0x080B7D90
+    .word dat_080B7D90
+    .global dat_080B7D90
+dat_080B7D90:
     .word 0xC8643C14
 _080B7D94:
     .word 0x00001401
@@ -11563,7 +11913,9 @@ sub_080B7DB4:
     pop {pc}
     .hword 0x0000
 _080B7DC4:
-    .word 0x080B7DC8
+    .word dat_080B7DC8
+    .global dat_080B7DC8
+dat_080B7DC8:
     .incbin "baserom.gba", 0xB7DC8, 0xC4
 
     .global sub_080B7E8C
@@ -11621,7 +11973,9 @@ sub_080B7EC8:
     pop {r6, r7, pc}
     .hword 0x0000
 _080B7EE0:
-    .word 0x080B7EE4
+    .word dat_080B7EE4
+    .global dat_080B7EE4
+dat_080B7EE4:
     .incbin "baserom.gba", 0xB7EE4, 0x14
 
     .global sub_080B7EF8
@@ -11745,7 +12099,9 @@ sub_080B7FC0:
     pop {pc}
     .hword 0x0000
 _080B7FD0:
-    .word 0x080B7FD4
+    .word dat_080B7FD4
+    .global dat_080B7FD4
+dat_080B7FD4:
     .incbin "baserom.gba", 0xB7FD4, 0x64
 
     .global sub_080B8038
@@ -11760,7 +12116,9 @@ sub_080B8038:
     pop {pc}
     .hword 0x0000
 _080B8048:
-    .word 0x080B804C
+    .word dat_080B804C
+    .global dat_080B804C
+dat_080B804C:
     .incbin "baserom.gba", 0xB804C, 0x70
 
     .global sub_080B80BC
@@ -11775,7 +12133,9 @@ sub_080B80BC:
     pop {pc}
     .hword 0x0000
 _080B80CC:
-    .word 0x080B80D0
+    .word dat_080B80D0
+    .global dat_080B80D0
+dat_080B80D0:
     .incbin "baserom.gba", 0xB80D0, 0x5C
 
     .global sub_080B812C
@@ -11790,7 +12150,9 @@ sub_080B812C:
     pop {pc}
     .hword 0x0000
 _080B813C:
-    .word 0x080B8140
+    .word dat_080B8140
+    .global dat_080B8140
+dat_080B8140:
     .incbin "baserom.gba", 0xB8140, 0x60
 
     .global sub_080B81A0
@@ -11801,7 +12163,9 @@ sub_080B81A0:
     ldrb r0, [r1, r0]
     mov pc, lr
 _080B81A8:
-    .word 0x080B81AC
+    .word dat_080B81AC
+    .global dat_080B81AC
+dat_080B81AC:
     .incbin "baserom.gba", 0xB81AC, 0x18
 _080B81C4:
     .word 0x00004000
@@ -11824,7 +12188,9 @@ sub_080B820C:
     pop {pc}
     .hword 0x0000
 _080B8220:
-    .word 0x080B8224
+    .word dat_080B8224
+    .global dat_080B8224
+dat_080B8224:
     .incbin "baserom.gba", 0xB8224, 0xB0
 
     .global sub_080B82D4
@@ -11843,7 +12209,9 @@ sub_080B82D4:
     pop {r6, r7, pc}
     .hword 0x0000
 _080B82EC:
-    .word 0x080B82F0
+    .word dat_080B82F0
+    .global dat_080B82F0
+dat_080B82F0:
     .incbin "baserom.gba", 0xB82F0, 0x230
 
     .global sub_080B8520
@@ -11859,7 +12227,9 @@ sub_080B8520:
     pop {pc}
     .hword 0x0000
 _080B8534:
-    .word 0x080B8538
+    .word dat_080B8538
+    .global dat_080B8538
+dat_080B8538:
     .incbin "baserom.gba", 0xB8538, 0xB0
 
     .global sub_080B85E8
@@ -11909,7 +12279,9 @@ _080B8638:
     pop {r4, r7, pc}
     .hword 0x0000
 _080B863C:
-    .word 0x080B8640
+    .word dat_080B8640
+    .global dat_080B8640
+dat_080B8640:
     .incbin "baserom.gba", 0xB8640, 0x8
 _080B8648:
     .word 0x00000010
@@ -12120,7 +12492,9 @@ sub_080B87AC:
     pop {pc}
     .hword 0x0000
 _080B87C0:
-    .word 0x080B87C4
+    .word dat_080B87C4
+    .global dat_080B87C4
+dat_080B87C4:
     .incbin "baserom.gba", 0xB87C4, 0x84
 
     .global sub_080B8848
@@ -12196,7 +12570,9 @@ sub_080B88AC:
     pop {pc}
     .hword 0x0000
 _080B88BC:
-    .word 0x080B88C0
+    .word dat_080B88C0
+    .global dat_080B88C0
+dat_080B88C0:
     .incbin "baserom.gba", 0xB88C0, 0xAA
 
     .global sub_080B896A
@@ -12264,7 +12640,9 @@ sub_080B89C0:
     pop {pc}
     .hword 0x0000
 _080B89D4:
-    .word 0x080B89D8
+    .word dat_080B89D8
+    .global dat_080B89D8
+dat_080B89D8:
     .incbin "baserom.gba", 0xB89D8, 0x1BC
 
     .global sub_080B8B94
@@ -12302,7 +12680,9 @@ sub_080B8BB8:
     pop {pc}
     .hword 0x0000
 _080B8BCC:
-    .word 0x080B8BD0
+    .word dat_080B8BD0
+    .global dat_080B8BD0
+dat_080B8BD0:
     .incbin "baserom.gba", 0xB8BD0, 0x38
 
     .global sub_080B8C08
@@ -12329,7 +12709,9 @@ _080B8C30:
     pop {pc}
     .hword 0x0000
 _080B8C34:
-    .word 0x080B8C38
+    .word dat_080B8C38
+    .global dat_080B8C38
+dat_080B8C38:
     .word 0x1E1E1E1E
     .hword 0x1E1E
 
@@ -12354,7 +12736,9 @@ _080B8C5A:
     pop {pc}
     .hword 0x0000
 _080B8C68:
-    .word 0x080B8C6C
+    .word dat_080B8C6C
+    .global dat_080B8C6C
+dat_080B8C6C:
     .incbin "baserom.gba", 0xB8C6C, 0x28
 _080B8C94:
     .word 0x0F800000
@@ -12381,7 +12765,9 @@ _080B8CB8:
     pop {r6, pc}
     .hword 0x0000
 _080B8CBC:
-    .word 0x080B8CC0
+    .word dat_080B8CC0
+    .global dat_080B8CC0
+dat_080B8CC0:
     .incbin "baserom.gba", 0xB8CC0, 0x9C
 
     .global sub_080B8D5C
@@ -12431,7 +12817,9 @@ sub_080B8D9E:
     bx r0
     pop {pc}
 _080B8DAC:
-    .word 0x080B8DB0
+    .word dat_080B8DB0
+    .global dat_080B8DB0
+dat_080B8DB0:
     .incbin "baserom.gba", 0xB8DB0, 0x10
 
     .global sub_080B8DC0
@@ -12563,10 +12951,14 @@ _080B8E8E:
 _080B8EA4:
     .word 0x0000A000
 _080B8EA8:
-    .word 0x080B8EAC
+    .word dat_080B8EAC
+    .global dat_080B8EAC
+dat_080B8EAC:
     .incbin "baserom.gba", 0xB8EAC, 0x8
 _080B8EB4:
-    .word 0x080B8EB8
+    .word dat_080B8EB8
+    .global dat_080B8EB8
+dat_080B8EB8:
     .word 0x03020201
     .hword 0x0403
 
@@ -12622,7 +13014,9 @@ sub_080B8F04:
     pop {r6, pc}
     .hword 0x0000
 _080B8F14:
-    .word 0x080B8F18
+    .word dat_080B8F18
+    .global dat_080B8F18
+dat_080B8F18:
     .incbin "baserom.gba", 0xB8F18, 0x22
 _080B8F3A:
     pop {pc}
@@ -12644,7 +13038,9 @@ sub_080B8F3C:
 _080B8F56:
     pop {pc}
 _080B8F58:
-    .word 0x080B8F5C
+    .word dat_080B8F5C
+    .global dat_080B8F5C
+dat_080B8F5C:
     .incbin "baserom.gba", 0xB8F5C, 0x4C
 
     .global sub_080B8FA8
@@ -12790,7 +13186,9 @@ sub_080B90B2:
     bx r1
     pop {r6, pc}
 _080B90C0:
-    .word 0x080B90C4
+    .word dat_080B90C4
+    .global dat_080B90C4
+dat_080B90C4:
     .incbin "baserom.gba", 0xB90C4, 0x112
 
     .global sub_080B91D6
@@ -12869,8 +13267,13 @@ _080B925A:
     pop {r7, pc}
     .hword 0x0000
 _080B9260:
-    .word 0x080B9264
-    .incbin "baserom.gba", 0xB9264, 0x3E
+    .word dat_080B9264
+    .global dat_080B9264
+dat_080B9264:
+    .incbin "baserom.gba", 0xB9264, 0x34
+    .global dat_080B9298
+dat_080B9298:
+    .incbin "baserom.gba", 0xB9298, 0xA
 
     .global sub_080B92A2
     .thumb_func
@@ -12884,7 +13287,9 @@ sub_080B92A2:
     bl sub_08014446
     pop {pc}
 _080B92B4:
-    .word 0x080B92B8
+    .word dat_080B92B8
+    .global dat_080B92B8
+dat_080B92B8:
     .incbin "baserom.gba", 0xB92B8, 0x8C
 
     .global sub_080B9344
@@ -13119,9 +13524,9 @@ _080B94D6:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080B94DC:
-    .word 0x080B9298
+    .word dat_080B9298
 _080B94E0:
-    .word 0x080B9298
+    .word dat_080B9298
 
     .global sub_080B94E4
     .thumb_func
@@ -13136,7 +13541,9 @@ sub_080B94E4:
     pop {pc}
     .hword 0x0000
 _080B94F8:
-    .word 0x080B94FC
+    .word dat_080B94FC
+    .global dat_080B94FC
+dat_080B94FC:
     .incbin "baserom.gba", 0xB94FC, 0xAC
 
     .global sub_080B95A8
@@ -13161,7 +13568,9 @@ _080B95C8:
     pop {r6, pc}
     .hword 0x0000
 _080B95CC:
-    .word 0x080B95D0
+    .word dat_080B95D0
+    .global dat_080B95D0
+dat_080B95D0:
     .incbin "baserom.gba", 0xB95D0, 0x134
 
     .global sub_080B9704
@@ -13207,7 +13616,9 @@ sub_080B97B0:
     pop {r6, pc}
     .hword 0x0000
 _080B97C0:
-    .word 0x080B97C4
+    .word dat_080B97C4
+    .global dat_080B97C4
+dat_080B97C4:
     .incbin "baserom.gba", 0xB97C4, 0x10
 
     .global sub_080B97D4
@@ -13304,7 +13715,9 @@ sub_080B985E:
 _080B9882:
     pop {pc}
 _080B9884:
-    .word 0x080B9888
+    .word dat_080B9888
+    .global dat_080B9888
+dat_080B9888:
     .word 0x1A1E1E32
     .hword 0x161A
 
@@ -13336,7 +13749,9 @@ sub_080B98A6:
     bx r1
     pop {r6, pc}
 _080B98B4:
-    .word 0x080B98B8
+    .word dat_080B98B8
+    .global dat_080B98B8
+dat_080B98B8:
     .incbin "baserom.gba", 0xB98B8, 0xE4
 
     .global sub_080B999C
@@ -13352,7 +13767,9 @@ sub_080B999C:
     pop {pc}
     .hword 0x0000
 _080B99B0:
-    .word 0x080B99B4
+    .word dat_080B99B4
+    .global dat_080B99B4
+dat_080B99B4:
     .incbin "baserom.gba", 0xB99B4, 0x74
 
     .global sub_080B9A28
@@ -13536,7 +13953,9 @@ sub_080B9B44:
     pop {pc}
     .hword 0x0000
 _080B9B58:
-    .word 0x080B9B5C
+    .word dat_080B9B5C
+    .global dat_080B9B5C
+dat_080B9B5C:
     .incbin "baserom.gba", 0xB9B5C, 0xB4
 
     .global sub_080B9C10
@@ -13585,7 +14004,9 @@ sub_080B9C40:
     pop {r6, pc}
     .hword 0x0000
 _080B9C54:
-    .word 0x080B9C58
+    .word dat_080B9C58
+    .global dat_080B9C58
+dat_080B9C58:
     .incbin "baserom.gba", 0xB9C58, 0x10
 
     .global sub_080B9C68
@@ -13600,7 +14021,9 @@ sub_080B9C68:
     pop {pc}
     .hword 0x0000
 _080B9C78:
-    .word 0x080B9C7C
+    .word dat_080B9C7C
+    .global dat_080B9C7C
+dat_080B9C7C:
     .incbin "baserom.gba", 0xB9C7C, 0x58
 
     .global sub_080B9CD4
@@ -13826,22 +14249,30 @@ _080B9E60:
     add sp, #0xc
     pop {r4, r7, pc}
 _080B9E64:
-    .word 0x080B9E78
+    .word dat_080B9E78
 _080B9E68:
     .word sub_080B9E80
 _080B9E6C:
-    .word 0x080B9E88
+    .word dat_080B9E88
 _080B9E70:
     .word sub_080B9E8E
 _080B9E74:
-    .word 0x080B9E96
-    .incbin "baserom.gba", 0xB9E78, 0x16
+    .word dat_080B9E96
+    .global dat_080B9E78
+dat_080B9E78:
+    .incbin "baserom.gba", 0xB9E78, 0x10
+    .global dat_080B9E88
+dat_080B9E88:
+    .word 0x01000001
+    .hword 0xFF00
 
     .global sub_080B9E8E
     .thumb_func
 sub_080B9E8E:
     lsls r7, r7, #5
-    .incbin "baserom.gba", 0xB9E90, 0x10
+    .word 0x0000FF00
+    .word 0x00017FFF
+    .incbin "baserom.gba", 0xB9E98, 0x8
 _080B9EA0:
     .word 0x00000030
 _080B9EA4:
@@ -13874,7 +14305,9 @@ sub_080B9EBC:
     pop {r6, pc}
     .hword 0x0000
 _080B9ECC:
-    .word 0x080B9ED0
+    .word dat_080B9ED0
+    .global dat_080B9ED0
+dat_080B9ED0:
     .incbin "baserom.gba", 0xB9ED0, 0x104
 
     .global sub_080B9FD4
@@ -13889,7 +14322,9 @@ sub_080B9FD4:
     pop {r6, pc}
     .hword 0x0000
 _080B9FE4:
-    .word 0x080B9FE8
+    .word dat_080B9FE8
+    .global dat_080B9FE8
+dat_080B9FE8:
     .incbin "baserom.gba", 0xB9FE8, 0xC4
 
     .global sub_080BA0AC
@@ -13905,7 +14340,9 @@ sub_080BA0AC:
     pop {pc}
     .hword 0x0000
 _080BA0C0:
-    .word 0x080BA0C4
+    .word dat_080BA0C4
+    .global dat_080BA0C4
+dat_080BA0C4:
     .incbin "baserom.gba", 0xBA0C4, 0xBC
 
     .global sub_080BA180
@@ -13922,7 +14359,9 @@ sub_080BA180:
     pop {r6, pc}
     .hword 0x0000
 _080BA194:
-    .word 0x080BA198
+    .word dat_080BA198
+    .global dat_080BA198
+dat_080BA198:
     .incbin "baserom.gba", 0xBA198, 0x10C
 
     .global sub_080BA2A4
@@ -13952,7 +14391,9 @@ sub_080BA2B8:
     pop {r6, pc}
     .hword 0x0000
 _080BA2C8:
-    .word 0x080BA2CC
+    .word dat_080BA2CC
+    .global dat_080BA2CC
+dat_080BA2CC:
     .incbin "baserom.gba", 0xBA2CC, 0xC4
 
     .global sub_080BA390
@@ -13967,7 +14408,9 @@ sub_080BA390:
     pop {r6, pc}
     .hword 0x0000
 _080BA3A0:
-    .word 0x080BA3A4
+    .word dat_080BA3A4
+    .global dat_080BA3A4
+dat_080BA3A4:
     .incbin "baserom.gba", 0xBA3A4, 0x60
 
     .global sub_080BA404
@@ -13983,7 +14426,9 @@ sub_080BA404:
     pop {pc}
     .hword 0x0000
 _080BA418:
-    .word 0x080BA41C
+    .word dat_080BA41C
+    .global dat_080BA41C
+dat_080BA41C:
     .incbin "baserom.gba", 0xBA41C, 0xB0
 
     .global sub_080BA4CC
@@ -14000,7 +14445,9 @@ sub_080BA4CC:
     pop {r6, pc}
     .hword 0x0000
 _080BA4E0:
-    .word 0x080BA4E4
+    .word dat_080BA4E4
+    .global dat_080BA4E4
+dat_080BA4E4:
     .incbin "baserom.gba", 0xBA4E4, 0x140
 
     .global sub_080BA624
@@ -14030,7 +14477,9 @@ sub_080BA638:
     pop {r6, pc}
     .hword 0x0000
 _080BA648:
-    .word 0x080BA64C
+    .word dat_080BA64C
+    .global dat_080BA64C
+dat_080BA64C:
     .incbin "baserom.gba", 0xBA64C, 0x10
 
     .global sub_080BA65C
@@ -14131,7 +14580,9 @@ sub_080BA6E6:
 _080BA716:
     pop {pc}
 _080BA718:
-    .word 0x080BA71C
+    .word dat_080BA71C
+    .global dat_080BA71C
+dat_080BA71C:
     .incbin "baserom.gba", 0xBA71C, 0x1E
 
     .global sub_080BA73A
@@ -14160,7 +14611,9 @@ sub_080BA74E:
     bx r1
     pop {r6, pc}
 _080BA75C:
-    .word 0x080BA760
+    .word dat_080BA760
+    .global dat_080BA760
+dat_080BA760:
     .incbin "baserom.gba", 0xBA760, 0x10
 
     .global sub_080BA770
@@ -14233,7 +14686,9 @@ _080BA7D2:
 _080BA7E6:
     pop {pc}
 _080BA7E8:
-    .word 0x080BA7EC
+    .word dat_080BA7EC
+    .global dat_080BA7EC
+dat_080BA7EC:
     .incbin "baserom.gba", 0xBA7EC, 0x8
 
     .global sub_080BA7F4
@@ -14249,7 +14704,9 @@ sub_080BA7F4:
     pop {pc}
     .hword 0x0000
 _080BA808:
-    .word 0x080BA80C
+    .word dat_080BA80C
+    .global dat_080BA80C
+dat_080BA80C:
     .incbin "baserom.gba", 0xBA80C, 0xD0
 
     .global sub_080BA8DC
@@ -14328,7 +14785,9 @@ _080BA94C:
 _080BA95A:
     pop {r6, pc}
 _080BA95C:
-    .word 0x080BA960
+    .word dat_080BA960
+    .global dat_080BA960
+dat_080BA960:
     .incbin "baserom.gba", 0xBA960, 0x1A8
 
     .global sub_080BAB08
@@ -14358,7 +14817,9 @@ sub_080BAB1C:
     pop {r6, pc}
     .hword 0x0000
 _080BAB2C:
-    .word 0x080BAB30
+    .word dat_080BAB30
+    .global dat_080BAB30
+dat_080BAB30:
     .incbin "baserom.gba", 0xBAB30, 0x118
 
     .global sub_080BAC48
@@ -14373,7 +14834,9 @@ sub_080BAC48:
     pop {r6, pc}
     .hword 0x0000
 _080BAC58:
-    .word 0x080BAC5C
+    .word dat_080BAC5C
+    .global dat_080BAC5C
+dat_080BAC5C:
     .incbin "baserom.gba", 0xBAC5C, 0x114
 
     .global sub_080BAD70
@@ -14389,7 +14852,9 @@ sub_080BAD70:
     pop {pc}
     .hword 0x0000
 _080BAD84:
-    .word 0x080BAD88
+    .word dat_080BAD88
+    .global dat_080BAD88
+dat_080BAD88:
     .incbin "baserom.gba", 0xBAD88, 0x192
 
     .global sub_080BAF1A
@@ -14428,7 +14893,9 @@ sub_080BAF88:
     pop {pc}
     .hword 0x0000
 _080BAF9C:
-    .word 0x080BAFA0
+    .word dat_080BAFA0
+    .global dat_080BAFA0
+dat_080BAFA0:
     .incbin "baserom.gba", 0xBAFA0, 0x84
 
     .global sub_080BB024
@@ -14504,7 +14971,9 @@ sub_080BB088:
     pop {pc}
     .hword 0x0000
 _080BB098:
-    .word 0x080BB09C
+    .word dat_080BB09C
+    .global dat_080BB09C
+dat_080BB09C:
     .incbin "baserom.gba", 0xBB09C, 0x68
 
     .global sub_080BB104
@@ -14571,7 +15040,9 @@ sub_080BB158:
     pop {pc}
     .hword 0x0000
 _080BB16C:
-    .word 0x080BB170
+    .word dat_080BB170
+    .global dat_080BB170
+dat_080BB170:
     .incbin "baserom.gba", 0xBB170, 0xA0
 
     .global sub_080BB210
@@ -14611,7 +15082,9 @@ _080BB248:
     pop {r6, pc}
     .hword 0x0000
 _080BB24C:
-    .word 0x080BB250
+    .word dat_080BB250
+    .global dat_080BB250
+dat_080BB250:
     .incbin "baserom.gba", 0xBB250, 0x14
 
     .global sub_080BB264
@@ -14626,7 +15099,9 @@ sub_080BB264:
     pop {pc}
     .hword 0x0000
 _080BB274:
-    .word 0x080BB278
+    .word dat_080BB278
+    .global dat_080BB278
+dat_080BB278:
     .incbin "baserom.gba", 0xBB278, 0x4E
 
     .global sub_080BB2C6
@@ -14820,7 +15295,9 @@ _080BB40E:
 _080BB41E:
     pop {pc}
 _080BB420:
-    .word 0x080BB424
+    .word dat_080BB424
+    .global dat_080BB424
+dat_080BB424:
     .word 0x28283232
     .hword 0x1E1E
 
@@ -14835,7 +15312,9 @@ sub_080BB42A:
     bx r1
     pop {r6, pc}
 _080BB438:
-    .word 0x080BB43C
+    .word dat_080BB43C
+    .global dat_080BB43C
+dat_080BB43C:
     .incbin "baserom.gba", 0xBB43C, 0x10
 
     .global sub_080BB44C
@@ -15002,10 +15481,14 @@ _080BB572:
 _080BB582:
     pop {r4, r6, r7, pc}
 _080BB584:
-    .word 0x080BB588
+    .word dat_080BB588
+    .global dat_080BB588
+dat_080BB588:
     .incbin "baserom.gba", 0xBB588, 0x8
 _080BB590:
-    .word 0x080BB594
+    .word dat_080BB594
+    .global dat_080BB594
+dat_080BB594:
     .incbin "baserom.gba", 0xBB594, 0x8
 _080BB59C:
     .word 0x2F00FF00
@@ -15070,10 +15553,14 @@ _080BB606:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080BB60C:
-    .word 0x080BB610
+    .word dat_080BB610
+    .global dat_080BB610
+dat_080BB610:
     .incbin "baserom.gba", 0xBB610, 0x8
 _080BB618:
-    .word 0x080BB61C
+    .word dat_080BB61C
+    .global dat_080BB61C
+dat_080BB61C:
     .incbin "baserom.gba", 0xBB61C, 0x10
 
     .global sub_080BB62C
@@ -15089,7 +15576,9 @@ sub_080BB62C:
     pop {pc}
     .hword 0x0000
 _080BB640:
-    .word 0x080BB644
+    .word dat_080BB644
+    .global dat_080BB644
+dat_080BB644:
     .incbin "baserom.gba", 0xBB644, 0xCC
 
     .global sub_080BB710
@@ -15135,7 +15624,9 @@ _080BB750:
     pop {r6, pc}
     .hword 0x0000
 _080BB754:
-    .word 0x080BB758
+    .word dat_080BB758
+    .global dat_080BB758
+dat_080BB758:
     .incbin "baserom.gba", 0xBB758, 0x14
 
     .global sub_080BB76C
@@ -15150,7 +15641,9 @@ sub_080BB76C:
     pop {pc}
     .hword 0x0000
 _080BB77C:
-    .word 0x080BB780
+    .word dat_080BB780
+    .global dat_080BB780
+dat_080BB780:
     .incbin "baserom.gba", 0xBB780, 0xA8
 
     .global sub_080BB828
@@ -15264,7 +15757,9 @@ _080BB8D8:
     add sp, #0x18
     pop {r7, pc}
 _080BB8E8:
-    .word 0x080BB8EC
+    .word dat_080BB8EC
+    .global dat_080BB8EC
+dat_080BB8EC:
     .incbin "baserom.gba", 0xBB8EC, 0x10
 
     .global sub_080BB8FC
@@ -15300,10 +15795,14 @@ _080BB93C:
     add sp, #0x18
     pop {r4, r7, pc}
 _080BB940:
-    .word 0x080BB944
+    .word dat_080BB944
+    .global dat_080BB944
+dat_080BB944:
     .incbin "baserom.gba", 0xBB944, 0x10
 _080BB954:
-    .word 0x080BB958
+    .word dat_080BB958
+    .global dat_080BB958
+dat_080BB958:
     .incbin "baserom.gba", 0xBB958, 0x10
 _080BB968:
     .word 0x0000A000
@@ -15392,10 +15891,14 @@ _080BBA08:
     pop {r4, pc}
     .hword 0x0000
 _080BBA0C:
-    .word 0x080BBA10
+    .word dat_080BBA10
+    .global dat_080BBA10
+dat_080BBA10:
     .incbin "baserom.gba", 0xBBA10, 0x10
 _080BBA20:
-    .word 0x080BBA24
+    .word dat_080BBA24
+    .global dat_080BBA24
+dat_080BBA24:
     .incbin "baserom.gba", 0xBBA24, 0x4C
 
     .global sub_080BBA70
@@ -15451,7 +15954,9 @@ _080BBABA:
 _080BBACA:
     pop {pc}
 _080BBACC:
-    .word 0x080BBAD0
+    .word dat_080BBAD0
+    .global dat_080BBAD0
+dat_080BBAD0:
     .word 0x2D323223
 
     .global sub_080BBAD4
@@ -15466,7 +15971,9 @@ sub_080BBAD4:
     pop {r6, pc}
     .hword 0x0000
 _080BBAE4:
-    .word 0x080BBAE8
+    .word dat_080BBAE8
+    .global dat_080BBAE8
+dat_080BBAE8:
     .incbin "baserom.gba", 0xBBAE8, 0x10
 
     .global sub_080BBAF8
@@ -15577,10 +16084,14 @@ _080BBBB4:
 _080BBBC6:
     pop {pc}
 _080BBBC8:
-    .word 0x080BBBCC
+    .word dat_080BBBCC
+    .global dat_080BBBCC
+dat_080BBBCC:
     .word 0x14191E28
 _080BBBD0:
-    .word 0x080BBBD4
+    .word dat_080BBBD4
+    .global dat_080BBBD4
+dat_080BBBD4:
     .word 0x0F0A00F6
 _080BBBD8:
     .word 0x0000A000
@@ -15614,7 +16125,9 @@ sub_080BBBF4:
     pop {pc}
     .hword 0x0000
 _080BBC04:
-    .word 0x080BBC08
+    .word dat_080BBC08
+    .global dat_080BBC08
+dat_080BBC08:
     .incbin "baserom.gba", 0xBBC08, 0x18
 
     .global sub_080BBC20
@@ -15802,7 +16315,9 @@ _080BBD74:
 _080BBD78:
     .word 0x0705FF06
 _080BBD7C:
-    .word 0x080BBD80
+    .word dat_080BBD80
+    .global dat_080BBD80
+dat_080BBD80:
     .incbin "baserom.gba", 0xBBD80, 0x8
 
     .global sub_080BBD88
@@ -15847,7 +16362,9 @@ sub_080BBDBA:
     bx r1
     pop {pc}
 _080BBDC8:
-    .word 0x080BBDCC
+    .word dat_080BBDCC
+    .global dat_080BBDCC
+dat_080BBDCC:
     .incbin "baserom.gba", 0xBBDCC, 0x14
 
     .global sub_080BBDE0
@@ -16026,10 +16543,14 @@ _080BBF24:
 _080BBF32:
     pop {r4, r6, r7, pc}
 _080BBF34:
-    .word 0x080BBF38
+    .word dat_080BBF38
+    .global dat_080BBF38
+dat_080BBF38:
     .word 0x00000000
 _080BBF3C:
-    .word 0x080BBF40
+    .word dat_080BBF40
+    .global dat_080BBF40
+dat_080BBF40:
     .word 0x96643C14
 _080BBF44:
     .word 0x0000A000
@@ -16074,7 +16595,9 @@ sub_080BBF76:
     bx r1
     pop {pc}
 _080BBF84:
-    .word 0x080BBF88
+    .word dat_080BBF88
+    .global dat_080BBF88
+dat_080BBF88:
     .incbin "baserom.gba", 0xBBF88, 0x15C
 
     .global sub_080BC0E4
@@ -16090,7 +16613,9 @@ sub_080BC0E4:
     pop {pc}
     .hword 0x0000
 _080BC0F8:
-    .word 0x080BC0FC
+    .word dat_080BC0FC
+    .global dat_080BC0FC
+dat_080BC0FC:
     .incbin "baserom.gba", 0xBC0FC, 0xB8
 
     .global sub_080BC1B4
@@ -16118,7 +16643,9 @@ sub_080BC1C0:
     pop {r6, r7, pc}
     .hword 0x0000
 _080BC1D8:
-    .word 0x080BC1DC
+    .word dat_080BC1DC
+    .global dat_080BC1DC
+dat_080BC1DC:
     .incbin "baserom.gba", 0xBC1DC, 0x12C
 
     .global sub_080BC308
@@ -16199,7 +16726,9 @@ _080BC39A:
     pop {r7, pc}
     .hword 0x0000
 _080BC3A0:
-    .word 0x080BC3A4
+    .word dat_080BC3A4
+    .global dat_080BC3A4
+dat_080BC3A4:
     .incbin "baserom.gba", 0xBC3A4, 0x58
 
     .global sub_080BC3FC
@@ -16215,7 +16744,9 @@ sub_080BC3FC:
     pop {pc}
     .hword 0x0000
 _080BC410:
-    .word 0x080BC414
+    .word dat_080BC414
+    .global dat_080BC414
+dat_080BC414:
     .incbin "baserom.gba", 0xBC414, 0xA4
 
     .global sub_080BC4B8
@@ -16232,7 +16763,9 @@ sub_080BC4B8:
     pop {r6, pc}
     .hword 0x0000
 _080BC4CC:
-    .word 0x080BC4D0
+    .word dat_080BC4D0
+    .global dat_080BC4D0
+dat_080BC4D0:
     .incbin "baserom.gba", 0xBC4D0, 0x74
 
     .global sub_080BC544
@@ -16298,7 +16831,9 @@ _080BC5A4:
     pop {pc}
     .hword 0x0000
 _080BC5B4:
-    .word 0x080BC5B8
+    .word dat_080BC5B8
+    .global dat_080BC5B8
+dat_080BC5B8:
     .word 0x03030303
     .hword 0x0202
 
@@ -16330,9 +16865,11 @@ _080BC5EC:
     add sp, #0xc
     pop {r4, r7, pc}
 _080BC5F0:
-    .word 0x080BC5F8
+    .word dat_080BC5F8
 _080BC5F4:
     .word sub_080BC5FC
+    .global dat_080BC5F8
+dat_080BC5F8:
     .word 0xFF000100
 
     .global sub_080BC5FC
@@ -16403,7 +16940,9 @@ sub_080BC6C0:
     pop {r6, pc}
     .hword 0x0000
 _080BC6D0:
-    .word 0x080BC6D4
+    .word dat_080BC6D4
+    .global dat_080BC6D4
+dat_080BC6D4:
     .incbin "baserom.gba", 0xBC6D4, 0x10C
 
     .global sub_080BC7E0
@@ -16418,7 +16957,9 @@ sub_080BC7E0:
     pop {r6, pc}
     .hword 0x0000
 _080BC7F0:
-    .word 0x080BC7F4
+    .word dat_080BC7F4
+    .global dat_080BC7F4
+dat_080BC7F4:
     .incbin "baserom.gba", 0xBC7F4, 0x1C
 
     .global sub_080BC810
@@ -16526,7 +17067,9 @@ _080BC8D8:
     pop {r4, r7, pc}
     .hword 0x0000
 _080BC8DC:
-    .word 0x080BC8E0
+    .word dat_080BC8E0
+    .global dat_080BC8E0
+dat_080BC8E0:
     .word 0x191D1D21
     .hword 0x1319
 
@@ -16621,7 +17164,9 @@ _080BC970:
 _080BC974:
     .word 0x04050401
 _080BC978:
-    .word 0x080BC97C
+    .word dat_080BC97C
+    .global dat_080BC97C
+dat_080BC97C:
     .word 0x6446321E
     .hword 0xC896
 
@@ -16724,7 +17269,9 @@ sub_080BCA20:
     pop {pc}
     .hword 0x0000
 _080BCA34:
-    .word 0x080BCA38
+    .word dat_080BCA38
+    .global dat_080BCA38
+dat_080BCA38:
     .incbin "baserom.gba", 0xBCA38, 0x108
 
     .global sub_080BCB40
@@ -16741,7 +17288,9 @@ sub_080BCB40:
     pop {r6, pc}
     .hword 0x0000
 _080BCB54:
-    .word 0x080BCB58
+    .word dat_080BCB58
+    .global dat_080BCB58
+dat_080BCB58:
     .incbin "baserom.gba", 0xBCB58, 0x1A8
 
     .global sub_080BCD00
@@ -16860,7 +17409,7 @@ _080BCDD0:
     pop {r4, r6, pc}
     .hword 0x0000
 _080BCDD4:
-    .word 0x08000000
+    .word dat_08000000
     .word 0x0000A000
 
     .global sub_080BCDDC
@@ -16897,7 +17446,9 @@ sub_080BCE00:
     pop {r6, pc}
     .hword 0x0000
 _080BCE10:
-    .word 0x080BCE14
+    .word dat_080BCE14
+    .global dat_080BCE14
+dat_080BCE14:
     .incbin "baserom.gba", 0xBCE14, 0xDA
 
     .global sub_080BCEEE
@@ -16911,7 +17462,9 @@ sub_080BCEEE:
     bx r1
     pop {r6, pc}
 _080BCEFC:
-    .word 0x080BCF00
+    .word dat_080BCF00
+    .global dat_080BCF00
+dat_080BCF00:
     .incbin "baserom.gba", 0xBCF00, 0x60
 
     .global sub_080BCF60
@@ -16926,7 +17479,9 @@ sub_080BCF60:
     pop {r6, pc}
     .hword 0x0000
 _080BCF70:
-    .word 0x080BCF74
+    .word dat_080BCF74
+    .global dat_080BCF74
+dat_080BCF74:
     .incbin "baserom.gba", 0xBCF74, 0x120
 
     .global sub_080BD094
@@ -16942,7 +17497,9 @@ sub_080BD094:
     pop {pc}
     .hword 0x0000
 _080BD0A8:
-    .word 0x080BD0AC
+    .word dat_080BD0AC
+    .global dat_080BD0AC
+dat_080BD0AC:
     .incbin "baserom.gba", 0xBD0AC, 0xB0
 
     .global sub_080BD15C
@@ -16960,7 +17517,9 @@ sub_080BD15C:
     pop {r6, pc}
     .hword 0x0000
 _080BD174:
-    .word 0x080BD178
+    .word dat_080BD178
+    .global dat_080BD178
+dat_080BD178:
     .incbin "baserom.gba", 0xBD178, 0xB8
 
     .global sub_080BD230
@@ -16976,7 +17535,9 @@ sub_080BD230:
     pop {r6, pc}
     .hword 0x0000
 _080BD244:
-    .word 0x080BD248
+    .word dat_080BD248
+    .global dat_080BD248
+dat_080BD248:
     .incbin "baserom.gba", 0xBD248, 0x13C
 
     .global sub_080BD384
@@ -16991,7 +17552,9 @@ sub_080BD384:
     pop {pc}
     .hword 0x0000
 _080BD394:
-    .word 0x080BD398
+    .word dat_080BD398
+    .global dat_080BD398
+dat_080BD398:
     .incbin "baserom.gba", 0xBD398, 0x118
 
     .global sub_080BD4B0
@@ -17007,7 +17570,9 @@ sub_080BD4B0:
     pop {pc}
     .hword 0x0000
 _080BD4C4:
-    .word 0x080BD4C8
+    .word dat_080BD4C8
+    .global dat_080BD4C8
+dat_080BD4C8:
     .incbin "baserom.gba", 0xBD4C8, 0xA8
 
     .global sub_080BD570
@@ -17056,7 +17621,9 @@ sub_080BD5A0:
     pop {r6, pc}
     .hword 0x0000
 _080BD5B4:
-    .word 0x080BD5B8
+    .word dat_080BD5B8
+    .global dat_080BD5B8
+dat_080BD5B8:
     .incbin "baserom.gba", 0xBD5B8, 0xA4
 
     .global sub_080BD65C
@@ -17086,7 +17653,9 @@ sub_080BD670:
     pop {r6, pc}
     .hword 0x0000
 _080BD680:
-    .word 0x080BD684
+    .word dat_080BD684
+    .global dat_080BD684
+dat_080BD684:
     .incbin "baserom.gba", 0xBD684, 0x10
 
     .global sub_080BD694
@@ -17191,7 +17760,9 @@ _080BD750:
     pop {pc}
     .hword 0x0000
 _080BD754:
-    .word 0x080BD758
+    .word dat_080BD758
+    .global dat_080BD758
+dat_080BD758:
     .word 0x0F14191E
     .hword 0x0A0A
 
@@ -17221,7 +17792,9 @@ sub_080BD772:
     bx r1
     pop {r6, pc}
 _080BD780:
-    .word 0x080BD784
+    .word dat_080BD784
+    .global dat_080BD784
+dat_080BD784:
     .incbin "baserom.gba", 0xBD784, 0x14
 
     .global sub_080BD798
@@ -17273,7 +17846,9 @@ _080BD7CA:
 _080BD7EA:
     pop {pc}
 _080BD7EC:
-    .word 0x080BD7F0
+    .word dat_080BD7F0
+    .global dat_080BD7F0
+dat_080BD7F0:
     .word 0xB478B478
     .hword 0xB430
 
@@ -17313,13 +17888,19 @@ _080BD81E:
 _080BD832:
     pop {pc}
 _080BD834:
-    .word 0x080BD838
+    .word dat_080BD838
+    .global dat_080BD838
+dat_080BD838:
     .incbin "baserom.gba", 0xBD838, 0x18
 _080BD850:
-    .word 0x080BD858
+    .word dat_080BD858
 _080BD854:
-    .word 0x080BD85E
-    .incbin "baserom.gba", 0xBD858, 0x12
+    .word dat_080BD85E
+    .global dat_080BD858
+dat_080BD858:
+    .word 0x40404040
+    .word 0x012A40FF
+    .incbin "baserom.gba", 0xBD860, 0xA
 
     .global sub_080BD86A
     .thumb_func
@@ -17543,7 +18124,9 @@ sub_080BD9C0:
     pop {pc}
     .hword 0x0000
 _080BD9D4:
-    .word 0x080BD9D8
+    .word dat_080BD9D8
+    .global dat_080BD9D8
+dat_080BD9D8:
     .incbin "baserom.gba", 0xBD9D8, 0x82
 
     .global sub_080BDA5A
@@ -17574,7 +18157,9 @@ sub_080BDA5A:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080BDA8C:
-    .word 0x080BDA90
+    .word dat_080BDA90
+    .global dat_080BDA90
+dat_080BDA90:
     .incbin "baserom.gba", 0xBDA90, 0x58
 
     .global sub_080BDAE8
@@ -17624,7 +18209,9 @@ sub_080BDB1E:
     bx r0
     pop {r6, pc}
 _080BDB30:
-    .word 0x080BDB34
+    .word dat_080BDB34
+    .global dat_080BDB34
+dat_080BDB34:
     .incbin "baserom.gba", 0xBDB34, 0x1F8
 
     .global sub_080BDD2C
@@ -17731,7 +18318,9 @@ sub_080BDDC8:
     pop {r6, pc}
     .hword 0x0000
 _080BDDD8:
-    .word 0x080BDDDC
+    .word dat_080BDDDC
+    .global dat_080BDDDC
+dat_080BDDDC:
     .incbin "baserom.gba", 0xBDDDC, 0x10
 
     .global sub_080BDDEC
@@ -17833,7 +18422,9 @@ _080BDEA4:
     pop {pc}
     .hword 0x0000
 _080BDEA8:
-    .word 0x080BDEAC
+    .word dat_080BDEAC
+    .global dat_080BDEAC
+dat_080BDEAC:
     .word 0x0F19232D
 
     .global sub_080BDEB0
@@ -17863,7 +18454,9 @@ sub_080BDEC4:
     pop {r6, pc}
     .hword 0x0000
 _080BDED4:
-    .word 0x080BDED8
+    .word dat_080BDED8
+    .global dat_080BDED8
+dat_080BDED8:
     .incbin "baserom.gba", 0xBDED8, 0x10
 
     .global sub_080BDEE8
@@ -17927,7 +18520,9 @@ sub_080BDF0C:
 _080BDF5A:
     pop {r6, r7, pc}
 _080BDF5C:
-    .word 0x080BDF60
+    .word dat_080BDF60
+    .global dat_080BDF60
+dat_080BDF60:
     .word 0xC8785028
 
     .global sub_080BDF64
@@ -17971,7 +18566,9 @@ sub_080BDF94:
     pop {r6, pc}
     .hword 0x0000
 _080BDFA4:
-    .word 0x080BDFA8
+    .word dat_080BDFA8
+    .global dat_080BDFA8
+dat_080BDFA8:
     .incbin "baserom.gba", 0xBDFA8, 0x14
 
     .global sub_080BDFBC
@@ -18043,7 +18640,9 @@ _080BE03E:
 _080BE040:
     .word 0x00048000
 _080BE044:
-    .word 0x080BE048
+    .word dat_080BE048
+    .global dat_080BE048
+dat_080BE048:
     .incbin "baserom.gba", 0xBE048, 0x8
 
     .global sub_080BE050
@@ -18195,7 +18794,9 @@ sub_080BE168:
     pop {pc}
     .hword 0x0000
 _080BE17C:
-    .word 0x080BE180
+    .word dat_080BE180
+    .global dat_080BE180
+dat_080BE180:
     .incbin "baserom.gba", 0xBE180, 0x1A8
 
     .global sub_080BE328
@@ -18242,7 +18843,9 @@ _080BE35E:
     pop {pc}
     .hword 0x0000
 _080BE370:
-    .word 0x080BE374
+    .word dat_080BE374
+    .global dat_080BE374
+dat_080BE374:
     .incbin "baserom.gba", 0xBE374, 0xC4
 
     .global sub_080BE438
@@ -18259,7 +18862,9 @@ sub_080BE438:
     pop {r6, pc}
     .hword 0x0000
 _080BE44C:
-    .word 0x080BE450
+    .word dat_080BE450
+    .global dat_080BE450
+dat_080BE450:
     .incbin "baserom.gba", 0xBE450, 0x14
 
     .global sub_080BE464
@@ -18274,7 +18879,9 @@ sub_080BE464:
     pop {pc}
     .hword 0x0000
 _080BE474:
-    .word 0x080BE478
+    .word dat_080BE478
+    .global dat_080BE478
+dat_080BE478:
     .incbin "baserom.gba", 0xBE478, 0x134
 
     .global sub_080BE5AC
@@ -18451,7 +19058,9 @@ sub_080BE6D4:
     pop {r6, pc}
     .hword 0x0000
 _080BE6E4:
-    .word 0x080BE6E8
+    .word dat_080BE6E8
+    .global dat_080BE6E8
+dat_080BE6E8:
     .incbin "baserom.gba", 0xBE6E8, 0xEE
 
     .global sub_080BE7D6
@@ -18465,7 +19074,9 @@ sub_080BE7D6:
     bx r1
     pop {r6, pc}
 _080BE7E4:
-    .word 0x080BE7E8
+    .word dat_080BE7E8
+    .global dat_080BE7E8
+dat_080BE7E8:
     .incbin "baserom.gba", 0xBE7E8, 0xA0
 
     .global sub_080BE888
@@ -18481,7 +19092,9 @@ sub_080BE888:
     pop {pc}
     .hword 0x0000
 _080BE89C:
-    .word 0x080BE8A0
+    .word dat_080BE8A0
+    .global dat_080BE8A0
+dat_080BE8A0:
     .incbin "baserom.gba", 0xBE8A0, 0x94
 
     .global sub_080BE934
@@ -18498,7 +19111,9 @@ sub_080BE934:
     pop {r6, pc}
     .hword 0x0000
 _080BE948:
-    .word 0x080BE94C
+    .word dat_080BE94C
+    .global dat_080BE94C
+dat_080BE94C:
     .incbin "baserom.gba", 0xBE94C, 0x16C
 
     .global sub_080BEAB8
@@ -18513,7 +19128,9 @@ sub_080BEAB8:
     pop {r6, pc}
     .hword 0x0000
 _080BEAC8:
-    .word 0x080BEACC
+    .word dat_080BEACC
+    .global dat_080BEACC
+dat_080BEACC:
     .incbin "baserom.gba", 0xBEACC, 0x9C
 
     .global sub_080BEB68
@@ -18529,7 +19146,9 @@ sub_080BEB68:
     pop {pc}
     .hword 0x0000
 _080BEB7C:
-    .word 0x080BEB80
+    .word dat_080BEB80
+    .global dat_080BEB80
+dat_080BEB80:
     .incbin "baserom.gba", 0xBEB80, 0x76
 
     .global sub_080BEBF6
@@ -18553,7 +19172,9 @@ sub_080BEC28:
     pop {r6, pc}
     .hword 0x0000
 _080BEC3C:
-    .word 0x080BEC40
+    .word dat_080BEC40
+    .global dat_080BEC40
+dat_080BEC40:
     .incbin "baserom.gba", 0xBEC40, 0x52
 
     .global sub_080BEC92
@@ -18702,7 +19323,9 @@ sub_080BED84:
     pop {r6, pc}
     .hword 0x0000
 _080BED94:
-    .word 0x080BED98
+    .word dat_080BED98
+    .global dat_080BED98
+dat_080BED98:
     .incbin "baserom.gba", 0xBED98, 0xD2
 
     .global sub_080BEE6A
@@ -18732,7 +19355,9 @@ _080BEE94:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080BEE98:
-    .word 0x080BEE9C
+    .word dat_080BEE9C
+    .global dat_080BEE9C
+dat_080BEE9C:
     .incbin "baserom.gba", 0xBEE9C, 0x18
 _080BEEB4:
     .word 0x23000301
@@ -18895,7 +19520,9 @@ _080BEFDA:
 _080BEFDC:
     .word 0x04050301
 _080BEFE0:
-    .word 0x080BEFE4
+    .word dat_080BEFE4
+    .global dat_080BEFE4
+dat_080BEFE4:
     .word 0x7850321E
     .hword 0xC8A0
 
@@ -19005,7 +19632,9 @@ _080BF0A8:
     pop {pc}
     .hword 0x0000
 _080BF0AC:
-    .word 0x080BF0B0
+    .word dat_080BF0B0
+    .global dat_080BF0B0
+dat_080BF0B0:
     .incbin "baserom.gba", 0xBF0B0, 0x20
 
     .global sub_080BF0D0
@@ -19032,7 +19661,9 @@ sub_080BF0E0:
     pop {pc}
     .hword 0x0000
 _080BF0F4:
-    .word 0x080BF0F8
+    .word dat_080BF0F8
+    .global dat_080BF0F8
+dat_080BF0F8:
     .incbin "baserom.gba", 0xBF0F8, 0xAC
 
     .global sub_080BF1A4
@@ -19049,7 +19680,9 @@ sub_080BF1A4:
     pop {r6, pc}
     .hword 0x0000
 _080BF1B8:
-    .word 0x080BF1BC
+    .word dat_080BF1BC
+    .global dat_080BF1BC
+dat_080BF1BC:
     .incbin "baserom.gba", 0xBF1BC, 0xA8
 
     .global sub_080BF264
@@ -19079,7 +19712,9 @@ sub_080BF278:
     pop {r6, pc}
     .hword 0x0000
 _080BF288:
-    .word 0x080BF28C
+    .word dat_080BF28C
+    .global dat_080BF28C
+dat_080BF28C:
     .incbin "baserom.gba", 0xBF28C, 0x18
 
     .global sub_080BF2A4
@@ -19276,7 +19911,9 @@ sub_080BF3F8:
     pop {r6, pc}
     .hword 0x0000
 _080BF40C:
-    .word 0x080BF410
+    .word dat_080BF410
+    .global dat_080BF410
+dat_080BF410:
     .incbin "baserom.gba", 0xBF410, 0x1C2
 
     .global sub_080BF5D2
@@ -19293,10 +19930,14 @@ sub_080BF5D2:
     pop {pc}
     .hword 0x0000
 _080BF5E8:
-    .word 0x080BF5EC
+    .word dat_080BF5EC
+    .global dat_080BF5EC
+dat_080BF5EC:
     .word 0x01010203
 _080BF5F0:
-    .word 0x080BF5F4
+    .word dat_080BF5F4
+    .global dat_080BF5F4
+dat_080BF5F4:
     .incbin "baserom.gba", 0xBF5F4, 0x64
 
     .global sub_080BF658
@@ -19312,7 +19953,9 @@ sub_080BF658:
     pop {pc}
     .hword 0x0000
 _080BF66C:
-    .word 0x080BF670
+    .word dat_080BF670
+    .global dat_080BF670
+dat_080BF670:
     .incbin "baserom.gba", 0xBF670, 0x98
 
     .global sub_080BF708
@@ -19366,7 +20009,9 @@ sub_080BF74A:
     bx r0
     pop {r6, pc}
 _080BF75C:
-    .word 0x080BF760
+    .word dat_080BF760
+    .global dat_080BF760
+dat_080BF760:
     .incbin "baserom.gba", 0xBF760, 0x84
 
     .global sub_080BF7E4
@@ -19490,7 +20135,9 @@ sub_080BF89C:
     pop {r6, pc}
     .hword 0x0000
 _080BF8AC:
-    .word 0x080BF8B0
+    .word dat_080BF8B0
+    .global dat_080BF8B0
+dat_080BF8B0:
     .incbin "baserom.gba", 0xBF8B0, 0x10
 
     .global sub_080BF8C0
@@ -19613,7 +20260,9 @@ sub_080BF980:
     pop {r6, pc}
     .hword 0x0000
 _080BF994:
-    .word 0x080BF998
+    .word dat_080BF998
+    .global dat_080BF998
+dat_080BF998:
     .incbin "baserom.gba", 0xBF998, 0x154
 
     .global sub_080BFAEC
@@ -19629,7 +20278,9 @@ sub_080BFAEC:
     pop {pc}
     .hword 0x0000
 _080BFB00:
-    .word 0x080BFB04
+    .word dat_080BFB04
+    .global dat_080BFB04
+dat_080BFB04:
     .incbin "baserom.gba", 0xBFB04, 0xC4
 
     .global sub_080BFBC8
@@ -19724,7 +20375,9 @@ _080BFC64:
     pop {pc}
     .hword 0x0000
 _080BFC68:
-    .word 0x080BFC6C
+    .word dat_080BFC6C
+    .global dat_080BFC6C
+dat_080BFC6C:
     .incbin "baserom.gba", 0xBFC6C, 0x8C
 
     .global sub_080BFCF8
@@ -19740,7 +20393,9 @@ sub_080BFCF8:
     pop {pc}
     .hword 0x0000
 _080BFD0C:
-    .word 0x080BFD10
+    .word dat_080BFD10
+    .global dat_080BFD10
+dat_080BFD10:
     .incbin "baserom.gba", 0xBFD10, 0x8
 
     .global sub_080BFD18
@@ -19757,7 +20412,9 @@ sub_080BFD18:
     pop {r6, pc}
     .hword 0x0000
 _080BFD2C:
-    .word 0x080BFD30
+    .word dat_080BFD30
+    .global dat_080BFD30
+dat_080BFD30:
     .incbin "baserom.gba", 0xBFD30, 0x14
 
     .global sub_080BFD44
@@ -19772,7 +20429,9 @@ sub_080BFD44:
     pop {pc}
     .hword 0x0000
 _080BFD54:
-    .word 0x080BFD58
+    .word dat_080BFD58
+    .global dat_080BFD58
+dat_080BFD58:
     .incbin "baserom.gba", 0xBFD58, 0x7C
 
     .global sub_080BFDD4
@@ -20078,7 +20737,9 @@ sub_080BFFCC:
     pop {r6, pc}
     .hword 0x0000
 _080BFFDC:
-    .word 0x080BFFE0
+    .word dat_080BFFE0
+    .global dat_080BFFE0
+dat_080BFFE0:
     .incbin "baserom.gba", 0xBFFE0, 0x10
 
     .global sub_080BFFF0
@@ -20192,10 +20853,14 @@ _080C00C0:
     pop {pc}
     .hword 0x0000
 _080C00C4:
-    .word 0x080C00C8
+    .word dat_080C00C8
+    .global dat_080C00C8
+dat_080C00C8:
     .word 0x0E101214
 _080C00CC:
-    .word 0x080C00D0
+    .word dat_080C00D0
+    .global dat_080C00D0
+dat_080C00D0:
     .incbin "baserom.gba", 0xC00D0, 0x8
 
     .global sub_080C00D8
@@ -20225,7 +20890,9 @@ sub_080C00EC:
     pop {r6, pc}
     .hword 0x0000
 _080C00FC:
-    .word 0x080C0100
+    .word dat_080C0100
+    .global dat_080C0100
+dat_080C0100:
     .incbin "baserom.gba", 0xC0100, 0x10
 
     .global sub_080C0110
@@ -20288,7 +20955,9 @@ _080C017C:
     pop {r4, r6, pc}
     .hword 0x0000
 _080C0180:
-    .word 0x080C0184
+    .word dat_080C0184
+    .global dat_080C0184
+dat_080C0184:
     .word 0xC8966432
 _080C0188:
     .word 0x00000101
@@ -20332,7 +21001,9 @@ sub_080C01B0:
     pop {r6, pc}
     .hword 0x0000
 _080C01C0:
-    .word 0x080C01C4
+    .word dat_080C01C4
+    .global dat_080C01C4
+dat_080C01C4:
     .incbin "baserom.gba", 0xC01C4, 0x60
 
     .global sub_080C0224
@@ -20347,7 +21018,9 @@ sub_080C0224:
     pop {r6, pc}
     .hword 0x0000
 _080C0234:
-    .word 0x080C0238
+    .word dat_080C0238
+    .global dat_080C0238
+dat_080C0238:
     .incbin "baserom.gba", 0xC0238, 0x10
 
     .global sub_080C0248
@@ -20400,7 +21073,9 @@ _080C0298:
     pop {r4, r6, pc}
     .hword 0x0000
 _080C029C:
-    .word 0x080C02A0
+    .word dat_080C02A0
+    .global dat_080C02A0
+dat_080C02A0:
     .word 0xC8966432
 
     .global sub_080C02A4
@@ -20447,7 +21122,9 @@ sub_080C02C4:
 _080C02E2:
     pop {r6, pc}
 _080C02E4:
-    .word 0x080C02E8
+    .word dat_080C02E8
+    .global dat_080C02E8
+dat_080C02E8:
     .incbin "baserom.gba", 0xC02E8, 0x14
 
     .global sub_080C02FC
@@ -20572,7 +21249,9 @@ _080C03BA:
 _080C03D2:
     pop {pc}
 _080C03D4:
-    .word 0x080C03D8
+    .word dat_080C03D8
+    .global dat_080C03D8
+dat_080C03D8:
     .incbin "baserom.gba", 0xC03D8, 0x8
 _080C03E0:
     .word 0x00000104
@@ -20602,7 +21281,9 @@ sub_080C03F4:
     pop {pc}
     .hword 0x0000
 _080C0408:
-    .word 0x080C040C
+    .word dat_080C040C
+    .global dat_080C040C
+dat_080C040C:
     .incbin "baserom.gba", 0xC040C, 0xB4
 
     .global sub_080C04C0
@@ -20637,7 +21318,9 @@ sub_080C04E2:
     bl sub_08012D62
     pop {pc}
 _080C04F4:
-    .word 0x080C04F8
+    .word dat_080C04F8
+    .global dat_080C04F8
+dat_080C04F8:
     .incbin "baserom.gba", 0xC04F8, 0x40
 
     .global sub_080C0538
@@ -20686,7 +21369,9 @@ sub_080C0568:
     pop {r6, pc}
     .hword 0x0000
 _080C057C:
-    .word 0x080C0580
+    .word dat_080C0580
+    .global dat_080C0580
+dat_080C0580:
     .incbin "baserom.gba", 0xC0580, 0x1C0
 
     .global sub_080C0740
@@ -20764,7 +21449,9 @@ sub_080C07B0:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C07D4:
-    .word 0x080C07D8
+    .word dat_080C07D8
+    .global dat_080C07D8
+dat_080C07D8:
     .incbin "baserom.gba", 0xC07D8, 0x154
 
     .global sub_080C092C
@@ -20832,7 +21519,9 @@ sub_080C0986:
     bx r1
     pop {r6, pc}
 _080C0994:
-    .word 0x080C0998
+    .word dat_080C0998
+    .global dat_080C0998
+dat_080C0998:
     .incbin "baserom.gba", 0xC0998, 0x14
 
     .global sub_080C09AC
@@ -20970,7 +21659,9 @@ _080C0AB0:
     pop {r4, r7, pc}
     .hword 0x0000
 _080C0AB4:
-    .word 0x080C0AB8
+    .word dat_080C0AB8
+    .global dat_080C0AB8
+dat_080C0AB8:
     .word 0x0A0A0A0A
 
     .global sub_080C0ABC
@@ -21007,7 +21698,9 @@ sub_080C0AE4:
     pop {r6, pc}
     .hword 0x0000
 _080C0AF4:
-    .word 0x080C0AF8
+    .word dat_080C0AF8
+    .global dat_080C0AF8
+dat_080C0AF8:
     .incbin "baserom.gba", 0xC0AF8, 0x10
 
     .global sub_080C0B08
@@ -21086,7 +21779,9 @@ _080C0B94:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C0B98:
-    .word 0x080C0B9C
+    .word dat_080C0B9C
+    .global dat_080C0B9C
+dat_080C0B9C:
     .incbin "baserom.gba", 0xC0B9C, 0x8
 
     .global sub_080C0BA4
@@ -21170,7 +21865,9 @@ sub_080C0C1C:
     pop {r6, pc}
     .hword 0x0000
 _080C0C2C:
-    .word 0x080C0C30
+    .word dat_080C0C30
+    .global dat_080C0C30
+dat_080C0C30:
     .incbin "baserom.gba", 0xC0C30, 0x17C
 
     .global sub_080C0DAC
@@ -21185,7 +21882,9 @@ sub_080C0DAC:
     pop {r6, pc}
     .hword 0x0000
 _080C0DBC:
-    .word 0x080C0DC0
+    .word dat_080C0DC0
+    .global dat_080C0DC0
+dat_080C0DC0:
     .incbin "baserom.gba", 0xC0DC0, 0x14
 
     .global sub_080C0DD4
@@ -21332,7 +22031,9 @@ _080C0ED4:
     pop {r4, r6, pc}
     .hword 0x0000
 _080C0ED8:
-    .word 0x080C0EDC
+    .word dat_080C0EDC
+    .global dat_080C0EDC
+dat_080C0EDC:
     .incbin "baserom.gba", 0xC0EDC, 0x8
 
     .global sub_080C0EE4
@@ -21396,7 +22097,9 @@ sub_080C0F34:
     pop {r6, pc}
     .hword 0x0000
 _080C0F44:
-    .word 0x080C0F48
+    .word dat_080C0F48
+    .global dat_080C0F48
+dat_080C0F48:
     .incbin "baserom.gba", 0xC0F48, 0x10
 
     .global sub_080C0F58
@@ -21502,7 +22205,9 @@ sub_080C0FF6:
     bx r1
     pop {r6, pc}
 _080C1004:
-    .word 0x080C1008
+    .word dat_080C1008
+    .global dat_080C1008
+dat_080C1008:
     .incbin "baserom.gba", 0xC1008, 0x10
 
     .global sub_080C1018
@@ -21546,7 +22251,9 @@ _080C1048:
 _080C1062:
     pop {pc}
 _080C1064:
-    .word 0x080C1068
+    .word dat_080C1068
+    .global dat_080C1068
+dat_080C1068:
     .incbin "baserom.gba", 0xC1068, 0xC
 
     .global sub_080C1074
@@ -21613,7 +22320,9 @@ _080C10E4:
     pop {r4, r6, pc}
     .hword 0x0000
 _080C10E8:
-    .word 0x080C10EC
+    .word dat_080C10EC
+    .global dat_080C10EC
+dat_080C10EC:
     .incbin "baserom.gba", 0xC10EC, 0x8
 
     .global sub_080C10F4
@@ -21641,7 +22350,9 @@ sub_080C1106:
     bx r1
     pop {r6, pc}
 _080C1114:
-    .word 0x080C1118
+    .word dat_080C1118
+    .global dat_080C1118
+dat_080C1118:
     .incbin "baserom.gba", 0xC1118, 0x5A
 
     .global sub_080C1172
@@ -21655,7 +22366,9 @@ sub_080C1172:
     mov pc, lr
     .hword 0x0000
 _080C1180:
-    .word 0x080C1184
+    .word dat_080C1184
+    .global dat_080C1184
+dat_080C1184:
     .incbin "baserom.gba", 0xC1184, 0x8
 
     .global sub_080C118C
@@ -21672,7 +22385,9 @@ sub_080C118C:
     bx r1
     pop {r6, pc}
 _080C11A0:
-    .word 0x080C11A4
+    .word dat_080C11A4
+    .global dat_080C11A4
+dat_080C11A4:
     .incbin "baserom.gba", 0xC11A4, 0x54
 
     .global sub_080C11F8
@@ -21688,7 +22403,9 @@ sub_080C11F8:
     pop {pc}
     .hword 0x0000
 _080C120C:
-    .word 0x080C1210
+    .word dat_080C1210
+    .global dat_080C1210
+dat_080C1210:
     .incbin "baserom.gba", 0xC1210, 0xA8
 
     .global sub_080C12B8
@@ -21712,7 +22429,9 @@ sub_080C12C0:
     pop {pc}
     .hword 0x0000
 _080C12D4:
-    .word 0x080C12D8
+    .word dat_080C12D8
+    .global dat_080C12D8
+dat_080C12D8:
     .incbin "baserom.gba", 0xC12D8, 0x244
 
     .global sub_080C151C
@@ -21725,9 +22444,12 @@ sub_080C151C:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC152A, 0xE
+    .hword 0x0000
+    .global dat_080C152C
+dat_080C152C:
+    .incbin "baserom.gba", 0xC152C, 0xC
 _080C1538:
-    .word 0x080C152C
+    .word dat_080C152C
 
     .global sub_080C153C
     .thumb_func
@@ -21776,9 +22498,12 @@ sub_080C1590:
     bl sub_080143FC
     bl sub_080C1B08
     pop {pc}
-    .incbin "baserom.gba", 0xC15A6, 0x16
+    .hword 0x0000
+    .global dat_080C15A8
+dat_080C15A8:
+    .incbin "baserom.gba", 0xC15A8, 0x14
 _080C15BC:
-    .word 0x080C15A8
+    .word dat_080C15A8
 
     .global sub_080C15C0
     .thumb_func
@@ -21792,7 +22517,9 @@ sub_080C15C0:
     pop {pc}
     .hword 0x0000
 _080C15D0:
-    .word 0x080C15D4
+    .word dat_080C15D4
+    .global dat_080C15D4
+dat_080C15D4:
     .incbin "baserom.gba", 0xC15D4, 0x8E
 
     .global sub_080C1662
@@ -21806,7 +22533,9 @@ sub_080C1662:
     bx r1
     pop {pc}
 _080C1670:
-    .word 0x080C1674
+    .word dat_080C1674
+    .global dat_080C1674
+dat_080C1674:
     .incbin "baserom.gba", 0xC1674, 0x14
 
     .global sub_080C1688
@@ -21985,7 +22714,9 @@ sub_080C179E:
     bx r1
     pop {pc}
 _080C17AC:
-    .word 0x080C17B0
+    .word dat_080C17B0
+    .global dat_080C17B0
+dat_080C17B0:
     .incbin "baserom.gba", 0xC17B0, 0x106
 
     .global sub_080C18B6
@@ -21999,7 +22730,9 @@ sub_080C18B6:
     bx r1
     pop {pc}
 _080C18C4:
-    .word 0x080C18C8
+    .word dat_080C18C8
+    .global dat_080C18C8
+dat_080C18C8:
     .incbin "baserom.gba", 0xC18C8, 0x7E
 
     .global sub_080C1946
@@ -22013,7 +22746,9 @@ sub_080C1946:
     bx r1
     pop {pc}
 _080C1954:
-    .word 0x080C1958
+    .word dat_080C1958
+    .global dat_080C1958
+dat_080C1958:
     .incbin "baserom.gba", 0xC1958, 0x9A
 
     .global sub_080C19F2
@@ -22143,10 +22878,14 @@ _080C1AD2:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C1AD8:
-    .word 0x080C1ADC
+    .word dat_080C1ADC
+    .global dat_080C1ADC
+dat_080C1ADC:
     .incbin "baserom.gba", 0xC1ADC, 0x8
 _080C1AE4:
-    .word 0x080C1AE8
+    .word dat_080C1AE8
+    .global dat_080C1AE8
+dat_080C1AE8:
     .incbin "baserom.gba", 0xC1AE8, 0x20
 
     .global sub_080C1B08
@@ -22209,7 +22948,9 @@ sub_080C1B54:
     pop {pc}
     .hword 0x0000
 _080C1B68:
-    .word 0x080C1B6C
+    .word dat_080C1B6C
+    .global dat_080C1B6C
+dat_080C1B6C:
     .incbin "baserom.gba", 0xC1B6C, 0xB0
 
     .global sub_080C1C1C
@@ -22260,7 +23001,9 @@ sub_080C1C56:
     bx r0
     pop {r6, pc}
 _080C1C68:
-    .word 0x080C1C6C
+    .word dat_080C1C6C
+    .global dat_080C1C6C
+dat_080C1C6C:
     .incbin "baserom.gba", 0xC1C6C, 0x15C
 
     .global sub_080C1DC8
@@ -22337,11 +23080,13 @@ sub_080C1E2E:
 _080C1E40:
     .word 0x0000A000
 _080C1E44:
-    .word 0x080C1E50
+    .word dat_080C1E50
 _080C1E48:
     .word sub_080C1E52
 _080C1E4C:
-    .word 0x080C1E58
+    .word dat_080C1E58
+    .global dat_080C1E50
+dat_080C1E50:
     .hword 0x0001
 
     .global sub_080C1E52
@@ -22350,6 +23095,8 @@ sub_080C1E52:
     lsls r7, r7, #5
     lsls r7, r7, #7
     ldrb r1, [r0, #0x1c]
+    .global dat_080C1E58
+dat_080C1E58:
     .incbin "baserom.gba", 0xC1E58, 0x84
 _080C1EDC:
     .word 0x00000030
@@ -22389,7 +23136,9 @@ sub_080C1F04:
     pop {r6, pc}
     .hword 0x0000
 _080C1F14:
-    .word 0x080C1F18
+    .word dat_080C1F18
+    .global dat_080C1F18
+dat_080C1F18:
     .incbin "baserom.gba", 0xC1F18, 0xC
 
     .global sub_080C1F24
@@ -22500,7 +23249,9 @@ _080C1FE6:
 _080C1FEE:
     pop {pc}
 _080C1FF0:
-    .word 0x080C1FF4
+    .word dat_080C1FF4
+    .global dat_080C1FF4
+dat_080C1FF4:
     .word 0x14141414
 
     .global sub_080C1FF8
@@ -22515,7 +23266,9 @@ sub_080C1FF8:
     pop {r6, pc}
     .hword 0x0000
 _080C2008:
-    .word 0x080C200C
+    .word dat_080C200C
+    .global dat_080C200C
+dat_080C200C:
     .incbin "baserom.gba", 0xC200C, 0xC2
 _080C20CE:
     pop {pc}
@@ -22559,7 +23312,9 @@ sub_080C2100:
     pop {r6, pc}
     .hword 0x0000
 _080C2110:
-    .word 0x080C2114
+    .word dat_080C2114
+    .global dat_080C2114
+dat_080C2114:
     .incbin "baserom.gba", 0xC2114, 0x10
 
     .global sub_080C2124
@@ -22745,7 +23500,9 @@ _080C2288:
 _080C228C:
     .word 0x04050001
 _080C2290:
-    .word 0x080C2294
+    .word dat_080C2294
+    .global dat_080C2294
+dat_080C2294:
     .word 0x643C2814
 
     .global sub_080C2298
@@ -22797,7 +23554,9 @@ sub_080C22DE:
     bx r1
     pop {r6, pc}
 _080C22EC:
-    .word 0x080C22F0
+    .word dat_080C22F0
+    .global dat_080C22F0
+dat_080C22F0:
     .incbin "baserom.gba", 0xC22F0, 0xBA
 
     .global sub_080C23AA
@@ -22811,7 +23570,9 @@ sub_080C23AA:
     bx r1
     pop {r6, pc}
 _080C23B8:
-    .word 0x080C23BC
+    .word dat_080C23BC
+    .global dat_080C23BC
+dat_080C23BC:
     .incbin "baserom.gba", 0xC23BC, 0xF8
 
     .global sub_080C24B4
@@ -22826,7 +23587,9 @@ sub_080C24B4:
     pop {r6, pc}
     .hword 0x0000
 _080C24C4:
-    .word 0x080C24C8
+    .word dat_080C24C8
+    .global dat_080C24C8
+dat_080C24C8:
     .incbin "baserom.gba", 0xC24C8, 0x18
 
     .global sub_080C24E0
@@ -22916,10 +23679,14 @@ _080C254C:
 _080C2586:
     pop {r4, r6, r7, pc}
 _080C2588:
-    .word 0x080C258C
+    .word dat_080C258C
+    .global dat_080C258C
+dat_080C258C:
     .word 0x18181818
 _080C2590:
-    .word 0x080C2594
+    .word dat_080C2594
+    .global dat_080C2594
+dat_080C2594:
     .word 0x0F0D0B09
 
     .global sub_080C2598
@@ -22935,7 +23702,9 @@ sub_080C2598:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C25AC:
-    .word 0x080C25B0
+    .word dat_080C25B0
+    .global dat_080C25B0
+dat_080C25B0:
     .incbin "baserom.gba", 0xC25B0, 0x88
 
     .global sub_080C2638
@@ -23099,7 +23868,9 @@ sub_080C2754:
 _080C2780:
     .word 0x04050501
 _080C2784:
-    .word 0x080C2788
+    .word dat_080C2788
+    .global dat_080C2788
+dat_080C2788:
     .word 0x32281E14
 _080C278C:
     .word 0x00000127
@@ -23117,7 +23888,9 @@ sub_080C2790:
     pop {pc}
     .hword 0x0000
 _080C27A4:
-    .word 0x080C27A8
+    .word dat_080C27A8
+    .global dat_080C27A8
+dat_080C27A8:
     .incbin "baserom.gba", 0xC27A8, 0xA8
 
     .global sub_080C2850
@@ -23161,7 +23934,9 @@ _080C2890:
     pop {pc}
     .hword 0x0000
 _080C2894:
-    .word 0x080C2898
+    .word dat_080C2898
+    .global dat_080C2898
+dat_080C2898:
     .word 0x0507090C
     .hword 0x0304
 
@@ -23178,7 +23953,9 @@ sub_080C289E:
     bx r0
     pop {r6, pc}
 _080C28B0:
-    .word 0x080C28B4
+    .word dat_080C28B4
+    .global dat_080C28B4
+dat_080C28B4:
     .incbin "baserom.gba", 0xC28B4, 0x6E
 
     .global sub_080C2922
@@ -23203,7 +23980,9 @@ _080C293E:
     pop {pc}
     .hword 0x0000
 _080C2944:
-    .word 0x080C2948
+    .word dat_080C2948
+    .global dat_080C2948
+dat_080C2948:
     .incbin "baserom.gba", 0xC2948, 0xA
 
     .global sub_080C2952
@@ -23244,7 +24023,9 @@ sub_080C297C:
     pop {r6, pc}
     .hword 0x0000
 _080C298C:
-    .word 0x080C2990
+    .word dat_080C2990
+    .global dat_080C2990
+dat_080C2990:
     .incbin "baserom.gba", 0xC2990, 0xA8
 
     .global sub_080C2A38
@@ -23259,7 +24040,9 @@ sub_080C2A38:
     pop {r6, pc}
     .hword 0x0000
 _080C2A48:
-    .word 0x080C2A4C
+    .word dat_080C2A4C
+    .global dat_080C2A4C
+dat_080C2A4C:
     .incbin "baserom.gba", 0xC2A4C, 0x50
 
     .global sub_080C2A9C
@@ -23275,7 +24058,9 @@ sub_080C2A9C:
     pop {pc}
     .hword 0x0000
 _080C2AB0:
-    .word 0x080C2AB4
+    .word dat_080C2AB4
+    .global dat_080C2AB4
+dat_080C2AB4:
     .incbin "baserom.gba", 0xC2AB4, 0xD4
 
     .global sub_080C2B88
@@ -23312,7 +24097,9 @@ sub_080C2BAA:
     bx r0
     pop {r6, pc}
 _080C2BBC:
-    .word 0x080C2BC0
+    .word dat_080C2BC0
+    .global dat_080C2BC0
+dat_080C2BC0:
     .incbin "baserom.gba", 0xC2BC0, 0x102
 
     .global sub_080C2CC2
@@ -23509,7 +24296,9 @@ _080C2E20:
     pop {pc}
     .hword 0x0000
 _080C2E24:
-    .word 0x080C2E28
+    .word dat_080C2E28
+    .global dat_080C2E28
+dat_080C2E28:
     .word 0x06080A0C
 
     .global sub_080C2E2C
@@ -23539,7 +24328,9 @@ sub_080C2E40:
     pop {r6, pc}
     .hword 0x0000
 _080C2E50:
-    .word 0x080C2E54
+    .word dat_080C2E54
+    .global dat_080C2E54
+dat_080C2E54:
     .incbin "baserom.gba", 0xC2E54, 0x10
 
     .global sub_080C2E64
@@ -23627,7 +24418,9 @@ _080C2EFC:
     pop {pc}
     .hword 0x0000
 _080C2F00:
-    .word 0x080C2F04
+    .word dat_080C2F04
+    .global dat_080C2F04
+dat_080C2F04:
     .word 0x181C2024
 
     .global sub_080C2F08
@@ -23659,7 +24452,9 @@ sub_080C2F20:
     pop {r6, pc}
     .hword 0x0000
 _080C2F30:
-    .word 0x080C2F34
+    .word dat_080C2F34
+    .global dat_080C2F34
+dat_080C2F34:
     .incbin "baserom.gba", 0xC2F34, 0x18
 
     .global sub_080C2F4C
@@ -23746,7 +24541,9 @@ _080C2FDC:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C2FE0:
-    .word 0x080C2FE4
+    .word dat_080C2FE4
+    .global dat_080C2FE4
+dat_080C2FE4:
     .word 0x32281E14
 
     .global sub_080C2FE8
@@ -23830,7 +24627,9 @@ sub_080C305E:
     bx r1
     pop {r6, pc}
 _080C306C:
-    .word 0x080C3070
+    .word dat_080C3070
+    .global dat_080C3070
+dat_080C3070:
     .incbin "baserom.gba", 0xC3070, 0x14
 
     .global sub_080C3084
@@ -23896,7 +24695,9 @@ sub_080C30D0:
     strh r0, [r5, #0xa]
     pop {pc}
 _080C30EC:
-    .word 0x080C30F0
+    .word dat_080C30F0
+    .global dat_080C30F0
+dat_080C30F0:
     .hword 0x6460
 
     .global sub_080C30F2
@@ -23912,7 +24713,9 @@ sub_080C30F2:
     bx r1
     pop {r6, pc}
 _080C3104:
-    .word 0x080C3108
+    .word dat_080C3108
+    .global dat_080C3108
+dat_080C3108:
     .incbin "baserom.gba", 0xC3108, 0x84
 
     .global sub_080C318C
@@ -24022,7 +24825,9 @@ sub_080C3234:
     pop {pc}
     .hword 0x0000
 _080C3248:
-    .word 0x080C324C
+    .word dat_080C324C
+    .global dat_080C324C
+dat_080C324C:
     .incbin "baserom.gba", 0xC324C, 0xD4
 
     .global sub_080C3320
@@ -24081,7 +24886,9 @@ sub_080C3358:
 _080C337A:
     pop {r6, r7, pc}
 _080C337C:
-    .word 0x080C3380
+    .word dat_080C3380
+    .global dat_080C3380
+dat_080C3380:
     .incbin "baserom.gba", 0xC3380, 0x10
 
     .global sub_080C3390
@@ -24152,10 +24959,15 @@ _080C33F2:
     bl sub_0800C9AC
     pop {r4, pc}
 _080C340C:
-    .word 0x080C3418
+    .word dat_080C3418
 _080C3410:
-    .word 0x080C3414
-    .incbin "baserom.gba", 0xC3414, 0x8
+    .word dat_080C3414
+    .global dat_080C3414
+dat_080C3414:
+    .word 0x08070605
+    .global dat_080C3418
+dat_080C3418:
+    .word 0x1E28323C
 
     .global sub_080C341C
     .thumb_func
@@ -24209,12 +25021,20 @@ _080C3478:
     pop {pc}
     .hword 0x0000
 _080C347C:
-    .word 0x080C3488
+    .word dat_080C3488
 _080C3480:
-    .word 0x080C3494
+    .word dat_080C3494
 _080C3484:
-    .word 0x080C348C
-    .incbin "baserom.gba", 0xC3488, 0x10
+    .word dat_080C348C
+    .global dat_080C3488
+dat_080C3488:
+    .word 0xC8785028
+    .global dat_080C348C
+dat_080C348C:
+    .incbin "baserom.gba", 0xC348C, 0x8
+    .global dat_080C3494
+dat_080C3494:
+    .word 0x2832415A
 
     .global sub_080C3498
     .thumb_func
@@ -24254,12 +25074,20 @@ _080C34B8:
 _080C34DA:
     pop {pc}
 _080C34DC:
-    .word 0x080C34E8
+    .word dat_080C34E8
 _080C34E0:
-    .word 0x080C34F0
+    .word dat_080C34F0
 _080C34E4:
-    .word 0x080C34EC
-    .incbin "baserom.gba", 0xC34E8, 0xC
+    .word dat_080C34EC
+    .global dat_080C34E8
+dat_080C34E8:
+    .word 0xC8785028
+    .global dat_080C34EC
+dat_080C34EC:
+    .word 0x30201810
+    .global dat_080C34F0
+dat_080C34F0:
+    .word 0x2832415A
 
     .global sub_080C34F4
     .thumb_func
@@ -24299,10 +25127,15 @@ _080C3514:
 _080C3536:
     pop {pc}
 _080C3538:
-    .word 0x080C3540
+    .word dat_080C3540
 _080C353C:
-    .word 0x080C3544
-    .incbin "baserom.gba", 0xC3540, 0x8
+    .word dat_080C3544
+    .global dat_080C3540
+dat_080C3540:
+    .word 0xC8785028
+    .global dat_080C3544
+dat_080C3544:
+    .word 0x2832415A
 _080C3548:
     .word 0x0000A000
 _080C354C:
@@ -24324,9 +25157,12 @@ sub_080C355C:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC356A, 0xE
+    .hword 0x0000
+    .global dat_080C356C
+dat_080C356C:
+    .incbin "baserom.gba", 0xC356C, 0xC
 _080C3578:
-    .word 0x080C356C
+    .word dat_080C356C
 
     .global sub_080C357C
     .thumb_func
@@ -24375,9 +25211,12 @@ sub_080C35D0:
     bl sub_080143FC
     bl sub_080C37C2
     pop {pc}
-    .incbin "baserom.gba", 0xC35E6, 0xE
+    .hword 0x0000
+    .global dat_080C35E8
+dat_080C35E8:
+    .incbin "baserom.gba", 0xC35E8, 0xC
 _080C35F4:
-    .word 0x080C35E8
+    .word dat_080C35E8
 
     .global sub_080C35F8
     .thumb_func
@@ -24391,7 +25230,9 @@ sub_080C35F8:
     pop {pc}
     .hword 0x0000
 _080C3608:
-    .word 0x080C360C
+    .word dat_080C360C
+    .global dat_080C360C
+dat_080C360C:
     .incbin "baserom.gba", 0xC360C, 0x1B6
 
     .global sub_080C37C2
@@ -24439,7 +25280,9 @@ sub_080C37F4:
     pop {pc}
     .hword 0x0000
 _080C3808:
-    .word 0x080C380C
+    .word dat_080C380C
+    .global dat_080C380C
+dat_080C380C:
     .incbin "baserom.gba", 0xC380C, 0x7C
 
     .global sub_080C3888
@@ -24455,7 +25298,9 @@ sub_080C3888:
     pop {pc}
     .hword 0x0000
 _080C38A0:
-    .word 0x080C38A4
+    .word dat_080C38A4
+    .global dat_080C38A4
+dat_080C38A4:
     .incbin "baserom.gba", 0xC38A4, 0x28
 
     .global sub_080C38CC
@@ -24479,7 +25324,9 @@ sub_080C38D4:
     pop {pc}
     .hword 0x0000
 _080C38E8:
-    .word 0x080C38EC
+    .word dat_080C38EC
+    .global dat_080C38EC
+dat_080C38EC:
     .incbin "baserom.gba", 0xC38EC, 0x7A
 
     .global sub_080C3966
@@ -24578,10 +25425,14 @@ _080C3A10:
     add sp, #8
     pop {r4, r6, r7, pc}
 _080C3A14:
-    .word 0x080C3A18
+    .word dat_080C3A18
+    .global dat_080C3A18
+dat_080C3A18:
     .incbin "baserom.gba", 0xC3A18, 0x18
 _080C3A30:
-    .word 0x080C3A34
+    .word dat_080C3A34
+    .global dat_080C3A34
+dat_080C3A34:
     .incbin "baserom.gba", 0xC3A34, 0xC
 _080C3A40:
     .word 0x0000A000
@@ -24644,7 +25495,9 @@ _080C3AA4:
     .word 0x0000E000
     .incbin "baserom.gba", 0xC3AA8, 0x34
 _080C3ADC:
-    .word 0x080C3AE0
+    .word dat_080C3AE0
+    .global dat_080C3AE0
+dat_080C3AE0:
     .incbin "baserom.gba", 0xC3AE0, 0x10
 
     .global sub_080C3AF0
@@ -24660,7 +25513,9 @@ sub_080C3AF0:
     pop {pc}
     .hword 0x0000
 _080C3B04:
-    .word 0x080C3B08
+    .word dat_080C3B08
+    .global dat_080C3B08
+dat_080C3B08:
     .incbin "baserom.gba", 0xC3B08, 0x27C
 
     .global sub_080C3D84
@@ -24698,7 +25553,9 @@ sub_080C3DA8:
     pop {pc}
     .hword 0x0000
 _080C3DBC:
-    .word 0x080C3DC0
+    .word dat_080C3DC0
+    .global dat_080C3DC0
+dat_080C3DC0:
     .incbin "baserom.gba", 0xC3DC0, 0x8C
 
     .global sub_080C3E4C
@@ -24768,7 +25625,9 @@ sub_080C3EA6:
     bx r1
     pop {pc}
 _080C3EB4:
-    .word 0x080C3EB8
+    .word dat_080C3EB8
+    .global dat_080C3EB8
+dat_080C3EB8:
     .incbin "baserom.gba", 0xC3EB8, 0x10
 
     .global sub_080C3EC8
@@ -24933,7 +25792,9 @@ sub_080C3FB4:
     pop {pc}
     .hword 0x0000
 _080C3FC8:
-    .word 0x080C3FCC
+    .word dat_080C3FCC
+    .global dat_080C3FCC
+dat_080C3FCC:
     .incbin "baserom.gba", 0xC3FCC, 0xA8
 
     .global sub_080C4074
@@ -24950,7 +25811,9 @@ sub_080C4074:
     pop {r6, pc}
     .hword 0x0000
 _080C4088:
-    .word 0x080C408C
+    .word dat_080C408C
+    .global dat_080C408C
+dat_080C408C:
     .incbin "baserom.gba", 0xC408C, 0x14
 
     .global sub_080C40A0
@@ -24965,7 +25828,9 @@ sub_080C40A0:
     pop {pc}
     .hword 0x0000
 _080C40B0:
-    .word 0x080C40B4
+    .word dat_080C40B4
+    .global dat_080C40B4
+dat_080C40B4:
     .incbin "baserom.gba", 0xC40B4, 0x8C
 
     .global sub_080C4140
@@ -25107,7 +25972,9 @@ sub_080C4210:
     pop {r6, pc}
     .hword 0x0000
 _080C4220:
-    .word 0x080C4224
+    .word dat_080C4224
+    .global dat_080C4224
+dat_080C4224:
     .incbin "baserom.gba", 0xC4224, 0x10
 
     .global sub_080C4234
@@ -25211,7 +26078,9 @@ _080C42F0:
     pop {pc}
     .hword 0x0000
 _080C42F4:
-    .word 0x080C42F8
+    .word dat_080C42F8
+    .global dat_080C42F8
+dat_080C42F8:
     .word 0x14191E28
 _080C42FC:
     .word 0x0000A000
@@ -25245,7 +26114,9 @@ sub_080C4318:
     pop {pc}
     .hword 0x0000
 _080C4328:
-    .word 0x080C432C
+    .word dat_080C432C
+    .global dat_080C432C
+dat_080C432C:
     .incbin "baserom.gba", 0xC432C, 0x18
 
     .global sub_080C4344
@@ -25433,7 +26304,9 @@ _080C4498:
 _080C449C:
     .word 0x0705FF02
 _080C44A0:
-    .word 0x080C44A4
+    .word dat_080C44A4
+    .global dat_080C44A4
+dat_080C44A4:
     .incbin "baserom.gba", 0xC44A4, 0x8
 
     .global sub_080C44AC
@@ -25478,7 +26351,9 @@ sub_080C44DE:
     bx r1
     pop {pc}
 _080C44EC:
-    .word 0x080C44F0
+    .word dat_080C44F0
+    .global dat_080C44F0
+dat_080C44F0:
     .incbin "baserom.gba", 0xC44F0, 0x14
 
     .global sub_080C4504
@@ -25657,7 +26532,9 @@ _080C4654:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C4658:
-    .word 0x080C465C
+    .word dat_080C465C
+    .global dat_080C465C
+dat_080C465C:
     .word 0x96643214
 _080C4660:
     .word 0x0000A000
@@ -25705,7 +26582,9 @@ sub_080C4694:
     pop {pc}
     .hword 0x0000
 _080C46A8:
-    .word 0x080C46AC
+    .word dat_080C46AC
+    .global dat_080C46AC
+dat_080C46AC:
     .incbin "baserom.gba", 0xC46AC, 0xD4
 
     .global sub_080C4780
@@ -25753,7 +26632,9 @@ sub_080C47B0:
     pop {r6, pc}
     .hword 0x0000
 _080C47C4:
-    .word 0x080C47C8
+    .word dat_080C47C8
+    .global dat_080C47C8
+dat_080C47C8:
     .incbin "baserom.gba", 0xC47C8, 0x10
 
     .global sub_080C47D8
@@ -25768,7 +26649,9 @@ sub_080C47D8:
     pop {pc}
     .hword 0x0000
 _080C47E8:
-    .word 0x080C47EC
+    .word dat_080C47EC
+    .global dat_080C47EC
+dat_080C47EC:
     .incbin "baserom.gba", 0xC47EC, 0x78
 
     .global sub_080C4864
@@ -25815,7 +26698,9 @@ _080C48B0:
     pop {r4, pc}
     .hword 0x0000
 _080C48B4:
-    .word 0x080C48B8
+    .word dat_080C48B8
+    .global dat_080C48B8
+dat_080C48B8:
     .incbin "baserom.gba", 0xC48B8, 0x8
 _080C48C0:
     .word 0x00000030
@@ -26060,7 +26945,9 @@ _080C4A5C:
     subs r1, r1, r0
     pop {pc}
 _080C4A74:
-    .word 0x080C4A78
+    .word dat_080C4A78
+    .global dat_080C4A78
+dat_080C4A78:
     .incbin "baserom.gba", 0xC4A78, 0x3C
 
     .global sub_080C4AB4
@@ -26110,13 +26997,19 @@ _080C4AD0:
 _080C4B0A:
     pop {r4, r6, r7, pc}
 _080C4B0C:
-    .word 0x080C4B10
+    .word dat_080C4B10
+    .global dat_080C4B10
+dat_080C4B10:
     .incbin "baserom.gba", 0xC4B10, 0x10
 _080C4B20:
-    .word 0x080C4B24
+    .word dat_080C4B24
+    .global dat_080C4B24
+dat_080C4B24:
     .incbin "baserom.gba", 0xC4B24, 0x10
 _080C4B34:
-    .word 0x080C4B38
+    .word dat_080C4B38
+    .global dat_080C4B38
+dat_080C4B38:
     .incbin "baserom.gba", 0xC4B38, 0x8
 
     .global sub_080C4B40
@@ -26152,7 +27045,9 @@ _080C4B74:
     pop {r4, pc}
     .hword 0x0000
 _080C4B78:
-    .word 0x080C4B7C
+    .word dat_080C4B7C
+    .global dat_080C4B7C
+dat_080C4B7C:
     .incbin "baserom.gba", 0xC4B7C, 0xC
 
     .global sub_080C4B88
@@ -26177,7 +27072,7 @@ _080C4BA0:
 _080C4BA4:
     .word 0x00000020
 _080C4BA8:
-    .word 0x08000020
+    .word dat_08000020
 
     .global sub_080C4BAC
     .thumb_func
@@ -26358,7 +27253,9 @@ _080C4CCA:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C4CE8:
-    .word 0x080C4CEC
+    .word dat_080C4CEC
+    .global dat_080C4CEC
+dat_080C4CEC:
     .incbin "baserom.gba", 0xC4CEC, 0x8
 _080C4CF4:
     .word 0x0000A000
@@ -26407,15 +27304,21 @@ sub_080C4CF8:
     bl sub_08000560
     pop {r4, r6, r7, pc}
 _080C4D50:
-    .word 0x080C4D58
+    .word dat_080C4D58
 _080C4D54:
-    .word 0x080C4D5A
+    .word dat_080C4D5A
+    .global dat_080C4D58
+dat_080C4D58:
     .word 0x5C5BFF01
 _080C4D5C:
-    .word 0x080C4D60
+    .word dat_080C4D60
+    .global dat_080C4D60
+dat_080C4D60:
     .incbin "baserom.gba", 0xC4D60, 0x8
 _080C4D68:
-    .word 0x080C4D6C
+    .word dat_080C4D6C
+    .global dat_080C4D6C
+dat_080C4D6C:
     .incbin "baserom.gba", 0xC4D6C, 0x8
 
     .global sub_080C4D74
@@ -26613,7 +27516,9 @@ sub_080C4EBC:
     pop {r6, pc}
     .hword 0x0000
 _080C4ECC:
-    .word 0x080C4ED0
+    .word dat_080C4ED0
+    .global dat_080C4ED0
+dat_080C4ED0:
     .incbin "baserom.gba", 0xC4ED0, 0xC
 
     .global sub_080C4EDC
@@ -26730,7 +27635,9 @@ _080C4FAE:
 _080C4FBA:
     pop {r4, r6, pc}
 _080C4FBC:
-    .word 0x080C4FC0
+    .word dat_080C4FC0
+    .global dat_080C4FC0
+dat_080C4FC0:
     .word 0x0C0C0C10
 _080C4FC4:
     .word 0x00003106
@@ -26770,7 +27677,9 @@ sub_080C4FD0:
 _080C500E:
     pop {r6, r7, pc}
 _080C5010:
-    .word 0x080C5014
+    .word dat_080C5014
+    .global dat_080C5014
+dat_080C5014:
     .incbin "baserom.gba", 0xC5014, 0x18
 
     .global sub_080C502C
@@ -26799,7 +27708,9 @@ sub_080C5042:
     bx r1
     pop {r6, pc}
 _080C5050:
-    .word 0x080C5054
+    .word dat_080C5054
+    .global dat_080C5054
+dat_080C5054:
     .incbin "baserom.gba", 0xC5054, 0x10
 
     .global sub_080C5064
@@ -26856,7 +27767,9 @@ sub_080C5090:
 _080C50BA:
     pop {pc}
 _080C50BC:
-    .word 0x080C50C0
+    .word dat_080C50C0
+    .global dat_080C50C0
+dat_080C50C0:
     .word 0x161E1E12
 
     .global sub_080C50C4
@@ -26896,7 +27809,9 @@ _080C50F6:
 _080C5102:
     pop {pc}
 _080C5104:
-    .word 0x080C5108
+    .word dat_080C5108
+    .global dat_080C5108
+dat_080C5108:
     .word 0x0806060A
 
     .global sub_080C510C
@@ -26936,7 +27851,9 @@ sub_080C5134:
     pop {r6, pc}
     .hword 0x0000
 _080C5144:
-    .word 0x080C5148
+    .word dat_080C5148
+    .global dat_080C5148
+dat_080C5148:
     .incbin "baserom.gba", 0xC5148, 0xB4
 
     .global sub_080C51FC
@@ -26953,7 +27870,9 @@ sub_080C51FC:
     pop {r6, pc}
     .hword 0x0000
 _080C5210:
-    .word 0x080C5214
+    .word dat_080C5214
+    .global dat_080C5214
+dat_080C5214:
     .incbin "baserom.gba", 0xC5214, 0x14
 
     .global sub_080C5228
@@ -27166,7 +28085,9 @@ _080C53C8:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C53CC:
-    .word 0x080C53D0
+    .word dat_080C53D0
+    .global dat_080C53D0
+dat_080C53D0:
     .incbin "baserom.gba", 0xC53D0, 0x8
 _080C53D8:
     .word 0x1705FF11
@@ -27306,7 +28227,9 @@ _080C5468:
     strh r0, [r5, #0x3a]
     pop {r4, r6, r7, pc}
 _080C54E4:
-    .word 0x080C54E8
+    .word dat_080C54E8
+    .global dat_080C54E8
+dat_080C54E8:
     .word 0x0C0C0C10
 _080C54EC:
     .word 0x00003106
@@ -27487,7 +28410,9 @@ sub_080C5656:
     bx r1
     pop {r6, pc}
 _080C5668:
-    .word 0x080C566C
+    .word dat_080C566C
+    .global dat_080C566C
+dat_080C566C:
     .incbin "baserom.gba", 0xC566C, 0x30
 
     .global sub_080C569C
@@ -27838,9 +28763,12 @@ sub_080C5920:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC592E, 0xE
+    .hword 0x0000
+    .global dat_080C5930
+dat_080C5930:
+    .incbin "baserom.gba", 0xC5930, 0xC
 _080C593C:
-    .word 0x080C5930
+    .word dat_080C5930
 
     .global sub_080C5940
     .thumb_func
@@ -27889,9 +28817,12 @@ sub_080C5994:
     bl sub_08014446
     bl sub_080C5B52
     pop {pc}
-    .incbin "baserom.gba", 0xC59AA, 0xE
+    .hword 0x0000
+    .global dat_080C59AC
+dat_080C59AC:
+    .incbin "baserom.gba", 0xC59AC, 0xC
 _080C59B8:
-    .word 0x080C59AC
+    .word dat_080C59AC
 
     .global sub_080C59BC
     .thumb_func
@@ -27905,7 +28836,9 @@ sub_080C59BC:
     pop {pc}
     .hword 0x0000
 _080C59CC:
-    .word 0x080C59D0
+    .word dat_080C59D0
+    .global dat_080C59D0
+dat_080C59D0:
     .incbin "baserom.gba", 0xC59D0, 0x182
 
     .global sub_080C5B52
@@ -27953,7 +28886,9 @@ sub_080C5B84:
     pop {pc}
     .hword 0x0000
 _080C5B98:
-    .word 0x080C5B9C
+    .word dat_080C5B9C
+    .global dat_080C5B9C
+dat_080C5B9C:
     .incbin "baserom.gba", 0xC5B9C, 0xB8
 
     .global sub_080C5C54
@@ -27988,7 +28923,9 @@ sub_080C5C74:
     pop {pc}
     .hword 0x0000
 _080C5C88:
-    .word 0x080C5C8C
+    .word dat_080C5C8C
+    .global dat_080C5C8C
+dat_080C5C8C:
     .incbin "baserom.gba", 0xC5C8C, 0xE8
 
     .global sub_080C5D74
@@ -28117,7 +29054,9 @@ _080C5E52:
     pop {r6, pc}
     .hword 0x0000
 _080C5E58:
-    .word 0x080C5E5C
+    .word dat_080C5E5C
+    .global dat_080C5E5C
+dat_080C5E5C:
     .incbin "baserom.gba", 0xC5E5C, 0xC
 _080C5E68:
     .word 0x0000A000
@@ -28242,7 +29181,9 @@ _080C5F0A:
 _080C5F4E:
     pop {r4, pc}
 _080C5F50:
-    .word 0x080C5F54
+    .word dat_080C5F54
+    .global dat_080C5F54
+dat_080C5F54:
     .word 0x02020301
 
     .global sub_080C5F58
@@ -28308,10 +29249,15 @@ _080C5FB8:
     str r0, [r7, #8]
     mov pc, lr
 _080C5FC8:
-    .word 0x080C5FDC
-    .incbin "baserom.gba", 0xC5FCC, 0x24
+    .word dat_080C5FDC
+    .incbin "baserom.gba", 0xC5FCC, 0x10
+    .global dat_080C5FDC
+dat_080C5FDC:
+    .incbin "baserom.gba", 0xC5FDC, 0x14
 _080C5FF0:
-    .word 0x080C5FF4
+    .word dat_080C5FF4
+    .global dat_080C5FF4
+dat_080C5FF4:
     .incbin "baserom.gba", 0xC5FF4, 0x8
 
     .global sub_080C5FFC
@@ -28354,7 +29300,9 @@ _080C6038:
 _080C6042:
     pop {r4, r7, pc}
 _080C6044:
-    .word 0x080C6048
+    .word dat_080C6048
+    .global dat_080C6048
+dat_080C6048:
     .incbin "baserom.gba", 0xC6048, 0x10
 _080C6058:
     .word 0x00000010
@@ -28375,7 +29323,9 @@ sub_080C6064:
     pop {pc}
     .hword 0x0000
 _080C6078:
-    .word 0x080C607C
+    .word dat_080C607C
+    .global dat_080C607C
+dat_080C607C:
     .incbin "baserom.gba", 0xC607C, 0xA4
 
     .global sub_080C6120
@@ -28390,7 +29340,9 @@ sub_080C6120:
     pop {pc}
     .hword 0x0000
 _080C6130:
-    .word 0x080C6134
+    .word dat_080C6134
+    .global dat_080C6134
+dat_080C6134:
     .incbin "baserom.gba", 0xC6134, 0x36
 
     .global sub_080C616A
@@ -28404,7 +29356,9 @@ sub_080C616A:
     bx r1
     pop {pc}
 _080C6178:
-    .word 0x080C617C
+    .word dat_080C617C
+    .global dat_080C617C
+dat_080C617C:
     .incbin "baserom.gba", 0xC617C, 0xFC
 
     .global sub_080C6278
@@ -28420,7 +29374,9 @@ sub_080C6278:
     pop {pc}
     .hword 0x0000
 _080C628C:
-    .word 0x080C6290
+    .word dat_080C6290
+    .global dat_080C6290
+dat_080C6290:
     .incbin "baserom.gba", 0xC6290, 0xA0
 
     .global sub_080C6330
@@ -28437,7 +29393,9 @@ sub_080C6330:
     pop {r6, pc}
     .hword 0x0000
 _080C6344:
-    .word 0x080C6348
+    .word dat_080C6348
+    .global dat_080C6348
+dat_080C6348:
     .incbin "baserom.gba", 0xC6348, 0x10
 
     .global sub_080C6358
@@ -28553,7 +29511,9 @@ sub_080C6408:
     pop {pc}
     .hword 0x0000
 _080C6418:
-    .word 0x080C641C
+    .word dat_080C641C
+    .global dat_080C641C
+dat_080C641C:
     .incbin "baserom.gba", 0xC641C, 0x38
 
     .global sub_080C6454
@@ -28633,7 +29593,9 @@ sub_080C64C0:
     pop {r6, pc}
     .hword 0x0000
 _080C64D0:
-    .word 0x080C64D4
+    .word dat_080C64D4
+    .global dat_080C64D4
+dat_080C64D4:
     .incbin "baserom.gba", 0xC64D4, 0x10
 
     .global sub_080C64E4
@@ -28716,7 +29678,9 @@ _080C6570:
     pop {pc}
     .hword 0x0000
 _080C6574:
-    .word 0x080C6578
+    .word dat_080C6578
+    .global dat_080C6578
+dat_080C6578:
     .hword 0x2832
 
     .global sub_080C657A
@@ -28747,7 +29711,9 @@ sub_080C6592:
     bx r1
     pop {pc}
 _080C65A0:
-    .word 0x080C65A4
+    .word dat_080C65A4
+    .global dat_080C65A4
+dat_080C65A4:
     .incbin "baserom.gba", 0xC65A4, 0xC6
 
     .global sub_080C666A
@@ -28763,7 +29729,9 @@ sub_080C666A:
     bx r1
     pop {r6, pc}
 _080C667C:
-    .word 0x080C6680
+    .word dat_080C6680
+    .global dat_080C6680
+dat_080C6680:
     .incbin "baserom.gba", 0xC6680, 0x24
 
     .global sub_080C66A4
@@ -28931,7 +29899,9 @@ _080C67CA:
 _080C67CC:
     .word 0x0705FF04
 _080C67D0:
-    .word 0x080C67D4
+    .word dat_080C67D4
+    .global dat_080C67D4
+dat_080C67D4:
     .word 0x0000C864
 
     .global sub_080C67D8
@@ -29018,7 +29988,9 @@ sub_080C6850:
     pop {pc}
     .hword 0x0000
 _080C6864:
-    .word 0x080C6868
+    .word dat_080C6868
+    .global dat_080C6868
+dat_080C6868:
     .incbin "baserom.gba", 0xC6868, 0xA4
 
     .global sub_080C690C
@@ -29035,7 +30007,9 @@ sub_080C690C:
     pop {r6, pc}
     .hword 0x0000
 _080C6920:
-    .word 0x080C6924
+    .word dat_080C6924
+    .global dat_080C6924
+dat_080C6924:
     .incbin "baserom.gba", 0xC6924, 0x14
 
     .global sub_080C6938
@@ -29050,7 +30024,9 @@ sub_080C6938:
     pop {pc}
     .hword 0x0000
 _080C6948:
-    .word 0x080C694C
+    .word dat_080C694C
+    .global dat_080C694C
+dat_080C694C:
     .incbin "baserom.gba", 0xC694C, 0x84
 
     .global sub_080C69D0
@@ -29151,7 +30127,9 @@ sub_080C6A54:
     pop {r6, pc}
     .hword 0x0000
 _080C6A64:
-    .word 0x080C6A68
+    .word dat_080C6A68
+    .global dat_080C6A68
+dat_080C6A68:
     .incbin "baserom.gba", 0xC6A68, 0x10
 
     .global sub_080C6A78
@@ -29255,7 +30233,9 @@ _080C6B26:
 _080C6B36:
     pop {pc}
 _080C6B38:
-    .word 0x080C6B3C
+    .word dat_080C6B3C
+    .global dat_080C6B3C
+dat_080C6B3C:
     .word 0x00001E28
 _080C6B40:
     .word 0x0000A000
@@ -29289,7 +30269,9 @@ sub_080C6B5C:
     pop {pc}
     .hword 0x0000
 _080C6B6C:
-    .word 0x080C6B70
+    .word dat_080C6B70
+    .global dat_080C6B70
+dat_080C6B70:
     .incbin "baserom.gba", 0xC6B70, 0x18
 
     .global sub_080C6B88
@@ -29477,7 +30459,9 @@ _080C6CDC:
 _080C6CE0:
     .word 0x0705FF06
 _080C6CE4:
-    .word 0x080C6CE8
+    .word dat_080C6CE8
+    .global dat_080C6CE8
+dat_080C6CE8:
     .word 0x0000C864
 
     .global sub_080C6CEC
@@ -29522,7 +30506,9 @@ sub_080C6D1E:
     bx r1
     pop {pc}
 _080C6D2C:
-    .word 0x080C6D30
+    .word dat_080C6D30
+    .global dat_080C6D30
+dat_080C6D30:
     .incbin "baserom.gba", 0xC6D30, 0x14
 
     .global sub_080C6D44
@@ -29701,7 +30687,9 @@ _080C6E88:
 _080C6E96:
     pop {r4, r6, r7, pc}
 _080C6E98:
-    .word 0x080C6E9C
+    .word dat_080C6E9C
+    .global dat_080C6E9C
+dat_080C6E9C:
     .word 0x0000C864
 _080C6EA0:
     .word 0x0000A000
@@ -29746,9 +30734,12 @@ sub_080C6ED4:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC6EE2, 0xE
+    .hword 0x0000
+    .global dat_080C6EE4
+dat_080C6EE4:
+    .incbin "baserom.gba", 0xC6EE4, 0xC
 _080C6EF0:
-    .word 0x080C6EE4
+    .word dat_080C6EE4
 
     .global sub_080C6EF4
     .thumb_func
@@ -29797,9 +30788,12 @@ sub_080C6F48:
     bl sub_08014446
     bl sub_080C7208
     pop {pc}
-    .incbin "baserom.gba", 0xC6F5E, 0xE
+    .hword 0x0000
+    .global dat_080C6F60
+dat_080C6F60:
+    .incbin "baserom.gba", 0xC6F60, 0xC
 _080C6F6C:
-    .word 0x080C6F60
+    .word dat_080C6F60
 
     .global sub_080C6F70
     .thumb_func
@@ -29813,7 +30807,9 @@ sub_080C6F70:
     pop {pc}
     .hword 0x0000
 _080C6F80:
-    .word 0x080C6F84
+    .word dat_080C6F84
+    .global dat_080C6F84
+dat_080C6F84:
     .incbin "baserom.gba", 0xC6F84, 0xCC
 
     .global sub_080C7050
@@ -29883,7 +30879,9 @@ _080C70BE:
     strb r0, [r5, #9]
     pop {pc}
 _080C70C8:
-    .word 0x080C70CC
+    .word dat_080C70CC
+    .global dat_080C70CC
+dat_080C70CC:
     .incbin "baserom.gba", 0xC70CC, 0x8
 _080C70D4:
     .word 0x00000010
@@ -30107,9 +31105,12 @@ sub_080C7238:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC724A, 0xE
+    .hword 0x0000
+    .global dat_080C724C
+dat_080C724C:
+    .incbin "baserom.gba", 0xC724C, 0xC
 _080C7258:
-    .word 0x080C724C
+    .word dat_080C724C
 
     .global sub_080C725C
     .thumb_func
@@ -30160,9 +31161,12 @@ sub_080C72B4:
     bl sub_08014446
     bl sub_080C76BC
     pop {pc}
-    .incbin "baserom.gba", 0xC72CA, 0xE
+    .hword 0x0000
+    .global dat_080C72CC
+dat_080C72CC:
+    .incbin "baserom.gba", 0xC72CC, 0xC
 _080C72D8:
-    .word 0x080C72CC
+    .word dat_080C72CC
 
     .global sub_080C72DC
     .thumb_func
@@ -30176,7 +31180,9 @@ sub_080C72DC:
     pop {pc}
     .hword 0x0000
 _080C72EC:
-    .word 0x080C72F0
+    .word dat_080C72F0
+    .global dat_080C72F0
+dat_080C72F0:
     .incbin "baserom.gba", 0xC72F0, 0xDC
 
     .global sub_080C73CC
@@ -30556,10 +31562,14 @@ _080C7652:
 _080C7656:
     pop {r4, pc}
 _080C7658:
-    .word 0x080C765C
+    .word dat_080C765C
+    .global dat_080C765C
+dat_080C765C:
     .incbin "baserom.gba", 0xC765C, 0x8
 _080C7664:
-    .word 0x080C7668
+    .word dat_080C7668
+    .global dat_080C7668
+dat_080C7668:
     .incbin "baserom.gba", 0xC7668, 0x8
 _080C7670:
     .word 0x00000010
@@ -30654,7 +31664,9 @@ sub_080C76EC:
     pop {pc}
     .hword 0x0000
 _080C7700:
-    .word 0x080C7704
+    .word dat_080C7704
+    .global dat_080C7704
+dat_080C7704:
     .incbin "baserom.gba", 0xC7704, 0x140
 
     .global sub_080C7844
@@ -30692,7 +31704,9 @@ sub_080C7868:
     pop {pc}
     .hword 0x0000
 _080C787C:
-    .word 0x080C7880
+    .word dat_080C7880
+    .global dat_080C7880
+dat_080C7880:
     .incbin "baserom.gba", 0xC7880, 0xD4
 
     .global sub_080C7954
@@ -30773,7 +31787,9 @@ sub_080C79C4:
     pop {pc}
     .hword 0x0000
 _080C79D8:
-    .word 0x080C79DC
+    .word dat_080C79DC
+    .global dat_080C79DC
+dat_080C79DC:
     .incbin "baserom.gba", 0xC79DC, 0xB4
 
     .global sub_080C7A90
@@ -30824,7 +31840,9 @@ _080C7AE4:
     add sp, #0x18
     pop {r7, pc}
 _080C7AE8:
-    .word 0x080C7AEC
+    .word dat_080C7AEC
+    .global dat_080C7AEC
+dat_080C7AEC:
     .word 0x1E222A32
 
     .global sub_080C7AF0
@@ -31090,10 +32108,14 @@ sub_080C7C98:
 _080C7CC6:
     pop {pc}
 _080C7CC8:
-    .word 0x080C7CCC
+    .word dat_080C7CCC
+    .global dat_080C7CCC
+dat_080C7CCC:
     .incbin "baserom.gba", 0xC7CCC, 0x54
 _080C7D20:
-    .word 0x080C7D24
+    .word dat_080C7D24
+    .global dat_080C7D24
+dat_080C7D24:
     .incbin "baserom.gba", 0xC7D24, 0x10
 _080C7D34:
     .word 0x00000000
@@ -31114,9 +32136,12 @@ sub_080C7D44:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC7D52, 0xE
+    .hword 0x0000
+    .global dat_080C7D54
+dat_080C7D54:
+    .incbin "baserom.gba", 0xC7D54, 0xC
 _080C7D60:
-    .word 0x080C7D54
+    .word dat_080C7D54
 
     .global sub_080C7D64
     .thumb_func
@@ -31171,9 +32196,12 @@ sub_080C7DC8:
     bl sub_08014446
     bl sub_080C80F0
     pop {pc}
-    .incbin "baserom.gba", 0xC7DDE, 0xE
+    .hword 0x0000
+    .global dat_080C7DE0
+dat_080C7DE0:
+    .incbin "baserom.gba", 0xC7DE0, 0xC
 _080C7DEC:
-    .word 0x080C7DE0
+    .word dat_080C7DE0
 
     .global sub_080C7DF0
     .thumb_func
@@ -31187,7 +32215,9 @@ sub_080C7DF0:
     pop {pc}
     .hword 0x0000
 _080C7E00:
-    .word 0x080C7E04
+    .word dat_080C7E04
+    .global dat_080C7E04
+dat_080C7E04:
     .incbin "baserom.gba", 0xC7E04, 0x88
 
     .global sub_080C7E8C
@@ -31293,7 +32323,9 @@ _080C7F32:
 _080C7F36:
     pop {pc}
 _080C7F38:
-    .word 0x080C7F3C
+    .word dat_080C7F3C
+    .global dat_080C7F3C
+dat_080C7F3C:
     .incbin "baserom.gba", 0xC7F3C, 0x8
 
     .global sub_080C7F44
@@ -31589,9 +32621,12 @@ sub_080C8120:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC812E, 0xE
+    .hword 0x0000
+    .global dat_080C8130
+dat_080C8130:
+    .incbin "baserom.gba", 0xC8130, 0xC
 _080C813C:
-    .word 0x080C8130
+    .word dat_080C8130
 
     .global sub_080C8140
     .thumb_func
@@ -31640,9 +32675,12 @@ sub_080C8194:
     bl sub_080143FC
     bl sub_080C83AC
     pop {pc}
-    .incbin "baserom.gba", 0xC81AA, 0xE
+    .hword 0x0000
+    .global dat_080C81AC
+dat_080C81AC:
+    .incbin "baserom.gba", 0xC81AC, 0xC
 _080C81B8:
-    .word 0x080C81AC
+    .word dat_080C81AC
 
     .global sub_080C81BC
     .thumb_func
@@ -31656,7 +32694,9 @@ sub_080C81BC:
     pop {pc}
     .hword 0x0000
 _080C81CC:
-    .word 0x080C81D0
+    .word dat_080C81D0
+    .global dat_080C81D0
+dat_080C81D0:
     .incbin "baserom.gba", 0xC81D0, 0xFE
 
     .global sub_080C82CE
@@ -31717,7 +32757,9 @@ sub_080C831A:
     bx r1
     pop {pc}
 _080C8328:
-    .word 0x080C832C
+    .word dat_080C832C
+    .global dat_080C832C
+dat_080C832C:
     .incbin "baserom.gba", 0xC832C, 0x80
 
     .global sub_080C83AC
@@ -31780,7 +32822,9 @@ sub_080C83F8:
     pop {pc}
     .hword 0x0000
 _080C840C:
-    .word 0x080C8410
+    .word dat_080C8410
+    .global dat_080C8410
+dat_080C8410:
     .incbin "baserom.gba", 0xC8410, 0x74
 
     .global sub_080C8484
@@ -31856,7 +32900,9 @@ sub_080C84E8:
     pop {pc}
     .hword 0x0000
 _080C84F8:
-    .word 0x080C84FC
+    .word dat_080C84FC
+    .global dat_080C84FC
+dat_080C84FC:
     .incbin "baserom.gba", 0xC84FC, 0x5E
 
     .global sub_080C855A
@@ -31936,7 +32982,9 @@ sub_080C85E8:
     pop {pc}
     .hword 0x0000
 _080C85FC:
-    .word 0x080C8600
+    .word dat_080C8600
+    .global dat_080C8600
+dat_080C8600:
     .incbin "baserom.gba", 0xC8600, 0xD0
 
     .global sub_080C86D0
@@ -32366,7 +33414,9 @@ _080C8A18:
     ldrb r1, [r5, #0x13]
     pop {r4, r6, r7, pc}
 _080C8A1C:
-    .word 0x080C8A20
+    .word dat_080C8A20
+    .global dat_080C8A20
+dat_080C8A20:
     .incbin "baserom.gba", 0xC8A20, 0x8
 
     .global sub_080C8A28
@@ -32382,7 +33432,9 @@ sub_080C8A28:
     pop {pc}
     .hword 0x0000
 _080C8A3C:
-    .word 0x080C8A40
+    .word dat_080C8A40
+    .global dat_080C8A40
+dat_080C8A40:
     .incbin "baserom.gba", 0xC8A40, 0x74
 
     .global sub_080C8AB4
@@ -32458,7 +33510,9 @@ sub_080C8B18:
     pop {pc}
     .hword 0x0000
 _080C8B28:
-    .word 0x080C8B2C
+    .word dat_080C8B2C
+    .global dat_080C8B2C
+dat_080C8B2C:
     .incbin "baserom.gba", 0xC8B2C, 0x10
 
     .global sub_080C8B3C
@@ -32693,7 +33747,9 @@ sub_080C8CC4:
     pop {pc}
     .hword 0x0000
 _080C8CD8:
-    .word 0x080C8CDC
+    .word dat_080C8CDC
+    .global dat_080C8CDC
+dat_080C8CDC:
     .incbin "baserom.gba", 0xC8CDC, 0x74
 
     .global sub_080C8D50
@@ -32769,7 +33825,9 @@ sub_080C8DB4:
     pop {pc}
     .hword 0x0000
 _080C8DC4:
-    .word 0x080C8DC8
+    .word dat_080C8DC8
+    .global dat_080C8DC8
+dat_080C8DC8:
     .incbin "baserom.gba", 0xC8DC8, 0xA2
 
     .global sub_080C8E6A
@@ -32837,7 +33895,9 @@ sub_080C8EC0:
     pop {pc}
     .hword 0x0000
 _080C8ED4:
-    .word 0x080C8ED8
+    .word dat_080C8ED8
+    .global dat_080C8ED8
+dat_080C8ED8:
     .incbin "baserom.gba", 0xC8ED8, 0xA8
 
     .global sub_080C8F80
@@ -32856,7 +33916,9 @@ sub_080C8F80:
     pop {r6, pc}
     .hword 0x0000
 _080C8F98:
-    .word 0x080C8F9C
+    .word dat_080C8F9C
+    .global dat_080C8F9C
+dat_080C8F9C:
     .incbin "baserom.gba", 0xC8F9C, 0x184
 
     .global sub_080C9120
@@ -32892,7 +33954,9 @@ _080C9154:
     add sp, #0x18
     pop {r7, pc}
 _080C9164:
-    .word 0x080C9168
+    .word dat_080C9168
+    .global dat_080C9168
+dat_080C9168:
     .incbin "baserom.gba", 0xC9168, 0x40
 
     .global sub_080C91A8
@@ -32908,7 +33972,9 @@ sub_080C91A8:
     pop {pc}
     .hword 0x0000
 _080C91BC:
-    .word 0x080C91C0
+    .word dat_080C91C0
+    .global dat_080C91C0
+dat_080C91C0:
     .incbin "baserom.gba", 0xC91C0, 0xB0
 
     .global sub_080C9270
@@ -32959,7 +34025,9 @@ sub_080C92AE:
     bx r1
     pop {pc}
 _080C92C0:
-    .word 0x080C92C4
+    .word dat_080C92C4
+    .global dat_080C92C4
+dat_080C92C4:
     .incbin "baserom.gba", 0xC92C4, 0x1D4
 
     .global sub_080C9498
@@ -33079,10 +34147,14 @@ _080C9566:
     pop {r6, r7, pc}
     .hword 0x0000
 _080C956C:
-    .word 0x080C9570
+    .word dat_080C9570
+    .global dat_080C9570
+dat_080C9570:
     .word 0x1E1E1E1E
 _080C9574:
-    .word 0x080C9578
+    .word dat_080C9578
+    .global dat_080C9578
+dat_080C9578:
     .incbin "baserom.gba", 0xC9578, 0x10
 
     .global sub_080C9588
@@ -33108,10 +34180,15 @@ _080C959C:
     str r0, [r3, #8]
     mov pc, lr
 _080C95AC:
-    .word 0x080C95B8
-    .incbin "baserom.gba", 0xC95B0, 0x14
+    .word dat_080C95B8
+    .incbin "baserom.gba", 0xC95B0, 0x8
+    .global dat_080C95B8
+dat_080C95B8:
+    .incbin "baserom.gba", 0xC95B8, 0xC
 _080C95C4:
-    .word 0x080C95C8
+    .word dat_080C95C8
+    .global dat_080C95C8
+dat_080C95C8:
     .incbin "baserom.gba", 0xC95C8, 0x20
 
     .global sub_080C95E8
@@ -33124,9 +34201,12 @@ sub_080C95E8:
     mov lr, pc
     bx r1
     pop {pc}
-    .incbin "baserom.gba", 0xC95F6, 0xE
+    .hword 0x0000
+    .global dat_080C95F8
+dat_080C95F8:
+    .incbin "baserom.gba", 0xC95F8, 0xC
 _080C9604:
-    .word 0x080C95F8
+    .word dat_080C95F8
 
     .global sub_080C9608
     .thumb_func
@@ -33175,9 +34255,12 @@ sub_080C965C:
     bl sub_08014446
     bl sub_080C97DC
     pop {pc}
-    .incbin "baserom.gba", 0xC9672, 0xE
+    .hword 0x0000
+    .global dat_080C9674
+dat_080C9674:
+    .incbin "baserom.gba", 0xC9674, 0xC
 _080C9680:
-    .word 0x080C9674
+    .word dat_080C9674
 
     .global sub_080C9684
     .thumb_func
@@ -33191,7 +34274,9 @@ sub_080C9684:
     pop {pc}
     .hword 0x0000
 _080C9694:
-    .word 0x080C9698
+    .word dat_080C9698
+    .global dat_080C9698
+dat_080C9698:
     .incbin "baserom.gba", 0xC9698, 0x144
 
     .global sub_080C97DC
@@ -33238,7 +34323,9 @@ sub_080C980C:
     pop {pc}
     .hword 0x0000
 _080C9820:
-    .word 0x080C9824
+    .word dat_080C9824
+    .global dat_080C9824
+dat_080C9824:
     .incbin "baserom.gba", 0xC9824, 0xF8
 
     .global sub_080C991C
@@ -33425,7 +34512,9 @@ _080C9A58:
     add sp, #0x20
     pop {r4, r6, r7, pc}
 _080C9A5C:
-    .word 0x080C9A60
+    .word dat_080C9A60
+    .global dat_080C9A60
+dat_080C9A60:
     .incbin "baserom.gba", 0xC9A60, 0x10
 
     .global sub_080C9A70
@@ -33517,7 +34606,9 @@ sub_080C9AEC:
     pop {pc}
     .hword 0x0000
 _080C9B00:
-    .word 0x080C9B04
+    .word dat_080C9B04
+    .global dat_080C9B04
+dat_080C9B04:
     .incbin "baserom.gba", 0xC9B04, 0xC0
 
     .global sub_080C9BC4
@@ -33587,7 +34678,9 @@ sub_080C9C18:
     pop {r6, pc}
     .hword 0x0000
 _080C9C2C:
-    .word 0x080C9C30
+    .word dat_080C9C30
+    .global dat_080C9C30
+dat_080C9C30:
     .incbin "baserom.gba", 0xC9C30, 0x17C
 
     .global sub_080C9DAC
@@ -33668,7 +34761,9 @@ _080C9E30:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080C9E3C:
-    .word 0x080C9E40
+    .word dat_080C9E40
+    .global dat_080C9E40
+dat_080C9E40:
     .incbin "baserom.gba", 0xC9E40, 0x28
 _080C9E68:
     .word 0x00000010
@@ -33770,7 +34865,9 @@ sub_080C9F00:
     pop {r6, pc}
     .hword 0x0000
 _080C9F14:
-    .word 0x080C9F18
+    .word dat_080C9F18
+    .global dat_080C9F18
+dat_080C9F18:
     .incbin "baserom.gba", 0xC9F18, 0x10
 
     .global sub_080C9F28
@@ -33859,7 +34956,9 @@ _080C9FB8:
 _080C9FBE:
     pop {pc}
 _080C9FC0:
-    .word 0x080C9FC4
+    .word dat_080C9FC4
+    .global dat_080C9FC4
+dat_080C9FC4:
     .word 0x14191E23
 
     .global sub_080C9FC8
@@ -33893,7 +34992,9 @@ sub_080C9FE0:
     pop {r6, pc}
     .hword 0x0000
 _080C9FF4:
-    .word 0x080C9FF8
+    .word dat_080C9FF8
+    .global dat_080C9FF8
+dat_080C9FF8:
     .incbin "baserom.gba", 0xC9FF8, 0x20
 
     .global sub_080CA018
@@ -34176,7 +35277,9 @@ sub_080CA21A:
     bx r1
     pop {r6, pc}
 _080CA22C:
-    .word 0x080CA230
+    .word dat_080CA230
+    .global dat_080CA230
+dat_080CA230:
     .incbin "baserom.gba", 0xCA230, 0xCE
 
     .global sub_080CA2FE
@@ -34192,7 +35295,9 @@ sub_080CA2FE:
     bx r1
     pop {r6, pc}
 _080CA310:
-    .word 0x080CA314
+    .word dat_080CA314
+    .global dat_080CA314
+dat_080CA314:
     .incbin "baserom.gba", 0xCA314, 0x4C
 
     .global sub_080CA360
@@ -34209,7 +35314,9 @@ sub_080CA360:
     pop {r6, pc}
     .hword 0x0000
 _080CA374:
-    .word 0x080CA378
+    .word dat_080CA378
+    .global dat_080CA378
+dat_080CA378:
     .incbin "baserom.gba", 0xCA378, 0x1C
 
     .global sub_080CA394
@@ -34399,7 +35506,9 @@ sub_080CA4C4:
     pop {pc}
     .hword 0x0000
 _080CA4D8:
-    .word 0x080CA4DC
+    .word dat_080CA4DC
+    .global dat_080CA4DC
+dat_080CA4DC:
     .incbin "baserom.gba", 0xCA4DC, 0x110
 
     .global sub_080CA5EC
@@ -34587,7 +35696,9 @@ _080CA724:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080CA734:
-    .word 0x080CA738
+    .word dat_080CA738
+    .global dat_080CA738
+dat_080CA738:
     .incbin "baserom.gba", 0xCA738, 0x34
 
     .global sub_080CA76C
@@ -34603,7 +35714,9 @@ sub_080CA76C:
     pop {pc}
     .hword 0x0000
 _080CA780:
-    .word 0x080CA784
+    .word dat_080CA784
+    .global dat_080CA784
+dat_080CA784:
     .incbin "baserom.gba", 0xCA784, 0x84
 
     .global sub_080CA808
@@ -34868,7 +35981,9 @@ sub_080CA9B4:
     pop {pc}
     .hword 0x0000
 _080CA9C8:
-    .word 0x080CA9CC
+    .word dat_080CA9CC
+    .global dat_080CA9CC
+dat_080CA9CC:
     .incbin "baserom.gba", 0xCA9CC, 0x98
 
     .global sub_080CAA64
@@ -35089,7 +36204,9 @@ sub_080CABE4:
     pop {pc}
     .hword 0x0000
 _080CABF8:
-    .word 0x080CABFC
+    .word dat_080CABFC
+    .global dat_080CABFC
+dat_080CABFC:
     .incbin "baserom.gba", 0xCABFC, 0x19C
 
     .global sub_080CAD98
@@ -35128,7 +36245,9 @@ sub_080CADC0:
     pop {pc}
     .hword 0x0000
 _080CADD4:
-    .word 0x080CADD8
+    .word dat_080CADD8
+    .global dat_080CADD8
+dat_080CADD8:
     .incbin "baserom.gba", 0xCADD8, 0x190
 
     .global sub_080CAF68
@@ -35197,7 +36316,9 @@ _080CAFDE:
 _080CAFE0:
     .word 0x00010000
 _080CAFE4:
-    .word 0x080CAFE8
+    .word dat_080CAFE8
+    .global dat_080CAFE8
+dat_080CAFE8:
     .incbin "baserom.gba", 0xCAFE8, 0x10
 
     .global sub_080CAFF8
@@ -35309,7 +36430,9 @@ _080CB0A0:
     add sp, #0x20
     pop {r4, r6, r7, pc}
 _080CB0BC:
-    .word 0x080CB0C0
+    .word dat_080CB0C0
+    .global dat_080CB0C0
+dat_080CB0C0:
     .incbin "baserom.gba", 0xCB0C0, 0x10
 
     .global sub_080CB0D0
@@ -35348,7 +36471,9 @@ sub_080CB0FC:
     pop {pc}
     .hword 0x0000
 _080CB110:
-    .word 0x080CB114
+    .word dat_080CB114
+    .global dat_080CB114
+dat_080CB114:
     .incbin "baserom.gba", 0xCB114, 0xFC
 
     .global sub_080CB210
@@ -35526,7 +36651,9 @@ sub_080CB320:
     pop {pc}
     .hword 0x0000
 _080CB334:
-    .word 0x080CB338
+    .word dat_080CB338
+    .global dat_080CB338
+dat_080CB338:
     .incbin "baserom.gba", 0xCB338, 0x12C
 
     .global sub_080CB464
@@ -35767,7 +36894,9 @@ _080CB636:
 _080CB638:
     .word 0x0006AAAA
 _080CB63C:
-    .word 0x080CB640
+    .word dat_080CB640
+    .global dat_080CB640
+dat_080CB640:
     .incbin "baserom.gba", 0xCB640, 0xA4
 
     .global sub_080CB6E4
@@ -35806,7 +36935,9 @@ sub_080CB70C:
     pop {pc}
     .hword 0x0000
 _080CB720:
-    .word 0x080CB724
+    .word dat_080CB724
+    .global dat_080CB724
+dat_080CB724:
     .incbin "baserom.gba", 0xCB724, 0x5C
 
     .global sub_080CB780
@@ -35821,7 +36952,9 @@ sub_080CB780:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080CB790:
-    .word 0x080CB794
+    .word dat_080CB794
+    .global dat_080CB794
+dat_080CB794:
     .incbin "baserom.gba", 0xCB794, 0xE6
 
     .global sub_080CB87A
@@ -35852,7 +36985,9 @@ sub_080CB892:
     bx r1
     pop {r4, r6, r7, pc}
 _080CB8A0:
-    .word 0x080CB8A4
+    .word dat_080CB8A4
+    .global dat_080CB8A4
+dat_080CB8A4:
     .incbin "baserom.gba", 0xCB8A4, 0x58
 
     .global sub_080CB8FC
@@ -35867,7 +37002,9 @@ sub_080CB8FC:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080CB90C:
-    .word 0x080CB910
+    .word dat_080CB910
+    .global dat_080CB910
+dat_080CB910:
     .incbin "baserom.gba", 0xCB910, 0x5E
 
     .global sub_080CB96E
@@ -35955,7 +37092,9 @@ _080CB9EE:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080CB9F8:
-    .word 0x080CB9FC
+    .word dat_080CB9FC
+    .global dat_080CB9FC
+dat_080CB9FC:
     .incbin "baserom.gba", 0xCB9FC, 0x44
 
     .global sub_080CBA40
@@ -36026,10 +37165,14 @@ _080CBAAC:
     pop {r3, r5, r6, r7, pc}
     .hword 0x0000
 _080CBAB8:
-    .word 0x080CBABC
+    .word dat_080CBABC
+    .global dat_080CBABC
+dat_080CBABC:
     .incbin "baserom.gba", 0xCBABC, 0x10
 _080CBACC:
-    .word 0x080CBAD0
+    .word dat_080CBAD0
+    .global dat_080CBAD0
+dat_080CBAD0:
     .incbin "baserom.gba", 0xCBAD0, 0x12
 
     .global sub_080CBAE2
@@ -36098,7 +37241,9 @@ sub_080CBB40:
     pop {pc}
     .hword 0x0000
 _080CBB54:
-    .word 0x080CBB58
+    .word dat_080CBB58
+    .global dat_080CBB58
+dat_080CBB58:
     .incbin "baserom.gba", 0xCBB58, 0x132
 
     .global sub_080CBC8A
@@ -36137,7 +37282,9 @@ sub_080CBCB0:
     pop {pc}
     .hword 0x0000
 _080CBCC4:
-    .word 0x080CBCC8
+    .word dat_080CBCC8
+    .global dat_080CBCC8
+dat_080CBCC8:
     .incbin "baserom.gba", 0xCBCC8, 0x150
 
     .global sub_080CBE18
@@ -36176,7 +37323,9 @@ sub_080CBE40:
     pop {pc}
     .hword 0x0000
 _080CBE54:
-    .word 0x080CBE58
+    .word dat_080CBE58
+    .global dat_080CBE58
+dat_080CBE58:
     .incbin "baserom.gba", 0xCBE58, 0x154
 
     .global sub_080CBFAC
@@ -36287,7 +37436,9 @@ sub_080CC04C:
     pop {pc}
     .hword 0x0000
 _080CC060:
-    .word 0x080CC064
+    .word dat_080CC064
+    .global dat_080CC064
+dat_080CC064:
     .incbin "baserom.gba", 0xCC064, 0x138
 
     .global sub_080CC19C
@@ -36637,7 +37788,9 @@ sub_080CC3D8:
     pop {pc}
     .hword 0x0000
 _080CC3E8:
-    .word 0x080CC3EC
+    .word dat_080CC3EC
+    .global dat_080CC3EC
+dat_080CC3EC:
     .incbin "baserom.gba", 0xCC3EC, 0x208
 
     .global sub_080CC5F4
@@ -36690,7 +37843,9 @@ sub_080CC624:
     pop {pc}
     .hword 0x0000
 _080CC638:
-    .word 0x080CC63C
+    .word dat_080CC63C
+    .global dat_080CC63C
+dat_080CC63C:
     .incbin "baserom.gba", 0xCC63C, 0xC2
 
     .global sub_080CC6FE
@@ -36733,7 +37888,9 @@ sub_080CC72C:
     pop {pc}
     .hword 0x0000
 _080CC740:
-    .word 0x080CC744
+    .word dat_080CC744
+    .global dat_080CC744
+dat_080CC744:
     .incbin "baserom.gba", 0xCC744, 0x1C8
 
     .global sub_080CC90C
@@ -36777,7 +37934,9 @@ sub_080CC93C:
     pop {pc}
     .hword 0x0000
 _080CC950:
-    .word 0x080CC954
+    .word dat_080CC954
+    .global dat_080CC954
+dat_080CC954:
     .incbin "baserom.gba", 0xCC954, 0x148
 
     .global sub_080CCA9C
@@ -36821,7 +37980,9 @@ sub_080CCACC:
     pop {pc}
     .hword 0x0000
 _080CCAE0:
-    .word 0x080CCAE4
+    .word dat_080CCAE4
+    .global dat_080CCAE4
+dat_080CCAE4:
     .incbin "baserom.gba", 0xCCAE4, 0x182
 
     .global sub_080CCC66
@@ -36871,7 +38032,9 @@ sub_080CCC9C:
     pop {pc}
     .hword 0x0000
 _080CCCAC:
-    .word 0x080CCCB0
+    .word dat_080CCCB0
+    .global dat_080CCCB0
+dat_080CCCB0:
     .incbin "baserom.gba", 0xCCCB0, 0x118
 
     .global sub_080CCDC8
@@ -37006,7 +38169,9 @@ _080CCEB4:
     pop {pc}
     .hword 0x0000
 _080CCEB8:
-    .word 0x080CCEBC
+    .word dat_080CCEBC
+    .global dat_080CCEBC
+dat_080CCEBC:
     .incbin "baserom.gba", 0xCCEBC, 0x10
 
     .global sub_080CCECC
@@ -37114,7 +38279,9 @@ sub_080CCF5C:
     pop {pc}
     .hword 0x0000
 _080CCF6C:
-    .word 0x080CCF70
+    .word dat_080CCF70
+    .global dat_080CCF70
+dat_080CCF70:
     .incbin "baserom.gba", 0xCCF70, 0x1DE
 
     .global sub_080CD14E
@@ -37160,7 +38327,9 @@ sub_080CD180:
 _080CD196:
     pop {pc}
 _080CD198:
-    .word 0x080CD19C
+    .word dat_080CD19C
+    .global dat_080CD19C
+dat_080CD19C:
     .incbin "baserom.gba", 0xCD19C, 0xDA
 
     .global sub_080CD276
@@ -37213,7 +38382,9 @@ sub_080CD330:
     pop {pc}
     .hword 0x0000
 _080CD344:
-    .word 0x080CD348
+    .word dat_080CD348
+    .global dat_080CD348
+dat_080CD348:
     .incbin "baserom.gba", 0xCD348, 0x134
 
     .global sub_080CD47C
@@ -37229,8 +38400,13 @@ sub_080CD47C:
     pop {pc}
     .hword 0x0000
 _080CD490:
-    .word 0x080CD494
-    .incbin "baserom.gba", 0xCD494, 0x164
+    .word dat_080CD494
+    .global dat_080CD494
+dat_080CD494:
+    .incbin "baserom.gba", 0xCD494, 0x90
+    .global dat_080CD524
+dat_080CD524:
+    .incbin "baserom.gba", 0xCD524, 0xD4
 
     .global sub_080CD5F8
     .thumb_func
@@ -37244,7 +38420,9 @@ sub_080CD5F8:
     pop {pc}
     .hword 0x0000
 _080CD608:
-    .word 0x080CD60C
+    .word dat_080CD60C
+    .global dat_080CD60C
+dat_080CD60C:
     .incbin "baserom.gba", 0xCD60C, 0xD4
 
     .global sub_080CD6E0
@@ -37293,7 +38471,7 @@ sub_080CD712:
     .hword 0x0000
     .word 0x080CD524
 _080CD724:
-    .word 0x080CD524
+    .word dat_080CD524
 
     .global sub_080CD728
     .thumb_func
@@ -37307,7 +38485,9 @@ sub_080CD728:
     pop {pc}
     .hword 0x0000
 _080CD738:
-    .word 0x080CD73C
+    .word dat_080CD73C
+    .global dat_080CD73C
+dat_080CD73C:
     .incbin "baserom.gba", 0xCD73C, 0xA6
 
     .global sub_080CD7E2
@@ -37373,7 +38553,9 @@ sub_080CD838:
     pop {pc}
     .hword 0x0000
 _080CD84C:
-    .word 0x080CD850
+    .word dat_080CD850
+    .global dat_080CD850
+dat_080CD850:
     .incbin "baserom.gba", 0xCD850, 0x198
 
     .global sub_080CD9E8
@@ -37397,7 +38579,9 @@ _080CDA06:
 _080CDA0A:
     pop {pc}
 _080CDA0C:
-    .word 0x080CDA10
+    .word dat_080CDA10
+    .global dat_080CDA10
+dat_080CDA10:
     .incbin "baserom.gba", 0xCDA10, 0x11C
 
     .global sub_080CDB2C
@@ -37705,7 +38889,9 @@ sub_080CDD64:
     pop {pc}
     .hword 0x0000
 _080CDD78:
-    .word 0x080CDD7C
+    .word dat_080CDD7C
+    .global dat_080CDD7C
+dat_080CDD7C:
     .incbin "baserom.gba", 0xCDD7C, 0x13C
 
     .global sub_080CDEB8
@@ -37721,7 +38907,9 @@ sub_080CDEB8:
     pop {pc}
     .hword 0x0000
 _080CDECC:
-    .word 0x080CDED0
+    .word dat_080CDED0
+    .global dat_080CDED0
+dat_080CDED0:
     .incbin "baserom.gba", 0xCDED0, 0xA8
 
     .global sub_080CDF78
@@ -37762,7 +38950,9 @@ sub_080CDFAC:
     pop {pc}
     .hword 0x0000
 _080CDFBC:
-    .word 0x080CDFC0
+    .word dat_080CDFC0
+    .global dat_080CDFC0
+dat_080CDFC0:
     .incbin "baserom.gba", 0xCDFC0, 0x92
 
     .global sub_080CE052
@@ -37814,7 +39004,9 @@ sub_080CE0A4:
     pop {pc}
     .hword 0x0000
 _080CE0B8:
-    .word 0x080CE0BC
+    .word dat_080CE0BC
+    .global dat_080CE0BC
+dat_080CE0BC:
     .incbin "baserom.gba", 0xCE0BC, 0x1FC
 
     .global sub_080CE2B8
@@ -37857,7 +39049,9 @@ _080CE2F4:
     pop {pc}
     .hword 0x0000
 _080CE2F8:
-    .word 0x080CE2FC
+    .word dat_080CE2FC
+    .global dat_080CE2FC
+dat_080CE2FC:
     .incbin "baserom.gba", 0xCE2FC, 0xA4
 _080CE3A0:
     bl sub_080129FC
@@ -37938,7 +39132,9 @@ _080CE43A:
     bl sub_08012D62
     pop {pc}
 _080CE440:
-    .word 0x080CE444
+    .word dat_080CE444
+    .global dat_080CE444
+dat_080CE444:
     .incbin "baserom.gba", 0xCE444, 0x58
 
     .global sub_080CE49C
@@ -37984,7 +39180,9 @@ sub_080CE4D0:
     pop {pc}
     .hword 0x0000
 _080CE4E4:
-    .word 0x080CE4E8
+    .word dat_080CE4E8
+    .global dat_080CE4E8
+dat_080CE4E8:
     .incbin "baserom.gba", 0xCE4E8, 0x1F8
 
     .global sub_080CE6E0
@@ -38000,7 +39198,9 @@ sub_080CE6E0:
     pop {pc}
     .hword 0x0000
 _080CE6F4:
-    .word 0x080CE6F8
+    .word dat_080CE6F8
+    .global dat_080CE6F8
+dat_080CE6F8:
     .incbin "baserom.gba", 0xCE6F8, 0x116
 
     .global sub_080CE80E
@@ -38053,7 +39253,9 @@ sub_080CE840:
     pop {pc}
     .hword 0x0000
 _080CE854:
-    .word 0x080CE858
+    .word dat_080CE858
+    .global dat_080CE858
+dat_080CE858:
     .incbin "baserom.gba", 0xCE858, 0x21C
 
     .global sub_080CEA74
@@ -38071,7 +39273,9 @@ sub_080CEA74:
 _080CEA8A:
     pop {pc}
 _080CEA8C:
-    .word 0x080CEA90
+    .word dat_080CEA90
+    .global dat_080CEA90
+dat_080CEA90:
     .incbin "baserom.gba", 0xCEA90, 0x240
 
     .global sub_080CECD0
@@ -38101,7 +39305,9 @@ sub_080CECEA:
     bx r1
     pop {pc}
 _080CECF8:
-    .word 0x080CECFC
+    .word dat_080CECFC
+    .global dat_080CECFC
+dat_080CECFC:
     .incbin "baserom.gba", 0xCECFC, 0x10
 
     .global sub_080CED0C
@@ -38340,7 +39546,9 @@ sub_080CEEB8:
     pop {pc}
     .hword 0x0000
 _080CEECC:
-    .word 0x080CEED0
+    .word dat_080CEED0
+    .global dat_080CEED0
+dat_080CEED0:
     .incbin "baserom.gba", 0xCEED0, 0xD2
 
     .global sub_080CEFA2
@@ -38389,7 +39597,9 @@ sub_080CEFD4:
     pop {pc}
     .hword 0x0000
 _080CEFE8:
-    .word 0x080CEFEC
+    .word dat_080CEFEC
+    .global dat_080CEFEC
+dat_080CEFEC:
     .incbin "baserom.gba", 0xCEFEC, 0x11C
 
     .global sub_080CF108
@@ -38425,7 +39635,9 @@ sub_080CF134:
     pop {pc}
     .hword 0x0000
 _080CF148:
-    .word 0x080CF14C
+    .word dat_080CF14C
+    .global dat_080CF14C
+dat_080CF14C:
     .incbin "baserom.gba", 0xCF14C, 0x188
 
     .global sub_080CF2D4
@@ -38466,7 +39678,9 @@ sub_080CF300:
     pop {pc}
     .hword 0x0000
 _080CF314:
-    .word 0x080CF318
+    .word dat_080CF318
+    .global dat_080CF318
+dat_080CF318:
     .incbin "baserom.gba", 0xCF318, 0xC4
 
     .global sub_080CF3DC
@@ -38519,7 +39733,9 @@ sub_080CF420:
     pop {pc}
     .hword 0x0000
 _080CF430:
-    .word 0x080CF434
+    .word dat_080CF434
+    .global dat_080CF434
+dat_080CF434:
     .incbin "baserom.gba", 0xCF434, 0x162
 
     .global sub_080CF596
@@ -38555,7 +39771,9 @@ sub_080CF5B8:
     pop {pc}
     .hword 0x0000
 _080CF5CC:
-    .word 0x080CF5D0
+    .word dat_080CF5D0
+    .global dat_080CF5D0
+dat_080CF5D0:
     .incbin "baserom.gba", 0xCF5D0, 0xDE
 
     .global sub_080CF6AE
@@ -38687,7 +39905,9 @@ sub_080CF76C:
 _080CF782:
     pop {pc}
 _080CF784:
-    .word 0x080CF788
+    .word dat_080CF788
+    .global dat_080CF788
+dat_080CF788:
     .incbin "baserom.gba", 0xCF788, 0xE0
 
     .global sub_080CF868
@@ -38702,7 +39922,9 @@ sub_080CF868:
     pop {pc}
     .hword 0x0000
 _080CF878:
-    .word 0x080CF87C
+    .word dat_080CF87C
+    .global dat_080CF87C
+dat_080CF87C:
     .incbin "baserom.gba", 0xCF87C, 0xE8
 
     .global sub_080CF964
@@ -38790,7 +40012,9 @@ sub_080CF9FA:
     bl sub_08002FF8
     pop {pc}
 _080CFA0C:
-    .word 0x080CFA10
+    .word dat_080CFA10
+    .global dat_080CFA10
+dat_080CFA10:
     .incbin "baserom.gba", 0xCFA10, 0x24
 
     .global sub_080CFA34
@@ -38828,7 +40052,7 @@ sub_080CFA56:
     pop {r4, pc}
     .hword 0x0000
 _080CFA6C:
-    .word 0x080188E0
+    .word dat_080188E0
     .incbin "baserom.gba", 0xCFA70, 0x8
 
     .global sub_080CFA78
@@ -38844,7 +40068,9 @@ sub_080CFA78:
     pop {pc}
     .hword 0x0000
 _080CFA8C:
-    .word 0x080CFA90
+    .word dat_080CFA90
+    .global dat_080CFA90
+dat_080CFA90:
     .incbin "baserom.gba", 0xCFA90, 0xDC
 
     .global sub_080CFB6C
@@ -38881,7 +40107,9 @@ sub_080CFBB0:
     pop {pc}
     .hword 0x0000
 _080CFBC4:
-    .word 0x080CFBC8
+    .word dat_080CFBC8
+    .global dat_080CFBC8
+dat_080CFBC8:
     .incbin "baserom.gba", 0xCFBC8, 0x162
 
     .global sub_080CFD2A
@@ -38916,7 +40144,9 @@ sub_080CFD48:
     pop {pc}
     .hword 0x0000
 _080CFD5C:
-    .word 0x080CFD60
+    .word dat_080CFD60
+    .global dat_080CFD60
+dat_080CFD60:
     .incbin "baserom.gba", 0xCFD60, 0x84
 
     .global sub_080CFDE4
@@ -39003,7 +40233,9 @@ sub_080CFE5C:
     pop {pc}
     .hword 0x0000
 _080CFE70:
-    .word 0x080CFE74
+    .word dat_080CFE74
+    .global dat_080CFE74
+dat_080CFE74:
     .incbin "baserom.gba", 0xCFE74, 0x10C
 
     .global sub_080CFF80
@@ -39019,5 +40251,7 @@ sub_080CFF80:
     pop {pc}
     .hword 0x0000
 _080CFF94:
-    .word 0x080CFF98
+    .word dat_080CFF98
+    .global dat_080CFF98
+dat_080CFF98:
     .incbin "baserom.gba", 0xCFF98, 0x120

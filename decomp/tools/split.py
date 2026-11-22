@@ -83,6 +83,19 @@ def write_externs(v: str) -> int:
             continue
         off = int(a, 16) - BASE
         lines.append(f"    {'.thumb_set' if mode == 'T' else '.set'} {name}, Start + 0x{off:X}")
+    # Data references whose target couldn't take a label (inside an
+    # instruction, or in a range that is still incbin).
+    dfile = DECOMP / "symbols" / f"datarefs_{v}.txt"
+    dlabels = set()
+    for f in (DECOMP / "asm").glob("*.s"):
+        dlabels |= set(re.findall(r"^(dat_[0-9A-F]{8}):", f.read_text(), re.M))
+    if dfile.exists():
+        for tok in dfile.read_text().split():
+            if tok.startswith("#") or not all(c in "0123456789ABCDEFabcdef" for c in tok):
+                continue
+            name = f"dat_{tok.upper()}"
+            if name not in dlabels:
+                lines.append(f"    .set {name}, Start + 0x{int(tok, 16) - BASE:X}")
     out = DECOMP / "build" / v / "externs.inc"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines) + "\n", newline="\n")

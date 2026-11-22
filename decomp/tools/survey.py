@@ -59,6 +59,7 @@ class Survey:
         self.queue: list[tuple[int, bool, str]] = []
         self.code: set[int] = set()            # halfword addresses decoded as code
         self.literals: set[int] = set()
+        self.lit_values: set[int] = set()      # values loaded from literal pools
         self.unresolved = Counter()            # kind -> count
         self.ram_calls = Counter()
 
@@ -139,6 +140,7 @@ class Survey:
                     if self.rom.in_rom(lit):
                         self.literals.add(lit)
                         v = self.rom.u32(lit)
+                        self.lit_values.add(v)
                         if self.rom.in_rom(v) and v & 1:
                             self.seed(v, True, "literal_ptr")
                         elif 0x02000000 <= v < 0x04000000 and v & 1:
@@ -254,6 +256,18 @@ def main() -> None:
         for a in sorted(s.funcs):
             fi = s.funcs[a]
             f.write(f"{a:08X} {'T' if fi['thumb'] else 'A'} {fi['end'] - a:5d} {fi['source']} {int(fi['ok'])}\n")
+
+    # Data references: literal values pointing into the code region that are
+    # not function starts (tables inside the code region, struct fields...).
+    code_end = args.code_end
+    datarefs = sorted(v for v in s.lit_values
+                      if BASE <= v < code_end and not ((v & ~1) in s.funcs and v & 1))
+    dpath = DECOMP / "symbols" / f"datarefs_{args.version}.txt"
+    with dpath.open("w", encoding="utf-8", newline="\n") as f:
+        f.write("# literal values pointing into the code region (not function starts); tools/survey.py\n")
+        for v in datarefs:
+            f.write(f"{v:08X}\n")
+    print(f"data references into the code region: {len(datarefs)} -> {dpath.relative_to(ROOT)}")
 
     ce_hit = sum(1 for a, _ in ce if a in s.funcs)
     print(f"version={args.version}")

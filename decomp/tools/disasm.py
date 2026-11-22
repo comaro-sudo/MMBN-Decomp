@@ -75,6 +75,12 @@ class Segment:
                     self.funcs[a] = mode == "T"
         for e in self.entries:
             self.funcs.setdefault(e, self.thumb)
+        self.datarefs: set[int] = set()        # literal targets in the code region (all segments)
+        dpath = DECOMP / "symbols" / f"datarefs_{v}.txt"
+        if dpath.exists():
+            self.datarefs = {int(l, 16) for l in dpath.read_text().split() if not l.startswith("#")
+                             and all(c in "0123456789ABCDEFabcdef" for c in l)}
+        self.datalabels: set[int] = set()      # dat_ labels defined in this segment
         self.insns: dict[int, tuple] = {}      # addr -> (insn, thumb)
         self.literals: set[int] = set()
         self.labels: set[int] = set()
@@ -133,6 +139,16 @@ class Segment:
             insn, _ = self.insns[a]
             if any(l <= a < l + 4 or a <= l < a + insn.size for l in self.literals):
                 del self.insns[a]
+        self.place_datalabels()
+
+    def place_datalabels(self) -> None:
+        """dat_ labels for data references that land on data in this segment
+        (not on, or inside, an instruction)."""
+        covered = set()
+        for a, (insn, _) in self.insns.items():
+            covered.update(range(a, a + insn.size))
+        self.datalabels = {d for d in self.datarefs if self.start <= d < self.end and d not in covered}
+        self.labels |= self.datalabels
 
     @staticmethod
     def target(ops: str):
@@ -201,6 +217,8 @@ class Segment:
             target, thumb = w & ~1, bool(w & 1)
             if self.allfuncs.get(target) is thumb and BASE <= target < BASE + 0x120000:
                 return fname(target)
+            if w in self.datarefs:
+                return f"dat_{w:08X}"
         return f"0x{w:08X}"
 
     def label_for(self, a: int) -> str:
@@ -238,7 +256,9 @@ class Segment:
                 a += insn.size
                 continue
             # data
-            if a in self.labels:
+            if a in self.datalabels:
+                lines += [f"    .global dat_{a:08X}", f"dat_{a:08X}:"]
+            if a in self.labels and (a in self.literals or a not in self.datalabels):
                 lines.append(f"{lname(a)}:")
             # Unclassified runs (tables etc.) stay incbin from the player's ROM:
             # no bulk ROM data is written into the source. Labelled literal
