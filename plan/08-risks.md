@@ -12,4 +12,7 @@
 | R8 | Reference repos in the list are missing, outdated or misdescribed | Med | Low–Med | Verify in M0. Rely on mGBA and Ghidra for anything missing. |
 | R9 | Scope creep from Tier C content and stretch features (Slot-2, online) | High | Med | Tiered releases. Stretch items are explicitly out of scope until 1.0 ships. |
 | R10 | Save-compatibility breakage annoys players | Med | Med | New variables in unused save bytes. A version tag in the save. Document breakages. |
+| R12 | Wii U: big-endian bugs in host-side code | Med | Med | Option E (mGBA handles it). Endian-safe `pal_read*` helpers used on every platform from the start |
+| R13 | Wii U: no way to test on the ARM64 laptop (Cemu is x64-only) | Med | Low–Med | Early Cemu-under-Prism spike. Fall back to hardware-only testing |
+| R14 | Wii U: needs Wii U hardware and a homebrew setup the owner may not have | ? | Med | Confirm before M6/M12 |
 | R11 | Burnout (**confirmed solo project**) | High | High | Small releasable increments (Tier A ships early). Hard gates (G2/G3) so there is never more than one big track at a time. Reuse community work (WoodMan fix, existing RE notes, any existing decomp) instead of redoing it. Public progress may attract contributors later. |

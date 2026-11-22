@@ -1,6 +1,6 @@
-# 06 — Phase 4: Native Ports (PC → NDS → 3DS)
+# 06 — Phase 4: Native Ports (PC → NDS → 3DS, + Wii U)
 
-Depends on Phase 3. Covers the design doc's Parts II and III.
+Depends on Phase 3 (decomp, or option E: embedded mGBA core). Covers the design doc's Parts II and III and [docs/wii-u-blueprint.md](../docs/wii-u-blueprint.md).
 
 ## 1. Architecture: platform abstraction layer (PAL)
 
@@ -15,7 +15,7 @@ Depends on Phase 3. Covers the design doc's Parts II and III.
    │  palettes) │  touch) │  seq →   │  file/EEPROM)│  socket/   │
    │            │         │  mixer)  │              │  NiFi/UDS) │
    └────────────┴─────────┴──────────┴──────────────┴────────────┘
-        PC/SDL backend   |   NDS backend   |   3DS backend
+        PC/SDL backend  |  NDS backend  |  3DS backend  |  Wii U backend
 ```
 
 Two ways to implement the video layer:
@@ -64,8 +64,28 @@ Performance risk: ARM9 at 67 MHz is about 4x the GBA's CPU. That is enough for l
 | UDS local wireless | Replace SIO as on NDS | Share the NDS netcode message protocol |
 | Online (Pretendo / NEX) | **Stretch.** Consider a simple relay server or rollback netplay (nettai) instead | Big scope |
 
-## 5. Exit criteria
+## 5. Step 4d — Native Wii U (from docs/wii-u-blueprint.md)
+
+Order: after the PC port. It can run in parallel with 3DS. The PC build's two-window layout (game + PET) is the prototype: **TV = game window, GamePad = PET window.**
+
+| Feature | Plan | Notes |
+|---|---|---|
+| Toolchain | devkitPPC + `wut` + `wut-tools` (`dkp-pacman -S wiiu-dev`), output `.wuhb` | Run devkitPro under WSL2 ARM64 or x64 emulation (same question as NDS/3DS, see [01 §3.1](01-setup-and-toolchain.md)) |
+| **Endianness** | Big-endian PowerPC. With **option E** the mGBA core already handles it (it runs on Wii). Only host code that reads GBA RAM swaps bytes. With **decomp**, every struct loaded from ROM data needs swapping or build-time conversion | One more reason to prefer option E. Add `pal_read16/32` helpers from day one, even on PC, so the code is endian-clean |
+| TV rendering (GX2) | GBA frame (software PPU) → texture → integer-scaled to 1080p with optional LCD colour correction | The blueprint's 16:9 `480x270` widescreen has the same per-map caveat as 3DS widescreen (§4). Treat it as a stretch goal |
+| GamePad PET (854x480 touch) | Reuse the PET UI from the PC/NDS/3DS work: Net Map, touch Custom Screen, NaviCust drag and drop, folder editor, mail ticker | Resolution-independent UI layout is needed. Design it for 320x240 (3DS) and 854x480 from the start |
+| Off-TV play | Toggle: the whole game plus a compact PET on the GamePad | |
+| Audio | Mixer output → AX. PET cues routed to the GamePad speakers | Routing needs the audio layer to tag sounds as "PET" vs. "world" |
+| Input | VPAD (GamePad) + WPAD/KPAD (Pro Controller) | Same input abstraction as PC |
+| Local couch NetBattle (GamePad vs. Pro Controller) | Two link-cable endpoints in one process (two emulated GBAs, or two game instances) | New. Interesting, but stretch |
+| Online (sockets, rollback) | Share the netcode with PC/NDS/3DS. Study nettai's rollback design | Stretch, as for 3DS |
+| Testing | Cemu (x64-only release, so it runs under Prism on the ThinkPad; Vulkan on Adreno is untested) plus real hardware | **Spike early:** does Cemu run acceptably on this laptop? If not, test on hardware only |
+
+Wii U hardware: the CPU is a 1.24 GHz tri-core PowerPC 750 (Espresso). That is plenty for an mGBA core plus the UI, since mGBA already runs full speed on the 729 MHz Wii.
+
+## 6. Exit criteria
 
 - PC: a full playthrough on both versions.
 - NDS: a full playthrough on hardware, local wireless netbattle between two DS units.
 - 3DS: a full playthrough on hardware with stereo 3D on, and the dual-version save shared.
+- Wii U: a full playthrough on hardware with the GamePad PET working, Off-TV play, and `.wuhb` packaging.

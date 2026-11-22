@@ -1,5 +1,7 @@
 # Mega Man Battle Network 4: Nintendo Wii U Porting & Engineering Blueprint
 
+> **Reviewed 2026-11-21.** Corrections are marked ⚠️. How this fits the project: [plan/06 §5](../plan/06-phase4-native-ports.md) (native) and [plan/04 §2.3](../plan/04-phase2-handheld-deployment.md) (VC injection).
+
 ## Executive Summary
 
 The **Nintendo Wii U** provides a uniquely suited dual-screen ecosystem for *Mega Man Battle Network 4*. Unlike the Nintendo DS or 3DS, the Wii U pairs a **1080p HD Television Display (TV)** with the **Wii U GamePad (854x480 resistive touch screen)**, essentially transforming the GamePad into a life-sized, interactive **PErsonal Terminal (PET)** while rendering the Cyberworld and 6x3 tactical battles in crisp HD on the big screen.
@@ -79,6 +81,8 @@ The GamePad operates as an interactive, stateful OS running alongside the main g
   * **Core 1 (Main Game Thread):** Executes the ported *MMBN4* C/C++ game logic, collision detection, AI state machines, and GBA bytecode event interpreter at a locked 60.00 Hz (matching GBA's `59.7275 Hz` adjusted cleanly for 60Hz VSync).
 
   * **Core 2:** Dedicated to asynchronous asset streaming (HD portraits, SDAT/WAV audio banks) and **DRC (GamePad)** UI layout preparation.
+
+* ⚠️ **Note:** endianness only matters for the native (decomp-based) route. With the embedded-emulator route (plan option E), the mGBA core already handles big-endian hosts (it runs on Wii/PPC). Only host-side code that reads GBA RAM needs byte swaps.
 
 * **Endianness Conversion (CRITICAL):**
 
@@ -190,13 +194,17 @@ To build, compile, and package the Wii U port, integrate the following open-sour
 
 If deploying a fast-track release using Nintendo's official M2 GBA emulator on Wii U:
 
-* [**NicoAICP/UWUVCI-AIO-WPF**](https://github.com/NicoAICP/UWUVCI-AIO-WPF) *(Ultimate Wii U VC Injector)*
+* [**stuff-by-3-random-dudes/UWUVCI-AIO-WPF**](https://github.com/stuff-by-3-random-dudes/UWUVCI-AIO-WPF) *(Ultimate Wii U VC Injector)*
+
+  * ⚠️ **Correction:** `NicoAICP/UWUVCI-AIO-WPF` does not exist. The project lives at the link above (the older `NicoAICP/UWUVCI-AIO` is archived).
 
   * **Purpose:** Automated tool for injecting modified GBA ROMs (such as our single-playthrough, bug-fixed *MMBN4* overhaul) into an official Wii U GBA Virtual Console WUP package.
 
   * **Usage:** Packages the patched ROM with custom GamePad/TV boot banners, pixel-perfect scaling configs, and save-state support installable directly to the Wii U home menu.
 
-* [**Chadderz121/wup-installer-gx2**](https://github.com/Chadderz121/wup-installer-gx2)
+* [**xhp-creations/WUP-Installer-GX2**](https://github.com/xhp-creations/WUP-Installer-GX2)
+
+  * ⚠️ **Correction:** `Chadderz121/wup-installer-gx2` does not exist. The link above is the original (last updated 2017). Check which installer current Aroma setups use before writing the install guide.
 
   * **Purpose:** On-console WUP package installer for deploying Virtual Console builds to Wii U NAND or USB storage.
 
@@ -215,6 +223,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/cmake/WiiU.cmake ..
 make -j$(nproc)
 
 # 4. Test dual-screen TV + GamePad rendering in Cemu before hardware deployment
+#    (⚠️ Cemu ships x64-only builds; on the ARM64 ThinkPad it runs under Prism emulation. Untested.)
 cemu -g mmbn4_solar_eclipse.wuhb
 
 # 5. Deploy to physical Wii U via Wiiload over local Wi-Fi

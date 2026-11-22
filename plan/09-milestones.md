@@ -10,13 +10,14 @@ Effort estimates assume one person working part-time. Treat them as order-of-mag
 | **M3 QoL complete** | WP-A3, A5 | M2 | 3–5 weeks | **v0.2** |
 | **M4 Progression rework** | WP-B1, B2, B3, B4, B9 | M3, RE-06/07/15/18 | 3–5 months | v0.5 beta |
 | **M5 Polish & balance** | WP-B5, B6, B7, B8, full playthrough tests | M4 | 1–2 months | **v1.0** |
-| **M6 Handheld deployment** | GBARunner3 / open_agb_firm testing, bezel, install guides | v0.1+ (can run in parallel from M2) | 1–2 weeks | docs |
+| **M6 Handheld & console deployment** | GBARunner3 / open_agb_firm / Wii U VC (UWUVCI) testing, bezel, install guides | v0.1+ (can run in parallel from M2) | 1–2 weeks | docs |
 | **— Gate G2 —** | Decide whether to do Tier C content and/or Phase 3 | v1.0 | — | — |
 | **M7 Narrative content** | Tier C (C1–C6) | G2, RE-16 | 6–12+ months | v2.0 |
 | **M8 Decomp / recomp** | Phase 3 (community-coordinated) | G2/G3 | years | — |
 | **M9 PC port (ThinkPad)** | PAL + SDL backend, software PPU, dual-screen prototype | M8 | months | PC build |
 | **M10 NDS native** | Phase 4b | M9 | months | NDS build |
 | **M11 3DS native** | Phase 4c | M9 (+M10 UI) | months | 3DS build |
+| **M12 Wii U native** | Phase 4d: TV + GamePad PET, Off-TV, `.wuhb` | M9 (can run parallel to M10/M11) | months | Wii U build |
 
 ## Gates
 

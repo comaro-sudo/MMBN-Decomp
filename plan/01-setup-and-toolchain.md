@@ -50,6 +50,9 @@ MMBN4/
 | Python 3 | Table generation, build glue, data extraction | 1 |
 | devkitPro (devkitARM, libnds, libctru, citro2d/3d) | Native ports | 4 |
 | BlocksDS *(alternative to libnds)* | Native NDS port | 4 |
+| UWUVCI-AIO-WPF | Wii U GBA VC injection | 2 |
+| devkitPPC + wut + wut-tools | Native Wii U port | 4 |
+| Cemu *(x64, Prism)* | Wii U testing on the laptop (spike) | 4 |
 
 ### 3.1 Dev machine is Windows on ARM64 (ThinkPad T14s Gen 6, Snapdragon X Elite)
 
