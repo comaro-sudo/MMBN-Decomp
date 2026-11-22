@@ -1,4 +1,4 @@
-# Experiment: a Blue Moon Soul in Red Sun (2026-11-22)
+# Experiment: the other version's Souls in each ROM (2026-11-22)
 
 **Result: confirmed in both directions.**
 - **Red Sun:** with one 12-byte table changed, MegaMan unites with **WoodSoul**, a Blue Moon Soul. He takes WoodSoul's form, the Soul's 3-turn counter starts, and the battle runs normally.
