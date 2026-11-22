@@ -20,7 +20,7 @@
 .endif
 
 ; ---- Overhaul work packages (added per milestone) -----------
-; .include "common/wp_a1_woodman_fix.asm"   ; M2
+.include "common/wp_a1_woodman_fix.asm"      ; WP-A1: WoodMan scenario fix (Prof. 9)
 .include "common/wp_d4_twelve_souls.asm"     ; Violet Eclipse: all 12 Souls unite (both versions)
 
 .close
