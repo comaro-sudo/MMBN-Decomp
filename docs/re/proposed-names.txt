@@ -69,3 +69,11 @@
 080373F0 ?        code   CLAUDE       GetLibraryCountMega              compared with 60
 08037450 ?        code   CLAUDE       GetLibraryCountGiga              compared with 5
 080374F0 ?        code   CLAUDE       GetLibraryCountPA                compared with 30
+020073A0 020073A0 ram    CLAUDE       BN4_TOURNAMENT_POOLS             (CE name kept) 0xC a tournament: +0/+1 the Soul Navi pair, +2..+6 other entrants, +7..+0xB a second Navi list
+02006F40 02006F40 ram    CLAUDE       BN4_TRADED_NAVIS                 7 x 2 bytes, the id in +1: the other version's Navis received by trade (FF none); kept by New Game+
+0200ACC0 0200ACC0 ram    CLAUDE       BN4_TOURNAMENT_STATE             +5 the current tournament (BN4_START_TOURNAMENT), +1 entrant count, +2/+3 sort cursors
+08043FE4 08043FEC code   CLAUDE       TournamentPickSoulPair           pool +0/+1 from BN4_TOURNAMENT_SOUL_PAIRS; order by GetTertiaryRNG & 1 once flag 0x15 is set
+08044044 0804404C rom    CLAUDE       BN4_TOURNAMENT_SOUL_PAIRS        3 pointers to 2-byte pairs: RS 00 01 / 04 05 / 08 09, BM 03 02 / 06 07 / 0A 0B
+08044058 08044060 code   CLAUDE       TournamentFillEntrants           per-tournament list, Soul Navis only if in BN4_TRADED_NAVIS, shuffled, met (flag id+1) sorted last
+080441EC 080441F4 rom    CLAUDE       BN4_TOURNAMENT_ENTRANTS          3 pointers to 0xFF-terminated lists (2 shared Navis + the other version's pair)
+08044618 08044620 code   CLAUDE       IsNaviTraded                     r0 id: r0 count of BN4_TRADED_NAVIS entries equal to it, r1 entries used

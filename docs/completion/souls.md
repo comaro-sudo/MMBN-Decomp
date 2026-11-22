@@ -28,6 +28,10 @@ The order comes from the chip table's names (`0x161`–`0x16C`) and CE's Soul to
 5. **No tournament luck:** in the original game, which Souls you get depends on who you face. WP-B1 (deterministic brackets) is still blocked on RE-04.
 6. **Soul flags survive New Game+** (flags `0x000`–`0x0FF` are kept), so nothing to do there.
 
+## Lead: Red Sun may already hold Blue Moon's Navis (T)
+
+Red Sun enters Blue Moon's Navis in tournaments when its traded-Navi list holds them, and a community Red Sun save has Blue Moon's Soul flags and all 36 secret chips ([`../re/tournaments.md`](../re/tournaments.md) §5, [`../re/community-saves.md`](../re/community-saves.md) §3). If the Soul forms are present too (CE's tool reads all twelve from Red Sun), step 1 above shrinks to filling that list or the entrant tables. The test: patch the Soul flag table, load save `22565`, and unite with ProtoSoul.
+
 ## Open
 
 - Where the story sets a Soul's flag is still unknown. A runtime watch on the flag byte from a late-game save will find it.
