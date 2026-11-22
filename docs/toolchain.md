@@ -59,6 +59,7 @@ All three ROMs match **No-Intro** (DAT shipped with mGBA 0.10.5, version 2024010
 | roms/bn4_bm_us.gba | Megaman - Battle Network 4 - Blue Moon (USA) |
 | roms/bn4_rs_us.gba | Megaman - Battle Network 4 - Red Sun (USA) |
 | roms/bn4_bm_jp.gba | Rockman EXE 4 - Tournament Blue Moon (Japan) |
+| roms/bn4_rs_jp.gba | Rockman EXE 4 - Tournament Red Sun (Japan), **Rev 0** (added 2026-11-22; exe4rs needs Rev 1) |
 
 ## Build
 

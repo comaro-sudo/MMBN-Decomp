@@ -31,7 +31,7 @@ Stage A disassembly ──► Stage B names ──► Stage C functional C ─�
 | # | Decision | Recommendation |
 |---|---|---|
 | DD1 | Base ROM | **US Red Sun (B4WE)**. We own it, and Cyberworld Endless's symbol map is for it. US Blue Moon is a build variant. JP stays reference-only. |
-| DD2 | Fork `dism-exe/exe4rs` or start fresh | **Start fresh**, using exe4rs (JP, IDA-generated, ROM chunks in git, dormant since 2018) and bn6f only as references for boundaries, macros and naming. |
+| DD2 | Fork `dism-exe/exe4rs` or start fresh | **Start fresh**, using exe4rs and bn6f only as references for boundaries, macros and naming. Re-checked 2026-11-22 with a JP Red Sun in hand: exe4rs targets **Rev 1**, ours is **Rev 0**, and exe4rs is only ~9% disassembled. Recommendation unchanged. |
 | DD3 | Matching C or functional C | **Functional C** with differential testing (reasons in [01](01-findings.md)). |
 | DD4 | Assembler for the disassembly | **GNU as / ld (arm-none-eabi)**, as bn6f does. It lets C link in later and reuses bn6f's macros. Phase 1 stays armips. |
 | DD5 | Repo visibility | Private while solo. Public would need the same "no ROM bytes" rules plus a licence choice. |
