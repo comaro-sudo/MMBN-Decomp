@@ -19,6 +19,11 @@ Edit only your own areas. If work needs a change in the other agent's area, **st
 
 To swap or change ownership, the owner edits this table.
 
+**Claude's reverse-engineering lane (approved by the owner, 2026-11-22).** Claude may read `decomp/` but doesn't edit it.
+- Findings go in `docs/re/`.
+- Proposed symbol names go in `docs/re/proposed-names.txt`, in the `names.txt` format. Gemini merges them into `decomp/symbols/names.txt` and deletes the merged lines.
+- Claude builds only in a private directory outside `decomp/build/`.
+
 ## 2. Working rules (both agents)
 
 - **Check before editing.** Run `git status --short` first. Read the latest handoff of the area you touch (`decomp/notes/handoff-*.md`, `HANDOFF.md`, or `docs/handoff-*.md`).

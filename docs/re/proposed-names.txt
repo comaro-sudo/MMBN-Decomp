@@ -1,0 +1,44 @@
+# Names proposed by Claude's RE lane, for Gemini to merge into decomp/symbols/names.txt.
+# Same columns as names.txt: addr_rs   addr_bm   kind   source   symbol_name   description
+# source CLAUDE = static reading of decomp/asm (see docs/re/save-and-flags.md). Delete lines once merged.
+02001550 02001550 ram    CLAUDE       BN4_SAVE_SHIFT                   u32: the save block's current shift (even, 0-0x1FE); block base 0x02002130 + shift
+02001554 02001554 ram    CLAUDE       BN4_SAVE_KEY                     u32: the save XOR key (~GetRNG, nonzero); its low byte scrambles the SRAM image, the word itself is stored in the clear
+02002130 02002130 ram    CLAUDE       BN4_SAVE_BLOCK_BASE              the 0x3CF0-byte save block's unshifted base; toolkit +0x40..+0x98 point into it
+080061AC 080061AC rom    CLAUDE       BN4_SAVE_SLOT_OFFSETS            23 u32: offsets into the save block for toolkit +0x40..+0x98
+08000C44 08000C44 code   CLAUDE       GetPlaythrough                   r0 = progress +0x0D (playthrough count, raw)
+08000C4C 08000C4C code   CLAUDE       GetPlaythroughTier               r0 = playthrough count capped at 2
+08000C5A 08000C5A code   CLAUDE       IncPlaythrough                   progress +0x0D += 1, capped at 99
+08006128 08006128 code   CLAUDE       RelocateSaveBlock                new random shift, block moved (IWRAM memmove 0x03006FA9), toolkit save pointers rebuilt
+0800616A 0800616A code   CLAUDE       RebuildSavePointers              toolkit +0x40..+0x98 = base + shift + BN4_SAVE_SLOT_OFFSETS[i]
+08006338 08006338 code   CLAUDE       ScrambleSaveImage                r0 buf, r1 len: XOR with BN4_SAVE_KEY low byte, key word restored
+08006350 08006350 code   CLAUDE       UnscrambleSaveImage              same XOR as ScrambleSaveImage (used after write and after load)
+08006368 08006368 code   CLAUDE       NewSaveKey                       BN4_SAVE_KEY = ~GetRNG(), retried until nonzero
+08024FFC 08025000 code   CLAUDE       ClearAllEventFlags               zero [eToolkit+0x48], 0x3E0 bytes
+08025010 08025014 code   CLAUDE       ClearEventFlags1150              flags 0x1150-0x115F cleared
+0802502C 08025030 code   CLAUDE       ClearEventFlags1100              flags 0x1100-0x114F cleared
+08025048 0802504C code   CLAUDE       SetEventFlagHL                   flag (r0 << 8 | r1) set
+0802504C 08025050 code   CLAUDE       SetEventFlag                     flag r0 set (bit 0x80 >> (n & 7) of byte n >> 3)
+08025064 08025068 code   CLAUDE       ClearEventFlagHL                 flag (r0 << 8 | r1) cleared
+08025068 0802506C code   CLAUDE       ClearEventFlag                   flag r0 cleared
+08025084 08025088 code   CLAUDE       ToggleEventFlag                  flag r0 toggled
+0802509C 080250A0 code   CLAUDE       TestEventFlagHL                  flag (r0 << 8 | r1) tested, Z set when clear
+080250A0 080250A4 code   CLAUDE       TestEventFlag                    flag r0 tested, Z set when clear
+080250B6 080250BA code   CLAUDE       SetEventFlagRangeHL              r0 << 8 | r1 first, r2 count
+080250BA 080250BE code   CLAUDE       SetEventFlagRange                r0 first, r2 count
+080250E0 080250E4 code   CLAUDE       ClearEventFlagRangeHL            r0 << 8 | r1 first, r2 count
+080250E4 080250E8 code   CLAUDE       ClearEventFlagRange              r0 first, r2 count
+0802510E 08025112 code   CLAUDE       ToggleEventFlagRange             r0 first, r2 count
+08025138 0802513C code   CLAUDE       TestEventFlagRangeAll            r0 first, r2 count: r0 1 and Z clear when all set
+0802516E 08025172 code   CLAUDE       SetEventFlagLogged15C0           flag r0 and r0+0x80 set, r0-0x15C0 appended at 0x02006EC0 (tentative: Mystery Data)
+0802519C 080251A0 code   CLAUDE       SetEventFlagLogged1200           flag r0 and r0-0x1200+0x1400 set, appended to 64-entry lists at 0x020017A0 (tentative)
+080251D6 080251DA code   CLAUDE       ClearFlagLog15C0                 list at 0x02006EC0 filled 0x80, count 0x02001600 zeroed
+08048858 08048860 code   CLAUDE       SaveGameKeepPlace                save, first copying the map place into the game state (+0x38..+0x44)
+0804885C 08048864 code   CLAUDE       SaveGame                         checksum, scramble, write 0x02000000+0x73D2 to SRAM 0x0E000000 (3 tries); r0 0 ok, 1 failed, 2 refused (flag 0x118A)
+080488EC 080488F4 code   CLAUDE       LoadGame                         read SRAM, unscramble, checksum and magic check (flag 0x1166 on failure), then RelocateSaveBlock
+08048960 08048968 code   CLAUDE       ComputeSaveChecksum              progress +0x34 = byte sum of 0x02000000..0x020073D1 + 0x16 (RS) / 0x22 (BM)
+0804897C 08048984 code   CLAUDE       WriteSaveMagic                   BN4_SAVE_MAGIC copied to progress +0x54
+0804898E 08048996 code   CLAUDE       VerifySaveChecksum               r0 0 when progress +0x34 matches
+080489C0 080489C8 code   CLAUDE       VerifySaveMagic                  r0 0 when progress +0x54 matches BN4_SAVE_MAGIC
+080489E4 080489EC rom    CLAUDE       BN4_SAVE_MAGIC                   20-byte save magic string
+080489FC 08048A04 code   CLAUDE       SaveSystemBlock                  0x020073E0, 0x1C bytes, to SRAM 0x0E007F00 (flag 0x1188 on failure)
+08048A5A 08048A62 code   CLAUDE       LoadSystemBlock                  SRAM 0x0E007F00 to 0x020073E0, magic and sum check
