@@ -59,3 +59,13 @@
 0802D66C 0802D670 code   CLAUDE       SubBugFrags                      as SubZenny
 0802D698 0802D69C code   CLAUDE       GetBugFrags                      r0 BugFrags, 0 if tampered
 0800D7A2 0800D7A2 code   CLAUDE       GetNaviStat16                    r0 field offset: u16 at [eToolkit+0x78] + r0
+08000D28 08000D28 code   CLAUDE       GetCompletionStars               r0 count, r1 mask: 0x80 flag 0x500, 0x40 all Souls (list 0x08000DB4), 0x20 Std Library 150, 0x10 Mega 60, 0x08 Giga 5, 0x04 PA 30, 0x02 flag 0x6F
+08000DB4 08000DB4 rom    CLAUDE       BN4_STAR_SOUL_FLAGS              zero-terminated u16 list of this version's six Soul flags
+08000DC2 08000DC2 code   CLAUDE       SaveGameClear                    load save, set flags 0x500 and 0x6E, clear time into progress +0x2C, save
+08000DE8 08000DE8 code   CLAUDE       StartNewGamePlus                 stash kept data at 0x0202A000, new-game init, restore, IncPlaythrough, flag 0x500 set, 0x6E cleared
+080063B4 080063B4 code   CLAUDE       WriteChipKey                     r0 chip id: [eToolkit+0x84][id] = [0x02000670 + id] XOR 0x64 (also Soul pseudo-chips 353-364)
+0804F494 0804F4A0 code   CLAUDE       ScriptCmd_checkDoubleSouls       script EE 2B: TestEventFlagRangeAll(0x17 RS / 0x1D BM, 6), jump by result
+080373A8 ?        code   CLAUDE       GetLibraryCountStandard          star check compares with 150 (BM address not mapped)
+080373F0 ?        code   CLAUDE       GetLibraryCountMega              compared with 60
+08037450 ?        code   CLAUDE       GetLibraryCountGiga              compared with 5
+080374F0 ?        code   CLAUDE       GetLibraryCountPA                compared with 30
