@@ -44,6 +44,8 @@
 
 ## Immediate Next Steps
 
+0. The content inventory has started (commit `2938b52`): run `python patch/tools/inventory.py`; the conclusions are in `docs/completion/`. Its next step is RE-07/RE-09 (the ROM's own GMD, Mystery Data, shop and trader tables), which replace the guide- and map-based sources.
+
 1. RE-08: the battle-reward grant is `sub_08021684` (§4b of the note). Still to do: find who fills the reward word at `[obj+0x10]` from `BN4_REWARD_ROWS`, which sets the Busting Level row, and the "no reward" rule for scripted battles. Confirm it in a real battle once the story allows jack-in.
 2. New Game+ and completion stars are mapped in [`docs/re/completion-and-new-game-plus.md`](re/completion-and-new-game-plus.md). Leftover debug scripts show how to grant any Soul (flag plus pseudo-chip key). The story's own Soul grant is still not found; the best route is a runtime watch on the Soul flag byte from a late-game state.
 3. (old step 2) RE-05, second half: find the event-script opcode that sets a flag (TextPet script commands) and the scripts that use flags `0x17`–`0x22`.
