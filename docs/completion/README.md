@@ -40,4 +40,4 @@ python patch/tools/inventory.py      # writes build/inventory/chips.csv and prin
 
 That makes 68 items for WP-D2/WP-D4 to give an in-game source, plus up to 4 to confirm.
 
-**2026-11-22: the other version's Souls already work in either ROM** once they're granted: a Blue Moon Soul runs in Red Sun with a 6-byte patch ([../re/soul-merge-experiment.md](../re/soul-merge-experiment.md)). The merge work for C1 is the grant, not the Soul data.
+**2026-11-22: a Blue Moon Soul already works in Red Sun** once granted, with a 6-byte patch (the mirror case, Red Sun Souls in Blue Moon, is untested) ([../re/soul-merge-experiment.md](../re/soul-merge-experiment.md)). The merge work for C1 is the grant, not the Soul data.
