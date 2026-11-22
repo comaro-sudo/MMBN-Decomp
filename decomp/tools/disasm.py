@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Disassemble one segment of config/segments_<v>.toml to asm/<name>.s (GNU as).
+"""Disassemble one segment of config/segments_<v>.toml to versioned GNU-as source.
 
     python3 tools/disasm.py rs crt0 [--no-verify]
 
@@ -59,7 +59,18 @@ class Segment:
         self.linear = s.get("linear", False)
         self.data_from = s.get("data_from", self.end)
         self.entries = s.get("entries", [])
+        self.bm_delta = s.get("bm_delta", 0)
         self.rom = ROMS[v].read_bytes()
+        self.jumptables: dict[int, list[int]] = {}
+        for jt in s.get("jumptables", []):
+            jt_addr = jt["addr"]
+            jt_count = jt["count"]
+            targets = []
+            for i in range(jt_count):
+                off = jt_addr - BASE + i * 4
+                w = struct.unpack_from("<I", self.rom, off)[0]
+                targets.append(w)
+            self.jumptables[jt_addr] = targets
         self.md = {True: Cs(CS_ARCH_ARM, CS_MODE_THUMB), False: Cs(CS_ARCH_ARM, CS_MODE_ARM)}
         self.funcs: dict[int, bool] = {}       # start -> thumb (inside this segment)
         self.allfuncs: dict[int, bool] = {}    # every known function start (for externs)
@@ -87,6 +98,20 @@ class Segment:
         self.externs: set[int] = set()
         self.raw: set[int] = set()             # addresses forced to raw
         self.raw_lits: set[int] = set()        # literal words forced to raw values
+        self.names: dict[int, str] = {}
+        names_path = DECOMP / "symbols" / "names.txt"
+        if names_path.exists():
+            for line in names_path.read_text().splitlines():
+                if line.startswith("#") or not line.strip():
+                    continue
+                parts = line.split()
+                if len(parts) >= 5:
+                    addr_str = parts[0] if v == "rs" else parts[1]
+                    sym_name = parts[4]
+                    try:
+                        self.names[int(addr_str, 16)] = sym_name
+                    except ValueError:
+                        pass
 
     def inside(self, a: int) -> bool:
         return self.start <= a < self.data_from
@@ -109,6 +134,13 @@ class Segment:
                 self.note_refs(insn, self.thumb)
                 a += insn.size
             return
+        jt_targets = set()
+        for jt_addr, targets in self.jumptables.items():
+            self.labels.add(jt_addr)
+            for t in targets:
+                self.labels.add(t)
+                jt_targets.add(t)
+
         for f, thumb in sorted(self.funcs.items()):
             work = [f]
             while work:
@@ -134,6 +166,33 @@ class Segment:
                         break
                     prev = (m, ops)
                     a += insn.size
+
+        # Trace jump table targets within this segment
+        work = sorted(jt_targets)
+        while work:
+            a = work.pop()
+            prev = None
+            thumb = self.thumb
+            while self.inside(a) and a not in self.insns:
+                insn = self.decode(a, thumb)
+                if insn is None or a in self.literals:
+                    break
+                self.insns[a] = (insn, thumb)
+                self.note_refs(insn, thumb)
+                m, ops = insn.mnemonic, insn.op_str
+                if m == "b" or (m[0] == "b" and m[1:] in COND):
+                    t = self.target(ops)
+                    if t is not None and self.inside(t):
+                        work.append(t)
+                    if m == "b":
+                        break
+                elif m == "bx" and prev == ("mov", "lr, pc"):
+                    pass
+                elif m == "bx" or (m == "pop" and "pc" in ops) or \
+                        (m in ("mov", "add", "ldr") and ops.startswith("pc")):
+                    break
+                prev = (m, ops)
+                a += insn.size
         # Drop instructions that overlap a literal (descent ran into a pool).
         for a in list(self.insns):
             insn, _ = self.insns[a]
@@ -174,7 +233,7 @@ class Segment:
 
     def render(self, a: int, insn, thumb: bool) -> str:
         m, ops = insn.mnemonic, insn.op_str
-        raw = self.raw_line(a, insn.size, f"{m} {ops}")
+        raw = self.raw_line(a, insn.size, f"{m} {ops}".rstrip())
         if a in self.raw:
             return raw
         if is_branch(m):
@@ -189,7 +248,8 @@ class Segment:
             # (the linker would otherwise fail, or add an interworking veneer).
             if m != "bl" or t not in self.allfuncs or self.allfuncs[t] != thumb:
                 return raw
-            return f"    {m} {fname(t)}"
+            sym_comment = f"   @ {self.names[t]}" if t in self.names else ""
+            return f"    {m} {fname(t)}{sym_comment}"
         if m == "ldr" and "[pc" in ops:
             imm = self.target(ops.rstrip("]")) or 0
             lit = ((a + (4 if thumb else 8)) & ~3) + imm
@@ -216,9 +276,11 @@ class Segment:
         if a in self.literals and a not in self.raw_lits:
             target, thumb = w & ~1, bool(w & 1)
             if self.allfuncs.get(target) is thumb and BASE <= target < BASE + 0x120000:
-                return fname(target)
+                sym_comment = f"   @ {self.names[target]}" if target in self.names else ""
+                return f"{fname(target)}{sym_comment}"
             if w in self.datarefs:
-                return f"dat_{w:08X}"
+                sym_comment = f"   @ {self.names[w]}" if w in self.names else ""
+                return f"dat_{w:08X}{sym_comment}"
         return f"0x{w:08X}"
 
     def label_for(self, a: int) -> str:
@@ -233,7 +295,8 @@ class Segment:
 
     def emit(self) -> tuple[str, dict[int, int]]:
         lines = [f"@ {self.name}: 0x{self.start:08X}-0x{self.end:08X} ({self.v.upper()})",
-                 "@ GENERATED by tools/disasm.py, then verified byte-identical.", ""]
+                 "@ GENERATED by tools/disasm.py, then verified byte-identical.", "",
+                 f"    .set SEG_BM_DELTA, 0x{self.bm_delta:X}   @ Blue Moon = RS + this, inside this segment", ""]
         line_of: dict[int, int] = {}
         mode = None
         a = self.start
@@ -245,10 +308,11 @@ class Segment:
                     mode = thumb
                 if a in self.funcs:
                     n = fname(a)
+                    sym_comment = f"   @ {self.names[a]}" if a in self.names else ""
                     lines += ["", f"    .global {n}"]
                     if thumb:
                         lines.append("    .thumb_func")
-                    lines.append(f"{n}:")
+                    lines.append(f"{n}:{sym_comment}")
                 elif a in self.labels:
                     lines.append(f"{lname(a)}:")
                 lines.append(self.render(a, insn, thumb))
@@ -257,9 +321,18 @@ class Segment:
                 continue
             # data
             if a in self.datalabels:
-                lines += [f"    .global dat_{a:08X}", f"dat_{a:08X}:"]
+                sym_comment = f"   @ {self.names[a]}" if a in self.names else ""
+                lines += [f"    .global dat_{a:08X}", f"dat_{a:08X}:{sym_comment}"]
             if a in self.labels and (a in self.literals or a not in self.datalabels):
                 lines.append(f"{lname(a)}:")
+            if a in self.jumptables:
+                jt_entries = self.jumptables[a]
+                for target in jt_entries:
+                    sym_comment = f"   @ {self.names[target]}" if target in self.names else ""
+                    lines.append(f"    .word {lname(target)}{sym_comment}")
+                    line_of[a] = len(lines)
+                    a += 4
+                continue
             # Unclassified runs (tables etc.) stay incbin from the player's ROM:
             # no bulk ROM data is written into the source. Labelled literal
             # words (constants/pointers used by code) are emitted as .word.
@@ -267,7 +340,7 @@ class Segment:
             while run_end < self.end and run_end not in self.insns and run_end not in self.labels:
                 run_end += 1
             if a not in self.literals and run_end - a >= 8:
-                lines.append(f'    .incbin "baserom.gba", 0x{a - BASE:X}, 0x{run_end - a:X}')
+                lines.append(f'    incrom 0x{a - BASE:X}, 0x{run_end - a:X}')
                 a = run_end
                 continue
             if a % 4 == 0 and a + 4 <= self.end and not any(x in self.insns for x in range(a + 1, a + 4)):
@@ -302,8 +375,12 @@ def main() -> None:
 
     seg = Segment(args.version, args.segment)
     seg.classify()
-    out = DECOMP / "asm" / f"{seg.name}.s"
+    out = DECOMP / "asm" / ("" if args.version == "rs" else args.version) / f"{seg.name}.s"
     out.parent.mkdir(exist_ok=True)
+    # GNU as reports paths relative to decomp/.  Keep the retry parser in
+    # sync with the versioned output location (asm/code_*.s for RS,
+    # asm/bm/code_*.s for Blue Moon).
+    out_rel = out.relative_to(DECOMP).as_posix()
 
     for attempt in range(1, 9):
         text, line_of = seg.emit()
@@ -313,7 +390,7 @@ def main() -> None:
         ok, log = build(args.version)
         if not ok:
             errs = [(int(m.group(1)), m.group(2)) for m in
-                    re.finditer(rf"asm/{re.escape(seg.name)}\.s:(\d+): Error: ([^\n]*)", log)]
+                    re.finditer(rf"{re.escape(out_rel)}:(\d+): Error: ([^\n]*)", log)]
             # A rejected instruction emits no bytes, so later labels shift and
             # healthy pc-relative loads report "invalid offset". Fix primary
             # errors first; offset errors only when nothing else is left.
@@ -326,7 +403,7 @@ def main() -> None:
             seg.raw |= hit
             print(f"attempt {attempt}: {len(hit)} instruction(s) rejected by as -> raw")
             msgs = {}
-            for m in re.finditer(rf"asm/{re.escape(seg.name)}\.s:\d+: Error: ([^\n]*)", log):
+            for m in re.finditer(rf"{re.escape(out_rel)}:\d+: Error: ([^\n]*)", log):
                 key = re.sub(r"`[^`]*'", "`...'", m.group(1))
                 msgs.setdefault(key, m.group(1))
             for k, example in list(msgs.items())[:4]:

@@ -4,8 +4,10 @@
     ~/.venvs/mmbn4-decomp/bin/python tools/survey.py [rs|bm] [--out notes/]
 
 Seeds: the ROM entry (ARM), Cyberworld Endless code symbols (RS only),
-odd ROM pointers found in literal pools, and tables of >=4 consecutive
-Thumb code pointers. Follows bl/b/bcc; stops at bx, pop {pc}, mov/add pc.
+odd ROM pointers found in literal pools, tables of >=4 consecutive Thumb
+code pointers, and short two/three-entry tables whose every target starts
+with a Thumb `push {..., lr}` prologue. Follows bl/b/bcc; stops at bx, pop
+{pc}, mov/add pc.
 Jump tables (mov pc / add pc) are not resolved yet: that's DC-2.
 
 Output: symbols/functions_<v>.txt (addr mode size source) and a summary.
@@ -18,7 +20,7 @@ import csv
 import re
 import struct
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from capstone import CS_ARCH_ARM, CS_MODE_ARM, CS_MODE_THUMB, Cs
@@ -61,6 +63,8 @@ class Survey:
         self.literals: set[int] = set()
         self.lit_values: set[int] = set()      # values loaded from literal pools
         self.unresolved = Counter()            # kind -> count
+        self.unresolved_sites: dict[str, set[int]] = defaultdict(set)
+        self.unresolved_origins = defaultdict(lambda: defaultdict(set))
         self.ram_calls = Counter()
 
     code_end: int | None = None
@@ -85,6 +89,12 @@ class Survey:
             start, thumb, _ = self.queue.pop()
             self.walk(start, thumb)
 
+    def note_unresolved(self, kind: str, address: int, origin: int) -> None:
+        """Count an unresolved control-flow case and retain its site/origin."""
+        self.unresolved[kind] += 1
+        self.unresolved_sites[kind].add(address)
+        self.unresolved_origins[kind][address].add(origin)
+
     def walk(self, start: int, thumb: bool) -> None:
         info = self.funcs[start]
         md = self.thumb if thumb else self.arm
@@ -97,7 +107,7 @@ class Survey:
                 insn = next(md.disasm(self.rom.d[off:off + 4], a), None)
                 if insn is None or (thumb and insn.size == 4 and insn.mnemonic != "bl"):
                     info["ok"] = False
-                    self.unresolved["invalid"] += 1
+                    self.note_unresolved("invalid", a, start)
                     break
                 seen.add(a)
                 for h in range(a, a + insn.size, 2):
@@ -122,17 +132,21 @@ class Survey:
                     if prev == ("mov", "lr, pc"):
                         # `mov lr, pc; bx rX` is a call through a register:
                         # execution returns to the next instruction.
-                        self.unresolved["bx_call"] += 1
+                        self.note_unresolved("bx_call", a, start)
                         prev = (m, ops)
                         a = nxt
                         continue
                     if not ops.startswith("lr"):
-                        self.unresolved["bx_reg"] += 1
+                        self.note_unresolved("bx_reg", a, start)
                     break
                 elif m == "pop" and "pc" in ops:
                     break
+                elif m == "mov" and ops == "pc, lr":
+                    # Thumb return form. It stops this path but is not an
+                    # unresolved computed jump or a jump-table dispatch.
+                    break
                 elif m in ("mov", "add", "ldr") and ops.startswith("pc"):
-                    self.unresolved["jump_table_or_pc_write"] += 1
+                    self.note_unresolved("jump_table_or_pc_write", a, start)
                     break
                 elif m == "ldr" and "[pc" in ops:
                     imm = imm_target(ops.rstrip("]")) or 0
@@ -181,6 +195,66 @@ class Survey:
             added_total += added
         return added_total
 
+    def verify_clean_thumb_func(self, addr: int, max_insns: int = 500) -> bool:
+        """Verify that addr points to a valid Thumb function:
+        all instructions are valid ARMv4T Thumb, and execution reaches
+        a standard function return (pop {..., pc}, mov pc, lr, or bx lr)."""
+        a = addr
+        insn_cnt = 0
+        d = self.rom.d
+        while insn_cnt < max_insns:
+            o = a - BASE
+            if not (0 <= o <= len(d) - 4):
+                return False
+            insn = next(self.thumb.disasm(d[o:o+4], a), None)
+            if insn is None or (insn.size == 4 and insn.mnemonic != "bl"):
+                return False
+            insn_cnt += 1
+            m, ops = insn.mnemonic, insn.op_str
+            if m == "pop" and "pc" in ops:
+                return True
+            if m == "mov" and ops == "pc, lr":
+                return True
+            if m == "bx" and ops.startswith("lr"):
+                return True
+            a += insn.size
+        return False
+
+    def clean_gap_prologue_pass(self) -> int:
+        """Scan undecoded gaps for Thumb push {..., lr} or preceded push {r...}
+        that decode cleanly to a valid function return. This recovers functions
+        situated inside gaps after data tables or unreferenced dispatch blocks."""
+        added_total = 0
+        end = self.code_end or self.rom.end
+        d = self.rom.d
+        for _ in range(4):
+            covered = set(self.code)
+            for l in self.literals:
+                covered |= {l, l + 2}
+            added = 0
+            a = BASE + 0x25C
+            while a < end:
+                if a in covered or a in self.funcs:
+                    a += 2
+                    continue
+                val = struct.unpack_from("<H", d, a - BASE)[0]
+                if (val & 0xFF00) == 0xB500:
+                    if self.verify_clean_thumb_func(a):
+                        self.seed(a | 1, True, "clean_prologue")
+                        added += 1
+                elif (val & 0xFF00) == 0xB400:
+                    prev_h = struct.unpack_from("<H", d, a - BASE - 2)[0] if a > BASE else 0
+                    if prev_h == 0 or prev_h == 0x46F7 or prev_h == 0x4770 or (prev_h & 0xFF00) == 0xBD00 or (prev_h & 0xF800) == 0xE000:
+                        if self.verify_clean_thumb_func(a):
+                            self.seed(a | 1, True, "preceded_b4_push")
+                            added += 1
+                a += 2
+            if not added:
+                break
+            self.run()
+            added_total += added
+        return added_total
+
     def pointer_tables(self, min_run: int = 4) -> int:
         """Seed from runs of >= min_run words that are odd ROM pointers."""
         d, n, found = self.rom.d, len(self.rom.d) // 4, 0
@@ -196,6 +270,77 @@ class Survey:
                     self.seed(p, True, "ptr_table")
             run = []
         return found
+
+    def short_prologue_pointer_tables(self) -> tuple[int, int]:
+        """Seed conservative two/three-entry Thumb callback tables.
+
+        The broad pointer-table pass deliberately requires four adjacent ROM
+        pointers to avoid treating arbitrary data as code.  Real callback and
+        state tables commonly contain only two or three entries, though.  A
+        short run is admitted only when *all* its targets begin with a Thumb
+        `push {..., lr}` instruction and the targets are not already decoded
+        code or literal-pool words.  This gives the same structural evidence
+        as a normal function entry without making single pointer-shaped data
+        a seed.
+
+        Returns `(tables, targets)` for the survey report.
+        """
+        d, n = self.rom.d, len(self.rom.d) // 4
+        tables = targets = 0
+        run: list[int] = []
+        for i in range(n + 1):
+            v = struct.unpack_from("<I", d, i * 4)[0] if i < n else 0
+            if self.rom.in_rom(v) and v & 1:
+                run.append(v)
+                continue
+            if 2 <= len(run) <= 3:
+                starts = [p & ~1 for p in run]
+                code_limit = self.code_end or self.rom.end
+                valid = all(
+                    BASE + 0x25C <= start < code_limit
+                    and start not in self.literals
+                    and self.verify_clean_thumb_func(start)
+                    for start in starts
+                ) and any(start not in self.funcs for start in starts)
+                if valid:
+                    tables += 1
+                    for p in run:
+                        before = len(self.funcs)
+                        self.seed(p, True, "short_ptr_table")
+                        targets += len(self.funcs) - before
+            run = []
+        return tables, targets
+
+    def sparse_pointer_tables(self) -> tuple[int, int]:
+        """Seed callback tables that contain interleaved null pointers (0x00000000).
+
+        Sparse tables occur in opcode dispatchers where unassigned opcodes have null
+        table entries. Admitted only when all non-zero entries verify as clean Thumb
+        routines.
+        """
+        d, n = self.rom.d, len(self.rom.d) // 4
+        code_limit = self.code_end or self.rom.end
+        tables = targets = 0
+        run: list[int] = []
+        for i in range(n + 1):
+            w = struct.unpack_from("<I", d, i * 4)[0] if i < n else 0xDEADBEEF
+            is_odd_rom = (BASE + 0x25C <= w < code_limit) and (w & 1)
+            is_null = (w == 0)
+            if is_odd_rom or is_null:
+                run.append(w)
+                continue
+            odd_ptrs = [w for w in run if w != 0]
+            null_ptrs = [w for w in run if w == 0]
+            if 4 <= len(run) <= 64 and len(odd_ptrs) >= 2 and len(null_ptrs) >= 1:
+                starts = [w & ~1 for w in odd_ptrs]
+                if all(start not in self.literals and self.verify_clean_thumb_func(start) for start in starts) and any(start not in self.funcs for start in starts):
+                    tables += 1
+                    for p in odd_ptrs:
+                        before = len(self.funcs)
+                        self.seed(p, True, "sparse_ptr_table")
+                        targets += len(self.funcs) - before
+            run = []
+        return tables, targets
 
 
 def ce_code_symbols() -> list[tuple[int, str]]:
@@ -239,8 +384,14 @@ def main() -> None:
 
     tables = s.pointer_tables()
     s.run()
+    short_tables, short_targets = s.short_prologue_pointer_tables()
+    s.run()
+    sparse_tables, sparse_targets = s.sparse_pointer_tables()
+    s.run()
     prologues = s.prologue_pass()
     print(f"prologue pass: {prologues} gap-start functions seeded")
+    clean_prologues = s.clean_gap_prologue_pass()
+    print(f"clean gap prologue pass: {clean_prologues} functions seeded")
 
     ok = sum(1 for f in s.funcs.values() if f["ok"])
     code_bytes = len(s.code) * 2
@@ -272,7 +423,9 @@ def main() -> None:
     ce_hit = sum(1 for a, _ in ce if a in s.funcs)
     print(f"version={args.version}")
     print(f"functions={len(s.funcs)} (clean={ok}); from entry={after_entry}, +CE={after_ce - after_entry}, "
-          f"+ptr tables={len(s.funcs) - after_ce} ({tables} tables)")
+          f"+ptr tables={len(s.funcs) - after_ce} ({tables} long tables, "
+          f"{short_tables} short tables/{short_targets} new targets, "
+          f"{sparse_tables} sparse tables/{sparse_targets} new targets)")
     print(f"by source: {dict(by_source)}")
     print(f"code bytes decoded={code_bytes} ({code_bytes / len(rom.d) * 100:.1f}% of ROM), "
           f"highest code address=0x{hi:08X}")

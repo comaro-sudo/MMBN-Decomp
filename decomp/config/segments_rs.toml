@@ -2,6 +2,7 @@
 # kind: "header" (hand-written asm), "code" (asm/<name>.s from tools/disasm.py),
 #       "incbin" (explicit binary range, e.g. Nintendo logo or graphics)
 # mode: "arm" | "thumb" (initial decode mode for code segments)
+# bm_delta: Blue Moon address = RS address + bm_delta inside this segment
 # entries: extra code entry points inside the segment (besides known function starts)
 # data_from: everything from here to the segment end is data (literal pools, tables)
 
@@ -10,12 +11,14 @@ rom_size = 0x800000
 
 [[segment]]
 name = "header"
+bm_delta = 0x0
 start = 0x08000000
 end = 0x080000C0
 kind = "header"
 
 [[segment]]
 name = "crt0"
+bm_delta = 0x0
 start = 0x080000C0
 end = 0x0800022C
 kind = "code"
@@ -26,6 +29,7 @@ entries = [0x080000C0]
 
 [[segment]]
 name = "intr_table"
+bm_delta = 0x0
 start = 0x0800022C
 end = 0x0800025C
 kind = "code"            # pure data: emitted as .word by disasm.py
@@ -37,6 +41,7 @@ data_from = 0x0800022C
 
 [[segment]]
 name = "code_00"
+bm_delta = 0x0
 start = 0x0800025C
 end = 0x0801002A
 kind = "code"
@@ -44,6 +49,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0x0
 name = "code_01"
+bm_delta = 0x0
 start = 0x0801002A
 end = 0x08020D6C
 kind = "code"
@@ -51,6 +57,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0x4
 name = "code_02"
+bm_delta = 0x4
 start = 0x08020D6C
 end = 0x08035088
 kind = "code"
@@ -58,6 +65,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0x8
 name = "code_03"
+bm_delta = 0x8
 start = 0x08035088
 end = 0x0804F21C
 kind = "code"
@@ -65,6 +73,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_04"
+bm_delta = 0xC
 start = 0x0804F21C
 end = 0x080711E4
 kind = "code"
@@ -72,6 +81,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_05"
+bm_delta = 0xC
 start = 0x080711E4
 end = 0x08094758
 kind = "code"
@@ -79,6 +89,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_06"
+bm_delta = 0xC
 start = 0x08094758
 end = 0x080B01DE
 kind = "code"
@@ -86,6 +97,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_07"
+bm_delta = 0xC
 start = 0x080B01DE
 end = 0x080D00B8
 kind = "code"
@@ -93,6 +105,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_08"
+bm_delta = 0xC
 start = 0x080D00B8
 end = 0x080F0012
 kind = "code"
@@ -100,6 +113,7 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0xC
 name = "code_09"
+bm_delta = 0xC
 start = 0x080F0012
 end = 0x0810A1B4
 kind = "code"
@@ -107,7 +121,12 @@ mode = "thumb"
 
 [[segment]]   # BM delta +0x14, includes m4a
 name = "code_10"
+bm_delta = 0x14
 start = 0x0810A1B4
 end = 0x08120000
 kind = "code"
 mode = "thumb"
+jumptables = [
+    { addr = 0x08110DA4, count = 5 },
+    { addr = 0x08113A70, count = 18 },
+]

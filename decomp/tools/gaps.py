@@ -30,6 +30,8 @@ def main() -> None:
     s.run()
     s.pointer_tables()
     s.run()
+    s.short_prologue_pointer_tables()
+    s.run()
 
     covered = set(s.code)
     for l in s.literals:

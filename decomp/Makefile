@@ -29,6 +29,7 @@ BUILD   := build/$(VERSION)
 ROM     := $(BUILD)/bn4_$(VERSION).gba
 ELF     := $(BUILD)/bn4_$(VERSION).elf
 OBJ     := $(BUILD)/rom.o
+SRC     := $(BUILD)/rom.s
 
 ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork -I $(BUILD) -I include -I . \
            --defsym VERSION_RS=$(if $(filter rs,$(VERSION)),1,0) \
@@ -41,17 +42,23 @@ all: $(ROM)
 $(BUILD)/baserom.gba: $(BASEROM)
 	@mkdir -p $(BUILD)
 	@echo "$(SHA1)  $<" | sha1sum -c --quiet - || (echo "baserom $< has the wrong SHA-1"; exit 1)
-	ln -sf $(abspath $<) $@
+	ln -sf ../../../roms/$(notdir $<) $@
 
-$(OBJ): rom.s $(wildcard asm/*.s) $(wildcard config/*.toml) $(wildcard data/*.s) $(wildcard include/*.inc) $(BUILD)/baserom.gba
-	$(AS) $(ASFLAGS) -o $@ rom.s
-
-# Function symbols for code still inside incbin ranges (section-relative, so
-# `as` resolves BL offsets itself). Regenerated with rom.s by tools/split.py.
-$(BUILD)/externs.inc: rom.s symbols/functions_$(VERSION).txt $(wildcard asm/*.s)
+# The splitter writes a version-addressed ROM source and its external-symbol
+# table. RS sources live in asm/; BM's parallel generated view lives in
+# asm/bm/. This keeps both ROMs byte-matching while their insertion shifts are
+# still being reconciled into shared source.
+$(SRC): config/segments_$(VERSION).toml symbols/functions_$(VERSION).txt \
+        $(wildcard asm/*.s) $(wildcard asm/$(VERSION)/*.s) $(wildcard data/*.s) \
+        $(wildcard include/*.inc) tools/split.py
+	@mkdir -p $(BUILD)
 	python3 tools/split.py $(VERSION)
 
-$(OBJ): $(BUILD)/externs.inc
+$(BUILD)/externs.inc: $(SRC)
+	@test -f $@
+
+$(OBJ): $(SRC) $(BUILD)/externs.inc $(BUILD)/baserom.gba
+	$(AS) $(ASFLAGS) -o $@ $(SRC)
 
 $(ELF): $(OBJ) ld_script.ld
 	$(LD) -T ld_script.ld -Map $(BUILD)/bn4_$(VERSION).map -o $@ $(OBJ)
