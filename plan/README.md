@@ -23,6 +23,7 @@ M0 (setup, build pipeline, hello-world patch) is done. Write no overhaul code un
 | 07 | [07-testing-and-qa.md](07-testing-and-qa.md) | Regression strategy, test saves, automation |
 | 08 | [08-risks.md](08-risks.md) | Risk register |
 | 09 | [09-milestones.md](09-milestones.md) | Milestone roadmap and the backlog in order |
+| 10 | [10-pc-port.md](10-pc-port.md) | **PC port (started):** embedded mGBA core + SDL3 + PET window, milestones PC-1..PC-7 |
 
 ## The plan in one paragraph
 

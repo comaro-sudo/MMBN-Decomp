@@ -26,7 +26,7 @@
 | D6 | DS/3DS deployment in the short term | **Hypervisor route** (GBARunner3, open_agb_firm) | Wait for native ports |
 | D7 | Native port strategy | **Decomp (or option E) → platform abstraction layer → PC/SDL port (ThinkPad) → NDS → 3DS, with Wii U as an extra target after PC** ✅ confirmed (Wii U added 2026-11-21) | Go straight to NDS (painful debugging, no shared layer) |
 | D8 | Version control | Git, private repo; ROMs and build outputs in `.gitignore` | — |
-| D10 | Porting architecture option | Add **option E: an embedded GBA core (mGBA, MPL-2.0) plus host-side hooks and UI** to the Phase 3/4 choices, as proven by Cyberworld Endless on PC and 3DS. It may make a full decompilation unnecessary for the ports (see [05](05-phase3-decompilation.md)). | Decomp only |
+| D10 ✅ adopted for the PC port (2026-11-21) | Porting architecture option | Add **option E: an embedded GBA core (mGBA, MPL-2.0) plus host-side hooks and UI** to the Phase 3/4 choices, as proven by Cyberworld Endless on PC and 3DS. It may make a full decompilation unnecessary for the ports (see [05](05-phase3-decompilation.md)). | Decomp only |
 | D9 | Asset policy for native ports | Port **extracts assets from the user's own ROM at build time** (sm64/pokeemerald-PC model). No Capcom assets in the repo. | — |
 
 ## 3. Design-doc claims to verify before building on them
