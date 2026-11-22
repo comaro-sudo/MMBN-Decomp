@@ -569,7 +569,7 @@ _080F0A40:
 _080F0A66:
     pop {pc}
 _080F0A68:
-    .word 0x080F0A7B
+    .word sub_080F0A7A
 _080F0A6C:
     .word 0x080F0A70
     .incbin "baserom.gba", 0xF0A70, 0xA
@@ -628,11 +628,11 @@ _080F0AD4:
     .word 0x080F0AD8
     .incbin "baserom.gba", 0xF0AD8, 0x14
 _080F0AEC:
-    .word 0x080F0EA7
+    .word sub_080F0EA6
 _080F0AF0:
-    .word 0x080F0EA7
+    .word sub_080F0EA6
 _080F0AF4:
-    .word 0x080F0F1D
+    .word sub_080F0F1C
 
     .global sub_080F0AF8
     .thumb_func
@@ -2092,7 +2092,7 @@ _080F20C0:
     .word 0x080F20C4
     .incbin "baserom.gba", 0xF20C4, 0xC
 _080F20D0:
-    .word 0x0800F735
+    .word sub_0800F734
     .incbin "baserom.gba", 0xF20D4, 0x28
 
     .global sub_080F20FC
@@ -4473,9 +4473,9 @@ _080F39E0:
     .word 0x080F39E4
     .incbin "baserom.gba", 0xF39E4, 0x18
 _080F39FC:
-    .word 0x080F338B
+    .word sub_080F338A
 _080F3A00:
-    .word 0x080F338B
+    .word sub_080F338A
 
     .global sub_080F3A04
     .thumb_func
@@ -5612,7 +5612,7 @@ sub_080F4400:
 _080F4424:
     .word 0x080F442C
 _080F4428:
-    .word 0x080F442F
+    .word sub_080F442E
     .hword 0x1E14
 
     .global sub_080F442E
@@ -7225,7 +7225,7 @@ _080F59FC:
     add sp, #0x18
     pop {r4, pc}
 _080F5A00:
-    .word 0x0801881D
+    .word sub_0801881C
 
     .global sub_080F5A04
     .thumb_func
@@ -7301,7 +7301,7 @@ sub_080F5A68:
     pop {r4, pc}
     .hword 0x0000
 _080F5A84:
-    .word 0x0801881D
+    .word sub_0801881C
 
     .global sub_080F5A88
     .thumb_func
@@ -9086,7 +9086,7 @@ _081042EC:
 _081042F0:
     .word 0x0810430C
 _081042F4:
-    .word 0x0810433F
+    .word sub_0810433E
     .word 0x08104351
 _081042FC:
     .word 0x08104362
@@ -11912,7 +11912,7 @@ _0810782E:
     bl sub_08107870
     pop {pc}
 _08107834:
-    .word 0x08107869
+    .word sub_08107868
 _08107838:
     .word 0x08107844
 _0810783C:

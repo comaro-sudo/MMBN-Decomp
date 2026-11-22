@@ -557,7 +557,7 @@ _08000730:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08000738:
-    .word 0x08000729
+    .word sub_08000728
 
     .global sub_0800073C
     .thumb_func
@@ -582,27 +582,27 @@ _08000758:
     .word 0x0200A800
     .word 0x02010BB0
 _08000760:
-    .word 0x08112849
+    .word sub_08112848
 _08000764:
-    .word 0x0811297D
+    .word sub_0811297C
 _08000768:
-    .word 0x081137F1
+    .word sub_081137F0
 _0800076C:
-    .word 0x081127A5
+    .word sub_081127A4
 _08000770:
-    .word 0x08112849
+    .word sub_08112848
 _08000774:
-    .word 0x08112A39
+    .word sub_08112A38
 _08000778:
-    .word 0x081137F1
+    .word sub_081137F0
 _0800077C:
-    .word 0x08112915
+    .word sub_08112914
 _08000780:
-    .word 0x08112A11
+    .word sub_08112A10
 _08000784:
-    .word 0x0811297D
+    .word sub_0811297C
 _08000788:
-    .word 0x08112915
+    .word sub_08112914
 _0800078C:
     .word 0x00000204
 
@@ -3735,7 +3735,7 @@ sub_08001E94:
     pop {pc}
     .hword 0x0000
 _08001EAC:
-    .word 0x08001FB5
+    .word sub_08001FB4
 _08001EB0:
     .word 0x0300593D
 
@@ -9078,7 +9078,7 @@ sub_08005370:
 _08005384:
     .word 0x0809D38A
 _08005388:
-    .word 0x0809D3A3
+    .word sub_0809D3A2
 _0800538C:
     .word 0x0809D3D8
 _08005390:
@@ -13954,7 +13954,7 @@ _08008190:
 _08008194:
     .word 0x0203DB70
 _08008198:
-    .word 0x08018787
+    .word sub_08018786
 _0800819C:
     .word 0x02001610
 _080081A0:
@@ -17068,7 +17068,7 @@ sub_08009ABC:
     pop {pc}
     .hword 0x0000
 _08009AC8:
-    .word 0x0800A3D9
+    .word sub_0800A3D8
 
     .global sub_08009ACC
     .thumb_func
@@ -17080,7 +17080,7 @@ sub_08009ACC:
     pop {pc}
     .hword 0x0000
 _08009AD8:
-    .word 0x0800A351
+    .word sub_0800A350
 
     .global sub_08009ADC
     .thumb_func
@@ -17092,7 +17092,7 @@ sub_08009ADC:
     pop {pc}
     .hword 0x0000
 _08009AE8:
-    .word 0x0800A369
+    .word sub_0800A368
 
     .global sub_08009AEC
     .thumb_func
@@ -20426,7 +20426,7 @@ sub_0800B990:
 _0800B9A4:
     .word 0x0800B9AC
 _0800B9A8:
-    .word 0x0800B9B1
+    .word sub_0800B9B0
     .word 0x02000000
 
     .global sub_0800B9B0
@@ -21147,7 +21147,7 @@ _0800C232:
 _0800C238:
     .word 0x0800C240
 _0800C23C:
-    .word 0x0800C3ED
+    .word sub_0800C3EC
     .incbin "baserom.gba", 0xC240, 0x1AC
 
     .global sub_0800C3EC
@@ -24532,7 +24532,7 @@ _0800DB08:
 _0800DB0C:
     .word 0x000002D0
 _0800DB10:
-    .word 0x08000001
+    .word sub_08000000
 _0800DB14:
     .word 0x02000000
 _0800DB18:

@@ -9034,7 +9034,7 @@ _080DBB60:
 _080DBB70:
     .word 0x080DBB78
 _080DBB74:
-    .word 0x080DBB7D
+    .word sub_080DBB7C
     .word 0xFE02FF01
 
     .global sub_080DBB7C
@@ -17242,7 +17242,7 @@ _080E52C8:
 _080E52CC:
     .word 0x080E531A
 _080E52D0:
-    .word 0x080E531F
+    .word sub_080E531E
 _080E52D4:
     .word 0x080E5310
     .incbin "baserom.gba", 0xE52D8, 0x46

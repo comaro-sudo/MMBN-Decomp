@@ -25231,7 +25231,7 @@ _08043E8C:
 _08043E90:
     .word 0x08043E98
 _08043E94:
-    .word 0x08043E9B
+    .word sub_08043E9A
     .hword 0x0204
 
     .global sub_08043E9A

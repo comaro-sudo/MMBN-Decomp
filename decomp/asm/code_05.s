@@ -266,7 +266,7 @@ sub_08072018:
     lsls r0, r1, #8
     strb r0, [r6, #1]
 _08072028:
-    .word 0x08072031
+    .word sub_08072030
     .word 0x0720A901
 
     .global sub_08072030
@@ -631,7 +631,7 @@ _08074EC0:
     .word 0x05160000
     .incbin "baserom.gba", 0x74EC4, 0xC
 _08074ED0:
-    .word 0x08074EF3
+    .word sub_08074EF2
     .incbin "baserom.gba", 0x74ED4, 0x1E
 
     .global sub_08074EF2
@@ -866,7 +866,7 @@ _08075284:
     .word 0x08075290
     .incbin "baserom.gba", 0x75288, 0x68
 _080752F0:
-    .word 0x0807530D
+    .word sub_0807530C
 _080752F4:
     .word 0x000000FF
     .incbin "baserom.gba", 0x752F8, 0x14
@@ -1535,7 +1535,7 @@ _0807D18C:
     ldr r6, _0807D1B8
     .incbin "baserom.gba", 0x7D1AE, 0xA
 _0807D1B8:
-    .word 0x0803FF05
+    .word sub_0803FF04
     .incbin "baserom.gba", 0x7D1BC, 0x10
 _0807D1CC:
     blo _0807D240

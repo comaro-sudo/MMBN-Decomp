@@ -23,7 +23,10 @@ Everything under `tools/` and `ext/` is gitignored. Rebuild it from this file.
 | Flips | v198 | x64 (Prism emulation) | github.com/Sir-Walrus/Flips (renamed from Alcaro/Flips) | release `flips-windows.zip` |
 | TextPet | v1.0.0 | .NET Framework 4.8.1 (AnyCPU → ARM64) | github.com/Prof9/TextPet | release `TextPet.v1.0.0.zip`. Ships `mmbn4bm-us.tpi` / `mmbn4rs-us.tpi` indexes |
 | mGBA | 0.10.5 | x64 (Prism emulation) | github.com/mgba-emu/mgba | release `mGBA-0.10.5-win64.7z`, extracted with Windows `tar.exe` |
-| Cemu (Wii U emulator) | rhemfur/Cemu ARM64 fork `e488d8c` (2026-10-08) | **ARM64 native** | github.com/rhemfur/Cemu | Binary copied from `C:\proyectos\Silent-Hill-Decomp\tools\cemu\Cemu.exe` (built from that commit; verified there with Vulkan on the Adreno X1-85). Only `graphicPacks` was copied, with a fresh `portable/` (no Silent Hill saves, shader cache or SD card). Source shallow-cloned into `ext/cemu`. Run homebrew with `Cemu.exe -g <file.rpx/.wuhb>`, with the Vulkan graphics API |
+| Cemu (Wii U) | rhemfur/Cemu ARM64 fork `e488d8c` (2026-10-08) | **ARM64 native** | github.com/rhemfur/Cemu | Full copy of `C:\proyectos\Silent-Hill-Decomp	ools\cemu` (2026-11-22), source in `ext/cemu`. Vulkan on the Adreno X1-85. `Cemu.exe -g <file.rpx/.wuhb>` |
+| Dolphin (GameCube/Wii) | as in the Silent Hill workspace | **ARM64** (`Dolphin-arm64/`) | dolphin-emu.org | Full copy of `…\Silent-Hill-Decomp	ools\dolphin` (2.3 GB, incl. `gc/`, `wii-sd/`) |
+| PPSSPP (PSP) | as in the Silent Hill workspace (1.20.4 per its README) | **ARM64** `PPSSPPWindowsARM64.exe` (+ x64/x86) | ppsspp.org | Full copy of `…\Silent-Hill-Decomp	ools\ppsspp` (672 MB, incl. `memstick/`) |
+| Vita3K (PS Vita) | as in the Silent Hill workspace | **ARM64** | vita3k.org | Full copy of `…\Silent-Hill-Decomp	oolsita3k` (767 MB, incl. `fs/`) |
 
 | SDL3 | 3.4.20 (`SDL3-devel-3.4.20-VC.zip`) | **ARM64** + x64 + x86 libs | github.com/libsdl-org/SDL | extracted to `tools/sdl3/`. Used by the PC port |
 

@@ -80,6 +80,7 @@ class Segment:
         self.labels: set[int] = set()
         self.externs: set[int] = set()
         self.raw: set[int] = set()             # addresses forced to raw
+        self.raw_lits: set[int] = set()        # literal words forced to raw values
 
     def inside(self, a: int) -> bool:
         return self.start <= a < self.data_from
@@ -193,6 +194,15 @@ class Segment:
                     return f"    add {o[0]}, {o[2]}"
         return f"    {m} {ops}".rstrip()
 
+    def literal_value(self, a: int, w: int) -> str:
+        """A literal pool word: a known function pointer becomes its symbol
+        (the Thumb bit comes from the symbol), anything else stays a number."""
+        if a in self.literals and a not in self.raw_lits:
+            target, thumb = w & ~1, bool(w & 1)
+            if self.allfuncs.get(target) is thumb and BASE <= target < BASE + 0x120000:
+                return fname(target)
+        return f"0x{w:08X}"
+
     def label_for(self, a: int) -> str:
         return fname(a) if a in self.funcs else lname(a)
 
@@ -242,7 +252,8 @@ class Segment:
                 continue
             if a % 4 == 0 and a + 4 <= self.end and not any(x in self.insns for x in range(a + 1, a + 4)):
                 w = struct.unpack_from("<I", self.rom, a - BASE)[0]
-                lines.append(f"    .word 0x{w:08X}")
+                lines.append(f"    .word {self.literal_value(a, w)}")
+                line_of[a] = len(lines)
                 a += 4
             elif a % 2 == 0 and a + 2 <= self.end and a + 1 not in self.insns:
                 h = struct.unpack_from("<H", self.rom, a - BASE)[0]
@@ -310,10 +321,12 @@ def main() -> None:
                   f"{len(seg.literals)} literals, {len(seg.externs)} external refs)")
             break
         hit = {a for a, (insn, _) in seg.insns.items() if any(a <= d < a + insn.size for d in diff)}
-        if not hit:
+        lits = {l for l in seg.literals if any(l <= d < l + 4 for d in diff)}
+        if not hit and not lits:
             sys.exit(f"mismatch outside instructions at {', '.join(hex(d) for d in diff[:8])}")
         seg.raw |= hit
-        print(f"attempt {attempt}: {len(hit)} instruction(s) encoded differently -> raw")
+        seg.raw_lits |= lits
+        print(f"attempt {attempt}: {len(hit)} instruction(s) / {len(lits)} literal(s) differ -> raw")
     else:
         sys.exit("did not converge")
 

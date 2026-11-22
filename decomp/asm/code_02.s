@@ -1257,7 +1257,7 @@ sub_08022634:
     movs r0, #1
     pop {pc}
 _0802265C:
-    .word 0x080F077D
+    .word sub_080F077C
     .incbin "baserom.gba", 0x22660, 0x28C
 
     .global sub_080228EC
@@ -2155,7 +2155,7 @@ _08022F88:
 _08022F8C:
     .word 0x020374B0
 _08022F90:
-    .word 0x080EF5D5
+    .word sub_080EF5D4
 _08022F94:
     .word 0x020374B0
 _08022F98:
@@ -4996,7 +4996,7 @@ _080258CC:
 _080258D4:
     .word 0x080258DC
 _080258D8:
-    .word 0x080258E3
+    .word sub_080258E2
     .word 0x623C1600
     .hword 0xAE88
 
@@ -14035,7 +14035,7 @@ _0802CEA4:
     pop {pc}
     .hword 0x0000
 _0802CEAC:
-    .word 0x0802C2DD
+    .word sub_0802C2DC
 
     .global sub_0802CEB0
     .thumb_func
@@ -16801,7 +16801,7 @@ _0802F480:
 _0802F4B0:
     .word 0x0802F4B8
 _0802F4B4:
-    .word 0x0802F4BB
+    .word sub_0802F4BA
     .hword 0x1613
 
     .global sub_0802F4BA

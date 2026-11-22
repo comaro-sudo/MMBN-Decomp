@@ -3921,7 +3921,7 @@ _080A35CA:
 _080A35F4:
     .word 0x080A35FC
 _080A35F8:
-    .word 0x080A35FF
+    .word sub_080A35FE
     .hword 0xCAC9
 
     .global sub_080A35FE

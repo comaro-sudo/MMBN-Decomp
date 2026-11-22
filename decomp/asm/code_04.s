@@ -4650,7 +4650,7 @@ _080539AE:
     mov ip, r1
     pop {pc}
 _080539DC:
-    .word 0x08053AFD
+    .word sub_08053AFC
 _080539E0:
     .word 0x0200A6C0
 
@@ -5115,9 +5115,9 @@ _08053DC8:
     pop {r3, pc}
     .hword 0x0000
 _08053DD0:
-    .word 0x08000A39
+    .word sub_08000A38
 _08053DD4:
-    .word 0x08000A95
+    .word sub_08000A94
 _08053DD8:
     .word 0x0200A6C0
 
@@ -7343,7 +7343,7 @@ sub_08063E40:
     asrs r0, r0, #0x10
     .incbin "baserom.gba", 0x63E78, 0x78
 _08063EF0:
-    .word 0x0807150B
+    .word sub_0807150A
     .incbin "baserom.gba", 0x63EF4, 0x2CE4
 
     .global sub_08066BD8
