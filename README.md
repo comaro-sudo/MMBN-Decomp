@@ -1,6 +1,6 @@
-# MMBN4 Overhaul
+# Mega Man Battle Network 4: Violet Eclipse
 
-A definitive edition of Mega Man Battle Network 4 (Red Sun / Blue Moon) for every port: every Soul, every chip, every boss in one save ([plan/DEFINITIVE-EDITION.md](plan/DEFINITIVE-EDITION.md)). Solo project. Nothing from the ROMs is in this repository: everything is built from the player's own dumps.
+A definitive edition of Mega Man Battle Network 4 that unites Red Sun and Blue Moon, for every port: every Soul, every chip, every boss in one save ([plan/DEFINITIVE-EDITION.md](plan/DEFINITIVE-EDITION.md)). Solo project. Nothing from the ROMs is in this repository: everything is built from the player's own dumps.
 
 | Folder | Contents |
 |---|---|

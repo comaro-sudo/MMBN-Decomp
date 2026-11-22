@@ -1,8 +1,8 @@
-# Project Goal: a Definitive Edition on Every Port
+# Project Goal: *Mega Man Battle Network 4: Violet Eclipse* on Every Port
 
-*Set by the project owner, 2026-11-22.*
+*Set by the project owner, 2026-11-22. Name chosen by the owner, 2026-11-22: **Violet Eclipse** (Red Sun + Blue Moon → violet). It replaces the working title "Solar Eclipse" in [docs/design/design-document.md](../docs/design/design-document.md).*
 
-> **Every port (PC, Wii U, 3DS, NDS, plus the patched GBA ROM) ships a definitive version of MMBN4. In one save file, the player can get every Double Soul, collect every chip, and fight every boss.**
+> **Every port (PC, Wii U, 3DS, NDS, plus the patched GBA ROM) ships *Violet Eclipse*, the definitive version of MMBN4. In one save file, the player can get every Double Soul, collect every chip, and fight every boss.**
 
 This goal outranks the rest of the plan. Phase 1 work packages, the emulation-layer ports and the decompilation are all judged by whether they move toward it.
 
@@ -47,7 +47,7 @@ Red Sun and Blue Moon each contain only their own exclusives. The fingerprint su
 
 | Option | How | Works on | Cost |
 |---|---|---|---|
-| **A. Merged ROM** ("BN4 Definitive", recommended) | One patched ROM built from Red Sun that **also contains Blue Moon's exclusive data** (Navi graphics, AI, records, Soul data, scripts), added in expanded ROM space (8 → 16 MB; GBA max 32 MB). A version choice at New Game, or both sets of exclusives in one story | **Every port, and GBA hardware** | Highest: needs the BM-only data identified and relocated. The disassembly's RS/BM variant work (DC-4) is exactly that inventory |
+| **A. Merged ROM** (*Violet Eclipse*, recommended) | One patched ROM built from Red Sun that **also contains Blue Moon's exclusive data** (Navi graphics, AI, records, Soul data, scripts), added in expanded ROM space (8 → 16 MB; GBA max 32 MB). A version choice at New Game, or both sets of exclusives in one story | **Every port, and GBA hardware** | Highest: needs the BM-only data identified and relocated. The disassembly's RS/BM variant work (DC-4) is exactly that inventory |
 | B. Two-ROM runtime (Cyberworld Endless model) | The director loads both ROMs and pulls the other version's content in at runtime | PC / Wii U / 3DS only. **Not NDS, not GBA hardware** | Medium, but breaks C5 |
 | C. Two patched ROMs, each complete | Each version patched to include the other's exclusives | Every port | About the same as A, twice the testing |
 
