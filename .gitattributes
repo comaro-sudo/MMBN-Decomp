@@ -1,0 +1,13 @@
+# Keep LF everywhere: the decomp builds in WSL (make, GNU as) and CRLF
+# breaks Makefile recipes and assembler sources.
+* text=auto eol=lf
+
+# Windows-only scripts may keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.png binary
+*.bmp binary
+*.ico binary
+*.gba binary
+*.bps binary
