@@ -17,22 +17,23 @@
 | ID | Decision | Recommendation | Alternatives |
 |---|---|---|---|
 | D1 | Implementation method for Phase 1 | **Binary patching with armips** against the original ROMs, plus TextPet for scripts | Start a disassembly first (slow; delays every feature) |
-| D2 | Base ROMs | **US Blue Moon (B4BE) and US Red Sun (B4WE)**, one shared source with version-specific offset files. Develop on Blue Moon first. | Single version only |
+| D2 | Base ROMs | **US Blue Moon (B4BE) and US Red Sun (B4WE)**, one shared source with version-specific offset files. ~~Develop on Blue Moon first.~~ **Revised proposal: develop on Red Sun first**, because Cyberworld Endless publishes a ~700-symbol map (MIT) for our exact RS ROM. Port to BM by byte-pattern search. | Single version only; BM first |
 | D3 | JP Blue Moon (B4BJ) | **Reference only** (compare original text/scripts, cross-check offsets with JP-based community notes) | Also patch JP |
 | D4 | Distribution | **BPS patches only.** Never commit or ship ROMs. | xdelta/IPS |
 | D5 | Scope of Part I | Ship in **tiers** (see [03](03-phase1-rom-overhaul.md)): quick wins → progression → narrative content | All at once |
 | D6 | DS/3DS deployment in the short term | **Hypervisor route** (GBARunner3, open_agb_firm) | Wait for native ports |
 | D7 | Native port strategy | **Decomp → platform abstraction layer → PC/SDL port (ThinkPad) → NDS → 3DS** ✅ confirmed | Go straight to NDS (painful debugging, no shared layer) |
 | D8 | Version control | Git, private repo; ROMs and build outputs in `.gitignore` | — |
+| D10 | Porting architecture option | Add **option E: an embedded GBA core (mGBA, MPL-2.0) plus host-side hooks and UI** to the Phase 3/4 choices, as proven by Cyberworld Endless on PC and 3DS. It may make a full decompilation unnecessary for the ports (see [05](05-phase3-decompilation.md)). | Decomp only |
 | D9 | Asset policy for native ports | Port **extracts assets from the user's own ROM at build time** (sm64/pokeemerald-PC model). No Capcom assets in the repo. | — |
 
 ## 3. Design-doc claims to verify before building on them
 
 - [ ] The exact current rules for how Double Souls are earned per playthrough (which tournament gives which Soul, and how opponents are chosen). WP-P1 is designed on top of this.
-- [ ] Whether the WoodMan softlock is Blue-Moon-only and DS-specific as stated, and what `BN4-WoodMan-Fix` actually patches.
+- [x] WoodMan: **not** Blue-Moon-only. It is a DS/emulator timing crash in both versions. `BN4-WoodMan-Fix` (Prof. 9, free to reuse) has armips sources and addresses for RS/BM in US/JP/EU. The doc is corrected.
 - [ ] "Waiting Room buffer overwrites Soul flags". Confirm the bug exists and reproduce it.
-- [ ] Every repository in the repo list exists and matches its description (`Silenthal/bn1`, `nettaisen/nettai`, `saschb2b/...Cyberworld-Endless` and `RockmanEXEZone/MMBN45-English-Translation` especially). Fix the `[ blocksds/sdk]` link typo.
-- [ ] 3DS bottom screen: the doc says "capacitive/resistive". It is **resistive only**. Fix the doc.
+- [x] All 22 repos exist and none are archived (2026-11-21). The BlocksDS typo is fixed. **Cyberworld Endless was misdescribed**: it is an embedded-mGBA C game with a BN4 Red Sun symbol map, not a ROM hack (see the doc and D2/D10). nettai has `docs/engine/` as claimed. Flips moved to `Sir-Walrus/Flips`.
+- [x] 3DS bottom screen is resistive only. The doc is fixed.
 - [ ] Whether the GBA save type is 64 KB Flash (affects save-layout work in WP-P4/P8).
 
 ## 4. Open questions for the project owner

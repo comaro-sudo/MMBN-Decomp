@@ -58,7 +58,7 @@ In the original release, the villainous syndicate **Nebula** and the approaching
   * Ensure Duo's core remains vulnerable to short-range sword chips (e.g., *LifeSword*, *VarSwrd*) during his laser and meteor recovery frames.
 * **Dark Soul & Karma Balance:** Allow players who fall into "Dark Karma" (using Dark Chips) to redeem their alignment through a dedicated purification quest in the Undernet rather than permanently crippling MegaMan's base HP without recourse.
 * **Critical Softlock & Save Protection:**
-  * Patch the *Blue Moon* WoodMan scenario softlock triggered by fleeing from virus encounters during the vine-cutting sequence.
+  * Patch the WoodMan scenario crash (both versions; caused by DS/emulator timing; integrate Prof. 9's BN4-WoodMan-Fix).
   * Decouple the **Waiting Room** Navi-transfer buffer from the main story Soul flags so transferring friends' Navis never overwrites or locks out unobtained Double Souls.
 
 ---
@@ -115,7 +115,7 @@ A Nintendo 3DS port allows for an even more ambitious presentation, running nati
   * *Z = +1.0 (Foreground):* Attack projectiles, Double Soul transformation particles, and HUD elements.
 
 ### 1.2 Bottom Screen (320x240) & Controls
-* **High-Resolution PET Interface:** Utilize the 320x240 capacitive/resistive touch screen to render crisp vector-style PET menus, Folder Editing via drag-and-drop, and NaviCust grid manipulation with stylus precision.
+* **High-Resolution PET Interface:** Utilize the 320x240 resistive touch screen to render crisp vector-style PET menus, Folder Editing via drag-and-drop, and NaviCust grid manipulation with stylus precision.
 * **Control Mapping:**
   * **Circle Pad:** 8-directional smooth movement in the overworld, automatically snapping to 4-directional grid inputs during combat to prevent accidental diagonal missteps on the 6x3 battle grid.
   * **ZL / ZR (New 3DS) or X / Y Buttons:** Dedicated hotkeys for *Full Synchro Counter* macros, instant *SubChip* usage, and *Folder Quick-Swap*.

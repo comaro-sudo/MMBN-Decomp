@@ -33,7 +33,7 @@ MMBN4/
 | bn4_rs_us.gba | B4WE | a97e96a7da03abd70f7953328e511b9fa29179f1 |
 | bn4_bm_jp.gba | B4BJ | c4302ada1ff652c740dff51df6dec801fd5b7854 |
 
-- [ ] Cross-check these hashes against a known-good database (No-Intro) to confirm the dumps are clean.
+- [x] All three match No-Intro (the DAT shipped with mGBA). See [docs/toolchain.md](../docs/toolchain.md).
 - The build script must refuse to run if the input hash does not match.
 
 ## 3. Tools to install
@@ -98,6 +98,7 @@ Requirements:
 - [x] `git init` + initial commit (`.gitignore` included)
 - [x] Move the ROMs into `roms/`, verify hashes
 - [x] Move the design docs into `docs/`
-- [ ] Install the tools and record their versions in `docs/toolchain.md`
-- [ ] Clone the reference repos and record the commit hashes used
-- [ ] Hello-world patch: change one visible string or one chip's damage, build, apply, confirm in mGBA
+- [x] Install the tools and record their versions in [docs/toolchain.md](../docs/toolchain.md) (armips built native ARM64. Flips, TextPet and mGBA installed. Ghidra deferred to M1.)
+- [x] Clone the reference repos and record the commit hashes used
+- [x] Hello-world patch: Cannon damage 40 → 99 (`python build.py --hello`). It builds, the BPS round-trips, and it changes exactly 1 byte. Chip-table identity test passes for BM and RS.
+- [ ] Confirm the hello patch in mGBA by hand: Library/Folder shows Cannon at 99, and it does 99 in battle.

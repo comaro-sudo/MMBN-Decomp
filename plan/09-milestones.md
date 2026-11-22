@@ -27,12 +27,12 @@ Effort estimates assume one person working part-time. Treat them as order-of-mag
 ## Immediate next actions (the first 10)
 
 1. Answer the remaining open questions (2–4) in [00 §4](00-decisions-and-feasibility.md) and confirm decisions D1–D6, D8 and D9. Questions 1 (solo) and 5 (PC port on the ThinkPad) are answered.
-2. `git init` + `.gitignore`. Move the ROMs into `roms/` and the docs into `docs/`.
-3. Check the ROM hashes against No-Intro.
-4. Verify every repo in the repo list exists. Fix the list (typo, the 3DS touch screen note).
-5. Install armips, TextPet, Flips, mGBA, Ghidra + GhidraGBA, and Python.
-6. Clone the reference repos into `ext/`. Read BN4-WoodMan-Fix and nettai's BN4 docs.
+2. ✅ `git init` + `.gitignore`. Move the ROMs into `roms/` and the docs into `docs/`.
+3. ✅ Check the ROM hashes against No-Intro.
+4. ✅ Verify every repo in the repo list exists. Fix the list (typo, the 3DS touch screen note).
+5. ✅ Install armips, TextPet, Flips, mGBA and Python. (Ghidra + GhidraGBA moved to M1.)
+6. ✅ Clone the reference repos into `ext/`. Read BN4-WoodMan-Fix. (nettai's docs/engine is still to be read.)
 7. Search the community for existing BN4 RAM maps, flag lists and any disassembly effort.
-8. Build the hello-world patch end to end (string or chip-damage change → `.bps`).
+8. ✅ Build the hello-world patch end to end (string or chip-damage change → `.bps`). The manual in-game check is still pending.
 9. Make test saves S01–S04 on Blue Moon.
 10. Start RE-01 (save layout) and RE-03 (playthrough counter readers).

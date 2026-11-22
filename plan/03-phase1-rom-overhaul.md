@@ -12,8 +12,8 @@ Implementation methods:
 
 ### WP-A1 — WoodMan softlock fix
 - Prereq: RE-14
-- Method: integrate or port `BN4-WoodMan-Fix` (credit the authors). Check whether it is Blue-Moon-only.
-- Accept: fleeing battles during the vine sequence never softlocks (test on emulator and on GBARunner).
+- Method: integrate `BN4-WoodMan-Fix` v2.0 (Prof. 9, credit in the changelog). The addresses for both US versions are already in `src/{bm,rs}/version.asm` (`WOODMAN_FIX`). Verified: the bug hits **both** versions, caused by DS/emulator timing.
+- Accept: the WoodMan scenario plays through on GBARunner3, and WoodTower timings are unchanged (the reason for the fix's v2.0).
 - Size: S
 
 ### WP-A2 — Zenny scaling (1.75x)

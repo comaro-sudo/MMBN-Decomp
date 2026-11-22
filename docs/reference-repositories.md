@@ -4,6 +4,8 @@ To execute the game design overhaul and hardware porting roadmap outlined in the
 
 Below is a curated directory of verified, open-source GitHub repositories required for each stage of the project.
 
+> **Verified 2026-11-21:** all 22 linked repos exist and none are archived. Corrections from that check are marked ⚠️ below. Pinned commits are in [toolchain.md](toolchain.md).
+
 ---
 
 ## 1. MMBN Disassembly, Modding & Scripting Frameworks
@@ -31,11 +33,12 @@ These repositories provide the foundational assembly offsets, script compilers, 
   * **Purpose:** Disassembled Battle Chip data tables for *MMBN1–6* formatted for `armips`.
   * **Relevance to MMBN4:** Allows clean editing of chip damage values, Zenny shop costs, Dark Chip penalties, and chip drop tables.
 * **[RockmanEXEZone/BN4-WoodMan-Fix](https://github.com/RockmanEXEZone/BN4-WoodMan-Fix)**
-  * **Purpose:** Assembly patch fixing the infamous game-breaking WoodMan scenario softlock in *MMBN4: Blue Moon* (which occurs most frequently when running the game on Nintendo DS hardware).
+  * **Purpose:** Assembly patch fixing the infamous game-breaking WoodMan scenario crash that happens on Nintendo DS hardware and some emulators.
+  * ⚠️ **Correction:** the bug affects **both** Red Sun and Blue Moon (the patch ships armips sources for RS/BM in US/JP/EU). Its cause is DS/emulator timing, not player actions. The author allows free reuse (attribution welcome).
   * **Relevance to MMBN4:** Directly solves one of the critical hardware compatibility bugs required for an NDS port.
 * **[saschb2b/Mega-Man-Battle-Network-Cyberworld-Endless](https://github.com/saschb2b/Mega-Man-Battle-Network-Cyberworld-Endless)**
-  * **Purpose:** Open-source ROM hack merging content, Navis, and chips across *MMBN4*, *MMBN5*, and *MMBN6*.
-  * **Relevance to MMBN4:** Demonstrates how to expand ROM space, inject custom boss encounters, and bypass version-exclusive locks.
+  * ⚠️ **Correction:** this is **not a ROM hack**. It is an MIT-licensed C roguelike built around BN6 that runs the original games' code on an **embedded mGBA core** from the player's own ROMs (BN4 Red Sun and BN5 Team Colonel join as content), on Windows, Linux, macOS, 3DS, Switch, Vita, Android, iOS and the web, with online play.
+  * **Relevance to MMBN4:** (1) `docs/symbols/bn4-red-sun-us.sym` is a ~700-symbol map of the exact US Red Sun ROM we use, plus `docs/rom/` notes (BN4 tables, Souls, battle, encounters, rewards). (2) It is a working example of a **third porting architecture** (embedded emulator core + host-side hooks), including 3DS stereo and second-screen notes.
 
 ---
 
@@ -66,7 +69,7 @@ Depending on whether you choose a **Native ARM9 Port** (like *MMBN5: Double Team
 * **[devkitPro/nds-examples](https://github.com/devkitPro/nds-examples)**
   * **Purpose:** Official reference implementations for `libnds`.
   * **Usage:** Contains templates for touch-screen coordinate polling, dual-screen tiled background setups, and `dswifi` local wireless (NiFi) packet transmission.
-* **[ blocksds/sdk](https://github.com/blocksds/sdk)**
+* **[blocksds/sdk](https://github.com/blocksds/sdk)**
   * **Purpose:** Modern, actively maintained open-source Nintendo DS SDK alternative with enhanced ARM7/ARM9 tooling and improved wireless/filesystem support.
   * **Usage:** Ideal for building a modernized NDS native port with Maxmod audio streaming and NitroFS asset loading.
 

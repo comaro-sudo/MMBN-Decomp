@@ -4,10 +4,16 @@ Every Phase 1 feature depends on finding a specific routine, table or flag in th
 
 ## 1. Method
 
-1. **Harvest existing knowledge first.** Check nettai, bn6f symbols, community RAM maps, TextPet game definitions and chip-table repos. Never re-discover what is already documented.
+1. **Harvest existing knowledge first.** Never re-discover what is already documented. Known sources, in order of value:
+   - `ext/Mega-Man-Battle-Network-Cyberworld-Endless/docs/symbols/bn4-red-sun-us.sym` (~700 symbols, our exact RS ROM, MIT) and `docs/rom/` (bn4.md, souls.md, battle.md, game-state.md, scripts-and-shops.md…).
+   - `ext/nettai/docs/engine/` (battle flow, custom screen, chips, JP differences).
+   - bn6f symbols (shared engine).
+   - TextPet `mmbn4{rs,bm}-us.tpi` indexes.
+   - chip tables (verified byte-identical).
+   - The symbols load into mGBA with `load-symbols FILE`.
 2. **Dynamic tracing in mGBA.** Use memory watchpoints on known RAM values (Zenny, HP, playthrough counter, flags) to find the code that reads and writes them.
 3. **Static analysis in Ghidra.** Label each function found, then follow its callers and callees.
-4. **Cross-version mapping.** Once an offset is found in Blue Moon, find the matching offset in Red Sun by byte-pattern search. Record both.
+4. **Cross-version mapping.** Once an offset is found in one version (Red Sun first, if D2's revision is accepted), find the matching offset in the other by byte-pattern search. Record both.
 5. **Document as you go.** One file per system in `docs/re/`, with the RAM address, the ROM offset (BM/RS), the function signature, a short pseudo-C sketch and confidence (confirmed/likely/guess).
 
 ## 2. RE targets (ordered by which features they unblock)
