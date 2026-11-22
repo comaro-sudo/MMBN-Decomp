@@ -1,6 +1,9 @@
 # Experiment: a Blue Moon Soul in Red Sun (2026-11-22)
 
-**Result: confirmed.** With one 12-byte table changed, Red Sun lets MegaMan unite with **WoodSoul**, a Blue Moon Soul. He takes WoodSoul's form, the Soul's 3-turn counter starts, and the battle runs normally. With the original table, the same hand and save cannot unite. That's the control.
+**Result: confirmed in both directions.**
+- **Red Sun:** with one 12-byte table changed, MegaMan unites with **WoodSoul**, a Blue Moon Soul. He takes WoodSoul's form, the Soul's 3-turn counter starts, and the battle runs normally.
+- **Blue Moon:** the same change lets MegaMan unite with **SearchSoul**, a Red Sun Soul (save `4891`, Invis chip), and fight in it.
+- **Control:** with each version's original table, the same hand and save leave UNITE greyed.
 
 ## Why it was expected
 
@@ -53,6 +56,6 @@
 
 ## Not yet tested
 
-- The mirror case: a Red Sun Soul in Blue Moon. Blue Moon save `4891` has Red Sun Soul flags but no keys in the layout Red Sun uses, so Blue Moon may store keys differently.
+- ~~The mirror case~~: done, SearchSoul unites in Blue Moon. Open question it raised: Blue Moon save `4891` has no Soul pseudo-chip keys where Red Sun keeps them (slot `+0x84`), yet the unite works. So either Blue Moon stores the keys elsewhere, or the key check doesn't apply at unite. Check before writing the grant.
 - Every Soul's full moveset, and the other five Blue Moon Souls. Same code path, so this is low risk.
 - Fighting Blue Moon's Navis in Red Sun outside the Free Tournament path.

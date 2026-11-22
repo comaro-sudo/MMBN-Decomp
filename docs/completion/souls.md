@@ -28,9 +28,9 @@ The order comes from the chip table's names (`0x161`–`0x16C`) and CE's Soul to
 5. **No tournament luck:** in the original game, which Souls you get depends on who you face. WP-B1 (deterministic brackets) is still blocked on RE-04.
 6. **Soul flags survive New Game+** (flags `0x000`–`0x0FF` are kept), so nothing to do there.
 
-## Confirmed: a Blue Moon Soul works in Red Sun (2026-11-22)
+## Confirmed: the other version's Souls work in both ROMs (2026-11-22)
 
-With the 12-entry flag table (`patch/src/common/wp_d4_twelve_souls.asm`, now in both builds), Red Sun unites WoodSoul and fights in it. Both ROMs carry all twelve Souls' code, tables and sprites ([`../re/soul-merge-experiment.md`](../re/soul-merge-experiment.md)). Step 2 above is done, and step 1 shrinks to *getting* the other version's Souls: the grant, and the Navis' entries.
+With the 12-entry flag table (`patch/src/common/wp_d4_twelve_souls.asm`, now in both builds), Red Sun unites WoodSoul and Blue Moon unites SearchSoul. Both ROMs carry all twelve Souls' code, tables and sprites ([`../re/soul-merge-experiment.md`](../re/soul-merge-experiment.md)). Step 2 above is done, and step 1 shrinks to *getting* the other version's Souls: the grant, and the Navis' entries.
 
 ## Background: Red Sun may already hold Blue Moon's Navis (T)
 

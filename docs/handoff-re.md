@@ -44,7 +44,7 @@
 
 ## Immediate Next Steps
 
-0b. **Confirmed:** WoodSoul (Blue Moon) unites in Red Sun with `wp_d4_twelve_souls.asm` (now in both builds). See `docs/re/soul-merge-experiment.md`. Next: the mirror test (a Red Sun Soul in Blue Moon), then the grant without a trade.
+0b. **Confirmed both ways:** WoodSoul unites in Red Sun and SearchSoul in Blue Moon with `wp_d4_twelve_souls.asm` (in both builds). See `docs/re/soul-merge-experiment.md`. WP-A1, the WoodMan fix, is integrated and matches the official IPS (`5f61730`). Next: the grant without a trade (open: Blue Moon's key storage), then WP-A2 once the owner decides how Zenny scaling works (fixed or an in-game option).
 0a. **13 community saves** (`ref/saves/`, local) decode with `python patch/tools/savetool.py`: [`docs/re/community-saves.md`](re/community-saves.md). RE-04 is half-mapped in [`docs/re/tournaments.md`](re/tournaments.md). The key lead: Red Sun can already field Blue Moon's Navis. Test it: 12-entry Soul flag table + save `22565` + unite ProtoSoul.
 
 0. The content inventory has started (commit `2938b52`): run `python patch/tools/inventory.py`; the conclusions are in `docs/completion/`. Its next step is RE-07/RE-09 (the ROM's own GMD, Mystery Data, shop and trader tables), which replace the guide- and map-based sources.
