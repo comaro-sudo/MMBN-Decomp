@@ -99,9 +99,26 @@ static uint32_t parse_keys(const char* s) {
     return keys;
 }
 
-static int run_test(const char* rom, int frames, const char* shot, const char* script, const char* save) {
+/* --dump FILE: EWRAM (0x02000000, 256 KB) written raw at the end of a test run,
+ * for reverse engineering (docs/re/). --state-in / --state-out chain long runs. */
+static bool dump_ewram(Emu* emu, const char* path) {
+    SDL_IOStream* io = SDL_IOFromFile(path, "wb");
+    if (!io) return false;
+    bool ok = true;
+    for (uint32_t a = 0x02000000; a < 0x02040000 && ok; a += 4) {
+        uint32_t w = emu_read32(emu, a);
+        ok = SDL_WriteIO(io, &w, 4) == 4;  /* little-endian host (ARM64/x64) */
+    }
+    return SDL_CloseIO(io) && ok;
+}
+
+typedef struct { const char *dump, *state_in, *state_out; } TestExtras;
+
+static int run_test(const char* rom, int frames, const char* shot, const char* script, const char* save,
+                    const TestExtras* x) {
     Emu* emu = emu_open(rom, save, SAMPLE_RATE);
     if (!emu) return 2;
+    if (x->state_in && !emu_load_state(emu, x->state_in)) fprintf(stderr, "could not load state %s\n", x->state_in);
     char code[16];
     emu_game_code(emu, code);
     const GameInfo* game = game_identify(code);
@@ -133,6 +150,8 @@ static int run_test(const char* rom, int frames, const char* shot, const char* s
            game->name, (unsigned) emu_crc32(emu), (unsigned) emu_frame(emu), audio_frames, nonblack,
            ok ? shot : "(none)");
     if (game->ram_rng) printf("ram rng=%08X\n", (unsigned) emu_read32(emu, game->ram_rng));
+    if (x->dump) printf("dump=%s %s\n", x->dump, dump_ewram(emu, x->dump) ? "ok" : "FAILED");
+    if (x->state_out) printf("state=%s %s\n", x->state_out, emu_save_state(emu, x->state_out) ? "ok" : "FAILED");
     SDL_DestroySurface(s);
     emu_close(emu);
     return 0;
@@ -146,6 +165,7 @@ static void fail(const char* msg) {
 int main(int argc, char** argv) {
     int test_frames = 0, quit_after = 0;
     const char *shot = NULL, *script = NULL, *test_save = "build/test.sav", *pet_shot = NULL;
+    TestExtras extras = { 0 };
     for (int i = 2; i + 1 < argc; ++i) {
         if (!strcmp(argv[i], "--test")) test_frames = SDL_atoi(argv[++i]);
         else if (!strcmp(argv[i], "--quit-after")) quit_after = SDL_atoi(argv[++i]);
@@ -153,10 +173,13 @@ int main(int argc, char** argv) {
         else if (!strcmp(argv[i], "--shot")) shot = argv[++i];
         else if (!strcmp(argv[i], "--input")) script = argv[++i];
         else if (!strcmp(argv[i], "--save")) test_save = argv[++i];
+        else if (!strcmp(argv[i], "--dump")) extras.dump = argv[++i];
+        else if (!strcmp(argv[i], "--state-in")) extras.state_in = argv[++i];
+        else if (!strcmp(argv[i], "--state-out")) extras.state_out = argv[++i];
     }
     if (test_frames > 0) {
         SDL_Init(0);
-        int rc = run_test(argv[1], test_frames, shot, script, test_save);
+        int rc = run_test(argv[1], test_frames, shot, script, test_save, &extras);
         SDL_Quit();
         return rc;
     }

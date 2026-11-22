@@ -41,6 +41,7 @@ mmbn4.exe rom.gba --test 1500 --input "700=START,706=,900=A,906=" --shot out.bmp
 mmbn4.exe rom.gba --quit-after 420 --pet-shot pet.bmp
 ```
 
+- `--dump FILE`, `--state-in FILE`, `--state-out FILE` (with `--test`): write EWRAM (`0x02000000`, 256 KB) raw at the end of the run; start from a save state; save the final state. These chain long scripted runs for reverse engineering ([docs/re/](../../docs/re/save-and-flags.md)).
 - `--test`: headless and unthrottled. It runs N frames with a scripted input (`frame=KEYS`, keys joined by `+`, empty releases all), saves the last frame as a BMP, and prints the game code, CRC32, audio sample count and RAM values.
 - `--quit-after`: the normal windowed path that quits by itself. It logs window geometry and FPS, and optionally saves the PET window's own pixels.
 

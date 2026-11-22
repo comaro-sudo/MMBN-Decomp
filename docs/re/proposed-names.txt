@@ -42,3 +42,4 @@
 080489E4 080489EC rom    CLAUDE       BN4_SAVE_MAGIC                   20-byte save magic string
 080489FC 08048A04 code   CLAUDE       SaveSystemBlock                  0x020073E0, 0x1C bytes, to SRAM 0x0E007F00 (flag 0x1188 on failure)
 08048A5A 08048A62 code   CLAUDE       LoadSystemBlock                  SRAM 0x0E007F00 to 0x020073E0, magic and sum check
+0800045E 0800045E code   CLAUDE       GameInit?                        CHECK: names.txt has HBlankIntr, but it calls the toolkit setup (0x080060CC) then RelocateSaveBlock; looks like boot/soft-reset init

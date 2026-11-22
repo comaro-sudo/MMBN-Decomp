@@ -2,9 +2,10 @@
 
 Claude's reverse-engineering lane, 2026-11-22. This note is based on static reading of Gemini's generated assembly in `decomp/asm/` (RS at `decomp/asm/`, BM at `decomp/asm/bm/`) and on small reads of the player's ROMs. Nothing from the ROM is reproduced here beyond addresses, offsets and constants.
 
-**Status legend.** **V**: verified by reading the code, in both versions where a BM address is given. **T**: tentative, an inference that still needs a runtime check (mGBA watchpoint or a real save).
-
-None of this has been checked against a running game or a real `.sav` yet. That is the first item in §6.
+**Status legend.**
+- **V**: verified by reading the code, in both versions where a BM address is given.
+- **R**: also confirmed in the running game (§7).
+- **T**: tentative, an inference that still needs a runtime check.
 
 ## 1. Where the save lives
 
@@ -22,7 +23,7 @@ The game's main save data is one `0x3CF0`-byte block. It doesn't sit at a fixed 
 - Its base is `0x02002130 + shift`. `shift` is a u32 at `0x02001550`, an even number from `0x000` to `0x1FE` (`GetRNG() & 0x1FE`).
 - `sub_08006128` picks a new shift and moves the block with a memmove in IWRAM (`0x03006FA9`, length `0x3CF0`). It then rebuilds 23 toolkit pointers, `eToolkit+0x40` to `+0x98`, as base + shift + a fixed offset from the ROM table at `0x080061AC` (same address and contents in RS and BM). **V**
 - `sub_0800616A` rebuilds the same pointers without moving the block. It runs after a load. **V**
-- After every load, `sub_080488EC` calls `sub_08006128`, so the block moves again each time a save is loaded. **V**
+- `sub_08006128` runs after every load (`sub_080488EC`). It also runs on game-mode changes: the mode routines `sub_08004BE0`–`sub_080051C8` (map, jack-in, PET, bracket and others; 11 call sites), `sub_0803A704`, and `sub_0800045E`. That one sets up the toolkit (`sub_080060CC`) and then relocates, so it looks like the boot or soft-reset routine. `names.txt` calls it `HBlankIntr`, which looks wrong (T). So the block moves many times per session. **V**, **R**: during the intro, with no load in between, the shift went from `0x16C` to `0xBC`.
 
 All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX, #slot]`). Nothing uses absolute addresses, which is why a fixed-address cheat breaks after each load.
 
@@ -63,12 +64,12 @@ Sizes are the gap to the next slot. The slot boundaries are **V**. Naming the un
 | 3. Magic | 20 bytes `"ROCKMANEXE4 20031022"` (ROM `0x080489E4` RS / `0x080489EC` BM) copied to progress `+0x54` | V |
 | 4. Checksum | Progress `+0x34` is zeroed, then set to the byte sum of `0x02000000`–`0x020073D1`, **plus `0x16` in Red Sun or `0x22` in Blue Moon** (`sub_08048960`) | V |
 | 5. Scramble | `sub_08006338`: every byte of the image XOR `key & 0xFF`; then the key word at `0x02001554` is restored in the clear | V |
-| 6. Write and verify, up to 3 tries | Failure sets flag `0x1166`, success clears it | V |
+| 6. Write and verify, up to 3 tries | Success **sets** flag `0x1166` (after the write, so the file holds it clear), failure clears it and returns 1 | V, R |
 | 7. Unscramble RAM again | `sub_08006350` (same XOR) | V |
 
-Load (`sub_080488EC`) reverses it: read, XOR with the key byte found at `0x1554` (which is stored in the clear), rebuild the pointers, check the checksum (`sub_0804898E`) and the magic (`sub_080489C0`). If either fails, it sets flag `0x1166` and reseeds the RNG. Finally it re-randomizes the shift.
+Load (`sub_080488EC`) reverses it: read, XOR with the key byte found at `0x1554` (which is stored in the clear), rebuild the pointers, check the checksum (`sub_0804898E`) and the magic (`sub_080489C0`). If both pass, it sets flag `0x1166`. If either fails, it clears `0x1166` and reseeds the RNG. Finally it re-randomizes the shift.
 
-**How to read a `.sav`** (derived from the code above; **T** until checked on a real save):
+**How to read a `.sav`** (**R**: tested on real RS and BM saves, §7):
 
 1. `key = u8 at 0x1554`.
 2. XOR every byte except `0x1554`–`0x1557` with `key`.
@@ -107,8 +108,10 @@ Code calls these at about 186 set sites and 373 test sites; most story flags are
 |---|---|---|
 | `0x17`–`0x1C` | Red Sun's six Double Souls obtained (Souls 1–6) | V |
 | `0x1D`–`0x22` | Blue Moon's six Double Souls obtained (Souls 7–12) | V |
-| `0x1166` | Last save or load failed | V |
-| `0x1188` | Second-block (`0x0E007F00`) I/O failed | V |
+| `0x31D` | Lan has picked up the PET (opening, Lan's room); the START menu stays locked until then | R |
+| `0x1130`, `0x1151` | Cleared at the same moment as the PET pickup: temporary scene flags in the `0x1100`–`0x115F` ranges | R |
+| `0x1166` | Last save or load succeeded | V, R |
+| `0x1188` | Second block (`0x0E007F00`) last written or read successfully | V |
 | `0x118A` | Saving refused | V (when it is set: T) |
 | `0x15C0`–`0x163F` | Logged by `sub_0802516E`: sets `f` and `f + 0x80`, and appends `f - 0x15C0` to a list at `0x02006EC0` (count `0x02001600`; cleared by `sub_080251D6`). Likely one-shot Mystery Data per map visit | T (RE-07) |
 | `0x1200`–`0x13FF` | Logged by `sub_0802519C`: sets `f` and `f - 0x1200 + 0x1400`, and appends to 64-entry lists at `0x020017A0` (counts `0x02001500`) | T |
@@ -155,8 +158,22 @@ The field scan of §3 and of the slot table comes from a throwaway script (read-
 
 ## 6. Next steps
 
-1. **Runtime check:** in mGBA, read `0x02001550`/`0x02001554`, confirm the flag buffer at `0x02002130 + shift + 0x118`, and watch flags `0x17`–`0x1C` across a Soul event. Then decode a real `.sav` with §1.2.
+1. Watch flags `0x17`–`0x1C` across a Soul event; this needs a late-game state.
 2. Name the remaining save slots (`+0x4C` to `+0x98`) from their readers: folder, pack, Library, NaviCust, Zenny, BugFrags, mail, key items.
 3. RE-05 second half: the script flag opcode and the scripts that set `0x17`–`0x22`.
 4. RE-03 completion: read the six tier readers and the `sub_0803A3xx` group.
 5. RE-04: CE already names `BN4_START_TOURNAMENT`, `BN4_ADVANCE_ROUND` and `BN4_NEXT_OPPONENT`; follow the pool fill (`0x08043FE4`, `0x08044058`, `0x0804422C`, `0x0804428C`) to the RNG.
+
+## 7. Runtime checks (2026-11-22)
+
+These runs used the PC port's headless test mode with the new `--dump`, `--state-in` and `--state-out` options (`ports/pc/README.md`). The inputs started a new game, skipped the intro, picked up the PET in Lan's room, and saved from the PET menu. The same inputs work on both versions.
+
+| Check | Red Sun | Blue Moon |
+|---|---|---|
+| All 23 toolkit save pointers = `0x02002130 + shift + BN4_SAVE_SLOT_OFFSETS[i]` | match (shift `0x16C`, later `0xBC`) | match |
+| `.sav` decoded with §1.2: magic `ROCKMANEXE4 20031022` | yes (key byte `0x90`, shift `0xF0`) | yes (key byte `0x6F`, shift `0x1EC`) |
+| Stored checksum = byte sum + constant | `+0x16` OK | `+0x22` OK |
+| Decoded save vs RAM right after the save | 7 bytes differ, all expected: RNG `0x02001790`, play time (progress `+0x2C`), and the flag byte holding `0x1166` (set after the write) | same 7 |
+| Playthrough byte (progress `+0x0D`) on a new game | 0 | 0 |
+
+The scripts (`run.py` input runner, `savdec.py` save decoder, `fdiff.py` flag diff) are throwaway; `savdec.py`'s logic is §1.2. If a save tool is wanted, it belongs in `tools/` of the patch or port project, not in `decomp/`.
