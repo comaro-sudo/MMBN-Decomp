@@ -12,7 +12,7 @@ python ports/pc/build_pc.py --arch x64   # x64 build
 python ports/pc/build_pc.py --run        # build + launch from the repo root
 ```
 
-Needs VS 2022 Build Tools (ARM64 target), CMake, `ext/mgba` (tag 0.10.5) and `tools/sdl3` (SDL3 VC package). See [docs/toolchain.md](../../docs/toolchain.md). The first build also compiles a static libmgba (GBA core only) into `build/mgba-<arch>`.
+Needs VS 2022 Build Tools (ARM64 target), CMake, `ext/mgba` (tag 0.10.5) and `tools/sdl3` (SDL3 VC package). See [docs/reference/toolchain.md](../../docs/reference/toolchain.md). The first build also compiles a static libmgba (GBA core only) into `build/mgba-<arch>`.
 
 ## Run
 

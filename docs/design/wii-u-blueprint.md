@@ -1,6 +1,6 @@
 # Mega Man Battle Network 4: Nintendo Wii U Porting & Engineering Blueprint
 
-> **Reviewed 2026-11-21.** Corrections are marked ⚠️. How this fits the project: [plan/06 §5](../plan/06-phase4-native-ports.md) (native) and [plan/04 §2.3](../plan/04-phase2-handheld-deployment.md) (VC injection).
+> **Reviewed 2026-11-21.** Corrections are marked ⚠️. How this fits the project: [plan/06 §5](../../plan/06-phase4-native-ports.md) (native) and [plan/04 §2.3](../../plan/04-phase2-handheld-deployment.md) (VC injection).
 
 ## Executive Summary
 

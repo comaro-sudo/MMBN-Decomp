@@ -1,7 +1,7 @@
 ; Identity test: re-assemble the community chip table unchanged over the
 ; original ROM. The output must be byte-identical to the input; that proves
 ; the table offset and format are correct for this version.
-; Run via: python build.py --check
+; Run via: python patch/build.py --check
 
 .gba
 .include VERSION_FILE

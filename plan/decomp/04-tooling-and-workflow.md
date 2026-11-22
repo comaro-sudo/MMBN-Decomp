@@ -65,7 +65,7 @@ Same habits as the Silent Hill decomp:
 
 ## 5. Sharing with the rest of the project
 
-- `symbols/symbols_rs.txt` is the **single source of truth** for addresses. The Phase 1 `src/{rs,bm}/version.asm` labels, the PC port's `game.c` and the mGBA `.sym` files are generated from it.
+- `symbols/symbols_rs.txt` is the **single source of truth** for addresses. The Phase 1 `patch/src/{rs,bm}/version.asm` labels, the PC port's `game.c` and the mGBA `.sym` files are generated from it.
 - Once the disassembly matches, Phase 1 changes can move from "armips patch on the ROM" to "edit the source". Keep armips patches until G-A passes, then decide (that's a Phase 1 decision; both work).
 
 ## 6. Rules

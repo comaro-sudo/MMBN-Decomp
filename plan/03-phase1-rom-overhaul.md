@@ -12,7 +12,7 @@ Implementation methods:
 
 ### WP-A1 — WoodMan softlock fix
 - Prereq: RE-14
-- Method: integrate `BN4-WoodMan-Fix` v2.0 (Prof. 9, credit in the changelog). The addresses for both US versions are already in `src/{bm,rs}/version.asm` (`WOODMAN_FIX`). Verified: the bug hits **both** versions, caused by DS/emulator timing.
+- Method: integrate `BN4-WoodMan-Fix` v2.0 (Prof. 9, credit in the changelog). The addresses for both US versions are already in `patch/src/{bm,rs}/version.asm` (`WOODMAN_FIX`). Verified: the bug hits **both** versions, caused by DS/emulator timing.
 - Accept: the WoodMan scenario plays through on GBARunner3, and WoodTower timings are unchanged (the reason for the fix's v2.0).
 - Size: S
 

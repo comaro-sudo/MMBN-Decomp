@@ -2,9 +2,9 @@
 
 This folder turns the two source documents into an ordered, executable plan:
 
-- [../docs/design-document.md](../docs/design-document.md) (what we want)
-- [../docs/reference-repositories.md](../docs/reference-repositories.md) (tools we expect to use)
-- [../docs/wii-u-blueprint.md](../docs/wii-u-blueprint.md) (Wii U target: TV + GamePad PET)
+- [../docs/design/design-document.md](../docs/design/design-document.md) (what we want)
+- [../docs/reference/reference-repositories.md](../docs/reference/reference-repositories.md) (tools we expect to use)
+- [../docs/design/wii-u-blueprint.md](../docs/design/wii-u-blueprint.md) (Wii U target: TV + GamePad PET)
 - [../docs/hardware/thinkpad-t14s-gen6.md](../docs/hardware/thinkpad-t14s-gen6.md) (dev machine and PC port target: **Windows 11 on ARM64**)
 
 M0 (setup, build pipeline, hello-world patch) is done. Write no overhaul code until the decisions in [00](00-decisions-and-feasibility.md) are confirmed.

@@ -2,7 +2,7 @@
 
 > **Port strategy updated 2026-11-22:** every port runs on an emulation layer first. See [emulation-layer/](emulation-layer/README.md) (mGBA on PC/Wii U/New 3DS, GBARunner hypervisor on NDS). This file describes the *native* (decomp-based) end state, which is now optional and per feature.
 
-Depends on Phase 3 (decomp, or option E: embedded mGBA core). Covers the design doc's Parts II and III and [docs/wii-u-blueprint.md](../docs/wii-u-blueprint.md).
+Depends on Phase 3 (decomp, or option E: embedded mGBA core). Covers the design doc's Parts II and III and [docs/design/wii-u-blueprint.md](../docs/design/wii-u-blueprint.md).
 
 ## 1. Architecture: platform abstraction layer (PAL)
 
@@ -66,7 +66,7 @@ Performance risk: ARM9 at 67 MHz is about 4x the GBA's CPU. That is enough for l
 | UDS local wireless | Replace SIO as on NDS | Share the NDS netcode message protocol |
 | Online (Pretendo / NEX) | **Stretch.** Consider a simple relay server or rollback netplay (nettai) instead | Big scope |
 
-## 5. Step 4d — Native Wii U (from docs/wii-u-blueprint.md)
+## 5. Step 4d — Native Wii U (from docs/design/wii-u-blueprint.md)
 
 Order: after the PC port. It can run in parallel with 3DS. The PC build's two-window layout (game + PET) is the prototype: **TV = game window, GamePad = PET window.**
 

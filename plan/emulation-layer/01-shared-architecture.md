@@ -56,7 +56,7 @@ The director checks `caps()` and degrades gracefully: on NDS the PET polls RAM i
 | `PET_QVGA` | 320×240 | 3DS bottom screen |
 | `PET_DS` | 256×192 | NDS Engine B. Simplified and **tile-based**, drawn by its own small renderer |
 
-  Layouts follow `docs/touch_screen_analysis_…md` (the MMBN1 DS-style permanent Net Map, MMBN5 DS-style touch Custom Screen and dock, Star Force 3-style battle telemetry).
+  Layouts follow [docs/design/touch-screen-ux.md](../../docs/design/touch-screen-ux.md) (the MMBN1 DS-style permanent Net Map, MMBN5 DS-style touch Custom Screen and dock, Star Force 3-style battle telemetry).
 - **`ui_draw` API** (immediate mode): `rect`, `line`, `text` (built-in bitmap font), `image` (RGBA or 4bpp+palette), `clip`. Implemented by SDL3 (PC), SDL2 or GX2 (Wii U), citro2d (3DS). NDS uses tiles instead.
 - **Graphics from the player's ROM:** chip icons, element icons and Navi mugshots are decoded at runtime from ROM pointers (the chip table's icon/palette pointers at entry +0x20). Nothing is shipped.
 

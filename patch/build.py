@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """MMBN4 Overhaul build script.
 
-    python build.py              build both versions -> build/*.gba + build/*.bps
-    python build.py bm           build Blue Moon only (bm | rs | all)
-    python build.py --hello      include the hello-world test patch (Cannon = 99 dmg)
-    python build.py --check      run the identity tests (no output ROMs kept)
+    python patch/build.py              build both versions -> build/*.gba + build/*.bps
+    python patch/build.py bm           build Blue Moon only (bm | rs | all)
+    python patch/build.py --hello      include the hello-world test patch (Cannon = 99 dmg)
+    python patch/build.py --check      run the identity tests (no output ROMs kept)
 
 Pipeline: verify ROM hash -> armips -> fix header checksum -> flips .bps
           -> re-apply the .bps to the original and confirm the result matches.
@@ -17,7 +17,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+PATCH = Path(__file__).resolve().parent   # patch/ (Phase 1 ROM patch project)
+ROOT = PATCH.parent                        # repo root (roms/, tools/, ext/, build/)
 TOOLS = ROOT / "tools"
 ARMIPS = TOOLS / "armips" / "armips.exe"
 FLIPS = TOOLS / "flips" / "flips.exe"
@@ -29,14 +30,14 @@ VERSIONS = {
         "name": "Blue Moon (USA)",
         "rom": ROOT / "roms" / "bn4_bm_us.gba",
         "sha1": "5e017c803ddc768efb8010314b46bc17e9757f71",
-        "version_file": ROOT / "src" / "bm" / "version.asm",
+        "version_file": PATCH / "src" / "bm" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4b_chip_table.asm",
     },
     "rs": {
         "name": "Red Sun (USA)",
         "rom": ROOT / "roms" / "bn4_rs_us.gba",
         "sha1": "a97e96a7da03abd70f7953328e511b9fa29179f1",
-        "version_file": ROOT / "src" / "rs" / "version.asm",
+        "version_file": PATCH / "src" / "rs" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4r_chip_table.asm",
     },
 }
@@ -99,7 +100,7 @@ def build(key: str, hello: bool) -> None:
     out_bps = BUILD / f"bn4_{key}_overhaul{suffix}.bps"
     print(f"== {v['name']}")
 
-    armips(ROOT / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
+    armips(PATCH / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
            ["-definelabel", "HELLO", "1" if hello else "0"])
     fix_header_checksum(out_rom)
 
@@ -126,7 +127,7 @@ def check(key: str) -> None:
     BUILD.mkdir(exist_ok=True)
     print(f"== {v['name']} identity tests")
     tmp = BUILD / f".identity_{key}.gba"
-    armips(ROOT / "test" / "asm" / "chip_table_identity.asm", v["rom"], tmp, v["version_file"],
+    armips(PATCH / "test" / "chip_table_identity.asm", v["rom"], tmp, v["version_file"],
            ["-strequ", "CHIP_MACROS", (CHIP_TABLES / "bn4_chip_macros.asm").as_posix(),
             "-strequ", "CHIP_TABLE_FILE", v["chip_table"].as_posix()])
     ok = sha1(tmp) == v["sha1"]

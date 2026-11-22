@@ -1,6 +1,6 @@
 # Toolchain (installed 2026-11-21)
 
-Dev machine: ThinkPad T14s Gen 6, Windows 11 Pro **ARM64** ([hardware/thinkpad-t14s-gen6.md](hardware/thinkpad-t14s-gen6.md)).
+Dev machine: ThinkPad T14s Gen 6, Windows 11 Pro **ARM64** ([hardware/thinkpad-t14s-gen6.md](../hardware/thinkpad-t14s-gen6.md)).
 Everything under `tools/` and `ext/` is gitignored. Rebuild it from this file.
 
 ## Pre-installed on the machine
@@ -64,7 +64,7 @@ All three ROMs match **No-Intro** (DAT shipped with mGBA 0.10.5, version 2024010
 ## Build
 
 ```
-python build.py --check      # identity tests: chip table re-assembles byte-identical (BM + RS)
-python build.py              # both versions -> build/bn4_{bm,rs}_overhaul.{gba,bps}
-python build.py --hello bm   # hello-world test patch (Cannon 40 -> 99 damage)
+python patch/build.py --check      # identity tests: chip table re-assembles byte-identical (BM + RS)
+python patch/build.py              # both versions -> build/bn4_{bm,rs}_overhaul.{gba,bps}
+python patch/build.py --hello bm   # hello-world test patch (Cannon 40 -> 99 damage)
 ```

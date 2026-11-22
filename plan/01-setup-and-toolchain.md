@@ -1,29 +1,29 @@
 # 01 — Setup & Toolchain
 
-## 1. Proposed repository layout
+## 1. Repository layout (restructured 2026-11-22)
 
 ```
 MMBN4/
-├─ plan/                      # this plan
-├─ docs/                      # design doc, repo list, RE notes, offset tables
+├─ plan/                      # the plan (start at plan/README.md); decomp/ and emulation-layer/ sub-plans
+├─ docs/
+│  ├─ design/                 # design inputs: design document, Wii U blueprint, touch-screen UX study
+│  ├─ reference/              # reference repo list, toolchain (installed tools, pinned commits)
+│  ├─ hardware/               # dev machine profile (ThinkPad, ARM64)
 │  └─ re/                     # one .md per researched system (see 02)
-├─ roms/                      # (gitignored) original ROMs, verified by SHA-1
-├─ tools/                     # (gitignored or submodules) armips, TextPet, mGBA, flips
-├─ ext/                       # (gitignored) cloned reference repos (bn6f, nettai, chip tables…)
-├─ src/
-│  ├─ common/                 # version-agnostic armips sources
-│  ├─ bm/                     # Blue Moon-specific offsets / defines
-│  ├─ rs/                     # Red Sun-specific offsets / defines
-│  ├─ scripts/                # TextPet script dumps (edited)
-│  └─ data/                   # chip tables, encounter tables, shop tables
-├─ test/
-│  ├─ saves/                  # test save files at key story points
-│  └─ lua/                    # mGBA Lua automation scripts
-├─ build/                     # (gitignored) output ROMs + .bps patches
-└─ build script (PowerShell or Python)
+├─ patch/                     # Phase 1: the ROM overhaul as armips patches (.bps)
+│  ├─ build.py                # python patch/build.py [--check|--hello] [rs|bm]
+│  ├─ src/                    # main.asm, common/, rs/, bm/ (per-version labels), scripts/, data/, test/
+│  └─ test/                   # assembler identity tests (chip table)
+├─ decomp/                    # the disassembly (WSL: make compare) - see decomp/README.md
+├─ ports/                     # emulation-layer ports: pc/ today; common/, wiiu/, 3ds/, nds/ planned
+├─ test/                      # shared test assets: saves/, lua/
+├─ roms/                      # (gitignored) the player's ROMs, verified by SHA-1
+├─ tools/                     # (gitignored) armips, Flips, TextPet, mGBA, SDL3, Cemu
+├─ ext/                       # (gitignored) cloned reference repos (bn6f, nettai, mgba, Cemu source...)
+└─ build/                     # (gitignored) every build output: patched ROMs, .bps, pc-arm64/, mgba-arm64/
 ```
 
-✅ Done (2026-11-21): the layout above exists, the ROMs are in `roms/` under canonical names (hashes unchanged), the docs are in `docs/`, and `.gitignore` is written. `build/`, `tools/` and `ext/` exist but are empty and gitignored.
+History: the original layout (2026-11-21) had the patch sources in `src/` and `build.py` at the root. They moved to `patch/` when `decomp/` and `ports/` became sibling projects.
 
 ## 2. ROM verification (from the header check already done)
 
@@ -33,7 +33,7 @@ MMBN4/
 | bn4_rs_us.gba | B4WE | a97e96a7da03abd70f7953328e511b9fa29179f1 |
 | bn4_bm_jp.gba | B4BJ | c4302ada1ff652c740dff51df6dec801fd5b7854 |
 
-- [x] All three match No-Intro (the DAT shipped with mGBA). See [docs/toolchain.md](../docs/toolchain.md).
+- [x] All three match No-Intro (the DAT shipped with mGBA). See [docs/toolchain.md](../docs/reference/toolchain.md).
 - The build script must refuse to run if the input hash does not match.
 
 ## 3. Tools to install
@@ -101,7 +101,7 @@ Requirements:
 - [x] `git init` + initial commit (`.gitignore` included)
 - [x] Move the ROMs into `roms/`, verify hashes
 - [x] Move the design docs into `docs/`
-- [x] Install the tools and record their versions in [docs/toolchain.md](../docs/toolchain.md) (armips built native ARM64. Flips, TextPet and mGBA installed. Ghidra deferred to M1.)
+- [x] Install the tools and record their versions in [docs/toolchain.md](../docs/reference/toolchain.md) (armips built native ARM64. Flips, TextPet and mGBA installed. Ghidra deferred to M1.)
 - [x] Clone the reference repos and record the commit hashes used
-- [x] Hello-world patch: Cannon damage 40 → 99 (`python build.py --hello`). It builds, the BPS round-trips, and it changes exactly 1 byte. Chip-table identity test passes for BM and RS.
+- [x] Hello-world patch: Cannon damage 40 → 99 (`python patch/build.py --hello`). It builds, the BPS round-trips, and it changes exactly 1 byte. Chip-table identity test passes for BM and RS.
 - [ ] Confirm the hello patch in mGBA by hand: Library/Folder shows Cannon at 99, and it does 99 in battle.

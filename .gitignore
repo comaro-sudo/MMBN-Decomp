@@ -20,6 +20,7 @@ roms/*
 *.rar
 
 # --- Build output (patched ROMs, patches, intermediates) ---
+# build/ at any depth: build/ (patch, ports, libmgba) and decomp/build/.
 build/
 *.bps
 *.ips
@@ -36,7 +37,7 @@ build/
 /ext/
 
 # --- Extracted / dumped game data (copyrighted; regenerate from your ROM) ---
-# TextPet dumps are tracked ONLY after editing, under src/scripts/.
+# TextPet dumps are tracked ONLY after editing, under patch/src/scripts/.
 extracted/
 dump/
 dumps/
@@ -48,6 +49,7 @@ dumps/
 *.ss[0-9]
 *.ss
 *.state
+*.state[0-9]
 *.st[0-9]
 *.sgm
 *.mgm
@@ -68,10 +70,12 @@ ghidra/
 *.rep/
 *.no$gba
 
-# --- Future native ports (CMake / devkitPro / MSVC / clangd) ---
+# --- Ports (CMake / MSVC / devkitPro / clangd) ---
 out/
 cmake-build-*/
 CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles/
 .cache/
 .vs/
 *.vcxproj.user
@@ -79,6 +83,20 @@ CMakeUserPresets.json
 *.ilk
 *.exe
 *.dll
+*.lib
+*.exp
+*.obj
+# console outputs (Wii U, 3DS, DS)
+*.wuhb
+*.rpx
+*.rpl
+*.3dsx
+*.smdh
+*.cia
+*.dol
+
+# --- Decomp: generated diagnostics (regenerate with decomp/tools) ---
+decomp/symbols/prologue_candidates_*.txt
 
 # --- Python ---
 __pycache__/

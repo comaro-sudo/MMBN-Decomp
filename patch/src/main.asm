@@ -2,7 +2,7 @@
 ; MMBN4 Overhaul — main entry point
 ; Assembled by build.py with:
 ;   -strequ ROM_IN  <original rom>   -strequ ROM_OUT <output rom>
-;   -strequ VERSION_FILE src/bm/version.asm | src/rs/version.asm
+;   -strequ VERSION_FILE patch/src/bm/version.asm | patch/src/rs/version.asm
 ;   -definelabel HELLO 0|1
 ; ============================================================
 
