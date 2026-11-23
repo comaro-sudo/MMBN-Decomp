@@ -72,6 +72,7 @@ class Segment:
                 targets.append(w)
             self.jumptables[jt_addr] = targets
         self.arm_ranges: list[tuple[int, int]] = [(r["start"], r["end"]) for r in s.get("arm_ranges", [])]
+        self.data_tables: list[dict] = sorted(s.get("data_tables", []), key=lambda t: t["start"])
         self.md = {True: Cs(CS_ARCH_ARM, CS_MODE_THUMB), False: Cs(CS_ARCH_ARM, CS_MODE_ARM)}
         self.funcs: dict[int, bool] = {}       # start -> thumb (inside this segment)
         self.allfuncs: dict[int, bool] = {}    # every known function start (for externs)
@@ -369,6 +370,86 @@ class Segment:
             return f"dat_{w & 0x7FFFFFFF:08X} + 0x80000000"
         return f"0x{w:08X}"
 
+    def table_word(self, a: int, w: int) -> str:
+        """Symbolize a 32-bit word inside a structured data_table."""
+        target, thumb = w & ~1, bool(w & 1)
+        if self.allfuncs.get(target) is thumb and BASE <= target < BASE + 0x120000:
+            sym_comment = f"   @ {self.names[target]}" if target in self.names else ""
+            return f"{fname(target)}{sym_comment}"
+        if w in self.datarefs:
+            sym_comment = f"   @ {self.names[w]}" if w in self.names else ""
+            return f"dat_{w:08X}{sym_comment}"
+        if BASE <= w < BASE + 0x120000:
+            return f"dat_{w:08X}"
+        if 0x08120000 <= w < 0x08800000:
+            return f"dat_{w:08X}"
+        if 0x88120000 <= w < 0x88800000:
+            return f"dat_{w & 0x7FFFFFFF:08X} + 0x80000000"
+        return f"0x{w:08X}"
+
+    def find_data_table(self, a: int) -> dict | None:
+        for t in self.data_tables:
+            if t["start"] <= a < t["end"]:
+                return t
+        return None
+
+    def emit_data_table_chunk(self, a: int, end: int, tbl: dict, lines: list[str], line_of: dict[int, int]) -> int:
+        fmt = tbl.get("fmt", "word")
+        if fmt == "word":
+            while a + 4 <= end and a % 4 == 0:
+                w = struct.unpack_from("<I", self.rom, a - BASE)[0]
+                lines.append(f"    .word {self.table_word(a, w)}")
+                line_of[a] = len(lines)
+                a += 4
+        elif fmt == "hword":
+            cols = tbl.get("cols", 10)
+            while a + 2 <= end and a % 2 == 0:
+                n = min(cols, (end - a) // 2)
+                vals = struct.unpack_from(f"<{n}H", self.rom, a - BASE)
+                lines.append("    .hword " + ", ".join(f"0x{v:04X}" for v in vals))
+                line_of[a] = len(lines)
+                a += n * 2
+        elif fmt == "record":
+            fields = tbl["fields"]
+            rec_sz = sum(4 if c in "wu" else (2 if c == "h" else 1) for c in fields)
+            while a + rec_sz <= end:
+                i = 0
+                while i < len(fields):
+                    c = fields[i]
+                    if c == "w":
+                        w = struct.unpack_from("<I", self.rom, a - BASE)[0]
+                        lines.append(f"    .word {self.table_word(a, w)}")
+                        line_of[a] = len(lines)
+                        a += 4
+                        i += 1
+                    elif c == "u":
+                        w = struct.unpack_from("<I", self.rom, a - BASE)[0]
+                        lines.append(f"    .word 0x{w:08X}")
+                        line_of[a] = len(lines)
+                        a += 4
+                        i += 1
+                    elif c == "h":
+                        j = i
+                        while j < len(fields) and fields[j] == "h":
+                            j += 1
+                        n = j - i
+                        vals = struct.unpack_from(f"<{n}H", self.rom, a - BASE)
+                        lines.append("    .hword " + ", ".join(f"0x{v:04X}" for v in vals))
+                        line_of[a] = len(lines)
+                        a += n * 2
+                        i = j
+                    elif c == "b":
+                        j = i
+                        while j < len(fields) and fields[j] == "b":
+                            j += 1
+                        n = j - i
+                        vals = self.rom[a - BASE : a - BASE + n]
+                        lines.append("    .byte " + ", ".join(f"0x{v:02X}" for v in vals))
+                        line_of[a] = len(lines)
+                        a += n
+                        i = j
+        return a
+
     def label_for(self, a: int) -> str:
         return fname(a) if a in self.funcs else lname(a)
 
@@ -421,10 +502,23 @@ class Segment:
                 continue
             # Unclassified runs (tables etc.) stay incbin from the player's ROM:
             # no bulk ROM data is written into the source. Labelled literal
-            # words (constants/pointers used by code) are emitted as .word.
+            # words (constants/pointers used by code) and configured data_tables
+            # are emitted as structured .word/.hword/.byte directives.
             run_end = a + 1
             while run_end < self.end and run_end not in self.insns and run_end not in self.labels:
                 run_end += 1
+            dtbl = self.find_data_table(a)
+            if dtbl is not None:
+                chunk_end = min(run_end, dtbl["end"])
+                new_a = self.emit_data_table_chunk(a, chunk_end, dtbl, lines, line_of)
+                if new_a > a:
+                    a = new_a
+                    continue
+            # Don't let an incrom swallow the start of a configured data_table
+            for t in self.data_tables:
+                if a < t["start"] < run_end:
+                    run_end = t["start"]
+                    break
             if a not in self.literals and run_end - a >= 8:
                 lines.append(f'    incrom 0x{a - BASE:X}, 0x{run_end - a:X}')
                 a = run_end

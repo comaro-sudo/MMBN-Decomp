@@ -44,6 +44,9 @@ start = 0x0801002A
 end = 0x08020D70
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x08011888, end = 0x08012470, fmt = "record", fields = "hbbbbbbu" }, # BN4_ENEMY_STATS (254 x 12B)
+]
 
 [[segment]]
 name = "code_02"
@@ -67,6 +70,9 @@ start = 0x0804F228
 end = 0x0805CF74
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080523CC, end = 0x08053904, fmt = "word" }, # 723-pointer sprite/object table
+]
 
 [[segment]]
 name = "code_04b"
@@ -95,6 +101,9 @@ start = 0x080711F0
 end = 0x08094764
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080843FC, end = 0x08085404, fmt = "word" }, # 370-pointer table
+]
 
 [[segment]]
 name = "code_06"
@@ -102,6 +111,11 @@ start = 0x08094764
 end = 0x080B01EA
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080A78D4, end = 0x080A7C34, fmt = "word" }, # 96-pointer table
+    { start = 0x080A7C6C, end = 0x080A7ECC, fmt = "word" }, # 96-pointer table
+    { start = 0x080A911C, end = 0x080ADD98, fmt = "word" }, # BN4_MYSTERY_DATA (414 pointers, RW+CW)
+]
 
 [[segment]]
 name = "code_07"
@@ -123,6 +137,10 @@ start = 0x080F001E
 end = 0x08109F04
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080F5F5C, end = 0x080F8A7C, fmt = "hword", cols = 10 },              # BN4_REWARD_ROWS (276 x 20 hwords)
+    { start = 0x080FA90C, end = 0x080FB488, fmt = "record", fields = "bbbbbbbbw" },  # BN4_STORY_BATTLES (245 x 12B)
+]
 
 [[segment]]
 name = "code_10"

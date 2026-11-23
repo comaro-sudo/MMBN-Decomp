@@ -54,6 +54,9 @@ start = 0x0801002A
 end = 0x08020D6C
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x08011888, end = 0x08012470, fmt = "record", fields = "hbbbbbbu" }, # BN4_ENEMY_STATS (254 x 12B)
+]
 
 [[segment]]   # BM delta +0x4
 name = "code_02"
@@ -80,6 +83,9 @@ start = 0x0804F21C
 end = 0x0805CF5C
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080523C0, end = 0x080538F8, fmt = "word" }, # 723-pointer sprite/object table
+]
 
 # code_04 is split where the RS->BM delta changes inside it: three cutscene-script
 # tables insert or delete 14-byte commands (notes/dc4-version-differences.md 2.2/3).
@@ -114,6 +120,9 @@ start = 0x080711E4
 end = 0x08094758
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080843F0, end = 0x080853F8, fmt = "word" }, # 370-pointer table
+]
 
 [[segment]]   # BM delta +0xC
 name = "code_06"
@@ -122,6 +131,11 @@ start = 0x08094758
 end = 0x080B01DE
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080A78C8, end = 0x080A7C28, fmt = "word" }, # 96-pointer table
+    { start = 0x080A7C60, end = 0x080A7EC0, fmt = "word" }, # 96-pointer table
+    { start = 0x080A9110, end = 0x080ADD8C, fmt = "word" }, # BN4_MYSTERY_DATA (414 pointers, RW+CW)
+]
 
 [[segment]]   # BM delta +0xC
 name = "code_07"
@@ -146,6 +160,10 @@ start = 0x080F0012
 end = 0x08109EF0   # the +0xC -> +0x14 shift is inside sub_08109E48, just before
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080F5F50, end = 0x080F8A70, fmt = "hword", cols = 10 },              # BN4_REWARD_ROWS (276 x 20 hwords)
+    { start = 0x080FA900, end = 0x080FB47C, fmt = "record", fields = "bbbbbbbbw" },  # BN4_STORY_BATTLES (245 x 12B)
+]
 
 [[segment]]   # BM delta +0x14, includes m4a
 name = "code_10"
