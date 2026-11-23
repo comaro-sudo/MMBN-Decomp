@@ -50,7 +50,7 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
     - plus the area's spawn script entry.
     - Blue, so no Unlocker is needed.
   - **Placement (owner, 2026-11-23): one in an Undernet dead end, one in a quiet corner of an early area (ACDC).**
-    - Proposed split (T, owner to confirm): **Z-Saver in the Undernet** (a rare sword for a hidden, dangerous place) and **Grand Prix Power in ACDC** (an early surprise).
+    - Split (owner confirmed, 2026-11-23): **Z-Saver in the Undernet** (a rare sword for a hidden, dangerous place) and **Grand Prix Power in ACDC** (an early surprise).
     - The exact spots, a dead end off the main path in each area, come from the maps (`ref/maps/`, local) and the areas' Mystery Data coordinates (RE-07).
 - *(Superseded: Z-Saver and Grand Prix Power sold at Higsby's shop at a very high price. Kept for the record.)*
   - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
