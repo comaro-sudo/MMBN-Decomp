@@ -30,4 +30,4 @@ None. **Owner confirmed the final lineup on 2026-11-23** (recorded in `canon-nav
   - **Raika / SearchMan** fights Lan **before** the canon fight with Chaud / ProtoMan, with a similar friendly-challenge beat.
 
 ## Immediate Next Steps
-1. Claude records the owner's confirmed lineup (`AquaMan → Roll → ProtoMan`) and the Dex/Raika friendly-match beats in `docs/pending/free-tournament-secret-chips.md` and the WP-B1 / exhibition-match design.
+1. Claude records the owner's confirmed lineup (`AquaMan → Roll → ProtoMan`), the Dex/Raika friendly-match beats, and the 9 approved friendly-match dialogue drafts (`canon-navis.md` §6–7) in `docs/pending/free-tournament-secret-chips.md` and the WP-B1 / exhibition-match design.

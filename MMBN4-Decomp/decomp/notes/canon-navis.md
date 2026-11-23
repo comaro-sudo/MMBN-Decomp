@@ -106,3 +106,83 @@ Confirmed unified *Violet Eclipse* canon lineup (1 canon story fight + 3 friendl
 | **1st: Den Battle** | **AquaMan** (Shuko) | **GutsMan** (Dex), **FireMan** (Mr. Match), **NumberMan** (Higsby) | **Dex / GutsMan** challenges Lan **after** the first canon fight (AquaMan), with dialogue along the lines of *"I lost my fight, but I really wanted to battle you."* |
 | **2nd: Eagle / Hawk** | **Roll** (Mayl) | **WindMan** (Lily), **MetalMan** (Tamako), **WoodMan** (Sal) | Standard friendly-match pacing before the final. |
 | **3rd: Red Sun / Blue Moon** | **ProtoMan** (Chaud) | **SearchMan** (Raika), **ThunderMan** (Raoul), **JunkMan** | **Raika / SearchMan** challenges Lan **before** the canon fight with Chaud / ProtoMan, with a similar friendly-challenge beat (establishing Lan & Raika's acquaintance for BN5 before the ProtoMan climax). |
+
+---
+
+## 7. Approved friendly-match pre-battle dialogue drafts (2026-11-23)
+
+Drafted for *Violet Eclipse*'s 9 friendly matches (approved by owner; ready for Claude / script insertion):
+
+### Tournament 1: Den Battle (canon: AquaMan)
+
+1. **Dex & GutsMan** *(after the AquaMan fight)*
+   - **Dex:** "Hey, Lan! Wait up!"
+   - **Dex:** "Aw man, I got knocked out of my match early... What a bust!"
+   - **Dex:** "Still, no way I'm letting you walk through this tournament without facing me first!"
+   - **GutsMan:** "Yeah! My fists have been itching for a real fight, Guts!"
+   - **Dex:** "Come on, Lan—just a quick friendly match! Show me what that new power of yours can do!"
+   - **Lan:** "Heh, you're on, Dex! Ready, MegaMan?"
+   - **MegaMan:** "Always ready, Lan! Let's go!"
+
+2. **Mr. Match & FireMan**
+   - **Mr. Match:** "Well, well... If it isn't Lan Hikari! Didn't think I'd bow out of the bracket this early, did ya?"
+   - **Lan:** "Mr. Match?! Wait—you're not up to anything shady, are you?"
+   - **Mr. Match:** "Relax, kid! I entered fair and square. Just hate leaving a tournament without getting a real sweat going."
+   - **FireMan:** "My flames are still burning hot! Let us test our heat against MegaMan!"
+   - **Mr. Match:** "What do ya say, Lan? One friendly match—strictly on the level. Let's turn up the heat!"
+
+3. **Higsby & NumberMan**
+   - **Higsby:** "Oh, Lan! Just the NetBattler I was hoping to run into, huh!"
+   - **Higsby:** "My tournament run ended in a flash, huh... Guess my calculations were off by a decimal!"
+   - **NumberMan:** "Statistically, a practice bout with MegaMan is the best way to recalibrate!"
+   - **Higsby:** "That's right, huh! Consider it a friendly chip-testing match—no hard feelings, huh!"
+   - **Lan:** "Sure thing, Mr. Higsby! Let's see what rare combos you've got!"
+
+### Tournament 2: Eagle / Hawk (canon: Roll)
+
+4. **Lily & WindMan**
+   - **Lily:** "Ah... Lan Hikari. The wind carried word of your victories."
+   - **Lan:** "Whoa—you're WindMan's operator, right? Did you already finish your match?"
+   - **Lily:** "Yes. Our path in this tournament has ended, yet the wind still whispers that we should cross blades once."
+   - **WindMan:** "Woooosh! Let us see if your spirit can stand against the gale, MegaMan!"
+   - **Lily:** "Think of it as a friendly breeze before the storm of the finals. Shall we begin?"
+
+5. **Tamako & MetalMan**
+   - **Tamako:** "Heya, Lan! Don't tell me you're heading into the next round without warming up first!"
+   - **Lan:** "Tamako! Wait, weren't you on the other side of the bracket?"
+   - **Tamako:** "Ugh, don't remind me—I got knocked out! No way I came all the way to Castillo just to sit in the stands!"
+   - **MetalMan:** "My fists are still itching for a brawl! Come on, MegaMan, let's spar!"
+   - **Tamako:** "Just a friendly match, Lan! Give us everything you've got!"
+
+6. **Sal & WoodMan**
+   - **Sal:** "Oh, hello, Lan! It's good to see you and MegaMan doing so well."
+   - **Sal:** "WoodMan and I were eliminated earlier, so we've just been enjoying the park."
+   - **WoodMan:** "Hmph! Still, it would be a shame to leave without testing MegaMan's strength ourselves!"
+   - **Sal:** "Hehe, WoodMan's been eager to spar with you all day. Would you mind a friendly match before your next bout?"
+   - **Lan:** "Not at all, Sal! Ready when you are, MegaMan!"
+
+### Tournament 3: Red Sun / Blue Moon (canon: ProtoMan)
+
+7. **Raika & SearchMan** *(before the Chaud / ProtoMan fight)*
+   - **Raika:** "...Lan Hikari. Hold it."
+   - **Lan:** "Huh? You're Raika from Sharo, right?"
+   - **Raika:** "My bracket ended earlier than planned. Unacceptable—but it leaves me with one unfinished objective."
+   - **Raika:** "You face Chaud Blaze next. Before you do, I want to measure your strength myself."
+   - **SearchMan:** "Target acquired. A live-fire warm-up will serve us both, Lan."
+   - **Raika:** "No holding back. Consider it a friendly exercise—show me if you're really ready for ProtoMan."
+   - **Lan:** "You got it, Raika! Battle routine, set!"
+
+8. **Raoul & ThunderMan**
+   - **Raoul:** "Lan. It has been some time."
+   - **Lan:** "Raoul! You're in this tournament too?!"
+   - **Raoul:** "My match is already over, and I fell short. Yet standing here, I can feel how much stronger you and MegaMan have grown."
+   - **ThunderMan:** "Bzzzzt! The storm does not pass without testing the oak! Face me, MegaMan!"
+   - **Raoul:** "A friendly bout, Lan—nothing more. Show me the resolve you carry into the finals."
+
+9. **JunkMan** *(autonomous Navi — no operator)*
+   - **MegaMan:** "Lan, wait! I'm picking up a strange Navi signal right next to us..."
+   - **JunkMan:** "...MegaMan. You carry the light of so many Navis' souls."
+   - **Lan:** "Who are you? Were you in the tournament?"
+   - **JunkMan:** "I am JunkMan... born from data the world threw away. My match is already over, cast aside like scrap."
+   - **JunkMan:** "Before I fade back into the junkyard, grant me one honest battle. No malice... only a test of strength."
+   - **MegaMan:** "I hear you, JunkMan. Let's give it our best—together, Lan!"
