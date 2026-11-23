@@ -1,5 +1,6 @@
 ; ============================================================
-; WP-D4 step 3: the status screen shows all 12 Double Souls, as two pages of 6 (L or R switches pages).
+; WP-D4 step 3: the status screen shows all 13 Double Souls (12 + Duo), as pages of 6: R next page, L previous.
+; Page 3 (Duo) appears only when a 13th Soul is owned (2026-11-23, with wp_d4_duo_soul.asm).
 ; A 2 x 6 grid doesn't fit (the NAVIGATOR box starts at Y = 94; decomp/notes/status-screen-2x6.md).
 ; Design: Gemini, decomp/notes/status-screen-two-pages.md. Corrected call site and veneer spots:
 ; docs/handoff-violet-eclipse.md ("Status-screen two-page patch").
@@ -11,12 +12,12 @@
 ; - StatusCollectOwnedSouls resets the page to 0 when the screen opens (InitPage, via a veneer in the old
 ;   completion-star list at 0x08000DB4, unused since wp_d4_star_twelve_souls.asm).
 ; - The empty per-frame stub's call goes to StatusSoulPageToggle (via a veneer in the freed status-list
-;   bytes): on L or R, when 7+ Souls are owned, flip the page (0 <-> 6), play a cursor sound and reset the
+;   bytes): on L or R, when 7+ Souls are owned, change the page (0 / 6 / 12), play a cursor sound and reset the
 ;   six Soul icon objects so they redraw on the same frame.
 ; The page byte is 0x0201D018, an unused byte of the screen's 32-byte Soul buffer.
 ; ============================================================
 
-SOUL_BUF        equ 0x0201D000      ; owned Soul flags, 0xFF-filled (32 bytes); +0x18 = page offset (0 or 6)
+SOUL_BUF        equ 0x0201D000      ; owned Soul flags, 0xFF-filled (32 bytes); +0x18 = page offset (0, 6 or 12)
 UI_POOL         equ 0x02008BB0      ; 24 UI objects x 0x58: +0 active (bit 0), +1 type, +8 state
 UI_TYPE_SOUL    equ 0x45
 SFX_PAGE        equ 0x6E
@@ -34,11 +35,11 @@ SFX_PAGE        equ 0x6E
     .word FS_STATUS_SOULS + 0x20
 
 .org FS_STATUS_SOULS
-    .byte 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22, 0xFF  ; Roll..Wood, end
+    .byte 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22, 0x23, 0xFF  ; Roll..Wood, Duo, end
 .org FS_STATUS_SOULS + 0x10
-    .byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B        ; icon animations
+    .byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x08  ; icon animations (Duo: MetalSoul's)
 .org FS_STATUS_SOULS + 0x20
-    .byte 0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x02, 0x01        ; icon palettes
+    .byte 0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x02, 0x01, 0x02  ; icon palettes (Duo: MetalSoul's)
 .org FS_STATUS_OAM
     .byte 0x00, 0x10, 0x20, 0x30, 0x40, 0x50                                            ; OAM slot offsets (slots 0-5)
 
@@ -94,13 +95,31 @@ StatusSoulPageToggle:
     beq     @@done
     mov     r0, r10                 ; sl
     ldr     r0, [r0, 4]             ; input
-    ldrh    r0, [r0, 2]             ; newly pressed
+    ldrh    r2, [r0, 2]             ; newly pressed
     ldr     r1, =0x0300             ; L | R
-    tst     r0, r1
+    tst     r2, r1
     beq     @@done
-    ldrb    r0, [r4, 0x18]
-    mov     r1, 6
-    eor     r0, r1                  ; 0 <-> 6
+    ldrb    r0, [r4, 0x18]          ; page offset 0 / 6 / 12
+    lsl     r3, r2, 22              ; L (bit 9) -> sign bit
+    bmi     @@left
+    add     r0, 6                   ; R: next page, if it has a Soul; else back to page 1
+    cmp     r0, 12
+    bgt     @@first
+    ldrb    r1, [r4, r0]
+    cmp     r1, 0xFF
+    bne     @@set
+@@first:
+    mov     r0, 0
+    b       @@set
+@@left:
+    sub     r0, 6                   ; L: previous page; from page 1 to the last one with a Soul
+    bge     @@set
+    mov     r0, 12
+    ldrb    r1, [r4, 12]
+    cmp     r1, 0xFF
+    bne     @@set
+    mov     r0, 6
+@@set:
     strb    r0, [r4, 0x18]
     mov     r0, SFX_PAGE
     ldr     r3, =PLAY_SFX | 1

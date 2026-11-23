@@ -20,7 +20,7 @@
 ;    (they're not attack chips, except the counters' own hit).
 ; 6. Icon: 0x16D's icon pointer, a blank placeholder today, takes MetalSoul's (0x169's) icon.
 ; The grant (flag 0x0023 + WriteChipKey(0x16D)) is in wp_d2_duo_story_grant.asm; FC 0C takes idx 12
-; (wp_d4_grant_soul.asm); the status screen's 3rd page is still to do.
+; (wp_d4_grant_soul.asm); the status screen's 3rd page is in wp_d4_status_two_pages.asm.
 ; ============================================================
 
 DUO_SOUL_FLAG       equ 0x23
