@@ -157,6 +157,36 @@ def active_lines(text: str, v: str) -> list[str]:
     return out
 
 
+# Single-line RS vs BM differences that fold into named version constants
+# defined in include/macros.inc (keeps shared source clean on every regen).
+SHARED_CONST_PAIRS: list[tuple[str, str, str]] = [
+    ("movs r0, #0",       "movs r0, #1",       "movs r0, #VERSION_INDEX"),
+    ("movs r1, #0",       "movs r1, #1",       "movs r1, #VERSION_INDEX"),
+    ("movs r2, #0",       "movs r2, #1",       "movs r2, #VERSION_INDEX"),
+    (".word 0x00000000",  ".word 0x00000001",  ".word VERSION_INDEX"),
+    ("adds r0, #0x16",    "adds r0, #0x22",    "adds r0, #SAVE_CHECKSUM_KEY"),
+    ("movs r1, #0x2c",    "movs r1, #0x71",    "movs r1, #SAVE_XOR_KEY_0"),
+    ("movs r2, #0x2c",    "movs r2, #0x71",    "movs r2, #SAVE_XOR_KEY_0"),
+    ("movs r1, #0x64",    "movs r1, #0x47",    "movs r1, #SAVE_XOR_KEY_1"),
+    ("movs r2, #0x64",    "movs r2, #0x47",    "movs r2, #SAVE_XOR_KEY_1"),
+    ("movs r1, #0x38",    "movs r1, #0x8e",    "movs r1, #SAVE_XOR_KEY_2"),
+    ("movs r2, #0x38",    "movs r2, #0x8e",    "movs r2, #SAVE_XOR_KEY_2"),
+    ("movs r1, #0x43",    "movs r1, #0x31",    "movs r1, #SAVE_XOR_KEY_3"),
+    ("movs r2, #0x43",    "movs r2, #0x31",    "movs r2, #SAVE_XOR_KEY_3"),
+    ("movs r0, #0x17",    "movs r0, #0x1d",    "movs r0, #FIRST_SOUL_FLAG"),
+    ("movs r1, #0x18",    "movs r1, #0x21",    "movs r1, #NGPLUS_POOL_SOUL_FLAG"),
+]
+
+
+def _fold_shared_const(rs_line: str, bm_line: str) -> str | None:
+    rs_s, bm_s = rs_line.strip(), bm_line.strip()
+    indent = rs_line[: len(rs_line) - len(rs_line.lstrip())]
+    for r_pat, b_pat, repl in SHARED_CONST_PAIRS:
+        if rs_s == r_pat and bm_s == b_pat:
+            return indent + repl
+    return None
+
+
 def merge(name: str, dry: bool) -> tuple[int, int]:
     rs_path, bm_path = DECOMP / "asm" / f"{name}.s", DECOMP / "asm" / "bm" / f"{name}.s"
     rs = rs_path.read_text().splitlines()
@@ -178,6 +208,11 @@ def merge(name: str, dry: bool) -> tuple[int, int]:
         if op == "equal":
             out += rs[i1:i2]
             continue
+        if op == "replace" and (i2 - i1) == 1 and (j2 - j1) == 1:
+            folded = _fold_shared_const(rs[i1], bm[j1])
+            if folded is not None:
+                out.append(folded)
+                continue
         hunks += 1
         changed += max(i2 - i1, j2 - j1)
         if op == "insert":

@@ -4136,11 +4136,7 @@ _080373F8:
     movs r2, #1
     tst r1, r2
     bne _0803743A
-    .if VERSION_BM
-    movs r1, #1
-    .else
-    movs r1, #0
-    .endif
+    movs r1, #VERSION_INDEX
     tst r1, r1
     beq _0803742A
     ldrb r1, [r0, #0x16]
@@ -4195,11 +4191,7 @@ _08037458:
     movs r2, #1
     tst r1, r2
     bne _0803749A
-    .if VERSION_BM
-    movs r1, #1
-    .else
-    movs r1, #0
-    .endif
+    movs r1, #VERSION_INDEX
     tst r1, r1
     beq _0803748A
     ldrb r1, [r0, #0x16]
@@ -4686,11 +4678,7 @@ _08037836:
     movs r2, #1
     tst r1, r2
     bne _080378B8
-    .if VERSION_BM
-    movs r2, #1
-    .else
-    movs r2, #0
-    .endif
+    movs r2, #VERSION_INDEX
     tst r2, r2
     beq _08037866
     movs r2, #4
@@ -4782,11 +4770,7 @@ _080378EA:
     movs r2, #1
     tst r1, r2
     bne _0803796C
-    .if VERSION_BM
-    movs r2, #1
-    .else
-    movs r2, #0
-    .endif
+    movs r2, #VERSION_INDEX
     tst r2, r2
     beq _0803791A
     movs r2, #4
@@ -7545,11 +7529,7 @@ _080397F2:
 _08039808:
     .word 0x0202A000
 _0803980C:
-    .if VERSION_BM
-    .word 0x00000001
-    .else
-    .word 0x00000000
-    .endif
+    .word VERSION_INDEX
 
     .global sub_08039810
     .thumb_func
@@ -7672,11 +7652,7 @@ _080398E4:
     strh r0, [r5, #0x2c]
 _080398F6:
     ldrb r0, [r6, #1]
-    .if VERSION_BM
-    movs r1, #1
-    .else
-    movs r1, #0
-    .endif
+    movs r1, #VERSION_INDEX
     cmp r0, r1
     bne _0803990E
     movs r1, #0xfb
@@ -8173,11 +8149,7 @@ _08039CE0:
     ldr r6, _08039D00
     ldr r6, [r6, r4]
     ldrh r0, [r6]
-    .if VERSION_BM
-    movs r1, #1
-    .else
-    movs r1, #0
-    .endif
+    movs r1, #VERSION_INDEX
     cmp r0, r1
     beq _08039CF8
     movs r1, #0xdd
@@ -9052,11 +9024,7 @@ _0803A3C8:
 _0803A3CC:
     .word 0x0202A000
 _0803A3D0:
-    .if VERSION_BM
-    .word 0x00000001
-    .else
-    .word 0x00000000
-    .endif
+    .word VERSION_INDEX
 
     .global sub_0803A3D4
     .thumb_func
@@ -9576,11 +9544,7 @@ _0803A7E0:
     b _0803A806
 _0803A7EC:
     movs r1, #0x99
-    .if VERSION_BM
-    movs r2, #1
-    .else
-    movs r2, #0
-    .endif
+    movs r2, #VERSION_INDEX
     lsls r2, r2, #1
     adds r1, r1, r2
     adds r1, r1, r0
@@ -9786,11 +9750,7 @@ sub_0803A930:
     ldrb r0, [r0, #0xd]
     tst r0, r0
     beq _0803A9A8
-    .if VERSION_BM
-    movs r1, #1
-    .else
-    movs r1, #0
-    .endif
+    movs r1, #VERSION_INDEX
     movs r0, #0xa1
     adds r0, r0, r1
     movs r1, #0
@@ -11595,11 +11555,7 @@ _0803B7DE:
     adds r6, #2
     tst r2, r2
     bne _0803B806
-    .if VERSION_BM
-    movs r0, #1
-    .else
-    movs r0, #0
-    .endif
+    movs r0, #VERSION_INDEX
 _0803B7F4:
     strb r0, [r7, r5]
     adds r5, #1
@@ -35390,11 +35346,7 @@ _0804896E:
     adds r0, r0, r3
     subs r2, #1
     bge _0804896E
-    .if VERSION_BM
-    adds r0, #0x22
-    .else
-    adds r0, #0x16
-    .endif
+    adds r0, #SAVE_CHECKSUM_KEY
     str r0, [r7, #0x34]
     mov pc, lr
 
@@ -35427,11 +35379,7 @@ _080489A0:
     adds r0, r0, r3
     subs r2, #1
     bge _080489A0
-    .if VERSION_BM
-    adds r0, #0x22
-    .else
-    adds r0, #0x16
-    .endif
+    adds r0, #SAVE_CHECKSUM_KEY
     cmp r0, r6
     bne _080489B2
     movs r0, #0

@@ -361,11 +361,7 @@ dat_0804F484:
     .thumb_func
 sub_0804F494:   @ ScriptCmd_checkDoubleSouls
     push {lr}
-    .if VERSION_BM
-    movs r0, #0x1d
-    .else
-    movs r0, #0x17
-    .endif
+    movs r0, #FIRST_SOUL_FLAG
     movs r1, #6
     .hword 0x1C00   @ adds r0, r0, #0
     adds r2, r1, #0

@@ -22,7 +22,7 @@ Needs `binutils-arm-none-eabi`, `make`, `sha1sum`. Tools under `tools/` use the 
 | DC-0 skeleton | ✅ RS matches from a whole-ROM incbin (2026-11-22) |
 | DC-1 survey | In progress: [notes/dc1-survey.md](notes/dc1-survey.md). About 7.2k functions, code region `0x08000000`–`0x0811FFFF`, stock m4a present, RS↔BM = 5 shift regions |
 | DC-2 code carved | In progress: all 11 code regions have generated assembly views for RS and BM. Unclassified ranges remain `incrom`; run `python3 tools/coverage.py rs` or `bm` for the exact source coverage. |
-| DC-4 Blue Moon variant | ✅ Both ROMs build byte-identical from **one shared tree** (`asm/`, 2026-11-22). Symbols are named after RS addresses. The ~1,050 version differences are `.if VERSION_BM` blocks, written by `tools/merge_bm.py`. Next: reduce the blocks that come from mid-segment shifts ([notes/task-gemini-dc4-version-differences.md](notes/task-gemini-dc4-version-differences.md)). |
+| DC-4 Blue Moon variant | ✅ Both ROMs build byte-identical from **one shared tree** (`asm/`, 2026-11-22). Symbols are named after RS addresses; data-region pointers map through `symbols/datashift_rs_bm.txt`, and version constants (`VERSION_INDEX`, `SAVE_CHECKSUM_KEY`, `SAVE_XOR_KEY_0..3`, `FIRST_SOUL_FLAG`, `NGPLUS_POOL_SOUL_FLAG`) live in `include/macros.inc`. Remaining genuine version differences are `.if VERSION_BM` / `.if VERSION_RS` blocks written by `tools/merge_bm.py`. |
 
 ## Layout
 

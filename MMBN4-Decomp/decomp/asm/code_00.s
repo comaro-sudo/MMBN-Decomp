@@ -2247,11 +2247,7 @@ _0800134C:
 sub_08001350:
     push {r4, r5, r6, lr}
     movs r0, #0
-    .if VERSION_BM
-    movs r1, #0x21
-    .else
-    movs r1, #0x18
-    .endif
+    movs r1, #NGPLUS_POOL_SOUL_FLAG
     bl sub_0802509C   @ TestEventFlagHL
     beq _08001368
     ldr r0, _08001384
@@ -2267,11 +2263,7 @@ _08001368:
 sub_0800136A:
     push {r4, r5, r6, lr}
     movs r0, #0
-    .if VERSION_BM
-    movs r1, #0x21
-    .else
-    movs r1, #0x18
-    .endif
+    movs r1, #NGPLUS_POOL_SOUL_FLAG
     bl sub_0802509C   @ TestEventFlagHL
     beq _08001382
     adds r0, r7, #0
@@ -11103,11 +11095,7 @@ _0800622C:
     bl sub_08001B00
     movs r1, #0xff
     ands r0, r1
-    .if VERSION_BM
-    movs r1, #0x71
-    .else
-    movs r1, #0x2c
-    .endif
+    movs r1, #SAVE_XOR_KEY_0
     eors r0, r1
     tst r0, r0
     beq _0800622C
@@ -11128,11 +11116,7 @@ _08006252:
     bl sub_08001B00
     movs r1, #0xff
     ands r0, r1
-    .if VERSION_BM
-    movs r1, #0x47
-    .else
-    movs r1, #0x64
-    .endif
+    movs r1, #SAVE_XOR_KEY_1
     eors r0, r1
     tst r0, r0
     beq _08006252
@@ -11153,11 +11137,7 @@ _08006278:
     bl sub_08001B00
     movs r1, #0xff
     ands r0, r1
-    .if VERSION_BM
-    movs r1, #0x8e
-    .else
-    movs r1, #0x38
-    .endif
+    movs r1, #SAVE_XOR_KEY_2
     eors r0, r1
     tst r0, r0
     beq _08006278
@@ -11200,11 +11180,7 @@ _080062CE:
     bl sub_08001B00
     movs r1, #0xff
     ands r0, r1
-    .if VERSION_BM
-    movs r1, #0x31
-    .else
-    movs r1, #0x43
-    .endif
+    movs r1, #SAVE_XOR_KEY_3
     eors r0, r1
     tst r0, r0
     beq _080062CE
@@ -11325,11 +11301,7 @@ sub_08006380:
     movs r1, #0x80
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x71
-    .else
-    movs r2, #0x2c
-    .endif
+    movs r2, #SAVE_XOR_KEY_0
     eors r1, r2
     strb r1, [r7, r0]
     pop {r1, r2, r3, r4, r5, r6, r7, pc}
@@ -11343,11 +11315,7 @@ sub_08006394:
     movs r1, #0x80
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x71
-    .else
-    movs r2, #0x2c
-    .endif
+    movs r2, #SAVE_XOR_KEY_0
     eors r1, r2
     ldrb r2, [r7, r0]
     cmp r1, r2
@@ -11368,11 +11336,7 @@ sub_080063B4:   @ WriteChipKey
     movs r1, #0x84
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x47
-    .else
-    movs r2, #0x64
-    .endif
+    movs r2, #SAVE_XOR_KEY_1
     eors r1, r2
     strb r1, [r7, r0]
     pop {r1, r2, r3, r4, r5, r6, r7, pc}
@@ -11386,11 +11350,7 @@ sub_080063C8:   @ BN4_CHIP_GATE
     movs r1, #0x84
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x47
-    .else
-    movs r2, #0x64
-    .endif
+    movs r2, #SAVE_XOR_KEY_1
     eors r1, r2
     ldrb r2, [r7, r0]
     cmp r1, r2
@@ -11589,11 +11549,7 @@ sub_08006510:
     movs r1, #0x94
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x31
-    .else
-    movs r2, #0x43
-    .endif
+    movs r2, #SAVE_XOR_KEY_3
     eors r1, r2
     strb r1, [r7, r0]
     pop {r1, r2, r3, r4, r5, r6, r7, pc}
@@ -11607,11 +11563,7 @@ sub_08006524:
     movs r1, #0x94
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x31
-    .else
-    movs r2, #0x43
-    .endif
+    movs r2, #SAVE_XOR_KEY_3
     eors r1, r2
     mvns r1, r1
     strb r1, [r7, r0]
@@ -11626,11 +11578,7 @@ sub_0800653A:
     movs r1, #0x94
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x31
-    .else
-    movs r2, #0x43
-    .endif
+    movs r2, #SAVE_XOR_KEY_3
     eors r1, r2
     ldrb r2, [r7, r0]
     cmp r1, r2
@@ -11694,11 +11642,7 @@ _0800659E:
     movs r1, #0x88
     ldr r0, [r0, r1]
     ldrb r1, [r5, r7]
-    .if VERSION_BM
-    movs r2, #0x8e
-    .else
-    movs r2, #0x38
-    .endif
+    movs r2, #SAVE_XOR_KEY_2
     eors r1, r2
     strb r1, [r0, r7]
 _080065B4:
@@ -11721,11 +11665,7 @@ sub_080065BE:
     movs r1, #0x88
     ldr r7, [r7, r1]
     ldrb r1, [r5, r0]
-    .if VERSION_BM
-    movs r2, #0x8e
-    .else
-    movs r2, #0x38
-    .endif
+    movs r2, #SAVE_XOR_KEY_2
     eors r1, r2
     ldrb r2, [r7, r0]
     cmp r1, r2
