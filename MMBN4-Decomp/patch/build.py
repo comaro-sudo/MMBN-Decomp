@@ -6,13 +6,19 @@
     python patch/build.py --hello      include the hello-world test patch (Cannon = 99 dmg)
     python patch/build.py --check      run the identity tests (no output ROMs kept)
 
-Pipeline: verify ROM hash -> armips -> fix header checksum -> flips .bps
+Pipeline: verify ROM hash -> armips -> TextPet (patch/src/text/<v>/*.tpl, if any)
+          -> fix header checksum -> flips .bps
           -> re-apply the .bps to the original and confirm the result matches.
+
+Text (plan/text-insertion.md): patch/src/text/rs/ and patch/src/text/bm/ hold only OUR scripts, as TextPet
+.tpl files (@archive <offset> + script blocks; UTF-8 without BOM). TextPet writes only those archives:
+in place when they still fit, otherwise into FS_TEXT (patch/src/common/defines.asm).
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +28,8 @@ ROOT = PATCH.parent                        # repo root (roms/, tools/, ext/, bui
 TOOLS = ROOT / "tools"
 ARMIPS = TOOLS / "armips" / "armips.exe"
 FLIPS = TOOLS / "flips" / "flips.exe"
+TEXTPET_DIR = TOOLS / "textpet"
+TEXTPET = TEXTPET_DIR / "TextPet.exe"
 BUILD = ROOT / "build"
 CHIP_TABLES = ROOT / "ext" / "mmbn-chip-tables"
 
@@ -107,6 +115,35 @@ def check_inputs(key: str) -> dict:
     return v
 
 
+def insert_text(key: str, rom: Path) -> None:
+    """Insert our TextPet scripts (patch/src/text/<key>/*.tpl) into the built ROM, if there are any."""
+    src = PATCH / "src" / "text" / key
+    tpls = sorted(src.glob("*.tpl")) if src.is_dir() else []
+    if not tpls:
+        return
+    if not TEXTPET.exists():
+        fail(f"missing tool {TEXTPET.relative_to(ROOT)} (see plan/text-insertion.md)")
+    for t in tpls:
+        if t.read_bytes()[:3] == b"\xef\xbb\xbf":
+            fail(f"{t.relative_to(ROOT)} starts with a UTF-8 BOM; TextPet rejects it (save as UTF-8 without BOM)")
+    defines = (PATCH / "src" / "common" / "defines.asm").read_text(encoding="utf-8")
+    m = re.search(r"^FS_TEXT\s+equ\s+0x([0-9A-Fa-f]+)", defines, re.M)
+    if not m:
+        fail("FS_TEXT not found in patch/src/common/defines.asm")
+    free = int(m.group(1), 16) - 0x08000000
+    index = TEXTPET_DIR / "indexes" / f"mmbn4{key}-us.tpi"
+    # Read ONLY our scripts (reading the ROM's archives first would rewrite all 794 of them).
+    cmd = [TEXTPET, "load-plugins", "plugins", "game", "mmbn4", "load-file", rom, "load-file-index", index]
+    for t in tpls:
+        cmd += ["read-text-archives", t, "--format", "tpl"]
+    cmd += ["write-text-archives", rom, "--free-space", f"0x{free:X}"]
+    result = subprocess.run([str(c) for c in cmd], cwd=TEXTPET_DIR, capture_output=True, text=True)
+    out = result.stdout + result.stderr
+    if result.returncode != 0 or "FATAL" in out:
+        fail(f"TextPet failed:\n{out[-1500:]}")
+    print(f"   text: {len(tpls)} script file(s) inserted with TextPet")
+
+
 def build(key: str, hello: bool) -> None:
     v = check_inputs(key)
     BUILD.mkdir(exist_ok=True)
@@ -118,6 +155,7 @@ def build(key: str, hello: bool) -> None:
     armips(PATCH / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
            ["-definelabel", "HELLO", "1" if hello else "0",
             "-strequ", "OTHER_REWARD_ROWS", other_reward_rows(key).as_posix()])
+    insert_text(key, out_rom)
     fix_header_checksum(out_rom)
 
     original = v["rom"].read_bytes()

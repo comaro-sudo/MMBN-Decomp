@@ -19,7 +19,17 @@ Needs:
 - **Both US ROMs** in `../roms/`, `bn4_rs_us.gba` and `bn4_bm_us.gba`, which are hash-checked. The random-drop package copies the other version's drop table from the player's other ROM at build time, so building either version needs both.
 - `tools/armips/armips.exe` and `tools/flips/` ([`../docs/reference/toolchain.md`](../docs/reference/toolchain.md)).
 
-The pipeline: verify the ROM hashes, run armips, fix the header checksum, then create the `.bps` with flips and check that it round-trips.
+The pipeline:
+1. verify the ROM hashes;
+2. run armips;
+3. **insert text** with TextPet: our scripts in `src/text/rs/*.tpl` and `src/text/bm/*.tpl`, if any;
+4. fix the header checksum;
+5. create the `.bps` with flips, and check that it round-trips.
+
+Text (see [`../plan/text-insertion.md`](../plan/text-insertion.md)):
+- the `.tpl` files hold **only our own scripts** (`@archive <offset>` + `script` blocks, UTF-8 without BOM), never extracted game text;
+- TextPet rewrites only those archives: in place when they still fit, otherwise into `FS_TEXT` (`0x087FC000`–`0x08800000`, set in `defines.asm`);
+- it needs `tools/textpet/` (TextPet with its BN4 plugins and US indexes).
 
 ## What's in it
 

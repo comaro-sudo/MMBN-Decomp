@@ -50,7 +50,9 @@ FS_FREQ_TUNER             equ 0x087FA930    ; WP-B2 Frequency Tuner (BN4_ID_RAIS
 FS_FREQ_TUNER_SIZE        equ 0x100
 FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul handler
 FS_GRANT_SOUL_SIZE        equ 0x40
-; next free slot:             0x087FAA70
+; next free slot:             0x087FAA70 (code/data packages must stay below FS_TEXT)
+FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
+FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 
 WRITE_CHIP_KEY      equ 0x080063B4      ; WriteChipKey(r0 chip id): the anti-cheat key, version XOR applied; same in RS and BM
 
