@@ -40,19 +40,19 @@ Overall owned bytes are now 438,604 / 1,179,456 (37.2%) for RS and 433,196 / 1,1
 Run the survey before regenerating an affected segment:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/survey.py rs && ~/.venvs/mmbn4-decomp/bin/python tools/survey.py bm"
+wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/survey.py rs && ~/.venvs/mmbn4-decomp/bin/python tools/survey.py bm"
 ```
 
 Then regenerate only the segment under investigation, for example:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_09"
+wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_09"
 ```
 
 The generator retries with annotated raw instruction encodings when GNU `as` cannot reproduce Capstone's syntax. Finish every batch with both forced comparisons:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
+wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
 ```
 
 ## Deliberate limits

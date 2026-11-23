@@ -1,12 +1,14 @@
 # ============================================================
-# Mega Man Battle Network 4: Violet Eclipse — .gitignore
+# MMBN-Decomp (Mega Man Battle Network decomp collection) — .gitignore
 # Rule #1: never commit Capcom ROMs or anything built from them.
 # Rule #2: never commit third-party guides, maps or other people's assets.
+# Each game lives in its own folder (MMBN4-Decomp/, ...): "/*/" below
+# means "inside any game folder".
 # ============================================================
 
-# --- Original ROMs (keep the folder + README, ignore the contents) ---
-roms/*
-!roms/README.md
+# --- Original ROMs (keep each game's roms/ folder + README, ignore the contents) ---
+/*/roms/*
+!/*/roms/README.md
 *.gba
 *.agb
 *.mb
@@ -21,7 +23,7 @@ roms/*
 *.rar
 
 # --- Build output (patched ROMs, patches, intermediates) ---
-# build/ at any depth: build/ (patch, ports, libmgba) and decomp/build/.
+# build/ at any depth: <game>/build/ (patch, ports, libmgba) and <game>/decomp/build/.
 build/
 *.bps
 *.ips
@@ -32,17 +34,19 @@ build/
 *.o
 *.map
 
-# --- Third-party tools and cloned reference repos (repo root only;
-#     decomp/tools/ holds our own scripts and IS tracked) ---
+# --- Third-party tools and cloned reference repos (repo root or a game
+#     folder; <game>/decomp/tools/ holds our own scripts and IS tracked) ---
 /tools/
 /ext/
+/*/tools/
+/*/ext/
 
-# --- Third-party reference material (guides, fan maps); see ref/README.md ---
-/ref/*
-!/ref/README.md
+# --- Third-party reference material (guides, fan maps); see <game>/ref/README.md ---
+/*/ref/*
+!/*/ref/README.md
 
 # --- Extracted / dumped game data (copyrighted; regenerate from your ROM) ---
-# TextPet dumps are tracked ONLY after editing, under patch/src/scripts/.
+# TextPet dumps are tracked ONLY after editing, under <game>/patch/src/scripts/.
 extracted/
 dump/
 dumps/
@@ -52,7 +56,7 @@ dumps/
 *.ewram
 *.iwram
 *.tpl
-!patch/src/scripts/**/*.tpl
+!/*/patch/src/scripts/**/*.tpl
 
 # --- Emulator saves, states, recordings ---
 # Save states hold RAM/VRAM snapshots, so keep them local.
@@ -74,13 +78,13 @@ dumps/
 *.sav
 *.srm
 *.fla
-!test/saves/*.sav
-!test/saves/*.srm
+!/*/test/saves/*.sav
+!/*/test/saves/*.srm
 # No$GBA writes saves into BATTERY/
 BATTERY/
 
 # --- Debugger / RE workspaces ---
-# Keep Ghidra projects under ghidra/ (repo root) so they're ignored as a whole.
+# Keep Ghidra projects under a ghidra/ folder so they're ignored as a whole.
 ghidra/
 *.gpr
 *.rep/
@@ -111,7 +115,7 @@ CMakeFiles/
 *.dol
 
 # --- Decomp: generated diagnostics (regenerate with decomp/tools) ---
-decomp/symbols/prologue_candidates_*.txt
+/*/decomp/symbols/prologue_candidates_*.txt
 
 # --- Python ---
 __pycache__/

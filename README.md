@@ -1,17 +1,21 @@
-# Mega Man Battle Network 4: Violet Eclipse
+# MMBN-Decomp
 
-A definitive edition of Mega Man Battle Network 4 that unites Red Sun and Blue Moon, for every port: every Soul, every chip, every boss in one save ([plan/DEFINITIVE-EDITION.md](plan/DEFINITIVE-EDITION.md)). Solo project. Nothing from the ROMs is in this repository: everything is built from the player's own dumps.
+A collection of decompilation projects for the *Mega Man Battle Network* series. Each game has its own self-contained folder: its decomp, plans, docs, ROM patch and ports. Nothing from the ROMs is in this repository. Everything is built from the player's own dumps, which go in each game's gitignored `roms/` folder.
 
-| Folder | Contents |
+| Folder | Game | Status |
+|---|---|---|
+| [MMBN4-Decomp/](MMBN4-Decomp/README.md) | Battle Network 4 (Red Sun / Blue Moon): *Violet Eclipse* definitive edition | Active |
+| `MMBN1-Decomp/` | Battle Network | Planned |
+| `MMBN2-Decomp/` | Battle Network 2 | Planned |
+| `MMBN3-Decomp/` | Battle Network 3 (White / Blue) | Planned |
+| `MMBN5-Decomp/` | Battle Network 5 (Team ProtoMan / Team Colonel) | Planned |
+| `MMBN6-Decomp/` | Battle Network 6 (Cybeast Gregar / Falzar) | Planned |
+
+Work order: BN4 first, then BN1, 2, 3, 5 and 6.
+
+| File | Contents |
 |---|---|
-| `AGENTS.md` | Rules for the two AI agents (Claude, Gemini): who owns what, git rules, handoffs |
-| `TODO.md` | Short backlog (Gemini's) |
-| [plan/](plan/README.md) | The plan. Sub-plans: [decomp/](plan/decomp/README.md), [emulation-layer/](plan/emulation-layer/README.md) |
-| [docs/](docs/) | `design/` (design inputs), `reference/` (repos, [toolchain](docs/reference/toolchain.md)), `hardware/`, [`re/`](docs/re/save-and-flags.md) (reverse-engineering notes), `handoff-*.md` |
-| [patch/](patch/) | Phase 1 overhaul as armips patches: `python patch/build.py [--check\|--hello] [rs\|bm]` |
-| [decomp/](decomp/README.md) | Byte-matching disassembly, Gemini's area (WSL: `make -C decomp compare`) |
-| [ports/](ports/pc/README.md) | Emulation-layer ports: `pc/` (Windows ARM64/x64) today; its `--test --dump` mode feeds `docs/re/` |
-| `test/` | Shared test assets: `saves/`, `lua/` |
-| `roms/` | Your own ROM dumps (gitignored, see [roms/README.md](roms/README.md)) |
-| `ref/` | Third-party guides and fan maps used as reference (gitignored, see [ref/README.md](ref/README.md)) |
-| `tools/`, `ext/`, `build/` | Third-party tools, cloned reference repos, all build output (gitignored) |
+| [AGENTS.md](AGENTS.md) | Rules for the two AI agents (Claude, Gemini): repo layout, who owns what, git rules, handoffs |
+| `CLAUDE.md`, `GEMINI.md` | Per-agent entry points (both import `AGENTS.md`) |
+
+Run a game's commands from inside its folder, for example `cd MMBN4-Decomp` then `python patch/build.py --check`.

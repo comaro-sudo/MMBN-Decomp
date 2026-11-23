@@ -1,7 +1,7 @@
 # Violet Eclipse (MMBN4) TODO
 
 Updated: 2026-11-22, evening (America/Mexico_City). Claude updated it at the owner's request;
-the decomp sections are Gemini's (see [`AGENTS.md`](AGENTS.md)) and keep Gemini's wording.
+the decomp sections are Gemini's (see [`AGENTS.md`](../AGENTS.md)) and keep Gemini's wording.
 
 This is the short, execution-oriented backlog. The detailed plans remain in
 [`plan/`](plan/README.md); the decomp notes and handoffs are in
@@ -9,7 +9,7 @@ This is the short, execution-oriented backlog. The detailed plans remain in
 
 ## Coordination (read first)
 
-- [x] Ownership split recorded in [`AGENTS.md`](AGENTS.md): **Gemini** owns `decomp/` and this file;
+- [x] Ownership split recorded in [`AGENTS.md`](../AGENTS.md): **Gemini** owns `decomp/` and this file;
   **Claude** owns `plan/`, `docs/`, `patch/`, `ports/`, `README.md`. Stage by path, never `git add -A`.
 - [x] Gemini and Claude now work **one at a time**: the owner runs Gemini only when Claude's usage limit is
   reached. Each one starts by reading the other's latest handoff (`decomp/notes/handoff-*.md`,
@@ -70,7 +70,7 @@ and identical literal/external reference counts across all 11 code segments.
 - [x] Preserve the byte-matching baseline before and after each change:
 
   ```powershell
-  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
+  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
   ```
 
 - [x] Discover short two/three-entry Thumb callback tables: broadened with
@@ -110,7 +110,7 @@ and identical literal/external reference counts across all 11 code segments.
   WSL Capstone venv:
 
   ```powershell
-  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_04"
+  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_04"
   ```
 
 - [ ] Keep unresolved bytes as `incrom`; never commit ROM bytes, extracted
