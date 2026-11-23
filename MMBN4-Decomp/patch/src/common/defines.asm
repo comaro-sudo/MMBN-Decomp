@@ -16,6 +16,7 @@ CHIP_DELTARAY       equ 302
 CHIP_BASSANLY       equ 306
 CHIP_BLAKBARR       equ 308
 CHIP_DUO            equ 0x137       ; Duo (Giga), code D only
+CHIP_GPP            equ 0x138       ; Grand Prix Power (PrixPowr, Mega), code G only
 
 ; Give a chip: r0 id, r1 code, r2 quantity (pack + Library flag + chip key). code_01, same address in RS and BM
 CHIP_GIVE           equ 0x0801913E
@@ -50,7 +51,9 @@ FS_FREQ_TUNER             equ 0x087FA930    ; WP-B2 Frequency Tuner (BN4_ID_RAIS
 FS_FREQ_TUNER_SIZE        equ 0x100
 FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul handler
 FS_GRANT_SOUL_SIZE        equ 0x40
-; next free slot:             0x087FAA70 (code/data packages must stay below FS_TEXT)
+FS_CHIP_ART               equ 0x087FAA70    ; WP-D2: Duo/GP Power pictures, palettes, icons (0xBC0; private builds only)
+FS_CHIP_ART_SIZE          equ 0xC00
+; next free slot:             0x087FB670 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 

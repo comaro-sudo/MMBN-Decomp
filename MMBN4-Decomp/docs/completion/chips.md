@@ -59,9 +59,10 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
   - No ROM has their art: all four US and JP ROMs point the image to an EWRAM event-download buffer (Gemini, `decomp/notes/duo-gpp-research.md`).
   - The owner supplied the official 56 × 48 chip pictures. They're kept **local only**, in `ref/chip-art/` (gitignored: `duo_image.png`, `gpp_image.png`, plus a wiki row showing Duo's data and small icon).
   - Duo's data: **200 attack, code D, 99 MB**, description "Fist of Justice: MetKnukl!".
-  - **Plan:** a build step converts each PNG into the GBA chip-picture format (16-colour 4bpp tiles + palette) and writes it into free space. It then repoints the chip record's image and palette pointers, which point to EWRAM today, to the converted art.
+  - **Built (2026-11-23, `patch/src/common/wp_d2_special_chip_art.asm`):** `patch/build.py` converts each PNG with `patch/tools/chipart.py` into the GBA chip-picture format (56 × 48, 16-colour 4bpp tiles + own palette) and writes it into free space at `0x087FAA70`. It then repoints the chip record's icon, picture and palette pointers, which point to EWRAM today, to the converted art.
+    - **Icons:** derived from each picture at build time (12 × 12 downscale on the Z-Saver icon frame, mapped to the shared icon palette). The image supplied as the icon was the wiki's "no element" marker (owner confirmed), kept as `ref/chip-art/element_null_marker.png`; the game draws element markers itself.
+    - **Public builds:** `python patch/build.py --public` leaves the art out (the records keep their original pointers). Original placeholder art for public releases is still to decide.
   - **Still needed:**
-    - **each chip's 16 × 16 icon.** The image supplied as the icon turned out to be the wiki's "no element" marker (owner confirmed); it's kept as `ref/chip-art/element_null_marker.png` for reference. The game draws element markers itself, so it isn't needed. **The real icons are still missing.** Fallback: derive a 16 × 16 icon from each 56 × 48 picture at build time.
     - Grand Prix Power's attack, MB and description (code G, from the inventory);
     - the names and descriptions through the text pipeline (`plan/text-insertion.md`).
   - **Distribution caveat:** this art isn't in any player ROM, so a built `.bps` that includes it carries Capcom art. That's fine for private builds. A public release needs a build switch that uses original placeholder art instead (decision deferred to publication).

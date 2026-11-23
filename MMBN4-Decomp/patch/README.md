@@ -13,6 +13,7 @@ python patch/build.py            # both versions: build/bn4_{rs,bm}_overhaul.gba
 python patch/build.py rs         # one version
 python patch/build.py --check    # identity tests (chip table re-assembles byte-identical)
 python patch/build.py --hello    # test patch (Cannon 40 -> 99) instead of the overhaul
+python patch/build.py --public   # leave out the local-only Duo / Grand Prix Power art (shareable patch)
 ```
 
 Needs:
@@ -47,6 +48,7 @@ Text (see [`../plan/text-insertion.md`](../plan/text-insertion.md)):
 | `wp_d4_free_tournament.asm` | WP-D4 | The Free Tournament fields the 12 Soul Navis without trades (missing chips first; type-0x01 battles), so the 36 secret chips are obtainable | **PASS in-game** (7 Soul Navis with no traded Navis; Gemini, `c9d36cf`) |
 | `wp_d3_lobby_rematches.asm` | WP-D3 | 9 operators in Higsby's, 2 + JunkMan's trash can on the ACDC street; rematches climb V1 → V2 → V3 → SP on S ranks (tier flags `0x0E40`–`0x0E57`); the trash can warps to JunkMan in `WtrGodComp1 (8E, 00)` | **PASS in-game** (Gemini, `ce9d481`). Fixed by Claude from Gemini's round 8 (`lobby-fixes.md`): real sprites for all operators, the trash can is a junk-pile prop, and each NPC is gated on that Navi's **Soul flag** (`0x0017`–`0x0022`; the old `0x0001 + id` flags are only set for traded Navis). Re-test pending |
 | `wp_d4_grant_soul.asm` | WP-D4 | Script command **`FC 0C <idx>`** grants any of the 12 Souls in either version (flag `0x15` + flag `0x17 + idx` + `WriteChipKey(0x161 + idx)`); for the friendly matches | Built, disassembly-checked; not yet called by any script |
+| `wp_d2_special_chip_art.asm` | WP-D2 | Chip art for **Duo** (`0x137`) and **Grand Prix Power** (`0x138`), which no ROM has: `build.py` converts the owner's local `ref/chip-art/` PNGs with `tools/chipart.py` (picture, palette, and a 16×16 icon made from the picture on the Z-Saver icon frame), places them at `0x087FAA70` (0xBC0 bytes) and repoints both records' icon, picture and palette pointers (EWRAM today). **Private builds only:** skipped by `--public` or when the PNGs are missing | Built, bytes and pointers checked in both builds; not yet seen in-game (the names are still blank) |
 | `wp_b2_frequency_tuner.asm` | WP-B2 | Frequency Tuner: an NPC in Higsby's cycles the virus tier Auto / V1 / V2 / V3 (flags `0x0E58`–`0x0E59`), read by `BN4_ID_RAISE` | Toggle tested in-game (Gemini, `ec5e084`) |
 | `wp_d0_npc_lists.asm` | infrastructure | Higsby's and ACDC Town's NPC lists move to free space, with room for 16 | Built; byte-identical copies; boots |
 | `wp_d4_status_two_pages.asm` | WP-D4 | The status screen shows all 12 Souls on two pages of 6 (L or R switches, once 7+ are owned) | Built, disassembly-checked, boots; **not yet tested on the status screen** |

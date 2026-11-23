@@ -5,6 +5,7 @@
     python patch/build.py bm           build Blue Moon only (bm | rs | all)
     python patch/build.py --hello      include the hello-world test patch (Cannon = 99 dmg)
     python patch/build.py --check      run the identity tests (no output ROMs kept)
+    python patch/build.py --public     leave out local-only third-party art (ref/chip-art) for a shareable patch
 
 Pipeline: verify ROM hash -> armips -> TextPet (patch/src/text/<v>/*.tpl, if any)
           -> fix header checksum -> flips .bps
@@ -41,6 +42,7 @@ VERSIONS = {
         "version_file": PATCH / "src" / "bm" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4b_chip_table.asm",
         "reward_rows": 0x080F5F5C,      # BN4_REWARD_ROWS (RE-06): 276 rows x 40 bytes
+        "icon_pal": 0x08747AEC,         # BN4_CHIP_ICON_PAL (CE)
     },
     "rs": {
         "name": "Red Sun (USA)",
@@ -49,9 +51,37 @@ VERSIONS = {
         "version_file": PATCH / "src" / "rs" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4r_chip_table.asm",
         "reward_rows": 0x080F5F50,
+        "icon_pal": 0x08747FF8,
     },
 }
 REWARD_ROWS_SIZE = 276 * 40
+
+
+CHIP_ART_DIR = ROOT / "ref" / "chip-art"      # local only (gitignored): art that is in no ROM
+CHIP_ART = {"DUO": "duo_image.png", "GPP": "gpp_image.png"}
+
+
+def chip_art(key: str, public: bool) -> list:
+    """Duo and Grand Prix Power chip art (docs/completion/chips.md section 3). Their art is in no ROM, so it
+    comes from the owner's local ref/chip-art/ PNGs, converted by patch/tools/chipart.py. A --public build
+    (or a missing PNG) leaves it out: the chips then keep their original (blank) art."""
+    pngs = {k: CHIP_ART_DIR / f for k, f in CHIP_ART.items()}
+    out = BUILD / "chipart" / key
+    out.mkdir(parents=True, exist_ok=True)
+    enabled = not public and all(p.exists() for p in pngs.values())
+    if enabled:
+        v = VERSIONS[key]
+        run([sys.executable, PATCH / "tools" / "chipart.py", v["rom"], f"0x{v['icon_pal']:08X}", out,
+             *(f"{k.lower()}={p}" for k, p in pngs.items())])
+    else:
+        # armips resolves .incbin names even inside a false .if, so they still need a file to name
+        (out / "none.bin").write_bytes(b"")
+    args = ["-definelabel", "CHIP_ART", "1" if enabled else "0"]
+    for k in pngs:
+        for part in ("image", "pal", "icon"):
+            f = out / (f"{k.lower()}_{part}.bin" if enabled else "none.bin")
+            args += ["-strequ", f"{k}_{part.upper()}_BIN", f.as_posix()]
+    return args
 
 
 def other_reward_rows(key: str) -> Path:
@@ -174,7 +204,7 @@ def insert_text(key: str, rom: Path) -> None:
     print(f"   text: {len(tpls)} script file(s) inserted with TextPet")
 
 
-def build(key: str, hello: bool) -> None:
+def build(key: str, hello: bool, public: bool = False) -> None:
     v = check_inputs(key)
     BUILD.mkdir(exist_ok=True)
     suffix = "_hello" if hello else ""
@@ -185,7 +215,7 @@ def build(key: str, hello: bool) -> None:
     armips(PATCH / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
            ["-definelabel", "HELLO", "1" if hello else "0",
             "-strequ", "OTHER_REWARD_ROWS", other_reward_rows(key).as_posix(),
-            *compile_new_text()])
+            *compile_new_text(), *chip_art(key, public)])
     insert_text(key, out_rom)
     fix_header_checksum(out_rom)
 
@@ -227,11 +257,13 @@ def main() -> None:
     ap.add_argument("version", nargs="?", default="all", choices=["all", *VERSIONS])
     ap.add_argument("--hello", action="store_true", help="include the hello-world test patch")
     ap.add_argument("--check", action="store_true", help="run identity tests only")
+    ap.add_argument("--public", action="store_true",
+                    help="leave out local-only third-party art (ref/chip-art) for a shareable patch")
     args = ap.parse_args()
 
     keys = list(VERSIONS) if args.version == "all" else [args.version]
     for key in keys:
-        check(key) if args.check else build(key, args.hello)
+        check(key) if args.check else build(key, args.hello, args.public)
 
 
 if __name__ == "__main__":
