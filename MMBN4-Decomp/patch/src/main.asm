@@ -30,5 +30,6 @@
 .include "common/wp_d4_status_two_pages.asm" ; Violet Eclipse: status screen shows 12 Souls on two pages (L/R)
 .include "common/wp_d0_npc_lists.asm"        ; infrastructure: Higsby's and ACDC Town NPC lists in free space
 .include "common/wp_d2_zsaver_md.asm"        ; Violet Eclipse: Z-Saver Z Blue Mystery Data in Undernet 1
+.include "common/wp_b1_tournaments.asm"      ; WP-B1: deterministic story tournaments & canon Soul Navi pairs
 
 .close
