@@ -30,9 +30,34 @@
 
 Free space: about 35 KiB of the tail is left after the current packages (next free slot `0x087FAA70`). Nine short dialogues are a few KiB compressed. If later text work outgrows it, the ROM can be expanded to 16 MiB (`docs/re/free-space.md` §4).
 
+## Proven recipe (Claude, 2026-11-23, tested on a scratch copy of the RS ROM)
+
+TextPet ships US indexes for both versions: `tools/textpet/indexes/mmbn4rs-us.tpi` (794 archives) and `mmbn4bm-us.tpi`. The order of commands matters: `load-plugins` must come before `game`.
+
+**Extract every archive to `.tpl` (one file per archive, named by its ROM offset):**
+```
+TextPet.exe load-plugins plugins game mmbn4 load-file rom.gba load-file-index indexes\mmbn4rs-us.tpi read-text-archives rom.gba write-text-archives <dir> --format tpl
+```
+
+**Insert only our changed or new archives:**
+```
+TextPet.exe load-plugins plugins game mmbn4 load-file rom.gba load-file-index indexes\mmbn4rs-us.tpi read-text-archives patch.tpl --format tpl write-text-archives rom.gba --free-space 0x7FB000
+```
+- **Don't** `read-text-archives rom.gba` before the patch: TextPet would then rewrite **all 794 archives** (tested: 46,765 bytes changed and many pointers moved). Reading only the patch writes only its archives.
+- An archive that still fits is rewritten **in place**. One that grows goes to `--free-space` and its pointer is updated through the index.
+- `--free-space` needs the `0x` prefix (without it: "FATAL: Invalid Base"). It must be a free-space slot from `patch/src/common/defines.asm`, so it can't collide with the patch.
+- `.tpl` files must be UTF-8 **without** a byte-order mark. Windows PowerShell 5.1's `Set-Content -Encoding utf8` adds one; use `[IO.File]::WriteAllText` with `UTF8Encoding($false)`.
+- **Verified round trip:** a one-line change to Higsby's greeting (archive `0x77D944`) was re-extracted identical to the patch, and the other 793 archives were unchanged.
+
+**What the repo holds:** a `.tpl` with only our scripts. Like TextPet's own `fix-*.tpl` examples: `@archive <offset>`, `@size`, and just the `script N mmbn4 { … }` blocks we add or change. Never whole extracted archives.
+
+**Build order:** armips first (code and data), then TextPet on armips' output ROM, then the header checksum fix and flips. `build.py` needs a TextPet step between armips and `fix_header_checksum`.
+
 ## Open questions (research, Gemini or Claude)
 
-1. TextPet's exact CLI for extract, insert and compile with the BN4 plugin, and whether it can emit a standalone archive for `.incbin`.
+1. ~~TextPet's exact CLI~~: answered above.
+   - Still to check: does a `--patch` read keep the *untouched* scripts of a partially edited archive? Needed when we add one script to an existing archive. The patch file must then hold the whole archive's script list, or TextPet must merge.
+   - Still to check: does `--free-space` write anything past the end of the archives it moves?
 2. How a tournament cutscene calls a dialogue archive. The friendly matches must hook into the tournament-day cutscenes (`wp-b1-design.md`: cutscene opcodes `0x51` battle, `0x52`/`0x53` tournament).
 3. How the chip-name table is stored (for "Duo" and "GP Power"), and whether it is a TextPet archive too (Gemini round 8, task 3).
 4. The font: does BN4's US font table (`bn4-utf8.tbl`) cover every character we need? Plain English should be fine.
