@@ -315,24 +315,39 @@ lbl:
     .byte   0x00
 .endmacro
 
-; 9 Higsby's operators (placements.md §1)
-lobby_npc lobby_npc_chaud,  0x04, 0x000B, 0xFA,   36,  42, 5  ; ProtoMan (0x0A)
-lobby_npc lobby_npc_mayl,   0x01, 0x0005, 0xF4,   36,  70, 5  ; Roll     (0x04)
-lobby_npc lobby_npc_dex,    0x02, 0x0001, 0xF0,   36,  98, 5  ; GutsMan  (0x00)
-lobby_npc lobby_npc_match,  0x09, 0x0002, 0xF1,   12, 112, 7  ; FireMan  (0x01)
-lobby_npc lobby_npc_shuko,  0x14, 0x0004, 0xF3,  -54, 112, 7  ; AquaMan  (0x03)
-lobby_npc lobby_npc_lily,   0x2E, 0x0006, 0xF5,  -84, 112, 7  ; WindMan  (0x05)
-lobby_npc lobby_npc_tamako, 0x13, 0x0007, 0xF6, -140,  44, 3  ; MetalMan (0x06)
-lobby_npc lobby_npc_sal,    0x17, 0x0008, 0xF7, -134,  72, 1  ; WoodMan  (0x07)
-lobby_npc lobby_npc_number, 0x08, 0x0003, 0xF2,  -56,  56, 3  ; NumberMan(0x02)
+; 9 Higsby's operators (placements.md §1). Sprites and the gates (the Navi's Double Soul flag 0x0017-0x0022) from Gemini's lobby-fixes.md:
+; flags 0x0001-0x000C, used before, are only set for traded Navis
+lobby_npc lobby_npc_chaud,  0x04, 0x001D, 0xFA,   36,  42, 5  ; ProtoMan (0x0A)
+lobby_npc lobby_npc_mayl,   0x01, 0x0017, 0xF4,   36,  70, 5  ; Roll     (0x04)
+lobby_npc lobby_npc_dex,    0x02, 0x0018, 0xF0,   36,  98, 5  ; GutsMan  (0x00)
+lobby_npc lobby_npc_match,  0x1D, 0x001B, 0xF1,   12, 112, 7  ; FireMan  (0x01)
+lobby_npc lobby_npc_shuko,  0x20, 0x0021, 0xF3,  -54, 112, 7  ; AquaMan  (0x03)
+lobby_npc lobby_npc_lily,   0x34, 0x0019, 0xF5,  -84, 112, 7  ; WindMan  (0x05)
+lobby_npc lobby_npc_tamako, 0x1F, 0x001F, 0xF6, -140,  44, 3  ; MetalMan (0x06)
+lobby_npc lobby_npc_sal,    0x2C, 0x0022, 0xF7, -134,  72, 1  ; WoodMan  (0x07)
+lobby_npc lobby_npc_number, 0x08, 0x001E, 0xF2,  -56,  56, 3  ; NumberMan(0x02)
 
 ; 2 ACDC Town street operators + Trash Can (placements.md §2)
-lobby_npc lobby_npc_raika,    0x11, 0x000A, 0xF9, -134, -76, 5 ; SearchMan  (0x09)
-lobby_npc lobby_npc_raoul,    0x39, 0x0009, 0xF8, -164, -56, 7 ; ThunderMan (0x08)
-lobby_npc lobby_npc_trashcan, 0x2B, 0x000C, 0xFC, -150, -90, 3 ; Trash Can -> JunkMan
+lobby_npc lobby_npc_raika,    0x3B, 0x001A, 0xF9, -134, -76, 5 ; SearchMan  (0x09)
+lobby_npc lobby_npc_raoul,    0x32, 0x001C, 0xF8, -164, -56, 7 ; ThunderMan (0x08)
+; Trash Can / Junk Pile (Gemini round 8, lobby-fixes.md): op 0x25 -> list[7] 0x44, gated on JunkSoul 0x0020
+.align 4
+lobby_npc_trashcan:
+    .byte   0x08
+    .byte   0x25, 0x44, 0x1C        ; list[7] 0x44 = junk/trash pile (alt: 0x5A grey bin)
+    .byte   0x05, 0x20, 0x00        ; hide while JunkSoul (0x0020) is clear
+    .word   @@hide
+    .byte   0x18, 0xFC
+    .byte   0x14
+    .halfword (-150) & 0xFFFF, (-90) & 0xFFFF, 0
+    .byte   0x16, 3
+    .byte   0x36
+    .word   NPC_IDLE_TALK_LOOP
+@@hide:
+    .byte   0x00
 
 ; JunkMan inside WtrGodComp1 (8E,00) (list[6] sprite 0x5A)
-lobby_npc lobby_npc_junkman,  0x5A, 0x000C, 0xFB,    0, -24, 3 ; JunkMan (0x0B)
+lobby_npc lobby_npc_junkman,  0x5A, 0x0020, 0xFB,    0, -24, 3 ; JunkMan (0x0B)
 
 ; -- 5i. Custom Yes/No dialogue archive (indices 0x00..0x0D = talk_idx 0xF0..0xFD) --
 .align 4
