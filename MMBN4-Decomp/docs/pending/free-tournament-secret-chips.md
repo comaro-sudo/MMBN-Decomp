@@ -151,7 +151,7 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
   1. **two pages of 6**, switched with L/R: no risk to the screen's graphics memory (Gemini's recommendation);
   2. a taller **2 × 6 grid**, only if the space below the current grid is free on screen and in graphics memory (to verify).
 
-## Where the operators stand (owner, 2026-11-23): two options, not yet chosen
+## Where the operators stand (owner, 2026-11-23): **A preferred, B as the fallback**
 
 - **Option A, a waiting room in an existing room:** BN4 may already have an unused or rarely used room that looks like a shop interior (a debug map, another shop). The street door leads into it, and it has a door into the real Higsby's. The patch only redirects doors, with no new tilemap.
   - It would be enabled only after a flag (e.g. once the Free Tournament or post-game opens), so story scenes that walk Lan straight into Higsby's still work.
