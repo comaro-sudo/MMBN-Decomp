@@ -49,6 +49,16 @@ TextPet.exe load-plugins plugins game mmbn4 load-file rom.gba load-file-index in
 - `.tpl` files must be UTF-8 **without** a byte-order mark. Windows PowerShell 5.1's `Set-Content -Encoding utf8` adds one; use `[IO.File]::WriteAllText` with `UTF8Encoding($false)`.
 - **Verified round trip:** a one-line change to Higsby's greeting (archive `0x77D944`) was re-extracted identical to the patch, and the other 793 archives were unchanged.
 
+**New dialogue archives, compiled for `.incbin`** (wired into `build.py`, tested):
+- `patch/src/text/new/<name>.tpl` (`@archive 0`, `@size <n scripts>`, our scripts) is compiled **before armips**:
+  ```
+  TextPet.exe load-plugins plugins game mmbn4 read-text-archives <name>.tpl --format tpl write-text-archives build/text/<name>.bin --format bin
+  ```
+- The output is the game's archive format (u16 offset table + encoded scripts, uncompressed), and armips gets its path as `<NAME>_BIN`.
+- **Use:** `.incbin <NAME>_BIN` into a custom dialogue archive, as the lobby's `lobby_dialogue_archive` (opened by the `OpenMapDialogue` hook for talk indexes `≥ 0xF0`).
+- It's version-neutral, needs no index, and doesn't touch the game's own archives.
+- Check: a one-script test compiled to `02 00 E7 00 18 2A 39 0C 26 39 39 31 2A 45 E5`, byte-identical to Gemini's hand-encoded "NetBattle?" message. So readable scripts replace hand-written `.byte` text.
+
 **What the repo holds:** a `.tpl` with only our scripts. Like TextPet's own `fix-*.tpl` examples: `@archive <offset>`, `@size`, and just the `script N mmbn4 { … }` blocks we add or change. Never whole extracted archives.
 
 **Build order:** armips first (code and data), then TextPet on armips' output ROM, then the header checksum fix and flips. `build.py` needs a TextPet step between armips and `fix_header_checksum`.

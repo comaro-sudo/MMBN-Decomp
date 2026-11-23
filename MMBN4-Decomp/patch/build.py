@@ -115,6 +115,36 @@ def check_inputs(key: str) -> dict:
     return v
 
 
+def compile_new_text() -> list:
+    """Compile our new dialogue archives (patch/src/text/new/<name>.tpl) to build/text/<name>.bin, the game's
+    archive format (u16 offset table + encoded scripts), for the asm to .incbin as <NAME>_BIN. Version-neutral.
+    Returns the extra armips arguments."""
+    src = PATCH / "src" / "text" / "new"
+    tpls = sorted(src.glob("*.tpl")) if src.is_dir() else []
+    if not tpls:
+        return []
+    if not TEXTPET.exists():
+        fail(f"missing tool {TEXTPET.relative_to(ROOT)} (see plan/text-insertion.md)")
+    out_dir = BUILD / "text"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    args = []
+    for t in tpls:
+        if t.read_bytes()[:3] == b"\xef\xbb\xbf":
+            fail(f"{t.relative_to(ROOT)} starts with a UTF-8 BOM; TextPet rejects it (save as UTF-8 without BOM)")
+        out = out_dir / f"{t.stem}.bin"
+        if out.exists():
+            out.unlink()
+        cmd = [TEXTPET, "load-plugins", "plugins", "game", "mmbn4",
+               "read-text-archives", t, "--format", "tpl", "write-text-archives", out, "--format", "bin"]
+        result = subprocess.run([str(c) for c in cmd], cwd=TEXTPET_DIR, capture_output=True, text=True)
+        text = result.stdout + result.stderr
+        if result.returncode != 0 or "FATAL" in text or not out.exists():
+            fail(f"TextPet could not compile {t.name}:\n{text[-1500:]}")
+        args += ["-strequ", f"{t.stem.upper()}_BIN", out.as_posix()]
+    print(f"   text: compiled {len(tpls)} new dialogue archive(s)")
+    return args
+
+
 def insert_text(key: str, rom: Path) -> None:
     """Insert our TextPet scripts (patch/src/text/<key>/*.tpl) into the built ROM, if there are any."""
     src = PATCH / "src" / "text" / key
@@ -154,7 +184,8 @@ def build(key: str, hello: bool) -> None:
 
     armips(PATCH / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
            ["-definelabel", "HELLO", "1" if hello else "0",
-            "-strequ", "OTHER_REWARD_ROWS", other_reward_rows(key).as_posix()])
+            "-strequ", "OTHER_REWARD_ROWS", other_reward_rows(key).as_posix(),
+            *compile_new_text()])
     insert_text(key, out_rom)
     fix_header_checksum(out_rom)
 
