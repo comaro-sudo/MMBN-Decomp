@@ -961,7 +961,7 @@ _0804F8C6:
     ldr r1, [r5, #0x58]
 _0804F8CE:
     ldrb r2, [r4, #5]
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     pop {r4, r5}
     adds r4, #6
     movs r0, #1
@@ -2153,7 +2153,7 @@ sub_080501F4:   @ ScriptCmd_startGiveRandomChipCode
     ldrb r0, [r0]
     str r0, [r5, #0x4c]
     push {r4}
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     pop {r4}
     ldrb r0, [r4, #2]
     adds r0, #1
@@ -3218,7 +3218,7 @@ _08050934:
 _0805093C:
     ldrb r2, [r4, #3]
     adds r0, #0xc0
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
     pop {r4, r5}
     adds r4, #5
     movs r0, #1

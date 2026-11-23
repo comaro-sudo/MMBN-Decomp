@@ -5120,7 +5120,7 @@ _08091FAA:
     str r0, [r4, #0x50]
     str r1, [r4, #0x54]
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r0, #0
     pop {r4, pc}
     .hword 0x0000

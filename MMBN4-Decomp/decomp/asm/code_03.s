@@ -14066,7 +14066,7 @@ _0803CBD4:
     beq _0803CBE2
     ldrh r1, [r5, #0x36]
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
 _0803CBE2:
     bl sub_08048858
 _0803CBE6:
@@ -16185,7 +16185,7 @@ _0803DDBE:
     ldrb r1, [r1, #3]
     strh r1, [r5, #0x1e]
     movs r2, #1
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
 _0803DDE6:
     bl sub_08048858
     movs r0, #0x24
@@ -33470,7 +33470,7 @@ _080477FE:
     cmp r1, #0
     beq _0804780C
     movs r2, #9
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
 _0804780C:
     adds r4, #0x10
     cmp r4, #0x40
@@ -37754,7 +37754,7 @@ _0804A060:
     bl sub_0804A438
     bne _0804A032
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r1, #9
     cmp r0, #0
     bne _0804A146
@@ -37807,7 +37807,7 @@ _0804A0E0:
     bne _0804A032
     adds r0, #0xc0
     movs r2, #1
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
     movs r1, #9
     cmp r0, #0
     bne _0804A146
@@ -40195,7 +40195,7 @@ _0804C0A4:
     strh r0, [r5, #4]
     strh r1, [r5, #6]
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     bl sub_08048858
     mov r0, sl
     ldr r0, [r0, #0x40]
@@ -42711,15 +42711,15 @@ _0804DE08:
 dat_0804DE0C:
     incrom 0x4DE0C, 0x30
     .global dat_0804DE3C
-dat_0804DE3C:
+dat_0804DE3C:   @ BN4_NUMBER_TRADER_TABLE
     incrom 0x4DE3C, 0x18C
     .global dat_0804DFC8
-dat_0804DFC8:
+dat_0804DFC8:   @ BN4_NUMBER_TRADER_LUT
     incrom 0x4DFC8, 0xC
 
     .global sub_0804DFD4
     .thumb_func
-sub_0804DFD4:
+sub_0804DFD4:   @ NumberTraderCheckCode
     push {r5, r6, r7, lr}
     ldr r7, _0804E038
     ldr r6, _0804E03C
@@ -42775,9 +42775,9 @@ _0804E02A:
     pop {r5, r6, r7, pc}
     .hword 0x0000
 _0804E038:
-    .word dat_0804DE3C
+    .word dat_0804DE3C   @ BN4_NUMBER_TRADER_TABLE
 _0804E03C:
-    .word dat_0804DFC8
+    .word dat_0804DFC8   @ BN4_NUMBER_TRADER_LUT
 _0804E040:
     .word 0x00001EC0
     .global dat_0804E044
@@ -43337,7 +43337,7 @@ _0804E4B4:
 
     .global sub_0804E4B8
     .thumb_func
-sub_0804E4B8:
+sub_0804E4B8:   @ MapGetDialogueArchive
     push {r4, r5, r6, r7, lr}
     adds r4, r0, #0
     mov r2, sl

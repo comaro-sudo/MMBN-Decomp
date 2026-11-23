@@ -978,7 +978,7 @@ _08021680:
 
     .global sub_08021684
     .thumb_func
-sub_08021684:
+sub_08021684:   @ BattleResultsGrantReward
     push {lr}
     ldrb r0, [r5, #0xb]
     subs r0, #1
@@ -1027,7 +1027,7 @@ _080216C6:
 _080216DE:
     pop {r0, r1, r2, r4, r6, r7}
     push {r0}
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     pop {r0}
     b _080216EE
 _080216EA:
@@ -17316,7 +17316,7 @@ dat_0802A7D0:   @ map_scripts_commands
     .word sub_0802CF8A
     .word sub_0802AEC6
     .word sub_0802CFBA
-    .word sub_0802CFDE
+    .word sub_0802CFDE   @ ScriptCmd_WriteChipKey
 
     .global sub_0802A8D0
     .thumb_func
@@ -19128,7 +19128,7 @@ dat_0802C140:   @ BN4_CUTSCENE_COMMANDS
     .word sub_0802CF8A
     .word sub_0802CF9A
     .word sub_0802CFBA
-    .word sub_0802CFDE
+    .word sub_0802CFDE   @ ScriptCmd_WriteChipKey
     .global dat_0802C2DC
 dat_0802C2DC:
     .word 0xFFFFFF10
@@ -20807,7 +20807,7 @@ _0802CFCC:
 
     .global sub_0802CFDE
     .thumb_func
-sub_0802CFDE:
+sub_0802CFDE:   @ ScriptCmd_WriteChipKey
     push {lr}
     movs r6, #1
     bl sub_0802AF94
@@ -21709,7 +21709,7 @@ _0802D6A8:
 
     .global sub_0802D6AC
     .thumb_func
-sub_0802D6AC:
+sub_0802D6AC:   @ InventoryAddNaviCust
     push {r4, r5, r6, r7, lr}
     bl sub_0802D6E8
     adds r1, r2, #0
@@ -27396,7 +27396,7 @@ _08030778:
     cmp r1, #0xff
     beq _08030786
     movs r2, #0x1e
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
 _08030786:
     subs r6, #1
     cmp r6, #0
@@ -35353,7 +35353,7 @@ sub_0803495C:
     pop {r0, r1}
     bne _0803498C
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r1, #0x46
     bl sub_08034878
     movs r0, #0x74
@@ -35414,7 +35414,7 @@ dat_080349E0:
 
     .global sub_08034A30
     .thumb_func
-sub_08034A30:
+sub_08034A30:   @ StatusCollectOwnedSouls
     push {lr}
     bl sub_080351A8
     movs r0, #0
@@ -35446,13 +35446,13 @@ _08034A68:
     pop {pc}
     .hword 0x0000
 _08034A6C:
-    .word dat_08034A78
+    .word dat_08034A78   @ BN4_STATUS_SOUL_FLAGS
 _08034A70:
     .word 0x0201D000
 _08034A74:
     .word dat_0803325C
     .global dat_08034A78
-dat_08034A78:
+dat_08034A78:   @ BN4_STATUS_SOUL_FLAGS
     incrom 0x34A78, 0x8
 
     .global sub_08034A80
@@ -36287,7 +36287,7 @@ sub_08034FEC:
 
     .global sub_08035000
     .thumb_func
-sub_08035000:
+sub_08035000:   @ ModCardSlotsAllEmpty
     push {r4, r5, r6, r7, lr}
     movs r4, #0
     movs r2, #0

@@ -732,7 +732,7 @@ sub_0809C6B8:
 
     .global sub_0809C9C4
     .thumb_func
-sub_0809C9C4:
+sub_0809C9C4:   @ BassV1PostWinGrant
     push {lr}
     movs r0, #0
     movs r1, #0x9f
@@ -741,7 +741,7 @@ sub_0809C9C4:
     ldr r0, _0809C9E8
     movs r1, #1
     movs r2, #1
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
 _0809C9DA:
     movs r0, #0
     movs r1, #0x9f
@@ -764,7 +764,7 @@ sub_0809CCE0:
     ldr r0, _0809CD04
     movs r1, #6
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r0, #0
     movs r1, #0x9e
     bl sub_08025048   @ SetEventFlagHL
@@ -1195,7 +1195,7 @@ sub_0809DC48:
     strh r0, [r7, #4]
     strh r1, [r7, #6]
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r0, #0xa
     bl sub_0802D66C   @ SubBugFrags
     bl sub_08048858   @ SaveGameKeepPlace
@@ -1672,7 +1672,7 @@ _0809E0AC:
 
     .global sub_0809E0B0
     .thumb_func
-sub_0809E0B0:
+sub_0809E0B0:   @ NumberTraderGrantState
     push {r4, r5, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x8c
@@ -1710,7 +1710,7 @@ _0809E0E6:
     movs r2, #8
     bl sub_08000994   @ CopyWords
     mov r0, sp
-    bl sub_0804DFD4
+    bl sub_0804DFD4   @ NumberTraderCheckCode
     str r4, [r5, #0x6c]
     add sp, #8
     cmp r0, #1
@@ -1742,7 +1742,7 @@ _0809E11E:
     adds r0, r2, #0
     adds r1, r3, #0
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r0, #0x18
     movs r1, #3
     b _0809E18A
@@ -1777,7 +1777,7 @@ _0809E178:
     adds r0, r2, #0
     adds r1, r3, #0
     movs r2, #1
-    bl sub_0802D6AC
+    bl sub_0802D6AC   @ InventoryAddNaviCust
     movs r0, #0x1c
     movs r1, #3
 _0809E18A:
@@ -1827,7 +1827,7 @@ dat_0809E1CC:
 
     .global sub_0809E1D8
     .thumb_func
-sub_0809E1D8:
+sub_0809E1D8:   @ NumberTraderRefundFlag
     push {r4, r5, r6, r7, lr}
     ldr r0, [r5, #0x6c]
     .hword 0x1C00   @ adds r0, r0, #0
@@ -2030,7 +2030,7 @@ _0809E390:
     ldrh r0, [r5, #6]
     ldrb r1, [r5, #5]
     movs r2, #1
-    bl sub_0801913E
+    bl sub_0801913E   @ ChipGive
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _0809E3B2:

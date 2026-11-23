@@ -11928,7 +11928,7 @@ _080F5742:
     movs r1, #0x9f
     bl sub_0802509C   @ TestEventFlagHL
     beq _080F5760
-    bl sub_08035000
+    bl sub_08035000   @ ModCardSlotsAllEmpty
     tst r0, r0
     beq _080F575C
     movs r0, #0x10

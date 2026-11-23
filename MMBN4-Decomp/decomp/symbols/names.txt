@@ -1036,3 +1036,19 @@
 08046DAC 08046DB4 code   GEMINI       NaviCustGetPlacedProgram         r0 idx: returns &[eToolkit+0x60] + idx * 8
 08046DB8 08046DC0 code   GEMINI       NaviCustLoadToWorkBuf            Copies NaviCust grid (+0x5C, 0x20B) -> 0x0201C000 and placed programs (+0x60, 0xC8B) -> 0x0201C020
 08047344 0804734C code   GEMINI       NaviCustCompileBugs              Zeroes NaviCust bug flags (+0x64, 0x10B) and three 5x5 scratch grids, then compiles bugs
+
+# --- Round-2 RE names (Gemini: bass-rematch.md, soul-grant.md, shops-in-the-world.md; merged by Claude 2026-11-23) ---
+0809C9C4 0809C9D0 code   GEMINI       BassV1PostWinGrant               Black Earth 2 Bass V1 post-win: if flag 0x9F clear, gives HubBatc Pink (0x124, 1, 1), then sets flag 0x9F
+08035000 08035004 code   GEMINI       ModCardSlotsAllEmpty             Returns 1 if all 7 Mod Card slots in save slot +0x70 are 0xFF (selects BassOmega vs BassXX in Black Earth 2)
+0802D6AC 0802D6B0 code   GEMINI       InventoryAddNaviCust             r0 program id (0xC0+), r1 color, r2 qty: resolves color variant via sub_0802D6E8 and adds via InventoryAddItem
+08021684 08021688 code   GEMINI       BattleResultsGrantReward         Decodes BN4_BATTLE_REWARD (RewardDecode), grants chip/zenny/HP, and displays single reward line (sub_08021CA8)
+0802CFDE 0802CFE2 code   GEMINI       ScriptCmd_WriteChipKey           Cutscene/map-script opcode (0x3F map / 0x66 event): reads u16 chip id and calls WriteChipKey (0x080063B4); used for Soul grants
+08034A30 08034A34 code   GEMINI       StatusCollectOwnedSouls          If flag 0x15 set, walks dat_08034A78 (version's 6 Soul flags) and writes owned Soul flags to 0x0201D000
+08034A78 08034A7C data   GEMINI       BN4_STATUS_SOUL_FLAGS            0xFF-terminated u8 list of this version's 6 Soul flags (RS: 17..1C, BM: 1D..22)
+0804DFD4 0804DFDC code   GEMINI       NumberTraderCheckCode            r0 ptr to 8 digits (0..9): matches against BN4_NUMBER_TRADER_TABLE via LUT, checks/sets flag 0x1EC0+idx; returns r0=0 invalid / 1 ok / 2 used
+0804DE3C 0804DE44 data   GEMINI       BN4_NUMBER_TRADER_TABLE          32 x 12-byte Number Trader entries ({u8 kind, u8 param, u16 id, u8 code[8]}), 0xFF-terminated; identical in RS and BM
+0804DFC8 0804DFD0 data   GEMINI       BN4_NUMBER_TRADER_LUT            10-byte digit-encoding LUT for Number Trader codes (0..9 -> 3E 45 CC 86 90 18 4F 09 61 E9)
+0809E0B0 0809E0BC code   GEMINI       NumberTraderGrantState           State machine handler: copies 8 digits, calls NumberTraderCheckCode, grants chip/item/SubChip/NaviCust reward
+0809E1D8 0809E1E4 code   GEMINI       NumberTraderRefundFlag           Clears the Number Trader code's event flag (stored at [r5+0x6C]) when a SubChip reward cannot fit in the pack
+0804E4B8 0804E4C0 code   GEMINI       MapGetDialogueArchive            Resolves (group, map, story_phase) -> LZ77 dialogue text archive via dat_0804E504 and dat_0804E518
+0801913E 0801913E code   CLAUDE       ChipGive                         r0 chip id, r1 code, r2 qty: adds to the pack, sets Library flag 0x16C0+id, writes the chip key (used by patch WP-D3)
