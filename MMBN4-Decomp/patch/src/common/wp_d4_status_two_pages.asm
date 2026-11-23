@@ -26,6 +26,8 @@ SFX_PAGE        equ 0x6E
     .word FS_STATUS_SOULS
 .org ICON_FLAGS_PTR                 ; StatusSoulIconInit: Soul flag -> icon index
     .word FS_STATUS_SOULS
+.org ICON_OAM_PTR                   ; StatusSoulIconInit: 6-byte OAM slot offsets (moved before ICON_FREE reuse)
+    .word FS_STATUS_OAM
 .org ICON_ANIMS_PTR
     .word FS_STATUS_SOULS + 0x10
 .org ICON_PALS_PTR
@@ -37,6 +39,8 @@ SFX_PAGE        equ 0x6E
     .byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B        ; icon animations
 .org FS_STATUS_SOULS + 0x20
     .byte 0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x02, 0x01        ; icon palettes
+.org FS_STATUS_OAM
+    .byte 0x00, 0x10, 0x20, 0x30, 0x40, 0x50                                            ; OAM slot offsets (slots 0-5)
 
 ; ---- the icon reads buf[slot + page] ---------------------------------------------------------
 .org ICON_FLAG_READ                 ; movs r2,1 / ldrb r6,[r5,4] / ldr r1,=SOUL_BUF / ldrb r4,[r1,r6]

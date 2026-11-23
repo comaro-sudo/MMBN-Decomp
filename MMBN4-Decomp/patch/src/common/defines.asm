@@ -37,7 +37,8 @@ FS_STATUS_CODE_SIZE       equ 0xA0
 FS_NPC_HIGSBY             equ 0x087FA010    ; WP-D0: Higsby's NPC list (max 16 + 0xFF)
 FS_NPC_ACDC               equ 0x087FA058    ; WP-D0: ACDC Town's NPC list (max 16 + 0xFF)
 FS_NPC_LIST_SIZE          equ 0x48
-; next free slot:             0x087FA0A0
+FS_STATUS_OAM             equ 0x087FA0A0    ; WP-D4 status: 6-byte OAM slot offsets (moved off dat_0810DABF)
+; next free slot:             0x087FA0A8
 
 PLAY_SFX            equ 0x08000560      ; PlaySoundEffect(r0); same in RS and BM
 VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes, unreferenced since WP-D4 star)
