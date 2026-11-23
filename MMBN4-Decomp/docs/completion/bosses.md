@@ -93,10 +93,9 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
   - The same model as the operator rematches: a 2-bit tier counter in free flags (next free after the lobby's `0x0E40`–`0x0E59`, e.g. `0x0E5A`–`0x0E5B`), raised only on an S rank.
   - The rematch battle uses the "no automatic tier raise" bit.
   - The four Duo records are enemy ids `0xE0`–`0xE3`, with story battles 93 and 94 (RE-06).
-- **Where the rematch is offered: open** (owner to choose). Duo has no operator. Options:
-  - a terminal or NPC in Higsby's lobby;
-  - the post-game Meteor Comp area;
-  - a menu in the lobby's "challenge" logic.
+- **Where (owner, 2026-11-23): back in the Meteor Comp**, where Duo is fought in the story, after the ending (post-game).
+  - To research: the exact Meteor Comp map, which flag marks the ending/post-game (Gemini found Duo-defeated flag `0x006F`), and a free spot for a Duo NPC or object there that starts the rematch at the current tier.
+  - *(Not chosen: a terminal in Higsby's lobby; a lobby "challenge" menu.)*
 - **Side effect:** rematches go through a normal battle start, so they **reach the results screen** (the story's final battle doesn't). The existing `wp_d2_duo_chip_reward.asm` (Duoβ/DuoΩ drop the Duo chip) therefore works in rematches, so the Duo chip comes from beating Duoβ or DuoΩ in a rematch.
 - Still useful: the post-ending grant hook (Gemini's `sub_080C4780` / `IncPlaythrough`) for players who beat Duo only in the story.
 
