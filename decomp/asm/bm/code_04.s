@@ -7,7 +7,7 @@
 
     .global sub_0804F228
     .thumb_func
-sub_0804F228:
+sub_0804F228:   @ ScriptCmd_checkPlaythrough
     push {lr}
     mov r2, sl
     ldr r2, [r2, #0x44]
@@ -34,7 +34,7 @@ _0804F24E:
 
     .global sub_0804F254
     .thumb_func
-sub_0804F254:
+sub_0804F254:   @ ScriptCmd_checkItem
     push {lr}
     push {r4, r5}
     ldrb r0, [r4, #2]
@@ -64,7 +64,7 @@ _0804F280:
 
     .global sub_0804F288
     .thumb_func
-sub_0804F288:
+sub_0804F288:   @ ScriptCmd_checkChipCode
     push {lr}
     ldrb r0, [r4, #1]
     cmp r0, #9
@@ -154,7 +154,7 @@ _0804F32A:
 
     .global sub_0804F330
     .thumb_func
-sub_0804F330:
+sub_0804F330:   @ ScriptCmd_checkHaveOneItem
     push {r6, lr}
     ldrb r6, [r4, #3]
     movs r3, #0
@@ -188,7 +188,7 @@ _0804F362:
 
     .global sub_0804F368
     .thumb_func
-sub_0804F368:
+sub_0804F368:   @ ScriptCmd_checkToyRobotStory
     push {lr}
     push {r4, r5, r6, r7}
     mov r0, r8
@@ -237,7 +237,7 @@ _0804F3C4:
 
     .global sub_0804F3C8
     .thumb_func
-sub_0804F3C8:
+sub_0804F3C8:   @ ScriptCmd_checkHaveTwoItem
     push {r6, r7, lr}
     movs r7, #0
     ldrb r6, [r4, #3]
@@ -275,7 +275,7 @@ _0804F402:
 
     .global sub_0804F408
     .thumb_func
-sub_0804F408:
+sub_0804F408:   @ ScriptCmd_checkBattleResult
     push {r6, r7, lr}
     mov r2, sl
     ldr r2, [r2, #0x40]
@@ -295,7 +295,7 @@ _0804F420:
 
     .global sub_0804F428
     .thumb_func
-sub_0804F428:
+sub_0804F428:   @ ScriptCmd_checkShopStock
     push {lr}
     ldrb r0, [r4, #2]
     push {r4, r5}
@@ -319,7 +319,7 @@ _0804F44A:
 
     .global sub_0804F450
     .thumb_func
-sub_0804F450:
+sub_0804F450:   @ ScriptCmd_checkLibraryStandard
     push {lr}
     ldrb r1, [r4, #1]
     subs r1, #0x24
@@ -386,7 +386,7 @@ _0804F4C4:
 
     .global sub_0804F4CC
     .thumb_func
-sub_0804F4CC:
+sub_0804F4CC:   @ ScriptCmd_checkKarma
     push {lr}
     movs r0, #0x36
     bl sub_0800D7A2   @ GetNaviStat16
@@ -428,7 +428,7 @@ dat_0804F508:
 
     .global sub_0804F538
     .thumb_func
-sub_0804F538:
+sub_0804F538:   @ ScriptCmd_jumpRandom
     push {lr}
     ldrb r0, [r4, #1]
     tst r0, r0
@@ -538,7 +538,7 @@ dat_0804F5F0:
 
     .global sub_0804F5F8
     .thumb_func
-sub_0804F5F8:
+sub_0804F5F8:   @ ScriptCmd_textSpeed
     push {lr}
     ldrb r0, [r4, #2]
     strb r0, [r5, #8]
@@ -564,7 +564,7 @@ sub_0804F618:
 
     .global sub_0804F61C
     .thumb_func
-sub_0804F61C:
+sub_0804F61C:   @ ScriptCmd_clearMsg
     push {lr}
     ldrb r2, [r5, #8]
     tst r2, r2
@@ -614,7 +614,7 @@ sub_0804F670:
 
     .global sub_0804F674
     .thumb_func
-sub_0804F674:
+sub_0804F674:   @ ScriptCmd_controlLock
     push {lr}
     ldrb r0, [r4, #1]
     cmp r0, #0
@@ -649,7 +649,7 @@ sub_0804F6A4:
 
     .global sub_0804F6A8
     .thumb_func
-sub_0804F6A8:
+sub_0804F6A8:   @ ScriptCmd_itemGive
     push {lr}
     ldrb r0, [r4, #1]
     lsrs r1, r0, #4
@@ -747,7 +747,7 @@ dat_0804F758:
 
     .global sub_0804F75C
     .thumb_func
-sub_0804F75C:
+sub_0804F75C:   @ ScriptCmd_mugshotAnimation
     push {lr}
     ldrb r0, [r4, #1]
     cmp r0, #1
@@ -888,7 +888,7 @@ dat_0804F854:
 
     .global sub_0804F85C
     .thumb_func
-sub_0804F85C:
+sub_0804F85C:   @ ScriptCmd_color
     push {lr}
     ldrb r0, [r4, #1]
     tst r0, r0
@@ -1015,7 +1015,7 @@ dat_0804F938:
 
     .global sub_0804F940
     .thumb_func
-sub_0804F940:
+sub_0804F940:   @ ScriptGroup_F7
     push {lr}
     ldr r0, _0804F950
     ldrb r1, [r4, #1]
@@ -1032,7 +1032,7 @@ dat_0804F954:
 
     .global sub_0804F970
     .thumb_func
-sub_0804F970:
+sub_0804F970:   @ ScriptCmd_playerLock
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1059,7 +1059,7 @@ _0804F99A:
 
     .global sub_0804F9A0
     .thumb_func
-sub_0804F9A0:
+sub_0804F9A0:   @ ScriptCmd_playerAnimateScene
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1082,7 +1082,7 @@ _0804F9BC:
 
     .global sub_0804F9C8
     .thumb_func
-sub_0804F9C8:
+sub_0804F9C8:   @ ScriptCmd_playerUnlock
     push {lr}
     bl sub_080A6D6E
     adds r4, #2
@@ -1091,7 +1091,7 @@ sub_0804F9C8:
 
     .global sub_0804F9D4
     .thumb_func
-sub_0804F9D4:
+sub_0804F9D4:   @ ScriptCmd_playerFinish
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1114,7 +1114,7 @@ _0804F9F4:
 
     .global sub_0804F9FC
     .thumb_func
-sub_0804F9FC:
+sub_0804F9FC:   @ ScriptCmd_playerResetScene
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1135,7 +1135,7 @@ _0804FA16:
 
     .global sub_0804FA20
     .thumb_func
-sub_0804FA20:
+sub_0804FA20:   @ ScriptCmd_playerAnimateObject
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1158,7 +1158,7 @@ _0804FA3C:
 
     .global sub_0804FA48
     .thumb_func
-sub_0804FA48:
+sub_0804FA48:   @ ScriptCmd_playerResetObject
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -1194,7 +1194,7 @@ dat_0804FA7C:
 
     .global sub_0804FA98
     .thumb_func
-sub_0804FA98:
+sub_0804FA98:   @ ScriptGroup_F9
     push {lr}
     ldr r0, _0804FAA8
     ldrb r1, [r4, #1]
@@ -1211,7 +1211,7 @@ dat_0804FAAC:
 
     .global sub_0804FADC
     .thumb_func
-sub_0804FADC:
+sub_0804FADC:   @ ScriptCmd_printItem
     push {lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1319,7 +1319,7 @@ sub_0804FBCC:
 
     .global sub_0804FBD0
     .thumb_func
-sub_0804FBD0:
+sub_0804FBD0:   @ ScriptCmd_printZenny
     push {lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1365,7 +1365,7 @@ _0804FC18:
 
     .global sub_0804FC1C
     .thumb_func
-sub_0804FC1C:
+sub_0804FC1C:   @ ScriptCmd_printWaitingRoomName
     push {r7, lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1425,7 +1425,7 @@ dat_0804FC84:
 
     .global sub_0804FC8C
     .thumb_func
-sub_0804FC8C:
+sub_0804FC8C:   @ ScriptCmd_printStoryData
     push {lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1475,7 +1475,7 @@ dat_0804FCE4:
 
     .global sub_0804FCF4
     .thumb_func
-sub_0804FCF4:
+sub_0804FCF4:   @ ScriptCmd_printStoryDataOption
     push {r6, r7, lr}
     mov r0, r8
     push {r0}
@@ -1557,7 +1557,7 @@ _0804FD36:
 
     .global sub_0804FD90
     .thumb_func
-sub_0804FD90:
+sub_0804FD90:   @ ScriptCmd_printStoryDataOptionRemaining
     push {r6, r7, lr}
     mov r0, r8
     push {r0}
@@ -1641,7 +1641,7 @@ _0804FDD6:
 
     .global sub_0804FE30
     .thumb_func
-sub_0804FE30:
+sub_0804FE30:   @ ScriptCmd_printStoryDataChosen
     push {r6, r7, lr}
     mov r0, r8
     push {r0}
@@ -1719,7 +1719,7 @@ dat_0804FECC:
 
     .global sub_0804FEDC
     .thumb_func
-sub_0804FEDC:
+sub_0804FEDC:   @ ScriptCmd_printBufferedShortString
     push {r7, lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1754,7 +1754,7 @@ sub_0804FEDC:
 
     .global sub_0804FF1C
     .thumb_func
-sub_0804FF1C:
+sub_0804FF1C:   @ ScriptCmd_printShortString
     push {r7, lr}
     ldrb r0, [r5, #5]
     adds r0, #1
@@ -1897,7 +1897,7 @@ _08050034:
 
     .global sub_08050038
     .thumb_func
-sub_08050038:
+sub_08050038:   @ ScriptGroup_FD
     push {lr}
     ldr r0, _08050048
     ldrb r1, [r4, #1]
@@ -1914,7 +1914,7 @@ dat_0805004C:   @ text_0xfd_sub_commands
 
     .global sub_0805007C
     .thumb_func
-sub_0805007C:
+sub_0805007C:   @ ScriptCmd_soundPlay
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r1, [r4, #3]
@@ -1927,7 +1927,7 @@ sub_0805007C:
 
     .global sub_08050090
     .thumb_func
-sub_08050090:
+sub_08050090:   @ ScriptCmd_soundStopBGM
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r1, [r4, #3]
@@ -1940,7 +1940,7 @@ sub_08050090:
 
     .global sub_080500A4
     .thumb_func
-sub_080500A4:
+sub_080500A4:   @ ScriptCmd_soundEnableTextSFX
     push {lr}
     movs r0, #0x40
     bl sub_0804E674
@@ -1951,7 +1951,7 @@ sub_080500A4:
 
     .global sub_080500B4
     .thumb_func
-sub_080500B4:
+sub_080500B4:   @ ScriptCmd_soundDisableTextSFX
     push {lr}
     movs r0, #0x40
     bl sub_0804E668
@@ -1962,7 +1962,7 @@ sub_080500B4:
 
     .global sub_080500C4
     .thumb_func
-sub_080500C4:
+sub_080500C4:   @ ScriptCmd_soundStop
     push {lr}
     bl sub_080006D4
     adds r4, #2
@@ -1971,7 +1971,7 @@ sub_080500C4:
 
     .global sub_080500D0
     .thumb_func
-sub_080500D0:
+sub_080500D0:   @ ScriptCmd_soundFadeOut
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r1, [r4, #3]
@@ -1986,7 +1986,7 @@ sub_080500D0:
 
     .global sub_080500E8
     .thumb_func
-sub_080500E8:
+sub_080500E8:   @ ScriptCmd_soundEnableChoiceSFX
     push {lr}
     movs r0, #0x80
     bl sub_0804E674
@@ -1997,7 +1997,7 @@ sub_080500E8:
 
     .global sub_080500F8
     .thumb_func
-sub_080500F8:
+sub_080500F8:   @ ScriptCmd_soundDisableChoiceSFX
     push {lr}
     movs r0, #0x80
     bl sub_0804E668
@@ -2008,7 +2008,7 @@ sub_080500F8:
 
     .global sub_08050108
     .thumb_func
-sub_08050108:
+sub_08050108:   @ ScriptCmd_soundPlayAreaBGM
     push {lr}
     bl sub_0802BCD0
     bl sub_0802BD04
@@ -2018,7 +2018,7 @@ sub_08050108:
 
     .global sub_08050118
     .thumb_func
-sub_08050118:
+sub_08050118:   @ ScriptCmd_soundFadeInBGM
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r1, [r4, #3]
@@ -2048,7 +2048,7 @@ dat_08050140:
 
     .global sub_08050170
     .thumb_func
-sub_08050170:
+sub_08050170:   @ ScriptGroup_FB
     push {lr}
     ldr r0, _08050180
     ldrb r1, [r4, #1]
@@ -2065,7 +2065,7 @@ dat_08050184:
 
     .global sub_080501C4
     .thumb_func
-sub_080501C4:
+sub_080501C4:   @ ScriptCmd_startGiveRandomZenny
     push {lr}
     movs r0, #0x73
     bl sub_08000560   @ PlaySoundEffect
@@ -2097,7 +2097,7 @@ sub_080501C4:
 
     .global sub_08050200
     .thumb_func
-sub_08050200:
+sub_08050200:   @ ScriptCmd_startGiveRandomChipCode
     push {lr}
     movs r0, #0x73
     bl sub_08000560   @ PlaySoundEffect
@@ -2125,7 +2125,7 @@ sub_08050200:
 
     .global sub_08050234
     .thumb_func
-sub_08050234:
+sub_08050234:   @ ScriptCmd_startRandomBattle
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -2153,7 +2153,7 @@ _08050264:
 
     .global sub_08050268
     .thumb_func
-sub_08050268:
+sub_08050268:   @ ScriptCmd_startShop
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -2175,7 +2175,7 @@ _08050286:
 
     .global sub_0805028C
     .thumb_func
-sub_0805028C:
+sub_0805028C:   @ ScriptCmd_startBugFragTrader
     push {lr}
     ldrb r0, [r5, #4]
     cmp r0, #0
@@ -2218,7 +2218,7 @@ _080502D2:
 
     .global sub_080502D8
     .thumb_func
-sub_080502D8:
+sub_080502D8:   @ ScriptCmd_startWarp
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -2249,7 +2249,7 @@ _08050310:
 
     .global sub_08050314
     .thumb_func
-sub_08050314:
+sub_08050314:   @ ScriptCmd_startHeal
     push {lr}
     mov r0, sl
     ldr r7, [r0, #0x40]
@@ -2298,7 +2298,7 @@ sub_08050340:
 
     .global sub_0805036C
     .thumb_func
-sub_0805036C:
+sub_0805036C:   @ ScriptCmd_startBBS
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -2318,7 +2318,7 @@ _08050386:
 
     .global sub_0805038C
     .thumb_func
-sub_0805038C:
+sub_0805038C:   @ ScriptCmd_startGiveFolder
     push {lr}
     ldrb r0, [r4, #2]
     bl sub_080430B4
@@ -2420,7 +2420,7 @@ sub_08050428:
 
     .global sub_0805042C
     .thumb_func
-sub_0805042C:
+sub_0805042C:   @ ScriptGroup_FC
     push {lr}
     ldr r0, _0805043C
     ldrb r1, [r4, #1]
@@ -2437,7 +2437,7 @@ dat_08050440:
 
     .global sub_08050464
     .thumb_func
-sub_08050464:
+sub_08050464:   @ ScriptCmd_callSave
     push {lr}
     push {r4}
     bl sub_08048860   @ SaveGameKeepPlace
@@ -2464,7 +2464,7 @@ _0805048C:
 
     .global sub_08050494
     .thumb_func
-sub_08050494:
+sub_08050494:   @ ScriptCmd_callTournament
     push {lr}
     movs r0, #0xc
     movs r1, #0x10
@@ -2480,7 +2480,7 @@ sub_08050494:
 
     .global sub_080504B0
     .thumb_func
-sub_080504B0:
+sub_080504B0:   @ ScriptCmd_callCancelSonar
     push {lr}
     bl sub_0809ED0C
     adds r4, #2
@@ -2489,7 +2489,7 @@ sub_080504B0:
 
     .global sub_080504BC
     .thumb_func
-sub_080504BC:
+sub_080504BC:   @ ScriptCmd_callBufferTerryPassword
     push {lr}
     ldrb r0, [r4, #2]
     lsls r0, r0, #2
@@ -2507,7 +2507,7 @@ _080504D4:
 
     .global sub_080504D8
     .thumb_func
-sub_080504D8:
+sub_080504D8:   @ ScriptCmd_callWorldMap
     push {lr}
     movs r0, #0xc
     movs r1, #0xc
@@ -2519,7 +2519,7 @@ sub_080504D8:
 
     .global sub_080504EC
     .thumb_func
-sub_080504EC:
+sub_080504EC:   @ ScriptCmd_callGiveAllNaviCustPrograms
     push {lr}
     bl sub_080477F4
     adds r4, #2
@@ -2528,7 +2528,7 @@ sub_080504EC:
 
     .global sub_080504F8
     .thumb_func
-sub_080504F8:
+sub_080504F8:   @ ScriptCmd_callDisableMugshotBrighten
     push {lr}
     ldr r0, _08050508
     bl sub_0804E668
@@ -2541,7 +2541,7 @@ _08050508:
 
     .global sub_0805050C
     .thumb_func
-sub_0805050C:
+sub_0805050C:   @ ScriptCmd_callFreeTournament
     push {lr}
     bl sub_080057C8   @ BN4_OPEN_FREE_BRACKET
     tst r0, r0
@@ -2566,7 +2566,7 @@ _08050532:
 
     .global sub_08050538
     .thumb_func
-sub_08050538:
+sub_08050538:   @ ScriptCmd_callCheckOutsideJackIn
     push {lr}
     movs r2, #0
     movs r0, #0x29
@@ -2605,7 +2605,7 @@ dat_08050570:
 
     .global sub_0805057C
     .thumb_func
-sub_0805057C:
+sub_0805057C:   @ ScriptGroup_F6
     push {lr}
     ldr r0, _0805058C
     ldrb r1, [r4, #1]
@@ -2622,7 +2622,7 @@ dat_08050590:
 
     .global sub_080505BC
     .thumb_func
-sub_080505BC:
+sub_080505BC:   @ ScriptCmd_positionBox
     ldr r0, _080505EC
     ldrb r3, [r4, #4]
     strb r3, [r5, #0x15]
@@ -2663,7 +2663,7 @@ sub_08050600:
 
     .global sub_08050608
     .thumb_func
-sub_08050608:
+sub_08050608:   @ ScriptCmd_positionText
     ldrb r1, [r4, #2]
     strb r1, [r5, #0x18]
     adds r1, #0xa3
@@ -2693,7 +2693,7 @@ sub_0805062C:
 
     .global sub_08050634
     .thumb_func
-sub_08050634:
+sub_08050634:   @ ScriptCmd_positionArrow
     ldrb r1, [r4, #2]
     strb r1, [r5, #0x1a]
     ldrb r1, [r4, #3]
@@ -2705,7 +2705,7 @@ sub_08050634:
 
     .global sub_08050644
     .thumb_func
-sub_08050644:
+sub_08050644:   @ ScriptCmd_positionMugshot
     ldrb r1, [r4, #2]
     movs r0, #0x84
     str r1, [r5, r0]
@@ -2719,7 +2719,7 @@ sub_08050644:
 
     .global sub_08050658
     .thumb_func
-sub_08050658:
+sub_08050658:   @ ScriptCmd_positionTextCenter
     ldrb r1, [r4, #2]
     movs r0, #8
     muls r0, r1, r0
@@ -2745,7 +2745,7 @@ sub_08050658:
 
     .global sub_08050684
     .thumb_func
-sub_08050684:
+sub_08050684:   @ ScriptCmd_positionOptionHorizontal
     push {lr}
     adds r4, #3
     movs r0, #1
@@ -2753,7 +2753,7 @@ sub_08050684:
 
     .global sub_0805068C
     .thumb_func
-sub_0805068C:
+sub_0805068C:   @ ScriptCmd_positionOptionVertical
     push {lr}
     adds r4, #3
     movs r0, #1
@@ -2761,7 +2761,7 @@ sub_0805068C:
 
     .global sub_08050694
     .thumb_func
-sub_08050694:
+sub_08050694:   @ ScriptCmd_positionOptionFromCenter
     push {lr}
     adds r4, #3
     movs r0, #1
@@ -2769,7 +2769,7 @@ sub_08050694:
 
     .global sub_0805069C
     .thumb_func
-sub_0805069C:
+sub_0805069C:   @ ScriptCmd_positionTextPrinter
     push {lr}
     ldrb r2, [r4, #2]
     subs r2, #1
@@ -2900,7 +2900,7 @@ _0805076A:
 
     .global sub_08050778
     .thumb_func
-sub_08050778:
+sub_08050778:   @ ScriptCmd_checkGiveItem
     push {lr}
     ldrb r0, [r4, #1]
     subs r0, #0xa
@@ -3000,7 +3000,7 @@ dat_08050824:
 
     .global sub_08050828
     .thumb_func
-sub_08050828:
+sub_08050828:   @ ScriptCmd_checkGiveZenny
     push {lr}
     ldrb r0, [r4, #1]
     subs r0, #0xe
@@ -3132,7 +3132,7 @@ dat_08050918:
 
     .global sub_0805091C
     .thumb_func
-sub_0805091C:
+sub_0805091C:   @ ScriptCmd_itemGiveNaviCustProgram
     ldrb r0, [r4, #1]
     subs r0, #0x1b
     cmp r0, #0
@@ -3234,7 +3234,7 @@ dat_080509D0:
 
     .global sub_080509D4
     .thumb_func
-sub_080509D4:
+sub_080509D4:   @ ScriptCmd_checkGiveBugFrags
     push {lr}
     ldrb r0, [r4, #1]
     subs r0, #0x12
@@ -3366,7 +3366,7 @@ dat_08050AC4:
 
     .global sub_08050AC8
     .thumb_func
-sub_08050AC8:
+sub_08050AC8:   @ ScriptCmd_checkGiveTournamentPoints
     push {lr}
     ldrb r0, [r4, #1]
     subs r0, #0x16
@@ -3437,7 +3437,7 @@ _08050B42:
 
     .global sub_08050B5C
     .thumb_func
-sub_08050B5C:
+sub_08050B5C:   @ ScriptGroup_FE
     push {lr}
     ldr r0, _08050B6C
     ldrb r1, [r4, #1]
@@ -3454,7 +3454,7 @@ dat_08050B70:
 
     .global sub_08050BB0
     .thumb_func
-sub_08050BB0:
+sub_08050BB0:   @ ScriptCmd_menuOptionNumberTrader
     ldrb r0, [r4, #2]
     adds r0, #0x4c
     movs r1, #0
@@ -3466,7 +3466,7 @@ sub_08050BB0:
 
     .global sub_08050BC0
     .thumb_func
-sub_08050BC0:
+sub_08050BC0:   @ ScriptCmd_menuSelectNumberTrader
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -3532,7 +3532,7 @@ _08050C0E:
 
     .global sub_08050C44
     .thumb_func
-sub_08050C44:
+sub_08050C44:   @ ScriptCmd_menuOptionNumber
     ldrb r0, [r4, #2]
     adds r0, #0x4c
     movs r1, #0
@@ -3551,7 +3551,7 @@ _08050C58:
 
     .global sub_08050C60
     .thumb_func
-sub_08050C60:
+sub_08050C60:   @ ScriptCmd_menuOptionName
     ldrb r0, [r4, #2]
     movs r1, #0xb
     mov r2, sl
@@ -3570,7 +3570,7 @@ _08050C72:
 
     .global sub_08050C7C
     .thumb_func
-sub_08050C7C:
+sub_08050C7C:   @ ScriptCmd_menuSelectBufferedPassword
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -3740,7 +3740,7 @@ _08050DB0:
 
     .global sub_08050DB4
     .thumb_func
-sub_08050DB4:
+sub_08050DB4:   @ ScriptCmd_menuRegisterName
     mov r0, sl
     ldr r0, [r0, #0x44]
     ldr r1, [r5, #0x4c]
@@ -3767,7 +3767,7 @@ _08050DD8:
 
     .global sub_08050DDC
     .thumb_func
-sub_08050DDC:
+sub_08050DDC:   @ ScriptCmd_menuSelectStoryData
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -3852,7 +3852,7 @@ _08050E74:
 
     .global sub_08050E7C
     .thumb_func
-sub_08050E7C:
+sub_08050E7C:   @ ScriptCmd_menuCheckStoryDataInput
     push {lr}
     movs r0, #1
     bl sub_0804E668
@@ -3885,7 +3885,7 @@ _08050EAC:
 
     .global sub_08050EB0
     .thumb_func
-sub_08050EB0:
+sub_08050EB0:   @ ScriptCmd_menuBufferCorrectStoryData
     push {r6, r7, lr}
     movs r0, #0
     str r0, [r5, #0x50]
@@ -3916,7 +3916,7 @@ dat_08050EE0:
 
     .global sub_08050EF0
     .thumb_func
-sub_08050EF0:
+sub_08050EF0:   @ ScriptCmd_menuFinishStory
     push {r6, r7, lr}
     push {r4, r5}
     bl sub_0809F250
@@ -3972,7 +3972,7 @@ dat_08050F60:
 
     .global sub_08050F68
     .thumb_func
-sub_08050F68:
+sub_08050F68:   @ ScriptCmd_menuDeleteStoryData
     push {r6, r7, lr}
     push {r4, r5}
     bl sub_0809F250
@@ -4009,7 +4009,7 @@ dat_08050FA8:
 
     .global sub_08050FDC
     .thumb_func
-sub_08050FDC:
+sub_08050FDC:   @ ScriptCmd_menuCancelStory
     push {r6, r7, lr}
     push {r4, r5}
     bl sub_0809F250
@@ -4032,7 +4032,7 @@ dat_08051000:
 
     .global sub_08051004
     .thumb_func
-sub_08051004:
+sub_08051004:   @ ScriptCmd_menuNextStory
     push {r6, r7, lr}
     push {r4, r5}
     bl sub_0809F284
@@ -4075,7 +4075,7 @@ dat_08051054:
 
     .global sub_08051058
     .thumb_func
-sub_08051058:
+sub_08051058:   @ ScriptCmd_menuBufferCorrectRiddleAnswer
     push {lr}
     movs r0, #0
     str r0, [r5, #0x50]
@@ -4604,7 +4604,7 @@ sub_08051420:
 
     .global sub_08051424
     .thumb_func
-sub_08051424:
+sub_08051424:   @ ScriptGroup_F8
     push {lr}
     ldr r0, _08051434
     ldrb r1, [r4, #1]
@@ -4621,7 +4621,7 @@ dat_08051438:
 
     .global sub_08051440
     .thumb_func
-sub_08051440:
+sub_08051440:   @ ScriptCmd_storeTimer
     push {lr}
     mov r2, sl
     ldr r2, [r2, #0x10]
@@ -4635,7 +4635,7 @@ sub_08051440:
 
     .global sub_08051454
     .thumb_func
-sub_08051454:
+sub_08051454:   @ ScriptCmd_storeGlobal
     ldr r0, _08051468
     ldrb r1, [r4, #2]
     lsls r1, r1, #2
@@ -4666,7 +4666,7 @@ dat_0805147C:
 
     .global sub_08051480
     .thumb_func
-sub_08051480:
+sub_08051480:   @ ScriptGroup_FA
     push {lr}
     ldr r0, _08051490
     ldrb r1, [r4, #1]
@@ -4683,7 +4683,7 @@ dat_08051494:
 
     .global sub_0805149C
     .thumb_func
-sub_0805149C:
+sub_0805149C:   @ ScriptCmd_spriteRemove
     push {lr}
     ldrb r0, [r4, #2]
     bl sub_080A8E9E
@@ -4697,7 +4697,7 @@ sub_0805149C:
 
     .global sub_080514B4
     .thumb_func
-sub_080514B4:
+sub_080514B4:   @ ScriptCmd_spriteRotate
     push {lr}
     ldrb r0, [r4, #2]
     bl sub_080A8E9E
@@ -4732,7 +4732,7 @@ dat_080514E8:
 
     .global sub_080514EC
     .thumb_func
-sub_080514EC:
+sub_080514EC:   @ ScriptGroup_FF
     push {lr}
     ldr r0, _080514FC
     ldrb r1, [r4, #1]
@@ -4749,7 +4749,7 @@ dat_08051500:
 
     .global sub_08051508
     .thumb_func
-sub_08051508:
+sub_08051508:   @ ScriptCmd_ereaderName
     push {lr}
     ldrb r0, [r5, #5]
     adds r0, #1

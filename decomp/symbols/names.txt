@@ -829,3 +829,130 @@
 0874CBE0 0874C6D4 data   CE           BN4_CHIP_DESCS                   text archive: the chips' descriptions, ids 0-255: E7 02, F0 00 00, three lines by E8, E6 01, ... its end 0xE5 as every entry of BN4's; ids 256-368, none past them
 0874F03C 0874EACC data   CE           BN4_CHIP_DESCS_HI                text archive: the chips' descriptions, ids 0-255: E7 02, F0 00 00, three lines by E8, E6 01, ... its end 0xE5 as every entry of BN4's; ids 256-368, none past them
 08800000 08800000 constant CE           guest_core_rom_copy_past_bn4     BN4 on the guest core: the guest core's ROM copy past BN4's 8 MB
+# --- Text-script command handlers (tools/script_cmds.py; TextPet command names), Claude 2026-11-22 ---
+0804E9D8 0804E9E0 code   CLAUDE       ScriptCmd_end                    script command handler: E5:end
+0804EA44 0804EA4C code   CLAUDE       ScriptCmd_keyWait                script command handler: E6:keyWait
+0804EAC8 0804EAD0 code   CLAUDE       ScriptGroup_E7                   script command handler: E7:group
+0804EAEC 0804EAF4 code   CLAUDE       ScriptCmd_msgOpen                script command handler: E7 00:msgOpen
+0804EB3C 0804EB44 code   CLAUDE       ScriptCmd_msgClose               script command handler: E7 01:msgClose
+0804EBA0 0804EBA8 code   CLAUDE       ScriptCmd_msgOpenQuick           script command handler: E7 02:msgOpenQuick
+0804EBB8 0804EBC0 code   CLAUDE       ScriptCmd_msgCloseQuick          script command handler: E7 03:msgCloseQuick
+0804EBE8 0804EBF0 code   CLAUDE       ScriptCmd_E8                     script command handler: E8 (no TextPet name)
+0804EC28 0804EC30 code   CLAUDE       ScriptCmd_flagAddBBSMessage      script command handler: E9:flagAddBBSMessage/flagAddMail/flagClear/flagMultiClear/flagMultiSet/flagSet/flagSetBuffered/flagToggle
+0804ED18 0804ED20 code   CLAUDE       ScriptCmd_option                 script command handler: EA:option
+0804EDE4 0804EDEC code   CLAUDE       ScriptCmd_space                  script command handler: EB:space/spacePx
+0804EE48 0804EE50 code   CLAUDE       ScriptCmd_select                 script command handler: EC:select
+0804EF6C 0804EF74 code   CLAUDE       ScriptCmd_wait                   script command handler: ED:wait/waitFlag/waitHold/waitOWVar/waitSkip
+0804F00C 0804F014 code   CLAUDE       ScriptGroup_EE                   script command handler: EE:group
+0804F0D4 0804F0DC code   CLAUDE       ScriptCmd_checkWaterGodProgram   script command handler: EE 29:checkWaterGodProgram
+0804F0F8 0804F100 code   CLAUDE       ScriptCmd_checkMultiFlag         script command handler: EE 28:checkMultiFlag
+0804F128 0804F130 code   CLAUDE       ScriptCmd_checkSubArea           script command handler: EE 02:checkSubArea
+0804F154 0804F15C code   CLAUDE       ScriptCmd_checkFlag              script command handler: EE 00:checkFlag
+0804F180 0804F188 code   CLAUDE       ScriptCmd_checkChapter           script command handler: EE 01:checkChapter
+0804F1AC 0804F1B4 code   CLAUDE       ScriptCmd_checkGlobal            script command handler: EE 03:checkGlobal
+0804F1DC 0804F1E4 code   CLAUDE       ScriptCmd_checkTournamentRound   script command handler: EE 04:checkTournamentRound
+0804F204 0804F20C code   CLAUDE       ScriptCmd_checkGameVersion       script command handler: EE 05:checkGameVersion
+0804F21C 0804F228 code   CLAUDE       ScriptCmd_checkPlaythrough       script command handler: EE 06:checkPlaythrough
+0804F248 0804F254 code   CLAUDE       ScriptCmd_checkItem              script command handler: EE 07:checkItem
+0804F27C 0804F288 code   CLAUDE       ScriptCmd_checkChipCode          script command handler: EE 08:checkChipCode, EE 09:checkPackChipCode, EE 2A:checkChip
+0804F324 0804F330 code   CLAUDE       ScriptCmd_checkHaveOneItem       script command handler: EE 1A:checkHaveOneItem
+0804F35C 0804F368 code   CLAUDE       ScriptCmd_checkToyRobotStory     script command handler: EE 1F:checkToyRobotStory
+0804F3BC 0804F3C8 code   CLAUDE       ScriptCmd_checkHaveTwoItem       script command handler: EE 20:checkHaveTwoItem
+0804F3FC 0804F408 code   CLAUDE       ScriptCmd_checkBattleResult      script command handler: EE 21:checkBattleResult
+0804F41C 0804F428 code   CLAUDE       ScriptCmd_checkShopStock         script command handler: EE 22:checkShopStock
+0804F444 0804F450 code   CLAUDE       ScriptCmd_checkLibraryStandard   script command handler: EE 24:checkLibraryStandard, EE 25:checkLibraryMega, EE 26:checkLibraryGiga, EE 27:checkLibraryPA
+0804F4C0 0804F4CC code   CLAUDE       ScriptCmd_checkKarma             script command handler: EE 2C:checkKarma
+0804F52C 0804F538 code   CLAUDE       ScriptCmd_jumpRandom             script command handler: EF:jumpRandom
+0804F5EC 0804F5F8 code   CLAUDE       ScriptCmd_textSpeed              script command handler: F0:textSpeed
+0804F610 0804F61C code   CLAUDE       ScriptCmd_clearMsg               script command handler: F1:clearMsg
+0804F668 0804F674 code   CLAUDE       ScriptCmd_controlLock            script command handler: F2:controlLock/controlSet/controlUnlock
+0804F69C 0804F6A8 code   CLAUDE       ScriptCmd_itemGive               script command handler: F3:itemGive/itemGiveAllChips/itemGiveChip/itemSet/itemSetChip/itemTake/itemTakeChip
+0804F750 0804F75C code   CLAUDE       ScriptCmd_mugshotAnimation       script command handler: F4:mugshotAnimation/mugshotHide/mugshotOAMPalette/mugshotPalette/mugshotShow
+0804F850 0804F85C code   CLAUDE       ScriptCmd_color                  script command handler: F5:color/colorBuffered
+0804F934 0804F940 code   CLAUDE       ScriptGroup_F7                   script command handler: F7:group
+0804F964 0804F970 code   CLAUDE       ScriptCmd_playerLock             script command handler: F7 00:playerLock
+0804F994 0804F9A0 code   CLAUDE       ScriptCmd_playerAnimateScene     script command handler: F7 01:playerAnimateScene
+0804F9BC 0804F9C8 code   CLAUDE       ScriptCmd_playerUnlock           script command handler: F7 02:playerUnlock
+0804F9C8 0804F9D4 code   CLAUDE       ScriptCmd_playerFinish           script command handler: F7 03:playerFinish
+0804F9F0 0804F9FC code   CLAUDE       ScriptCmd_playerResetScene       script command handler: F7 04:playerResetScene
+0804FA14 0804FA20 code   CLAUDE       ScriptCmd_playerAnimateObject    script command handler: F7 05:playerAnimateObject
+0804FA3C 0804FA48 code   CLAUDE       ScriptCmd_playerResetObject      script command handler: F7 06:playerResetObject
+0804FA8C 0804FA98 code   CLAUDE       ScriptGroup_F9                   script command handler: F9:group
+0804FAD0 0804FADC code   CLAUDE       ScriptCmd_printItem              script command handler: F9 00:printItem, F9 00:printChip, F9 00:printCode, F9 00:printFolderName, F9 00:printNaviCustProgram, F9 00:printEnemy, F9 00:printRiddle
+0804FBC4 0804FBD0 code   CLAUDE       ScriptCmd_printZenny             script command handler: F9 03:printZenny, F9 03:printBuffer
+0804FC10 0804FC1C code   CLAUDE       ScriptCmd_printWaitingRoomName   script command handler: F9 05:printWaitingRoomName, F9 05:printRecordName
+0804FC80 0804FC8C code   CLAUDE       ScriptCmd_printStoryData         script command handler: F9 06:printStoryData
+0804FCE8 0804FCF4 code   CLAUDE       ScriptCmd_printStoryDataOption   script command handler: F9 07:printStoryDataOption
+0804FD84 0804FD90 code   CLAUDE       ScriptCmd_printStoryDataOptionRemaining script command handler: F9 08:printStoryDataOptionRemaining
+0804FE24 0804FE30 code   CLAUDE       ScriptCmd_printStoryDataChosen   script command handler: F9 09:printStoryDataChosen
+0804FED0 0804FEDC code   CLAUDE       ScriptCmd_printBufferedShortString script command handler: F9 0A:printBufferedShortString
+0804FF10 0804FF1C code   CLAUDE       ScriptCmd_printShortString       script command handler: F9 0B:printShortString
+0805002C 08050038 code   CLAUDE       ScriptGroup_FD                   script command handler: FD:group
+08050070 0805007C code   CLAUDE       ScriptCmd_soundPlay              script command handler: FD 00:soundPlay
+08050084 08050090 code   CLAUDE       ScriptCmd_soundStopBGM           script command handler: FD 01:soundStopBGM, FD 01:soundPlayBGM
+08050098 080500A4 code   CLAUDE       ScriptCmd_soundEnableTextSFX     script command handler: FD 02:soundEnableTextSFX
+080500A8 080500B4 code   CLAUDE       ScriptCmd_soundDisableTextSFX    script command handler: FD 03:soundDisableTextSFX
+080500B8 080500C4 code   CLAUDE       ScriptCmd_soundStop              script command handler: FD 04:soundStop
+080500C4 080500D0 code   CLAUDE       ScriptCmd_soundFadeOut           script command handler: FD 05:soundFadeOut
+080500DC 080500E8 code   CLAUDE       ScriptCmd_soundEnableChoiceSFX   script command handler: FD 08:soundEnableChoiceSFX
+080500EC 080500F8 code   CLAUDE       ScriptCmd_soundDisableChoiceSFX  script command handler: FD 09:soundDisableChoiceSFX
+080500FC 08050108 code   CLAUDE       ScriptCmd_soundPlayAreaBGM       script command handler: FD 0A:soundPlayAreaBGM
+0805010C 08050118 code   CLAUDE       ScriptCmd_soundFadeInBGM         script command handler: FD 0B:soundFadeInBGM
+08050164 08050170 code   CLAUDE       ScriptGroup_FB                   script command handler: FB:group
+080501B8 080501C4 code   CLAUDE       ScriptCmd_startGiveRandomZenny   script command handler: FB 00:startGiveRandomZenny
+080501F4 08050200 code   CLAUDE       ScriptCmd_startGiveRandomChipCode script command handler: FB 01:startGiveRandomChipCode
+08050228 08050234 code   CLAUDE       ScriptCmd_startRandomBattle      script command handler: FB 02:startRandomBattle
+0805025C 08050268 code   CLAUDE       ScriptCmd_startShop              script command handler: FB 05:startShop
+08050280 0805028C code   CLAUDE       ScriptCmd_startBugFragTrader     script command handler: FB 06:startBugFragTrader, FB 06:startChipTrader
+080502CC 080502D8 code   CLAUDE       ScriptCmd_startWarp              script command handler: FB 07:startWarp
+08050308 08050314 code   CLAUDE       ScriptCmd_startHeal              script command handler: FB 08:startHeal
+08050360 0805036C code   CLAUDE       ScriptCmd_startBBS               script command handler: FB 0A:startBBS
+08050380 0805038C code   CLAUDE       ScriptCmd_startGiveFolder        script command handler: FB 0D:startGiveFolder
+08050420 0805042C code   CLAUDE       ScriptGroup_FC                   script command handler: FC:group
+08050458 08050464 code   CLAUDE       ScriptCmd_callSave               script command handler: FC 00:callSave
+08050488 08050494 code   CLAUDE       ScriptCmd_callTournament         script command handler: FC 01:callTournament
+080504A4 080504B0 code   CLAUDE       ScriptCmd_callCancelSonar        script command handler: FC 02:callCancelSonar
+080504B0 080504BC code   CLAUDE       ScriptCmd_callBufferTerryPassword script command handler: FC 03:callBufferTerryPassword, FC 03:callScenarioEffect, FC 03:callBufferCastilloPassword, FC 03:callPETEffect
+080504CC 080504D8 code   CLAUDE       ScriptCmd_callWorldMap           script command handler: FC 04:callWorldMap
+080504E0 080504EC code   CLAUDE       ScriptCmd_callGiveAllNaviCustPrograms script command handler: FC 05:callGiveAllNaviCustPrograms
+080504EC 080504F8 code   CLAUDE       ScriptCmd_callDisableMugshotBrighten script command handler: FC 06:callDisableMugshotBrighten
+08050500 0805050C code   CLAUDE       ScriptCmd_callFreeTournament     script command handler: FC 07:callFreeTournament
+0805052C 08050538 code   CLAUDE       ScriptCmd_callCheckOutsideJackIn script command handler: FC 08:callCheckOutsideJackIn
+08050570 0805057C code   CLAUDE       ScriptGroup_F6                   script command handler: F6:group
+080505B0 080505BC code   CLAUDE       ScriptCmd_positionBox            script command handler: F6 00:positionBox
+080505FC 08050608 code   CLAUDE       ScriptCmd_positionText           script command handler: F6 02:positionText
+08050628 08050634 code   CLAUDE       ScriptCmd_positionArrow          script command handler: F6 04:positionArrow
+08050638 08050644 code   CLAUDE       ScriptCmd_positionMugshot        script command handler: F6 05:positionMugshot
+0805064C 08050658 code   CLAUDE       ScriptCmd_positionTextCenter     script command handler: F6 06:positionTextCenter
+08050678 08050684 code   CLAUDE       ScriptCmd_positionOptionHorizontal script command handler: F6 07:positionOptionHorizontal
+08050680 0805068C code   CLAUDE       ScriptCmd_positionOptionVertical script command handler: F6 08:positionOptionVertical
+08050688 08050694 code   CLAUDE       ScriptCmd_positionOptionFromCenter script command handler: F6 09:positionOptionFromCenter
+08050690 0805069C code   CLAUDE       ScriptCmd_positionTextPrinter    script command handler: F6 0A:positionTextPrinter
+0805076C 08050778 code   CLAUDE       ScriptCmd_checkGiveItem          script command handler: EE 0A:checkGiveItem, EE 0B:checkTakeItem, EE 0C:setItem
+0805081C 08050828 code   CLAUDE       ScriptCmd_checkGiveZenny         script command handler: EE 0E:checkGiveZenny, EE 0F:checkTakeZenny, EE 10:setZenny, EE 11:checkZenny
+08050910 0805091C code   CLAUDE       ScriptCmd_itemGiveNaviCustProgram script command handler: EE 1B:itemGiveNaviCustProgram, EE 1C:itemTakeNaviCustProgram, EE 1D:itemSetNaviCustProgram, EE 1E:checkNaviCustProgram
+080509C8 080509D4 code   CLAUDE       ScriptCmd_checkGiveBugFrags      script command handler: EE 12:checkGiveBugFrags, EE 13:checkTakeBugFrags, EE 14:setBugFrags, EE 15:checkBugFrags
+08050ABC 08050AC8 code   CLAUDE       ScriptCmd_checkGiveTournamentPoints script command handler: EE 16:checkGiveTournamentPoints, EE 17:checkTakeTournamentPoints, EE 18:setTournamentPoints, EE 19:checkTournamentPoints
+08050B50 08050B5C code   CLAUDE       ScriptGroup_FE                   script command handler: FE:group
+08050BA4 08050BB0 code   CLAUDE       ScriptCmd_menuOptionNumberTrader script command handler: FE 00:menuOptionNumberTrader
+08050BB4 08050BC0 code   CLAUDE       ScriptCmd_menuSelectNumberTrader script command handler: FE 01:menuSelectNumberTrader
+08050C38 08050C44 code   CLAUDE       ScriptCmd_menuOptionNumber       script command handler: FE 02:menuOptionNumber, FE 0D:menuOptionLetter
+08050C54 08050C60 code   CLAUDE       ScriptCmd_menuOptionName         script command handler: FE 04:menuOptionName
+08050C70 08050C7C code   CLAUDE       ScriptCmd_menuSelectBufferedPassword script command handler: FE 03:menuSelectBufferedPassword, FE 05:menuSelectName
+08050DA8 08050DB4 code   CLAUDE       ScriptCmd_menuRegisterName       script command handler: FE 0F:menuRegisterName
+08050DD0 08050DDC code   CLAUDE       ScriptCmd_menuSelectStoryData    script command handler: FE 06:menuSelectStoryData
+08050E70 08050E7C code   CLAUDE       ScriptCmd_menuCheckStoryDataInput script command handler: FE 07:menuCheckStoryDataInput
+08050EA4 08050EB0 code   CLAUDE       ScriptCmd_menuBufferCorrectStoryData script command handler: FE 08:menuBufferCorrectStoryData
+08050EE4 08050EF0 code   CLAUDE       ScriptCmd_menuFinishStory        script command handler: FE 09:menuFinishStory
+08050F5C 08050F68 code   CLAUDE       ScriptCmd_menuDeleteStoryData    script command handler: FE 0A:menuDeleteStoryData
+08050FD0 08050FDC code   CLAUDE       ScriptCmd_menuCancelStory        script command handler: FE 0B:menuCancelStory
+08050FF8 08051004 code   CLAUDE       ScriptCmd_menuNextStory          script command handler: FE 0C:menuNextStory
+0805104C 08051058 code   CLAUDE       ScriptCmd_menuBufferCorrectRiddleAnswer script command handler: FE 0E:menuBufferCorrectRiddleAnswer
+08051418 08051424 code   CLAUDE       ScriptGroup_F8                   script command handler: F8:group
+08051434 08051440 code   CLAUDE       ScriptCmd_storeTimer             script command handler: F8 00:storeTimer
+08051448 08051454 code   CLAUDE       ScriptCmd_storeGlobal            script command handler: F8 01:storeGlobal
+08051474 08051480 code   CLAUDE       ScriptGroup_FA                   script command handler: FA:group
+08051490 0805149C code   CLAUDE       ScriptCmd_spriteRemove           script command handler: FA 00:spriteRemove
+080514A8 080514B4 code   CLAUDE       ScriptCmd_spriteRotate           script command handler: FA 01:spriteRotate
+080514E0 080514EC code   CLAUDE       ScriptGroup_FF                   script command handler: FF:group
+080514FC 08051508 code   CLAUDE       ScriptCmd_ereaderName            script command handler: FF 00:ereaderName, FF 01:ereaderDesc

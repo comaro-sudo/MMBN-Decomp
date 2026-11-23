@@ -43419,7 +43419,7 @@ dat_0804E96C:
 
     .global sub_0804E9D8
     .thumb_func
-sub_0804E9D8:
+sub_0804E9D8:   @ ScriptCmd_end
     push {lr}
     ldrb r0, [r5, #5]
     tst r0, r0
@@ -43478,7 +43478,7 @@ _0804EA3E:
 
     .global sub_0804EA44
     .thumb_func
-sub_0804EA44:
+sub_0804EA44:   @ ScriptCmd_keyWait
     push {lr}
     ldr r0, _0804EAC0
     bl sub_0804E660
@@ -43555,7 +43555,7 @@ sub_0804EAC4:
 
     .global sub_0804EAC8
     .thumb_func
-sub_0804EAC8:
+sub_0804EAC8:   @ ScriptGroup_E7
     push {lr}
     ldr r0, _0804EAD8
     ldrb r1, [r4, #1]
@@ -43572,7 +43572,7 @@ dat_0804EADC:
 
     .global sub_0804EAEC
     .thumb_func
-sub_0804EAEC:
+sub_0804EAEC:   @ ScriptCmd_msgOpen
     push {lr}
     movs r0, #1
     bl sub_0804E660
@@ -43615,7 +43615,7 @@ _0804EB38:
 
     .global sub_0804EB3C
     .thumb_func
-sub_0804EB3C:
+sub_0804EB3C:   @ ScriptCmd_msgClose
     push {lr}
     ldr r0, _0804EB9C
     bl sub_0804E678
@@ -43666,7 +43666,7 @@ _0804EB9C:
 
     .global sub_0804EBA0
     .thumb_func
-sub_0804EBA0:
+sub_0804EBA0:   @ ScriptCmd_msgOpenQuick
     push {lr}
     ldr r0, _0804EBB4
     bl sub_0804E66C
@@ -43681,7 +43681,7 @@ _0804EBB4:
 
     .global sub_0804EBB8
     .thumb_func
-sub_0804EBB8:
+sub_0804EBB8:   @ ScriptCmd_msgCloseQuick
     push {lr}
     movs r0, #1
     bl sub_0804E660
@@ -43709,7 +43709,7 @@ sub_0804EBE4:
 
     .global sub_0804EBE8
     .thumb_func
-sub_0804EBE8:
+sub_0804EBE8:   @ ScriptCmd_E8
     push {lr}
     movs r0, #1
     bl sub_0804E660
@@ -43750,7 +43750,7 @@ sub_0804EC18:
 
     .global sub_0804EC28
     .thumb_func
-sub_0804EC28:
+sub_0804EC28:   @ ScriptCmd_flagAddBBSMessage
     push {lr}
     ldr r2, _0804EC48
     ldrb r0, [r4, #1]
@@ -43886,7 +43886,7 @@ dat_0804ED0C:
 
     .global sub_0804ED18
     .thumb_func
-sub_0804ED18:
+sub_0804ED18:   @ ScriptCmd_option
     push {lr}
     movs r0, #0xff
     strb r0, [r5, #0x13]
@@ -43995,7 +43995,7 @@ _0804EDE0:
 
     .global sub_0804EDE4
     .thumb_func
-sub_0804EDE4:
+sub_0804EDE4:   @ ScriptCmd_space
     push {lr}
     ldrb r1, [r4, #1]
     cmp r1, #1
@@ -44057,7 +44057,7 @@ _0804EE44:
 
     .global sub_0804EE48
     .thumb_func
-sub_0804EE48:
+sub_0804EE48:   @ ScriptCmd_select
     push {lr}
     movs r0, #1
     bl sub_0804E660
@@ -44206,7 +44206,7 @@ sub_0804EF64:
 
     .global sub_0804EF6C
     .thumb_func
-sub_0804EF6C:
+sub_0804EF6C:   @ ScriptCmd_wait
     push {lr}
     ldrb r1, [r4, #1]
     cmp r1, #0xff
@@ -44293,7 +44293,7 @@ sub_0804F008:
 
     .global sub_0804F00C
     .thumb_func
-sub_0804F00C:
+sub_0804F00C:   @ ScriptGroup_EE
     push {lr}
     ldr r0, _0804F01C
     ldrb r1, [r4, #1]
@@ -44310,7 +44310,7 @@ dat_0804F020:
 
     .global sub_0804F0D4
     .thumb_func
-sub_0804F0D4:
+sub_0804F0D4:   @ ScriptCmd_checkWaterGodProgram
     push {lr}
     ldr r0, _0804F0F4
     ldrb r1, [r4, #2]
@@ -44332,7 +44332,7 @@ _0804F0F4:
 
     .global sub_0804F0F8
     .thumb_func
-sub_0804F0F8:
+sub_0804F0F8:   @ ScriptCmd_checkMultiFlag
     push {lr}
     ldrb r1, [r4, #2]
     ldrb r0, [r4, #3]
@@ -44361,7 +44361,7 @@ _0804F122:
 
     .global sub_0804F128
     .thumb_func
-sub_0804F128:
+sub_0804F128:   @ ScriptCmd_checkSubArea
     push {lr}
     ldrb r1, [r4, #2]
     ldrb r2, [r4, #3]
@@ -44388,7 +44388,7 @@ _0804F14E:
 
     .global sub_0804F154
     .thumb_func
-sub_0804F154:
+sub_0804F154:   @ ScriptCmd_checkFlag
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r2, [r4, #3]
@@ -44414,7 +44414,7 @@ _0804F17A:
 
     .global sub_0804F180
     .thumb_func
-sub_0804F180:
+sub_0804F180:   @ ScriptCmd_checkChapter
     push {lr}
     ldrb r1, [r4, #2]
     ldrb r2, [r4, #3]
@@ -44441,7 +44441,7 @@ _0804F1A6:
 
     .global sub_0804F1AC
     .thumb_func
-sub_0804F1AC:
+sub_0804F1AC:   @ ScriptCmd_checkGlobal
     push {lr}
     ldr r0, _0804F1D8
     ldrb r1, [r4, #2]
@@ -44470,7 +44470,7 @@ _0804F1D8:
 
     .global sub_0804F1DC
     .thumb_func
-sub_0804F1DC:
+sub_0804F1DC:   @ ScriptCmd_checkTournamentRound
     push {lr}
     ldrb r0, [r4, #2]
     bl sub_08043F4C
@@ -44494,7 +44494,7 @@ _0804F1FC:
 
     .global sub_0804F204
     .thumb_func
-sub_0804F204:
+sub_0804F204:   @ ScriptCmd_checkGameVersion
     push {lr}
     movs r0, #2
     ldrb r1, [r4, r0]
