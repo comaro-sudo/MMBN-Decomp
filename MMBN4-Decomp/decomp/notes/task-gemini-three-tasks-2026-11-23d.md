@@ -23,7 +23,12 @@ Round 3's `lobby-npcs.md` covered jack-ins in general but **not the trash can**.
 2. If a trash can exists in or near Higsby's: is it jack-in-able, and which cyber map does it lead to?
 3. If not: what adding one to Higsby's takes. That means its map graphics or tile, its collision, the examine/jack-in hook, and which existing cyber map to send it to (round 3 suggested `(88, 00)` or `(8E, 00)` / `(8E, 02)`).
 
-4. **Where the 11 operators fit** (the owner decided they stand **inside Higsby's and just outside the store**, on the street in front, split as space requires):
+4. **Where the 11 operators fit.** The owner has two options, so cover both.
+   - **Option A, a waiting room:** find an **existing unused or rarely used room** that looks like a shop interior (a debug or unused real-world map, another shop, a room used once in the story). The street door would lead into it, and it would get a door into the real Higsby's. Find out:
+     - the real-world map table layout (group `00`) and any unused or unreferenced maps;
+     - how doors and warps between maps are defined;
+     - which story scripts warp Lan into Higsby's, so the waiting room can be enabled only after a flag without breaking them.
+   - **Option B, inside Higsby's and just outside the store** on the street in front, split as space requires:
    - **BN4's real per-map NPC limit.** BN6's is 16 (`NUM_OVERWORLD_NPC_OBJECTS = 0x10` in `ext/bn6f/constants/constants.inc`). Find BN4's object-pool size, the table the NPC allocator uses (`NpcSpawnList` `0x08026748` → `sub_08026774`).
    - **The walkable floor** in Higsby's `(00, 06)`, and on the outside map in front of the store: which map that is (group/number), its current NPC count, and free spots near the door.
    - **A proposed split:** how many operators inside and how many outside, with coordinates.

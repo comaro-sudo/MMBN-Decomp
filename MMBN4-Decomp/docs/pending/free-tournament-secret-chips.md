@@ -151,9 +151,13 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
   1. **two pages of 6**, switched with L/R: no risk to the screen's graphics memory (Gemini's recommendation);
   2. a taller **2 × 6 grid**, only if the space below the current grid is free on screen and in graphics memory (to verify).
 
-## Where the operators stand (owner, 2026-11-23)
+## Where the operators stand (owner, 2026-11-23): two options, not yet chosen
 
-- **Inside Higsby's shop `(00, 06)` and just outside it**, on the ACDC Town street in front of the store. They're split between the two maps as space requires.
+- **Option A, a waiting room in an existing room:** BN4 may already have an unused or rarely used room that looks like a shop interior (a debug map, another shop). The street door leads into it, and it has a door into the real Higsby's. The patch only redirects doors, with no new tilemap.
+  - It would be enabled only after a flag (e.g. once the Free Tournament or post-game opens), so story scenes that walk Lan straight into Higsby's still work.
+  - It has its own 16 NPC slots, enough for all 11 operators.
+  - Not chosen: building a brand-new room (new map table entry and a modified copy of Higsby's tilemap) is possible but much more work.
+- **Option B, inside Higsby's and just outside it:** the operators stand inside Higsby's shop `(00, 06)` and on the ACDC Town street in front of the store, split between the two maps as space requires.
 - Why: Higsby's already has 4 NPCs. BN6's engine (same family) allows 16 overworld NPCs per map (`NUM_OVERWORLD_NPC_OBJECTS`, `ext/bn6f/constants/constants.inc`), and 4 + 11 = 15 is too tight. The small room may also lack the floor space.
 - To check (Gemini's round-4 task 1): BN4's real per-map NPC limit, the walkable space in Higsby's, and which outside map and spots sit in front of the store.
 
