@@ -169,7 +169,9 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
 
 - **8 operators inside Higsby's**: 4 existing NPCs + 8 = 12 of the 16 slots.
 - **3 operators outside**, on the ACDC Town street, **plus JunkMan's trash can outside** at `(-150, -90)`.
-- **Slot conflict:** ACDC Town `(00, 00)` has only **3 free slots** (13/16; Gemini round 5), and 3 operators + the trash can need 4. Ways out:
+- **Resolved (owner, 2026-11-23): way out 1.**
+  - **9 operators inside Higsby's** (13/16 slots) and **2 outside** on the ACDC Town street, plus the trash can outside at `(-150, -90)`. ACDC Town is then 16/16.
+  - Earlier slot conflict, for the record: ACDC Town `(00, 00)` has only **3 free slots** (13/16; Gemini round 5), and 3 operators + the trash can needed 4. The ways out were:
   1. 9 inside and 2 outside (inside becomes 13/16, outside 3/3), keeping the trash can outside;
   2. hide one existing ACDC Town NPC after the flag that enables the operators;
   3. make the trash can a background tile with an examine/jack-in hook instead of an NPC. Real trash cans elsewhere in BN4 are BG tiles, but this needs a map tile and collision edit, the harder route.
