@@ -44,7 +44,20 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
 - **Duo:** a **reward for beating Duo at his highest tier** (V3/Ω, or in a post-game rematch). The same kind of hook as the Bass patch (WP-D3): grant the chip after that battle.
 - **Z-Saver and Grand Prix Power:** **sold at Higsby's shop at a very high price.**
   - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
-  - **They always appear** in the list (owner, 2026-11-23), whether or not they're in the Library. If `ShopBuildChipOrderList` hides chips that aren't in the Library, the patch overrides that for these two.
+  - **They always appear** in the list (owner, 2026-11-23), whether or not they're in the Library.
+  - **Findings (Claude, 2026-11-23, V):**
+    - **Chip ids:** Z-Saver = `0x0DA` (218), code `Z` only, Library number 280. Grand Prix Power = `0x138` (312, named `PrixPowr`), code `G` only, Library number 291. Both are Mega chips (`ext/mmbn-chip-tables`, `build/inventory/chips.csv`).
+    - **The chip-order list does hide chips that aren't in the Library:**
+      - `ShopBuildChipOrderList` (`0x0804BD18`) puts each entry in list A (`0x0201A000`) when none of its flags `0x16C0` / `0x18C0` / `0x1AC0` + id is set, and in list B (`0x0201B400`) when one is;
+      - the shop screen's chip-order branch (`sub_0804ABBC`, `_0804AC50`) **reads only list B**;
+      - its per-entry filter `sub_0804ACBC` is a stub that never skips.
+    - The builder **stops at the first empty slot** (type 0), so new entries must follow the last chip entry of record 16 in `BN4_SHOP_STOCK_INIT`.
+  - **What the patch needs:**
+    1. Two new stock entries right after record 16's last chip: `{type 2, qty 1, id, code, 0, price 4500}`.
+    2. Make the builder file these two ids under list B even without a flag. A small hook on the builder's flag test (`bl TestEventFlag` for `0x18C0 + id`) returns "set" for ids 218 and 312.
+       - It must use the "not owned" path (`+5` flag = 1) and the index `Library number × 8`.
+       - The hook needs a **code cave within `bl` range** of `0x0804BD9x`. Both dead blocks in `code_03` are already used, so another one must be found: unused code in `code_03`, or a `bx`-register trampoline.
+    3. For existing saves: shop stock is copied at new game, so a load hook would have to add the two entries to the save's shop block.
   - **Price: 450,000 Zenny each** (owner, 2026-11-23): the price field value 4500 (× 100).
   - Caveat: shop stock is copied into the save at new game, so existing saves only get them if a load-time hook adds them.
 
