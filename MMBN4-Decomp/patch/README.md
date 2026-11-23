@@ -31,6 +31,7 @@ The pipeline: verify the ROM hashes, run armips, fix the header checksum, then c
 | `wp_d3_bass_both_chips.asm` | WP-D3 | A Bass battle also grants the other version's chip (Bass ↔ BassAnly, BlakBarr ↔ DeltaRay) | **PASS in-game** (Bass V1 and BassΩ: both Library flags set, both pack counts +1) |
 | `wp_d4_star_twelve_souls.asm` | WP-D4 | The Souls completion star needs all 12 Souls (12-entry list, and the count compare raised to 12) | **PASS in-game after the fix** (`79398a4`): 6 Souls → no star, 12 → star, RS and BM |
 | `wp_d2_random_version_drops.asm` | WP-D2 | Drops that differ by version come from either version's table, 50/50 | **PASS in-game** (Billy on BM, 30 seeds: vanilla 6 P / 0 L; patched 4 P / 4 L) |
+| `wp_d4_status_two_pages.asm` | WP-D4 | The status screen shows all 12 Souls on two pages of 6 (L or R switches, once 7+ are owned) | Built, disassembly-checked, boots; **not yet tested on the status screen** |
 
 Test evidence: `../decomp/notes/patch-test-results.md` (Gemini, 2026-11-23). The owner's decisions behind them are in [`../docs/completion/bosses.md`](../docs/completion/bosses.md) and `../plan/DEFINITIVE-EDITION.md` §7. The ones still pending are in [`../docs/pending/`](../docs/pending/).
 

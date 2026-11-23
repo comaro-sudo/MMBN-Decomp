@@ -12,3 +12,14 @@ BASS_PAIR_SPACE equ 0x08037C60      ; dead 86-byte block after an unconditional 
 REWARD_ROW_PTR  equ 0x080F5F4C      ; RewardGetRowPtr: r0 row -> &BN4_REWARD_ROWS[row] (RE-06); 12 bytes + literal
 REWARD_ROWS     equ 0x080F5F5C      ; BN4_REWARD_ROWS, 276 x 40 bytes
 RANDOM_ROW_SPACE equ 0x08037D38     ; second dead 86-byte block after an unconditional b in code_03 (unreferenced)
+; Status screen, two Soul pages (wp_d4_status_two_pages.asm; docs/handoff-violet-eclipse.md)
+STATUS_STUB_CALL  equ 0x08033678
+STATUS_SPAWN_CALL equ 0x08034A68
+STATUS_LIST_PTR   equ 0x08034A70
+VENEER_TOGGLE     equ 0x08034A7C
+UI_SPAWN          equ 0x08053F98
+ICON_FLAG_READ    equ 0x0810DA0E
+ICON_FLAGS_PTR    equ 0x0810DA8C
+ICON_ANIMS_PTR    equ 0x0810DA9C
+ICON_PALS_PTR     equ 0x0810DAA0
+ICON_FREE         equ 0x0810DACC

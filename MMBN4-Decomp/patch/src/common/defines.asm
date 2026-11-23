@@ -30,7 +30,13 @@ FS_STAR_SOUL_FLAGS      equ 0x087F7400      ; WP-D4 star: 13 u16 = 26 bytes
 FS_STAR_SOUL_FLAGS_SIZE equ 0x20
 FS_OTHER_REWARD_ROWS      equ 0x087F7420    ; WP-D2 random drops: the other version's 276 x 40 drop rows
 FS_OTHER_REWARD_ROWS_SIZE equ 0x2B20
-; next free slot:             0x087F9F40
+FS_STATUS_SOULS           equ 0x087F9F40    ; WP-D4 status: 12-Soul flags (+0), icon anims (+0x10), icon pals (+0x20)
+FS_STATUS_CODE            equ 0x087F9F70    ; WP-D4 status: InitPage + PageToggle
+FS_STATUS_CODE_SIZE       equ 0xA0
+; next free slot:             0x087FA010
+
+PLAY_SFX            equ 0x08000560      ; PlaySoundEffect(r0); same in RS and BM
+VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes, unreferenced since WP-D4 star)
 
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
 GET_RNG             equ 0x08001B16
