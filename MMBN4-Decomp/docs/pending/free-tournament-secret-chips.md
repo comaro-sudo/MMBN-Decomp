@@ -68,6 +68,40 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - The rematch battle must be started with the battle record's "no automatic raise" bit set (`+6` bit 7, RE-06), so the playthrough doesn't change the chosen tier.
   - (T: after SP the tier stays at SP. What an S win against SP gives once all 3 chips are owned isn't decided; the original rule falls back to V3.)
 
+## Exhibition matches, in detail (owner likes this option, 2026-11-23)
+
+**Goal:** MegaMan fights all 12 Soul Navis in one playthrough, through the story tournaments, without rebuilding the 8-slot bracket.
+
+**Who is in each tournament** (`decomp/notes/re04-tournaments-remainder.md` §1). Each story tournament has four Soul Navis: the version's own pair plus the other version's pair.
+
+| Tournament | Red Sun's pair | Blue Moon's pair |
+|---|---|---|
+| 1st: Den Battle | GutsMan, FireMan | NumberMan, AquaMan |
+| 2nd: Eagle (RS) / Hawk (BM) | Roll, WindMan | MetalMan, WoodMan |
+| 3rd: Red Sun (RS) / Blue Moon (BM) | ThunderMan, SearchMan | ProtoMan, JunkMan |
+
+**How a tournament runs:**
+1. **Bracket rounds** (WP-B1, deterministic): MegaMan's three opponents (round 1, semifinal, final) are three of those four Soul Navis. The other entrants are shared and generic Navis, as today.
+2. **The exhibition match**, right after MegaMan wins the final, in the same venue. The announcer calls a special match against the fourth Soul Navi.
+   - It's a scripted battle using that Navi's existing record in `BN4_STORY_BATTLES` (every Soul Navi has records there, identical in RS and BM).
+   - No bracket screen is involved.
+3. That's 4 Soul Navis × 3 tournaments = **all 12 in one playthrough**.
+
+**Details to settle (owner):**
+- **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
+- **Its tier:** the game's own tier (V1 on the first playthrough, raised by the playthrough as usual), the same as the other story fights.
+- **Does winning give that Navi's Soul?** That would give all 12 Souls in one run (criterion C1, WP-B1). Proposal: yes. How the story grants a Soul is Gemini's round-2 task 2.
+- **Losing:** the original tournaments end the game on a loss. Proposal: a lost exhibition can be retried right away, with no game over, since it's a bonus match.
+- **"Met" for the lobby operators:** winning or losing the exhibition counts as meeting that Navi, so its operator appears in the lobby.
+- **Scenarios:** each Soul Navi has its own side scenario (e.g. AquaMan's water-god comps, RE-07). The exhibition only adds a battle. Whether the unchosen Navis' scenarios also become playable is part of WP-D4.
+
+**Implementation sketch (T):**
+- a script after the tournament-win cutscene: text, then `startBattle` with the Navi's record, then the Soul grant if chosen, then set flags (exhibition done, Navi met);
+- one flag per tournament so it happens once;
+- the bracket logic itself is untouched.
+
+**The variant with a hidden first round** (owner's idea for Option 1): a 16-entrant tournament whose first round isn't shown, with the normal 8-slot bracket only once 8 Navis remain. In practice that's the same as an exhibition **before** the bracket: MegaMan plays a qualifying match against the fourth Soul Navi, then the usual three rounds. It's just as cheap, because the qualifier is a scripted battle too. The difference is only presentation and story order: "qualifier, then bracket" versus "bracket, then exhibition". Either works with the same code.
+
 ## Decisions for the owner
 
 1. Use this fix for the 36 secret chips (C2)?
