@@ -52,4 +52,4 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 3. **SP+** (Gemini's `sp-plus-design.md`): don't build until round 11 task 2 gives a verified battle-exit clear, otherwise a lost/fled SP+ battle leaves the next battle SP+. Planned hook sites: HP at `0x08006802` (replace `ldrh r1,[r7]; adds r2,r1,#0`), attack after `bl sub_08013410` at `0x08013A5A`, veneers in the 20 dead bytes after Duo's thunk (RS `0x080C4788` / BM `0x080C4794`). Reward `0xC032` (50 BugFrags) unless the owner picks Zenny. Duo SP+ flag `0x0E5C`.
 4. **Friendly matches:** after round 11 task 6 (`FC 0E`, talk indices `0xE0`+).
 5. Duo palette and passive: after round 11 tasks 3–4.
-6. Owner decisions (2026-11-23): GP Power's description approved; SP+ reward random 50/50, 50 BugFrags or 15,000 Zenny; pushed to `origin/main`. Gemini round 11 assigned.
+6. Owner decisions (2026-11-23): GP Power's description approved; SP+ reward random: 80% 15,000 Zenny, 20% 50 BugFrags; pushed to `origin/main`. Gemini round 11 assigned.

@@ -68,7 +68,7 @@ Complete `sp-plus-design.md`:
   - **attack:** hook `bl sub_08013410` at `0x08013A5A` and scale `[r6,#0x28]` *after* it, since damage is read only after both calls;
   - **veneers:** the 20 dead bytes after Duo's deletion thunk (RS `0x080C4788` / BM `0x080C4794`).
 - **Duo:** its SP+ step uses flag `0x0E5C` ("Duo SP+ unlocked").
-- **Reward (owner, 2026-11-23): random, 50/50**, between 50 BugFrags (`0xC032`) and 15,000 Zenny (`0x7A98`). Give the exact code at the reward point: where `BN4_BATTLE_REWARD` is written for the results screen, and which RNG to use (`GET_RNG` `0x08001B16`, as the random-drops patch does).
+- **Reward (owner, 2026-11-23, revised): random, 80% 15,000 Zenny (`0x7A98`), 20% 50 BugFrags (`0xC032`).** (Replaces 50/50.) Give the exact code at the reward point: where `BN4_BATTLE_REWARD` is written for the results screen, and which RNG to use (`GET_RNG` `0x08001B16`, as the random-drops patch does).
 
 ## 6. Friendly matches, updated for FC 0E (`decomp/notes/friendly-matches-design-2.md`)
 Re-issue `friendly-matches-design.md` with `FC 0E`.
