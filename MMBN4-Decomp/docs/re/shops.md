@@ -68,8 +68,26 @@ Shop 5 sells chips at 8, 24, 32 and 76, so 800, 2400, 3200 and **7600** Zenny. T
 | `0x0804ACF4` | `ShopPriceToMoney` | r1 = price: × 100 unless record kind 1 (display) |
 | `0x0804A04C` | (inside the buy state) | The same × 100 rule, then `money − price`, refusing when negative |
 
+## Which shop is which (done by Gemini, [`decomp/notes/shops-in-the-world.md`](../../decomp/notes/shops-in-the-world.md), V)
+
+| Records | Where |
+|---|---|
+| 0–3, 5 | Net shops: Town Area3, Netopia Area, Undernet1, Undernet4, ACDC Area2 |
+| 4 and 16 | **Higsby's**: the chip shop (4) and the chip-order service (16) |
+| 6–11 | SubChip dealers: Park Area1 (net); ACDC Town, Elec Town1, MelSquar, ColosseumAve, YumRuins (real world) |
+| 12–13 | BugFrag traders: Park Area3, Undernet3 |
+| 14–15 | NaviCust program dealers: Castillo HP, Undernet6 |
+
+Items are confirmed (save slot `+0x54`, Gemini's `save-slots.md`): 160 = HPMemory, and **176–181 = MiniEnrg, FullEnrg, SneakRun, Untrap, LocEnemy, Unlocker**.
+
+## The Number Trader (done by Gemini, same note, V)
+
+- In Higsby's shop (text opcode `FE 01`): an 8-digit keypad, `ScriptCmd_menuSelectNumberTrader` (RS `0x08050BB4`).
+- The code is checked by `sub_0804DFD4` (RS `0x0804DFD4` / BM `0x0804DFDC`), which encodes each digit through a 10-byte table and compares against **32 codes** in `dat_0804DE3C` (RS) / `dat_0804DE44` (BM).
+  - Each code is a 12-byte entry: kind (chip, item, SubChip or NaviCust program), code or color, id, the code's own event flag. The table ends with `0xFF`.
+- On success, `sub_0809E0B0` grants the reward through the usual routines (chips through `CHIP_GIVE`), and the flag stops the code being used twice. A SubChip code whose pack is full is un-flagged, so it can be entered again.
+- **For C2:** this is the obvious place for Z-Saver, Grand Prix Power and Duo (`../completion/chips.md` §3). Adding codes means relocating the 32-entry table to free space with more entries, and finding free event flags for them.
+
 ## Still open
 
-- Which shop index is which shop in the world. Each `startShop nn` script site gives the map; this needs the script data mapped (RE-07/TextPet).
-- The item-id namespace (type 1): confirm 160 = HPMemory and 176–181 = the SubChips from the item name table.
-- Number Trader and other traders: a different system (`sub_0804C680` is a possible lead, since it restocks).
+- Other traders, if any (`sub_0804C680`, which restocks, is still unread).
