@@ -44,6 +44,8 @@
 
 ## Immediate Next Steps
 
+0c. **Patch status (2026-11-22):** the build has WP-A1 WoodMan fix (`5f61730`), WP-A2 battle Zenny ×1.5 (built in by owner decision; `6380365`) and WP-D4 twelve Souls. `python patch/build.py` gives 61 bytes changed per ROM. Still to do: confirm WP-A2 in a real battle (an enemy whose rewards are all Zenny: HealNavi, id 196, gives 1000 at high HP; its HP isn't in the virus stats table).
+
 0b. **Confirmed both ways:** WoodSoul unites in Red Sun and SearchSoul in Blue Moon with `wp_d4_twelve_souls.asm` (in both builds). See `docs/re/soul-merge-experiment.md`. WP-A1, the WoodMan fix, is integrated and matches the official IPS (`5f61730`). Next: the grant without a trade (open: Blue Moon's key storage), then WP-A2 once the owner decides how Zenny scaling works (fixed or an in-game option).
 0a. **13 community saves** (`ref/saves/`, local) decode with `python patch/tools/savetool.py`: [`docs/re/community-saves.md`](re/community-saves.md). RE-04 is half-mapped in [`docs/re/tournaments.md`](re/tournaments.md). The key lead: Red Sun can already field Blue Moon's Navis. Test it: 12-entry Soul flag table + save `22565` + unite ProtoSoul.
 
