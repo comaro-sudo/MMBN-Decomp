@@ -97,7 +97,11 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - **winning gives that Navi's Soul**, so all 12 Souls are obtainable in one run;
   - losing can be retried right away, with no game over;
   - the match counts as **meeting** the Navi, win or lose, so its operator appears in the lobby.
-- **Still open:** when the friendly matches happen: before the bracket (qualifiers), after the final, or spread around the tournament day.
+- **When the friendly matches happen (owner, 2026-11-23):**
+  - **all before the tournament's final;**
+  - **2 or 3 before the first canon fight;**
+  - the rest spread across the tournament day.
+- **Which Navi is canon:** research assigned to Gemini, `decomp/notes/task-gemini-canon-navis.md`. Community consensus plus the game's own story text; the owner confirms.
 
 **Details to settle (earlier proposals; see the owner decisions above):**
 - **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
