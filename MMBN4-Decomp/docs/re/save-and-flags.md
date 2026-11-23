@@ -33,19 +33,19 @@ All save code reaches the data through these pointers (`mov rX, sl; ldr rY, [rX,
 | `+0x44` | `+0x0084` | `0x94` | Progress: playthrough `+0x0D`, HP `+0x14` and `+0x16` (100/100 on a new game; which is current and which max is T), game time `+0x2C`, checksum `+0x34`, magic `+0x54` | V, R |
 | `+0x48` | `+0x0118` | `0x3E4` | **Event flags**, `0x3E0` bytes = 7,936 flags (§2) | V |
 | `+0x4C` | `+0x04FC` | `0xB8` | **Folders**: 3 × 30 u16 `chip \| code << 9` (code 26 = `*`), then 4 bytes. A new game has folder 1 = the 30 starting chips (Cannon A/B first) and folders 2–3 filled with chip 0 | R |
-| `+0x50` | `+0x05B4` | `0xF04` | (large: likely chip/pack data) | T |
-| `+0x54` | `+0x14B8` | `0x194` | | |
-| `+0x58` | `+0x164C` | `0xDC4` | | |
-| `+0x5C` | `+0x2410` | `0x24` | | |
-| `+0x60` | `+0x2434` | `0xCC` | | |
-| `+0x64` | `+0x2500` | `0x14` | | |
-| `+0x68` | `+0x2514` | `0x4` | | |
-| `+0x6C` | `+0x2518` | `0x4` | | |
-| `+0x70` | `+0x251C` | `0x10` | | |
-| `+0x74` | `+0x252C` | `0x804` | | |
-| `+0x78` | `+0x2D30` | `0x204` | Navi stats (read as u16 by `sub_0800D7A2`, `r0` = field offset). A new game has 100 at `+0x30`, `+0x32` and `+0x34`, and 500 at `+0x36` | R (fields T) |
-| `+0x7C` | `+0x2F34` | `0x704` | | |
-| `+0x80` | `+0x3638` | `0x194` | Random-looking bytes on a new game: probably anti-cheat key tables like `+0x84` | T |
+| `+0x50` | `+0x05B4` | `0xF04` | **Chip pack**: 320 × 12 bytes, per chip id the owned count of each of its 4 codes (`ChipPackInit` `0x080192A8`, `ChipPackCountById` `0x0801922C`) | V, R (Gemini) |
+| `+0x54` | `+0x14B8` | `0x194` | **Items**, indexed by item id: key items; upgrades `0xA0` HPMemory, `0xA1` ExpMemory, `0xA2`–`0xA4` RegUP, `0xA5` SubMemory (starts at 4); **SubChips `0xB0`–`0xB5`** (capped at the SubMemory count); NaviCust programs `0xC0+` (cap 9). `InventoryAddItem` `0x0802D42C` | V, R (Gemini) |
+| `+0x58` | `+0x164C` | `0xDC4` | **Shop stock** ([shops.md](shops.md)) | V |
+| `+0x5C` | `+0x2410` | `0x24` | NaviCust 5×5 grid | V, R (Gemini) |
+| `+0x60` | `+0x2434` | `0xCC` | NaviCust placed programs, 25 × 8 bytes | V, R (Gemini) |
+| `+0x64` | `+0x2500` | `0x14` | NaviCust compiled bug flags | V, R (Gemini) |
+| `+0x68` | `+0x2514` | `0x4` | Active e-Reader Mod Card id (0 = none; effect table `dat_08041E8C`, 134 entries) | V, R (Gemini) |
+| `+0x6C` | `+0x2518` | `0x4` | u16 Max HP bonus (Mod Card / NaviCust) | V, R (Gemini) |
+| `+0x70` | `+0x251C` | `0x10` | 7 loaded e-Reader / Mod Card slots (`0xFF` = empty) | V, R (Gemini) |
+| `+0x74` | `+0x252C` | `0x804` | **Mystery Data state**, 1,024 × 2 bytes for flags `0x0D00`–`0x10FF` (RE-07) | V (Gemini) |
+| `+0x78` | `+0x2D30` | `0x204` | Navi stats, 8 × `0x40`: slot 0 = MegaMan, 1–7 = the Waiting Room's traded Navis (`WaitingRoomReceiveTradedNavi` `0x0803FA90`). A new game has 100 at `+0x30`, `+0x32` and `+0x34`, and 500 at `+0x36` | V, R |
+| `+0x7C` | `+0x2F34` | `0x704` | Navi AI / chip patterns, 8 × `0xE0`, same slots as `+0x78` | V, R (Gemini) |
+| `+0x80` | `+0x3638` | `0x194` | Item anti-cheat keys: `[+0x80][id] = [0x02000240 + id] XOR SAVE_XOR_KEY_0` (`0x2C` RS / `0x71` BM) | V, R (Gemini) |
 | `+0x84` | `+0x37CC` | `0x204` | Chip keys mirror: CE's `BN4_CHIP_GATE` compares `eToolkit[+0x84] + id` with `0x02000670 + id XOR 0x64` | T (from CE) |
 | `+0x88` | `+0x39D0` | `0x204` | Chip key table: for each set Library flag `0x18C0 + i`, byte `i` = `[0x020019A0 + i] XOR 0x38` (`sub_08006594`) | V, R |
 | `+0x8C` | `+0x3BD4` | `0x8` | **Zenny shadow**: Zenny XOR `[0x02000180]`. With 0 Zenny it equals the key, which looked like a ROM pointer | V, R |
