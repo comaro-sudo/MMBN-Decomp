@@ -9,6 +9,7 @@ This folder is gitignored except for this README. It holds material by other peo
 | `guides/bn4-chip-attributes-faq-phlemingo.txt` | Chip elements and attributes | GameFAQs, Phlemingo |
 | `saves/*.sps` | 15 community saves (13 unique: `…22565(1)` = `…22565`, `…7830` = `…4579`) (GameShark SP / SharkPort format), Red Sun and Blue Moon, from a first playthrough to a fifth; `saves/saves.txt` has the uploaders' descriptions, `saves/index.md` what each file actually contains | GameFAQs save uploads (2004–2012) |
 | `maps/*.png` | Net area maps with Mystery Data locations (32 areas) | Mega Boy (maps ©Mega Boy, game ©Capcom) |
+| `chip-art/*.png` | Official 56 x 48 chip pictures for Duo and Grand Prix Power, which are in no ROM (event-only). Supplied by the owner from a wiki; converted at build time for private builds only (`docs/completion/chips.md` §3) | Capcom (via MMKB / wiki) |
 
 Convert or inspect a save: `python patch/tools/savetool.py [--convert] ref/saves/*.sps` (converted `.sav` files go to `build/saves/`).
 

@@ -55,6 +55,16 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
     - Split (owner confirmed, 2026-11-23): **Z-Saver in the Undernet** (a rare sword for a hidden, dangerous place) and **Grand Prix Power in ACDC** (an early surprise).
     - The exact spots, a dead end off the main path in each area, come from the maps (`ref/maps/`, local) and the areas' Mystery Data coordinates (RE-07).
 - *(Superseded: Z-Saver and Grand Prix Power sold at Higsby's shop at a very high price. Kept for the record.)*
+- **Chip art for Duo and Grand Prix Power (owner, 2026-11-23).**
+  - No ROM has their art: all four US and JP ROMs point the image to an EWRAM event-download buffer (Gemini, `decomp/notes/duo-gpp-research.md`).
+  - The owner supplied the official 56 × 48 chip pictures. They're kept **local only**, in `ref/chip-art/` (gitignored: `duo_image.png`, `gpp_image.png`, plus a wiki row showing Duo's data and small icon).
+  - Duo's data: **200 attack, code D, 99 MB**, description "Fist of Justice: MetKnukl!".
+  - **Plan:** a build step converts each PNG into the GBA chip-picture format (16-colour 4bpp tiles + palette) and writes it into free space. It then repoints the chip record's image and palette pointers, which point to EWRAM today, to the converted art.
+  - **Still needed:**
+    - each chip's 16 × 16 icon (Duo's is visible in the wiki row; Grand Prix Power's isn't supplied);
+    - Grand Prix Power's attack, MB and description (code G, from the inventory);
+    - the names and descriptions through the text pipeline (`plan/text-insertion.md`).
+  - **Distribution caveat:** this art isn't in any player ROM, so a built `.bps` that includes it carries Capcom art. That's fine for private builds. A public release needs a build switch that uses original placeholder art instead (decision deferred to publication).
   - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
   - **They always appear** in the list (owner, 2026-11-23), whether or not they're in the Library.
   - **Findings (Claude, 2026-11-23, V):**
