@@ -13446,7 +13446,453 @@ sub_08027924:
     pop {pc}
     .global dat_0802793C
 dat_0802793C:   @ XRomLayout.sprite_lists
-    incrom 0x2793C, 0x6FC
+    .word dat_08027964
+    .word dat_08027998
+    .word dat_080279EC
+    .word dat_08027A54
+    .word dat_08027B90
+    .word dat_08027C8C
+    .word dat_08027CE8
+    .word dat_08027E80
+    .word dat_08028038
+    .word dat_080281D0   @ BN4_MENU_SPRITE_PTRS
+    .word dat_08214000
+    .word dat_0821CB68
+    .word dat_082270C0
+    .word dat_082307BC
+    .word dat_08238918
+    .word dat_082422A4
+    .word dat_0824AEE8
+    .word dat_08253AF0
+    .word dat_0825C688
+    .word dat_08264D1C
+    .word dat_0826E7B0
+    .word dat_08277140
+    .word dat_0827F770
+    .word dat_084B5478
+    .word dat_08287C94
+    .word dat_0828A784
+    .word dat_0828D13C
+    .word dat_0828F1D0
+    .word dat_08291920 + 0x80000000
+    .word dat_08292A40 + 0x80000000
+    .word dat_082932B0
+    .word dat_082946A4
+    .word dat_08296F1C + 0x80000000
+    .word dat_08297D0C
+    .word dat_08298D70 + 0x80000000
+    .word dat_08299AD8
+    .word dat_0829CD90 + 0x80000000
+    .word dat_0829DA0C + 0x80000000
+    .word dat_0829E870 + 0x80000000
+    .word dat_0829F988 + 0x80000000
+    .word dat_082A0400
+    .word dat_082A3CF8 + 0x80000000
+    .word dat_082A482C + 0x80000000
+    .word dat_082A4FD4 + 0x80000000
+    .word dat_084B5478
+    .word dat_082A5A10
+    .word dat_082B0668
+    .word dat_082BF4A8
+    .word dat_082C8AEC
+    .word dat_082D3A24
+    .word dat_082DE68C
+    .word dat_082E74B4
+    .word dat_082F3D5C
+    .word dat_082FF574
+    .word dat_083091D4
+    .word dat_083124B8
+    .word dat_0831A888
+    .word dat_083249D0 + 0x80000000
+    .word dat_08326EAC + 0x80000000
+    .word dat_084B5478
+    .word dat_083296B4 + 0x80000000
+    .word dat_0832D4CC + 0x80000000
+    .word dat_0832FA18 + 0x80000000
+    .word dat_08331984 + 0x80000000
+    .word dat_08333F34 + 0x80000000
+    .word dat_083367A0 + 0x80000000
+    .word dat_08339B6C + 0x80000000
+    .word dat_0833D4C8 + 0x80000000
+    .word dat_0833FC3C + 0x80000000
+    .word dat_08345470 + 0x80000000
+    .word dat_0834A1CC
+    .word dat_0834CC4C
+    .word dat_08352380
+    .word dat_084B5478
+    .word dat_08353274
+    .word dat_08354080
+    .word dat_083545EC
+    .word dat_083555DC
+    .word dat_084B5478
+    .word dat_0835683C
+    .word dat_08357528
+    .word dat_08358970
+    .word dat_0835A0E4
+    .word dat_0835AE5C
+    .word dat_0835D230
+    .word dat_0835DA6C
+    .word dat_0835E5C0
+    .word dat_0835E720
+    .word dat_0835F3A4
+    .word dat_08360684
+    .word dat_083616EC
+    .word dat_08363B50
+    .word dat_08364C4C
+    .word dat_083666FC
+    .word dat_08366FCC
+    .word dat_083698E4
+    .word dat_0836CEDC
+    .word dat_0836DF38
+    .word dat_0836ECB0
+    .word dat_08371384
+    .word dat_0837379C
+    .word dat_0837507C
+    .word dat_0837548C
+    .word dat_08375964
+    .word dat_08376008
+    .word dat_08376168
+    .word dat_08376C78
+    .word dat_08376EE4
+    .word dat_08378740
+    .word dat_0837994C
+    .word dat_0837AD20
+    .word dat_0837B768
+    .word dat_0837D7FC
+    .word dat_0837F1CC
+    .word dat_0837F398
+    .word dat_0837F760
+    .word dat_0837FBC4
+    .word dat_0837FDE8
+    .word dat_08380370
+    .word dat_08380A44
+    .word dat_08380CA4
+    .word dat_08381C30
+    .word dat_083822C4
+    .word dat_08382728
+    .word dat_083839C4
+    .word dat_08383BF8
+    .word dat_08384820
+    .word dat_08384BEC
+    .word dat_083866E0
+    .word dat_08386B14
+    .word dat_08388184
+    .word dat_08388984
+    .word dat_083895E4
+    .word dat_08389C9C
+    .word dat_0838AD38
+    .word dat_0838CBA8
+    .word dat_0838E87C
+    .word dat_0838F130
+    .word dat_08390C5C
+    .word dat_08391A6C
+    .word dat_08392F4C
+    .word dat_0839370C
+    .word dat_08394084
+    .word dat_0839646C
+    .word dat_08396FAC
+    .word dat_08397D84
+    .word dat_08399020
+    .word dat_0839B020
+    .word dat_0839BA54
+    .word dat_0839C958
+    .word dat_0839EDA4
+    .word dat_0839F5B8
+    .word dat_083A0800
+    .word dat_083A2334
+    .word dat_083A3934
+    .word dat_083A4904
+    .word dat_083A4C90
+    .word dat_083A5B64
+    .word dat_083A7094
+    .word dat_083A744C
+    .word dat_083A9320
+    .word dat_083AA0B8
+    .word dat_083AA514
+    .word dat_083AAA34
+    .word dat_083AAF9C
+    .word dat_083AB4D4
+    .word dat_083AE560
+    .word dat_083AEF80
+    .word dat_083AF204
+    .word dat_083AF854
+    .word dat_083B06B4
+    .word dat_083B0E8C
+    .word dat_083B1184
+    .word dat_083B1968
+    .word dat_083B29A4
+    .word dat_083B3940
+    .word dat_083B43F8
+    .word dat_083B5CFC
+    .word dat_083B62BC
+    .word dat_083B7008
+    .word dat_083B86C4
+    .word dat_083B9A08
+    .word dat_083BA360
+    .word dat_083BAB80
+    .word dat_083BB118
+    .word dat_083BB578
+    .word dat_083BBAB4
+    .word dat_083BBE7C
+    .word dat_083BBFE0
+    .word dat_083BC2A4
+    .word dat_083BC8D4
+    .word dat_083BCE14
+    .word dat_083BD03C
+    .word dat_083BD71C
+    .word dat_083BDC68
+    .word dat_083BFA74
+    .word dat_083C020C
+    .word dat_084B5478
+    .word dat_083C0B28
+    .word dat_083C0F14
+    .word dat_083C1178
+    .word dat_083C19F4
+    .word dat_083C2590
+    .word dat_083C36E4
+    .word dat_083C3F38
+    .word dat_083C5FE0
+    .word dat_083C75A8
+    .word dat_083C7944
+    .word dat_083C86FC
+    .word dat_083C8EE8
+    .word dat_083C969C
+    .word dat_083C97C0
+    .word dat_083C9FB4
+    .word dat_083CBBB4
+    .word dat_083CD2C4
+    .word dat_083CE550
+    .word dat_083D1BB8
+    .word dat_083D2954
+    .word dat_083D7D6C
+    .word dat_083D84F8
+    .word dat_083D8EF4
+    .word dat_083DBF0C
+    .word dat_083DC154
+    .word dat_083DCD5C
+    .word dat_083DD644
+    .word dat_083DE048
+    .word dat_083E02F0
+    .word dat_083E1208
+    .word dat_083E1BA0
+    .word dat_083E262C
+    .word dat_083E5520
+    .word dat_083E6C60
+    .word dat_083E7800
+    .word dat_083E7EB8
+    .word dat_083E8EA0
+    .word dat_083E99EC
+    .word dat_083F8D30
+    .word dat_083FA620
+    .word dat_083FC69C
+    .word dat_083FDEEC
+    .word dat_08400284
+    .word dat_08403668
+    .word dat_08405734
+    .word dat_084070FC + 0x80000000
+    .word dat_08407DD0
+    .word dat_08407DD0
+    .word dat_0840A540
+    .word dat_0840CDE8
+    .word dat_0840E700
+    .word dat_08412038
+    .word dat_08413E78
+    .word dat_08415CF0
+    .word dat_0840E700
+    .word dat_0840E700
+    .word dat_08417CCC
+    .word dat_08400284
+    .word dat_08400284
+    .word dat_08419AF4
+    .word dat_0841BD24
+    .word dat_0841D5D4
+    .word dat_0841DC88
+    .word dat_084210D8
+    .word dat_08422CC8 + 0x80000000
+    .word dat_08422FF8
+    .word dat_084259B0
+    .word dat_08427930
+    .word dat_084299A0
+    .word dat_0842B888
+    .word dat_0842D820
+    .word dat_0842EE30
+    .word dat_08435954
+    .word dat_08435954
+    .word dat_0843642C
+    .word dat_0840E700
+    .word dat_0841DC88
+    .word dat_08427930
+    .word dat_08407DD0
+    .word dat_0841DC88
+    .word dat_084210D8
+    .word dat_084382CC + 0x80000000
+    .word dat_084385D0 + 0x80000000
+    .word dat_08438D80 + 0x80000000
+    .word dat_084394B8 + 0x80000000
+    .word dat_08439BC4 + 0x80000000
+    .word dat_08435954
+    .word dat_0843A310
+    .word dat_0843C668
+    .word dat_0843F9C0
+    .word dat_0844221C
+    .word dat_08444F1C
+    .word dat_0844656C + 0x80000000
+    .word dat_084468E4
+    .word dat_08407DD0
+    .word dat_0844935C
+    .word dat_0844C9EC
+    .word dat_0843F9C0
+    .word dat_0844EE50
+    .word dat_0840A540
+    .word dat_0841BD24
+    .word dat_08450E50
+    .word dat_08465D48
+    .word dat_084680D0
+    .word dat_0846A210
+    .word dat_0846AEE0
+    .word dat_0846E174
+    .word dat_08475304
+    .word dat_0846E4E4
+    .word dat_0846EC60
+    .word dat_0846F9F4
+    .word dat_0846F9F4
+    .word dat_0846F9F4
+    .word dat_0846F9F4
+    .word dat_08475304
+    .word dat_0847884C
+    .word dat_0847A1BC
+    .word dat_0847BD28
+    .word dat_0847C6D4
+    .word dat_0847E7F4
+    .word dat_0847EFE4
+    .word dat_0847F67C
+    .word dat_08480AA0
+    .word dat_08483350
+    .word dat_08484324
+    .word dat_08484DD0
+    .word dat_08486508
+    .word dat_08486FC8
+    .word dat_084B5478
+    .word dat_084876AC
+    .word dat_084B5478
+    .word dat_0848C6DC
+    .word dat_0848EF18
+    .word dat_0848F9D8
+    .word dat_0849040C + 0x80000000
+    .word dat_08490978 + 0x80000000
+    .word dat_084911EC + 0x80000000
+    .word dat_0846F9F4
+    .word dat_0846EC60
+    .word dat_084919FC + 0x80000000
+    .word dat_084924A0 + 0x80000000
+    .word dat_084926F4 + 0x80000000
+    .word dat_08493990 + 0x80000000
+    .word dat_08493B6C + 0x80000000
+    .word dat_08494598 + 0x80000000
+    .word dat_0849473C
+    .word dat_08494C54
+    .word dat_08495D48
+    .word dat_08496AB0
+    .word dat_08498DD0 + 0x80000000
+    .word dat_0849917C + 0x80000000
+    .word dat_08499414 + 0x80000000
+    .word dat_08499804 + 0x80000000
+    .word dat_0849A14C + 0x80000000
+    .word dat_0849A53C + 0x80000000
+    .word dat_0849A968 + 0x80000000
+    .word dat_0849AAC4 + 0x80000000
+    .word dat_084B5478
+    .word dat_0849ADC0 + 0x80000000
+    .word dat_0849B378 + 0x80000000
+    .word dat_0849B5D4 + 0x80000000
+    .word dat_0849B8D0 + 0x80000000
+    .word dat_0849BA9C + 0x80000000
+    .word dat_0849BC28 + 0x80000000
+    .word dat_0849C108 + 0x80000000
+    .word dat_0849C2BC + 0x80000000
+    .word dat_0849C5DC + 0x80000000
+    .word dat_0849C7B0 + 0x80000000
+    .word dat_0849C968 + 0x80000000
+    .word dat_0849CE9C + 0x80000000
+    .word dat_0849D148 + 0x80000000
+    .word dat_0849D378
+    .word dat_0849E690 + 0x80000000
+    .word dat_0849E858 + 0x80000000
+    .word dat_0849E998 + 0x80000000
+    .word dat_0849ED18 + 0x80000000
+    .word dat_0849F520 + 0x80000000
+    .word dat_0849FB3C + 0x80000000
+    .word dat_084A0230 + 0x80000000
+    .word dat_084A0B30 + 0x80000000
+    .word dat_084A0CC8 + 0x80000000
+    .word dat_084A0E30 + 0x80000000
+    .word dat_084A119C + 0x80000000
+    .word dat_084A1D0C + 0x80000000
+    .word dat_084A21D8 + 0x80000000
+    .word dat_084A2864 + 0x80000000
+    .word dat_084A2C58 + 0x80000000
+    .word dat_084A2FFC + 0x80000000
+    .word dat_084A32EC + 0x80000000
+    .word dat_084A3490 + 0x80000000
+    .word dat_084A36B0 + 0x80000000
+    .word dat_084A3A7C + 0x80000000
+    .word dat_084A3DC0 + 0x80000000
+    .word dat_084A45B4 + 0x80000000
+    .word dat_084A4F94 + 0x80000000
+    .word dat_084A5B0C + 0x80000000
+    .word dat_084A5CEC + 0x80000000
+    .word dat_084A5E40 + 0x80000000
+    .word dat_084A68F0 + 0x80000000
+    .word dat_084A6FD8 + 0x80000000
+    .word dat_084A79A0 + 0x80000000
+    .word dat_084A7BE8 + 0x80000000
+    .word dat_084A7FE8 + 0x80000000
+    .word dat_084A85D0 + 0x80000000
+    .word dat_084A89B0 + 0x80000000
+    .word dat_084A8B74 + 0x80000000
+    .word dat_084A8D3C + 0x80000000
+    .word dat_084A8E44 + 0x80000000
+    .word dat_084A96FC
+    .word dat_084A9ADC + 0x80000000
+    .word dat_084AA1A0 + 0x80000000
+    .word dat_084AA8A8 + 0x80000000
+    .word dat_084AAF24 + 0x80000000
+    .word dat_084AB1FC
+    .word dat_084AB46C + 0x80000000
+    .word dat_084AB5EC + 0x80000000
+    .word dat_084AB708 + 0x80000000
+    .word dat_084AB810 + 0x80000000
+    .word dat_084ABB34 + 0x80000000
+    .word dat_084ABE90 + 0x80000000
+    .word dat_084AC228 + 0x80000000
+    .word dat_084AC6FC + 0x80000000
+    .word dat_084ACDA0
+    .word dat_084ADAF8 + 0x80000000
+    .word dat_084ADD80 + 0x80000000
+    .word dat_084AE050 + 0x80000000
+    .word dat_084AE480 + 0x80000000
+    .word dat_084AE6EC + 0x80000000
+    .word dat_084AE828 + 0x80000000
+    .word dat_084AED98 + 0x80000000
+    .word dat_084AEF84 + 0x80000000
+    .word dat_084B5478
+    .word dat_084AF384
+    .word dat_084AF930 + 0x80000000
+    .word dat_084B0014 + 0x80000000
+    .word dat_084B1070 + 0x80000000
+    .word dat_084B1654 + 0x80000000
+    .word dat_084B1A78 + 0x80000000
+    .word dat_084B1C3C + 0x80000000
+    .word dat_084B1D24 + 0x80000000
+    .word dat_084B1F60 + 0x80000000
+    .word dat_084B220C + 0x80000000
+    .word dat_084B2DB8
+    .word dat_084B3204 + 0x80000000
+    .word dat_084B405C + 0x80000000
+    .word dat_084B4CC0 + 0x80000000
+    .word dat_084B5478
+    .word dat_084B524C + 0x80000000
+    .word dat_084B5478
     .global dat_08028038
 dat_08028038:
     incrom 0x28038, 0x198
@@ -13458,13 +13904,767 @@ dat_08028304:   @ XRomLayout.map_table_rw
     incrom 0x28304, 0x18
     .global dat_0802831C
 dat_0802831C:   @ XRomLayout.map_table
-    incrom 0x2831C, 0x5E8
+    .word dat_08028508
+    .word dat_08028520
+    .word dat_08028550
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word dat_0802858C
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word dat_080285EC
+    .word dat_080286AC
+    .word dat_0802873C
+    .word 0x00000000
+    .word dat_080287FC
+    .word dat_08028820
+    .word dat_08028850
+    .word dat_08028874
+    .word dat_080288A4
+    .word dat_084E695C
+    .word dat_084EACA0
+    .word dat_084EAEA4
+    .word dat_084EC8C0
+    .word dat_084F0460
+    .word dat_084F0664
+    .word dat_084F10E8
+    .word dat_084F3450
+    .word dat_084F3654
+    .word dat_084F3BE8
+    .word dat_084F5E40
+    .word dat_084F6044
+    .word dat_084F664C
+    .word dat_084F93C0
+    .word dat_084F95C4
+    .word dat_084F9C48
+    .word dat_084FD2DC
+    .word dat_084FD4E0
+    .word dat_084FDE24
+    .word dat_08501068
+    .word dat_0850126C
+    .word dat_08501ABC
+    .word dat_085055C0
+    .word dat_085057C4
+    .word dat_08506E20
+    .word dat_0850A0B4
+    .word dat_0850A2B8
+    .word dat_0850B748
+    .word dat_0850E67C
+    .word dat_0850E880
+    .word dat_0850F9E0
+    .word dat_08513528
+    .word dat_0851372C
+    .word dat_08516634
+    .word dat_085151FC
+    .word dat_08515400
+    .word dat_08516634
+    .word dat_08519D8C
+    .word dat_08519F90
+    .word dat_0851A934
+    .word dat_0851DA00
+    .word dat_0851DC04
+    .word dat_0851EF0C
+    .word dat_08523540
+    .word dat_08523744
+    .word dat_08524E98
+    .word dat_08529424
+    .word dat_08529628
+    .word dat_0852ABCC
+    .word dat_0852DFAC
+    .word dat_0852E1B0
+    .word dat_0852EBE0
+    .word dat_08531BE0
+    .word dat_08531DE4
+    .word dat_085334CC
+    .word dat_085382C0
+    .word dat_085384C4
+    .word dat_085399D8
+    .word dat_0853DBDC
+    .word dat_0853DDE0
+    .word dat_0853F23C
+    .word dat_08542ED0
+    .word dat_085430D4
+    .word dat_08544D14
+    .word dat_085486A0
+    .word dat_085488A4
+    .word dat_0854A8D0
+    .word dat_0854D0EC
+    .word dat_0854D2F0
+    .word dat_0854DA64
+    .word dat_0854FBA0
+    .word dat_0854FDA4
+    .word dat_08550A1C
+    .word dat_085553E4
+    .word dat_085555E8
+    .word dat_08556BB8
+    .word dat_0855BD70
+    .word dat_0855BF74
+    .word dat_0855D37C
+    .word dat_085607CC
+    .word dat_085609D0
+    .word dat_08561878
+    .word dat_0856614C
+    .word dat_08566350
+    .word dat_08567E94
+    .word dat_0856B820
+    .word dat_0856BA24
+    .word dat_0856E770
+    .word dat_08571E90
+    .word dat_08572094
+    .word dat_085734D0
+    .word dat_085763D8
+    .word dat_085765DC
+    .word dat_08577698
+    .word dat_0857AF40
+    .word dat_0857B144
+    .word dat_0857CCA4
+    .word dat_085804D4
+    .word dat_085806D8
+    .word dat_08581E50
+    .word dat_08585108
+    .word dat_0858530C
+    .word dat_08586B38
+    .word dat_0858A960
+    .word dat_0858AB64
+    .word dat_08586B38
+    .word dat_0858A960
+    .word dat_0858CA24
+    .word dat_0858F36C
+    .word dat_0859297C
+    .word dat_08592B80
+    .word dat_0858F36C
+    .word dat_0859297C
+    .word dat_085958E8
+    .word dat_0858F36C
+    .word dat_0859297C
+    .word dat_0859844C
+    .word dat_0858F36C
+    .word dat_0859B21C
+    .word dat_0859B420
+    .word dat_0859E04C
+    .word dat_085A0A94
+    .word dat_085A0C98
+    .word dat_0859E04C
+    .word dat_085A0A94
+    .word dat_085A27E0
+    .word dat_0859E04C
+    .word dat_085A0A94
+    .word dat_085A43C8
+    .word dat_0859E04C
+    .word dat_085A0A94
+    .word dat_085A6104
+    .word dat_0859E04C
+    .word dat_085A8418
+    .word dat_085A861C
+    .word dat_085AA190
+    .word dat_085AC944
+    .word dat_085ACB48
+    .word dat_085AA190
+    .word dat_085ADB64
+    .word dat_085ADD68
+    .word dat_085AA190
+    .word dat_085AECCC
+    .word dat_085AEED0
+    .word dat_085AA190
+    .word dat_085AFF80
+    .word dat_085B0184
+    .word dat_085AA190
+    .word dat_085B1058
+    .word dat_085B125C
+    .word dat_085AA190
+    .word dat_085B2D0C
+    .word dat_085B2F10
+    .word dat_085AA190
+    .word dat_085B4220
+    .word dat_085B4424
+    .word dat_085AA190
+    .word dat_085B5804
+    .word dat_085B5A08
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8E10
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8E10
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8E10
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085B7020
+    .word dat_085B7F70
+    .word dat_085B8174
+    .word dat_085BA260
+    .word dat_085BE324
+    .word dat_085BE528
+    .word dat_085BA260
+    .word dat_085BE324
+    .word dat_085C069C
+    .word dat_085BA260
+    .word dat_085BE324
+    .word dat_085C2EFC
+    .word dat_085BA260
+    .word dat_085C75F0
+    .word dat_085C5324
+    .word dat_085BA260
+    .word dat_085C75F0
+    .word dat_085C77F4
+    .word dat_085BA260
+    .word dat_085C75F0
+    .word dat_085C9B20
+    .word dat_085CDEC4
+    .word dat_085CDCC0
+    .word dat_085CC25C
+    .word dat_085CDEC4
+    .word dat_085D49D4
+    .word dat_085D2080
+    .word dat_085CDEC4
+    .word dat_085D49D4
+    .word dat_085D4BD8
+    .word dat_085CDEC4
+    .word dat_085D49D4
+    .word dat_085D75B4
+    .word dat_085D9DEC
+    .word dat_085E05B4
+    .word dat_085DD948
+    .word dat_085D9DEC
+    .word dat_085E345C
+    .word dat_085E07B8
+    .word dat_085D9DEC
+    .word dat_085E60C8
+    .word dat_085E3660
+    .word dat_085D9DEC
+    .word dat_085E8DA0
+    .word dat_085E62CC
+    .word dat_085E8FA4
+    .word dat_085F1108
+    .word dat_085EE884
+    .word dat_085E8FA4
+    .word dat_085F1108
+    .word dat_085F130C
+    .word dat_085E8FA4
+    .word dat_085F1108
+    .word dat_085F3AF0
+    .word dat_085F6464
+    .word dat_085FC418
+    .word dat_085F944C
+    .word dat_085E8FA4
+    .word dat_085F1108
+    .word dat_085FC61C
+    .word dat_085E8FA4
+    .word dat_085F1108
+    .word dat_085FF104
+    .word dat_085E8FA4
+    .word dat_086040B0
+    .word dat_08601D6C
+    .word dat_085E8FA4
+    .word dat_086040B0
+    .word dat_086042B4
     .global dat_08028904
 dat_08028904:
     incrom 0x28904, 0x18
     .global dat_0802891C
 dat_0802891C:
-    incrom 0x2891C, 0x5E8
+    .word dat_08028B08
+    .word dat_08028B20
+    .word dat_08028B50
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word dat_08028B8C
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word dat_08028BEC
+    .word dat_08028CAC
+    .word dat_08028D3C
+    .word 0x00000000
+    .word dat_08028DFC
+    .word dat_08028E20
+    .word dat_08028E50
+    .word dat_08028E74
+    .word dat_08028EA4
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802637A
+    .word sub_0802650C
+    .word sub_08026578
+    .word sub_0802637A
+    .word sub_0802650C
+    .word sub_08026578
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802638E
+    .word sub_0802650C
+    .word sub_08026580
+    .word sub_0802638E
+    .word sub_0802650C
+    .word sub_08026580
+    .word sub_0802638E
+    .word sub_0802650C
+    .word sub_08026580
+    .word sub_0802638E
+    .word sub_0802650C
+    .word sub_08026580
+    .word sub_0802638E
+    .word sub_0802650C
+    .word sub_08026580
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
+    .word sub_0802635C
+    .word sub_0802650C
+    .word sub_08026570
     .global dat_08028F04
 dat_08028F04:   @ XRomLayout.coord_table_rw
     incrom 0x28F04, 0x18

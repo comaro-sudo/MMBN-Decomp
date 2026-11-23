@@ -47,6 +47,7 @@ mode = "thumb"
 data_tables = [
     { start = 0x08011888, end = 0x08012470, fmt = "record", fields = "hbbbbbbu" }, # BN4_ENEMY_STATS (254 x 12B)
     { start = 0x08017FB8, end = 0x08018068, fmt = "word" },                          # BN4_BATTLE_TABLES root: 2 roots + 21 group pointers
+    { start = 0x08016C04, end = 0x08017A28, fmt = "word" },                          # 0xE24-byte pointer table (95% ROM pointers)
 ]
 
 [[segment]]
@@ -55,6 +56,11 @@ start = 0x08020D70
 end = 0x08035090
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x08027940, end = 0x0802803C, fmt = "word" },   # pointer table (100% pointers)
+    { start = 0x08028320, end = 0x08028908, fmt = "word" },   # pointer table (98% pointers)
+    { start = 0x08028920, end = 0x08028F08, fmt = "word" },   # pointer table (98% pointers)
+]
 
 [[segment]]
 name = "code_03"
