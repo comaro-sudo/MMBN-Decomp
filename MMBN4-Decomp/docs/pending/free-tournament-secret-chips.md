@@ -54,6 +54,7 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - Each of a version's three tournaments draws **one of its two** Soul Navis (`docs/re/tournaments.md` §3), so a run meets 3 of the version's 6.
   - The other version's 6 never appear as story opponents.
   - Violet Eclipse already plans to fix this (WP-B1: every Soul in one run; WP-D4: the other version's Navis). Until those exist, the "met" condition would leave some operators out. Owner to confirm a rule (proposed below).
+- **Scope (owner, 2026-11-23):** the climbing rule below applies **only to the lobby operators' rematches**. Story and tournament fights are independent of it and keep the game's own tiers.
 - **Owner decision (2026-11-23), the rematch tier climbs with S ranks:** each operator's Navi starts at **V1**. After an S-rank win against V1, the next rematch is **V2**. After S against V2, it's **V3**. After S against V3, it's **SP**.
   - A win below S doesn't advance the tier.
   - Storage: 2 bits per Navi (V1/V2/V3/SP) × 12 Navis, in unused event flags.
