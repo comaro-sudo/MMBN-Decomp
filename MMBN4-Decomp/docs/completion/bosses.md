@@ -45,11 +45,17 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
   - Bass's every drop column gives his chip, so any Busting Level works. BlakBarr/DeltaRay need columns 3–4 (Busting Level 7 or higher, RE-06 §3).
   - Today Bass is a one-time story battle (`BN4_STORY_BATTLES` id 176). BassΩ roams Black Earth 2 behind flag `0x9F`. BassXX is in a story-override table.
   - The rematch (WP-D3) must re-arm all three. The simplest version is a repeatable script that starts battle 176 and the BassΩ/BassXX records again. (T: whether BassΩ already respawns after a win needs an in-game check.)
-  - **Priority (owner, 2026-11-23):**
-    1. A repeatable fight.
-    2. Otherwise, **the battle drops both chips**. This is the first fallback.
-    3. Only if that's impossible: the Mystery Data scheme below (purple with the missing chip; the Unlocker from the battle, else from a blue one).
-  - **Owner's fallbacks (2026-11-23), in this order:**
+  - **Priority (owner, 2026-11-23). This is the final order; it replaces the orders in the notes below.** Use the first one that can be implemented:
+
+    | # | What the player gets |
+    |---|---|
+    | Main | The first fight **drops both chips** |
+    | Fallback 1 | The fight drops one chip **+ an Unlocker** SubChip; a **purple** Mystery Data nearby holds the other chip |
+    | Fallback 2 | After the first fight, a **blue** Mystery Data (Unlocker) and a **purple** Mystery Data (the other chip) appear nearby |
+    | Fallback 3 | The Bass form **roams the same area** (Black Earth 2) and can be fought again |
+
+    This applies to Bass (Bass/BassAnly), BassΩ and BassXX (BlakBarr/DeltaRay). The notes below give implementation details. Where they set a different order, the table wins.
+  - **Earlier notes (2026-11-23):**
     - **Bass (V1):** if he doesn't appear again after the story battle, add him to Black Earth 2's roaming table, the same area as BassΩ (a new entry in the `+0x10` ghost table, or a second `+0x10`-style table behind its own flag). If that isn't possible, his story battle **drops both chips**, Bass and BassAnly.
     - **BassΩ:** if the in-game check shows he doesn't come back after a win, he **drops both chips**, BlakBarr and DeltaRay.
     - "Drops both" needs a small patch: after the normal reward, grant the other version's chip too (through the same chip-add path the reward screen uses; to be found from `BN4_REWARD_PICK` / `RewardDecode`, RE-06 §2).
