@@ -42,7 +42,15 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
 
 **Owner decision (2026-11-23) for the three special chips:**
 - **Duo:** a **reward for beating Duo at his highest tier** (V3/Ω, or in a post-game rematch). The same kind of hook as the Bass patch (WP-D3): grant the chip after that battle.
-- **Z-Saver and Grand Prix Power:** **sold at Higsby's shop at a very high price.**
+- **Z-Saver and Grand Prix Power (owner, 2026-11-23; replaces the shop plan below): two Blue Mystery Data in an out-of-the-way corner** of a net area, one holding Z-Saver `Z` and one Grand Prix Power `G`.
+  - Why: the shop route needed a code hook with no free code space nearby, plus a load hook for old saves.
+  - How (RE-07, `decomp/notes/re07-mystery-data.md`):
+    - two new placements in the chosen area's Mystery Data list, using free "taken" flags in `0x0D00`–`0x10FF` (169 of 1,024 are used);
+    - each with every content slot set to its chip, so New Game+ advancing it changes nothing;
+    - plus the area's spawn script entry.
+    - Blue, so no Unlocker is needed.
+  - Not yet chosen: which area and which corner (a dead end or a corner off the main path).
+- *(Superseded: Z-Saver and Grand Prix Power sold at Higsby's shop at a very high price. Kept for the record.)*
   - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
   - **They always appear** in the list (owner, 2026-11-23), whether or not they're in the Library.
   - **Findings (Claude, 2026-11-23, V):**
