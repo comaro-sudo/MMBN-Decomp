@@ -13,10 +13,16 @@ All three support owner decisions recorded in `docs/completion/bosses.md` §3 an
 
 ## Task 1: Bass rematch feasibility (`decomp/notes/bass-rematch.md`)
 
-The owner wants all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay) obtainable in one save. The order is:
-1. a repeatable fight;
-2. otherwise the battle drops both chips;
-3. otherwise a purple Mystery Data with the missing chip.
+The owner wants all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay) obtainable in one save. **The final order**, from `docs/completion/bosses.md` §3:
+
+| # | What the player gets |
+|---|---|
+| Main | The first fight drops **both** chips |
+| Fallback 1 | The fight drops one chip + an Unlocker SubChip, and a purple Mystery Data nearby holds the other chip |
+| Fallback 2 | After the first fight, a blue Mystery Data (Unlocker) and a purple one (the other chip) appear nearby |
+| Fallback 3 | The Bass form roams the same area and can be fought again |
+
+Check how feasible each one is, **in that order**.
 
 Find out statically:
 - **Bass V1 (story battle id 176):** what script and flags start it, and whether anything lets it happen again after the win.
