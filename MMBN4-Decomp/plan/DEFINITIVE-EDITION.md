@@ -43,6 +43,8 @@ The completion lists are **generated from the ROMs, not written from memory**:
 
 ## 4. The cross-version decision (must be made early)
 
+*Update (RE-06, 2026-11-22):* both ROMs already contain **every** Navi's records, battles and roaming-ghost tables, and these are identical in RS and BM. What a version lacks is the game state that fields the other version's Navis (tournament pools, flags, scripts), plus 64 drop rows with version-specific codes ([docs/completion/bosses.md](../docs/completion/bosses.md)). So Option A needs less imported data than assumed below: mostly Soul data, graphics and scripts still to be checked.
+
 Red Sun and Blue Moon each contain only their own exclusives. The fingerprint survey shows **79% of code bytes are identical** (5 shift regions), so the difference is mostly **data** (graphics, Navi records, scripts, chip availability). Three ways to get both versions' content into one game:
 
 | Option | How | Works on | Cost |
@@ -76,3 +78,4 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 1. **Version choice:** in the definitive ROM, does the player still pick Red Sun or Blue Moon (story and rival differ), with the other version's exclusives added as extra content? Or should both stories merge into one?
 2. **Stronger Navi tiers and post-game:** keep the original requirements (they are part of the challenge) as long as they're reachable in one save?
 3. **Dark Chips and Karma:** "every chip" includes Dark Chips, and using them changes Karma. Should collecting them be possible without being forced into Dark Karma?
+4. **Version drop codes** (from RE-06, [docs/completion/bosses.md](../docs/completion/bosses.md) §3): 61 virus families and Bass drop a different code (or chip) per version. Which rule should one save use: (a) each drop slot picks either version's code at random, (b) the code follows the chosen version, with the other's codes on the Frequency Tuner tiers, or (c) extra drop slots at high Busting Levels?
