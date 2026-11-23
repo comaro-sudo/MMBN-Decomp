@@ -15,7 +15,7 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 | `933f853` | Duo and Grand Prix Power **chip art** (`wp_d2_special_chip_art.asm`; `build.py` runs `tools/chipart.py` on the local `ref/chip-art/` PNGs; `--public` leaves it out) | Not tested |
 | `c3a787f` | Lobby trash can drawn with animation 0 (Gemini round 10 found the white-circle bug) | Visual re-check pending |
 | `999ec92` | **Beating Duo in the story gives Duo D** (`wp_d2_duo_story_grant.asm`: Duo's defeat handler `sub_080C4780` thunked to free space; grants once, while flag `0x006F` is still clear) | Not tested (needs a save before Duo) |
-| (next) | **Grand Prix Power Blue Mystery Data** in ACDC Area 2 (`wp_d2_gpp_md.asm`, flag `0x0D0B`) | Not tested |
+| `24786cd` | **Grand Prix Power Blue Mystery Data** in ACDC Area 2 (`wp_d2_gpp_md.asm`, flag `0x0D0B`) | Not tested |
 | `a16ea98` | **Duo rematches** in Meteor Comp 1 `(82,00)` (`wp_d3_duo_rematch.asm`, `FC 0D 00`; Duo → α → β → Ω on S ranks; flags `0x0E5A`–`0x0E5B`) | Not tested |
 
 **Gemini round 10** (`decomp/notes/task-gemini-round10.md`) is running. Task 1 is done (`decomp/notes/patch-test-results-3.md`, uncommitted, Gemini's): lobby gates, sprites, warp and rematch PASS; status two pages, Free Tournament, Frequency Tuner, Z-Saver PASS. Tasks 2–7 (names merge + regeneration, record carving, friendly-match / SP+ / Duo Soul / chip-text designs) were in progress: `decomp/asm/` and `decomp/symbols/names.txt` had uncommitted changes. **Don't touch them.**
