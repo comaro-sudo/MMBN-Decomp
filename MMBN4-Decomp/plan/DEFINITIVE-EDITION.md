@@ -81,7 +81,11 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 4. ~~**Version drop codes**~~: **decided by the owner, 2026-11-23** ([docs/completion/bosses.md](../docs/completion/bosses.md) §3).
    - **Rule (a):** every drop that differs between versions (61 virus families, Bass, BassΩ, BassXX) gives the Red Sun or the Blue Moon item **at random, each time it drops**.
    - **Bass can be fought again and again**, so the player can collect all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay). This is part of the rematch system (WP-D3).
-   - **Fallbacks:**
+   - **Order for each Bass form** (owner, 2026-11-23):
+     1. Repeatable fight (Bass V1: roam Black Earth 2 if he doesn't return).
+     2. Otherwise **the battle drops both chips**.
+     3. Only if that's impossible: the purple Mystery Data with the missing chip. The battle gives the Unlocker to open it, or failing that, a blue Mystery Data with an Unlocker next to it.
+   - **Fallbacks, in detail:**
      - If Bass (V1) doesn't appear again after the story battle, make him roam Black Earth 2 like BassΩ. If that isn't possible, his story battle drops **both** Bass and BassAnly.
      - If BassΩ doesn't come back after a win, he drops **both** BlakBarr and DeltaRay. The same goes for BassXX.
      - If "drops both" is too hard or impossible: after the battle, a **Purple** Mystery Data appears nearby in Black Earth 2 with the chip the battle didn't give. The battle gives an **Unlocker** SubChip to open it. Fallback, if the battle can't give one: a **Blue** Mystery Data holding an Unlocker is pinned next to the purple one, where the player fights that Bass form. **Every win against Bass re-arms both Mystery Data.** If that can't be done, make sure the game supplies enough Unlockers for every purple Mystery Data (the 14 originals plus the new Bass ones).
