@@ -13,7 +13,8 @@
 ; deletion's first sub-state.
 ;
 ; Its entry becomes a thunk to free space (a bl can't reach 0x087F....). The new handler, when
-; r5[0x0A] == 0, on any version (story or Meteor Comp rematch):
+; r5[0x0A] == 0, on any version (a won rematch is also paid by the lobby results hook: Gemini's
+; round-11 test saw no grant from this state in a plain battle):
 ;   - the Duo Soul, if not owned: flags 0x0015 (Double Soul) and 0x0023, WriteChipKey(0x16D)
 ;     (owner: "beat the first version of Duo"; V1 is always the first one beaten);
 ;   - the Duo chip D, once: guarded by flag 0x0E72 (free, Gemini's 0x0E3B-0x0E7F scan; after SP+'s
@@ -34,44 +35,51 @@ duo_defeat_hook:
     ldrb    r0, [r5, 0x0A]
     cmp     r0, 0
     bne     @@tail
-    mov     r0, 0x23                ; Duo Soul owned?
-    ldr     r3, =TEST_EVENT_FLAG | 1
-    bl      @@call_r3
-    bne     @@chip
-    mov     r0, 0x15                ; Double Soul unlocked
-    ldr     r3, =SET_EVENT_FLAG | 1
-    bl      @@call_r3
-    mov     r0, 0x23                ; DuoSoul
-    ldr     r3, =SET_EVENT_FLAG | 1
-    bl      @@call_r3
-    ldr     r0, =0x16D              ; DuoSoul's pseudo-chip key
-    ldr     r3, =WRITE_CHIP_KEY | 1
-    bl      @@call_r3
-@@chip:
-    ldr     r0, =DUO_CHIP_GIVEN_FLAG
-    ldr     r3, =TEST_EVENT_FLAG | 1
-    bl      @@call_r3
-    bne     @@star
-    ldr     r0, =DUO_CHIP_GIVEN_FLAG
-    ldr     r3, =SET_EVENT_FLAG | 1
-    bl      @@call_r3
-    ldr     r0, =CHIP_DUO
-    mov     r1, 3                   ; code D
-    mov     r2, 1
-    ldr     r3, =CHIP_GIVE | 1
-    bl      @@call_r3
-@@star:
+    bl      duo_grant_rewards
     ldrb    r0, [r5, 0x04]          ; the original: 0x006F for a harder Duo
     cmp     r0, 0
     beq     @@tail
     mov     r0, 0x6F
     ldr     r3, =SET_EVENT_FLAG | 1
-    bl      @@call_r3
+    bl      duo_call_r3
 @@tail:
     ldr     r3, =0x08010D4C | 1     ; sub_08010D4C, same in RS and BM
-    bl      @@call_r3
+    bl      duo_call_r3
     pop     r15
-@@call_r3:
+
+; The Duo Soul if not owned, and Duo D once. Also called by the lobby results hook for a won Duo rematch.
+; Uses r0-r3 only.
+duo_grant_rewards:
+    push    r14
+    mov     r0, 0x23                ; Duo Soul owned?
+    ldr     r3, =TEST_EVENT_FLAG | 1
+    bl      duo_call_r3
+    bne     @@chip
+    mov     r0, 0x15                ; Double Soul unlocked
+    ldr     r3, =SET_EVENT_FLAG | 1
+    bl      duo_call_r3
+    mov     r0, 0x23                ; DuoSoul
+    ldr     r3, =SET_EVENT_FLAG | 1
+    bl      duo_call_r3
+    ldr     r0, =0x16D              ; DuoSoul's pseudo-chip key
+    ldr     r3, =WRITE_CHIP_KEY | 1
+    bl      duo_call_r3
+@@chip:
+    ldr     r0, =DUO_CHIP_GIVEN_FLAG
+    ldr     r3, =TEST_EVENT_FLAG | 1
+    bl      duo_call_r3
+    bne     @@done
+    ldr     r0, =DUO_CHIP_GIVEN_FLAG
+    ldr     r3, =SET_EVENT_FLAG | 1
+    bl      duo_call_r3
+    ldr     r0, =CHIP_DUO
+    mov     r1, 3                   ; code D
+    mov     r2, 1
+    ldr     r3, =CHIP_GIVE | 1
+    bl      duo_call_r3
+@@done:
+    pop     r15
+duo_call_r3:
     bx      r3
     .pool
 .if . > FS_DUO_GRANT + FS_DUO_GRANT_SIZE

@@ -82,3 +82,6 @@ CW_NPC_SLOT_ACDC2       equ 0x08077498      ; ACDC Area 2 (90,01) CW NPC/object 
 CW_NPC_LIST_ACDC2       equ 0x08078100
 CW_NPC_COUNT_ACDC2      equ 13
 GMD_CONTENT_TABLE       equ 0x080ADF68      ; MysteryDataGetContentTable (re07-mystery-data.md); WP-B4
+CHIP_NAME_EREADER_MIN   equ 0x0802F1C0      ; sub_0802F154's literal 0x137 (patch-test-results-4.md)
+CHIP_DESC_EREADER_MIN   equ 0x08106C34      ; sub_08106BF0's literal 0x137
+VENEER_BATTLE_EXIT      equ 0x080C4794      ; DUO_DEFEAT_STATE + 8 (dead bytes after the thunk); 1st of 2 veneers

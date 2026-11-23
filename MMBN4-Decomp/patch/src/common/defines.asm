@@ -66,7 +66,9 @@ FS_DUO_GRANT              equ 0x087FB8D8    ; WP-D2/D4: Duo deletion handler (Du
 FS_DUO_GRANT_SIZE         equ 0x90
 FS_GMD_TIER               equ 0x087FB968    ; WP-B4: GMD content block follows the Frequency Tuner
 FS_GMD_TIER_SIZE          equ 0x60
-; next free slot:             0x087FB9C8 (code/data packages must stay below FS_TEXT)
+FS_BATTLE_EXIT            equ 0x087FB9C8    ; WP-D3: zero 0x020015EC-EF on every battle exit
+FS_BATTLE_EXIT_SIZE       equ 0x18
+; next free slot:             0x087FB9E0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 

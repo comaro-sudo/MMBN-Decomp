@@ -35,6 +35,8 @@
 .include "common/wp_d3_lobby_rematches.asm"  ; Violet Eclipse: 11 lobby operators + JunkMan trash can rematches
 .include "common/wp_b2_frequency_tuner.asm"  ; WP-B2: Frequency Tuner (V1/V2/V3/Auto virus tier override)
 .include "common/wp_b4_gmd_tier.asm"         ; WP-B4: GMD contents follow the Frequency Tuner
+.include "common/wp_d2_ereader_chips.asm"    ; Duo / GP Power text from the archives
+.include "common/wp_d3_battle_exit_clear.asm" ; clear per-battle bytes on every battle exit
 .include "common/wp_d4_grant_soul.asm"       ; Violet Eclipse: script command FC 0C <idx> grants any Soul
 .include "common/wp_d2_special_chip_art.asm" ; Duo / GP Power chip art (private builds; build.py --public leaves it out)
 .include "common/wp_d2_duo_story_grant.asm"  ; beating Duo in the story gives Duo D

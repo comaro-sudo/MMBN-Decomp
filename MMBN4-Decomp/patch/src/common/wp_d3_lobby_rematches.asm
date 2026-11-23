@@ -226,8 +226,11 @@ lobby_results_hook:
     bl      lobby_call_r3
 
 @@grant_secret:
-    cmp     r4, 12                  ; Duo (marker id 13, wp_d3_duo_rematch.asm): tier climb only, its chip comes
-    bge     @@ret                   ; from the battle's own drop table (wp_d2_duo_chip_reward.asm)
+    cmp     r4, 12                  ; Duo (marker id 13, wp_d3_duo_rematch.asm): no secret chip, but the Duo Soul
+    blt     @@navi_secret           ; and Duo D (once), since Duo's deletion state may not run in a plain battle
+    bl      duo_grant_rewards       ; (Gemini round 11). Beta/omega also drop Duo D (wp_d2_duo_chip_reward.asm)
+    b       @@ret
+@@navi_secret:
     ; Pick Secret Chip: BL 1-3 V1, 4-6 V2, 7-9 V3, 10/S highest unowned
     ldr     r0, =FREE_SECRET_CHIP_BASE
     lsl     r1, r4, 1
@@ -337,7 +340,8 @@ lobby_npc lobby_npc_raoul,    0x32, 0x001C, 0xF8, -164, -56, 7 ; ThunderMan (0x0
 .align 4
 lobby_npc_trashcan:
     .byte   0x08
-    .byte   0x25, 0x44, 0x1C        ; list[7] 0x44 = junk/trash pile (alt: 0x5A grey bin)
+    .byte   0x25, 0x08, 0x1C        ; list[7] 0x08, an uncompressed crystal prop: 0x44 is LZ77-compressed and drew a
+                                    ; white circle (Gemini round 11). A junk-looking uncompressed prop is still to pick
     .byte   0x05, 0x20, 0x00        ; hide while JunkSoul (0x0020) is clear
     .word   @@hide
     .byte   0x18, 0xFC

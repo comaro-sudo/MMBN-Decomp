@@ -5,8 +5,8 @@
 ; - "Duo's signal" NPC (list[6] 0x63, Duo's probe) in Meteor Comp 1 (82,00), right by the jack-in point,
 ;   shown once the Game Clear flag 0x0500 is set (kept across New Game+).
 ; - Talk (talk_idx 0xFD -> lobby archive entry 0x0D): "Fight Duo?  Yes / No" -> FC 0D 00.
-; - FC 0D replays the final battle as a plain battle: story battle 93/94's header with bit 7 of b1 cleared
-;   (0x93 -> 0x13: results screen, Busting Level, drops) and bit 7 of b6 set (0x1F -> 0x9F: no automatic
+; - FC 0D replays the final battle as a plain battle: story battle 93/94's header with b1 = 0
+;   (0x93 and 0x13 both skip the results screen; nearly every story battle uses 0) and bit 7 of b6 set (0x1F -> 0x9F: no automatic
 ;   tier raise), so the chosen Duo version is fought as is, and the ending doesn't replay.
 ; - Tier: 2-bit counter in flags 0x0E5A-0x0E5B (0 Duo 0xE0, 1 Duo-alpha 0xE1, 2 Duo-beta 0xE2,
 ;   3 Duo-omega 0xE3). It reuses the lobby's results hook: marker id 13 makes the lobby's flag math
@@ -73,7 +73,8 @@ duo_fc_rematch:
 
 ; ---- 3. Battle records: story battle 93/94's header as a plain battle, one per Duo version ----
 .macro duo_rec, objs
-    .byte   0x00, 0x13, 0x64, 0x16, 0x33, 0x17, 0x9F, 0x00
+    .byte   0x00, 0x00, 0x64, 0x16, 0x33, 0x17, 0x9F, 0x00  ; b1 = 0, as nearly every story battle
+                                    ; (0x13 still skipped the results screen, Gemini round 11)
     .word   objs
 .endmacro
 .macro duo_objs, enemy
@@ -107,7 +108,8 @@ duo_npc_list_meteor1:
 .align 4
 duo_npc_signal:
     .byte   0x08
-    .byte   0x17, 0x63              ; list[6] 0x63: Duo's comet probe
+    .byte   0x25, 0x08, 0x1C        ; list[7] 0x08, an uncompressed crystal: list[6] 0x63 (Duo's probe) is
+                                    ; LZ77-compressed and drew a white circle (Gemini round 11)
     .byte   0x05, 0x00, 0x05        ; hide until Game Clear (0x0500)
     .word   @@hide
     .byte   0x18, 0xFD              ; lobby archive entry 0x0D: "Fight Duo?"
