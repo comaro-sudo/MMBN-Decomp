@@ -46,7 +46,9 @@ FS_FREE_TOURN_FILL        equ 0x087FA140    ; WP-D4 Free Tournament: missing-chi
 FS_FREE_TOURN_SIZE        equ 0xF0
 FS_LOBBY_REMATCH          equ 0x087FA230    ; WP-D3 Lobby Rematches + JunkMan Trash Can (code, NPCs, dialogue, FC table)
 FS_LOBBY_REMATCH_SIZE     equ 0x700
-; next free slot:             0x087FA930
+FS_FREQ_TUNER             equ 0x087FA930    ; WP-B2 Frequency Tuner (BN4_ID_RAISE hook + FC 0B cycler + NPC)
+FS_FREQ_TUNER_SIZE        equ 0x100
+; next free slot:             0x087FAA30
 
 BN4_GET_CHIP        equ 0x080190D0      ; BN4_GET_CHIP(r0 chip_id) -> r0 ptr to chip entry; same in RS and BM
 INIT_BATTLE_REC     equ 0x08007C90      ; sub_08007C90; same in RS and BM

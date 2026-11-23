@@ -281,6 +281,7 @@ lobby_fc_table:
     .incbin ROM_IN, SCRIPT_FC_TBL_ORIG - 0x08000000, 9 * 4
     .word   lobby_fc_rematch | 1    ; FC 09 <navi_id>
     .word   lobby_fc_trash_warp | 1 ; FC 0A 00
+    .word   freq_tuner_fc_cycle | 1 ; FC 0B 00 (WP-B2 Frequency Tuner)
 
 ; -- 5f. Trash Can warp descriptor -> WtrGodComp1 (8E,00) at (0, 0, 0) facing 7 --
 .align 4
@@ -349,6 +350,7 @@ lobby_dialogue_archive:
     .halfword @@sB - lobby_dialogue_archive
     .halfword @@sC - lobby_dialogue_archive
     .halfword @@sD - lobby_dialogue_archive
+    .halfword @@sE - lobby_dialogue_archive
 
 ; "NetBattle? \n  Yes   No" + FC 09 <navi_id> + E5
 .macro lobby_rematch_msg, lbl, nid
@@ -385,8 +387,18 @@ lobby_rematch_msg @@sB, 0x0B
     .byte   0xFC, 0x0A, 0x00
     .byte   0xE5
 
-; "No" target (0xFD): just end
+; "No" target (0x0D): just end
 @@sD:
+    .byte   0xE5
+
+; Frequency Tuner (0x0E = talk_idx 0xFE): "Tune Tier? \n  Yes   No" + FC 0B 00 + E5
+@@sE:
+    .byte   0xE7, 0x00
+    .byte   0x1E,0x3A,0x33,0x2A,0x00,0x1E,0x2E,0x2A,0x37,0x45, 0xE8
+    .byte   0xEA,0x00,0x11,0x00, 0x00,0x23,0x2A,0x38, 0x00,0x00
+    .byte   0xEA,0x00,0x00,0x11, 0x00,0x18,0x34
+    .byte   0xEC,0x05,0x80, 0xFF, 0x0D
+    .byte   0xFC, 0x0B, 0x00
     .byte   0xE5
 
 .if . > FS_LOBBY_REMATCH + FS_LOBBY_REMATCH_SIZE

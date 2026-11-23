@@ -28,6 +28,7 @@
     .word lobby_npc_tamako
     .word lobby_npc_sal
     .word lobby_npc_number
+    .word freq_tuner_npc
     .word 0xFF
 .if . > FS_NPC_HIGSBY + FS_NPC_LIST_SIZE
     .error "WP-D0: Higsby's NPC list overruns its slot"
