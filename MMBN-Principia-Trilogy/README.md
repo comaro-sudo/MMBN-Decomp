@@ -17,7 +17,7 @@ Like *Violet Eclipse*, it's built on the player's machine from **their own three
 | **Three engines, not one** | BN2 and BN3 share an engine lineage, and BN3's is the most complete (Navi Customizer, style changes, the largest chip set). **BN1's engine is much older**: different battle code, chip ids, folder rules and save format, and no Navi Customizer. |
 | **Content must be converted, not copied** | BN1's and BN2's maps, scripts, chips and enemies must be rewritten into BN3's formats. The same chip has different ids and stats across the games, and some mechanics differ (BN1's chip codes, BN2's styles, BN3's Navi Customizer). |
 | **One story** | The three stories were written as sequels, with resets between them (MegaMan's power, Lan's progress). A merge must decide what carries over and how the later games' early chapters still make sense. |
-| **Size** | Each game is an 8 MiB ROM; the GBA limit is 32 MiB. Merged content without duplication should fit, but that must be measured. |
+| **Size** | Each game is an 8 MiB ROM. Since the game only targets ports (owner, below), the GBA's 32 MiB limit doesn't bind. The NDS's memory is the real ceiling to check. |
 
 **What makes it possible:** full decomps. Once each game builds from symbolic, understood source (as BN4 does now), its content can be extracted into structured data and converted by tools. The *Violet Eclipse* work proved the method: version merging, table carving, symbol maps across versions.
 
@@ -29,7 +29,10 @@ Like *Violet Eclipse*, it's built on the player's machine from **their own three
   2. Write converters (Python) that read BN1/BN2 data from the player's ROMs and emit BN3-engine data: chips mapped to BN3 records, BN1/BN2 viruses ported to BN3's enemy system, maps and scripts rewritten to BN3's script commands.
   3. Build one ROM from BN3's source plus the converted content, generated at build time from the player's three ROMs.
 - **Mechanics that exist only in one game** (e.g. BN2's styles vs BN3's styles, BN1's battle quirks) are kept, adapted or dropped case by case, decided per mechanic.
-- **Targets:** the GBA ROM if it fits in 32 MiB, and every port via the emulation layer (as for *Violet Eclipse*). If the merged game doesn't fit 32 MiB, the ports can still run it (a larger-than-GBA image is a port-only build).
+- **Targets (owner, 2026-11-23): ports only. It doesn't need to run on official GBA hardware.** The platforms are **PC, NDS, 3DS, PSP, PS Vita, Wii U and Android**.
+  - So the **32 MiB GBA limit doesn't apply**. The build can be a larger-than-GBA image run by each port's emulation layer, or native code where the decomp allows.
+  - The NDS has the tightest memory and CPU of the list: check it early, as for *Violet Eclipse*'s NDS route (`MMBN4-Decomp/plan/emulation-layer/`).
+  - PSP, PS Vita and Android are new targets for this collection: they need their own port plans. Emulators for PSP and Vita are already in `MMBN4-Decomp/tools/` (PPSSPP, Vita3K).
 
 ## 4. Phases
 
@@ -49,7 +52,7 @@ Like *Violet Eclipse*, it's built on the player's machine from **their own three
 | The scale: this is closer to making a new game than to a patch | Strict phases; P3 proves the converters on battles before any world-building |
 | BN1's engine differences are too large to convert cleanly | Rebuild BN1's content in BN3's engine by hand where converters fail; accept BN3's mechanics for BN1's content |
 | The story merge pleases nobody | P2 is an explicit owner-approved step before content work |
-| The size exceeds 32 MiB | Measure in P1; port-only build as the fallback |
+| The merged game is too big or too slow for the NDS | Measure in P1 and benchmark early; the NDS is the weakest target |
 | Legal | The same model as every project here: built from the player's own ROMs, nothing distributed |
 
 ## 6. Open decisions for the owner
@@ -57,5 +60,5 @@ Like *Violet Eclipse*, it's built on the player's machine from **their own three
 1. The base engine: BN3's (proposed) or another?
 2. Which mechanics from BN1 and BN2 must survive, and which can be replaced by BN3's?
 3. The story: one continuous arc that removes the resets between games, or three arcs kept as "chapters" of one save?
-4. Must it run on real GBA hardware (≤ 32 MiB), or are ports enough?
+4. ~~Must it run on real GBA hardware?~~ **Decided (2026-11-23): no. Ports only: PC, NDS, 3DS, PSP, PS Vita, Wii U, Android.**
 5. The name: "MMBN Principia Trilogy" (working title from the owner).
