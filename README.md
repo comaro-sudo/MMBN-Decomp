@@ -13,6 +13,10 @@ A collection of decompilation projects for the *Mega Man Battle Network* series.
 
 Work order: BN4 first, then BN1, 2, 3, 5 and 6.
 
+| Planned project | What | Status |
+|---|---|---|
+| [MMBN-Principia-Trilogy/](MMBN-Principia-Trilogy/README.md) | BN1, BN2 and BN3 merged into one continuous game on one engine (owner's vision, 2026-11-23) | Plan only; needs the BN1–3 decomps first |
+
 | File | Contents |
 |---|---|
 | [AGENTS.md](AGENTS.md) | Rules for the two AI agents (Claude, Gemini): repo layout, who owns what, git rules, handoffs |
