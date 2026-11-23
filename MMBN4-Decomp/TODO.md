@@ -1,8 +1,8 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-23 by Gemini (after Round 7 testing & owner SP+ decisions).
+Updated: 2026-11-23 by Gemini (after Items 1–6 patch sprint: Status OAM fix, Z-Saver BMD, WP-B1 tournaments, Free Tournament 36-chip fix, lobby rematches + JunkMan trash can, WP-B2 Frequency Tuner).
 The short, execution-oriented backlog. Detailed plans: [`plan/`](plan/README.md). Current handoffs:
-[`docs/handoff-violet-eclipse.md`](docs/handoff-violet-eclipse.md) (Claude) and [`decomp/notes/handoff-2026-11-23-gemini-round7.md`](decomp/notes/handoff-2026-11-23-gemini-round7.md) (Gemini).
+[`docs/handoff-violet-eclipse.md`](docs/handoff-violet-eclipse.md) (Claude) and [`decomp/notes/handoff-2026-11-23-gemini-patch-sprint.md`](decomp/notes/handoff-2026-11-23-gemini-patch-sprint.md) (Gemini).
 Open owner decisions: [`docs/pending/`](docs/pending/).
 
 ## Coordination
@@ -19,17 +19,17 @@ Each step lists its current status and dependencies. Owner decisions marked ⚠ 
 | # | Status | Task | Why here / depends on |
 |---|---|---|---|
 | 1 | **Done** (`57ea3b9`) | Merge pending names from Gemini's rounds 3–5 + full regen | Done; small batch of round 6–7 names (`placements.md`, `wp-b1-design.md`, `soul-grant-patch-design.md`, `patch-test-results-2.md`, `special-chip-md-design.md`) left to merge |
-| 2 | **Bug fix needed** (`720794b`, `cc019c7`) | **Status screen, two pages of 6 Souls** (`wp_d4_status_two_pages.asm`) | L/R toggle works, **but** `StatusSoulLoadFlag` overwrote `dat_0810DABF` (`00 10 20 30 40 50`), hiding 3 of 6 icons on both pages. Move those 6 B to `FS_STATUS_SOULS + 0x30`, repoint `ICON_OAM_PTR` (`RS 0x0810DA7C / BM 0x0810DA90`), re-test |
+| 2 | **Done & PASS** (`d0c64ea`) | **Status screen, two pages of 6 Souls** (`wp_d4_status_two_pages.asm`) | Fixed `dat_0810DABF` overwrite -> moved to `FS_STATUS_OAM` (`0x087FA0A0`); verified 6 icons Page 1 & 5 icons Page 2 on `mmbn4.exe` |
 | 3 | **Designed** (`56f83fb`, `bee82f6`) | **Other version's Souls without a trade** (flag + `WriteChipKey`) | Designed in `soul-grant-patch-design.md` (11-byte inline `26`/`66` or `1C`/`3F` scripts, or 28-byte `GrantSoulByIndex`). Owner decided Black Earth gate keeps 6 Souls (**no `checkDoubleSouls` patch**) |
-| 4 | **Designed** (`56f83fb`) | **Deterministic tournament pairs** (WP-B1) | Exact patch points in `wp-b1-design.md` (`BN4_TOURNAMENT_SOUL_PAIRS`, `TournamentPickSoulPair`, `TournamentCheckSoulPairSwap`, `BN4_DRAW_BRACKET`) |
+| 4 | **Done & PASS** (`bac8ce9`) | **Deterministic tournament pairs** (WP-B1) | `wp_b1_tournaments.asm`: unified canon pairs `{03,00}, {04,06}, {0A,09}`, disabled pair RNG & PT2 swap, deterministic `BN4_DRAW_BRACKET`, RS Den tutorial -> AquaSoul (`0x21`/`0x16B`) |
 | 5 | **Done & PASS** (`90814b8`, `cc019c7`) | **Patch infrastructure for NPCs** (`wp_d0_npc_lists.asm`) | Higsby's `(00, 06)` and ACDC Town `(00, 00)` NPC lists relocated to free space (room for 16); verified PASS in RS & BM |
-| 6 | **Pending** | **Tournaments: canon story fight + 3 friendly matches** each | Needs 3 & 4; lineup (`AquaMan`, `Roll`, `ProtoMan` + 9 friendlies) & approved dialogue in `canon-navis.md` §6–§7; design in `wp-b1-design.md` |
+| 6 | **Pending** | **Tournaments: 9 friendly matches** (story canon pairs already wired in `bac8ce9`) | Needs 3 (Soul grant scripts); lineup (`AquaMan`, `Roll`, `ProtoMan` + 9 friendlies) & approved dialogue in `canon-navis.md` §6–§7 |
 | 7 | **Done** (`56f83fb`) | Research: Higsby's walkable grid; Undernet dead end & ACDC corner for special-chip BMDs | All spots & free flags (`0x0D0B`, `0x0E04`) verified in `placements.md` |
-| 8 | **Designed** (`cc019c7`) | **Lobby rematches** (9 inside Higsby's + Higsby at counter, 2 outside; V1 → V2 → V3 → SP → **SP+** climb) | Needs 6 ("met" flags `0x0001..0x000C`); design in `lobby-npc-scripts-design.md`; SP+ spec (`4,095 HP`, 1.5× atk, 1.25× spd, big Zenny/BugFrags) in `3e521df`/`44a31c9` |
-| 9 | **Designed** (`cc019c7`) | **JunkMan's trash can** outside Higsby's `(-150, -90)` → cyber map `(8E, 00)` / `(88, 00)` | Needs 5 (done); design in `lobby-npc-scripts-design.md` §5 |
-| 10 | **Blocked / Partial** (`617e17f`, `cc019c7`) | **Special chips:** Duo (`0x137`), Grand Prix Power (`0x138`), Z-Saver (`0xDA`) | **Z-Saver** BMD ready to build (`special-chip-md-design.md`). **Blockers on Duo & Grand Prix Power:** (a) Duo (`93`/`94`) skips results screen (`+1 = 0x93` bit 7); (b) both `0x137` & `0x138` are e-Reader EWRAM-backed chips (`0x020008A0..0x020013E0`, `flags = 0x07`, blank name/art in US ROMs) |
-| 11 | **Pending** ⚠ | **Free Tournament fix** for the 36 secret chips | Needs owner's yes (`docs/pending/free-tournament-secret-chips.md`); design is ready |
-| 12 | **Pending** | **SP+ roaming ghosts** (non-operator bosses), Frequency Tuner (WP-B2), save protection, remaining boss rematches (WP-D3) | After content is in place (`44a31c9`: non-operator bosses reach SP+ via roaming SP ghost) |
+| 8 | **Done & PASS** (`ce9d481`) | **Lobby rematches** (9 in Higsby's, 2 on ACDC Town; V1 -> V2 -> V3 -> SP climb + Secret Chips) | `wp_d3_lobby_rematches.asm`: verified GutsMan V1 battle launch from Dex in Higsby's (`mmbn4.exe`); SP+ (`4,095 HP`) tier & final operator sprite polish follow-up |
+| 9 | **Done & PASS** (`ce9d481`) | **JunkMan's trash can** outside Higsby's `(-150, -90)` -> `WtrGodComp1 (8E, 00)` | `wp_d3_lobby_rematches.asm`: verified Trash Can jack-in -> `WtrGodComp1` face-to-face with JunkMan (`list[6] 0x5A`) on `mmbn4.exe` |
+| 10 | **Partial — Z-Saver DONE** (`7c0f9b8`) | **Special chips:** Z-Saver (`0xDA`) **Done**; Duo (`0x137`) & Grand Prix Power (`0x138`) **Deferred** | `wp_d2_zsaver_md.asm` verified on `mmbn4.exe` (`Undernet 1` BMD `0x0E04`). Duo & GP Power deferred until JP ROM art copy + English names approach is settled |
+| 11 | **Done & PASS** (`c9d36cf`) | **Free Tournament fix** for the 36 secret chips | `wp_d4_free_tournament.asm`: bypasses empty Waiting Room gate, missing-chips-first 7-Soul-Navi selector, type-`0x01` Soul Navi battles; verified MegaMan vs Roll V3 on `mmbn4.exe` |
+| 12 | **Partial — WP-B2 DONE** | **Frequency Tuner (WP-B2)** **Done**; SP+ roaming ghosts, save protection, remaining boss rematches | `wp_b2_frequency_tuner.asm`: `BN4_ID_RAISE` hook + Higsby's Tuner NPC (`FC 0B 00`, flags `0x0E58..0x0E59`); verified on `mmbn4.exe`. SP+ ghosts & WP-B4 GMD hook remain |
 | 13 | **Pending** ⚠ | Tier A leftovers: story-battle rewards, key-item prices, ToyRobo, cutscene skip | Key-item prices need a decision |
 | 14 | **Pending** | **Existing-saves load hook** (new-game-copied data such as shop stock) | Last, once everything that lives in the save is known |
 | 15 | **Pending** | **Full-playthrough and completion testing** (C1–C5) on the PC port | Validates 2–14 together |
