@@ -24918,7 +24918,22 @@ _0800C960:
     .word dat_0800C964   @ BN4_FORM_ELEMENTS
     .global dat_0800C964
 dat_0800C964:   @ BN4_FORM_ELEMENTS
-    incrom 0xC964, 0x10
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
+    .byte 0x01
+    .byte 0x03
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
+    .byte 0x02
+    .byte 0x04
+    .byte 0x00
+    .byte 0x00
+    .byte 0x00
 
     .global sub_0800C974
     .thumb_func
