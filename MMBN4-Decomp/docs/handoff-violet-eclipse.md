@@ -27,7 +27,7 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 - armips gotchas met today: labels are **case-insensitive** (a label `duo_defeat_state` clashed with the equ `DUO_DEFEAT_STATE`); `.macro` can't be defined inside a false `.if`; `.incbin` names are resolved even inside a false `.if` (`build.py` points them at an empty `build/chipart/<v>/none.bin`).
 - Lobby dialogue archive (in `wp_d3_lobby_rematches.asm`): entries `0x00`–`0x0F` = talk index `0xF0`–`0xFF`. `0x0D` is now Duo's prompt; the shared "No" target moved to `0x0F`.
 - Lobby marker byte `0x020015EF` = `0x80 | id`; id 0–11 Navis, **13 = Duo** (so `0x0E40 + id*2` gives Duo's flags `0x0E5A`). `0x0E5C` is reserved for Duo's SP+ step; `0x020015EE` for the SP+ flag (Gemini).
-- Free space: next free slot **`0x087FB968`** (plus a 0x60 hole at `0x087FB670`); code/data must stay below `FS_TEXT` `0x087FC000`.
+- Free space: next free slot **`0x087FB9C8`** (plus a 0x60 hole at `0x087FB670`); code/data must stay below `FS_TEXT` `0x087FC000`.
 - Rules: stage by explicit path; never commit ROM bytes; LF line endings (the Edit tool left CRLF in `defines.asm` once: run `sed -i 's/\r$//'` if git warns).
 
 ## Modified & Relevant Files
@@ -46,6 +46,8 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 - Owner questions open: RS/BM version choice (§7 q1), SP+ reward amount, key-item prices, Duo Soul colours/charge/passive/unite chips (Claude proposes defaults from Gemini's task 6).
 
 ## Immediate Next Steps
+
+0. **WP-B4 built** (GMD contents follow the Frequency Tuner, `wp_b4_gmd_tier.asm`): add it to the next Gemini test round (set the Tuner to Tier 3 on a first playthrough, jack in, open a GMD, compare with the Super Hard table in `decomp/notes/re07-mystery-data.md`).
 
 1. **Later commits (after the table above):** `8ba3c18` chip names/descriptions (TextPet `--patch`; sources in `patch/src/scripts/text/`, the only place `.gitignore` allows `*.tpl`); `146b2a8` **Duo Soul** + grant on any Duo version (`0x006F` is only set for α/β/Ω, `r5[4]` = version); `653233d` status page 3. Gemini round 10 is done and committed (`95c6e92`, `92538c0`, `adc7fdd`).
 2. **Gemini round 11 is written** (`decomp/notes/task-gemini-round11.md`): an in-game test of everything above, the battle-exit clear point, the form palette hook, a verified Duo passive, the SP+ gaps, friendly matches renumbered to `FC 0E`, names. Give it to Gemini when the owner says so.

@@ -81,3 +81,4 @@ MD_COUNT_ACDC2          equ 3
 CW_NPC_SLOT_ACDC2       equ 0x08077498      ; ACDC Area 2 (90,01) CW NPC/object list pointer
 CW_NPC_LIST_ACDC2       equ 0x08078100
 CW_NPC_COUNT_ACDC2      equ 13
+GMD_CONTENT_TABLE       equ 0x080ADF68      ; MysteryDataGetContentTable (re07-mystery-data.md); WP-B4
