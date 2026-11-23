@@ -42,7 +42,11 @@ FS_ZSAVER_MD              equ 0x087FA0A8    ; WP-D2 Z-Saver BMD: Undernet 1 MD l
 FS_MD_UNDER1_LIST         equ 0x087FA0A8    ;   4 existing + 1 new BMD + place + cont (0x60 B)
 FS_CW_NPC_UNDER1          equ 0x087FA108    ;   6 existing + 1 new spawn ptr + 11 B script (0x38 B)
 FS_ZSAVER_MD_SIZE         equ 0x98
-; next free slot:             0x087FA140
+FS_FREE_TOURN_FILL        equ 0x087FA140    ; WP-D4 Free Tournament: missing-chips-first selector + case 0 spawner
+FS_FREE_TOURN_SIZE        equ 0xF0
+; next free slot:             0x087FA230
+
+BATTLE_ADD_ACTOR    equ 0x08007CB0      ; BattleAddActor(slot, packed); same in RS and BM
 
 PLAY_SFX            equ 0x08000560      ; PlaySoundEffect(r0); same in RS and BM
 VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes, unreferenced since WP-D4 star)
