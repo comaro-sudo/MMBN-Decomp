@@ -72,6 +72,8 @@ Building now **needs both ROMs**: the other version's drop table is copied at bu
 ## Open Issues / Blockers
 
 - **In-game testing** of WP-A2, WP-D3, WP-D4 star and WP-D2 (mGBA, or the PC port's `--test`).
+  - Done so far: a **boot smoke test** (2026-11-23, PC port `--test 1500`, START then A). The patched RS and BM runs match their originals: the same final frame, the same audio sample count, and in RS the same RNG state.
+  - That only shows boot isn't affected. The packages act in battles and on menus, so they need test saves at the right point (e.g. `ref/saves/` converted with `patch/tools/savetool.py`, plus `--state-in`).
 - **The status screen** lists only 6 Souls: a 12-entry list may overflow the layout (Gemini's round-3 task 3).
 - **Owner decisions still open:**
   - whether to use the Free Tournament fix at all (pending doc);
