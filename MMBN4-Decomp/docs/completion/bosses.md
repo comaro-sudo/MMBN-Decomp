@@ -49,7 +49,7 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
     - **Bass (V1):** if he doesn't appear again after the story battle, add him to Black Earth 2's roaming table, the same area as BassΩ (a new entry in the `+0x10` ghost table, or a second `+0x10`-style table behind its own flag). If that isn't possible, his story battle **drops both chips**, Bass and BassAnly.
     - **BassΩ:** if the in-game check shows he doesn't come back after a win, he **drops both chips**, BlakBarr and DeltaRay.
     - "Drops both" needs a small patch: after the normal reward, grant the other version's chip too (through the same chip-add path the reward screen uses; to be found from `BN4_REWARD_PICK` / `RewardDecode`, RE-06 §2).
-    - BassXX keeps the general rule (repeatable through WP-D3, random drop). The owner hasn't set a fallback for it.
+    - **BassXX:** the same as BassΩ. If he can't be fought again, he **drops both chips**, BlakBarr and DeltaRay.
 - (Considered and not chosen: the code follows the chosen version; extra drop slots at high Busting Levels.)
 
 ## What blocks completion (updated)

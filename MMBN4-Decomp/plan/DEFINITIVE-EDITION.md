@@ -83,4 +83,4 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
    - **Bass can be fought again and again**, so the player can collect all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay). This is part of the rematch system (WP-D3).
    - **Fallbacks:**
      - If Bass (V1) doesn't appear again after the story battle, make him roam Black Earth 2 like BassΩ. If that isn't possible, his story battle drops **both** Bass and BassAnly.
-     - If BassΩ doesn't come back after a win, he drops **both** BlakBarr and DeltaRay.
+     - If BassΩ doesn't come back after a win, he drops **both** BlakBarr and DeltaRay. The same goes for BassXX.
