@@ -24,7 +24,7 @@ All three feed the owner's lobby-rematch design in `docs/pending/free-tournament
   - The operators (people) are probably in another list; find which.
 - **The owner's idea for JunkMan: Lan jacks into a trash can.** Is there a **trash can** (or dumpster, bin, junk pile) in the lobby or on a map next to it?
   - If there is, can it be jacked into already? List every jack-in object in and near the lobby.
-  - If no trash can is jack-in-able, say whether an existing trash-can object can be made one, or what adding a new one takes.
+  - If no trash can is jack-in-able, say whether an existing trash-can object can be made one, or what **adding a new trash can** to the lobby takes. **The owner's fallback is to add a trash can, not to use a PC.** So also find a trash-can map object, with its graphics and collision, that can be placed in the lobby.
   - BN4 may already have a trash-can comp elsewhere (look through the comp maps in groups `0x8C`–`0x8E`: `re06-encounters.md` §4, `re07-mystery-data.md`), which would give a ready-made small cyber map.
 - Find how a map gets a **jack-in** object in general, and which **small cyber map** could be reused for JunkMan's spot (one NPC, one exit), preferably a trash-can comp.
 - Say what a patch must add for 12 new NPCs (11 operators + JunkMan in the net). Can the map's NPC list be extended in place, or must it be relocated (to free space at `0x087F7420+`)?

@@ -111,7 +111,8 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
 
   This lineup implies one merged story, no RS/BM split for the tournaments (`plan/DEFINITIVE-EDITION.md` §7 question 1).
 - **JunkMan has no operator (owner decision, 2026-11-23):** he **waits in the lobby's network**. Lan jacks in, and JunkMan stands in a small cyber-area as an NPC; talking to him starts the rematch.
-  - **Owner's preference: the jack-in point is a trash can** in the lobby or nearby, fitting JunkMan ("born from data the world threw away"). Whether one exists and can be jacked into is part of Gemini's round-3 task 1. Otherwise, a lobby PC. It matches the friendly-match draft, where MegaMan "picks up a strange Navi signal".
+  - **Owner's preference: the jack-in point is a trash can** in the lobby or nearby, fitting JunkMan ("born from data the world threw away"). Whether one exists and can be jacked into is part of Gemini's round-3 task 1.
+  - **Fallback (owner, 2026-11-23): add a trash can** to the lobby and make it jack-in-able. Not a PC. It matches the friendly-match draft, where MegaMan "picks up a strange Navi signal".
   - **JunkMan's overworld (field) sprite exists in both ROMs (V, checked by Claude, 2026-11-23).**
     - Sprite list 6 (the Navis' overworld sprites; the list table at RS `0x0802793C` / BM `0x08027940`, per Cyberworld Endless's `docs/rom/bn4.md` and `bn4_navis.h`), entry `0x5A`, points to `0x08486FC8` in **both** versions, and its first 8 KiB are byte-identical.
     - Roll (`0x41`), WoodMan (`0x47`), AquaMan (`0x51`) and SearchMan (`0x59`) are likewise at the same address in both, so the lobby NPCs need no imported graphics.
