@@ -21,6 +21,7 @@ CHIP_GIVE           equ 0x0801913E
 
 ; The literal GetCompletionStars (0x08000D28) loads for BN4_STAR_SOUL_FLAGS; same address in RS and BM
 STAR_SOUL_FLAGS_PTR equ 0x08000DB0
+STAR_SOUL_COUNT_CMP equ 0x08000D56      ; cmp r5, #6 (owned Souls must equal the list's count); same in RS and BM
 
 ; ---- Free space: the unused 0xFF tail, 0x087F7400-0x08800000, same in RS and BM (docs/re/free-space.md).
 ; Allocate one slot per work package here, in address order, so nothing overlaps.

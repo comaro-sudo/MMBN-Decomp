@@ -12,6 +12,11 @@
 .org STAR_SOUL_FLAGS_PTR            ; the literal GetCompletionStars loads
     .word FS_STAR_SOUL_FLAGS
 
+; The star also requires the owned count to equal exactly 6 (cmp r5, #6; bne). Bug caught at runtime by
+; Gemini (decomp/notes/patch-test-plan.md): with only the list changed, 6 Souls still earned the star.
+.org STAR_SOUL_COUNT_CMP
+    cmp     r5, 12
+
 .org FS_STAR_SOUL_FLAGS
     .halfword 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C    ; Roll, Guts, Wind, Search, Fire, Thunder
     .halfword 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22    ; Proto, Number, Metal, Junk, Aqua, Wood
