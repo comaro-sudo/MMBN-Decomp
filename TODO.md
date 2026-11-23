@@ -42,8 +42,8 @@ This is the short, execution-oriented backlog. The detailed plans remain in
     6 bogus `code_04` "functions" (`sub_0805A58C`, `sub_0805A674`, `sub_0805A6AE`, `sub_08061836`, `sub_08066C0A`,
     `sub_08068B1C`) along with ~380 other bogus data blocks across all segments, and eliminated 100% of GNU `as`
     warnings on both Red Sun and Blue Moon.
-- [ ] Owner, later: rename `C:\proyectos\MMBN4` to `C:\proyectos\MMBN-Decomp` when no agent is running;
-  then fix the absolute `/mnt/c/proyectos/MMBN4` paths in the docs.
+- [x] Owner: renamed `C:\proyectos\MMBN4` to `C:\proyectos\MMBN-Decomp` (2026-11-22); the absolute
+  `/mnt/c/...` paths in the docs now point to the new folder.
 
 ## Current verified state
 
@@ -70,7 +70,7 @@ and identical literal/external reference counts across all 11 code segments.
 - [x] Preserve the byte-matching baseline before and after each change:
 
   ```powershell
-  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN4/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
+  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
   ```
 
 - [x] Discover short two/three-entry Thumb callback tables: broadened with
@@ -110,7 +110,7 @@ and identical literal/external reference counts across all 11 code segments.
   WSL Capstone venv:
 
   ```powershell
-  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN4/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_04"
+  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_04"
   ```
 
 - [ ] Keep unresolved bytes as `incrom`; never commit ROM bytes, extracted

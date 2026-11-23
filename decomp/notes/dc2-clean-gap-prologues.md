@@ -51,6 +51,6 @@ Investigation into the lowest-coverage segments (`code_05` at 3.6%, `code_04` at
 
 Both full builds forced and verified byte-for-byte:
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN4/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
+wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
 ```
 Both emitted `build/rs/bn4_rs.gba: OK` and `build/bm/bn4_bm.gba: OK`.

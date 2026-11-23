@@ -9,8 +9,8 @@ A byte-matching, buildable disassembly of *Mega Man Battle Network 4* (USA): Red
 Run from PowerShell (Git Bash rewrites `/mnt/c` paths):
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- make -C /mnt/c/proyectos/MMBN4/decomp compare
-wsl.exe -d Ubuntu-24.04 -- make -C /mnt/c/proyectos/MMBN4/decomp compare VERSION=bm
+wsl.exe -d Ubuntu-24.04 -- make -C /mnt/c/proyectos/MMBN-Decomp/decomp compare
+wsl.exe -d Ubuntu-24.04 -- make -C /mnt/c/proyectos/MMBN-Decomp/decomp compare VERSION=bm
 ```
 
 Needs `binutils-arm-none-eabi`, `make`, `sha1sum`. Tools under `tools/` use the venv `~/.venvs/mmbn4-decomp` (Capstone 5.0.6).

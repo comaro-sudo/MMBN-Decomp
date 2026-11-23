@@ -36,7 +36,7 @@ To swap or change ownership, the owner edits this table.
 - **Decomp changes must keep both ROMs byte-identical.** Run from PowerShell (Git Bash mangles `/mnt/c` paths):
 
   ```powershell
-  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN4/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
+  wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/decomp && make -B compare VERSION=rs && make -B compare VERSION=bm"
   ```
 
   Expected: `build/rs/bn4_rs.gba: OK` and `build/bm/bn4_bm.gba: OK`.
@@ -61,4 +61,4 @@ Write a handoff when your context is nearly full (Claude: the status-line hook w
 
 ## 4. Pending owner decisions
 
-- Rename the repo folder `C:\proyectos\MMBN4` → `C:\proyectos\MMBN-Decomp`: **later**, when no agent is running. Absolute paths in the docs (e.g. `/mnt/c/proyectos/MMBN4`) must be updated then.
+- ~~Rename the repo folder `C:\proyectos\MMBN4` → `C:\proyectos\MMBN-Decomp`~~: **done 2026-11-22**. The absolute `/mnt/c/...` paths in the docs were updated to the new folder.
