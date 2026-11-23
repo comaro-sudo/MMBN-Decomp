@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-22, afternoon (America/Mexico_City). Claude updated it at the owner's request;
+Updated: 2026-11-22, evening (America/Mexico_City). Claude updated it at the owner's request;
 the decomp sections are Gemini's (see [`AGENTS.md`](AGENTS.md)) and keep Gemini's wording.
 
 This is the short, execution-oriented backlog. The detailed plans remain in
@@ -131,9 +131,16 @@ and identical literal/external reference counts across all 11 code segments.
   - [x] Zenny and BugFrags with their anti-cheat shadows; battle-reward format and the AddZenny hook;
   - [x] Soul flags and pseudo-chips (and a debug script that grants the other version's Souls);
   - [x] completion stars; what New Game+ keeps.
+  - [x] 13 community saves decoded (`patch/tools/savetool.py`, saves in `ref/saves/`, local):
+    [`docs/re/community-saves.md`](docs/re/community-saves.md);
+  - [x] **the Soul merge works in both ROMs** (WoodSoul in Red Sun, SearchSoul in Blue Moon):
+    [`docs/re/soul-merge-experiment.md`](docs/re/soul-merge-experiment.md).
   Still to do:
-  - [ ] RE-04 tournament brackets and their RNG;
-  - [ ] the story's Soul grant (needs a late-game save for a runtime watch);
+  - [ ] RE-04 tournaments, half done ([`docs/re/tournaments.md`](docs/re/tournaments.md)): pools, Soul Navi
+    pairs, the entrant fill and its RNG are mapped. Left: the Free Tournament (`sub_080448C0`), the bracket
+    draw, and who writes the traded-Navi list (`0x02006F40`);
+  - [ ] the story's Soul grant: a runtime watch, now possible with the community saves (`4429`: Red Sun with
+    1 Soul). Also find where Blue Moon keeps Soul pseudo-chip keys;
   - [ ] RE-06 encounters and enemy records;
   - [ ] RE-07 Mystery Data and GMD tables;
   - [ ] RE-09 shop and trader tables;
@@ -156,13 +163,15 @@ and identical literal/external reference counts across all 11 code segments.
   [`docs/completion/`](docs/completion/README.md).
   - [x] Chips: 389 records, identical in both ROMs. One save is missing 68 items: the other version's
     18 Navi chips, 5 Giga chips and 6 Souls, the 36 secret chips, and Z-Saver, Grand Prix Power and Duo.
-  - [x] Souls: all 12, with flags, pseudo-chips and what the merge needs.
+  - [x] Souls: all 12, with flags, pseudo-chips and what the merge needs. Both ROMs already contain all
+    twelve Souls' code, tables and sprites; what's missing is a way to *get* the other version's Souls.
   - [ ] Bosses: a preliminary Navi/tier list exists; to be replaced with the ROM's enemy records (RE-06).
   - [ ] Replace the guide- and map-based sources (in `ref/`, local) with the ROM's own GMD, Mystery Data,
     shop and trader tables (RE-07/RE-09). Check the 4 chips with no listed source and the 6 partial-code
     chips.
-- [ ] Decide the definitive-ROM story/version model and implement the
-  cross-version content merge.
+- [ ] Decide the definitive-ROM story/version model and implement the cross-version content merge.
+  Smaller than planned: Red Sun already fields Blue Moon's Navis in tournaments when they're in its
+  traded list (`docs/re/tournaments.md` §5).
 - [ ] Ship the Phase 1 ROM-patch quick wins: WoodMan timing fix, Zenny scaling,
   key-item shop pricing, ToyRobo reduction, battle rewards, and cutscene skip.
 - [ ] Implement the progression work: all Souls in one run, deterministic
@@ -178,8 +187,8 @@ and identical literal/external reference counts across all 11 code segments.
 - [x] Emulators for testing copied into `tools/`: Cemu (Wii U, ARM64), Dolphin, PPSSPP, Vita3K.
 - [x] PC test mode for RE: `--dump` (EWRAM), `--state-in` and `--state-out` chain scripted runs
   (`cf318b4`).
-- [ ] A late-game test save or state (both versions), needed for runtime RE: Soul grants, tournaments,
-  battles. Owner: if you have real saves, `test/saves/` is the tracked test-save folder (saves hold no ROM data; ask before committing personal ones).
+- [x] Late-game test saves: 13 community saves, both versions, playthroughs 1-5 (`ref/saves/`, local;
+  convert them with `python patch/tools/savetool.py --convert`).
 - [ ] EL-0: refactor the PC code into `ports/common` (backend interface, endian-safe reads, `--bench`,
   idle hook) ([`plan/emulation-layer/`](plan/emulation-layer/README.md)).
 - [ ] PC-2: add mGBA BKPT hooks, then PET state, touch Custom Screen, and Net
@@ -196,22 +205,25 @@ and identical literal/external reference counts across all 11 code segments.
 - [x] Pipeline: `python patch/build.py` (hash-checked ROMs, armips, BPS round-trip); chip-table identity
   test passes for RS and BM; hello-world patch (Cannon 40 -> 99) builds.
 - [ ] Owner: check the hello patch in mGBA (Library shows Cannon at 99, and it does 99 in battle).
-- [ ] WP-A1: integrate Prof. 9's WoodMan fix. Ready: its mechanism is understood and its routine pointer is
-  confirmed in both ROMs (`docs/re/save-and-flags.md` §3).
-- [ ] WP-A2 Zenny ×1.75: the hook is the battle reward's AddZenny call (`0x08021704` RS). Changes must go
-  through AddZenny, because of the Zenny anti-cheat shadow.
+- [x] WP-A1 WoodMan fix (`5f61730`): our build matches Prof. 9's official IPS byte for byte in both versions.
+- [x] WP-A2 battle Zenny ×1.5, built in (owner decision; `6380365`): the battle-reward decoder is rewritten in
+  place, so the shown and granted amounts match. Shops and story Zenny are unchanged.
+  - [ ] Confirm it in a real battle: win against an enemy whose rewards are all Zenny and check the
+    result is 1.5× (HealNavi, id 196, gives 1000).
 - [ ] Remaining Tier A: story-battle rewards (find the "no reward" rule), key-item prices (RE-09), ToyRobo,
   cutscene skip ([`plan/03`](plan/03-phase1-rom-overhaul.md)).
 - [ ] Violet Eclipse patches unlocked by the RE so far (see `docs/completion/souls.md`):
-  - a 12-entry Soul flag table;
+  - [x] a 12-entry Soul flag table (`wp_d4_twelve_souls.asm`, in both builds; confirmed in-game);
+  - a grant for the other version's Souls without a trade (flag + pseudo-chip key);
+  - deterministic tournament pairs (WP-B1: the coin flip behind flag `0x15`, and the entrant shuffle);
   - 12-Soul checks in the completion star and in `checkDoubleSouls`;
   - a load routine that accepts both checksum constants;
   - a stash/restore pair for Mystery Data in New Game+ (WP-B3).
 
 ## Owner decisions needed
 
-- [ ] [`plan/00` §4](plan/00-decisions-and-feasibility.md): Tier C content in 1.0? Zenny/prices fixed o
-  in-game options? Omega Navis new or retuned? Confirm D1-D6, D8, D9 and D2 (develop on Red Sun first).
+- [ ] [`plan/00` §4](plan/00-decisions-and-feasibility.md): Tier C content in 1.0? (Zenny decided: built in, 1.5×, battle rewards
+  only.) Key-item prices fixed or in-game options? Omega Navis new or retuned? Confirm D1-D6, D8, D9 and D2 (develop on Red Sun first).
 - [ ] [`plan/DEFINITIVE-EDITION.md` §7](plan/DEFINITIVE-EDITION.md): RS/BM version choice in the merged ROM,
   stronger-Navi requirements, Dark Chips without forced Dark Karma.
 - [ ] [`plan/emulation-layer/06`](plan/emulation-layer/06-milestones-and-risks.md): which hardware you own
@@ -219,7 +231,7 @@ and identical literal/external reference counts across all 11 code segments.
   about the GBARunner licence?
 - [ ] [`plan/decomp/README.md`](plan/decomp/README.md): confirm DD1-DD6 (most already followed in practice).
 - [ ] [`docs/completion/chips.md`](docs/completion/chips.md) §3: how should one save get the 36 secret chips
-  (Free Tournament drawing all twelve Navis, level by tier?) and Z-Saver, Grand Prix Power and Duo (Numbe
+  (Free Tournament drawing all twelve Navis, level by tier?) and Z-Saver, Grand Prix Power and Duo (Number
   Trader codes, BBS, a post-game reward)?
 
 ## Before committing
