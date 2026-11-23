@@ -151,6 +151,12 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
   1. **two pages of 6**, switched with L/R: no risk to the screen's graphics memory (Gemini's recommendation);
   2. a taller **2 × 6 grid**, only if the space below the current grid is free on screen and in graphics memory (to verify).
 
+## Where the operators stand (owner, 2026-11-23)
+
+- **Inside Higsby's shop `(00, 06)` and just outside it**, on the ACDC Town street in front of the store. They're split between the two maps as space requires.
+- Why: Higsby's already has 4 NPCs. BN6's engine (same family) allows 16 overworld NPCs per map (`NUM_OVERWORLD_NPC_OBJECTS`, `ext/bn6f/constants/constants.inc`), and 4 + 11 = 15 is too tight. The small room may also lack the floor space.
+- To check (Gemini's round-4 task 1): BN4's real per-map NPC limit, the walkable space in Higsby's, and which outside map and spots sit in front of the store.
+
 ## Decisions for the owner
 
 1. Use this fix for the 36 secret chips (C2)?

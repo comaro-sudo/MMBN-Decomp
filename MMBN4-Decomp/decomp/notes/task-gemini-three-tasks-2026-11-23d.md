@@ -23,6 +23,11 @@ Round 3's `lobby-npcs.md` covered jack-ins in general but **not the trash can**.
 2. If a trash can exists in or near Higsby's: is it jack-in-able, and which cyber map does it lead to?
 3. If not: what adding one to Higsby's takes. That means its map graphics or tile, its collision, the examine/jack-in hook, and which existing cyber map to send it to (round 3 suggested `(88, 00)` or `(8E, 00)` / `(8E, 02)`).
 
+4. **Where the 11 operators fit** (the owner decided they stand **inside Higsby's and just outside the store**, on the street in front, split as space requires):
+   - **BN4's real per-map NPC limit.** BN6's is 16 (`NUM_OVERWORLD_NPC_OBJECTS = 0x10` in `ext/bn6f/constants/constants.inc`). Find BN4's object-pool size, the table the NPC allocator uses (`NpcSpawnList` `0x08026748` → `sub_08026774`).
+   - **The walkable floor** in Higsby's `(00, 06)`, and on the outside map in front of the store: which map that is (group/number), its current NPC count, and free spots near the door.
+   - **A proposed split:** how many operators inside and how many outside, with coordinates.
+
 ## Task 2: can the status screen show 12 Souls in a 2 × 6 grid? (`decomp/notes/status-screen-2x6.md`)
 
 Round 3 (`status-screen-souls.md`) found:
