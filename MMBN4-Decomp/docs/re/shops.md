@@ -35,7 +35,7 @@
 
 | Offset | Size | Meaning |
 |---|---|---|
-| `+0` | u8 | Type: 0 = empty slot (ends the list), **1** = item (T: id 160 looks like HPMemory; ids 176–181 are probably the SubChips), **2** = battle chip, **3** = NaviCust program (T) |
+| `+0` | u8 | Type: 0 = empty slot (ends the list), **1** = item (id 160 = HPMemory: its 14 lines total 207,700Z, matching the guide's 14 purchases for about 208,000Z; T: ids 176–181 are the SubChips), **2** = battle chip, **3** = NaviCust program (T) |
 | `+1` | u8 | Quantity left. `0xFF` = unlimited (never decremented) |
 | `+2` | u16 | Item, chip or program id |
 | `+4` | u8 | Chip code (26 = `*`); `0xFF` for items; for programs, probably the color (T) |
