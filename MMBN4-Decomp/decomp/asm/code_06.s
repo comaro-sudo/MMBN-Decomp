@@ -1082,7 +1082,7 @@ dat_0809DAD0:
 
     .global sub_0809DB10
     .thumb_func
-sub_0809DB10:
+sub_0809DB10:   @ MysteryDataLoadScriptVars
     push {r4, r5, r6, r7, lr}
     bl sub_080A90F4
     ldrb r0, [r7, #0x1c]
@@ -3450,7 +3450,7 @@ sub_0809F938:
 _0809F94C:
     mov r0, sp
     movs r1, #0xa
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     movs r1, #0
     mov r2, sp
     strb r1, [r2, r0]
@@ -3475,7 +3475,7 @@ _0809F94C:
     bl sub_080009BC   @ ByteFill
     mov r0, sp
     movs r1, #8
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     ldr r1, _0809FA0C
     lsls r2, r0, #2
     ldr r7, [r1, r2]
@@ -3484,7 +3484,7 @@ _0809F94C:
 _0809F994:
     mov r0, sp
     movs r1, #4
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     movs r1, #0
     mov r2, sp
     strb r1, [r2, r0]
@@ -4399,7 +4399,7 @@ _080A0382:
     adds r0, r5, #0
     adds r0, #0x20
     movs r1, #0x10
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     adds r2, r5, #0
     adds r2, #0x10
     movs r1, #0
@@ -6318,7 +6318,7 @@ _080A29B6:
     blt _080A29B6
     mov r0, sp
     movs r1, #4
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     add sp, #0x10
     ldr r7, _080A29E0
     lsls r0, r0, #3
@@ -6517,7 +6517,7 @@ sub_080A2B04:
     bl sub_080009BC   @ ByteFill
     mov r0, sp
     movs r1, #0x20
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     add sp, #0x20
     movs r1, #4
     muls r1, r0, r1
@@ -8810,7 +8810,7 @@ _080A3FC6:
     b _080A3FC6
 _080A3FD6:
     mov r0, sp
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     add sp, #0x20
     strb r0, [r5, #9]
     movs r0, #0
@@ -10508,7 +10508,7 @@ _080A528E:
 _080A5296:
     mov r0, sp
     movs r1, #5
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     movs r1, #0
     mov r2, sp
     strb r1, [r2, r0]
@@ -10554,7 +10554,7 @@ sub_080A52B6:
     bl sub_080009BC   @ ByteFill
     mov r0, sp
     movs r1, #0x40
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     cmp r0, #0
     bne _080A5314
     bl sub_08001B00   @ GetRNG
@@ -14748,7 +14748,7 @@ _080A84E4:
 
     .global sub_080A84E8
     .thumb_func
-sub_080A84E8:
+sub_080A84E8:   @ MapObj_InteractMysteryData
     push {lr}
     ldr r0, [r5, #0x60]
     movs r1, #2
@@ -15375,7 +15375,7 @@ sub_080A89AC:
 
     .global sub_080A89BC
     .thumb_func
-sub_080A89BC:
+sub_080A89BC:   @ MapObj_SpawnMysteryData
     push {lr}
     movs r0, #0xc0
     lsls r0, r0, #4
@@ -16316,15 +16316,15 @@ _080A910C:
     .word 0x020093F0
     incrom 0xA9110, 0x4C08
     .global dat_080ADD18
-dat_080ADD18:
+dat_080ADD18:   @ BN4_MYSTERY_DATA_RW
     incrom 0xADD18, 0x1C
     .global dat_080ADD34
-dat_080ADD34:
+dat_080ADD34:   @ BN4_MYSTERY_DATA_CW
     incrom 0xADD34, 0x58
 
     .global sub_080ADD8C
     .thumb_func
-sub_080ADD8C:
+sub_080ADD8C:   @ MysteryDataInitState
     push {r4, r5, r6, r7, lr}
     mov r0, sl
     ldr r0, [r0, #0x74]
@@ -16337,7 +16337,7 @@ _080ADD9C:
 
     .global sub_080ADDA0
     .thumb_func
-sub_080ADDA0:
+sub_080ADDA0:   @ MysteryDataRollAllGreen
     push {r4, r5, r6, r7, lr}
     ldr r4, _080AE04C
 _080ADDA4:
@@ -16382,7 +16382,7 @@ _080ADDEA:
 
     .global sub_080ADDEC
     .thumb_func
-sub_080ADDEC:
+sub_080ADDEC:   @ MysteryDataRollGreen
     push {r4, r5, r6, r7, lr}
     sub sp, #0x20
     adds r7, r1, #0
@@ -16400,7 +16400,7 @@ _080ADDF6:
 _080ADE06:
     mov r0, sp
     adds r1, r4, #0
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     adds r6, r0, #0
     adds r1, r7, #0
     movs r4, #0
@@ -16417,7 +16417,7 @@ _080ADE16:
 _080ADE26:
     mov r0, sp
     adds r1, r4, #0
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     adds r7, r0, #0
     add sp, #0x20
     adds r0, r6, #0
@@ -16426,7 +16426,7 @@ _080ADE26:
 
     .global sub_080ADE38
     .thumb_func
-sub_080ADE38:
+sub_080ADE38:   @ MysteryDataSetSlot
     push {r4, r5, r6, r7, lr}
     push {r1, r2}
     bl sub_080ADE48
@@ -16437,7 +16437,7 @@ sub_080ADE38:
 
     .global sub_080ADE48
     .thumb_func
-sub_080ADE48:
+sub_080ADE48:   @ MysteryDataGetSlot
     mov r2, sl
     ldr r2, [r2, #0x74]
     ldr r1, _080ADE58
@@ -16451,7 +16451,7 @@ _080ADE58:
 
     .global sub_080ADE5C
     .thumb_func
-sub_080ADE5C:
+sub_080ADE5C:   @ MysteryDataAdvanceAll
     push {r4, r5, r6, r7, lr}
     ldr r4, _080AE04C
     bl sub_080ADE6C
@@ -16461,7 +16461,7 @@ sub_080ADE5C:
 
     .global sub_080ADE6C
     .thumb_func
-sub_080ADE6C:
+sub_080ADE6C:   @ MysteryDataAdvanceGroupTable
     push {r4, r5, r6, r7, lr}
 _080ADE6E:
     ldr r6, [r4]
@@ -16504,7 +16504,7 @@ _080ADEB0:
 
     .global sub_080ADEB2
     .thumb_func
-sub_080ADEB2:
+sub_080ADEB2:   @ MysteryDataNextIndices
     push {r4, r5, r6, r7, lr}
     adds r5, r3, #0
     adds r6, r1, #0
@@ -16603,7 +16603,7 @@ _080ADF50:
 
     .global sub_080ADF5C
     .thumb_func
-sub_080ADF5C:
+sub_080ADF5C:   @ MysteryDataGetContentTable
     push {r2, r3, r4, r5, r6, r7, lr}
     adds r4, r1, #0
     cmp r0, #5
@@ -16626,7 +16626,7 @@ _080ADF7C:
 
     .global sub_080ADF80
     .thumb_func
-sub_080ADF80:
+sub_080ADF80:   @ MysteryDataLookupSpawn
     push {r4, r5, r6, r7, lr}
     adds r6, r0, #0
     mov r7, sl
@@ -16691,7 +16691,7 @@ _080ADFEE:
 
     .global sub_080ADFF0
     .thumb_func
-sub_080ADFF0:
+sub_080ADFF0:   @ MysteryDataLookupReward
     push {r4, r5, r6, r7, lr}
     adds r6, r0, #0
     mov r7, sl
@@ -16742,9 +16742,9 @@ _080AE042:
 _080AE046:
     pop {r4, r5, r6, r7, pc}
 _080AE048:
-    .word dat_080ADD18
+    .word dat_080ADD18   @ BN4_MYSTERY_DATA_RW
 _080AE04C:
-    .word dat_080ADD34
+    .word dat_080ADD34   @ BN4_MYSTERY_DATA_CW
     .global dat_080AE050
 dat_080AE050:
     incrom 0xAE050, 0x378

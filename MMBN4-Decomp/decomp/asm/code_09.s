@@ -11413,7 +11413,7 @@ _080F540E:
     beq _080F5440
 _080F5424:
     push {r0}
-    bl sub_08007DC0
+    bl sub_08007DC0   @ BattleGetBackgroundOrMode
     adds r4, r0, #0
     ldrh r0, [r6, #0x16]
     adds r0, #4
@@ -12191,7 +12191,7 @@ _080F5994:
 
     .global sub_080F5998
     .thumb_func
-sub_080F5998:
+sub_080F5998:   @ RewardPickBustingOffset
     push {r4, lr}
     sub sp, #0x18
     str r0, [sp]
@@ -12966,7 +12966,7 @@ _080F5F3C:
 
     .global sub_080F5F40
     .thumb_func
-sub_080F5F40:
+sub_080F5F40:   @ RewardGetRowPtr
     ldr r2, _080F5F4C
     movs r1, #0x28
     muls r0, r1, r0

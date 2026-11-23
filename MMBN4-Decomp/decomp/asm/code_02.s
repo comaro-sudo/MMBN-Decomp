@@ -1488,7 +1488,7 @@ _08021A94:
 
     .global sub_08021A98
     .thumb_func
-sub_08021A98:
+sub_08021A98:   @ RewardDecode
     ldr r1, _08021AD0
     cmp r0, r1
     beq _08021ACC
@@ -9049,7 +9049,7 @@ _08025654:
     tst r0, r0
     bne _08025692
     bl sub_080027B8
-    bl sub_080049A8
+    bl sub_080049A8   @ NewGameInit
     bl sub_08004928
     ldrb r0, [r5, #0xf]
     tst r0, r0
@@ -14050,7 +14050,7 @@ _080297C4:
 
     .global sub_080297C8
     .thumb_func
-sub_080297C8:
+sub_080297C8:   @ JackIn_ResetGreenMysteryData
     push {r4, r5, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x7d
@@ -14058,7 +14058,7 @@ sub_080297C8:
     movs r0, #0x11
     movs r1, #0x64
     bl sub_08025064
-    bl sub_080ADDA0
+    bl sub_080ADDA0   @ MysteryDataRollAllGreen
     bl sub_0802D4C4
     bl sub_080A0250
     bl sub_0809F34C

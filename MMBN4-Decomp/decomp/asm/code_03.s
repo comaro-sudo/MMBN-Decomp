@@ -37058,7 +37058,7 @@ dat_08049E14:
 
     .global sub_08049E40
     .thumb_func
-sub_08049E40:
+sub_08049E40:   @ ShopStateOpen
     push {lr}
     ldrb r0, [r5, #4]
     ldr r1, _08049EE4
@@ -37899,7 +37899,7 @@ _0804A52C:
 _0804A530:
     .word 0x0200A740
 _0804A534:
-    .word dat_0804ADA0
+    .word dat_0804ADA0   @ BN4_SHOP_STOCK_INIT
 
     .global sub_0804A538
     .thumb_func
@@ -38934,7 +38934,7 @@ _0804ACF0:
 
     .global sub_0804ACF4
     .thumb_func
-sub_0804ACF4:
+sub_0804ACF4:   @ ShopPriceToMoney
     push {r0, r2, r3, r4, r5, r6, r7, lr}
     ldr r6, [r5, #0x1c]
     ldr r6, [r6]
@@ -39034,7 +39034,7 @@ _0804AD98:
 _0804AD9C:
     .word 0x00000300
     .global dat_0804ADA0
-dat_0804ADA0:
+dat_0804ADA0:   @ BN4_SHOP_STOCK_INIT
     incrom 0x4ADA0, 0xD90
     .global dat_0804BB30
 dat_0804BB30:
@@ -39042,7 +39042,7 @@ dat_0804BB30:
 
     .global sub_0804BB34
     .thumb_func
-sub_0804BB34:
+sub_0804BB34:   @ ShopHasStock
     ldr r2, _0804BE80
     movs r1, #0x10
     muls r0, r1, r0
@@ -39070,7 +39070,7 @@ _0804BB54:
 
     .global sub_0804BB60
     .thumb_func
-sub_0804BB60:
+sub_0804BB60:   @ ShopStockInit
     push {lr}
     ldr r0, _0804BB70
     mov r1, sl
@@ -39079,13 +39079,13 @@ sub_0804BB60:
     bl sub_08000994   @ CopyWords
     pop {pc}
 _0804BB70:
-    .word dat_0804ADA0
+    .word dat_0804ADA0   @ BN4_SHOP_STOCK_INIT
 _0804BB74:
     .word 0x00000DC0
 
     .global sub_0804BB78
     .thumb_func
-sub_0804BB78:
+sub_0804BB78:   @ ShopAddStockList
     push {r4, r5, r6, r7, lr}
     adds r6, r1, #0
     ldr r7, _0804BE80
@@ -39161,7 +39161,7 @@ _0804BBF2:
 
     .global sub_0804BBFC
     .thumb_func
-sub_0804BBFC:
+sub_0804BBFC:   @ ShopRestockItem
     push {r4, r5, r6, r7, lr}
     adds r6, r1, #0
     ldr r7, _0804BE80
@@ -39199,7 +39199,7 @@ _0804BC36:
 
     .global sub_0804BC38
     .thumb_func
-sub_0804BC38:
+sub_0804BC38:   @ ShopGetStock
     ldr r2, _0804BE80
     movs r1, #0x10
     muls r0, r1, r0
@@ -39213,7 +39213,7 @@ sub_0804BC38:
 
     .global sub_0804BC4C
     .thumb_func
-sub_0804BC4C:
+sub_0804BC4C:   @ ShopTakeStock
     push {r4, r5, r6, r7, lr}
     cmp r4, #2
     beq _0804BCD0
@@ -39331,7 +39331,7 @@ _0804BD14:
 
     .global sub_0804BD18
     .thumb_func
-sub_0804BD18:
+sub_0804BD18:   @ ShopBuildChipOrderList
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb

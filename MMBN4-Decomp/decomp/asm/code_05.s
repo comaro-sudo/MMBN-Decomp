@@ -3594,7 +3594,7 @@ sub_0808EBC4:
     push {r4, r5, r6, r7, lr}
     ldr r0, _0808EBF8
     movs r1, #3
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     adds r4, r0, #0
     ldr r1, _0808EC10
     adds r1, r1, r0
@@ -3699,7 +3699,7 @@ sub_0808F420:
 _0808F436:
     mov r0, sp
     movs r1, #0xa
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     movs r1, #0
     mov r2, sp
     strb r1, [r2, r0]
@@ -3887,7 +3887,7 @@ sub_080920AC:
 _080920C0:
     adds r0, r4, #0
     movs r1, #0xa
-    bl sub_08000CA0
+    bl sub_08000CA0   @ WeightedRandomIndex
     movs r1, #0
     strb r1, [r4, r0]
     movs r1, #1

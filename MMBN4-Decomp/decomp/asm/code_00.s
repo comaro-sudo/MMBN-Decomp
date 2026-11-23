@@ -1390,7 +1390,7 @@ _08000C9C:
 
     .global sub_08000CA0
     .thumb_func
-sub_08000CA0:
+sub_08000CA0:   @ WeightedRandomIndex
     push {r4, r5, r6, r7, lr}
     push {r0, r1}
     bl sub_08001B00
@@ -1631,7 +1631,7 @@ sub_08000DE8:   @ StartNewGamePlus
     bl sub_0802F6F0
     bl sub_08035130
     bl sub_0802D4C4
-    bl sub_080ADE5C
+    bl sub_080ADE5C   @ MysteryDataAdvanceAll
     bl sub_080A5270
     movs r0, #5
     movs r1, #0
@@ -8874,7 +8874,7 @@ _080049A4:
 
     .global sub_080049A8
     .thumb_func
-sub_080049A8:
+sub_080049A8:   @ NewGameInit
     push {r4, r5, r6, r7, lr}
     mov r5, sl
     ldr r5, [r5, #0x40]
@@ -8935,7 +8935,7 @@ sub_080049A8:
     bl sub_08024FFC   @ ClearAllEventFlags
     bl sub_080251D6   @ ClearFlagLog15C0
     bl sub_080251F4
-    bl sub_0804BB60
+    bl sub_0804BB60   @ ShopStockInit
     bl sub_0802D410
     movs r0, #0
     strb r0, [r5, #0x15]
@@ -8955,8 +8955,8 @@ sub_080049A8:
     bl sub_080A5270
     bl sub_080037FC
     bl sub_08050DB8
-    bl sub_080ADD8C
-    bl sub_080ADE5C
+    bl sub_080ADD8C   @ MysteryDataInitState
+    bl sub_080ADE5C   @ MysteryDataAdvanceAll
     movs r0, #0x11
     movs r1, #0x7d
     bl sub_08025048   @ SetEventFlagHL
@@ -9005,7 +9005,7 @@ sub_080049A8:
     movs r0, #0
     movs r1, #0x2c
     bl sub_08025064   @ ClearEventFlagHL
-    bl sub_080ADDA0
+    bl sub_080ADDA0   @ MysteryDataRollAllGreen
     bl sub_08043F34
     bl sub_08006208
     ldr r0, _08004B70
@@ -14947,7 +14947,7 @@ sub_08007D9E:
 
     .global sub_08007DC0
     .thumb_func
-sub_08007DC0:
+sub_08007DC0:   @ BattleGetBackgroundOrMode
     push {lr}
     ldrb r3, [r0, #2]
     ldrb r1, [r0, #6]

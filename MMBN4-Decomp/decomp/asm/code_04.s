@@ -299,7 +299,7 @@ sub_0804F41C:   @ ScriptCmd_checkShopStock
     push {lr}
     ldrb r0, [r4, #2]
     push {r4, r5}
-    bl sub_0804BB34
+    bl sub_0804BB34   @ ShopHasStock
     pop {r4, r5}
     movs r1, #4
     tst r0, r0

@@ -14702,7 +14702,7 @@ sub_0801E8BC:
     mov r0, sl
     ldr r0, [r0, #0x18]
     ldr r0, [r0, #0x3c]
-    bl sub_08007DC0
+    bl sub_08007DC0   @ BattleGetBackgroundOrMode
     adds r4, r0, #0
     mov r0, sl
     ldr r0, [r0, #0x44]
