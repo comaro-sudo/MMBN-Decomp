@@ -36,5 +36,6 @@
 .include "common/wp_b2_frequency_tuner.asm"  ; WP-B2: Frequency Tuner (V1/V2/V3/Auto virus tier override)
 .include "common/wp_d4_grant_soul.asm"       ; Violet Eclipse: script command FC 0C <idx> grants any Soul
 .include "common/wp_d2_special_chip_art.asm" ; Duo / GP Power chip art (private builds; build.py --public leaves it out)
+.include "common/wp_d2_duo_story_grant.asm"  ; beating Duo in the story gives Duo D
 
 .close

@@ -71,3 +71,5 @@ WARP_CLEANUP_2          equ 0x080A6CDA
 NPC_SLOT_WTRGOD1        equ 0x08075EF8
 NPC_LIST_WTRGOD1        equ 0x08076518
 NPC_COUNT_WTRGOD1       equ 1
+
+DUO_DEFEAT_STATE        equ 0x080C4780      ; sub_080C4780: Duo defeated (sets flag 0x006F); WP-D2 Duo story grant

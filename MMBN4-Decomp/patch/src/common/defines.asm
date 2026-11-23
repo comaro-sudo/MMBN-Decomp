@@ -53,7 +53,9 @@ FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul hand
 FS_GRANT_SOUL_SIZE        equ 0x40
 FS_CHIP_ART               equ 0x087FAA70    ; WP-D2: Duo/GP Power pictures, palettes, icons (0xBC0; private builds only)
 FS_CHIP_ART_SIZE          equ 0xC00
-; next free slot:             0x087FB670 (code/data packages must stay below FS_TEXT)
+FS_DUO_GRANT              equ 0x087FB670    ; WP-D2: Duo defeat state handler (story win gives Duo D)
+FS_DUO_GRANT_SIZE         equ 0x60
+; next free slot:             0x087FB6D0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 
