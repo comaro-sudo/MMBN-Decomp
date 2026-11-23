@@ -12,6 +12,33 @@ Open owner decisions: [`docs/pending/`](docs/pending/).
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
 - [ ] **Push to GitHub:** local `main` is **85 commits ahead** of `origin/main` (last push `6e47d43`). The owner decides when.
 
+## Order of work (owner request, 2026-11-23)
+
+Each step lists what it depends on. Owner decisions marked ⚠ must be settled before their step.
+
+| # | Task | Why here / depends on |
+|---|---|---|
+| 1 | Merge the pending names from Gemini's round 3–5 notes, then a full regeneration | Quick; better names for all the patch work that follows |
+| 2 | **Status screen, two pages of 6 Souls** | Fully designed and self-contained (`status-screen-two-pages.md`); a good first new patch |
+| 3 | **Other version's Souls without a trade** (flag + `WriteChipKey`) + `checkDoubleSouls` for 12 | Core of C1; the friendly matches (step 6) grant Souls through it |
+| 4 | **Deterministic tournament pairs** (WP-B1) | The canon-fight design needs fixed brackets |
+| 5 | **Patch infrastructure for NPCs**: relocate a map's NPC list to free space, add flag-gated NPCs | Shared by steps 6, 8 and 9 |
+| 6 | **Tournaments: canon story fight + 3 friendly matches** each | Needs 3, 4 and 5; the lineup is decided |
+| 7 | Research: Higsby's walkable grid; the Undernet dead end and ACDC corner for the special-chip Mystery Data | Needed by 8 and 10 |
+| 8 | **Lobby rematches** (9 inside Higsby's, 2 outside; the V1 → SP climb; appear after meeting the Navi) | Needs 5, 6 ("met") and 7 |
+| 9 | **JunkMan's trash can** outside Higsby's → cyber map | Needs 5 |
+| 10 | **Special chips:** Duo's highest-tier reward; the Z-Saver and Grand Prix Power Blue Mystery Data | Needs 7 (spots); the Duo hook works like WP-D3 |
+| 11 | ⚠ **Free Tournament fix** for the 36 secret chips | Needs the owner's yes; the design is ready |
+| 12 | Frequency Tuner (WP-B2), save protection, the remaining boss rematches (WP-D3) | After the content is in place |
+| 13 | ⚠ Tier A leftovers: story-battle rewards, key-item prices, ToyRobo, cutscene skip | Key-item prices need a decision |
+| 14 | **Existing-saves load hook** (new-game-copied data such as shop stock) | Last, once everything that lives in the save is known |
+| 15 | **Full-playthrough and completion testing** (C1–C5) on the PC port | Validates 2–14 together |
+| 16 | Ports: EL-0 refactor → PC-2 (PET, touch Custom Screen, net map) → Wii U / 3DS / NDS | ⚠ hardware owned and the GBARunner licence |
+| 17 | Decomp, long term: carve the mixed tables once decoded, reduce the version blocks, DC-5 C | Ongoing, between steps |
+| 18 | Collection: the BN1, 2, 3, 5 and 6 decomps → ⚠ MMBN Principia Trilogy | After BN4 |
+
+⚠ The RS/BM version choice for the merged ROM (§7 q1) affects steps 3, 6 and 12; settle it before step 3.
+
 ## Current verified state
 
 - **Decomp:** US Red Sun and Blue Moon both rebuild byte-for-byte from **one shared `decomp/asm/` tree** (DC-4).
