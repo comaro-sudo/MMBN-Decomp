@@ -87,6 +87,19 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
       - If even that hook is too much, use one Mystery Data per missing chip, each visible only while its chip isn't in the Library.
 - (Considered and not chosen: the code follows the chosen version; extra drop slots at high Busting Levels.)
 
+## Duo rematches (owner decision, 2026-11-23)
+
+- **The player can fight every version of Duo, climbing like the lobby:** each S-rank win against Duo makes the next rematch the next version: **Duo (V1) → Duoα → Duoβ → DuoΩ**, then the SP+ step from `docs/pending/boss-double-hp.md`.
+  - The same model as the operator rematches: a 2-bit tier counter in free flags (next free after the lobby's `0x0E40`–`0x0E59`, e.g. `0x0E5A`–`0x0E5B`), raised only on an S rank.
+  - The rematch battle uses the "no automatic tier raise" bit.
+  - The four Duo records are enemy ids `0xE0`–`0xE3`, with story battles 93 and 94 (RE-06).
+- **Where the rematch is offered: open** (owner to choose). Duo has no operator. Options:
+  - a terminal or NPC in Higsby's lobby;
+  - the post-game Meteor Comp area;
+  - a menu in the lobby's "challenge" logic.
+- **Side effect:** rematches go through a normal battle start, so they **reach the results screen** (the story's final battle doesn't). The existing `wp_d2_duo_chip_reward.asm` (Duoβ/DuoΩ drop the Duo chip) therefore works in rematches, so the Duo chip comes from beating Duoβ or DuoΩ in a rematch.
+- Still useful: the post-ending grant hook (Gemini's `sub_080C4780` / `IncPlaythrough`) for players who beat Duo only in the story.
+
 ## What blocks completion (updated)
 
 | Blocker | Fix |
