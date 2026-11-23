@@ -133,6 +133,24 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
 
 **The variant with a hidden first round** (owner's idea for Option 1): a 16-entrant tournament whose first round isn't shown, with the normal 8-slot bracket only once 8 Navis remain. In practice that's the same as an exhibition **before** the bracket: MegaMan plays a qualifying match against the fourth Soul Navi, then the usual three rounds. It's just as cheap, because the qualifier is a scripted battle too. The difference is only presentation and story order: "qualifier, then bracket" versus "bracket, then exhibition". Either works with the same code.
 
+## Gemini's round-3 findings (2026-11-23, `0b96bad`)
+
+From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-screen-souls.md`:
+
+- **The lobby is Higsby's shop**, map `(00, 06)`, where the Free Tournament is entered.
+  - It has 4 NPCs in a tightly packed list (RS `0x08056550` / BM `0x0805655C`), so adding the 11 operators means **relocating that list to free space**.
+  - The NPC bytecode gives position, facing, sprite, talk script and flag gates, so "appears after meeting the Navi" is possible.
+  - Operators' sprites are in sprite list 7 (people) and JunkMan's in list 6 (Navis); both exist in both ROMs.
+- **JunkMan's cyber spot:** jack-ins are handled by `MapCheckJackIn` (`0x0802A2E8`). Small maps to reuse: `(88, 00)` (Lan's HP, no NPCs), or `(8E, 00)` / `(8E, 02)` (one NPC).
+  - **The trash can wasn't covered**: whether Higsby's or a nearby map has a trash can is still open. Next time, ask for it specifically.
+- **What the battles read:**
+  - The original Free Tournament **does** read the traded Navi's stats and AI from save slots `+0x78` / `+0x7C`.
+  - **The lobby rematches don't need them:** they can start ordinary `BN4_STORY_BATTLES` records (type `0x01`, enemy id) with the "no tier raise" bit. So the V1 → V2 → V3 → SP climb works by picking the record per tier.
+  - The Free Tournament fix itself also works: switching its opponent case to type `0x01` removes the traded-data dependency.
+- **The status screen:** its icon sprite already has **all 12 Soul icons** in both ROMs, and the buffer has room for 12. But the screen's 2 × 3 grid can't fit 12 as it is. Two options:
+  1. **two pages of 6**, switched with L/R: no risk to the screen's graphics memory (Gemini's recommendation);
+  2. a taller **2 × 6 grid**, only if the space below the current grid is free on screen and in graphics memory (to verify).
+
 ## Decisions for the owner
 
 1. Use this fix for the 36 secret chips (C2)?
