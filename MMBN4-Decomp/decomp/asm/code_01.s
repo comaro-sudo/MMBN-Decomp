@@ -13899,7 +13899,7 @@ _08019228:
 
     .global sub_0801922C
     .thumb_func
-sub_0801922C:
+sub_0801922C:   @ ChipPackCountById
     push {r7, lr}
     push {r0}
     bl sub_080063C8   @ BN4_CHIP_GATE
@@ -13972,7 +13972,7 @@ _080192A4:
 
     .global sub_080192A8
     .thumb_func
-sub_080192A8:
+sub_080192A8:   @ ChipPackInit
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x50]

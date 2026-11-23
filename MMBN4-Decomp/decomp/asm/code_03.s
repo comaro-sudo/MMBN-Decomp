@@ -19994,7 +19994,7 @@ sub_0803FB70:
     adds r0, r7, #0
     bl sub_08007FFA
     adds r0, r7, #0
-    bl sub_0800E8EC
+    bl sub_0800E8EC   @ NaviPatternInitMegaMan
     pop {r4, r5, r6, r7, pc}
 _0803FBB4:
     .word 0x020014F0
@@ -24384,7 +24384,7 @@ _08041E4C:
 
     .global sub_08041E50
     .thumb_func
-sub_08041E50:
+sub_08041E50:   @ ModCardClearActive
     mov r0, sl
     ldr r0, [r0, #0x68]
     movs r1, #0
@@ -24394,7 +24394,7 @@ sub_08041E50:
 
     .global sub_08041E5C
     .thumb_func
-sub_08041E5C:
+sub_08041E5C:   @ ModCardApplyActive
     push {r4, r5, r6, r7, lr}
     mov r1, sl
     ldr r1, [r1, #0x68]
@@ -24405,7 +24405,7 @@ sub_08041E5C:
 
     .global sub_08041E6A
     .thumb_func
-sub_08041E6A:
+sub_08041E6A:   @ ModCardSetAndApply
     push {r4, r5, r6, r7, lr}
     mov r1, sl
     ldr r1, [r1, #0x68]
@@ -31601,7 +31601,7 @@ _08046DA8:
 
     .global sub_08046DAC
     .thumb_func
-sub_08046DAC:
+sub_08046DAC:   @ NaviCustGetPlacedProgram
     mov r7, sl
     ldr r7, [r7, #0x60]
     movs r1, #8
@@ -31611,7 +31611,7 @@ sub_08046DAC:
 
     .global sub_08046DB8
     .thumb_func
-sub_08046DB8:
+sub_08046DB8:   @ NaviCustLoadToWorkBuf
     push {r4, r5, r6, r7, lr}
     mov r0, sl
     ldr r0, [r0, #0x5c]
@@ -32376,7 +32376,7 @@ _08047340:
 
     .global sub_08047344
     .thumb_func
-sub_08047344:
+sub_08047344:   @ NaviCustCompileBugs
     push {r4, r5, r6, r7, lr}
     mov r0, sl
     ldr r0, [r0, #0x64]
@@ -37317,7 +37317,7 @@ _0804A0B2:
     bl sub_0804A438
     bne _0804A032
     movs r1, #1
-    bl sub_0802D42C
+    bl sub_0802D42C   @ InventoryAddItem
     movs r1, #9
     cmp r0, #0
     bne _0804A146
@@ -42064,7 +42064,7 @@ sub_0804DCDC:
     push {r5, lr}
     cmp r2, #3
     blt _0804DD00
-    bl sub_0801922C
+    bl sub_0801922C   @ ChipPackCountById
     cmp r0, #4
     blt _0804DCEC
     movs r0, #4

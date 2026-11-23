@@ -1021,3 +1021,18 @@
 08045458 08045460 code   GEMINI       FreeTournamentSelectPrize        Selects Free Tournament prize (Zenny, BugFrags, or Secret Chip by Busting Level)
 080454E4 080454EC code   GEMINI       FreeTournamentPickSecretChip     Awards V1/V2/V3 secret chip (dat_08045528 + tier) with random valid code
 08045540 08045548 code   GEMINI       FreeTournamentPickMissingSecretChip Busting 10/S: awards highest unowned secret chip (V3->V1) checking Library 0x16C0+id
+# --- Remaining Save Slots (decomp/notes/save-slots.md), Gemini 2026-11-22 ---
+08006380 08006380 code   GEMINI       WriteItemAntiCheatKey            Writes [eToolkit+0x80][id] = [0x02000240 + id] XOR SAVE_XOR_KEY_0
+0800E8DA 0800E8DA code   GEMINI       NaviPatternInitAll               Fills save slot +0x7C (8 x 0xE0 bytes, MegaMan + 7 Waiting Room Navis) with 0xFF
+0800E8EC 0800E8EC code   GEMINI       NaviPatternInitMegaMan           Fills save slot +0x7C slot 0 (0xE0 bytes, MegaMan) with 0xFF
+0801922C 0801922C code   GEMINI       ChipPackCountById                r0 chip_id: returns total owned count across 4 code slots in save slot +0x50 (gated by BN4_CHIP_GATE)
+080192A8 080192A8 code   GEMINI       ChipPackInit                     Zeroes save slot +0x50 (0xF00 bytes = 320 x 12B chip pack)
+0802D410 0802D414 code   GEMINI       InventoryInit                    Zeroes save slot +0x54 (0x190 bytes) and sets SubMemry (0xA5) = 4
+0802D42C 0802D430 code   GEMINI       InventoryAddItem                 Adds item/SubChip/NaviCust program to save slot +0x54 with caps and WriteItemAntiCheatKey
+08034FAC 08034FB0 code   GEMINI       ModCardSlotsInit                 Fills save slot +0x70 (7 Mod Card slots) with 0xFF
+08041E50 08041E58 code   GEMINI       ModCardClearActive               Clears active Mod Card ID in save slot +0x68 to 0
+08041E5C 08041E64 code   GEMINI       ModCardApplyActive               Applies active Mod Card from save slot +0x68 via dat_08041E8C (134 handlers)
+08041E6A 08041E72 code   GEMINI       ModCardSetAndApply               Stores r0 to save slot +0x68 and applies its Mod Card handler
+08046DAC 08046DB4 code   GEMINI       NaviCustGetPlacedProgram         r0 idx: returns &[eToolkit+0x60] + idx * 8
+08046DB8 08046DC0 code   GEMINI       NaviCustLoadToWorkBuf            Copies NaviCust grid (+0x5C, 0x20B) -> 0x0201C000 and placed programs (+0x60, 0xC8B) -> 0x0201C020
+08047344 0804734C code   GEMINI       NaviCustCompileBugs              Zeroes NaviCust bug flags (+0x64, 0x10B) and three 5x5 scratch grids, then compiles bugs

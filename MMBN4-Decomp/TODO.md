@@ -59,9 +59,10 @@ This is the short, execution-oriented backlog. The detailed plans remain in
 - [x] Source-ownership reporting is available through `python decomp/tools/coverage.py rs` and `bm`
   (counting only lines active for the selected version).
 
-Current source ownership (verified at `1fd88fd`): RS **50.8%** (598,984 / 1,179,456 code-segment bytes,
-or **53.0%** of `0x08000000..0x08113CB8`) and BM **50.8%** (599,008 / 1,179,476 code-segment bytes, or
-**53.0%** of `0x08000000..0x08113CCC`). Both ROMs assemble with zero GNU `as` warnings.
+Current source ownership (verified after Task 1 structured data-table carving, `2f80df5`): RS **54.8%**
+(646,592 / 1,179,456 code-segment bytes, +47,608 B) and BM **54.8%** (646,624 / 1,179,476 code-segment
+bytes, +47,616 B), with 2,007+ shared pointer externs, 1,027 exported symbols, and 111 `.if VERSION_*`
+blocks (63 code + 48 genuine data-table differences). Both ROMs assemble with zero GNU `as` warnings.
 
 ## Do next: disassembly (DC-2)
 
@@ -134,9 +135,10 @@ or **53.0%** of `0x08000000..0x08113CB8`) and BM **50.8%** (599,008 / 1,179,476 
   - [x] **the Soul merge works in both ROMs** (WoodSoul in Red Sun, SearchSoul in Blue Moon):
     [`docs/re/soul-merge-experiment.md`](docs/re/soul-merge-experiment.md).
   Still to do:
-  - [ ] RE-04 tournaments, half done ([`docs/re/tournaments.md`](docs/re/tournaments.md)): pools, Soul Navi
-    pairs, the entrant fill and its RNG are mapped. Left: the Free Tournament (`sub_080448C0`), the bracket
-    draw, and who writes the traded-Navi list (`0x02006F40`);
+  - [x] **RE-04 tournaments (Claude + Gemini):** [`docs/re/tournaments.md`](docs/re/tournaments.md) +
+    [`decomp/notes/re04-tournaments-remainder.md`](decomp/notes/re04-tournaments-remainder.md) (Free Tournament
+    seeding & secret-chip prize tables, bracket draw RNG, Waiting Room `0x020014F0` & `0x02006F40` writers,
+    exact 12 Soul Navi tournament IDs);
   - [ ] the story's Soul grant: a runtime watch, now possible with the community saves (`4429`: Red Sun with
     1 Soul). Also find where Blue Moon keeps Soul pseudo-chip keys;
   - [x] **RE-06 encounters, enemy records, and drops (Gemini):** [`decomp/notes/re06-encounters.md`](decomp/notes/re06-encounters.md)
@@ -148,7 +150,9 @@ or **53.0%** of `0x08000000..0x08113CB8`) and BM **50.8%** (599,008 / 1,179,476 
     advance-on-pickup mechanic);
   - [ ] **RE-09 shop and trader tables:** mostly done ([`docs/re/shops.md`](docs/re/shops.md): stock copied to save
     at new game, prices ×100; open: which record is which shop in the world, and the Number Trader);
-  - [ ] the remaining save slots (pack, Library details, key items);
+  - [x] **remaining save slots (Gemini):** [`decomp/notes/save-slots.md`](decomp/notes/save-slots.md) (`+0x50` Chip Pack,
+    `+0x54` Items/SubChips/NaviCust inventory, `+0x5C`/`+0x60`/`+0x64` NaviCust grid/placed/bugs, `+0x68`/`+0x6C`/`+0x70`
+    Mod Cards & HP bonus, `+0x7C` Waiting Room AI patterns, `+0x80` inventory anti-cheat keys — confirmed across all 13 saves);
   - [x] **free ROM space (Claude):** [`docs/re/free-space.md`](docs/re/free-space.md) (35.9 KiB unused at `0x087F739C`–`0x08800000` in both versions).
 - [x] Promote those findings into versioned symbol tables and generate labels
   for the patch project, mGBA, and the PC port: `tools/split.py` emits `build/<v>/symbols.inc`

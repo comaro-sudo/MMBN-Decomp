@@ -8928,7 +8928,7 @@ sub_080049A8:   @ NewGameInit
     bl sub_080251D6   @ ClearFlagLog15C0
     bl sub_080251F4
     bl sub_0804BB60   @ ShopStockInit
-    bl sub_0802D410
+    bl sub_0802D410   @ InventoryInit
     movs r0, #0
     strb r0, [r5, #0x15]
     bl sub_080A6EE6
@@ -8992,7 +8992,7 @@ sub_080049A8:   @ NewGameInit
     bl sub_08025048   @ SetEventFlagHL
     movs r0, #0
     bl sub_0802D734
-    bl sub_08034FAC
+    bl sub_08034FAC   @ ModCardSlotsInit
     bl sub_08034FC0
     movs r0, #0
     movs r1, #0x2c
@@ -9025,7 +9025,7 @@ sub_080049A8:   @ NewGameInit
     str r0, [r5, #0x54]
     str r0, [r5, #0x68]
     bl sub_08019708
-    bl sub_080192A8
+    bl sub_080192A8   @ ChipPackInit
     ldr r0, _08004B8C
     movs r1, #0
     bl sub_080190E0
@@ -11294,7 +11294,7 @@ _0800637C:
 
     .global sub_08006380
     .thumb_func
-sub_08006380:
+sub_08006380:   @ WriteItemAntiCheatKey
     push {r1, r2, r3, r4, r5, r6, r7, lr}
     ldr r5, _080063B0
     mov r7, sl
@@ -28762,7 +28762,7 @@ _0800E8D6:
 
     .global sub_0800E8DA
     .thumb_func
-sub_0800E8DA:
+sub_0800E8DA:   @ NaviPatternInitAll
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x7c]
@@ -28774,7 +28774,7 @@ sub_0800E8DA:
 
     .global sub_0800E8EC
     .thumb_func
-sub_0800E8EC:
+sub_0800E8EC:   @ NaviPatternInitMegaMan
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x7c]

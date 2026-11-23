@@ -15687,7 +15687,7 @@ sub_0802AA5A:
     movs r6, #1
     bl sub_0802AF94
     adds r0, r4, #0
-    bl sub_0801922C
+    bl sub_0801922C   @ ChipPackCountById
     b _0802AA82
 _0802AA74:
     adds r1, r4, #0
@@ -19315,7 +19315,7 @@ _0802D40C:
 
     .global sub_0802D410
     .thumb_func
-sub_0802D410:
+sub_0802D410:   @ InventoryInit
     push {r4, r5, r6, r7, lr}
     mov r0, sl
     ldr r0, [r0, #0x54]
@@ -19331,10 +19331,10 @@ _0802D428:
 
     .global sub_0802D42C
     .thumb_func
-sub_0802D42C:
+sub_0802D42C:   @ InventoryAddItem
     push {r4, r5, r6, r7, lr}
     push {r0, r1}
-    bl sub_08006380
+    bl sub_08006380   @ WriteItemAntiCheatKey
     pop {r0, r1}
     mov r2, sl
     ldr r2, [r2, #0x54]
@@ -21035,7 +21035,7 @@ sub_0802E168:
     .thumb_func
 sub_0802E178:
     push {lr}
-    bl sub_080448C0
+    bl sub_080448C0   @ FreeTournamentSetup
     bl sub_0802DF2C
     pop {pc}
 
@@ -21043,7 +21043,7 @@ sub_0802E178:
     .thumb_func
 sub_0802E184:
     push {lr}
-    bl sub_0804498C
+    bl sub_0804498C   @ FreeTournamentPickMatch
     bl sub_0802DF2C
     pop {pc}
 
@@ -21051,7 +21051,7 @@ sub_0802E184:
     .thumb_func
 sub_0802E190:
     push {lr}
-    bl sub_080449E0
+    bl sub_080449E0   @ FreeTournamentRecordWinner
     bl sub_0802DF2C
     pop {pc}
 
@@ -32637,7 +32637,7 @@ sub_08034648:
     movs r4, #0
 _08034656:
     adds r0, r4, #0
-    bl sub_08046DAC
+    bl sub_08046DAC   @ NaviCustGetPlacedProgram
     ldrb r0, [r7]
     tst r0, r0
     beq _0803466C
@@ -33950,7 +33950,7 @@ _08034FA8:
 
     .global sub_08034FAC
     .thumb_func
-sub_08034FAC:
+sub_08034FAC:   @ ModCardSlotsInit
     push {r4, r5, r6, r7, lr}
     movs r2, #0
     mov r0, sl
