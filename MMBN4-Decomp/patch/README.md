@@ -52,4 +52,4 @@ The owner's decisions behind them are in [`../docs/completion/bosses.md`](../doc
   - **free space** (`docs/re/free-space.md`): take the next slot from the allocation table in `defines.asm`, and add an `.error` guard for the slot's size;
   - **verified dead code**: so far the two 86-byte blocks in `code_03`, both now used.
 - Check the emitted bytes (disassemble the built ROM), and run `--check` before committing.
-- Code from the player's *other* ROM is read at build time only (as `build.py` does for the drop table). Never commit ROM bytes.
+- Data from the player's *other* ROM is read at build time only (as `build.py` does for the drop table). Never commit ROM bytes.
