@@ -128,7 +128,7 @@ _0804F2EE:
     ldrb r1, [r4, #3]
     lsls r1, r1, #8
     orrs r0, r1
-    bl sub_0801922C
+    bl sub_0801922C   @ ChipPackCountById
     pop {r4, r5}
     ldrb r1, [r4, #4]
     movs r2, #0
@@ -678,7 +678,7 @@ _0804F6B8:
     str r1, [r5, #0x4c]
 _0804F6D0:
     ldrb r1, [r4, #3]
-    bl sub_0802D42C
+    bl sub_0802D42C   @ InventoryAddItem
     pop {r4, r5}
     adds r4, #4
     movs r0, #1
@@ -1207,7 +1207,18 @@ _0804FA9C:
     .word dat_0804FAA0
     .global dat_0804FAA0
 dat_0804FAA0:
-    incrom 0x4FAA0, 0x30
+    .word sub_0804FAD0   @ ScriptCmd_printItem
+    .word sub_0804FBBC
+    .word sub_0804FBC0
+    .word sub_0804FBC4   @ ScriptCmd_printZenny
+    .word sub_0804FBC4   @ ScriptCmd_printZenny
+    .word sub_0804FC10   @ ScriptCmd_printWaitingRoomName
+    .word sub_0804FC80   @ ScriptCmd_printStoryData
+    .word sub_0804FCE8   @ ScriptCmd_printStoryDataOption
+    .word sub_0804FD84   @ ScriptCmd_printStoryDataOptionRemaining
+    .word sub_0804FE24   @ ScriptCmd_printStoryDataChosen
+    .word sub_0804FED0   @ ScriptCmd_printBufferedShortString
+    .word sub_0804FF10   @ ScriptCmd_printShortString
 
     .global sub_0804FAD0
     .thumb_func
@@ -1298,7 +1309,15 @@ _0804FB6C:
     .word dat_0804FB70
     .global dat_0804FB70
 dat_0804FB70:
-    incrom 0x4FB70, 0x24
+    .word dat_087571A0
+    .word dat_087481D8
+    .word dat_08748C14
+    .word dat_087490E8
+    .word dat_086E425C
+    .word dat_086E7FC8
+    .word dat_086E7FC8
+    .word dat_0874A780
+    .word dat_087D1A38
 _0804FB94:
     .word dat_0804FB98
     .global dat_0804FB98
@@ -1802,7 +1821,18 @@ _0804FF60:
     .word dat_0804FF64
     .global dat_0804FF64
 dat_0804FF64:
-    incrom 0x4FF64, 0x30
+    .word sub_0804FF94
+    .word sub_0804FFB8
+    .word sub_0804FFB8
+    .word sub_0804FFB8
+    .word sub_0804FFB8
+    .word sub_0804FF94
+    .word sub_0804FF94
+    .word sub_08050004
+    .word sub_0804FFE0
+    .word sub_08050004
+    .word sub_08050004
+    .word sub_08050004
 
     .global sub_0804FF94
     .thumb_func
@@ -1910,7 +1940,18 @@ _0805003C:
     .word dat_08050040   @ text_0xfd_sub_commands
     .global dat_08050040
 dat_08050040:   @ text_0xfd_sub_commands
-    incrom 0x50040, 0x30
+    .word sub_08050070   @ ScriptCmd_soundPlay
+    .word sub_08050084   @ ScriptCmd_soundStopBGM
+    .word sub_08050098   @ ScriptCmd_soundEnableTextSFX
+    .word sub_080500A8   @ ScriptCmd_soundDisableTextSFX
+    .word sub_080500B8   @ ScriptCmd_soundStop
+    .word sub_080500C4   @ ScriptCmd_soundFadeOut
+    .word sub_08050070   @ ScriptCmd_soundPlay
+    .word sub_08050070   @ ScriptCmd_soundPlay
+    .word sub_080500DC   @ ScriptCmd_soundEnableChoiceSFX
+    .word sub_080500EC   @ ScriptCmd_soundDisableChoiceSFX
+    .word sub_080500FC   @ ScriptCmd_soundPlayAreaBGM
+    .word sub_0805010C   @ ScriptCmd_soundFadeInBGM
 
     .global sub_08050070
     .thumb_func
@@ -2287,7 +2328,7 @@ sub_08050334:
     ldrb r0, [r0]
     str r0, [r5, #0x4c]
     movs r1, #1
-    bl sub_0802D42C
+    bl sub_0802D42C   @ InventoryAddItem
     ldrb r0, [r4, #2]
     adds r0, #1
     adds r4, r4, r0
@@ -2433,7 +2474,15 @@ _08050430:
     .word dat_08050434
     .global dat_08050434
 dat_08050434:
-    incrom 0x50434, 0x24
+    .word sub_08050458   @ ScriptCmd_callSave
+    .word sub_08050488   @ ScriptCmd_callTournament
+    .word sub_080504A4   @ ScriptCmd_callCancelSonar
+    .word sub_080504B0   @ ScriptCmd_callBufferTerryPassword
+    .word sub_080504CC   @ ScriptCmd_callWorldMap
+    .word sub_080504E0   @ ScriptCmd_callGiveAllNaviCustPrograms
+    .word sub_080504EC   @ ScriptCmd_callDisableMugshotBrighten
+    .word sub_08050500   @ ScriptCmd_callFreeTournament
+    .word sub_0805052C   @ ScriptCmd_callCheckOutsideJackIn
 
     .global sub_08050458
     .thumb_func
@@ -2618,7 +2667,17 @@ _08050580:
     .word dat_08050584
     .global dat_08050584
 dat_08050584:
-    incrom 0x50584, 0x2C
+    .word sub_080505B0   @ ScriptCmd_positionBox
+    .word sub_080505F4
+    .word sub_080505FC   @ ScriptCmd_positionText
+    .word sub_08050620
+    .word sub_08050628   @ ScriptCmd_positionArrow
+    .word sub_08050638   @ ScriptCmd_positionMugshot
+    .word sub_0805064C   @ ScriptCmd_positionTextCenter
+    .word sub_08050678   @ ScriptCmd_positionOptionHorizontal
+    .word sub_08050680   @ ScriptCmd_positionOptionVertical
+    .word sub_08050688   @ ScriptCmd_positionOptionFromCenter
+    .word sub_08050690   @ ScriptCmd_positionTextPrinter
 
     .global sub_080505B0
     .thumb_func
@@ -2919,7 +2978,7 @@ _08050780:
     ldr r0, [r5, #0x54]
 _0805078A:
     ldrb r1, [r4, #3]
-    bl sub_0802D42C
+    bl sub_0802D42C   @ InventoryAddItem
     pop {r4, r5}
     cmp r0, #1
     beq _080507A0
@@ -3454,7 +3513,22 @@ _08050B60:
     .word dat_08050B64
     .global dat_08050B64
 dat_08050B64:
-    incrom 0x50B64, 0x40
+    .word sub_08050BA4   @ ScriptCmd_menuOptionNumberTrader
+    .word sub_08050BB4   @ ScriptCmd_menuSelectNumberTrader
+    .word sub_08050C38   @ ScriptCmd_menuOptionNumber
+    .word sub_08050C70   @ ScriptCmd_menuSelectBufferedPassword
+    .word sub_08050C54   @ ScriptCmd_menuOptionName
+    .word sub_08050C70   @ ScriptCmd_menuSelectBufferedPassword
+    .word sub_08050DD0   @ ScriptCmd_menuSelectStoryData
+    .word sub_08050E70   @ ScriptCmd_menuCheckStoryDataInput
+    .word sub_08050EA4   @ ScriptCmd_menuBufferCorrectStoryData
+    .word sub_08050EE4   @ ScriptCmd_menuFinishStory
+    .word sub_08050F5C   @ ScriptCmd_menuDeleteStoryData
+    .word sub_08050FD0   @ ScriptCmd_menuCancelStory
+    .word sub_08050FF8   @ ScriptCmd_menuNextStory
+    .word sub_08050C38   @ ScriptCmd_menuOptionNumber
+    .word sub_0805104C   @ ScriptCmd_menuBufferCorrectRiddleAnswer
+    .word sub_08050DA8   @ ScriptCmd_menuRegisterName
 
     .global sub_08050BA4
     .thumb_func
@@ -4113,7 +4187,22 @@ _08051080:
     .word dat_08051084
     .global dat_08051084
 dat_08051084:
-    incrom 0x51084, 0x40
+    .word sub_080510C4
+    .word sub_0805115C
+    .word sub_08051160
+    .word sub_080511FC
+    .word sub_08051250
+    .word sub_080511FC
+    .word sub_08051364
+    .word sub_08051368
+    .word sub_0805136C
+    .word sub_0805136C
+    .word sub_0805136C
+    .word sub_0805136C
+    .word sub_0805136C
+    .word sub_08051370
+    .word sub_08051414
+    .word sub_0805136C
 
     .global sub_080510C4
     .thumb_func
@@ -6883,7 +6972,87 @@ _08053E20:
     .word 0x11111111
     .global dat_08053E24
 dat_08053E24:   @ BN4_MENU_SPRITE_TYPES
-    incrom 0x53E24, 0x144
+    .word sub_08102FC8
+    .word sub_08103FFC   @ BN4_BRACKET_PLATE
+    .word sub_0810470C
+    .word sub_081049EC
+    .word sub_08104D84
+    .word sub_08104F84
+    .word sub_081051DC
+    .word sub_08105420
+    .word sub_081057FC
+    .word sub_08105984
+    .word sub_08105AEC
+    .word sub_08106520
+    .word sub_08106614
+    .word sub_08106D18
+    .word sub_08106F60
+    .word sub_08107014
+    .word sub_081070E0
+    .word sub_0810715C
+    .word sub_081072C8
+    .word sub_08107374
+    .word sub_08107494
+    .word sub_08107544
+    .word sub_0810778C
+    .word sub_08107B78
+    .word sub_08107FC4
+    .word sub_08108328
+    .word sub_08108734
+    .word sub_08108880
+    .word sub_08108A60
+    .word sub_08108B04
+    .word sub_08108D08
+    .word sub_08108DA4
+    .word sub_08108F0C
+    .word sub_08109070
+    .word sub_081094C8
+    .word sub_08109B1C
+    .word sub_08109EF0
+    .word sub_08109FA4
+    .word sub_0810A074
+    .word sub_0810A158
+    .word sub_0810A410
+    .word sub_0810A560
+    .word sub_0810A62C
+    .word sub_0810A894
+    .word sub_0810AA18
+    .word sub_0810ACAC
+    .word sub_0810AD70
+    .word sub_0810AF0C
+    .word sub_0810B140
+    .word sub_0810B368
+    .word sub_0810B448
+    .word sub_0810B54C
+    .word sub_0810B5FC
+    .word sub_0810B7CC
+    .word sub_0810BA20
+    .word sub_0810BB18
+    .word sub_0810BBE0
+    .word sub_0810BCB0
+    .word sub_0810BD88
+    .word sub_0810BF14
+    .word sub_0810BFE4
+    .word sub_0810C464
+    .word sub_0810CEEC
+    .word sub_0810CFDC
+    .word sub_0810D1A4
+    .word sub_0810D2E4
+    .word sub_0810D38C
+    .word sub_0810D540
+    .word sub_0810D8DC
+    .word sub_0810D9D4
+    .word sub_0810DB14
+    .word sub_0810DBC8
+    .word sub_0810DC70
+    .word sub_0810DF40
+    .word sub_0810E03C
+    .word sub_0810E242
+    .word sub_0810E2BC
+    .word sub_0810E46C
+    .word sub_0810E6F0
+    .word sub_0810E88C
+    .word sub_0810EA94
 
     .global sub_08053F68
     .thumb_func

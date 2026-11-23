@@ -37,6 +37,34 @@ start = 0x0800025C
 end = 0x0801002A
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x0800032C, end = 0x0800036C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08003A24, end = 0x08003BA0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08003C40, end = 0x08003ED4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08003F78, end = 0x08004180, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800439C, end = 0x08004460, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080046A0, end = 0x080046EC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08004BB0, end = 0x08004BE0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080052C0, end = 0x080052E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800591C, end = 0x0800597C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08006778, end = 0x0800679C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08007440, end = 0x08007464, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08009648, end = 0x08009670, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08009678, end = 0x080096A0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080096E8, end = 0x08009710, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08009718, end = 0x08009740, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800B604, end = 0x0800B638, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800B850, end = 0x0800B884, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800CA7C, end = 0x0800CC2C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DA48, end = 0x0800DA7C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DB38, end = 0x0800DB6C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DCB4, end = 0x0800DCE8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DD2C, end = 0x0800DD60, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DD9C, end = 0x0800DDD0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800DFE4, end = 0x0800E018, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800E0A0, end = 0x0800E0E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0800F3C8, end = 0x0800F480, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 
 [[segment]]
 name = "code_01"
@@ -48,6 +76,17 @@ data_tables = [
     { start = 0x08011888, end = 0x08012470, fmt = "record", fields = "hbbbbbbu" }, # BN4_ENEMY_STATS (254 x 12B)
     { start = 0x08017FB8, end = 0x08018068, fmt = "word" },                          # BN4_BATTLE_TABLES root: 2 roots + 21 group pointers
     { start = 0x08016C04, end = 0x08017A28, fmt = "word" },                          # 0xE24-byte pointer table (95% ROM pointers)
+    { start = 0x080125B0, end = 0x08012618, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080146CC, end = 0x0801472C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08014D34, end = 0x08014D94, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08014F9C, end = 0x08014FC4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08015BC4, end = 0x08015C24, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08015E9C, end = 0x08015EFC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08017A28, end = 0x08017A54, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08019380, end = 0x0801944C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0801E430, end = 0x0801E454, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0801E458, end = 0x0801E478, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0801E620, end = 0x0801E640, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -60,6 +99,29 @@ data_tables = [
     { start = 0x08027940, end = 0x0802803C, fmt = "word" },   # pointer table (100% pointers)
     { start = 0x08028320, end = 0x08028908, fmt = "word" },   # pointer table (98% pointers)
     { start = 0x08028920, end = 0x08028F08, fmt = "word" },   # pointer table (98% pointers)
+    { start = 0x080212B4, end = 0x0802134C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080220E4, end = 0x0802221C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08026638, end = 0x0802668C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802668C, end = 0x080266E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802803C, end = 0x080281D4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080281D4, end = 0x08028308, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08028F20, end = 0x08029150, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080295BC, end = 0x08029604, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08029658, end = 0x080296A0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08029A7C, end = 0x08029B80, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08029B84, end = 0x08029BC8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08029C50, end = 0x08029C80, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802A7D4, end = 0x0802A8D4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802BE30, end = 0x0802BE74, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802C144, end = 0x0802C2E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802C798, end = 0x0802C7D4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802DFDC, end = 0x0802E020, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802F40C, end = 0x0802F42C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802F488, end = 0x0802F4B4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802F520, end = 0x0802F57C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0802F778, end = 0x0802F970, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08031F94, end = 0x08031FB4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080335EC, end = 0x08033638, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -68,6 +130,35 @@ start = 0x08035090
 end = 0x0804F228
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x0803531C, end = 0x08035350, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08036544, end = 0x08036584, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08036FA8, end = 0x08036FFC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08039448, end = 0x08039474, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803AE48, end = 0x0803AE70, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803C878, end = 0x0803C8A0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803D9D0, end = 0x0803DA04, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803DE60, end = 0x0803DE94, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803F210, end = 0x0803F23C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0803FE8C, end = 0x0803FEB8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08040960, end = 0x08040990, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804188C, end = 0x080418B4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08041A58, end = 0x08041B14, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08041E94, end = 0x080420AC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08042B20, end = 0x08042BE0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08043054, end = 0x08043078, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08043518, end = 0x0804354C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08043610, end = 0x08043644, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08045188, end = 0x080451AC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080478D0, end = 0x08047964, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080490EC, end = 0x0804911C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08049170, end = 0x08049198, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08049E1C, end = 0x08049E48, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804E908, end = 0x0804E974, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804E974, end = 0x0804E9E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804EC54, end = 0x0804EC7C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804F028, end = 0x0804F0DC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 # dead code after an unconditional b (no branch or pointer reaches it); decoded for coverage (Claude)
 entries = [0x08037C60, 0x08037D38]
 
@@ -79,6 +170,15 @@ kind = "code"
 mode = "thumb"
 data_tables = [
     { start = 0x080523CC, end = 0x08053904, fmt = "word" }, # 723-pointer sprite/object table
+    { start = 0x0804FAAC, end = 0x0804FADC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804FB7C, end = 0x0804FBA0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0804FF70, end = 0x0804FFA0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0805004C, end = 0x0805007C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08050440, end = 0x08050464, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08050590, end = 0x080505BC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08050B70, end = 0x08050BB0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08051090, end = 0x080510D0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08053E30, end = 0x08053F74, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -101,6 +201,9 @@ start = 0x08067668
 end = 0x080711F0
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x0806FDF8, end = 0x0806FE18, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 
 [[segment]]
 name = "code_05"
@@ -110,6 +213,13 @@ kind = "code"
 mode = "thumb"
 data_tables = [
     { start = 0x080843FC, end = 0x08085404, fmt = "word" }, # 370-pointer table
+    { start = 0x080712D4, end = 0x08071324, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080714E4, end = 0x08071524, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080739B0, end = 0x080739F0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08073B60, end = 0x08073B90, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0807597C, end = 0x080759CC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08075B8C, end = 0x08075BCC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08082700, end = 0x08082720, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -122,6 +232,16 @@ data_tables = [
     { start = 0x080A78D4, end = 0x080A7C34, fmt = "word" }, # 96-pointer table
     { start = 0x080A7C6C, end = 0x080A7ECC, fmt = "word" }, # 96-pointer table
     { start = 0x080A911C, end = 0x080ADD98, fmt = "word" }, # BN4_MYSTERY_DATA (414 pointers, RW+CW)
+    { start = 0x080949F0, end = 0x08094A18, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0809FC94, end = 0x0809FCB8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A3164, end = 0x080A3194, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A3548, end = 0x080A357C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A4D1C, end = 0x080A4D54, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A5E28, end = 0x080A5E4C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A62FC, end = 0x080A6320, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A637C, end = 0x080A63A4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080A85DC, end = 0x080A870C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080AFB84, end = 0x080AFBA4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -130,6 +250,65 @@ start = 0x080B01EA
 end = 0x080D00C4
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080B0668, end = 0x080B0688, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B0890, end = 0x080B08DC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B3638, end = 0x080B3664, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B3CF0, end = 0x080B3D20, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B4188, end = 0x080B41BC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B48A0, end = 0x080B48C0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B5090, end = 0x080B50C0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B50E8, end = 0x080B510C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B5D50, end = 0x080B5D78, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B62A8, end = 0x080B62D4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B6958, end = 0x080B6988, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B6E70, end = 0x080B6E90, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B7218, end = 0x080B7240, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B7464, end = 0x080B7490, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B77D0, end = 0x080B7800, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B7E68, end = 0x080B7E98, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B82B4, end = 0x080B82E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B8C78, end = 0x080B8CA0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B958C, end = 0x080B95B4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080B9BF4, end = 0x080B9C1C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BA164, end = 0x080BA18C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BA4B0, end = 0x080BA4D8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BA8C0, end = 0x080BA8E8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BB1F8, end = 0x080BB21C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BB6EC, end = 0x080BB71C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BC190, end = 0x080BC1C0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BC49C, end = 0x080BC4C4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BCB18, end = 0x080BCB4C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BD148, end = 0x080BD168, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BD554, end = 0x080BD57C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BDAC8, end = 0x080BDAF4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BE420, end = 0x080BE444, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BE920, end = 0x080BE940, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BEC0C, end = 0x080BEC34, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BF188, end = 0x080BF1B0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BF6EC, end = 0x080BF714, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080BFBA0, end = 0x080BFBD4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C0504, end = 0x080C0544, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C1298, end = 0x080C12C4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C1BF0, end = 0x080C1C28, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C2834, end = 0x080C285C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C2B60, end = 0x080C2B94, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C3300, end = 0x080C332C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C38B0, end = 0x080C38D8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C4054, end = 0x080C4080, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C4758, end = 0x080C478C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C5678, end = 0x080C56A8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C5C30, end = 0x080C5C60, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C610C, end = 0x080C612C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C6310, end = 0x080C633C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C668C, end = 0x080C66B0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C68EC, end = 0x080C6918, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C7930, end = 0x080C7960, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C8F60, end = 0x080C8F8C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C9254, end = 0x080C927C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080C9B9C, end = 0x080C9BD0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080CA004, end = 0x080CA024, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 
 [[segment]]
 name = "code_08"
@@ -137,6 +316,21 @@ start = 0x080D00C4
 end = 0x080F001E
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x080D6264, end = 0x080D6284, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080D6568, end = 0x080D6588, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080D6998, end = 0x080D69B8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080DC428, end = 0x080DC448, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080DCE84, end = 0x080DCEA4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080E1950, end = 0x080E1970, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080E5190, end = 0x080E51B0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EAF08, end = 0x080EB0D8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EB138, end = 0x080EB1E0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EB4D0, end = 0x080EB4F8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EC9D8, end = 0x080ECA20, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EF15C, end = 0x080EF20C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080EF8A0, end = 0x080EF8C0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 
 [[segment]]
 name = "code_09"
@@ -148,6 +342,21 @@ data_tables = [
     { start = 0x080F5F5C, end = 0x080F8A7C, fmt = "hword", cols = 10 },              # BN4_REWARD_ROWS (276 x 20 hwords)
     { start = 0x080FA90C, end = 0x080FB488, fmt = "record", fields = "bbbbbbbbw" },  # BN4_STORY_BATTLES (245 x 12B)
     { start = 0x080FC144, end = 0x08102FD4, fmt = "word" },                          # encounter map-pointer arrays + 12-byte battle records (RE-06 4)
+    { start = 0x080F2320, end = 0x080F2340, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080F2694, end = 0x080F26C0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080F2A64, end = 0x080F2A84, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080F2D68, end = 0x080F2D88, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x080F54E0, end = 0x080F5534, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08103448, end = 0x08103484, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08103DAC, end = 0x08103DD8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08104C80, end = 0x08104CB0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08104CF0, end = 0x08104D30, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08104F44, end = 0x08104F74, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08108088, end = 0x081080BC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x081083F0, end = 0x08108424, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0810890C, end = 0x08108940, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0810909C, end = 0x081090EC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08109B48, end = 0x08109B88, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
 [[segment]]
@@ -156,6 +365,13 @@ start = 0x08109F04
 end = 0x08120014
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x0810A188, end = 0x0810A1C4, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0810AA4C, end = 0x0810AA88, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0810C220, end = 0x0810C244, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x0810E49C, end = 0x0810E4D8, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+    { start = 0x08110378, end = 0x0811039C, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
+]
 data_from = 0x08113CCC   # build timestamp ("Apr 16 2004 14:36:29") + m4a PCM audio samples
 jumptables = [
     { addr = 0x08110DB8, count = 5 },

@@ -12596,7 +12596,14 @@ _080D6254:
     .word dat_080D6258
     .global dat_080D6258
 dat_080D6258:
-    incrom 0xD6258, 0x20
+    .word sub_080D6278
+    .word sub_0801013A
+    .word sub_080D6320
+    .word sub_08010276
+    .word sub_080104AC
+    .word sub_080112C4   @ BN4_OBSTACLE_PUSHED
+    .word sub_080D6278
+    .word sub_080D631C
 
     .global sub_080D6278
     .thumb_func
@@ -12970,7 +12977,14 @@ _080D6558:
     .word dat_080D655C
     .global dat_080D655C
 dat_080D655C:
-    incrom 0xD655C, 0x20
+    .word sub_080D657C
+    .word sub_0801013A
+    .word sub_080D664C
+    .word sub_08010276
+    .word sub_080104AC
+    .word sub_080112C4   @ BN4_OBSTACLE_PUSHED
+    .word sub_080D6594
+    .word sub_080D65E2
 
     .global sub_080D657C
     .thumb_func
@@ -13511,7 +13525,14 @@ _080D6988:
     .word dat_080D698C   @ BN4_HAMMER_STATES
     .global dat_080D698C
 dat_080D698C:   @ BN4_HAMMER_STATES
-    incrom 0xD698C, 0x20
+    .word sub_080D69AC
+    .word sub_0801013A
+    .word sub_080D6B42
+    .word sub_08010276
+    .word sub_080104AC
+    .word sub_080112C4   @ BN4_OBSTACLE_PUSHED
+    .word sub_080D69BE
+    .word sub_080D69E0
 
     .global sub_080D69AC
     .thumb_func
@@ -25233,7 +25254,14 @@ _080DC418:
     .word dat_080DC41C
     .global dat_080DC41C
 dat_080DC41C:
-    incrom 0xDC41C, 0x20
+    .word sub_080DC43C
+    .word sub_0801013A
+    .word sub_080DC58C
+    .word sub_08010276
+    .word sub_080104AC
+    .word sub_080112C4   @ BN4_OBSTACLE_PUSHED
+    .word sub_080DC45A
+    .word sub_080DC4A0
 
     .global sub_080DC43C
     .thumb_func
@@ -26568,7 +26596,14 @@ _080DCE74:
     .word dat_080DCE78
     .global dat_080DCE78
 dat_080DCE78:
-    incrom 0xDCE78, 0x20
+    .word sub_080DCE98
+    .word sub_0801013A
+    .word sub_080DD024
+    .word sub_08010276
+    .word sub_080104AC
+    .word sub_080112C4   @ BN4_OBSTACLE_PUSHED
+    .word sub_080DCED8
+    .word sub_080DCEDC
 
     .global sub_080DCE98
     .thumb_func
@@ -36089,7 +36124,14 @@ _080E1940:
     .word dat_080E1944
     .global dat_080E1944
 dat_080E1944:
-    incrom 0xE1944, 0x20
+    .word sub_080E1964
+    .word sub_080E19D8
+    .word sub_080E1A2C
+    .word sub_080E1A82
+    .word sub_080E1AEA
+    .word sub_080E1DC0
+    .word sub_080E1E30
+    .word sub_080E1EA0
 
     .global sub_080E1964
     .thumb_func
@@ -43585,7 +43627,14 @@ _080E5180:
     .word dat_080E5184
     .global dat_080E5184
 dat_080E5184:
-    incrom 0xE5184, 0x20
+    .word sub_080E51A4
+    .word sub_080E51A4
+    .word sub_080E51A4
+    .word sub_080E51A4
+    .word sub_080E51B6
+    .word sub_080E51B6
+    .word sub_080E51B6
+    .word sub_080E51B6
 
     .global sub_080E51A4
     .thumb_func
@@ -56636,7 +56685,122 @@ _080EAEF8:
     .word dat_080EAEFC   @ BN4_PLAYER_STATES
     .global dat_080EAEFC
 dat_080EAEFC:   @ BN4_PLAYER_STATES
-    incrom 0xEAEFC, 0x1D0
+    .word sub_08010848
+    .word sub_08010A88
+    .word sub_08010850
+    .word sub_08010960   @ BN4_PLAYER_STRUCK
+    .word sub_080109FA
+    .word sub_08010A9C
+    .word sub_080EB0CC
+    .word sub_080EB1D8
+    .word sub_080EB316
+    .word sub_080EB3FE   @ BN4_BOMBS_STATE
+    .word sub_080EB51E
+    .word sub_080EB854
+    .word sub_080EB9EA   @ BN4_SUPPORT_RUN
+    .word sub_080EBA44
+    .word sub_080EBCAE
+    .word sub_080EBD2A
+    .word sub_080EBDC0
+    .word sub_080EBE90
+    .word sub_080EBF6A
+    .word sub_080EC01E
+    .word sub_080EC0A4
+    .word sub_080EC164
+    .word sub_080EC22E
+    .word sub_080EC2B8
+    .word sub_080EC3A4
+    .word sub_080EC44A
+    .word sub_080EC53E
+    .word sub_080EC574
+    .word sub_080EC642
+    .word sub_080EC71A
+    .word sub_080EC760   @ BN4_SPREAD_STATE
+    .word sub_080EC842
+    .word sub_080EC972   @ BN4_MISC_RUN
+    .word sub_080ECA14
+    .word sub_080ECAAE   @ BN4_FLMLINE_STATE
+    .word sub_080ECB74
+    .word sub_080ECC2C
+    .word sub_080ECCF2
+    .word sub_080ECE14   @ BN4_THUNDER_STATE
+    .word sub_080ECEAE
+    .word sub_080ECF44
+    .word sub_080ED02A
+    .word sub_080ED0FE
+    .word sub_080ED1D2
+    .word sub_080EF87C
+    .word sub_080EFA9A
+    .word sub_080EFB60
+    .word sub_080EFD06
+    .word sub_080EFEC8
+    .word sub_080ED25C
+    .word sub_080ED330
+    .word sub_080ED412
+    .word sub_080ED4C6   @ BN4_TWNFNG_STATE
+    .word sub_080ED572
+    .word sub_080ED6BE
+    .word sub_080ED7E6
+    .word sub_080ED972
+    .word sub_080EDA68
+    .word sub_080F0F64
+    .word sub_080F1030
+    .word sub_080F12E6
+    .word sub_080F1448
+    .word sub_080EDB5C
+    .word sub_080F0AF8
+    .word sub_080F0BCE
+    .word sub_080F0C9E
+    .word sub_080F0DC4
+    .word sub_080F0434
+    .word sub_080F050A
+    .word sub_080F05BA
+    .word sub_080F069A
+    .word sub_080EDC5A   @ BN4_RING_STATE
+    .word sub_080EDD2E
+    .word sub_080F1810
+    .word sub_080F19D6
+    .word sub_080F18F4
+    .word sub_080F1AAC
+    .word sub_080EE752
+    .word sub_080F30EC
+    .word sub_080F31E6
+    .word sub_080F32B0
+    .word sub_080F4434
+    .word sub_080F450E
+    .word sub_080F45EC
+    .word sub_080F46A0
+    .word sub_080F20FC
+    .word sub_080F21B0
+    .word sub_080F22FC
+    .word sub_080EDE0E
+    .word sub_080EE012   @ BN4_MAGBOLT_STATE
+    .word sub_080EE1A2
+    .word sub_080F250C
+    .word sub_080F2670
+    .word sub_080F2A40
+    .word sub_080F2B74
+    .word sub_080F2D42
+    .word sub_080EE2AE
+    .word sub_080EE426
+    .word sub_080EE532   @ BN4_PROPBOM_STATE
+    .word sub_080EE5EA
+    .word sub_080EE688
+    .word sub_080F3A04
+    .word sub_080F3AB4
+    .word sub_080F3BAA
+    .word sub_080F3CE0
+    .word sub_080F3EB6
+    .word sub_080F4C00
+    .word sub_080F4DA0
+    .word sub_080F5024
+    .word sub_080F401C
+    .word sub_080F40CC
+    .word sub_080F4200
+    .word sub_080EE774
+    .word sub_080EE93A
+    .word sub_080EE9EE
+    .word sub_080EEA56
 
     .global sub_080EB0CC
     .thumb_func
@@ -56685,7 +56849,48 @@ _080EB128:
     .word dat_080EB12C
     .global dat_080EB12C
 dat_080EB12C:
-    incrom 0xEB12C, 0xA8
+    .word dat_080EB138
+    .word dat_080EB16C
+    .word dat_080EB1A0
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EEB38
+    .word sub_080EED48
+    .word sub_080EF624
+    .word sub_080F01E8
+    .word sub_080F0880
+    .word sub_080F1674
+    .word sub_080F1DE8
+    .word sub_080F2430
+    .word sub_080F2FAC
+    .word sub_080F361C
+    .word sub_080F3F04
+    .word sub_080F433C
+    .word sub_080F4988
+    .word sub_080F5124
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
+    .word sub_080EED7C
 _080EB1D4:
     .word 0x00000600
 
@@ -57079,7 +57284,16 @@ _080EB4C0:
     .word dat_080EB4EC   @ BN4_BOMBS_ARMS
     .global dat_080EB4C4
 dat_080EB4C4:   @ BN4_BOMBS_SPAWNERS
-    incrom 0xEB4C4, 0x28
+    .word sub_080CE2B8
+    .word sub_080CE2B8
+    .word sub_080CE2B8
+    .word sub_080D2748
+    .word sub_080D3A58
+    .word sub_080D5B62
+    .word sub_080D645E
+    .word sub_080DC30C
+    .word sub_080DCA7C
+    .word sub_080DEEF2   @ BN4_SEEKBOM_THROW
     .global dat_080EB4EC
 dat_080EB4EC:   @ BN4_BOMBS_ARMS
     incrom 0xEB4EC, 0x14
@@ -59776,7 +59990,24 @@ _080EC9C8:
     .word dat_080EC9CC   @ BN4_MISC_ROUTINES
     .global dat_080EC9CC
 dat_080EC9CC:   @ BN4_MISC_ROUTINES
-    incrom 0xEC9CC, 0x48
+    .word sub_080CFE02   @ BN4_COUNTER
+    .word sub_080D252A   @ BN4_MOKORUS
+    .word sub_080D344E   @ BN4_BOOMER
+    .word sub_0800C6BC
+    .word sub_0800C6D2
+    .word sub_080D5DDA   @ BN4_SIDBMBO
+    .word sub_080D7540
+    .word sub_080084BC
+    .word sub_080D4F20   @ BN4_WHITWEB
+    .word sub_080D4F2A   @ whitweb_code_2
+    .word sub_080D4F34   @ three_routines
+    .word sub_0800C720   @ BN4_REPAIR
+    .word sub_080DF98C   @ BN4_SWEEP
+    .word sub_080E9A36   @ BN4_PITRNG
+    .word sub_08022F1C
+    .word sub_08022F5A   @ BN4_MARKING
+    .word sub_08022F6A
+    .word sub_080EAE92   @ BN4_METEORS
 
     .global sub_080ECA14
     .thumb_func
@@ -64980,7 +65211,50 @@ _080EF14C:
     .word 0x0000FFFF
     .global dat_080EF150
 dat_080EF150:
-    incrom 0xEF150, 0xB0
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word dat_080EF1EC
+    .word dat_080EF1EC
+    .word dat_080EF1F8
+    .word sub_080EF200
+    .word sub_080EF282
+    .word sub_080EF2B0
+    .word sub_080EF2D0
+    .word sub_080EF3C8
 
     .global sub_080EF200
     .thumb_func
@@ -65822,7 +66096,14 @@ _080EF890:
     .word dat_080EF894
     .global dat_080EF894
 dat_080EF894:
-    incrom 0xEF894, 0x20
+    .word sub_080EF8B4
+    .word sub_080EF90A
+    .word sub_080EF944
+    .word sub_080EF962
+    .word sub_080EF990
+    .word sub_080EFA14
+    .word sub_080EFA3E
+    .word sub_080EFA7C
 
     .global sub_080EF8B4
     .thumb_func

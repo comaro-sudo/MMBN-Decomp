@@ -355,7 +355,21 @@ _0810A170:
     .word dat_0810A174
     .global dat_0810A174
 dat_0810A174:
-    incrom 0x10A174, 0x3C
+    .word dat_0810A180
+    .word dat_0810A190
+    .word dat_0810A1A0
+    .word sub_0810A1B4
+    .word sub_0810A1B4
+    .word sub_0810A344
+    .word sub_0810A3EC
+    .word sub_0810A228
+    .word sub_0810A2D4
+    .word sub_0810A3A0
+    .word sub_0810A3EC
+    .word sub_0810A1B4
+    .word sub_0810A1B4
+    .word sub_0810A344
+    .word sub_0810A3EC
 _0810A1B0:
     .word 0x0200A740
 
@@ -1429,7 +1443,21 @@ _0810AA34:
     .word dat_0810AA38
     .global dat_0810AA38
 dat_0810AA38:
-    incrom 0x10AA38, 0x3C
+    .word dat_0810AA44
+    .word dat_0810AA54
+    .word dat_0810AA64
+    .word sub_0810AA74
+    .word sub_0810AA74
+    .word sub_0810AC04
+    .word sub_0810AC9C
+    .word sub_0810AAE0
+    .word sub_0810AB8C
+    .word sub_0810AC5C
+    .word sub_0810AC9C
+    .word sub_0810AA74
+    .word sub_0810AA74
+    .word sub_0810AC04
+    .word sub_0810AC9C
 
     .global sub_0810AA74
     .thumb_func
@@ -4450,7 +4478,15 @@ _0810C208:
     .word dat_0810C20C
     .global dat_0810C20C
 dat_0810C20C:
-    incrom 0x10C20C, 0x24
+    .word sub_0810C230
+    .word sub_0810C280
+    .word sub_0810C2C0
+    .word sub_0810C2FC
+    .word sub_0810C33C
+    .word sub_0810C358
+    .word sub_0810C2FC
+    .word sub_0810C3F8
+    .word sub_0810C3FC
 
     .global sub_0810C230
     .thumb_func
@@ -8733,7 +8769,21 @@ _0810E484:
     .word dat_0810E488
     .global dat_0810E488
 dat_0810E488:
-    incrom 0x10E488, 0x3C
+    .word dat_0810E494
+    .word dat_0810E4A4
+    .word dat_0810E4B4
+    .word sub_0810E4C8
+    .word sub_0810E4C8
+    .word sub_0810E648
+    .word sub_0810E6DC
+    .word sub_0810E52C
+    .word sub_0810E5D8
+    .word sub_0810E69C
+    .word sub_0810E6DC
+    .word sub_0810E4C8
+    .word sub_0810E4C8
+    .word sub_0810E648
+    .word sub_0810E6DC
 _0810E4C4:
     .word 0x0200B190
 
@@ -12151,7 +12201,15 @@ _08110360:
     .word dat_08110364
     .global dat_08110364
 dat_08110364:
-    incrom 0x110364, 0x24
+    .word sub_08110388
+    .word sub_08110410
+    .word sub_0811042A
+    .word sub_08110440
+    .word sub_0811044E
+    .word sub_08110460
+    .word sub_08110474
+    .word sub_08110484
+    .word sub_08110494
 
     .global sub_08110388
     .thumb_func

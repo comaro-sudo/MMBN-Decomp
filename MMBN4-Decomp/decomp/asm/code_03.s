@@ -253,7 +253,19 @@ _08035310:
     .word dat_08035314
     .global dat_08035314
 dat_08035314:
-    incrom 0x35314, 0x34
+    .word sub_08035348
+    .word sub_08035418
+    .word sub_080355CC
+    .word sub_08035618
+    .word sub_0803543C
+    .word sub_0803547C
+    .word sub_080354AC
+    .word sub_08036528
+    .word sub_08035644
+    .word sub_08035688
+    .word sub_080356D8
+    .word sub_080354D4
+    .word sub_08035538
 
     .global sub_08035348
     .thumb_func
@@ -2572,7 +2584,22 @@ _08036538:
     .word dat_0803653C
     .global dat_0803653C
 dat_0803653C:
-    incrom 0x3653C, 0x40
+    .word sub_0803657C
+    .word sub_0803657C
+    .word sub_0803657C
+    .word sub_0803657C
+    .word sub_0803657C
+    .word sub_08036604
+    .word sub_08036658
+    .word sub_080366E4
+    .word sub_08036750
+    .word sub_0803678C
+    .word sub_080367E8
+    .word sub_0803682C
+    .word sub_0803685C
+    .word sub_08036888
+    .word sub_080368B0
+    .word sub_080368F0
 
     .global sub_0803657C
     .thumb_func
@@ -3598,7 +3625,27 @@ _08036F9C:
     .word dat_08036FA0
     .global dat_08036FA0
 dat_08036FA0:
-    incrom 0x36FA0, 0x54
+    .word sub_08036FF4
+    .word sub_08037108
+    .word sub_08037130
+    .word sub_08037158
+    .word sub_08037180
+    .word sub_080371A0
+    .word sub_080371C8
+    .word sub_080371F0
+    .word sub_08037210
+    .word sub_08037238
+    .word sub_08037260
+    .word sub_08037280
+    .word sub_080372AC
+    .word sub_080372D8
+    .word sub_08037308
+    .word sub_08037308
+    .word sub_08037308
+    .word sub_08037308
+    .word sub_08037308
+    .word sub_08037350
+    .word sub_0803737C
 
     .global sub_08036FF4
     .thumb_func
@@ -7092,7 +7139,17 @@ _0803943C:
     .word dat_08039440
     .global dat_08039440
 dat_08039440:
-    incrom 0x39440, 0x2C
+    .word sub_0803946C
+    .word sub_080395D8
+    .word sub_08039658
+    .word sub_08039714
+    .word sub_08039940
+    .word sub_08039DC4
+    .word sub_0803A120
+    .word sub_0803A684
+    .word sub_0803A2C8
+    .word sub_0803A768
+    .word sub_0803A78C
 
     .global sub_0803946C
     .thumb_func
@@ -10273,7 +10330,16 @@ _0803AE3C:
     .word dat_0803AE40
     .global dat_0803AE40
 dat_0803AE40:
-    incrom 0x3AE40, 0x28
+    .word sub_0803AE68
+    .word sub_0803AE98
+    .word sub_0803AEFC
+    .word sub_0803AF34
+    .word sub_0803AF34
+    .word sub_0803AF7C
+    .word sub_0803AF7C
+    .word sub_0803AFD0
+    .word sub_0803B038
+    .word sub_0803B078
 
     .global sub_0803AE68
     .thumb_func
@@ -13581,7 +13647,16 @@ _0803C86C:
     .word dat_0803C870
     .global dat_0803C870
 dat_0803C870:
-    incrom 0x3C870, 0x28
+    .word sub_0803C898
+    .word sub_0803C918
+    .word sub_0803C9C4
+    .word sub_0803CA40
+    .word sub_0803CAB0
+    .word sub_0803CB08
+    .word sub_0803CB08
+    .word sub_0803CB64
+    .word sub_0803CB88
+    .word sub_0803CC1C
 
     .global sub_0803C898
     .thumb_func
@@ -15632,7 +15707,19 @@ _0803D9C4:
     .word dat_0803D9C8
     .global dat_0803D9C8
 dat_0803D9C8:
-    incrom 0x3D9C8, 0x34
+    .word sub_0803D9FC
+    .word sub_0803DAC8
+    .word sub_0803DAF4
+    .word sub_0803DB5C
+    .word sub_0803DBA8
+    .word sub_0803DC44
+    .word sub_0803DCA8
+    .word sub_0803DCF0
+    .word sub_0803DD60
+    .word sub_0803DDF4
+    .word sub_0803DE44
+    .word sub_0803DFF0
+    .word sub_0803E07C
 
     .global sub_0803D9FC
     .thumb_func
@@ -16162,7 +16249,19 @@ _0803DE54:
     .word dat_0803DE58
     .global dat_0803DE58
 dat_0803DE58:
-    incrom 0x3DE58, 0x34
+    .word sub_0803DE8C
+    .word sub_0803DE8C
+    .word sub_0803DE8C
+    .word sub_0803DEC0
+    .word sub_0803DEC0
+    .word sub_0803DF1C
+    .word sub_0803DF1C
+    .word sub_0803DF1C
+    .word sub_0803DF1C
+    .word sub_0803DFAC
+    .word sub_0803DF1C
+    .word sub_0803DF1C
+    .word sub_0803DF54
 
     .global sub_0803DE8C
     .thumb_func
@@ -18690,7 +18789,17 @@ _0803F204:
     .word dat_0803F208
     .global dat_0803F208
 dat_0803F208:
-    incrom 0x3F208, 0x2C
+    .word sub_0803F234
+    .word sub_0803F2A8
+    .word sub_0803F300
+    .word sub_0803F374
+    .word sub_0803F378
+    .word sub_0803F37C
+    .word sub_0803F394
+    .word sub_0803F408
+    .word sub_0803F42C
+    .word sub_0803F450   @ WaitingRoomClearSlotForSend
+    .word sub_0803F4B8
 
     .global sub_0803F234
     .thumb_func
@@ -20299,7 +20408,17 @@ _0803FE80:
     .word dat_0803FE84
     .global dat_0803FE84
 dat_0803FE84:
-    incrom 0x3FE84, 0x2C
+    .word sub_0803FEB0
+    .word sub_0803FF28
+    .word sub_0803FF6C
+    .word sub_0803FFBC
+    .word sub_0803FFC0
+    .word sub_0803FFC4
+    .word sub_0803FFF0
+    .word sub_0804000C
+    .word sub_08040058
+    .word sub_0804007C
+    .word sub_08040094
 
     .global sub_0803FEB0
     .thumb_func
@@ -21669,7 +21788,18 @@ _08040954:
     .word dat_08040958
     .global dat_08040958
 dat_08040958:
-    incrom 0x40958, 0x30
+    .word sub_0804098C
+    .word sub_080409EC
+    .word sub_08040AA0
+    .word sub_08040B78
+    .word sub_08040BF4
+    .word sub_08040D88
+    .word sub_08040ED0
+    .word sub_08040FAC
+    .word sub_08041028
+    .word sub_0804103C
+    .word sub_08041078
+    .word sub_08041090
 _08040988:
     .word 0x020073F8
 
@@ -23647,7 +23777,16 @@ _08041880:
     .word dat_08041884
     .global dat_08041884
 dat_08041884:
-    incrom 0x41884, 0x28
+    .word dat_086F64C8
+    .word dat_086F65A8
+    .word dat_086F61C0
+    .word dat_086F61F0
+    .word dat_086F622C
+    .word dat_086F626C
+    .word dat_086F62AC
+    .word dat_086F62EC
+    .word dat_086F6394
+    .word 0x00000000
 _080418AC:
     .word dat_080418B0
     .global dat_080418B0
@@ -23834,7 +23973,53 @@ _08041A4C:
     .word dat_08041A50
     .global dat_08041A50
 dat_08041A50:
-    incrom 0x41A50, 0xBC
+    .word 0x00000000
+    .word sub_08041B0C
+    .word sub_08041B18
+    .word sub_08041B30
+    .word sub_08041B48
+    .word sub_08041B60
+    .word sub_08041B78
+    .word sub_08041B90
+    .word sub_08041B9C
+    .word sub_08041BA8
+    .word sub_08041BB4
+    .word sub_08041BC0
+    .word sub_08041BCC
+    .word sub_08041BD8
+    .word sub_08041BE4
+    .word sub_08041BF0
+    .word sub_08041C00
+    .word sub_08041C10
+    .word sub_08041C20
+    .word sub_08041C30
+    .word sub_08041C44
+    .word sub_08041C50
+    .word sub_08041CA4
+    .word sub_08041CB8
+    .word sub_08041CE4
+    .word sub_08041CF0
+    .word sub_08041CFC
+    .word sub_08041D08
+    .word sub_08041D14
+    .word sub_08041D20
+    .word sub_08041D2C
+    .word sub_08041D38
+    .word sub_08041D44
+    .word sub_08041D50
+    .word sub_08041D5C
+    .word sub_08041D74
+    .word sub_08041D8C
+    .word sub_08041DA4
+    .word sub_08041DB0
+    .word sub_08041DBC
+    .word sub_08041DC8
+    .word sub_08041DE0
+    .word sub_08041DF0
+    .word sub_08041E00
+    .word sub_08041E10
+    .word sub_08041E24
+    .word sub_08041E38
 
     .global sub_08041B0C
     .thumb_func
@@ -24425,7 +24610,140 @@ _08041E88:
     .word dat_08041E8C
     .global dat_08041E8C
 dat_08041E8C:
-    incrom 0x41E8C, 0x218
+    .word sub_08041DE0
+    .word sub_08041DF0
+    .word sub_08041DF0
+    .word sub_080420A4
+    .word sub_080420A4
+    .word sub_08041E00
+    .word sub_08041E00
+    .word sub_080420B4
+    .word sub_080420B4
+    .word sub_08041E10
+    .word sub_08041E10
+    .word sub_080420C4
+    .word sub_080420D8
+    .word sub_080420EC
+    .word sub_080420F8
+    .word sub_0804210C
+    .word sub_08042120
+    .word sub_08042134
+    .word sub_08042154
+    .word sub_08042170
+    .word sub_08042184
+    .word sub_08042198
+    .word sub_080421AC
+    .word sub_080421C0
+    .word sub_080421D4
+    .word sub_080421E8
+    .word sub_080421FC
+    .word sub_08042210
+    .word sub_08042224
+    .word sub_08042228
+    .word sub_0804222C
+    .word sub_08042230
+    .word sub_08042230
+    .word sub_08041E24
+    .word sub_08041E24
+    .word sub_08042244
+    .word sub_08042260
+    .word sub_08041E38
+    .word sub_0804227C
+    .word sub_08042298
+    .word sub_080422A4
+    .word sub_080422B0
+    .word sub_080422BC
+    .word sub_080422C8
+    .word sub_080422D4
+    .word sub_080422E0
+    .word sub_080422EC
+    .word sub_08042300
+    .word sub_0804230C
+    .word sub_08042318
+    .word sub_08042334
+    .word sub_08042354
+    .word sub_08042368
+    .word sub_0804237C
+    .word sub_08042390
+    .word sub_080423A4
+    .word sub_080423B8
+    .word sub_080423CC
+    .word sub_080423E0
+    .word sub_080423F4
+    .word sub_08042400
+    .word sub_0804240C
+    .word sub_0804240C
+    .word sub_080429C4
+    .word sub_080429C4
+    .word sub_08042420
+    .word sub_08042434
+    .word sub_08042450
+    .word sub_0804246C
+    .word sub_08042478
+    .word sub_08042484
+    .word sub_08042490
+    .word sub_08042544
+    .word sub_08042550
+    .word sub_080424F4
+    .word sub_0804251C
+    .word sub_0804249C
+    .word sub_080424C8
+    .word sub_0804255C
+    .word sub_08042570
+    .word sub_08042584
+    .word sub_08041D38
+    .word sub_080425AC
+    .word sub_080425C0
+    .word sub_080425D4
+    .word sub_080425E8
+    .word sub_080425FC
+    .word sub_08042610
+    .word sub_08042624
+    .word sub_08042628
+    .word sub_08042634
+    .word sub_08042640
+    .word sub_0804265C
+    .word sub_08042670
+    .word sub_0804268C
+    .word sub_080426A0
+    .word sub_080426BC
+    .word sub_080426D0
+    .word sub_080426EC
+    .word sub_08042700
+    .word sub_0804271C
+    .word sub_08042738
+    .word sub_0804274C
+    .word sub_08042758
+    .word sub_08042780
+    .word sub_080427A8
+    .word sub_080427CC
+    .word sub_080427E0
+    .word sub_080427EC
+    .word sub_080427F8
+    .word sub_080429D8
+    .word sub_08042814
+    .word sub_08042840
+    .word sub_0804282C
+    .word sub_08042A04
+    .word sub_0804284C
+    .word sub_08042860
+    .word sub_08042874
+    .word sub_08042888
+    .word sub_0804289C
+    .word sub_080428B8
+    .word sub_080428D4
+    .word sub_080428E8
+    .word sub_080428FC
+    .word sub_08042910
+    .word sub_08042924
+    .word sub_08042938
+    .word sub_0804294C
+    .word sub_08042960
+    .word sub_08042974
+    .word sub_08042988
+    .word sub_0804299C
+    .word sub_080429B0
+    .word sub_080429F8
 
     .global sub_080420A4
     .thumb_func
@@ -26081,7 +26399,54 @@ _08042B14:
     .word dat_08042B18
     .global dat_08042B18
 dat_08042B18:
-    incrom 0x42B18, 0xC0
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word sub_08042BD8
+    .word sub_08042BDC
+    .word sub_08042BF8
+    .word sub_08042C14
+    .word sub_08042C30
+    .word sub_08042C34
+    .word sub_08042C50
+    .word sub_08042C6C
+    .word sub_08042C88
+    .word sub_08042C8C
+    .word sub_08042CA8
+    .word sub_08042CC4
+    .word sub_08042CE0
+    .word sub_08042CE4
+    .word sub_08042D00
+    .word sub_08042D1C
+    .word sub_08042D38
+    .word sub_08042D3C
+    .word sub_08042D58
+    .word sub_08042D74
+    .word sub_08042D90
+    .word sub_08042D94
+    .word sub_08042DB0
+    .word sub_08042DCC
+    .word sub_08042DE8
+    .word sub_08042DEC
+    .word sub_08042E08
+    .word sub_08042E24
+    .word sub_08042E40
+    .word sub_08042E44
+    .word sub_08042E60
+    .word sub_08042E7C
+    .word sub_08042E98
+    .word sub_08042E9C
+    .word sub_08042EB8
+    .word sub_08042ED4
+    .word sub_08042EF0
+    .word sub_08042EF4
+    .word sub_08042F12
+    .word sub_08042F30
+    .word sub_08042F4E
+    .word sub_08042F52
+    .word sub_08042F56
+    .word sub_08042F5A
 
     .global sub_08042BD8
     .thumb_func
@@ -26855,7 +27220,15 @@ _08043048:
     .word dat_0804304C
     .global dat_0804304C
 dat_0804304C:
-    incrom 0x4304C, 0x24
+    .word dat_08043079
+    .word dat_0804307D
+    .word dat_08043081
+    .word dat_08043085
+    .word dat_08043088
+    .word dat_0804308A
+    .word dat_0804308E
+    .word dat_08043090
+    .word dat_08043094
     .global dat_08043070
 dat_08043070:
     incrom 0x43070, 0x28
@@ -27495,7 +27868,19 @@ _0804350C:
     .word dat_08043510
     .global dat_08043510
 dat_08043510:
-    incrom 0x43510, 0x34
+    .word dat_086C17C8
+    .word dat_086C1BC8
+    .word dat_086C1DC8
+    .word dat_086C1FC8
+    .word dat_086C21C8
+    .word dat_086C23C8
+    .word dat_086C19C8
+    .word dat_086C23C8
+    .word dat_086C27C8
+    .word dat_086C29C8
+    .word dat_086C2BC8
+    .word dat_086C2DC8
+    .word dat_086C2FC8
 _08043544:
     .word dat_08043548
     .global dat_08043548
@@ -27525,7 +27910,19 @@ _08043604:
     .word dat_08043608
     .global dat_08043608
 dat_08043608:
-    incrom 0x43608, 0x34
+    .word dat_086C3208
+    .word dat_086C3C08
+    .word dat_086C3CF8
+    .word dat_086C3DE8
+    .word dat_086C3ED8
+    .word dat_086C3FC8
+    .word dat_086C3708
+    .word dat_086C3FC8
+    .word dat_086C45B8
+    .word dat_086C46A8
+    .word dat_086C4798
+    .word dat_086C4888
+    .word dat_086C4978
 _0804363C:
     .word dat_08043640
     .global dat_08043640
@@ -30980,7 +31377,15 @@ _0804517C:
     .word dat_08045180
     .global dat_08045180
 dat_08045180:
-    incrom 0x45180, 0x24
+    .word sub_080451B0
+    .word sub_08045208
+    .word sub_08045234
+    .word sub_08045274
+    .word sub_080452C4
+    .word sub_080452D4
+    .word sub_080452F4
+    .word sub_08045388
+    .word sub_08045398
 _080451A4:
     .word dat_086C792C
 _080451A8:
@@ -33168,7 +33573,43 @@ _080478C4:
     .word dat_080478C8
     .global dat_080478C8
 dat_080478C8:
-    incrom 0x478C8, 0x94
+    .word sub_0804795C
+    .word sub_08047970
+    .word sub_08047984
+    .word sub_080479B8
+    .word sub_080479EC
+    .word sub_08047A20
+    .word sub_08047A38
+    .word sub_08047A90
+    .word sub_08047AA4
+    .word sub_08047AF8
+    .word sub_08047B0C
+    .word sub_08047B28
+    .word sub_08047B3C
+    .word sub_08047BC0
+    .word sub_08047BD4
+    .word sub_08047C08
+    .word sub_08047C1C
+    .word sub_08047C84
+    .word sub_08047C98
+    .word sub_08047CB4
+    .word sub_08047CC8
+    .word sub_08047D38
+    .word sub_08047D4C
+    .word sub_08047D90
+    .word sub_08047DC8
+    .word sub_08047DDC
+    .word sub_08047ED4
+    .word sub_08047EE8
+    .word sub_08047F04
+    .word sub_08047F18
+    .word sub_08047F6C
+    .word sub_08047F80
+    .word sub_08047F9C
+    .word sub_08047FC0
+    .word sub_08047FF4
+    .word sub_08048008
+    .word sub_08048028
 
     .global sub_0804795C
     .thumb_func
@@ -35775,7 +36216,18 @@ dat_0804900C:
     incrom 0x4900C, 0xD8
     .global dat_080490E4
 dat_080490E4:
-    incrom 0x490E4, 0x30
+    .word dat_086FCA80
+    .word dat_086FBAE8
+    .word dat_086FD4AC
+    .word dat_086FCCFC
+    .word dat_086FDF40
+    .word dat_086FD6A0
+    .word dat_086FE9E0
+    .word dat_086FE108
+    .word dat_086FF460
+    .word dat_086FEC28
+    .word dat_086FFD5C
+    .word dat_086FF658
 
     .global sub_08049114
     .thumb_func
@@ -35827,7 +36279,16 @@ _08049164:
     .word dat_08049168
     .global dat_08049168
 dat_08049168:
-    incrom 0x49168, 0x28
+    .word sub_08049190
+    .word sub_08049240
+    .word sub_0804927C
+    .word sub_080492D8
+    .word sub_0804932C
+    .word sub_08049398
+    .word sub_080493EC
+    .word sub_08049430
+    .word sub_08049488
+    .word sub_080494C0
 
     .global sub_08049190
     .thumb_func
@@ -37002,7 +37463,17 @@ _08049E10:
     .word dat_08049E14
     .global dat_08049E14
 dat_08049E14:
-    incrom 0x49E14, 0x2C
+    .word sub_08049E40   @ ShopStateOpen
+    .word sub_08049EEC
+    .word sub_08049F08
+    .word sub_08049F20
+    .word sub_08049F64
+    .word sub_08049FA0
+    .word sub_08049FF4
+    .word sub_0804A160
+    .word sub_0804A188
+    .word sub_0804A1A4
+    .word sub_0804A1DC
 
     .global sub_08049E40
     .thumb_func
@@ -43422,10 +43893,62 @@ _0804E8FC:
     .hword 0x0000
     .global dat_0804E900
 dat_0804E900:   @ BN4_TEXT_COMMANDS
-    incrom 0x4E900, 0x6C
+    .word sub_0804E9D8   @ ScriptCmd_end
+    .word sub_0804EA44   @ ScriptCmd_keyWait
+    .word sub_0804EAC8   @ ScriptGroup_E7
+    .word sub_0804EBE8   @ ScriptCmd_E8
+    .word sub_0804EC28   @ ScriptCmd_flagAddBBSMessage
+    .word sub_0804ED18   @ ScriptCmd_option
+    .word sub_0804EDE4   @ ScriptCmd_space
+    .word sub_0804EE48   @ ScriptCmd_select
+    .word sub_0804EF6C   @ ScriptCmd_wait
+    .word sub_0804F00C   @ ScriptGroup_EE
+    .word sub_0804F52C   @ ScriptCmd_jumpRandom
+    .word sub_0804F5EC   @ ScriptCmd_textSpeed
+    .word sub_0804F610   @ ScriptCmd_clearMsg
+    .word sub_0804F668   @ ScriptCmd_controlLock
+    .word sub_0804F69C   @ ScriptCmd_itemGive
+    .word sub_0804F750   @ ScriptCmd_mugshotAnimation
+    .word sub_0804F850   @ ScriptCmd_color
+    .word sub_08050570   @ ScriptGroup_F6
+    .word sub_0804F934   @ ScriptGroup_F7
+    .word sub_08051418   @ ScriptGroup_F8
+    .word sub_0804FA8C   @ ScriptGroup_F9
+    .word sub_08051474   @ ScriptGroup_FA
+    .word sub_08050164   @ ScriptGroup_FB
+    .word sub_08050420   @ ScriptGroup_FC
+    .word sub_0805002C   @ ScriptGroup_FD
+    .word sub_08050B50   @ ScriptGroup_FE
+    .word sub_080514E0   @ ScriptGroup_FF
     .global dat_0804E96C
 dat_0804E96C:
-    incrom 0x4E96C, 0x6C
+    .word sub_0804EA30
+    .word sub_0804EAC4
+    .word sub_0804EBE4
+    .word sub_0804EC18
+    .word sub_0804ECFC
+    .word sub_0804ED44
+    .word sub_0804EE24
+    .word sub_0804EF64
+    .word sub_0804F008
+    .word sub_0804F4EC
+    .word sub_0804F5D0
+    .word sub_0804F60C
+    .word sub_0804F664
+    .word sub_0804F698
+    .word sub_0804F70C
+    .word sub_0804F838
+    .word sub_0804F888
+    .word sub_080506B0
+    .word sub_0804FA60
+    .word sub_08051460
+    .word sub_0804FF50
+    .word sub_080514CC
+    .word sub_08050390
+    .word sub_08050554
+    .word sub_08050124
+    .word sub_08051070
+    .word sub_08051570
 
     .global sub_0804E9D8
     .thumb_func
@@ -43781,7 +44304,16 @@ _0804EC48:
     .word dat_0804EC4C
     .global dat_0804EC4C
 dat_0804EC4C:
-    incrom 0x4EC4C, 0x28
+    .word sub_0804EC74
+    .word sub_0804EC80
+    .word sub_0804EC8C
+    .word sub_0804ECAC
+    .word sub_0804ECC4
+    .word 0x00000000
+    .word sub_0804ECDC
+    .word sub_0804EC98
+    .word sub_0804ECA4
+    .word sub_0804ECF0
 
     .global sub_0804EC74
     .thumb_func
@@ -44316,7 +44848,51 @@ _0804F01C:
     .word dat_0804F020
     .global dat_0804F020
 dat_0804F020:
-    incrom 0x4F020, 0xB4
+    .word sub_0804F154   @ ScriptCmd_checkFlag
+    .word sub_0804F180   @ ScriptCmd_checkChapter
+    .word sub_0804F128   @ ScriptCmd_checkSubArea
+    .word sub_0804F1AC   @ ScriptCmd_checkGlobal
+    .word sub_0804F1DC   @ ScriptCmd_checkTournamentRound
+    .word sub_0804F204   @ ScriptCmd_checkGameVersion
+    .word sub_0804F21C   @ ScriptCmd_checkPlaythrough
+    .word sub_0804F248   @ ScriptCmd_checkItem
+    .word sub_0804F27C   @ ScriptCmd_checkChipCode
+    .word sub_0804F27C   @ ScriptCmd_checkChipCode
+    .word sub_0805076C   @ ScriptCmd_checkGiveItem
+    .word sub_0805076C   @ ScriptCmd_checkGiveItem
+    .word sub_0805076C   @ ScriptCmd_checkGiveItem
+    .word sub_0805076C   @ ScriptCmd_checkGiveItem
+    .word sub_0805081C   @ ScriptCmd_checkGiveZenny
+    .word sub_0805081C   @ ScriptCmd_checkGiveZenny
+    .word sub_0805081C   @ ScriptCmd_checkGiveZenny
+    .word sub_0805081C   @ ScriptCmd_checkGiveZenny
+    .word sub_080509C8   @ ScriptCmd_checkGiveBugFrags
+    .word sub_080509C8   @ ScriptCmd_checkGiveBugFrags
+    .word sub_080509C8   @ ScriptCmd_checkGiveBugFrags
+    .word sub_080509C8   @ ScriptCmd_checkGiveBugFrags
+    .word sub_08050ABC   @ ScriptCmd_checkGiveTournamentPoints
+    .word sub_08050ABC   @ ScriptCmd_checkGiveTournamentPoints
+    .word sub_08050ABC   @ ScriptCmd_checkGiveTournamentPoints
+    .word sub_08050ABC   @ ScriptCmd_checkGiveTournamentPoints
+    .word sub_0804F324   @ ScriptCmd_checkHaveOneItem
+    .word sub_08050910   @ ScriptCmd_itemGiveNaviCustProgram
+    .word sub_08050910   @ ScriptCmd_itemGiveNaviCustProgram
+    .word sub_08050910   @ ScriptCmd_itemGiveNaviCustProgram
+    .word sub_08050910   @ ScriptCmd_itemGiveNaviCustProgram
+    .word sub_0804F35C   @ ScriptCmd_checkToyRobotStory
+    .word sub_0804F3BC   @ ScriptCmd_checkHaveTwoItem
+    .word sub_0804F3FC   @ ScriptCmd_checkBattleResult
+    .word sub_0804F41C   @ ScriptCmd_checkShopStock
+    .word 0x00000000
+    .word sub_0804F444   @ ScriptCmd_checkLibraryStandard
+    .word sub_0804F444   @ ScriptCmd_checkLibraryStandard
+    .word sub_0804F444   @ ScriptCmd_checkLibraryStandard
+    .word sub_0804F444   @ ScriptCmd_checkLibraryStandard
+    .word sub_0804F0F8   @ ScriptCmd_checkMultiFlag
+    .word sub_0804F0D4   @ ScriptCmd_checkWaterGodProgram
+    .word sub_0804F27C   @ ScriptCmd_checkChipCode
+    .word sub_0804F494   @ ScriptCmd_checkDoubleSouls
+    .word sub_0804F4C0   @ ScriptCmd_checkKarma
 
     .global sub_0804F0D4
     .thumb_func

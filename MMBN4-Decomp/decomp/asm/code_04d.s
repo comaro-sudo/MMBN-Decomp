@@ -1789,7 +1789,14 @@ _0806FDE8:
     .word dat_0806FDEC
     .global dat_0806FDEC
 dat_0806FDEC:
-    incrom 0x6FDEC, 0x20
+    .word sub_0806FE0C
+    .word sub_0806FE28
+    .word sub_0806FE44
+    .word sub_0806FE60
+    .word sub_0806FE7C
+    .word sub_0806FE98
+    .word sub_0806FEB4
+    .word sub_0806FED0
 
     .global sub_0806FE0C
     .thumb_func
