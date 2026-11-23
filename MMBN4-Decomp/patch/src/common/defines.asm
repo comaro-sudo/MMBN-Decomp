@@ -15,6 +15,7 @@ CHIP_BASS           equ 301
 CHIP_DELTARAY       equ 302
 CHIP_BASSANLY       equ 306
 CHIP_BLAKBARR       equ 308
+CHIP_DUO            equ 0x137       ; Duo (Giga), code D only
 
 ; Give a chip: r0 id, r1 code, r2 quantity (pack + Library flag + chip key). code_01, same address in RS and BM
 CHIP_GIVE           equ 0x0801913E

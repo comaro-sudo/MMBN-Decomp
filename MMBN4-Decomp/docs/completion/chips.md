@@ -41,7 +41,9 @@ Sources include story rewards, the Bass fight in Black Earth 2, S ranks against 
 GunSolEX, also once thought to be special, has an in-game source: a Number Lotto code.
 
 **Owner decision (2026-11-23) for the three special chips:**
-- **Duo:** a **reward for beating Duo at his highest tier** (V3/Ω, or in a post-game rematch). The same kind of hook as the Bass patch (WP-D3): grant the chip after that battle.
+- **Duo:** a **reward for beating Duo at his highest tier** (V3/Ω, or in a post-game rematch).
+  - **Implemented** as a data change (`patch/src/common/wp_d2_duo_chip_reward.asm`): Duoβ (`0xE2`) and DuoΩ (`0xE3`) drop the Duo chip (`0x137`, code D) in every slot, in both drop tables. They gave 5000 Zenny before.
+  - T: still to confirm in-game that those battles reach the results screen.
 - **Z-Saver and Grand Prix Power (owner, 2026-11-23; replaces the shop plan below): two Blue Mystery Data in an out-of-the-way corner** of a net area, one holding Z-Saver `Z` and one Grand Prix Power `G`.
   - Why: the shop route needed a code hook with no free code space nearby, plus a load hook for old saves.
   - How (RE-07, `decomp/notes/re07-mystery-data.md`):
