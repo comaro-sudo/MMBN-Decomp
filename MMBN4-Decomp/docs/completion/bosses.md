@@ -38,12 +38,14 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
 - **Bass:** drops `Bass X` in Red Sun and `BassAnly X` in Blue Moon. BassΩ and BassXX drop `BlakBarr A` in RS and `DeltaRay Z` in BM (columns 3–4).
 - **61 virus families drop a different code for the same chip**: e.g. Mettaur's `Guard1 L` (RS) vs `Guard1 V` (BM), Billy's `Thunder1 L` vs `P`, the Elmperor elements, BomBoy and the CircGuns. The full list is RE-06 §7.
 
-**For C2 (every chip):** one save needs both versions' codes. Possible Violet Eclipse rules:
-- (a) each drop slot picks the RS or BM code at random;
-- (b) the code follows the chosen version, with the other version's codes in the Frequency Tuner tiers;
-- (c) new drop slots at higher Busting Levels.
-
-That's an owner decision; it's added to `plan/DEFINITIVE-EDITION.md` §7's list.
+**Owner decision (2026-11-23), `plan/DEFINITIVE-EDITION.md` §7 question 4:**
+- **Random per drop.** Wherever the two versions' drop rows differ, a drop gives the Red Sun or the Blue Moon item at random (50/50), each time.
+  - Implementation idea: keep both versions' rows. After `BN4_REWARD_PICK` (`0x080F580C`) picks its slot, choose the RS or BM row with one RNG bit. The table costs about 64 × 40 bytes (2.5 KiB) in free space (`docs/re/free-space.md`).
+- **Bass is repeatable.** Bass, BassΩ and BassXX must be fightable as many times as the player wants, so that the random rule eventually gives all four chips: Bass, BassAnly, BlakBarr and DeltaRay.
+  - Bass's every drop column gives his chip, so any Busting Level works. BlakBarr/DeltaRay need columns 3–4 (Busting Level 7 or higher, RE-06 §3).
+  - Today Bass is a one-time story battle (`BN4_STORY_BATTLES` id 176). BassΩ roams Black Earth 2 behind flag `0x9F`. BassXX is in a story-override table.
+  - The rematch (WP-D3) must re-arm all three. The simplest version is a repeatable script that starts battle 176 and the BassΩ/BassXX records again. (T: whether BassΩ already respawns after a win needs an in-game check.)
+- (Considered and not chosen: the code follows the chosen version; extra drop slots at high Busting Levels.)
 
 ## What blocks completion (updated)
 
@@ -51,8 +53,8 @@ That's an owner decision; it's added to `plan/DEFINITIVE-EDITION.md` §7's list.
 |---|---|
 | The other version's six Navis are never fielded | WP-D4, now smaller: tournament pools, flags and scripts (data already present) |
 | Tiers depend on the playthrough count | Frequency Tuner (WP-B2): `BN4_ID_RAISE` is the single place to hook |
-| The other version's drop codes | One of the rules above (owner decision) |
-| No rematches after the story | WP-D3: boss rush or BBS challenges. The 245 story-battle records can be reused as they are |
+| The other version's drop codes | Random RS/BM item per drop (owner decision, above) |
+| No rematches after the story | WP-D3: boss rush or BBS challenges. The 245 story-battle records can be reused as they are. **Bass, BassΩ and BassXX must be repeatable** (owner decision) |
 | The WoodMan bug | WP-A1 (done) |
 
 ## Next

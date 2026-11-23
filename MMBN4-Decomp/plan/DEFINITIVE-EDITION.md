@@ -78,4 +78,6 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 1. **Version choice:** in the definitive ROM, does the player still pick Red Sun or Blue Moon (story and rival differ), with the other version's exclusives added as extra content? Or should both stories merge into one?
 2. **Stronger Navi tiers and post-game:** keep the original requirements (they are part of the challenge) as long as they're reachable in one save?
 3. **Dark Chips and Karma:** "every chip" includes Dark Chips, and using them changes Karma. Should collecting them be possible without being forced into Dark Karma?
-4. **Version drop codes** (from RE-06, [docs/completion/bosses.md](../docs/completion/bosses.md) §3): 61 virus families and Bass drop a different code (or chip) per version. Which rule should one save use: (a) each drop slot picks either version's code at random, (b) the code follows the chosen version, with the other's codes on the Frequency Tuner tiers, or (c) extra drop slots at high Busting Levels?
+4. ~~**Version drop codes**~~: **decided by the owner, 2026-11-23** ([docs/completion/bosses.md](../docs/completion/bosses.md) §3).
+   - **Rule (a):** every drop that differs between versions (61 virus families, Bass, BassΩ, BassXX) gives the Red Sun or the Blue Moon item **at random, each time it drops**.
+   - **Bass can be fought again and again**, so the player can collect all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay). This is part of the rematch system (WP-D3).
