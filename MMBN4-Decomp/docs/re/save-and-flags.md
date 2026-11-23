@@ -115,7 +115,8 @@ Code calls these at about 186 set sites and 373 test sites; most story flags are
 | `0x1166` | Last save or load succeeded | V, R |
 | `0x1188` | Second block (`0x0E007F00`) last written or read successfully | V |
 | `0x118A` | Saving refused | V (when it is set: T) |
-| `0x15C0`–`0x163F` | Logged by `sub_0802516E`: sets `f` and `f + 0x80`, and appends `f - 0x15C0` to a list at `0x02006EC0` (count `0x02001600`; cleared by `sub_080251D6`). Likely one-shot Mystery Data per map visit | T (RE-07) |
+| `0x0D00`–`0x10FF` | **Mystery Data taken** (Blue/Purple), one flag per placement, plus a 2-byte state per flag in save slot `+0x74`. Kept across New Game+ and advanced by `MysteryDataAdvanceAll` (`sub_080ADE5C`). See `decomp/notes/re07-mystery-data.md` (Gemini) | V (RE-07) |
+| `0x15C0`–`0x163F` | Logged by `sub_0802516E`: sets `f` and `f + 0x80`, and appends `f - 0x15C0` to a list at `0x02006EC0` (count `0x02001600`; cleared by `sub_080251D6`). Not Mystery Data (RE-07 corrected this guess); the debug menu and a story hook (`sub_08085EC0`) set it. Purpose unknown | T |
 | `0x1200`–`0x13FF` | Logged by `sub_0802519C`: sets `f` and `f - 0x1200 + 0x1400`, and appends to 64-entry lists at `0x020017A0` (counts `0x02001500`) | T |
 
 ## 3. Playthrough counter (RE-03)

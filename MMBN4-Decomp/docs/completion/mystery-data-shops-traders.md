@@ -17,7 +17,12 @@ Green Mystery Data (random, respawning) isn't on the maps. Its tables are per ar
 
 ## What this means for Violet Eclipse
 
-- **One-shot items:** 78 Blue and Purple Mystery Data are taken once per playthrough. New Game+ resets the Mystery Data flag range (`0x15C0`–`0x163F`, see [`../re/completion-and-new-game-plus.md`](../re/completion-and-new-game-plus.md) §3), so they come back, but anything that differs by tier must be taken in each mode. That's C4's risk. WP-B3 keeps every Mystery Data item reachable after any story point.
+- **One-shot items** (corrected by RE-07, [`../../decomp/notes/re07-mystery-data.md`](../../decomp/notes/re07-mystery-data.md)):
+  - The ROM has **123 Blue/Purple Mystery Data**: 109 Blue and 14 Purple. The 78 on the maps all match. The other 45 Blue sit in small scenario comps the maps don't show, including SpinWhit/SpinPink/SpinYllw and ExpMemry in HeroComp, SubMemry, FullCust `*` in WtrGodComp12, and 7 HP Memory.
+  - Their "taken" flags are **`0x0D00`–`0x10FF`**, with a 2-byte state per flag in save slot `+0x74`. The earlier guess, `0x15C0`–`0x163F`, was wrong.
+  - On New Game+ the game keeps that state, then advances **only the ones that were taken** to their next content and clears their flags (`MysteryDataAdvanceAll`, `sub_080ADE5C`). An untaken item keeps its reward, so skipping one doesn't lose it.
+  - C4's real risk is therefore smaller than first thought: only content that sits in a scenario comp a version never opens. WP-B3 should target those comps (e.g. BM's WtrGodComps), not the flag range.
+  - **Green Mystery Data:** 46 tables in 22 net areas, 3 tiers × 8 weighted entries. Some entries are virus-guarded chips or Zenny.
 - **The economy:** Buying every HP Memory in the shops costs about 208,000Z (14 purchases). That's the data behind the Zenny ×1.75 and price changes (WP-A2/A3); the AddZenny hook is in [`../re/save-and-flags.md`](../re/save-and-flags.md) §4b.
 - **Version differences:** the guide marks some codes as RS-only or BM-only by the virus or Navi that drops them (Billy/Silly/Killy families and others). Those are captured per code in the CSV.
 
@@ -40,5 +45,5 @@ The game's own table, `BN4_SHOP_STOCK_INIT` ([`../re/shops.md`](../re/shops.md))
 
 ## Next
 
-- RE-07: decode the game's own Mystery Data and GMD tables, then diff them with this list to confirm every entry, and add the Hard and Super Hard variants.
+- RE-07: **done** by Gemini (above). Remaining: feed its per-placement list into `patch/tools/inventory.py`'s chip sources.
 - RE-09 (rest): which record is which shop in the world (the `startShop nn` script sites), and the Number Trader.
