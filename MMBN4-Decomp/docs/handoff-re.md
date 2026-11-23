@@ -1,5 +1,7 @@
 # Handoff: Claude's reverse-engineering lane (2026-11-22)
 
+> **Superseded** by [`handoff-violet-eclipse.md`](handoff-violet-eclipse.md) (2026-11-23), Claude's current handoff. This file is kept for the history of the RE lane.
+
 ## Goal & Current Status
 
 - **Goal:** map the game systems that *Violet Eclipse* depends on: save, flags, playthrough tier, Souls, economy, tournaments, encounters, Mystery Data.
