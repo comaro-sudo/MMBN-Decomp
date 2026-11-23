@@ -26,13 +26,15 @@ Claude's recommendation: **C, built on the hook**. It gives every boss an extra 
 
 1. **Option A: a 5th lobby step.** After an S rank against SP, the operator's next rematch is the extra version ("SP+", working name).
 2. **Base: SP.**
-3. **All bosses, HP capped at 4,095**: SP+ HP = min(2 × SP HP, 4095). The cap means the 7 overflowing bosses (above) stop at 4,095, so the 12-bit field is enough and **HP can be pure data** (no HP hook needed).
+3. **Updated by the owner (2026-11-23): every boss's SP+ has exactly 4,095 HP** (the 12-bit maximum), not 2× SP.
+   - *(Earlier wording: SP+ HP = min(2 × SP HP, 4095).)*
+   - Bosses without an operator reach SP+ through **option (a): their roaming SP ghosts become SP+ after an S rank** (see the issues below). This covers the 8 shared Navis; Duo and Bass reach it through their own rematch routes. The cap means the 7 overflowing bosses (above) stop at 4,095, so the 12-bit field is enough and **HP can be pure data** (no HP hook needed).
 4. **Reward: a high amount of Zenny or BugFrags.** The amount is to set; e.g. 30,000Z or 50 BugFrags (T).
 5. **Attack × 1.5, speed × 1.25.**
 
 ## Issues these raise (Claude, for the owner and for research)
 
-- **"All bosses" vs option A:** the lobby only has the 12 Soul Navis' operators (and JunkMan via the trash can). The **8 shared Navis** (TopMan, ShadeMan, BurnerMan, ColdMan, SparkMan, LaserMan, KendoMan, VideoMan), **Duo** and **Bass** have no operator in the lobby. **Owner to decide** how they reach SP+:
+- **Resolved (owner, 2026-11-23): option (a).** Bosses without an operator get SP+ from their roaming SP ghost, after an S rank against it. Original issue: the lobby only has the 12 Soul Navis' operators (and JunkMan via the trash can). The **8 shared Navis** (TopMan, ShadeMan, BurnerMan, ColdMan, SparkMan, LaserMan, KendoMan, VideoMan), **Duo** and **Bass** have no operator in the lobby. **Owner to decide** how they reach SP+:
   - their roaming SP ghosts get an SP+ variant after an S rank;
   - more lobby NPCs (slots are tight: Higsby's 13/16, ACDC Town 16/16);
   - or a single "challenge" NPC or terminal that offers any of them.
