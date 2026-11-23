@@ -94,3 +94,15 @@ This depends on `plan/DEFINITIVE-EDITION.md` §7, question 1 (whether *Violet Ec
 - `MMBN4-Decomp/docs/re/tournaments.md` §3 (`sub_08043FE4`, pair tables `0x08044044` RS / `0x0804404C` BM, flag `0x15` lock).
 - `MMBN4-Decomp/decomp/notes/soul-grant.md` (hardcoded Playthrough-1 tutorial grants: RS GutsSoul `0x08059EB6`, BM AquaSoul `0x08059EC2`).
 - Local ROM text archives (`bn4_rs_us.gba` / `bn4_bm_us.gba`): DenDome hub (`0x08782BA4`, `0x08784430`), Castillo hub (`0x08785FCC`, `0x08786E94`, `0x08788A50`), Sharo SpaceCtr (`RS 0x0878EAC8` / `BM 0x0878E558`), NAXA / Duo finale (`RS 0x087C2E0C`, `0x087C3454` / `BM 0x087C28B0`, `0x087C2EF8`).
+
+---
+
+## 6. Owner decision (2026-11-23)
+
+Confirmed unified *Violet Eclipse* canon lineup (1 canon story fight + 3 friendly matches per tournament):
+
+| Tournament | Canon story fight | Friendly matches (3 per tournament) | Story / timing beats specified by owner |
+|---|---|---|---|
+| **1st: Den Battle** | **AquaMan** (Shuko) | **GutsMan** (Dex), **FireMan** (Mr. Match), **NumberMan** (Higsby) | **Dex / GutsMan** challenges Lan **after** the first canon fight (AquaMan), with dialogue along the lines of *"I lost my fight, but I really wanted to battle you."* |
+| **2nd: Eagle / Hawk** | **Roll** (Mayl) | **WindMan** (Lily), **MetalMan** (Tamako), **WoodMan** (Sal) | Standard friendly-match pacing before the final. |
+| **3rd: Red Sun / Blue Moon** | **ProtoMan** (Chaud) | **SearchMan** (Raika), **ThunderMan** (Raoul), **JunkMan** | **Raika / SearchMan** challenges Lan **before** the canon fight with Chaud / ProtoMan, with a similar friendly-challenge beat (establishing Lan & Raika's acquaintance for BN5 before the ProtoMan climax). |

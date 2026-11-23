@@ -23,8 +23,11 @@ Created and committed (by explicit path only):
 - `MMBN4-Decomp/decomp/notes/handoff-2026-11-23-gemini-canon-navis.md`
 
 ## Open Issues / Blockers
-None. Ready for the owner to review the disagreements in `canon-navis.md` §3–4 and confirm the final canon pick for each tournament.
+None. **Owner confirmed the final lineup on 2026-11-23** (recorded in `canon-navis.md` §6):
+- **Canon story fights (1 per tournament):** **AquaMan** (1st: Den Battle) → **Roll** (2nd: Eagle/Hawk) → **ProtoMan** (3rd: Red Sun/Blue Moon).
+- **Specific friendly-match beats:**
+  - **Dex / GutsMan** fights Lan **after** the first canon fight (AquaMan), saying something like *"I lost my fight, but I really wanted to battle you."*
+  - **Raika / SearchMan** fights Lan **before** the canon fight with Chaud / ProtoMan, with a similar friendly-challenge beat.
 
 ## Immediate Next Steps
-1. Owner confirms the canon Navi per tournament (and whether *Violet Eclipse* keeps RS/BM selection or uses one unified lineup).
-2. Claude updates `docs/pending/free-tournament-secret-chips.md` and WP-B1 / exhibition-match design with the owner's confirmed choices.
+1. Claude records the owner's confirmed lineup (`AquaMan → Roll → ProtoMan`) and the Dex/Raika friendly-match beats in `docs/pending/free-tournament-secret-chips.md` and the WP-B1 / exhibition-match design.
