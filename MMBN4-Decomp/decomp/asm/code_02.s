@@ -177,7 +177,7 @@ sub_08020F42:
     pop {r1}
     adds r1, r1, r0
     ldr r0, _080211AC
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {pc}
 
     .global sub_08020F64
@@ -9064,7 +9064,7 @@ _080255C0:
     str r2, [r3, #0x4c]
     ldr r0, _080255D0
     movs r1, #0x16
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #8
     strb r0, [r5, #1]
 _080255CE:
@@ -13608,7 +13608,7 @@ dat_0802793C:   @ XRomLayout.sprite_lists
     .word dat_08027C8C
     .word dat_08027CE8
     .word dat_08027E80
-    .word dat_08028038
+    .word dat_08028038   @ BN4_SPRITE_LIST_MUGSHOTS
     .word dat_080281D0   @ BN4_MENU_SPRITE_PTRS
     .word dat_08214000
     .word dat_0821CB68
@@ -14048,7 +14048,7 @@ dat_0802793C:   @ XRomLayout.sprite_lists
     .word dat_084B524C + 0x80000000
     .word dat_084B5478
     .global dat_08028038
-dat_08028038:
+dat_08028038:   @ BN4_SPRITE_LIST_MUGSHOTS
     .word dat_084C44EC
     .word dat_084C4BEC
     .word dat_084C52CC
@@ -18812,7 +18812,7 @@ sub_0802BFD6:
     movs r0, #2
     bl sub_0802C124
     adds r1, r4, #0
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r1}
     movs r0, #1
     adds r1, #6
@@ -19622,7 +19622,7 @@ sub_0802C6DE:
     beq _0802C6F8
     ldr r0, [r5, #0x30]
     ldrb r1, [r5, r4]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     adds r7, #2
     movs r0, #1
     pop {pc}
@@ -19631,7 +19631,7 @@ _0802C6F8:
     bl sub_0802AF80
     adds r1, r4, #0
     ldr r0, [r5, #0x30]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     adds r7, #3
     movs r0, #1
     pop {pc}

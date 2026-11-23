@@ -6,7 +6,7 @@
     .arm
 
     .global sub_080000C0
-sub_080000C0:
+sub_080000C0:   @ ResetHandler
     mov r0, #0x12
     msr cpsr_fc, r0
     ldr sp, _080001D8
@@ -69,7 +69,7 @@ sub_080000C0:
     .word 0xEAFFFF93   @ b #0x8000000
 
     .global sub_080001B0
-sub_080001B0:
+sub_080001B0:   @ ClearRam_Entry
     mov r2, #0
 _080001B4:
     subs r1, r1, #4
@@ -78,7 +78,7 @@ _080001B4:
     bx lr
 
     .global sub_080001C4
-sub_080001C4:
+sub_080001C4:   @ CopyIwramCode_Entry
     subs r2, r2, #4
     ldr r3, [r0, r2]
     str r3, [r1, r2]
@@ -97,13 +97,13 @@ _080001E8:
 _080001EC:
     .word 0x000045B4
 _080001F0:
-    .word 0x08212700
+    .word dat_08212700
 _080001F4:
     .word 0x03005800
 _080001F8:
     .word 0x000017D0
 _080001FC:
-    .word sub_0800025C
+    .word sub_0800025C   @ InitInterruptVectorTable
 _08000200:
     .word 0x03005800
 _08000204:
@@ -121,5 +121,5 @@ _08000218:
 _0800021C:
     .word 0x000083FF
 _08000220:
-    .word sub_0800029C
+    .word sub_0800029C   @ MainLoop
     incrom 0x224, 0x8

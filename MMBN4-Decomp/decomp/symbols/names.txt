@@ -1085,3 +1085,24 @@
 080AA6B4 080AA6C0 data   GEMINI       BN4_MD_ACDC2                     ACDC Area 2 (90,01) Mystery Data list (1 PMD 0x0D08, 2 GMDs 0x0D09..0x0D0A; 0x0D0B free)
 080AC6F4 080AC700 data   GEMINI       BN4_MD_UNDERNET1                 Undernet 1 (94,00) Mystery Data list (1 BMD 0x0E00, 1 PMD 0x0E01, 2 GMDs 0x0E02..0x0E03; 0x0E04 free)
 0810DABF 0810DAD3 data   GEMINI       BN4_STATUS_ICON_OAM_OFFSETS      6 bytes (00 10 20 30 40 50): OAM slot offsets for the 6 Status screen Soul icons (referenced by _0810DA7C RS / _0810DA90 BM; must NOT be overwritten!)
+
+# --- Round 8-9 names (Gemini: lobby-fixes, sp-plus-research, duo-gpp-research, duo-soul-research, duo-rematch-research; merged 2026-11-23) ---
+080067B4 080067B4 code   GEMINI       BattleSpawnEnemy                 Spawns a battle enemy actor from battle record entry; loads HP from Navi/virus HP table
+0800AB92 0800AB92 code   GEMINI       BattleActorSubHP                 Subtracts r1 damage from enemy/actor r5 HP (clamped at 0)
+0800AB9E 0800AB9E code   GEMINI       BattleMegaManSubHP               Subtracts r1 damage from MegaMan HP (clamped at 0); called by BattleMegaManApplyHit
+0800B90A 0800B90A code   GEMINI       BattleGetFormSprite              Returns battle sprite archive index for form r0 (0..15) via BN4_FORM_SPRITES
+0800B924 0800B924 code   GEMINI       ChipIdToSoulId                   Maps chip ID r0 to Soul form ID (1..12) using chip[+7] unite class and owned Soul flags
+0800B93C 0800B93C code   GEMINI       BattleSetSoulDuration            Sets MegaMan active Soul turn counter from BN4_FORM_DURATIONS[form]
+0800BD48 0800BD48 code   GEMINI       BattleLoadFormLoadout            Loads MegaMan buster/charge-shot weapon IDs from BN4_FORM_LOADOUTS[form]
+0800C93C 0800C93C code   GEMINI       BattleSetFormElement             Sets MegaMan battle element from BN4_FORM_ELEMENTS[form]
+08013A48 08013A48 code   GEMINI       BattleMegaManApplyHit            Applies incoming hit damage to MegaMan (after barrier/aura/element checks), calls BattleMegaManSubHP
+08027CE8 08027CEC data   GEMINI       BN4_SPRITE_LIST_CHARS            list[6] overworld character sprite pointer table (indexed by NPC opcode 0x17)
+08027E80 08027E84 data   GEMINI       BN4_SPRITE_LIST_PROPS            list[7] overworld prop/object sprite pointer table (indexed by NPC opcode 0x1F)
+08028038 0802803C data   GEMINI       BN4_SPRITE_LIST_MUGSHOTS         list[8] dialogue mugshot sprite pointer table
+0804E0A0 0804E0A8 code   GEMINI       OpenMapDialogue                  Opens dialogue message index r0 from the current map dialogue archive
+0804E3B4 0804E3BC code   GEMINI       OpenCustomDialogue               Opens dialogue message index r1 from an explicit LZ77 text archive pointer r0
+080A8732 080A873E code   GEMINI       NpcCmd_JumpIfFlagSet             NPC script opcode 0x05: jumps to target if event flag u16 is set
+080A8750 080A875C code   GEMINI       NpcCmd_JumpIfFlagClear           NPC script opcode 0x06: jumps to target if event flag u16 is clear
+080A8880 080A888C code   GEMINI       NpcCmd_SetCharSprite             NPC script opcode 0x17: sets overworld NPC sprite from list[6] (BN4_SPRITE_LIST_CHARS)
+080A8980 080A898C code   GEMINI       NpcCmd_SetPropSprite             NPC script opcode 0x1F: sets overworld NPC sprite from list[7] (BN4_SPRITE_LIST_PROPS)
+080C4780 080C478C code   GEMINI       DuoDefeatedSetFlag               Post-Duo battle cutscene callback: sets event flag 0x0528 (Duo defeated) and advances ending

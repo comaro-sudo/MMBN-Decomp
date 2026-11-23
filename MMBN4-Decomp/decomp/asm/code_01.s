@@ -1000,7 +1000,7 @@ sub_0801079C:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
     push {r0}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -7106,7 +7106,7 @@ _08013A44:
 
     .global sub_08013A48
     .thumb_func
-sub_08013A48:
+sub_08013A48:   @ BattleMegaManApplyHit
     push {r4, r6, r7, lr}
     sub sp, #4
     str r0, [sp]
@@ -7132,7 +7132,7 @@ sub_08013A48:
     subs r4, r1, #1
 _08013A7E:
     adds r0, r4, #0
-    bl sub_0800AB9E
+    bl sub_0800AB9E   @ BattleMegaManSubHP
     tst r1, r1
     beq _08013AB0
     bl sub_08002E1C
@@ -7149,7 +7149,7 @@ _08013A9C:
     bl sub_0800EE4C
 _08013AA4:
     ldrh r0, [r6, #0x34]
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     ldrh r0, [r5, #0x24]
     tst r0, r0
     bne _08013ACA
@@ -7350,12 +7350,12 @@ sub_08013C48:   @ BN4_STATE_RUNNER
     bl sub_0800EE4C
     bl sub_08013560
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _08013C88
 _08013C7C:
     ldrh r0, [r6, #0x34]
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     ldrh r0, [r5, #0x24]
     tst r0, r0
     bne _08013C8E
@@ -7517,12 +7517,12 @@ sub_08013DB4:   @ BN4_NAVI_RUNNER
     bl sub_0800EE4C
     bl sub_08013560
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _08013DF6
 _08013DEA:
     ldrh r0, [r6, #0x34]
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     ldrh r0, [r5, #0x24]
     tst r0, r0
     bne _08013DFC
@@ -7687,7 +7687,7 @@ sub_08013F3E:   @ BN4_ACTOR_RUN
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _08013F72
 _08013F64:
@@ -7827,7 +7827,7 @@ sub_08014058:
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _0801408C
 _0801407E:
@@ -7964,7 +7964,7 @@ sub_0801416C:
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _080141A0
 _08014192:
@@ -8098,7 +8098,7 @@ sub_0801427A:
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     tst r1, r1
     beq _080142AE
 _080142A0:
@@ -17359,7 +17359,7 @@ _0801E912:
 _0801E918:
     adds r1, #1
     ldr r0, _0801E940
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
 _0801E920:
     movs r0, #0x80
     bl sub_08053918
@@ -20661,7 +20661,7 @@ _080203A6:
     cmp r3, #0
     bne _080204A4
     bl sub_0801FDA4
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0x18
     strb r0, [r5, #2]
     movs r0, #0x66
@@ -20854,7 +20854,7 @@ _080205EC:
     movs r1, #0
 _080205F2:
     ldr r0, _08020614
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {pc}
 _080205FA:
     subs r0, #0x40
@@ -21500,7 +21500,7 @@ _08020AD6:
     lsls r2, r2, #2
     ldr r0, _08020C18
     ldr r0, [r0, r2]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #8
     strb r0, [r5, #3]
     pop {pc}

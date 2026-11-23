@@ -785,7 +785,7 @@ sub_0809CD94:
     push {r4, r5, r6, r7, lr}
     ldr r0, _0809CDA4
     ldrb r1, [r5, #4]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
@@ -977,7 +977,7 @@ sub_0809D6B0:
     bne _0809D6C8
     ldr r0, _0809D6D8
     movs r1, #0
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     b _0809D6D2
 _0809D6C8:
     mov r0, sl
@@ -1168,7 +1168,7 @@ sub_0809DC30:
     push {r4, r5, r6, r7, lr}
     ldr r0, _0809DED0
     ldr r1, [r5, #8]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     ldr r0, [r5, #0x68]
     bl sub_0809DE74
     movs r0, #0
@@ -1207,7 +1207,7 @@ sub_0809DC48:
     str r2, [r6, #0x50]
     ldr r0, _0809DED0
     movs r1, #0xf
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r2, #0
     strh r2, [r7, #0x30]
     strh r2, [r7, #4]
@@ -1630,7 +1630,7 @@ sub_0809E050:
     bl sub_08003878
     ldr r0, _0809E2AC
     movs r1, #0x13
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     bl sub_0805404A
     movs r0, #0
     strb r0, [r5, #8]
@@ -1649,7 +1649,7 @@ sub_0809E070:
     bne _0809E09E
     ldr r0, _0809E2AC
     movs r1, #0x15
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #1
     strb r0, [r5, #8]
     movs r0, #0x11
@@ -1662,7 +1662,7 @@ sub_0809E070:
 _0809E09E:
     ldr r0, _0809E2AC
     movs r1, #0x14
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0
     strb r0, [r5, #8]
     pop {r4, r5, r6, r7, pc}
@@ -1696,7 +1696,7 @@ _0809E0C6:
     bl sub_08000560   @ PlaySoundEffect
     ldr r0, _0809E2AC
     movs r1, #0x14
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     b _0809E1A4
 _0809E0E6:
     movs r0, #8
@@ -1719,7 +1719,7 @@ _0809E0E6:
     beq _0809E198
     ldr r0, _0809E2AC
     movs r1, #0x16
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #1
     strb r0, [r5, #8]
     b _0809E1A4
@@ -1785,12 +1785,12 @@ _0809E18A:
     strb r1, [r5, #8]
     ldr r0, _0809E2AC
     movs r1, #0x17
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     b _0809E1A4
 _0809E198:
     ldr r0, _0809E2AC
     movs r1, #0x1d
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #1
     strb r0, [r5, #8]
 _0809E1A4:
@@ -1834,7 +1834,7 @@ sub_0809E1D8:   @ NumberTraderRefundFlag
     bl sub_08025068   @ ClearEventFlag
     ldr r0, _0809E2AC
     ldr r1, [r5, #0x68]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
@@ -1845,7 +1845,7 @@ sub_0809E1F0:
     push {r4, r5, r6, r7, lr}
     ldr r0, _0809E2AC
     ldr r1, [r5, #0x68]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r1, #0x1c
     ldr r0, [r5, #0x68]
     cmp r0, #0x18
@@ -3876,7 +3876,7 @@ _0809FD48:
     bge _0809FD5C
     ldr r0, [r7, #0x2c]
     ldrb r1, [r7]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #8
     strb r0, [r5]
 _0809FD5C:
@@ -4010,7 +4010,7 @@ _0809FE30:
     adds r1, r1, r0
     adds r1, #3
     ldr r0, [r7, #0x2c]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
 _0809FE54:
     bl sub_08053FA8
     bl sub_08053FE4
@@ -4036,7 +4036,7 @@ sub_0809FE6C:
     ldr r0, [r7, #0x2c]
     ldrb r1, [r7]
     adds r1, #1
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     ldrb r0, [r7, #6]
     bl sub_080A6D7C
     movs r0, #0x14
@@ -4108,7 +4108,7 @@ sub_0809FEFE:
     adds r1, #2
     ldrb r2, [r5, #0xa]
     adds r1, r1, r2
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0x20
     strb r0, [r5]
 _0809FF1A:
@@ -4772,7 +4772,7 @@ sub_080A062C:
     bl sub_08053918
     bne _080A065C
     movs r0, #0x81
-    bl sub_0804E0A0
+    bl sub_0804E0A0   @ OpenMapDialogue
 _080A065C:
     ldr r0, _080A066C
     ldrb r1, [r5, #8]
@@ -7227,7 +7227,7 @@ sub_080A30EA:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A30F8
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A30F8:
@@ -7612,7 +7612,7 @@ sub_080A33CE:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A33DC
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A33DC:
@@ -8338,7 +8338,7 @@ sub_080A3974:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A3980
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
 _080A3980:
     .word 0x02036800
@@ -8681,7 +8681,7 @@ sub_080A3C46:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A3C54
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A3C54:
@@ -9615,7 +9615,7 @@ sub_080A4554:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A4560
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
 _080A4560:
     .word 0x02036800
@@ -10387,7 +10387,7 @@ sub_080A5172:
     push {r4, r5, r6, r7, lr}
     adds r1, r0, #0
     ldr r0, _080A5180
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A5180:
@@ -12547,7 +12547,7 @@ sub_080A6582:
     push {lr}
     ldr r0, _080A6594
     movs r1, #2
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0x24
     strb r0, [r5, #0xa]
     pop {pc}
@@ -15234,11 +15234,11 @@ _080A8538:
     movs r2, #0x94
     ldr r0, [r5, r2]
     ldrb r1, [r5, #0x1c]
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     b _080A854A
 _080A8544:
     ldrb r0, [r5, #0x1c]
-    bl sub_0804E0A0
+    bl sub_0804E0A0   @ OpenMapDialogue
 _080A854A:
     movs r0, #4
     strb r0, [r5, #0xa]
@@ -15332,8 +15332,8 @@ dat_080A85D0:   @ where_bn4_plays.objects
     .word 0x00000000
     .word sub_080A8708
     .word sub_080A8714
-    .word sub_080A8732
-    .word sub_080A8750
+    .word sub_080A8732   @ NpcCmd_JumpIfFlagSet
+    .word sub_080A8750   @ NpcCmd_JumpIfFlagClear
     .word sub_080A876E
     .word sub_080A8780
     .word sub_080A8792
@@ -15351,7 +15351,7 @@ dat_080A85D0:   @ where_bn4_plays.objects
     .word sub_080A8836
     .word sub_080A885A
     .word sub_080A8878
-    .word sub_080A8880
+    .word sub_080A8880   @ NpcCmd_SetCharSprite
     .word sub_080A88C0
     .word sub_080A88C8
     .word sub_080A88D0
@@ -15365,7 +15365,7 @@ dat_080A85D0:   @ where_bn4_plays.objects
     .word sub_080A8946
     .word sub_080A8958
     .word sub_080A897C
-    .word sub_080A8980
+    .word sub_080A8980   @ NpcCmd_SetPropSprite
     .word sub_080A8994
     .word sub_080A89A0
     .word sub_080A89AC
@@ -15438,7 +15438,7 @@ sub_080A8714:
 
     .global sub_080A8732
     .thumb_func
-sub_080A8732:
+sub_080A8732:   @ NpcCmd_JumpIfFlagSet
     push {lr}
     adds r0, r6, #1
     bl sub_080A8E64
@@ -15455,7 +15455,7 @@ _080A874C:
 
     .global sub_080A8750
     .thumb_func
-sub_080A8750:
+sub_080A8750:   @ NpcCmd_JumpIfFlagClear
     push {lr}
     adds r0, r6, #1
     bl sub_080A8E64
@@ -15667,7 +15667,7 @@ sub_080A8878:
 
     .global sub_080A8880
     .thumb_func
-sub_080A8880:
+sub_080A8880:   @ NpcCmd_SetCharSprite
     ldrb r0, [r6, #1]
     strh r0, [r5, #0x3c]
     movs r1, #0
@@ -15850,7 +15850,7 @@ sub_080A897C:
 
     .global sub_080A8980
     .thumb_func
-sub_080A8980:
+sub_080A8980:   @ NpcCmd_SetPropSprite
     ldrb r0, [r6, #1]
     strh r0, [r5, #0x3c]
     ldrb r0, [r6, #2]

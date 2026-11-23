@@ -42825,7 +42825,7 @@ _0804E09C:
 
     .global sub_0804E0A0
     .thumb_func
-sub_0804E0A0:
+sub_0804E0A0:   @ OpenMapDialogue
     push {r4, r5, lr}
     adds r1, r0, #0
     ldr r0, _0804E0AC
@@ -43211,7 +43211,7 @@ _0804E3B0:
 
     .global sub_0804E3B4
     .thumb_func
-sub_0804E3B4:
+sub_0804E3B4:   @ OpenCustomDialogue
     push {r4, r5, r6, lr}
     mov r5, sl
     ldr r5, [r5, #0x2c]

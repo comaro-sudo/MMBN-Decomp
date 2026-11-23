@@ -43497,7 +43497,7 @@ _080C4748:
 dat_080C474C:
     .word sub_08010D30
     .word sub_08010FA6
-    .word sub_080C4780
+    .word sub_080C4780   @ DuoDefeatedSetFlag
     .word sub_080C479C
     .word sub_08010F08
     .word sub_08010FAE
@@ -43511,7 +43511,7 @@ dat_080C474C:
 
     .global sub_080C4780
     .thumb_func
-sub_080C4780:
+sub_080C4780:   @ DuoDefeatedSetFlag
     push {lr}
     ldrb r0, [r5, #0xa]
     tst r0, r0
@@ -58441,7 +58441,7 @@ _080CB4F8:
     movs r1, #0x23
     bl sub_0800D772   @ BN4_NAVI_BYTE_SIDE
     adds r1, r4, #0
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     lsls r4, r2, #8
     adds r4, r4, r1
     ldrb r0, [r5, #0x12]
@@ -60826,7 +60826,7 @@ sub_080CC648:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -60953,7 +60953,7 @@ sub_080CC750:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -61220,7 +61220,7 @@ sub_080CC960:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -61423,7 +61423,7 @@ sub_080CCAF0:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -62038,7 +62038,7 @@ _080CCF8E:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #5]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C

@@ -15089,7 +15089,7 @@ sub_080D7590:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -27832,7 +27832,7 @@ sub_080DD7BC:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #6]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -38557,7 +38557,7 @@ _080E2C56:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #5]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -43918,7 +43918,7 @@ sub_080E53D0:
     push {r5}
     ldrh r0, [r5, #0x2c]
     ldr r5, [r5, #0x4c]
-    bl sub_0800AB92
+    bl sub_0800AB92   @ BattleActorSubHP
     pop {r5}
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
@@ -46208,7 +46208,7 @@ sub_080E641E:
     ldrb r0, [r5, #0x16]
     movs r1, #0xa
     bl sub_0800D756
-    bl sub_0800BD48
+    bl sub_0800BD48   @ BattleLoadFormLoadout
     pop {r5, pc}
 
     .global sub_080E646C
@@ -55630,7 +55630,7 @@ _080EA758:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     adds r1, r0, #0
     ldrb r0, [r5, #5]
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -56674,7 +56674,7 @@ sub_080EAECC:
     bl sub_08013858
     bl sub_0800DFCC
     ldr r0, _080EAEF8
-    bl sub_08013A48
+    bl sub_08013A48   @ BattleMegaManApplyHit
     bl sub_08022E3C   @ BN4_PLAYER_TICK
     bl sub_0800D98A
     bl sub_0800C08E
@@ -57377,7 +57377,7 @@ sub_080EB548:
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     adds r4, r4, r2
     lsls r4, r4, #8
     adds r4, r4, r1
@@ -57494,7 +57494,7 @@ _080EB65C:
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     adds r4, r4, r2
     lsls r4, r4, #8
     adds r4, r4, r1
@@ -57753,7 +57753,7 @@ _080EB8B2:
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     adds r4, r4, r2
     lsls r4, r4, #8
     adds r4, r4, r1
@@ -58085,7 +58085,7 @@ sub_080EBB6C:
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -58105,7 +58105,7 @@ _080EBBBE:
     bl sub_0800B7E8
     movs r0, #0
     str r0, [r5, #0x4c]
-    bl sub_0800B93C
+    bl sub_0800B93C   @ BattleSetSoulDuration
     movs r0, #0xa
     strh r0, [r7, #0x10]
     bl sub_08013218
@@ -58539,7 +58539,7 @@ sub_080EBEAC:
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     pop {r1}
-    bl sub_0800B90A
+    bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     bl sub_0800283C
@@ -58562,7 +58562,7 @@ _080EBF34:
     bl sub_0800C5EA
     movs r0, #0
     str r0, [r5, #0x4c]
-    bl sub_0800B93C
+    bl sub_0800B93C   @ BattleSetSoulDuration
     movs r0, #0x40
     bl sub_0800BFC0   @ BN4_AI_REQUESTS_CLEAR
     movs r0, #0

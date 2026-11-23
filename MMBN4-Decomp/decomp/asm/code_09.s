@@ -21994,7 +21994,7 @@ _08103A70:
     strb r0, [r5, #0x1f]
     ldr r0, _08103D3C
     movs r1, #0
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
 _08103A82:
     mov r4, sl
     ldr r4, [r4, #4]
@@ -22004,7 +22004,7 @@ _08103A82:
     beq _08103ABE
     ldr r0, _08103D3C
     movs r1, #1
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     mov r0, sl
     ldr r0, [r0, #8]
     ldr r1, _08103C2C
@@ -22053,7 +22053,7 @@ _08103ABE:
 _08103AEE:
     adds r1, #3
 _08103AF0:
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     pop {pc}
 _08103AF6:
     ldr r1, _08103C04
@@ -22172,7 +22172,7 @@ _08103BA2:
 _08103BCC:
     adds r1, #3
 _08103BCE:
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
 _08103BD2:
     adds r4, r5, #0
     adds r4, #0x20
@@ -22326,7 +22326,7 @@ sub_08103CD0:
     bge _08103D16
     ldr r0, _08103D3C
     movs r1, #2
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0x18
     strb r0, [r5, #0xa]
     b _08103D22
@@ -22340,7 +22340,7 @@ _08103CFA:
     blt _08103D16
     ldr r0, _08103D3C
     movs r1, #2
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #0x18
     strb r0, [r5, #0xa]
     b _08103D22
@@ -25601,7 +25601,7 @@ _081057C4:
 _081057C8:
     .word 0x06012D40
 _081057CC:
-    .word dat_08028038
+    .word dat_08028038   @ BN4_SPRITE_LIST_MUGSHOTS
 _081057D0:
     .word 0x03002640
 

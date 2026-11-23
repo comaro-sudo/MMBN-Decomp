@@ -5225,7 +5225,7 @@ sub_080028F2:
     strh r0, [r5, #0x16]
     pop {pc}
 _08002904:
-    .word dat_08028038
+    .word dat_08028038   @ BN4_SPRITE_LIST_MUGSHOTS
 
     .global sub_08002908
     .thumb_func
@@ -5271,7 +5271,7 @@ sub_08002934:
     strh r0, [r5, #0x16]
     pop {r5, pc}
 _08002948:
-    .word dat_08028038
+    .word dat_08028038   @ BN4_SPRITE_LIST_MUGSHOTS
 
     .global sub_0800294C
     .thumb_func
@@ -12380,14 +12380,14 @@ _08006774:
     .global dat_08006778
 dat_08006778:
     .word sub_0800679C
-    .word sub_080067B4
+    .word sub_080067B4   @ BattleSpawnEnemy
     .word sub_08006858
     .word sub_08006880
     .word sub_080068B2
     .word sub_080068C0
     .word sub_080068DE
     .word sub_080068F4
-    .word sub_080067B4
+    .word sub_080067B4   @ BattleSpawnEnemy
 
     .global sub_0800679C
     .thumb_func
@@ -12406,7 +12406,7 @@ sub_0800679C:
 
     .global sub_080067B4
     .thumb_func
-sub_080067B4:
+sub_080067B4:   @ BattleSpawnEnemy
     push {r4, r7, lr}
     mov r8, r0
     push {r0}
@@ -13407,7 +13407,7 @@ sub_08006FC8:
     bl sub_08005B70
     ldr r0, _08006FF0
     movs r1, #0xb
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #4
     strb r0, [r5, #1]
     pop {pc}
@@ -14477,7 +14477,7 @@ sub_080077DE:
     bne _080077F4
     ldr r0, _08007874
     movs r1, #0xb
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #4
     strb r0, [r5, #3]
     b _08007810
@@ -14507,7 +14507,7 @@ sub_08007812:
     bne _08007828
     ldr r0, _08007878
     movs r1, #0xb
-    bl sub_0804E3B4
+    bl sub_0804E3B4   @ OpenCustomDialogue
     movs r0, #4
     strb r0, [r5, #3]
     b _08007844
@@ -20833,7 +20833,7 @@ sub_0800AB8A:
 
     .global sub_0800AB92
     .thumb_func
-sub_0800AB92:
+sub_0800AB92:   @ BattleActorSubHP
     ldrh r1, [r5, #0x24]
     subs r1, r1, r0
     bge _0800AB9A
@@ -20844,7 +20844,7 @@ _0800AB9A:
 
     .global sub_0800AB9E
     .thumb_func
-sub_0800AB9E:
+sub_0800AB9E:   @ BattleMegaManSubHP
     push {lr}
     push {r0}
     adds r1, r0, #0
@@ -22808,7 +22808,7 @@ _0800B906:
 
     .global sub_0800B90A
     .thumb_func
-sub_0800B90A:
+sub_0800B90A:   @ BattleGetFormSprite
     adds r3, r0, r0
     ldr r2, _0800BB08
     adds r2, r2, r3
@@ -22826,7 +22826,7 @@ _0800B91C:
 
     .global sub_0800B924
     .thumb_func
-sub_0800B924:
+sub_0800B924:   @ ChipIdToSoulId
     push {r4, lr}
     adds r4, r0, #0
     bl sub_080190D0   @ BN4_GET_CHIP
@@ -22842,7 +22842,7 @@ _0800B93A:
 
     .global sub_0800B93C
     .thumb_func
-sub_0800B93C:
+sub_0800B93C:   @ BattleSetSoulDuration
     push {lr}
     movs r1, #0x24
     bl sub_0800D7CA
@@ -23413,7 +23413,7 @@ _0800BD44:
 
     .global sub_0800BD48
     .thumb_func
-sub_0800BD48:
+sub_0800BD48:   @ BattleLoadFormLoadout
     push {r4, lr}
     ldr r4, [r5, #0x58]
     movs r1, #0x24
@@ -24896,7 +24896,7 @@ _0800C938:
 
     .global sub_0800C93C
     .thumb_func
-sub_0800C93C:
+sub_0800C93C:   @ BattleSetFormElement
     push {r4, lr}
     ldr r4, _0800C960
     movs r1, #0x23
