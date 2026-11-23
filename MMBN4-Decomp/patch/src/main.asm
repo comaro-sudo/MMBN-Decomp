@@ -34,5 +34,6 @@
 .include "common/wp_d4_free_tournament.asm"  ; Violet Eclipse: Free Tournament 36-secret-chip fix
 .include "common/wp_d3_lobby_rematches.asm"  ; Violet Eclipse: 11 lobby operators + JunkMan trash can rematches
 .include "common/wp_b2_frequency_tuner.asm"  ; WP-B2: Frequency Tuner (V1/V2/V3/Auto virus tier override)
+.include "common/wp_d4_grant_soul.asm"       ; Violet Eclipse: script command FC 0C <idx> grants any Soul
 
 .close

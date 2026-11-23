@@ -48,7 +48,11 @@ FS_LOBBY_REMATCH          equ 0x087FA230    ; WP-D3 Lobby Rematches + JunkMan Tr
 FS_LOBBY_REMATCH_SIZE     equ 0x700
 FS_FREQ_TUNER             equ 0x087FA930    ; WP-B2 Frequency Tuner (BN4_ID_RAISE hook + FC 0B cycler + NPC)
 FS_FREQ_TUNER_SIZE        equ 0x100
-; next free slot:             0x087FAA30
+FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul handler
+FS_GRANT_SOUL_SIZE        equ 0x40
+; next free slot:             0x087FAA70
+
+WRITE_CHIP_KEY      equ 0x080063B4      ; WriteChipKey(r0 chip id): the anti-cheat key, version XOR applied; same in RS and BM
 
 BN4_GET_CHIP        equ 0x080190D0      ; BN4_GET_CHIP(r0 chip_id) -> r0 ptr to chip entry; same in RS and BM
 INIT_BATTLE_REC     equ 0x08007C90      ; sub_08007C90; same in RS and BM

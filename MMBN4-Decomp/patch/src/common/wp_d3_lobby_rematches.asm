@@ -282,6 +282,7 @@ lobby_fc_table:
     .word   lobby_fc_rematch | 1    ; FC 09 <navi_id>
     .word   lobby_fc_trash_warp | 1 ; FC 0A 00
     .word   freq_tuner_fc_cycle | 1 ; FC 0B 00 (WP-B2 Frequency Tuner)
+    .word   grant_soul_fc | 1       ; FC 0C <idx> (WP-D4 grant Soul, wp_d4_grant_soul.asm)
 
 ; -- 5f. Trash Can warp descriptor -> WtrGodComp1 (8E,00) at (0, 0, 0) facing 7 --
 .align 4
