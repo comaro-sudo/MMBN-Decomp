@@ -359,6 +359,14 @@ class Segment:
             # ones. If the word is really a constant, merge_bm.py just keeps
             # RS and BM in a version block.
             return f"dat_{w:08X}"
+        if a not in self.raw_lits and 0x08120000 <= w < 0x08800000:
+            # A pointer into the data region (graphics, maps, text, music).
+            # In a BM build split.py places it through
+            # symbols/datashift_rs_bm.txt; same rule as above.
+            return f"dat_{w:08X}"
+        if a not in self.raw_lits and 0x88120000 <= w < 0x88800000:
+            # The same, with bit 31 set: the game's flag for a compressed asset.
+            return f"dat_{w & 0x7FFFFFFF:08X} + 0x80000000"
         return f"0x{w:08X}"
 
     def label_for(self, a: int) -> str:

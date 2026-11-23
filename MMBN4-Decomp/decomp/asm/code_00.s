@@ -3627,21 +3627,13 @@ sub_08001DBC:
     bl sub_080009A8
     pop {pc}
 _08001DD4:
-    .if VERSION_BM
-    .word 0x08694544
-    .else
-    .word 0x0869475C
-    .endif
+    .word dat_0869475C
 _08001DD8:
     .word 0x0600D800
 _08001DDC:
     .word 0x00000800
 _08001DE0:
-    .if VERSION_BM
-    .word 0x08755D38
-    .else
-    .word 0x087562A8
-    .endif
+    .word dat_087562A8
 _08001DE4:
     .word 0x03002C30
 
@@ -5185,11 +5177,7 @@ _080028AE:
 _080028BC:
     .word dat_0802793C   @ XRomLayout.sprite_lists
 _080028C0:
-    .if VERSION_BM
-    .word 0x084B54F0
-    .else
-    .word 0x084B5478
-    .endif
+    .word dat_084B5478
 
     .global sub_080028C4
     .thumb_func
@@ -11273,9 +11261,9 @@ _08006330:
     .word 0x02001BA0
 _08006334:
     .if VERSION_BM
-    .word 0x082F123C
+    .word dat_082F123C
     .else
-    .word 0x08126511
+    .word dat_08126511
     .endif
 
     .global sub_08006338
@@ -12328,11 +12316,7 @@ dat_08006A68:
 _08006A90:
     .word 0x06008000
 _08006A94:
-    .if VERSION_BM
-    .word 0x08704154
-    .else
-    .word 0x08704660
-    .endif
+    .word dat_08704660
 _08006A98:
     .word 0x06001460
 _08006A9C:
@@ -12971,11 +12955,7 @@ sub_08006FC8:
     strb r0, [r5, #1]
     pop {pc}
 _08006FF0:
-    .if VERSION_BM
-    .word 0x08755820
-    .else
-    .word 0x08755D90
-    .endif
+    .word dat_08755D90
 
     .global sub_08006FF4
     .thumb_func
@@ -14106,17 +14086,9 @@ _0800786C:
 _08007870:
     .word 0x020363D0
 _08007874:
-    .if VERSION_BM
-    .word 0x0874BBCC
-    .else
-    .word 0x0874C0D8
-    .endif
+    .word dat_0874C0D8
 _08007878:
-    .if VERSION_BM
-    .word 0x0874C1E8
-    .else
-    .word 0x0874C6F4
-    .endif
+    .word dat_0874C6F4
 
     .global sub_0800787C
     .thumb_func
@@ -18090,11 +18062,7 @@ _08009434:
     pop {pc}
     .hword 0x0000
 _0800944C:
-    .if VERSION_BM
-    .word 0x08706134
-    .else
-    .word 0x08706640
-    .endif
+    .word dat_08706640
 _08009450:
     .word 0x030059E9
 _08009454:
@@ -18136,11 +18104,7 @@ sub_0800948A:
     pop {pc}
     .hword 0x0000
 _080094BC:
-    .if VERSION_BM
-    .word 0x08706A34
-    .else
-    .word 0x08706F40
-    .endif
+    .word dat_08706F40
 _080094C0:
     .word dat_0800947A
 
@@ -18204,11 +18168,7 @@ sub_080094FC:
     add sp, #0x28
     pop {pc}
 _08009530:
-    .if VERSION_BM
-    .word 0x08706A54
-    .else
-    .word 0x08706F60
-    .endif
+    .word dat_08706F60
 _08009534:
     .word dat_0800953C
 _08009538:

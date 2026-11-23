@@ -918,11 +918,7 @@ _0804F87A:
     movs r0, #1
     pop {pc}
 _0804F880:
-    .if VERSION_BM
-    .word 0x0869F2A4
-    .else
-    .word 0x0869F4BC
-    .endif
+    .word dat_0869F4BC
 _0804F884:
     .word 0x03002800
 
@@ -1711,11 +1707,7 @@ sub_0804FE24:   @ ScriptCmd_printStoryDataChosen
     pop {r6, r7, pc}
     .hword 0x0000
 _0804FEA0:
-    .if VERSION_BM
-    .word 0x086E95EC
-    .else
-    .word 0x086E9AF8
-    .endif
+    .word dat_086E9AF8
 _0804FEA4:
     .word dat_0804FEA8
     .global dat_0804FEA8
@@ -3752,11 +3744,7 @@ _08050D9E:
     pop {r1, r2, r3, r4, r5, r6, r7, pc}
     .hword 0x0000
 _08050DA4:
-    .if VERSION_BM
-    .word 0x087EF8A0
-    .else
-    .word 0x087EFDFC
-    .endif
+    .word dat_087EFDFC
 
     .global sub_08050DA8
     .thumb_func

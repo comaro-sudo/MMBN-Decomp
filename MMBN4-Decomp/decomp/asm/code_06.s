@@ -980,11 +980,7 @@ _0809D6D2:
     pop {pc}
     .hword 0x0000
 _0809D6D8:
-    .if VERSION_BM
-    .word 0x086E9784
-    .else
-    .word 0x086E9C90
-    .endif
+    .word dat_086E9C90
     .global dat_0809D6DC
 dat_0809D6DC:
     incrom 0x9D6DC, 0x320
@@ -1433,19 +1429,11 @@ sub_0809DE48:
     bl sub_08000994   @ CopyWords
     pop {r4, r5, r6, r7, pc}
 _0809DE60:
-    .if VERSION_BM
-    .word 0x08700FD8
-    .else
-    .word 0x087014E4
-    .endif
+    .word dat_087014E4
 _0809DE64:
     .word 0x0600C800
 _0809DE68:
-    .if VERSION_BM
-    .word 0x08701618
-    .else
-    .word 0x08701B24
-    .endif
+    .word dat_08701B24
 _0809DE6C:
     .word 0x03002C10
 _0809DE70:
@@ -1486,11 +1474,7 @@ sub_0809DE74:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0809DEB8:
-    .if VERSION_BM
-    .word 0x08700F7C
-    .else
-    .word 0x08701488
-    .endif
+    .word dat_08701488
 _0809DEBC:
     .word dat_0809DB30
 _0809DEC0:
@@ -1500,17 +1484,9 @@ _0809DEC4:
 _0809DEC8:
     .word 0x0600D800
 _0809DECC:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _0809DED0:
-    .if VERSION_BM
-    .word 0x08703544
-    .else
-    .word 0x08703A50
-    .endif
+    .word dat_08703A50
     .global dat_0809DED4
 dat_0809DED4:
     incrom 0x9DED4, 0x34
@@ -2221,21 +2197,13 @@ sub_0809ECB4:
     bl sub_080009A8   @ CopyByEightWords
     pop {r0, pc}
 _0809ECCC:
-    .if VERSION_BM
-    .word 0x08703CD4
-    .else
-    .word 0x087041E0
-    .endif
+    .word dat_087041E0
 _0809ECD0:
     .word 0x06016800
 _0809ECD4:
     .word 0x00000460
 _0809ECD8:
-    .if VERSION_BM
-    .word 0x08704134
-    .else
-    .word 0x08704640
-    .endif
+    .word dat_08704640
 _0809ECDC:
     .word 0x030027A0
 
@@ -7246,11 +7214,7 @@ sub_080A30EA:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080A30F8:
-    .if VERSION_BM
-    .word 0x087ED5E0
-    .else
-    .word 0x087EDB3C
-    .endif
+    .word dat_087EDB3C
     .global dat_080A30FC
 dat_080A30FC:
     incrom 0xA30FC, 0x30
@@ -8422,11 +8386,7 @@ _080A39F0:
     bl sub_08025C84
     pop {r4, r5, r6, r7, pc}
 _080A3A20:
-    .if VERSION_BM
-    .word 0x0869FE84
-    .else
-    .word 0x086A009C
-    .endif
+    .word dat_086A009C
 _080A3A24:
     .word 0x030027C0
 _080A3A28:
@@ -12515,11 +12475,7 @@ sub_080A6582:
     pop {pc}
     .hword 0x0000
 _080A6594:
-    .if VERSION_BM
-    .word 0x086E570C
-    .else
-    .word 0x086E5C18
-    .endif
+    .word dat_086E5C18
 
     .global sub_080A6598
     .thumb_func
@@ -15486,11 +15442,7 @@ _080A8A2A:
     pop {pc}
     .hword 0x0000
 _080A8A48:
-    .if VERSION_BM
-    .word 0x08758030
-    .else
-    .word 0x087585A0
-    .endif
+    .word dat_087585A0
 _080A8A4C:
     .word dat_080A8A50
     .global dat_080A8A50

@@ -45,13 +45,58 @@ RS, BM = segments("rs"), segments("bm")
 # (bm_start, bm_end, delta, rs_end) for every code segment
 SPANS = sorted((BM[n]["start"], BM[n]["end"], BM[n]["start"] - RS[n]["start"], RS[n]["end"]) for n in RS)
 
+# The data region (graphics, maps, text, music) after the code region:
+# symbols/datashift_rs_bm.txt (Gemini, tools/datashift.py) maps it in ranges.
+# Only offsets that exist in both versions are mapped (a range can be longer
+# in one version), so the renaming stays one-to-one.
+DATA_LO, DATA_HI = 0x08120000, 0x08800000
+
+
+def _load_data() -> list[tuple[int, int, int]]:
+    rows = []
+    path = DECOMP / "symbols" / "datashift_rs_bm.txt"
+    if not path.exists():
+        return rows
+    for line in path.read_text().splitlines():
+        f = line.split()
+        if not f or line.startswith("#") or f[2] == "-":
+            continue
+        rs, rs_end, bm = int(f[0], 16), int(f[1], 16), int(f[2], 16)
+        m = re.search(r"BM len=0x([0-9A-Fa-f]+)", line)
+        n = min(rs_end - rs, int(m.group(1), 16) if m else rs_end - rs)
+        rows.append((rs, bm, n))        # rs..rs+n <-> bm..bm+n
+    return rows
+
+
+DATA = _load_data()
+DATA_BY_RS = sorted(DATA)
+DATA_BY_BM = sorted(DATA, key=lambda t: t[1])
+
+
+def _find(rows: list, a: int, key: int) -> tuple[int, int, int] | None:
+    lo, hi = 0, len(rows)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if rows[mid][key] <= a:
+            lo = mid + 1
+        else:
+            hi = mid
+    if lo:
+        row = rows[lo - 1]
+        if row[key] <= a < row[key] + row[2]:
+            return row
+    return None
+
 
 def bm_to_rs(a: int) -> tuple[int, bool]:
-    """RS address for BM address a, and whether it is BM-only (segment tail)."""
+    """RS address for BM address a, and whether it is BM-only (no RS twin)."""
     for start, end, delta, rs_end in SPANS:
         if start <= a < end:
             r = a - delta
             return (a, True) if r >= rs_end else (r, False)
+    if DATA and DATA_LO <= a < DATA_HI:
+        row = _find(DATA_BY_BM, a, 1)
+        return (row[0] + a - row[1], False) if row else (a, True)
     return a, False
 
 
@@ -69,10 +114,14 @@ def normalize(line: str, delta: int) -> str:
 
 
 def rs_addr_to_bm(r: int) -> int:
-    """Inverse of bm_to_rs for a non-tail RS-named address (data region: unchanged)."""
+    """Inverse of bm_to_rs for a non-tail RS-named address."""
     for name, s in RS.items():
         if s["start"] <= r < s["end"]:
             return r + BM[name]["start"] - s["start"]
+    if DATA and DATA_LO <= r < DATA_HI:
+        row = _find(DATA_BY_RS, r, 0)
+        if row:
+            return row[1] + r - row[0]
     return r
 
 

@@ -23,6 +23,27 @@
 | code_04 | 135 | code_10 | 86 |
 | code_05 | 3 | crt0, intr_table | 0 |
 
+### Update, later the same night: ~1,050 → 92 version blocks
+
+All three steps are verified: `make -B compare` OK for both versions, and coverage is unchanged.
+
+1. **Segment split** at the true shift points (Gemini's `dc4-version-differences.md` §3):
+   - `code_04` became `code_04`, `code_04b`, `code_04c` and `code_04d` (BM deltas +0xC, +0x18, +0x14, +0xC);
+   - the `code_09`/`code_10` boundary moved to RS `0x08109EF0` / BM `0x08109F04`.
+2. **Code pointers:** `disasm.py` writes any code-region word (literal pool or short data run) as `dat_<value>`.
+3. **Data pointers:** `disasm.py` writes data-region words (`0x08120000`–`0x087FFFFF`, and bit-31-flagged ones as `dat_X + 0x80000000`) as symbols. `merge_bm.py` maps them through Gemini's `symbols/datashift_rs_bm.txt`, mapping only the offsets that exist in both versions.
+
+| Segment | Blocks | Segment | Blocks |
+|---|---|---|---|
+| code_00 | 18 | code_05 | 2 |
+| code_01 | 10 | code_06 | 0 |
+| code_02 | 7 | code_07 | 3 |
+| code_03 | 19 | code_08 | 3 |
+| code_04 / b / c / d | 3 / 1 / 1 / 0 | code_09 | 19 |
+| | | code_10 | 6 |
+
+What's left is mostly real version differences: the save XOR keys, the version index 0/1, the Soul and Navi tables, the Double Soul flag, BM's extra instructions in 4 functions, the 21 palette-row pointers, and a few code-region constants.
+
 ## Key Decisions & Constraints
 
 - **The renaming is one-to-one, and a line is shared only if both versions agree on it**, so a shared line can't point at the wrong twin. The build compare is the final check.

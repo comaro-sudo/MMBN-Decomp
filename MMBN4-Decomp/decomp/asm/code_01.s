@@ -7954,17 +7954,9 @@ _08014C48:
     pop {r4, r7, pc}
     .hword 0x0000
 _08014C54:
-    .if VERSION_BM
-    .word 0x0870AC54
-    .else
-    .word 0x0870B160
-    .endif
+    .word dat_0870B160
 _08014C58:
-    .if VERSION_BM
-    .word 0x0870B3D4
-    .else
-    .word 0x0870B8E0
-    .endif
+    .word dat_0870B8E0
 _08014C5C:
     .word 0x06017480
 _08014C60:
@@ -7972,11 +7964,7 @@ _08014C60:
 _08014C64:
     .word 0x00000100
 _08014C68:
-    .if VERSION_BM
-    .word 0x0870BCD4
-    .else
-    .word 0x0870C1E0
-    .endif
+    .word dat_0870C1E0
 _08014C6C:
     .word 0x030027C0
 _08014C70:
@@ -7985,11 +7973,7 @@ _08014C70:
 dat_08014C74:
     incrom 0x14C74, 0x40
 _08014CB4:
-    .if VERSION_BM
-    .word 0x0870B9D4
-    .else
-    .word 0x0870BEE0
-    .endif
+    .word dat_0870BEE0
 _08014CB8:
     .word 0x06017580
 _08014CBC:
@@ -8586,11 +8570,7 @@ _080151EC:
 _080151F0:
     .word 0x06009380
 _080151F4:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _080151F8:
     .word 0x020363F0
 
@@ -8872,21 +8852,13 @@ _08015418:
 dat_0801541C:
     incrom 0x1541C, 0x20
 _0801543C:
-    .if VERSION_BM
-    .word 0x08748CC0
-    .else
-    .word 0x087491CC
-    .endif
+    .word dat_087491CC
 _08015440:
     .word 0x0203E590
 _08015444:
     .word 0x06009380
 _08015448:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 
     .global sub_0801544C
     .thumb_func
@@ -9307,11 +9279,7 @@ _08015758:
     .word 0x00009080
     .word 0x00009090
 _08015760:
-    .if VERSION_BM
-    .word 0x08707DB4
-    .else
-    .word 0x087082C0
-    .endif
+    .word dat_087082C0
 _08015764:
     .word 0x03002B70
 _08015768:
@@ -9767,11 +9735,7 @@ sub_08015B24:
     pop {r4, r6, r7, pc}
     incrom 0x15B44, 0x8
 _08015B4C:
-    .if VERSION_BM
-    .word 0x08747B2C
-    .else
-    .word 0x08748038
-    .endif
+    .word dat_08748038
 _08015B50:
     .word 0x03002780
 
@@ -10296,19 +10260,11 @@ sub_08015F40:
 _08015F64:
     .word dat_08016B44
 _08015F68:
-    .if VERSION_BM
-    .word 0x08707D54
-    .else
-    .word 0x08708260
-    .endif
+    .word dat_08708260
 _08015F6C:
     .word 0x03002B70
 _08015F70:
-    .if VERSION_BM
-    .word 0x08707D54
-    .else
-    .word 0x08708260
-    .endif
+    .word dat_08708260
 _08015F74:
     .word 0x00010000
 
@@ -10470,18 +10426,10 @@ _08016070:
 _08016078:
     .word 0x00000400
 _0801607C:
-    .if VERSION_BM
-    .word 0x08707D54
-    .else
-    .word 0x08708260
-    .endif
+    .word dat_08708260
 _08016080:
     .word 0x03002B70
-    .if VERSION_BM
-    .word 0x08707D54
-    .else
-    .word 0x08708260
-    .endif
+    .word dat_08708260
 
     .global sub_08016088
     .thumb_func
@@ -10557,11 +10505,7 @@ sub_080160D8:
     bl sub_08015988
     pop {r4, r5, pc}
 _080160FC:
-    .if VERSION_BM
-    .word 0x08707D54
-    .else
-    .word 0x08708260
-    .endif
+    .word dat_08708260
 _08016100:
     .word 0x03002B70
 _08016104:
@@ -10768,11 +10712,7 @@ _0801626C:
 _08016270:
     .word 0x06017100
 _08016274:
-    .if VERSION_BM
-    .word 0x087508D0
-    .else
-    .word 0x08750E40
-    .endif
+    .word dat_08750E40
 _08016278:
     .word 0x030027A0
 
@@ -10923,21 +10863,13 @@ sub_08016362:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0801638C:
-    .if VERSION_BM
-    .word 0x08748CC0
-    .else
-    .word 0x087491CC
-    .endif
+    .word dat_087491CC
 _08016390:
     .word 0x0203B850
 _08016394:
     .word 0x06009580
 _08016398:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 
     .global sub_0801639C
     .thumb_func
@@ -11319,11 +11251,7 @@ _08016654:
 dat_08016658:
     incrom 0x16658, 0x8
 _08016660:
-    .if VERSION_BM
-    .word 0x08750910
-    .else
-    .word 0x08750E80
-    .endif
+    .word dat_08750E80
 _08016664:
     .word 0x030027A0
 _08016668:
@@ -11331,11 +11259,7 @@ _08016668:
 _0801666C:
     .word 0x06016C00
 _08016670:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _08016674:
     .word 0x0203DCD0
 _08016678:
@@ -11449,21 +11373,13 @@ _080167A0:
     bl sub_08015E78
     pop {r4, r5, r7, pc}
 _080167A8:
-    .if VERSION_BM
-    .word 0x0874A274
-    .else
-    .word 0x0874A780
-    .endif
+    .word dat_0874A780
 _080167AC:
     .word 0x0203DCD0
 _080167B0:
     .word 0x0600ACC0
 _080167B4:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _080167B8:
     .word 0x00000800
 _080167BC:
@@ -11569,11 +11485,7 @@ sub_08016842:
 _08016868:
     .word 0x00010000
 _0801686C:
-    .if VERSION_BM
-    .word 0x08709D74
-    .else
-    .word 0x0870A280
-    .endif
+    .word dat_0870A280
 _08016870:
     .word 0x06009000
 _08016874:
@@ -11601,19 +11513,11 @@ sub_08016878:
     pop {r4, r6, r7, pc}
     .hword 0x0000
 _080168A4:
-    .if VERSION_BM
-    .word 0x0870A0F4
-    .else
-    .word 0x0870A600
-    .endif
+    .word dat_0870A600
 _080168A8:
     .word 0x06017100
 _080168AC:
-    .if VERSION_BM
-    .word 0x0870A8B4
-    .else
-    .word 0x0870ADC0
-    .endif
+    .word dat_0870ADC0
 _080168B0:
     .word 0x030027E0
 _080168B4:
@@ -11753,30 +11657,18 @@ _08016974:
 _08016998:
     .word 0x00040000
 _0801699C:
-    .if VERSION_BM
-    .word 0x0874A274
-    .else
-    .word 0x0874A780
-    .endif
+    .word dat_0874A780
 _080169A0:
     .word 0x0203DCD0
 _080169A4:
     .word 0x0600ACC0
 _080169A8:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _080169AC:
     .word 0x0203DF90
 _080169B0:
     .word 0x0600AF80
-    .if VERSION_BM
-    .word 0x08748C4C
-    .else
-    .word 0x08749158
-    .endif
+    .word dat_08749158
 _080169B8:
     .word dat_080169BC
     .global dat_080169BC
@@ -11796,11 +11688,7 @@ sub_080169DA:
     pop {r4, r5, r7, pc}
     .hword 0x0000
 _080169F0:
-    .if VERSION_BM
-    .word 0x0870A914
-    .else
-    .word 0x0870AE20
-    .endif
+    .word dat_0870AE20
 _080169F4:
     .word 0x06009000
 _080169F8:
@@ -11927,11 +11815,7 @@ sub_08016A86:
 _08016AA0:
     .word 0x00200000
 _08016AA4:
-    .if VERSION_BM
-    .word 0x0870A8F4
-    .else
-    .word 0x0870AE00
-    .endif
+    .word dat_0870AE00
 _08016AA8:
     .word 0x030027C0
 
@@ -11955,19 +11839,11 @@ sub_08016AAC:
 _08016AD0:
     .word 0x00400000
 _08016AD4:
-    .if VERSION_BM
-    .word 0x0870A8F4
-    .else
-    .word 0x0870AE00
-    .endif
+    .word dat_0870AE00
 _08016AD8:
     .word 0x030027C0
 _08016ADC:
-    .if VERSION_BM
-    .word 0x0870A1B4
-    .else
-    .word 0x0870A6C0
-    .endif
+    .word dat_0870A6C0
 _08016AE0:
     .word 0x06017600
 _08016AE4:
@@ -13202,11 +13078,7 @@ _0801979C:
 _080197A0:
     .word 0x11111111
 _080197A4:
-    .if VERSION_BM
-    .word 0x0873FBEC
-    .else
-    .word 0x087400F8
-    .endif
+    .word dat_087400F8
 _080197A8:
     .word 0x02000E00
 _080197AC:
@@ -13493,11 +13365,7 @@ _0801DE30:
     .word 0x0000FFFF
     .word 0x0203BF88
 _0801DE38:
-    .if VERSION_BM
-    .word 0x0870BE34
-    .else
-    .word 0x0870C340
-    .endif
+    .word dat_0870C340
 _0801DE3C:
     .word 0x03002B70
 _0801DE40:
@@ -13507,11 +13375,7 @@ _0801DE44:
 _0801DE48:
     .word 0x02036170
 _0801DE4C:
-    .if VERSION_BM
-    .word 0x0870C774
-    .else
-    .word 0x0870CC80
-    .endif
+    .word dat_0870CC80
 _0801DE50:
     .word 0x00000258
 _0801DE54:
@@ -13843,11 +13707,7 @@ sub_0801E0D4:
     pop {pc}
     .hword 0x0000
 _0801E0E4:
-    .if VERSION_BM
-    .word 0x087098D4
-    .else
-    .word 0x08709DE0
-    .endif
+    .word dat_08709DE0
 _0801E0E8:
     .word 0x030027A0
 
@@ -14786,17 +14646,9 @@ _0801E86C:
 _0801E870:
     .word 0x06009580
 _0801E874:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _0801E878:
-    .if VERSION_BM
-    .word 0x08748C4C
-    .else
-    .word 0x08749158
-    .endif
+    .word dat_08749158
 _0801E87C:
     .word 0x0203E790
 _0801E880:
@@ -14908,17 +14760,9 @@ _0801E93C:
     pop {r4, r5, pc}
     .hword 0x0000
 _0801E940:
-    .if VERSION_BM
-    .word 0x08748D88
-    .else
-    .word 0x08749294
-    .endif
+    .word dat_08749294
 _0801E944:
-    .if VERSION_BM
-    .word 0x0870BE54
-    .else
-    .word 0x0870C360
-    .endif
+    .word dat_0870C360
 _0801E948:
     .word 0x030027E0
 _0801E94C:
@@ -15415,11 +15259,7 @@ _0801EF38:
 _0801EF3C:
     .word 0x0000D362
 _0801EF40:
-    .if VERSION_BM
-    .word 0x08707314
-    .else
-    .word 0x08707820
-    .endif
+    .word dat_08707820
 _0801EF44:
     .word 0x06016C40
 _0801EF48:
@@ -16332,11 +16172,7 @@ _0801F5AA:
     pop {r1, r2, pc}
     .hword 0x0000
 _0801F5B4:
-    .if VERSION_BM
-    .word 0x0870C5B4
-    .else
-    .word 0x0870CAC0
-    .endif
+    .word dat_0870CAC0
 _0801F5B8:
     .word 0x000001FF
 
@@ -16368,11 +16204,7 @@ _0801F5DE:
     pop {r2, pc}
     .hword 0x0000
 _0801F5E4:
-    .if VERSION_BM
-    .word 0x0870BEB4
-    .else
-    .word 0x0870C3C0
-    .endif
+    .word dat_0870C3C0
 _0801F5E8:
     .word dat_08020EDC
 
@@ -16546,11 +16378,7 @@ _0801F712:
 _0801F714:
     .word dat_08020EDC
 _0801F718:
-    .if VERSION_BM
-    .word 0x087098F4
-    .else
-    .word 0x08709E00
-    .endif
+    .word dat_08709E00
 _0801F71C:
     .word 0x00000180
 _0801F720:
@@ -17401,27 +17229,15 @@ _0801FD36:
     pop {r4, pc}
     .hword 0x0000
 _0801FD3C:
-    .if VERSION_BM
-    .word 0x08708654
-    .else
-    .word 0x08708B60
-    .endif
+    .word dat_08708B60
 _0801FD40:
     .word 0x06009AC0
 _0801FD44:
-    .if VERSION_BM
-    .word 0x08708D54
-    .else
-    .word 0x08709260
-    .endif
+    .word dat_08709260
 _0801FD48:
     .word 0x06016E40
 _0801FD4C:
-    .if VERSION_BM
-    .word 0x087093D4
-    .else
-    .word 0x087098E0
-    .endif
+    .word dat_087098E0
 _0801FD50:
     .word 0x06009B00
 _0801FD54:
@@ -17440,11 +17256,7 @@ _0801FD6C:
 _0801FD70:
     .word 0x06009380
 _0801FD74:
-    .if VERSION_BM
-    .word 0x0868DD44
-    .else
-    .word 0x0868DF5C
-    .endif
+    .word dat_0868DF5C
 _0801FD78:
     .word 0x00003784
 _0801FD7C:
@@ -17557,11 +17369,7 @@ _0801FE34:
 dat_0801FE38:
     incrom 0x1FE38, 0x8
 _0801FE40:
-    .if VERSION_BM
-    .word 0x0873FBAC
-    .else
-    .word 0x087400B8
-    .endif
+    .word dat_087400B8
 
     .global sub_0801FE44
     .thumb_func
@@ -17585,17 +17393,9 @@ sub_0801FE44:
     bl sub_0801FDEC
     pop {pc}
 _0801FE70:
-    .if VERSION_BM
-    .word 0x0873CDAC
-    .else
-    .word 0x0873D2B8
-    .endif
+    .word dat_0873D2B8
 _0801FE74:
-    .if VERSION_BM
-    .word 0x0873FBCC
-    .else
-    .word 0x087400D8
-    .endif
+    .word dat_087400D8
 
     .global sub_0801FE78
     .thumb_func
@@ -17628,21 +17428,13 @@ sub_0801FE78:
     pop {pc}
     .hword 0x0000
 _0801FEB8:
-    .if VERSION_BM
-    .word 0x0873D2EC
-    .else
-    .word 0x0873D7F8
-    .endif
+    .word dat_0873D7F8
 _0801FEBC:
     .word 0x06009580
 _0801FEC0:
     .word 0x00000540
 _0801FEC4:
-    .if VERSION_BM
-    .word 0x0873FBAC
-    .else
-    .word 0x087400B8
-    .endif
+    .word dat_087400B8
 _0801FEC8:
     .word 0x03002B90
 _0801FECC:
@@ -17654,11 +17446,7 @@ _0801FED4:
 _0801FED8:
     .word dat_08020E9C
 _0801FEDC:
-    .if VERSION_BM
-    .word 0x087093D4
-    .else
-    .word 0x087098E0
-    .endif
+    .word dat_087098E0
 _0801FEE0:
     .word 0x06009B80
 
@@ -18466,11 +18254,7 @@ _080205FA:
     strh r0, [r5, #2]
     pop {pc}
 _08020614:
-    .if VERSION_BM
-    .word 0x08748D88
-    .else
-    .word 0x08749294
-    .endif
+    .word dat_08749294
 _08020618:
     .word dat_0802061C
     .global dat_0802061C
@@ -18764,11 +18548,7 @@ sub_08020844:
 _08020878:
     .word 0x06017140
 _0802087C:
-    .if VERSION_BM
-    .word 0x08747AEC
-    .else
-    .word 0x08747FF8
-    .endif
+    .word dat_08747FF8
 _08020880:
     .word 0x030027A0
 
@@ -18999,11 +18779,7 @@ sub_08020A0A:
     bl sub_0800087C
     pop {pc}
 _08020A1C:
-    .if VERSION_BM
-    .word 0x0870BE54
-    .else
-    .word 0x0870C360
-    .endif
+    .word dat_0870C360
 _08020A20:
     .word 0x030027E0
     .word 0x000001FF
@@ -19140,11 +18916,7 @@ _08020AFE:
     pop {pc}
     .hword 0x0000
 _08020B24:
-    .if VERSION_BM
-    .word 0x0870BE94
-    .else
-    .word 0x0870C3A0
-    .endif
+    .word dat_0870C3A0
 _08020B28:
     .word 0x030027E0
 _08020B2C:

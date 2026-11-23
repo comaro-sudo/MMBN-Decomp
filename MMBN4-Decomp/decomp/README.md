@@ -39,8 +39,12 @@ Needs `binutils-arm-none-eabi`, `make`, `sha1sum`. Tools under `tools/` use the 
 `disasm.py` writes one version at a time: `asm/<seg>.s` for RS and `asm/bm/<seg>.s` for BM. Fold them back into one shared file:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc 'cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && P=~/.venvs/mmbn4-decomp/bin/python && $P tools/disasm.py rs code_05 && $P tools/disasm.py bm code_05 && $P tools/merge_bm.py code_05 && make -B compare VERSION=rs && make -B compare VERSION=bm'
+wsl.exe -d Ubuntu-24.04 -- bash -lc 'cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp/decomp && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py rs code_05 && ~/.venvs/mmbn4-decomp/bin/python tools/disasm.py bm code_05 && ~/.venvs/mmbn4-decomp/bin/python tools/merge_bm.py code_05 && make -B compare VERSION=rs && make -B compare VERSION=bm'
 ```
+
+(Don't shorten the venv path into a shell variable: PowerShell 5.1 expands `$P` before WSL sees it, even inside single quotes, and plain `python3` has no Capstone.)
+
+Symbols follow RS addresses everywhere. Code-region pointers move by the per-segment deltas in `config/segments_*.toml`; data-region pointers (`0x08120000`–`0x087FFFFF`, also with bit 31 set for compressed assets) move by Gemini's map `symbols/datashift_rs_bm.txt`.
 
 Always regenerate RS first. `merge_bm.py` refuses to run on a file that's already shared. Until the merge runs, `split.py` assembles the BM view under RS names (`build/bm/norm/`), so `disasm.py bm`'s self-check still works.
 | `tools/` | Disassembler, fingerprinting, coverage, symbol import |
