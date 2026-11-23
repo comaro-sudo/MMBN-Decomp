@@ -19,10 +19,14 @@ Edit only your own areas. If work needs a change in the other agent's area, **st
 
 To swap or change ownership, the owner edits this table.
 
-**Claude's reverse-engineering lane (approved by the owner, 2026-11-22).** Claude may read `decomp/` but doesn't edit it.
+**Claude's reverse-engineering lane (approved by the owner, 2026-11-22).** At first Claude only read `decomp/` (see the update below).
 - Findings go in `docs/re/`.
 - Proposed symbol names go in `docs/re/proposed-names.txt`, in the `names.txt` format. Gemini merges them into `decomp/symbols/names.txt` and deletes the merged lines.
 - Claude builds only in a private directory outside `decomp/build/`.
+
+**Update (owner, 2026-11-22 evening):** Claude may also work directly in `decomp/` ("you can also decomp"). This is safe because the agents run one at a time, never concurrently.
+- Claude follows the decomp rules: both ROMs byte-identical (`make -B compare` for `rs` and `bm`), no ROM bytes committed.
+- Claude records its decomp work in a `decomp/notes/` handoff, so Gemini sees it on its next turn.
 
 ## 2. Working rules (both agents)
 

@@ -70,6 +70,8 @@ start = 0x08035088
 end = 0x0804F21C
 kind = "code"
 mode = "thumb"
+# dead code after an unconditional b (no branch or pointer reaches it); decoded for coverage (Claude)
+entries = [0x08037C58, 0x08037D30]
 
 [[segment]]   # BM delta +0xC
 name = "code_04"

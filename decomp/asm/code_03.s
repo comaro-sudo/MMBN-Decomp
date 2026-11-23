@@ -5200,7 +5200,46 @@ sub_08037BE4:
     ldr r2, _08037F54
     bl sub_08038284
     b _08037CAE
-    incrom 0x37C58, 0x56
+
+    .global sub_08037C58
+    .thumb_func
+sub_08037C58:
+    ldrh r0, [r7, #0x22]
+    ldr r1, _08037CB0
+    ldr r2, _08037F54
+    movs r3, #0xe
+    bl sub_08037BC4
+    movs r5, #0x70
+    bl sub_08037FEC
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x83
+    adds r0, #3
+    movs r1, #4
+    ldr r2, _08037F54
+    movs r3, #0xe
+    bl sub_08038184
+    ldrh r0, [r7, #0x22]
+    ldr r1, _08037CB0
+    ldr r2, _08037F54
+    ldr r3, _08037CB8
+    ldr r4, _08037CB4
+    bl sub_080381B4
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x83
+    adds r0, #1
+    movs r1, #4
+    ldr r2, _08037F54
+    bl sub_08038208
+    ldrh r0, [r7, #0x22]
+    ldr r1, _08037CB0
+    ldr r2, _08037F54
+    bl sub_08038234
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x83
+    adds r0, #0xb
+    movs r1, #4
+    ldr r2, _08037F54
+    bl sub_08038284
 _08037CAE:
     pop {r4, r5, r6, r7, pc}
 _08037CB0:
@@ -5262,7 +5301,46 @@ sub_08037CBC:
     ldr r2, _08037F54
     bl sub_08038284
     b _08037D86
-    incrom 0x37D30, 0x56
+
+    .global sub_08037D30
+    .thumb_func
+sub_08037D30:
+    ldrh r0, [r7, #0x2c]
+    ldr r1, _08037D88
+    ldr r2, _08037F54
+    movs r3, #0xe
+    bl sub_08037BC4
+    movs r5, #0x50
+    bl sub_08037FEC
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x71
+    adds r0, #3
+    movs r1, #4
+    ldr r2, _08037F54
+    movs r3, #0xa
+    bl sub_08038184
+    ldrh r0, [r7, #0x2c]
+    ldr r1, _08037D88
+    ldr r2, _08037F54
+    ldr r3, _08037D90
+    ldr r4, _08037D8C
+    bl sub_080381B4
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x71
+    adds r0, #1
+    movs r1, #4
+    ldr r2, _08037F54
+    bl sub_08038208
+    ldrh r0, [r7, #0x2c]
+    ldr r1, _08037D88
+    ldr r2, _08037F54
+    bl sub_08038234
+    ldrb r0, [r7, #0xc]
+    subs r0, #0x71
+    adds r0, #0xb
+    movs r1, #4
+    ldr r2, _08037F54
+    bl sub_08038284
 _08037D86:
     pop {r4, r5, r6, r7, pc}
 _08037D88:
