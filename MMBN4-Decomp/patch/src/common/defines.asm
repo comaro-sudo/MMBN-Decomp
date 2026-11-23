@@ -19,6 +19,16 @@ CHIP_BLAKBARR       equ 308
 ; Give a chip: r0 id, r1 code, r2 quantity (pack + Library flag + chip key). code_01, same address in RS and BM
 CHIP_GIVE           equ 0x0801913E
 
+; The literal GetCompletionStars (0x08000D28) loads for BN4_STAR_SOUL_FLAGS; same address in RS and BM
+STAR_SOUL_FLAGS_PTR equ 0x08000DB0
+
+; ---- Free space: the unused 0xFF tail, 0x087F7400-0x08800000, same in RS and BM (docs/re/free-space.md).
+; Allocate one slot per work package here, in address order, so nothing overlaps.
+FREE_SPACE_START        equ 0x087F7400
+FS_STAR_SOUL_FLAGS      equ 0x087F7400      ; WP-D4 star: 13 u16 = 26 bytes
+FS_STAR_SOUL_FLAGS_SIZE equ 0x20
+; next free slot:           0x087F7420
+
 ; Address of a field of a chip entry
 .macro chip_field_org, id, field
     .org CHIP_TABLE + (id) * CHIP_ENTRY_SIZE + (field)

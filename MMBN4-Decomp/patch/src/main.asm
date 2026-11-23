@@ -24,5 +24,6 @@
 .include "common/wp_a2_zenny_battle.asm"      ; WP-A2: battle Zenny x1.5
 .include "common/wp_d4_twelve_souls.asm"     ; Violet Eclipse: all 12 Souls unite (both versions)
 .include "common/wp_d3_bass_both_chips.asm"  ; Violet Eclipse: a Bass battle gives both versions' chips
+.include "common/wp_d4_star_twelve_souls.asm" ; Violet Eclipse: the Souls completion star needs all 12
 
 .close
