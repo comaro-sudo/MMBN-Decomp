@@ -50,7 +50,15 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - the NPC script can start one of them and then call the Free Tournament prize routine (`FreeTournamentSelectPrize`, `0x08045458`) for that Navi;
   - placing 12 NPCs needs the lobby map's NPC list (not mapped yet), and their sprites (all in both ROMs, since every operator appears in the story).
 - **Owner decision (2026-11-23):** each operator appears in the lobby **only after the player has met that Navi in the story**.
-- Still open: which version of the Navi the rematch uses (V1, the playthrough's tier, or the player's choice). The prize doesn't depend on it, since it follows the Busting Level; it only changes how hard the fight is.
+- **Caveat on "met in the story":** in the original game, one playthrough doesn't meet all 12 Soul Navis.
+  - Each of a version's three tournaments draws **one of its two** Soul Navis (`docs/re/tournaments.md` §3), so a run meets 3 of the version's 6.
+  - The other version's 6 never appear as story opponents.
+  - Violet Eclipse already plans to fix this (WP-B1: every Soul in one run; WP-D4: the other version's Navis). Until those exist, the "met" condition would leave some operators out. Owner to confirm a rule (proposed below).
+- **Owner decision (2026-11-23), the rematch tier climbs with S ranks:** each operator's Navi starts at **V1**. After an S-rank win against V1, the next rematch is **V2**. After S against V2, it's **V3**. After S against V3, it's **SP**.
+  - A win below S doesn't advance the tier.
+  - Storage: 2 bits per Navi (V1/V2/V3/SP) × 12 Navis, in unused event flags.
+  - The rematch battle must be started with the battle record's "no automatic raise" bit set (`+6` bit 7, RE-06), so the playthrough doesn't change the chosen tier.
+  - (T: after SP the tier stays at SP. What an S win against SP gives once all 3 chips are owned isn't decided; the original rule falls back to V3.)
 
 ## Decisions for the owner
 
