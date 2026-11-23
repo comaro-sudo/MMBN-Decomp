@@ -7466,11 +7466,7 @@ _080038CC:
     .word dat_0800377C
     .global dat_080038D0
 dat_080038D0:
-    .if VERSION_BM
-    .word 0x080A5C71
-    .else
-    .word 0x080A5C65
-    .endif
+    .word dat_080A5C65
 
     .global sub_080038D4
     .thumb_func
@@ -7959,11 +7955,7 @@ _0800421C:
     .word 0x02037D10
     .global dat_08004220
 dat_08004220:
-    .if VERSION_BM
-    .word 0x080A80D1
-    .else
-    .word 0x080A80C5
-    .endif
+    .word dat_080A80C5
 
     .global sub_08004224
     .thumb_func
@@ -10489,9 +10481,9 @@ sub_0800582C:
 
     .global sub_08005858
     .thumb_func
-sub_08005858:
+sub_08005858:   @ ShopOpen
     push {r5, lr}
-    bl sub_08049DB4
+    bl sub_08049DB4   @ ShopInit
     mov r5, sl
     ldr r5, [r5, #0x40]
     ldr r1, [r5, #0x28]

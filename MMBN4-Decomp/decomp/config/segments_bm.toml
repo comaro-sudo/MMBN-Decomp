@@ -64,6 +64,27 @@ entries = [0x08037C60, 0x08037D38]
 [[segment]]
 name = "code_04"
 start = 0x0804F228
+end = 0x0805CF74
+kind = "code"
+mode = "thumb"
+
+[[segment]]
+name = "code_04b"
+start = 0x0805CF74
+end = 0x080612DC
+kind = "code"
+mode = "thumb"
+
+[[segment]]
+name = "code_04c"
+start = 0x080612DC
+end = 0x08067668
+kind = "code"
+mode = "thumb"
+
+[[segment]]
+name = "code_04d"
+start = 0x08067668
 end = 0x080711F0
 kind = "code"
 mode = "thumb"
@@ -99,13 +120,13 @@ mode = "thumb"
 [[segment]]
 name = "code_09"
 start = 0x080F001E
-end = 0x0810A1C8
+end = 0x08109F04
 kind = "code"
 mode = "thumb"
 
 [[segment]]
 name = "code_10"
-start = 0x0810A1C8
+start = 0x08109F04
 end = 0x08120014
 kind = "code"
 mode = "thumb"

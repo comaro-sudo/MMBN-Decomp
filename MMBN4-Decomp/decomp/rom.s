@@ -11,13 +11,16 @@
     .include "asm/code_01.s"              @ 0x0801002A-0x08020D6C
     .include "asm/code_02.s"              @ 0x08020D6C-0x08035088
     .include "asm/code_03.s"              @ 0x08035088-0x0804F21C
-    .include "asm/code_04.s"              @ 0x0804F21C-0x080711E4
+    .include "asm/code_04.s"              @ 0x0804F21C-0x0805CF5C
+    .include "asm/code_04b.s"              @ 0x0805CF5C-0x080612C8
+    .include "asm/code_04c.s"              @ 0x080612C8-0x0806765C
+    .include "asm/code_04d.s"              @ 0x0806765C-0x080711E4
     .include "asm/code_05.s"              @ 0x080711E4-0x08094758
     .include "asm/code_06.s"              @ 0x08094758-0x080B01DE
     .include "asm/code_07.s"              @ 0x080B01DE-0x080D00B8
     .include "asm/code_08.s"              @ 0x080D00B8-0x080F0012
-    .include "asm/code_09.s"              @ 0x080F0012-0x0810A1B4
-    .include "asm/code_10.s"              @ 0x0810A1B4-0x08120000
+    .include "asm/code_09.s"              @ 0x080F0012-0x08109EF0
+    .include "asm/code_10.s"              @ 0x08109EF0-0x08120000
 
 @ Data region (graphics, maps, text, music): still incbin.
     .incbin "baserom.gba", 0x120000, 0x6E0000   @ 0x08120000-0x08800000

@@ -77,6 +77,32 @@ entries = [0x08037C58, 0x08037D30]
 name = "code_04"
 bm_delta = 0xC
 start = 0x0804F21C
+end = 0x0805CF5C
+kind = "code"
+mode = "thumb"
+
+# code_04 is split where the RS->BM delta changes inside it: three cutscene-script
+# tables insert or delete 14-byte commands (notes/dc4-version-differences.md 2.2/3).
+[[segment]]   # BM delta +0x18
+name = "code_04b"
+bm_delta = 0x18
+start = 0x0805CF5C
+end = 0x080612C8
+kind = "code"
+mode = "thumb"
+
+[[segment]]   # BM delta +0x14
+name = "code_04c"
+bm_delta = 0x14
+start = 0x080612C8
+end = 0x0806765C
+kind = "code"
+mode = "thumb"
+
+[[segment]]   # BM delta +0xC
+name = "code_04d"
+bm_delta = 0xC
+start = 0x0806765C
 end = 0x080711E4
 kind = "code"
 mode = "thumb"
@@ -117,14 +143,14 @@ mode = "thumb"
 name = "code_09"
 bm_delta = 0xC
 start = 0x080F0012
-end = 0x0810A1B4
+end = 0x08109EF0   # the +0xC -> +0x14 shift is inside sub_08109E48, just before
 kind = "code"
 mode = "thumb"
 
 [[segment]]   # BM delta +0x14, includes m4a
 name = "code_10"
 bm_delta = 0x14
-start = 0x0810A1B4
+start = 0x08109EF0
 end = 0x08120000
 kind = "code"
 mode = "thumb"

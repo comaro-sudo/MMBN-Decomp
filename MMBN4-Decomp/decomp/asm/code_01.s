@@ -14452,7 +14452,7 @@ _0801E5F6:
     strb r0, [r5, #2]
 _0801E5FE:
     pop {r4, r5, pc}
-    .word 0x0801EB74
+    .word dat_0801EB74
 _0801E604:
     .word 0x02036170
 

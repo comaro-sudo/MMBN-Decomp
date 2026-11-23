@@ -1144,11 +1144,7 @@ _080D0990:
     .word dat_080D0994
     .global dat_080D0994
 dat_080D0994:
-    .if VERSION_BM
-    .word 0x080D09A5
-    .else
-    .word 0x080D0999
-    .endif
+    .word dat_080D0999
 
     .global sub_080D0998
     .thumb_func
@@ -2202,11 +2198,7 @@ _080D11E8:
     .word dat_080D11EC
     .global dat_080D11EC
 dat_080D11EC:
-    .if VERSION_BM
-    .word 0x080D1207
-    .else
-    .word 0x080D11FB
-    .endif
+    .word dat_080D11FB
 _080D11F0:
     bl sub_08012DC0
     movs r0, #8
@@ -4162,11 +4154,7 @@ _080D210C:
     .word dat_080D2110
     .global dat_080D2110
 dat_080D2110:
-    .if VERSION_BM
-    .word 0x080D2125
-    .else
-    .word 0x080D2119
-    .endif
+    .word dat_080D2119
 _080D2114:
     .word 0xFF800000
 
@@ -5175,11 +5163,7 @@ _080D28C0:
     .word dat_080D28C4
     .global dat_080D28C4
 dat_080D28C4:
-    .if VERSION_BM
-    .word 0x080D28D5
-    .else
-    .word 0x080D28C9
-    .endif
+    .word dat_080D28C9
 
     .global sub_080D28C8
     .thumb_func
@@ -5974,11 +5958,7 @@ _080D2F34:
     .word dat_080D2F38
     .global dat_080D2F38
 dat_080D2F38:
-    .if VERSION_BM
-    .word 0x080D2F69
-    .else
-    .word 0x080D2F5D
-    .endif
+    .word dat_080D2F5D
 _080D2F3C:
     .word dat_080D2F40
     .global dat_080D2F40
@@ -6447,11 +6427,7 @@ _080D3364:
     .word dat_080D3368
     .global dat_080D3368
 dat_080D3368:
-    .if VERSION_BM
-    .word 0x080D3379
-    .else
-    .word 0x080D336D
-    .endif
+    .word dat_080D336D
 
     .global sub_080D336C
     .thumb_func
@@ -8305,11 +8281,7 @@ _080D4110:
     .word dat_080D4114
     .global dat_080D4114
 dat_080D4114:
-    .if VERSION_BM
-    .word 0x080D4125
-    .else
-    .word 0x080D4119
-    .endif
+    .word dat_080D4119
 
     .global sub_080D4118
     .thumb_func
@@ -9568,11 +9540,7 @@ _080D4A74:
     .word dat_080D4A78
     .global dat_080D4A78
 dat_080D4A78:
-    .if VERSION_BM
-    .word 0x080D4A89
-    .else
-    .word 0x080D4A7D
-    .endif
+    .word dat_080D4A7D
 
     .global sub_080D4A7C
     .thumb_func
@@ -10060,11 +10028,7 @@ _080D4E64:
     .word dat_080D4E68
     .global dat_080D4E68
 dat_080D4E68:
-    .if VERSION_BM
-    .word 0x080D4E81
-    .else
-    .word 0x080D4E75
-    .endif
+    .word dat_080D4E75
     .global dat_080D4E6C
 dat_080D4E6C:
     incrom 0xD4E6C, 0x8
@@ -13381,11 +13345,7 @@ _080D6834:
     .word dat_080D6838
     .global dat_080D6838
 dat_080D6838:
-    .if VERSION_BM
-    .word 0x080D6849
-    .else
-    .word 0x080D683D
-    .endif
+    .word dat_080D683D
 
     .global sub_080D683C
     .thumb_func
@@ -16197,11 +16157,7 @@ _080D7DD8:
     .word dat_080D7DDC
     .global dat_080D7DDC
 dat_080D7DDC:
-    .if VERSION_BM
-    .word 0x080D7DED
-    .else
-    .word 0x080D7DE1
-    .endif
+    .word dat_080D7DE1
 
     .global sub_080D7DE0
     .thumb_func
@@ -16218,11 +16174,7 @@ _080D7DF0:
     .word dat_080D7DF4
     .global dat_080D7DF4
 dat_080D7DF4:
-    .if VERSION_BM
-    .word 0x080D7E05
-    .else
-    .word 0x080D7DF9
-    .endif
+    .word dat_080D7DF9
 
     .global sub_080D7DF8
     .thumb_func
@@ -20313,11 +20265,7 @@ _080D9D80:
     .word 0x3F800000
     .global dat_080D9D84
 dat_080D9D84:
-    .if VERSION_BM
-    .word 0x080D9D95
-    .else
-    .word 0x080D9D89
-    .endif
+    .word dat_080D9D89
 
     .global sub_080D9D88
     .thumb_func
@@ -20451,11 +20399,7 @@ _080D9E7C:
     .word dat_080D9E80
     .global dat_080D9E80
 dat_080D9E80:
-    .if VERSION_BM
-    .word 0x080D9E91
-    .else
-    .word 0x080D9E85
-    .endif
+    .word dat_080D9E85
 
     .global sub_080D9E84
     .thumb_func
@@ -23260,11 +23204,7 @@ _080DB494:
     .word dat_080DB498
     .global dat_080DB498
 dat_080DB498:
-    .if VERSION_BM
-    .word 0x080DB4A9
-    .else
-    .word 0x080DB49D
-    .endif
+    .word dat_080DB49D
 
     .global sub_080DB49C
     .thumb_func
@@ -25716,11 +25656,7 @@ _080DC744:
     .word dat_080DC748
     .global dat_080DC748
 dat_080DC748:
-    .if VERSION_BM
-    .word 0x080DC759
-    .else
-    .word 0x080DC74D
-    .endif
+    .word dat_080DC74D
 
     .global sub_080DC74C
     .thumb_func
@@ -27248,11 +27184,7 @@ _080DD324:
     .word dat_080DD328
     .global dat_080DD328
 dat_080DD328:
-    .if VERSION_BM
-    .word 0x080DD339
-    .else
-    .word 0x080DD32D
-    .endif
+    .word dat_080DD32D
 
     .global sub_080DD32C
     .thumb_func
@@ -27942,11 +27874,7 @@ _080DD870:
     .word dat_080DD874
     .global dat_080DD874
 dat_080DD874:
-    .if VERSION_BM
-    .word 0x080DD885
-    .else
-    .word 0x080DD879
-    .endif
+    .word dat_080DD879
 
     .global sub_080DD878
     .thumb_func
@@ -31581,11 +31509,7 @@ _080DF410:
     .word dat_080DF414
     .global dat_080DF414
 dat_080DF414:
-    .if VERSION_BM
-    .word 0x080DF425
-    .else
-    .word 0x080DF419
-    .endif
+    .word dat_080DF419
 
     .global sub_080DF418
     .thumb_func
@@ -34143,11 +34067,7 @@ _080E07A0:
     .word dat_080E07A4
     .global dat_080E07A4
 dat_080E07A4:
-    .if VERSION_BM
-    .word 0x080E07B5
-    .else
-    .word 0x080E07A9
-    .endif
+    .word dat_080E07A9
     .hword 0x46F7
 
     .global sub_080E07AA
@@ -35631,11 +35551,7 @@ _080E137C:
     .word dat_080E1380
     .global dat_080E1380
 dat_080E1380:
-    .if VERSION_BM
-    .word 0x080E1391
-    .else
-    .word 0x080E1385
-    .endif
+    .word dat_080E1385
 
     .global sub_080E1384
     .thumb_func
@@ -36586,11 +36502,7 @@ _080E1CA8:
 _080E1CE8:
     pop {r4, r6, r7, pc}
     .hword 0x0000
-    .if VERSION_BM
-    .word 0x080E1D90
-    .else
-    .word 0x080E1D84
-    .endif
+    .word dat_080E1D84
 _080E1CF0:
     .word 0x02010C40
 
@@ -39616,11 +39528,7 @@ _080E337C:
     .word dat_080E3380
     .global dat_080E3380
 dat_080E3380:
-    .if VERSION_BM
-    .word 0x080E3391
-    .else
-    .word 0x080E3385
-    .endif
+    .word dat_080E3385
 
     .global sub_080E3384
     .thumb_func
@@ -58380,11 +58288,7 @@ _080EBEA4:
     .word dat_080EBEA8
     .global dat_080EBEA8
 dat_080EBEA8:
-    .if VERSION_BM
-    .word 0x080EBEB9
-    .else
-    .word 0x080EBEAD
-    .endif
+    .word dat_080EBEAD
 
     .global sub_080EBEAC
     .thumb_func
@@ -60289,11 +60193,7 @@ _080ECD04:
     .word dat_080ECD08
     .global dat_080ECD08
 dat_080ECD08:
-    .if VERSION_BM
-    .word 0x080ECD19
-    .else
-    .word 0x080ECD0D
-    .endif
+    .word dat_080ECD0D
 
     .global sub_080ECD0C
     .thumb_func
@@ -60394,11 +60294,7 @@ _080ECDD2:
     pop {r4, r6, pc}
 _080ECDD4:
     .word dat_080ECDF0
-    .if VERSION_BM
-    .word 0x080ECDF4
-    .else
-    .word 0x080ECDE8
-    .endif
+    .word dat_080ECDE8
 _080ECDDC:
     .word dat_080ECE10
 _080ECDE0:
@@ -63328,7 +63224,11 @@ dat_080EE3D0:
     .global dat_080EE3EA
 dat_080EE3EA:
     .hword 0x0100
-    .word 0x08040302
+    .if VERSION_BM
+    .word dat_080402FA
+    .else
+    .word dat_08040302
+    .endif
     .word 0x040A0607
     .global dat_080EE3F4
 dat_080EE3F4:
@@ -64180,11 +64080,7 @@ _080EEA14:
     .word 0x00000600
     .global dat_080EEA18
 dat_080EEA18:
-    .if VERSION_BM
-    .word 0x080EEA29
-    .else
-    .word 0x080EEA1D
-    .endif
+    .word dat_080EEA1D
 
     .global sub_080EEA1C
     .thumb_func

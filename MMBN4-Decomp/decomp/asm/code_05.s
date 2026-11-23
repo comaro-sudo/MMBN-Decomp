@@ -2700,11 +2700,7 @@ _080898BC:
     .word dat_080898C0
     .global dat_080898C0
 dat_080898C0:
-    .if VERSION_BM
-    .word 0x0806C960
-    .else
-    .word 0x0806C954
-    .endif
+    .word dat_0806C954
 
     .global sub_080898C4
     .thumb_func

@@ -6594,11 +6594,7 @@ _08038524:
     .word 0x40000000
 _08038528:
     .word dat_08038588
-    .if VERSION_BM
-    .word 0x080385B6
-    .else
-    .word 0x080385AE
-    .endif
+    .word dat_080385AE
 _08038530:
     .word dat_080385D4
 _08038534:
@@ -6683,11 +6679,7 @@ _08038670:
     .word 0x00000000
 _08038674:
     .word dat_0803867C
-    .if VERSION_BM
-    .word 0x080386C4
-    .else
-    .word 0x080386BC
-    .endif
+    .word dat_080386BC
     .global dat_0803867C
 dat_0803867C:
     incrom 0x3867C, 0x80
@@ -11337,11 +11329,7 @@ _0803B444:
     .word dat_0803B448
     .global dat_0803B448
 dat_0803B448:
-    .if VERSION_BM
-    .word 0x0803B455
-    .else
-    .word 0x0803B44D
-    .endif
+    .word dat_0803B44D
 
     .global sub_0803B44C
     .thumb_func
@@ -13876,11 +13864,7 @@ _0803C7C8:
     bl sub_0803CD08
     bl sub_0803CD36
     pop {pc}
-    .if VERSION_BM
-    .word 0x0803C5D8
-    .else
-    .word 0x0803C5D0
-    .endif
+    .word dat_0803C5D0
 _0803C7E0:
     .word 0x00000200
 
@@ -14155,11 +14139,7 @@ _0803CA20:
 _0803CA34:
     pop {pc}
     .hword 0x0000
-    .if VERSION_BM
-    .word 0x0803C5D8
-    .else
-    .word 0x0803C5D0
-    .endif
+    .word dat_0803C5D0
 _0803CA3C:
     .word 0x00000200
 
@@ -24501,11 +24481,7 @@ sub_080418D4:
     movs r2, #1
     bl sub_08111878
     pop {pc}
-    .if VERSION_BM
-    .word 0x0811188D
-    .else
-    .word 0x08111879
-    .endif
+    .word dat_08111879
 
     .global sub_080418F8
     .thumb_func
@@ -35293,11 +35269,7 @@ sub_08048208:
     movs r0, #1
 _0804821A:
     pop {r7, pc}
-    .if VERSION_BM
-    .word 0x08048160
-    .else
-    .word 0x08048158
-    .endif
+    .word dat_08048158
 _08048220:
     .word 0x0200A3D0
 
@@ -37966,12 +37938,12 @@ dat_08049C8C:
 dat_08049C9C:
     incrom 0x49C9C, 0x8
     .global dat_08049CA4
-dat_08049CA4:
+dat_08049CA4:   @ BN4_SHOP_RECORDS
     incrom 0x49CA4, 0x110
 
     .global sub_08049DB4
     .thumb_func
-sub_08049DB4:
+sub_08049DB4:   @ ShopInit
     push {r5, lr}
     push {r0}
     ldr r0, _08049E0C
@@ -37994,7 +37966,7 @@ sub_08049DB4:
     pop {r5, pc}
     .hword 0x0000
 _08049DE0:
-    .word dat_08049CA4
+    .word dat_08049CA4   @ BN4_SHOP_RECORDS
 _08049DE4:
     .word 0x02026000
     .word 0x00001F40
@@ -40609,7 +40581,7 @@ _0804BE74:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0804BE80:
-    .word dat_08049CA4
+    .word dat_08049CA4   @ BN4_SHOP_RECORDS
 _0804BE84:
     .word 0x000016C0
 _0804BE88:
@@ -43948,11 +43920,7 @@ sub_0804E358:
     pop {pc}
 _0804E37C:
     .word dat_0804E384
-    .if VERSION_BM
-    .word 0x0804E39C
-    .else
-    .word 0x0804E394
-    .endif
+    .word dat_0804E394
     .global dat_0804E384
 dat_0804E384:
     incrom 0x4E384, 0x20

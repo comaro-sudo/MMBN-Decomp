@@ -8754,11 +8754,7 @@ _080253D8:
     .word dat_080253DC
     .global dat_080253DC
 dat_080253DC:
-    .if VERSION_BM
-    .word 0x080253E5
-    .else
-    .word 0x080253E1
-    .endif
+    .word dat_080253E1
 
     .global sub_080253E0
     .thumb_func
@@ -9378,11 +9374,7 @@ _08025862:
     bl sub_08000560   @ PlaySoundEffect
 _0802586E:
     pop {pc}
-    .if VERSION_BM
-    .word 0x080252DC
-    .else
-    .word 0x080252D8
-    .endif
+    .word dat_080252D8
 
     .global sub_08025874
     .thumb_func
@@ -11135,18 +11127,10 @@ dat_08026688:   @ BN4_MAP_ANIMS
     incrom 0x26688, 0x54
     .global dat_080266DC
 dat_080266DC:
-    .if VERSION_BM
-    .word 0x080266E9
-    .else
-    .word 0x080266E5
-    .endif
+    .word dat_080266E5
     .global dat_080266E0
 dat_080266E0:
-    .if VERSION_BM
-    .word 0x080266EB
-    .else
-    .word 0x080266E7
-    .endif
+    .word dat_080266E7
 
     .global sub_080266E4
     .thumb_func
@@ -34047,11 +34031,7 @@ _08034C52:
     .hword 0x0000
 _08034C58:
     .word dat_08034C60
-    .if VERSION_BM
-    .word 0x08034C68
-    .else
-    .word 0x08034C64
-    .endif
+    .word dat_08034C64
     .global dat_08034C60
 dat_08034C60:
     incrom 0x34C60, 0x8

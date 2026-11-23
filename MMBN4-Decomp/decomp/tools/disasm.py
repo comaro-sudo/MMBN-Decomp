@@ -350,6 +350,15 @@ class Segment:
             if w in self.datarefs:
                 sym_comment = f"   @ {self.names[w]}" if w in self.names else ""
                 return f"dat_{w:08X}{sym_comment}"
+        if a not in self.raw_lits and BASE <= w < BASE + 0x120000:
+            # Any other code-region value, in a literal pool or in a short
+            # data run (mid-function pointer, Thumb address with no known
+            # function, table entry): a symbol, so it moves with the code.
+            # split.py defines dat_<value> at the value itself, or at its BM
+            # address in a BM build, so the bytes are always the original
+            # ones. If the word is really a constant, merge_bm.py just keeps
+            # RS and BM in a version block.
+            return f"dat_{w:08X}"
         return f"0x{w:08X}"
 
     def label_for(self, a: int) -> str:
