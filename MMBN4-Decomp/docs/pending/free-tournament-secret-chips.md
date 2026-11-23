@@ -111,7 +111,10 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
 
   This lineup implies one merged story, no RS/BM split for the tournaments (`plan/DEFINITIVE-EDITION.md` §7 question 1).
 - **JunkMan has no operator (owner decision, 2026-11-23):** he **waits in the lobby's network**. Lan jacks in at a lobby PC, and JunkMan stands in a small cyber-area as an NPC; talking to him starts the rematch. It matches the friendly-match draft, where MegaMan "picks up a strange Navi signal".
-  - Open: whether a JunkMan **overworld (field) sprite** exists in both ROMs (to check). His battle sprite exists in both, since Red Sun can field Blue Moon's Navis.
+  - **JunkMan's overworld (field) sprite exists in both ROMs (V, checked by Claude, 2026-11-23).**
+    - Sprite list 6 (the Navis' overworld sprites; the list table at RS `0x0802793C` / BM `0x08027940`, per Cyberworld Endless's `docs/rom/bn4.md` and `bn4_navis.h`), entry `0x5A`, points to `0x08486FC8` in **both** versions, and its first 8 KiB are byte-identical.
+    - Roll (`0x41`), WoodMan (`0x47`), AquaMan (`0x51`) and SearchMan (`0x59`) are likewise at the same address in both, so the lobby NPCs need no imported graphics.
+    - His battle sprite also exists in both.
 
 **Details to settle (earlier proposals; see the owner decisions above):**
 - **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
