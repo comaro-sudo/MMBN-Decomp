@@ -165,6 +165,16 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
 - Why: Higsby's already has 4 NPCs. BN6's engine (same family) allows 16 overworld NPCs per map (`NUM_OVERWORLD_NPC_OBJECTS`, `ext/bn6f/constants/constants.inc`), and 4 + 11 = 15 is too tight. The small room may also lack the floor space.
 - To check (Gemini's round-4 task 1): BN4's real per-map NPC limit, the walkable space in Higsby's, and which outside map and spots sit in front of the store.
 
+## The operator split (owner, 2026-11-23)
+
+- **8 operators inside Higsby's**: 4 existing NPCs + 8 = 12 of the 16 slots.
+- **3 operators outside**, on the ACDC Town street, **plus JunkMan's trash can outside** at `(-150, -90)`.
+- **Slot conflict:** ACDC Town `(00, 00)` has only **3 free slots** (13/16; Gemini round 5), and 3 operators + the trash can need 4. Ways out:
+  1. 9 inside and 2 outside (inside becomes 13/16, outside 3/3), keeping the trash can outside;
+  2. hide one existing ACDC Town NPC after the flag that enables the operators;
+  3. make the trash can a background tile with an examine/jack-in hook instead of an NPC. Real trash cans elsewhere in BN4 are BG tiles, but this needs a map tile and collision edit, the harder route.
+- Whether this split **replaces the waiting room (option A)** is for the owner to confirm.
+
 ## Gemini's round-5 findings (2026-11-23, `6898fae`, `decomp/notes/waiting-room.md`)
 
 - **The real-world maps:** 34 maps in groups `0x00`–`0x05`, **with no unused or debug maps**. Option A must reuse a rarely used room.
