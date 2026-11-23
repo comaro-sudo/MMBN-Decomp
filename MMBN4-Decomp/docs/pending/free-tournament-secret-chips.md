@@ -165,6 +165,17 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
 - Why: Higsby's already has 4 NPCs. BN6's engine (same family) allows 16 overworld NPCs per map (`NUM_OVERWORLD_NPC_OBJECTS`, `ext/bn6f/constants/constants.inc`), and 4 + 11 = 15 is too tight. The small room may also lack the floor space.
 - To check (Gemini's round-4 task 1): BN4's real per-map NPC limit, the walkable space in Higsby's, and which outside map and spots sit in front of the store.
 
+## Gemini's round-5 findings (2026-11-23, `6898fae`, `decomp/notes/waiting-room.md`)
+
+- **The real-world maps:** 34 maps in groups `0x00`–`0x05`, **with no unused or debug maps**. Option A must reuse a rarely used room.
+- **The NPC cap is 16 per map** (confirmed for BN4).
+- **Best waiting-room candidate: `(02, 02)` DomeRoom.** It's the Den Dome tournament waiting room: bright, with a bracket chart on the wall, 2 doors, a wide floor, and only 2 NPCs, so 14 slots are free and all 11 operators fit.
+  - The others don't fit: `(03, 02)` WaitingRoom has 5 NPCs and no spare slots; `(04, 03)` ColosseumRm is an outdoor staircase.
+  - It's a different place in the story (Den Dome), so the door from the ACDC street into it is a "magic" door. **Owner to confirm.**
+- **Story safety:** only 2 warps lead into Higsby's: the ACDC street door (RS `0x080541EC`) and the Free Tournament's return (RS `0x080438B4`). Redirecting the street door behind a flag leaves every story scene alone.
+- **The outside trash can:** ACDC Town `(00, 00)` has 13 of 16 NPCs (3 free). The verified sidewalk spot is **`(-150, -90, 0)`**, Higsby's front-right corner under the awning, clear of the door at `(-176, -90)`. Existing trash cans elsewhere are background tiles, not sprites, so the added one needs a sprite NPC.
+- **The status screen's two pages:** L, R and Select are all free there. The hook is an empty per-frame stub, `sub_08034EB0` (RS) / `0x08034EB4` (BM). The page offset goes in an unused byte at `0x0201D018`. About 176 bytes of patch (`decomp/notes/status-screen-two-pages.md`).
+
 ## Decisions for the owner
 
 1. Use this fix for the 36 secret chips (C2)?
