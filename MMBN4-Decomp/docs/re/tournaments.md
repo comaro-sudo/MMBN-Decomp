@@ -69,7 +69,10 @@ New Game+ keeps the pools only when flag `0x18` is set (`sub_08001350`; see [com
 
 ## 6. Next
 
-1. Read `sub_080448C0` (Free Tournament), `sub_0804480C` (pair swap), `sub_0804422C`/`sub_0804428C`/`sub_080442EC` (bracket draw).
-2. Find who writes `0x02006F40` (the link-trade receive code) and flags `0x14`/`0x15`.
-3. The id → Navi/Soul table: confirm at runtime by loading a save at a tournament.
+1. ~~Free Tournament, pair swap, bracket draw~~ and ~~who writes `0x02006F40`~~: **done** by Gemini, [`decomp/notes/re04-tournaments-remainder.md`](../../decomp/notes/re04-tournaments-remainder.md) (V):
+   - `0x02006F40` is filled from the Waiting Room `0x020014F0` by `SyncTradedNavisToPool` (`0x0803F948`), after a link trade (`WaitingRoomReceiveTradedNavi` `0x0803FA90`);
+   - the bracket draw uses `GetTertiaryRNG` with flag `0x15`, and the playthrough-2 pair swap uses flag `0x9B`;
+   - the Free Tournament fields only Waiting Room Navis and gives the 36 secret chips (see `../completion/chips.md` §3).
+2. Flag `0x14`: still open.
+3. ~~The id → Navi/Soul table~~: **done** (Gemini's §1: tournament ids 0–11 → Navi, version, Soul index, secret chips).
 4. The ProtoSoul-in-Red-Sun experiment (§5).
