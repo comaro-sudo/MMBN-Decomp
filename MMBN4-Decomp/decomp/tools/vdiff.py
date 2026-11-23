@@ -193,11 +193,15 @@ def parse_pre_merge_asm(rev: str, ver: str, seg_cfg: dict) -> dict[int, tuple[in
 def analyze():
     rs_rom = (GAME_ROOT / "roms" / "bn4_rs_us.gba").read_bytes()
     bm_rom = (GAME_ROOT / "roms" / "bn4_bm_us.gba").read_bytes()
-    cfg_rs = tomllib.loads((DECOMP / "config" / "segments_rs.toml").read_text())
-    cfg_bm = tomllib.loads((DECOMP / "config" / "segments_bm.toml").read_text())
+    rev = find_pre_merge_rev()
+    cfg_rs = tomllib.loads(
+        subprocess.run(["git", "show", f"{rev}:MMBN4-Decomp/decomp/config/segments_rs.toml"], cwd=REPO_ROOT, capture_output=True, text=True).stdout
+    )
+    cfg_bm = tomllib.loads(
+        subprocess.run(["git", "show", f"{rev}:MMBN4-Decomp/decomp/config/segments_bm.toml"], cwd=REPO_ROOT, capture_output=True, text=True).stdout
+    )
     names = load_names()
     funcs = load_funcs()
-    rev = find_pre_merge_rev()
 
     rs_items: dict[int, tuple[int, str, str]] = {}
     bm_items: dict[int, tuple[int, str, str]] = {}
