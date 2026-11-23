@@ -27,6 +27,12 @@ Round 3's `lobby-npcs.md` covered jack-ins in general but **not the trash can**.
    - **BN4's real per-map NPC limit.** BN6's is 16 (`NUM_OVERWORLD_NPC_OBJECTS = 0x10` in `ext/bn6f/constants/constants.inc`). Find BN4's object-pool size, the table the NPC allocator uses (`NpcSpawnList` `0x08026748` → `sub_08026774`).
    - **The walkable floor** in Higsby's `(00, 06)`, and on the outside map in front of the store: which map that is (group/number), its current NPC count, and free spots near the door.
    - **A proposed split:** how many operators inside and how many outside, with coordinates.
+   - **See the rooms.** `ref/maps/` only has net maps; there's no picture of Higsby's anywhere. Take PC-port screenshots:
+     - load a community save near ACDC Town (`ref/saves/`, converted with `patch/tools/savetool.py --convert`, written outside the repo);
+     - script Lan into Higsby's and onto the street in front of it (`--test N --input ... --shot X.bmp`);
+     - write the shots **outside the repo**.
+     - If you can, also read the map's collision from the ROM (Cyberworld Endless's `docs/rom/bn4.md` describes the tilemap headers and `BN4_MAP_ENTERS`), to give an exact walkable grid.
+     - In the note, describe the layout in words and coordinates. Don't commit images.
 
 ## Task 2: can the status screen show 12 Souls in a 2 × 6 grid? (`decomp/notes/status-screen-2x6.md`)
 
