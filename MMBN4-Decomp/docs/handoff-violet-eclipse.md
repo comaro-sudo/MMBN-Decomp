@@ -47,7 +47,9 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 
 ## Immediate Next Steps
 
-1. When Gemini's round 10 lands: read its handoff and the four design notes; check that its regeneration compares OK.
-2. Build from those designs, in order: **Duo Soul** (`duo-soul-design.md`; add the grant to `wp_d2_duo_story_grant.asm` and to Duo V1 rematch wins), **chip names/descriptions** (`chip-text-design.md`), **SP+** (`sp-plus-design.md`; Duo's step uses `0x0E5C`), **friendly matches** (`friendly-matches-design.md`, TextPet dialogue + `FC 0C`).
-3. Give Gemini a test round: GP Power Blue Mystery Data (ACDC Area 2), chip art, Duo story grant, Duo rematch, trash can, and the stale-marker case above.
-4. Ask the owner whether to push.
+1. **Later commits (after the table above):** `8ba3c18` chip names/descriptions (TextPet `--patch`; sources in `patch/src/scripts/text/`, the only place `.gitignore` allows `*.tpl`); `146b2a8` **Duo Soul** + grant on any Duo version (`0x006F` is only set for α/β/Ω, `r5[4]` = version); `653233d` status page 3. Gemini round 10 is done and committed (`95c6e92`, `92538c0`, `adc7fdd`).
+2. **Gemini round 11 is written** (`decomp/notes/task-gemini-round11.md`): an in-game test of everything above, the battle-exit clear point, the form palette hook, a verified Duo passive, the SP+ gaps, friendly matches renumbered to `FC 0E`, names. Give it to Gemini when the owner says so.
+3. **SP+** (Gemini's `sp-plus-design.md`): don't build until round 11 task 2 gives a verified battle-exit clear, otherwise a lost/fled SP+ battle leaves the next battle SP+. Planned hook sites: HP at `0x08006802` (replace `ldrh r1,[r7]; adds r2,r1,#0`), attack after `bl sub_08013410` at `0x08013A5A`, veneers in the 20 dead bytes after Duo's thunk (RS `0x080C4788` / BM `0x080C4794`). Reward `0xC032` (50 BugFrags) unless the owner picks Zenny. Duo SP+ flag `0x0E5C`.
+4. **Friendly matches:** after round 11 task 6 (`FC 0E`, talk indices `0xE0`+).
+5. Duo palette and passive: after round 11 tasks 3–4.
+6. Owner: confirm GP Power's description (provisional "Speedy / trio / attack!"), SP+ reward (50 BugFrags or Zenny), and whether to push (`main` is ahead of `origin` by 40+ commits).
