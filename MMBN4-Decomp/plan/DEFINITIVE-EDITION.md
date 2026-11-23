@@ -81,3 +81,6 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 4. ~~**Version drop codes**~~: **decided by the owner, 2026-11-23** ([docs/completion/bosses.md](../docs/completion/bosses.md) §3).
    - **Rule (a):** every drop that differs between versions (61 virus families, Bass, BassΩ, BassXX) gives the Red Sun or the Blue Moon item **at random, each time it drops**.
    - **Bass can be fought again and again**, so the player can collect all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay). This is part of the rematch system (WP-D3).
+   - **Fallbacks:**
+     - If Bass (V1) doesn't appear again after the story battle, make him roam Black Earth 2 like BassΩ. If that isn't possible, his story battle drops **both** Bass and BassAnly.
+     - If BassΩ doesn't come back after a win, he drops **both** BlakBarr and DeltaRay.
