@@ -110,10 +110,8 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   | 3rd: Red Sun / Blue Moon | ProtoMan (Chaud) | SearchMan (Raika; challenges Lan before the Chaud fight), ThunderMan (Raoul), JunkMan |
 
   This lineup implies one merged story, no RS/BM split for the tournaments (`plan/DEFINITIVE-EDITION.md` §7 question 1).
-- **Open: JunkMan has no operator** (an autonomous Navi), so the lobby can't have "his operator". Options:
-  1. **JunkMan waits in the lobby's network:** jack in at a lobby PC, and he stands in a small cyber-area (Claude's recommendation);
-  2. a lobby terminal carries his signal and starts the battle directly;
-  3. a stand-in, such as Higsby or a tournament official.
+- **JunkMan has no operator (owner decision, 2026-11-23):** he **waits in the lobby's network**. Lan jacks in at a lobby PC, and JunkMan stands in a small cyber-area as an NPC; talking to him starts the rematch. It matches the friendly-match draft, where MegaMan "picks up a strange Navi signal".
+  - Open: whether a JunkMan **overworld (field) sprite** exists in both ROMs (to check). His battle sprite exists in both, since Red Sun can field Blue Moon's Navis.
 
 **Details to settle (earlier proposals; see the owner decisions above):**
 - **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
