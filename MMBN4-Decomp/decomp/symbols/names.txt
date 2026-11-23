@@ -1076,3 +1076,12 @@
 0810DAB8 0810DACC data   GEMINI       BN4_STATUS_ICON_SOUL_FLAGS       0xFF-terminated u8 list of 6 Soul flags mapped to sprite 0x37 anims (dat_0810DAC5) and palettes (dat_0810DACB)
 0810DAD4 0810DAE8 code   GEMINI       StatusSoulIconUpdate             Applies menu slide-in X offset to dat_0810DAF8[slot].x and calls BN4_SPRITE_UPDATE
 0810DF40 0810DF54 code   GEMINI       StatusMegaManSpriteTask          UI object 0x49: renders MegaMan's standing sprite (0x39) at (56, 80) on the Status screen
+
+# --- Round 6-7 names (Gemini: wp-b1-design, special-chip-md-design, patch sprint; merged by Claude 2026-11-23) ---
+0802CE1E 0802CE22 code   GEMINI       CutsceneCmd_StartTournament      Cutscene opcode 0x52: calls BN4_START_TOURNAMENT(t)
+0802CE32 0802CE36 code   GEMINI       CutsceneCmd_AdvanceRound         Cutscene opcode 0x53: calls BN4_ADVANCE_ROUND + BN4_NEXT_OPPONENT
+0807748C 08077498 data   GEMINI       BN4_CW_NPCS_ACDC2_SLOT           Pointer slot in dat_08029E14[0x10] for ACDC Area 2 (90,01) NPC list (13 entries @ 0x080780F4 RS)
+08082A00 08082A0C data   GEMINI       BN4_CW_NPCS_UNDERNET1_SLOT       Pointer slot in dat_08029E14[0x14] for Undernet 1 (94,00) NPC list (6 entries @ 0x080834B4 RS)
+080AA6B4 080AA6C0 data   GEMINI       BN4_MD_ACDC2                     ACDC Area 2 (90,01) Mystery Data list (1 PMD 0x0D08, 2 GMDs 0x0D09..0x0D0A; 0x0D0B free)
+080AC6F4 080AC700 data   GEMINI       BN4_MD_UNDERNET1                 Undernet 1 (94,00) Mystery Data list (1 BMD 0x0E00, 1 PMD 0x0E01, 2 GMDs 0x0E02..0x0E03; 0x0E04 free)
+0810DABF 0810DAD3 data   GEMINI       BN4_STATUS_ICON_OAM_OFFSETS      6 bytes (00 10 20 30 40 50): OAM slot offsets for the 6 Status screen Soul icons (referenced by _0810DA7C RS / _0810DA90 BM; must NOT be overwritten!)

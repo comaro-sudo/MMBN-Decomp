@@ -19108,8 +19108,8 @@ dat_0802C140:   @ BN4_CUTSCENE_COMMANDS
     .word sub_0802AE80
     .word sub_0802CDB8
     .word sub_0802CDEE   @ cutscene_command_0x51
-    .word sub_0802CE1E
-    .word sub_0802CE32
+    .word sub_0802CE1E   @ CutsceneCmd_StartTournament
+    .word sub_0802CE32   @ CutsceneCmd_AdvanceRound
     .word sub_0802CE4A
     .word sub_0802CE6E
     .word sub_0802CEB0
@@ -20538,7 +20538,7 @@ sub_0802CDEE:   @ cutscene_command_0x51
 
     .global sub_0802CE1E
     .thumb_func
-sub_0802CE1E:
+sub_0802CE1E:   @ CutsceneCmd_StartTournament
     push {lr}
     movs r6, #1
     bl sub_0802AF80
@@ -20550,7 +20550,7 @@ sub_0802CE1E:
 
     .global sub_0802CE32
     .thumb_func
-sub_0802CE32:
+sub_0802CE32:   @ CutsceneCmd_AdvanceRound
     push {lr}
     movs r6, #1
     bl sub_0802AF80
