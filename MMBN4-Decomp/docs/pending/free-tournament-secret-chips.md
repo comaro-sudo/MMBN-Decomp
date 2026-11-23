@@ -49,7 +49,8 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - each Soul Navi already has battle records in `BN4_STORY_BATTLES` (e.g. Roll: ids 64, 207, 208), identical in RS and BM;
   - the NPC script can start one of them and then call the Free Tournament prize routine (`FreeTournamentSelectPrize`, `0x08045458`) for that Navi;
   - placing 12 NPCs needs the lobby map's NPC list (not mapped yet), and their sprites (all in both ROMs, since every operator appears in the story).
-- Open details for the owner: should the operators appear only after the player has met that Navi in the story, or from the start? And should the rematch use the Navi's V1 record or the tier of the player's playthrough?
+- **Owner decision (2026-11-23):** each operator appears in the lobby **only after the player has met that Navi in the story**.
+- Still open: which version of the Navi the rematch uses (V1, the playthrough's tier, or the player's choice). The prize doesn't depend on it, since it follows the Busting Level; it only changes how hard the fight is.
 
 ## Decisions for the owner
 
