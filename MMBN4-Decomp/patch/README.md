@@ -23,12 +23,13 @@ Needs:
 The pipeline:
 1. verify the ROM hashes;
 2. run armips;
-3. **insert text** with TextPet: our scripts in `src/text/rs/*.tpl` and `src/text/bm/*.tpl`, if any;
+3. **patch text** with TextPet: our scripts in `src/scripts/text/*.tpl` (see `src/scripts/text/README.md`; `*.tpl` is gitignored everywhere else), merged into the version's existing archives with `--patch`;
 4. fix the header checksum;
 5. create the `.bps` with flips, and check that it round-trips.
 
 Text (see [`../plan/text-insertion.md`](../plan/text-insertion.md)):
-- the `.tpl` files hold **only our own scripts** (`@archive <offset>` + `script` blocks, UTF-8 without BOM), never extracted game text;
+- the `.tpl` files hold **only our own scripts** (`@archive <NAME>` + `script` blocks, UTF-8 without BOM), never extracted game text; `build.py` maps the name to the version's offset and keeps every other script of the archive (Gemini's recipe, `decomp/notes/chip-text-design.md`);
+- today: Duo and GP Power names and descriptions (chip archives bank 1, both moved to `0x087FC000`; checked script by script in both builds);
 - TextPet rewrites only those archives: in place when they still fit, otherwise into `FS_TEXT` (`0x087FC000`–`0x08800000`, set in `defines.asm`);
 - it needs `tools/textpet/` (TextPet with its BN4 plugins and US indexes).
 

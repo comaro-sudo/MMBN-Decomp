@@ -64,8 +64,8 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
     - **Icons:** derived from each picture at build time (12 × 12 downscale on the Z-Saver icon frame, mapped to the shared icon palette). The image supplied as the icon was the wiki's "no element" marker (owner confirmed), kept as `ref/chip-art/element_null_marker.png`; the game draws element markers itself.
     - **Public builds:** `python patch/build.py --public` leaves the art out (the records keep their original pointers). Original placeholder art for public releases is still to decide.
   - **Still needed:**
-    - Grand Prix Power's attack, MB and description (code G, from the inventory);
-    - the names and descriptions through the text pipeline (`plan/text-insertion.md`).
+    - Grand Prix Power's attack and MB (code G, from the inventory), and the owner's OK on its description (provisional: "Speedy / trio / attack!", Gemini's wording).
+  - **Names and descriptions built (2026-11-23):** `patch/src/scripts/text/chip_names_1.tpl` ("Duo", "GP Power") and `chip_descs_1.tpl` (Duo: "Fist of / Justice: / MetKnukl!"). DuoSoul (`0x16D`) already has its name in both US ROMs.
   - **Distribution caveat:** this art isn't in any player ROM, so a built `.bps` that includes it carries Capcom art. That's fine for private builds. A public release needs a build switch that uses original placeholder art instead (decision deferred to publication).
   - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
   - **They always appear** in the list (owner, 2026-11-23), whether or not they're in the Library.

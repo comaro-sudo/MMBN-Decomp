@@ -17,7 +17,7 @@
 
 ## The pipeline
 
-1. **Source files** (committed): `patch/src/text/<name>.txt`, one per new or changed dialogue, in TextPet's script syntax. They contain only our lines and commands. Example: the AquaMan-tournament friendly match with Dex, ending in `FC 0C 01` (grant GutsSoul) after a win.
+1. **Source files** (committed): `patch/src/scripts/text/<name>.tpl` (patches) and `patch/src/scripts/new/<name>.tpl` (new archives), one per new or changed dialogue, in TextPet's script syntax. They contain only our lines and commands. Example: the AquaMan-tournament friendly match with Dex, ending in `FC 0C 01` (grant GutsSoul) after a win.
 2. **Build step** (`build.py`, new):
    1. extract the needed archives from the player's ROM to `build/text/` (gitignored), with TextPet;
    2. **new archives:** compile our `.txt` scripts into new archives with TextPet;
@@ -50,7 +50,7 @@ TextPet.exe load-plugins plugins game mmbn4 load-file rom.gba load-file-index in
 - **Verified round trip:** a one-line change to Higsby's greeting (archive `0x77D944`) was re-extracted identical to the patch, and the other 793 archives were unchanged.
 
 **New dialogue archives, compiled for `.incbin`** (wired into `build.py`, tested):
-- `patch/src/text/new/<name>.tpl` (`@archive 0`, `@size <n scripts>`, our scripts) is compiled **before armips**:
+- `patch/src/scripts/new/<name>.tpl` (`@archive 0`, `@size <n scripts>`, our scripts) is compiled **before armips**:
   ```
   TextPet.exe load-plugins plugins game mmbn4 read-text-archives <name>.tpl --format tpl write-text-archives build/text/<name>.bin --format bin
   ```
@@ -66,7 +66,7 @@ TextPet.exe load-plugins plugins game mmbn4 load-file rom.gba load-file-index in
 ## Open questions (research, Gemini or Claude)
 
 1. ~~TextPet's exact CLI~~: answered above.
-   - Still to check: does a `--patch` read keep the *untouched* scripts of a partially edited archive? Needed when we add one script to an existing archive. The patch file must then hold the whole archive's script list, or TextPet must merge.
+   - **Answered (Gemini, round 10, `decomp/notes/chip-text-design.md`):** yes, when the ROM's archive is read first through an index that lists only that archive, then the `.tpl` with `--patch`. Without that, the `.tpl` replaces the whole archive. `build.py` now does this (`insert_text`). Original question: does a `--patch` read keep the *untouched* scripts of a partially edited archive? Needed when we add one script to an existing archive. The patch file must then hold the whole archive's script list, or TextPet must merge.
    - Still to check: does `--free-space` write anything past the end of the archives it moves?
 2. How a tournament cutscene calls a dialogue archive. The friendly matches must hook into the tournament-day cutscenes (`wp-b1-design.md`: cutscene opcodes `0x51` battle, `0x52`/`0x53` tournament).
 3. How the chip-name table is stored (for "Duo" and "GP Power"), and whether it is a TextPet archive too (Gemini round 8, task 3).

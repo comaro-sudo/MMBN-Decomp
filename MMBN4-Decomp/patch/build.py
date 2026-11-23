@@ -7,12 +7,12 @@
     python patch/build.py --check      run the identity tests (no output ROMs kept)
     python patch/build.py --public     leave out local-only third-party art (ref/chip-art) for a shareable patch
 
-Pipeline: verify ROM hash -> armips -> TextPet (patch/src/text/<v>/*.tpl, if any)
+Pipeline: verify ROM hash -> armips -> TextPet (patch/src/scripts/text/*.tpl, if any)
           -> fix header checksum -> flips .bps
           -> re-apply the .bps to the original and confirm the result matches.
 
-Text (plan/text-insertion.md): patch/src/text/rs/ and patch/src/text/bm/ hold only OUR scripts, as TextPet
-.tpl files (@archive <offset> + script blocks; UTF-8 without BOM). TextPet writes only those archives:
+Text (plan/text-insertion.md): patch/src/scripts/text/ holds only OUR scripts, as TextPet
+.tpl files (@archive <NAME> + script blocks; UTF-8 without BOM), merged into the archives with --patch;
 in place when they still fit, otherwise into FS_TEXT (patch/src/common/defines.asm).
 """
 from __future__ import annotations
@@ -43,6 +43,8 @@ VERSIONS = {
         "chip_table": CHIP_TABLES / "bn4b_chip_table.asm",
         "reward_rows": 0x080F5F5C,      # BN4_REWARD_ROWS (RE-06): 276 rows x 40 bytes
         "icon_pal": 0x08747AEC,         # BN4_CHIP_ICON_PAL (CE)
+        # TextPet archives our .tpl files patch (offsets from tools/textpet/indexes/mmbn4bm-us.tpi)
+        "text_archives": {"CHIP_NAMES_1": 0x748708, "CHIP_DESCS_1": 0x74EACC},
     },
     "rs": {
         "name": "Red Sun (USA)",
@@ -52,6 +54,7 @@ VERSIONS = {
         "chip_table": CHIP_TABLES / "bn4r_chip_table.asm",
         "reward_rows": 0x080F5F50,
         "icon_pal": 0x08747FF8,
+        "text_archives": {"CHIP_NAMES_1": 0x748C14, "CHIP_DESCS_1": 0x74F03C},
     },
 }
 REWARD_ROWS_SIZE = 276 * 40
@@ -146,10 +149,10 @@ def check_inputs(key: str) -> dict:
 
 
 def compile_new_text() -> list:
-    """Compile our new dialogue archives (patch/src/text/new/<name>.tpl) to build/text/<name>.bin, the game's
+    """Compile our new dialogue archives (patch/src/scripts/new/<name>.tpl) to build/text/<name>.bin, the game's
     archive format (u16 offset table + encoded scripts), for the asm to .incbin as <NAME>_BIN. Version-neutral.
     Returns the extra armips arguments."""
-    src = PATCH / "src" / "text" / "new"
+    src = PATCH / "src" / "scripts" / "new"
     tpls = sorted(src.glob("*.tpl")) if src.is_dir() else []
     if not tpls:
         return []
@@ -176,32 +179,57 @@ def compile_new_text() -> list:
 
 
 def insert_text(key: str, rom: Path) -> None:
-    """Insert our TextPet scripts (patch/src/text/<key>/*.tpl) into the built ROM, if there are any."""
-    src = PATCH / "src" / "text" / key
-    tpls = sorted(src.glob("*.tpl")) if src.is_dir() else []
+    """Patch our scripts (patch/src/scripts/text/*.tpl) into existing text archives of the built ROM.
+
+    The .tpl files hold only our scripts and name their archive symbolically (`@archive CHIP_NAMES_1`);
+    VERSIONS[key]["text_archives"] gives each version's offset. TextPet gets an index with only those
+    archives, reads them from the ROM, merges our scripts in with --patch (every other script is kept),
+    and writes them back, moving any that grew to FS_TEXT and repointing them (Gemini,
+    decomp/notes/chip-text-design.md). No Capcom text is committed."""
+    tpls = sorted((PATCH / "src" / "scripts" / "text").glob("*.tpl"))
     if not tpls:
         return
     if not TEXTPET.exists():
         fail(f"missing tool {TEXTPET.relative_to(ROOT)} (see plan/text-insertion.md)")
+    archives = VERSIONS[key]["text_archives"]
+    out = BUILD / "text" / key
+    out.mkdir(parents=True, exist_ok=True)
+    used, patched = set(), []
     for t in tpls:
-        if t.read_bytes()[:3] == b"\xef\xbb\xbf":
+        raw = t.read_bytes()
+        if raw[:3] == b"\xef\xbb\xbf":
             fail(f"{t.relative_to(ROOT)} starts with a UTF-8 BOM; TextPet rejects it (save as UTF-8 without BOM)")
+        def sub(m):
+            name = m.group(1)
+            if name not in archives:
+                fail(f"{t.relative_to(ROOT)}: unknown archive {name} (add it to VERSIONS[...]['text_archives'])")
+            used.add(archives[name])
+            return f"@archive {archives[name]:X}"
+        text = re.sub(r"^@archive\s+([A-Z0-9_]+)\s*$", sub, raw.decode("utf-8"), flags=re.M)
+        dst = out / t.name
+        dst.write_bytes(text.encode("utf-8"))
+        patched.append(dst)
+    index_lines = (TEXTPET_DIR / "indexes" / f"mmbn4{key}-us.tpi").read_text(encoding="utf-8").splitlines()
+    picked = [l for l in index_lines if l.split(":")[0].strip().lower() in {f"0x{a:x}" for a in used}]
+    if len(picked) != len(used):
+        fail(f"TextPet index lacks some archives: {sorted(hex(a) for a in used)}")
+    index = out / "patch.tpi"
+    index.write_text("\n".join(picked) + "\n", encoding="utf-8")
     defines = (PATCH / "src" / "common" / "defines.asm").read_text(encoding="utf-8")
     m = re.search(r"^FS_TEXT\s+equ\s+0x([0-9A-Fa-f]+)", defines, re.M)
     if not m:
         fail("FS_TEXT not found in patch/src/common/defines.asm")
     free = int(m.group(1), 16) - 0x08000000
-    index = TEXTPET_DIR / "indexes" / f"mmbn4{key}-us.tpi"
-    # Read ONLY our scripts (reading the ROM's archives first would rewrite all 794 of them).
-    cmd = [TEXTPET, "load-plugins", "plugins", "game", "mmbn4", "load-file", rom, "load-file-index", index]
-    for t in tpls:
-        cmd += ["read-text-archives", t, "--format", "tpl"]
-    cmd += ["write-text-archives", rom, "--free-space", f"0x{free:X}"]
+    cmd = [TEXTPET, "load-plugins", "plugins", "game", "mmbn4", "load-file", rom.resolve(),
+           "load-file-index", index.resolve(), "read-text-archives", rom.resolve()]
+    for d in patched:
+        cmd += ["read-text-archives", d.resolve(), "--format", "tpl", "--patch"]
+    cmd += ["write-text-archives", rom.resolve(), "--free-space", f"0x{free:X}"]
     result = subprocess.run([str(c) for c in cmd], cwd=TEXTPET_DIR, capture_output=True, text=True)
-    out = result.stdout + result.stderr
-    if result.returncode != 0 or "FATAL" in out:
-        fail(f"TextPet failed:\n{out[-1500:]}")
-    print(f"   text: {len(tpls)} script file(s) inserted with TextPet")
+    out_txt = result.stdout + result.stderr
+    if result.returncode != 0 or "FATAL" in out_txt:
+        fail(f"TextPet failed:\n{out_txt[-1500:]}")
+    print(f"   text: {len(patched)} script file(s) patched into {len(used)} archive(s) with TextPet")
 
 
 def build(key: str, hello: bool, public: bool = False) -> None:
