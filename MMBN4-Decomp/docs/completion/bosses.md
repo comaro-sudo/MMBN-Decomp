@@ -50,6 +50,10 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
     - **BassΩ:** if the in-game check shows he doesn't come back after a win, he **drops both chips**, BlakBarr and DeltaRay.
     - "Drops both" needs a small patch: after the normal reward, grant the other version's chip too (through the same chip-add path the reward screen uses; to be found from `BN4_REWARD_PICK` / `RewardDecode`, RE-06 §2).
     - **BassXX:** the same as BassΩ. If he can't be fought again, he **drops both chips**, BlakBarr and DeltaRay.
+    - **Last fallback, if "drops both" is too hard or impossible:** after the battle, a **Blue Mystery Data appears nearby** in Black Earth 2 and holds the chip the battle didn't give.
+      - How it could work (from RE-07, `decomp/notes/re07-mystery-data.md`): add a placement to Black Earth 2's Mystery Data list. Use an unused flag in `0x0D00`–`0x10FF`; 123 of the 1,024 slots are used. Make it visible only after the battle's win flag.
+      - Its content must be "the chip of the pair you don't have yet". It checks the Library flags (`0x16C0 + id`): if you lack BassAnly, it gives BassAnly; if you lack Bass, it gives Bass. Same for BlakBarr and DeltaRay. That needs a small content hook, since normal Blue Mystery Data hold one fixed item.
+      - If even that hook is too much, use one Mystery Data per missing chip, each visible only while its chip isn't in the Library.
 - (Considered and not chosen: the code follows the chosen version; extra drop slots at high Busting Levels.)
 
 ## What blocks completion (updated)

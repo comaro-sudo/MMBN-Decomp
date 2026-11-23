@@ -84,3 +84,4 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
    - **Fallbacks:**
      - If Bass (V1) doesn't appear again after the story battle, make him roam Black Earth 2 like BassΩ. If that isn't possible, his story battle drops **both** Bass and BassAnly.
      - If BassΩ doesn't come back after a win, he drops **both** BlakBarr and DeltaRay. The same goes for BassXX.
+     - If "drops both" is too hard or impossible: after the battle, a Blue Mystery Data appears nearby in Black Earth 2 with the chip the battle didn't give.
