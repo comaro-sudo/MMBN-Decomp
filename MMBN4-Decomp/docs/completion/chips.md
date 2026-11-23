@@ -40,6 +40,14 @@ Sources include story rewards, the Bass fight in Black Earth 2, S ranks against 
 
 GunSolEX, also once thought to be special, has an in-game source: a Number Lotto code.
 
+**Owner decision (2026-11-23) for the three special chips:**
+- **Duo:** a **reward for beating Duo at his highest tier** (V3/Ω, or in a post-game rematch). The same kind of hook as the Bass patch (WP-D3): grant the chip after that battle.
+- **Z-Saver and Grand Prix Power:** **sold at Higsby's shop at a very high price.**
+  - Higsby's regular stock (shop record 4) is full: 8 of 8 slots, in a fixed 0x40-byte block of the save (`../re/shops.md`). So the proposed place is **Higsby's chip-order list (record 16)**: 320 slots, about 266 used, so its ROM init table has free slots.
+  - To check: whether that list only shows chips already in the Library (`ShopBuildChipOrderList` sorts by the Library flags). If it does, the patch must always list these two.
+  - Price: "very high". The price field is u16 × 100, and Zenny caps at 999,999. Proposal: **500,000Z each** (T, owner to confirm).
+  - Caveat: shop stock is copied into the save at new game, so existing saves only get them if a load-time hook adds them.
+
 ## 4. To check against the ROM
 
 - **Codes with no listed source:** WideSht3 U, Vulcan3 T, TwnFng3 H, MokoRus2 U, DublCrak B/L/R, TripCrak B/L/R. The record has the code, but the reference gives no source. They may come from Green Mystery Data or virus drops the guide missed, so check them against the ROM's GMD and drop tables.
