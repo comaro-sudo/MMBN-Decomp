@@ -101,7 +101,19 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
   - **all before the tournament's final;**
   - **2 or 3 before the first canon fight;**
   - the rest spread across the tournament day.
-- **Which Navi is canon:** research assigned to Gemini, `decomp/notes/task-gemini-canon-navis.md`. Community consensus plus the game's own story text; the owner confirms.
+- **Which Navi is canon: decided** by the owner with Gemini (2026-11-23), for one unified story. See [`decomp/notes/canon-navis.md`](../../decomp/notes/canon-navis.md) §6, with friendly-match dialogue drafts in §7:
+
+  | Tournament | Canon story fight | Friendly matches |
+  |---|---|---|
+  | 1st: Den Battle | AquaMan (Shuko) | GutsMan (Dex; challenges Lan after the canon fight), FireMan (Mr. Match), NumberMan (Higsby) |
+  | 2nd: Eagle / Hawk | Roll (Mayl) | WindMan (Lily), MetalMan (Tamako), WoodMan (Sal) |
+  | 3rd: Red Sun / Blue Moon | ProtoMan (Chaud) | SearchMan (Raika; challenges Lan before the Chaud fight), ThunderMan (Raoul), JunkMan |
+
+  This lineup implies one merged story, no RS/BM split for the tournaments (`plan/DEFINITIVE-EDITION.md` §7 question 1).
+- **Open: JunkMan has no operator** (an autonomous Navi), so the lobby can't have "his operator". Options:
+  1. **JunkMan waits in the lobby's network:** jack in at a lobby PC, and he stands in a small cyber-area (Claude's recommendation);
+  2. a lobby terminal carries his signal and starts the battle directly;
+  3. a stand-in, such as Higsby or a tournament official.
 
 **Details to settle (earlier proposals; see the owner decisions above):**
 - **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
