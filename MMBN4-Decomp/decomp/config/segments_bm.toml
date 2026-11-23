@@ -46,6 +46,7 @@ kind = "code"
 mode = "thumb"
 data_tables = [
     { start = 0x08011888, end = 0x08012470, fmt = "record", fields = "hbbbbbbu" }, # BN4_ENEMY_STATS (254 x 12B)
+    { start = 0x08017FB8, end = 0x08018068, fmt = "word" },                          # BN4_BATTLE_TABLES root: 2 roots + 21 group pointers
 ]
 
 [[segment]]
@@ -140,6 +141,7 @@ mode = "thumb"
 data_tables = [
     { start = 0x080F5F5C, end = 0x080F8A7C, fmt = "hword", cols = 10 },              # BN4_REWARD_ROWS (276 x 20 hwords)
     { start = 0x080FA90C, end = 0x080FB488, fmt = "record", fields = "bbbbbbbbw" },  # BN4_STORY_BATTLES (245 x 12B)
+    { start = 0x080FC144, end = 0x08102FD4, fmt = "word" },                          # encounter map-pointer arrays + 12-byte battle records (RE-06 4)
 ]
 
 [[segment]]
