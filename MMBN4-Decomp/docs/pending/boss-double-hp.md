@@ -22,7 +22,26 @@ Every boss (the 20 Navis, Duo, Bass) gets **one more, harder version: the same b
 
 Claude's recommendation: **C, built on the hook**. It gives every boss an extra difficulty without changing the story. A is a subset of it (the lobby's 5th step).
 
-## Open decisions for the owner
+## Owner decisions (2026-11-23)
+
+1. **Option A: a 5th lobby step.** After an S rank against SP, the operator's next rematch is the extra version ("SP+", working name).
+2. **Base: SP.**
+3. **All bosses, HP capped at 4,095**: SP+ HP = min(2 × SP HP, 4095). The cap means the 7 overflowing bosses (above) stop at 4,095, so the 12-bit field is enough and **HP can be pure data** (no HP hook needed).
+4. **Reward: a high amount of Zenny or BugFrags.** The amount is to set; e.g. 30,000Z or 50 BugFrags (T).
+5. **Attack × 1.5, speed × 1.25.**
+
+## Issues these raise (Claude, for the owner and for research)
+
+- **"All bosses" vs option A:** the lobby only has the 12 Soul Navis' operators (and JunkMan via the trash can). The **8 shared Navis** (TopMan, ShadeMan, BurnerMan, ColdMan, SparkMan, LaserMan, KendoMan, VideoMan), **Duo** and **Bass** have no operator in the lobby. **Owner to decide** how they reach SP+:
+  - their roaming SP ghosts get an SP+ variant after an S rank;
+  - more lobby NPCs (slots are tight: Higsby's 13/16, ACDC Town 16/16);
+  - or a single "challenge" NPC or terminal that offers any of them.
+- **Attack × 1.5 and speed × 1.25 aren't single fields.** Damage comes partly from the record's `base_atk` byte and partly from per-attack constants in each Navi's AI code. Speed is AI timing (frame counts per action), spread across each Navi's code.
+  - Likely implementation: a battle-wide modifier active only in SP+ fights, scaling the damage MegaMan receives × 1.5 and shortening the enemy's AI wait timers to × 0.8 (= × 1.25 speed).
+  - This needs research: where enemy damage to MegaMan is applied, and whether there's a common AI timer. **Feasibility to confirm before promising exact factors.**
+- **New records or a hook?** SP+ needs its own identity (HP, reward). Either new enemy records (are there free enemy ids? 254 are used), or the SP record plus a "SP+ active" flag that a battle-start hook reads (HP from a small table, the damage and speed modifiers, the reward). The hook is likely, since attack and speed need code anyway.
+
+## Open decisions for the owner (original list; 1–5 answered above)
 
 1. Which option: A, B or C (or a mix)?
 2. **Which base version is doubled:** SP (the hardest, recommended), or whichever tier is being fought?
