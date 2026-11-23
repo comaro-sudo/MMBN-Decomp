@@ -61,7 +61,7 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
   - Duo's data: **200 attack, code D, 99 MB**, description "Fist of Justice: MetKnukl!".
   - **Plan:** a build step converts each PNG into the GBA chip-picture format (16-colour 4bpp tiles + palette) and writes it into free space. It then repoints the chip record's image and palette pointers, which point to EWRAM today, to the converted art.
   - **Still needed:**
-    - each chip's 16 × 16 icon (Duo's is visible in the wiki row; Grand Prix Power's isn't supplied);
+    - ~~each chip's 16 × 16 icon~~: the owner supplied **one icon for both chips** (`ref/chip-art/icon_both_supplied.png`, 14 × 14, 4 greys). The conversion centres it in the 16 × 16 icon cell. (Claude's note: it resembles the wiki's attack-column "no element" marker. If the in-game icon looks wrong, swap in another image.)
     - Grand Prix Power's attack, MB and description (code G, from the inventory);
     - the names and descriptions through the text pipeline (`plan/text-insertion.md`).
   - **Distribution caveat:** this art isn't in any player ROM, so a built `.bps` that includes it carries Capcom art. That's fine for private builds. A public release needs a build switch that uses original placeholder art instead (decision deferred to publication).
