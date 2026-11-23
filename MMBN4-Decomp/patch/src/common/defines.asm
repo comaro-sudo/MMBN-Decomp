@@ -55,7 +55,9 @@ FS_CHIP_ART               equ 0x087FAA70    ; WP-D2: Duo/GP Power pictures, pale
 FS_CHIP_ART_SIZE          equ 0xC00
 FS_DUO_GRANT              equ 0x087FB670    ; WP-D2: Duo defeat state handler (story win gives Duo D)
 FS_DUO_GRANT_SIZE         equ 0x60
-; next free slot:             0x087FB6D0 (code/data packages must stay below FS_TEXT)
+FS_DUO_REMATCH            equ 0x087FB6D0    ; WP-D3 Duo rematch (FC 0D, 4 battle records, Meteor Comp 1 NPC list + NPC)
+FS_DUO_REMATCH_SIZE       equ 0x100
+; next free slot:             0x087FB7D0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 

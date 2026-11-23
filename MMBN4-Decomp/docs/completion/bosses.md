@@ -97,6 +97,7 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
   - To research: the exact Meteor Comp map, which flag marks the ending/post-game (Gemini found Duo-defeated flag `0x006F`), and a free spot for a Duo NPC or object there that starts the rematch at the current tier.
   - *(Not chosen: a terminal in Higsby's lobby; a lobby "challenge" menu.)*
   - **The rematch replays the final battle** (owner, 2026-11-23): story battle records 93/94 with the current Duo version, started as a **plain battle** (as the lobby rematches do), so the ending and credits don't replay and the results screen is reached.
+- **Built (2026-11-23):** `patch/src/common/wp_d3_duo_rematch.asm`, from Gemini's `decomp/notes/duo-rematch-research.md`: the NPC in Meteor Comp 1 `(82,00)` gated on Game Clear `0x0500`, tier flags `0x0E5A`–`0x0E5B` (`0x0E5C` kept for SP+), four static records with the final battle's arena and music. In-game test pending.
 - **Side effect:** rematches go through a normal battle start, so they **reach the results screen** (the story's final battle doesn't). The existing `wp_d2_duo_chip_reward.asm` (Duoβ/DuoΩ drop the Duo chip) therefore works in rematches, so the Duo chip comes from beating Duoβ or DuoΩ in a rematch.
 - **Built (2026-11-23):** the post-Duo grant for players who beat Duo only in the story: `patch/src/common/wp_d2_duo_story_grant.asm` hooks Gemini's `sub_080C4780` and gives Duo D once, when flag `0x006F` is first set. In-game test pending.
 

@@ -73,3 +73,6 @@ NPC_LIST_WTRGOD1        equ 0x08076518
 NPC_COUNT_WTRGOD1       equ 1
 
 DUO_DEFEAT_STATE        equ 0x080C4780      ; sub_080C4780: Duo defeated (sets flag 0x006F); WP-D2 Duo story grant
+NPC_SLOT_METEOR1        equ 0x0806DA1C      ; Meteor Comp 1 (82,00) CW NPC list pointer (Gemini, duo-rematch-research.md)
+NPC_LIST_METEOR1        equ 0x0806DCCC
+NPC_COUNT_METEOR1       equ 3

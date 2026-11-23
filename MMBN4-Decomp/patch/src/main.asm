@@ -37,5 +37,6 @@
 .include "common/wp_d4_grant_soul.asm"       ; Violet Eclipse: script command FC 0C <idx> grants any Soul
 .include "common/wp_d2_special_chip_art.asm" ; Duo / GP Power chip art (private builds; build.py --public leaves it out)
 .include "common/wp_d2_duo_story_grant.asm"  ; beating Duo in the story gives Duo D
+.include "common/wp_d3_duo_rematch.asm"     ; Duo rematches in Meteor Comp 1 (post-game), V1 -> alpha -> beta -> omega
 
 .close
