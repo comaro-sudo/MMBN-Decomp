@@ -39,6 +39,18 @@ The open question is **what the Free Tournament battle actually reads** when it 
 
 Gemini's notes don't settle which one it is yet. It's a short static read of the battle setup code, plus one test in mGBA.
 
+## Owner addition (2026-11-23): rematches in the lobby
+
+**If the player didn't win with Busting Level 10 or S, the Navis' operators stand in the Free Tournament lobby, and Lan and MegaMan can challenge them again and again.**
+
+- Each of the 12 Soul Navis' operators is an NPC in the lobby. Talking to one starts a battle against that operator's Navi, as many times as the player wants.
+- The prize follows the same Busting Level table as the tournament, so a 10/S win gives the highest secret chip still missing. This way a lower-ranked tournament win never costs a chip; the player can just try again.
+- Implementation notes (T, from RE-04/RE-06):
+  - each Soul Navi already has battle records in `BN4_STORY_BATTLES` (e.g. Roll: ids 64, 207, 208), identical in RS and BM;
+  - the NPC script can start one of them and then call the Free Tournament prize routine (`FreeTournamentSelectPrize`, `0x08045458`) for that Navi;
+  - placing 12 NPCs needs the lobby map's NPC list (not mapped yet), and their sprites (all in both ROMs, since every operator appears in the story).
+- Open details for the owner: should the operators appear only after the player has met that Navi in the story, or from the start? And should the rematch use the Navi's V1 record or the tier of the player's playthrough?
+
 ## Decisions for the owner
 
 1. Use this fix for the 36 secret chips (C2)?
