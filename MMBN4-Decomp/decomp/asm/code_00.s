@@ -29974,7 +29974,7 @@ sub_0800EB8E:
 
     .global sub_0800EB98
     .thumb_func
-sub_0800EB98:
+sub_0800EB98:   @ BattleSetSideTradedNavi
     push {r4, lr}
     movs r4, #4
     muls r0, r4, r0
@@ -29987,7 +29987,7 @@ sub_0800EB98:
 
     .global sub_0800EBAA
     .thumb_func
-sub_0800EBAA:
+sub_0800EBAA:   @ BattleGetSideWaitingRoomSlot
     movs r3, #4
     muls r0, r3, r0
     ldr r3, _0800EC40

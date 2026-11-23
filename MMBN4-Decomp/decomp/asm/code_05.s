@@ -1585,7 +1585,7 @@ dat_0807E5E8:
 sub_0807F06C:
     push {lr}
     ldr r0, _0807F078
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
 _0807F078:
@@ -3748,7 +3748,7 @@ sub_08089698:
     ldrb r1, [r1, #5]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -3932,7 +3932,7 @@ sub_08089840:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -3950,7 +3950,7 @@ sub_080898A8:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -3996,7 +3996,7 @@ sub_08089970:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -4115,7 +4115,7 @@ sub_08089AA4:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -4133,7 +4133,7 @@ sub_08089B30:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -4449,13 +4449,13 @@ sub_0808A014:
     beq _0808A03A
     ldr r0, _0808A05C
     ldr r0, [r0, r2]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
 _0808A03A:
     ldr r0, _0808A048
     ldr r0, [r0, r2]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -5030,7 +5030,7 @@ sub_08091174:
     ldr r2, [r4, #8]
     bl sub_08025FD4
     ldr r0, [r4, #0x1c]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     mov r7, sl
     ldr r7, [r7, #0x44]
     adds r7, #0x68

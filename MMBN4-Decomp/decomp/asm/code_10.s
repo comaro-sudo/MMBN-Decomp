@@ -7479,7 +7479,7 @@ sub_0810D9C8:
 
     .global sub_0810D9D4
     .thumb_func
-sub_0810D9D4:
+sub_0810D9D4:   @ StatusSoulIconTask
     push {lr}
     adds r7, r5, #0
     adds r7, #0x20
@@ -7498,7 +7498,7 @@ dat_0810D9EC:
 
     .global sub_0810D9F8
     .thumb_func
-sub_0810D9F8:
+sub_0810D9F8:   @ StatusSoulIconInit
     push {lr}
     movs r2, #1
     ldrb r6, [r5, #4]
@@ -7561,7 +7561,7 @@ _0810DA28:
 _0810DA74:
     .word 0x0201D000
 _0810DA78:
-    .word dat_0810DAB8
+    .word dat_0810DAB8   @ BN4_STATUS_ICON_SOUL_FLAGS
 _0810DA7C:
     .word dat_0810DABF
 _0810DA80:
@@ -7581,7 +7581,7 @@ dat_0810DA94:
 dat_0810DAA0:
     incrom 0x10DAA0, 0x18
     .global dat_0810DAB8
-dat_0810DAB8:
+dat_0810DAB8:   @ BN4_STATUS_ICON_SOUL_FLAGS
     .if VERSION_BM
     .word 0x201F1E1D
     .word 0x00FF2221
@@ -7601,7 +7601,7 @@ dat_0810DAB8:
 
     .global sub_0810DAD4
     .thumb_func
-sub_0810DAD4:
+sub_0810DAD4:   @ StatusSoulIconUpdate
     push {lr}
     mov r4, sl
     ldr r4, [r4, #0x34]
@@ -8156,7 +8156,7 @@ _0810DF3C:
 
     .global sub_0810DF40
     .thumb_func
-sub_0810DF40:
+sub_0810DF40:   @ StatusMegaManSpriteTask
     push {lr}
     adds r7, r5, #0
     adds r7, #0x20

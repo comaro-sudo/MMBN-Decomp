@@ -7041,11 +7041,11 @@ dat_08053E24:   @ BN4_MENU_SPRITE_TYPES
     .word sub_0810D38C
     .word sub_0810D540
     .word sub_0810D8DC
-    .word sub_0810D9D4
+    .word sub_0810D9D4   @ StatusSoulIconTask
     .word sub_0810DB14
     .word sub_0810DBC8
     .word sub_0810DC70
-    .word sub_0810DF40
+    .word sub_0810DF40   @ StatusMegaManSpriteTask
     .word sub_0810E03C
     .word sub_0810E242
     .word sub_0810E2BC

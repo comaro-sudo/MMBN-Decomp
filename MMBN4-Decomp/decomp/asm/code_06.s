@@ -204,7 +204,7 @@ sub_080949B8:
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0xff
     ldr r1, _08094A0C
     strb r0, [r1]
@@ -308,7 +308,7 @@ _08094B80:
     ldr r0, _08094B94
     lsls r4, r4, #2
     ldr r0, [r0, r4]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     movs r0, #0
     ldr r1, _08094BA4
     strb r0, [r1]
@@ -957,7 +957,7 @@ sub_0809D67C:
     movs r1, #0
     ldrb r2, [r5, #6]
     movs r3, #1
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     bl sub_0809D648
     movs r0, #0
     pop {pc}
@@ -2224,7 +2224,7 @@ sub_0809ECE0:
     ldr r7, [r7, #0x40]
     movs r0, #0
     str r0, [r7, #0x34]
-    bl sub_0802A3D2
+    bl sub_0802A3D2   @ MapSpawnNPCs
     movs r0, #0xe
     bl sub_08002098
     movs r0, #0xf
@@ -2588,10 +2588,10 @@ sub_0809F180:
     ldr r0, _0809F1C0
     lsls r7, r7, #1
     ldr r0, [r0, r7]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     b _0809F1AE
 _0809F1AA:
-    bl sub_0802A3D2
+    bl sub_0802A3D2   @ MapSpawnNPCs
 _0809F1AE:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -3808,7 +3808,7 @@ sub_0809FCB4:
     ldr r2, [r7, #0x18]
     bl sub_08025FD4
     ldr r0, [r7, #0x28]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     bl sub_080A6F5A
     bl sub_080A6E64
     ldrb r0, [r7, #6]
@@ -5186,7 +5186,7 @@ _080A0C6C:
     ldrb r4, [r1, #5]
     lsls r1, r4, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
 _080A0C80:
     cmp r7, #2
     bne _080A0C94
@@ -5554,7 +5554,7 @@ _080A1492:
     ldrb r1, [r1, #5]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08026748
+    bl sub_08026748   @ NpcSpawnList
     ldr r0, _080A14C4
     ldr r1, _080A14C8
     movs r2, #0
@@ -15290,7 +15290,7 @@ _080A8596:
 
     .global sub_080A8598
     .thumb_func
-sub_080A8598:
+sub_080A8598:   @ NpcRunScript
     push {lr}
 _080A859A:
     ldrb r0, [r5, #0x1f]

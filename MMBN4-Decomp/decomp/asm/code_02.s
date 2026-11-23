@@ -11284,7 +11284,7 @@ _08026744:
 
     .global sub_08026748
     .thumb_func
-sub_08026748:
+sub_08026748:   @ NpcSpawnList
     push {r4, r5, r6, lr}
     mov r4, sl
     ldr r4, [r4, #0x40]
@@ -16275,7 +16275,7 @@ dat_08029C4C:   @ where_bn4_plays.each_map_group_scripts
 dat_08029C7C:
     incrom 0x29C7C, 0x18
     .global dat_08029C94
-dat_08029C94:
+dat_08029C94:   @ BN4_RW_MAP_NPCS
     incrom 0x29C94, 0x18
     .global dat_08029CAC
 dat_08029CAC:
@@ -16290,7 +16290,7 @@ dat_08029D6C:
 dat_08029DC0:
     incrom 0x29DC0, 0x54
     .global dat_08029E14
-dat_08029E14:
+dat_08029E14:   @ BN4_CW_MAP_NPCS
     incrom 0x29E14, 0x54
     .global dat_08029E68
 dat_08029E68:
@@ -16835,7 +16835,7 @@ _0802A2E4:
 
     .global sub_0802A2E8
     .thumb_func
-sub_0802A2E8:
+sub_0802A2E8:   @ MapCheckJackIn
     push {r4, r5, r6, r7, lr}
     bl sub_0802BDA2
     bne _0802A328
@@ -16962,7 +16962,7 @@ sub_0802A3C0:
 
     .global sub_0802A3D2
     .thumb_func
-sub_0802A3D2:
+sub_0802A3D2:   @ MapSpawnNPCs
     push {r4, r5, r6, r7, lr}
     movs r0, #0x11
     movs r1, #0x81
@@ -16991,9 +16991,9 @@ _0802A3FE:
     bl sub_08025064
     pop {r4, r5, r6, r7, pc}
 _0802A408:
-    .word dat_08029C94
+    .word dat_08029C94   @ BN4_RW_MAP_NPCS
 _0802A40C:
-    .word dat_08029E14
+    .word dat_08029E14   @ BN4_CW_MAP_NPCS
 
     .global sub_0802A410
     .thumb_func
@@ -20780,7 +20780,7 @@ sub_0802CF9A:
     adds r3, r4, #0
     movs r0, #1
     movs r1, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     adds r7, #3
     movs r0, #1
     pop {pc}
@@ -23065,7 +23065,7 @@ sub_0802E190:
     .thumb_func
 sub_0802E19C:
     push {lr}
-    bl sub_08044A8C
+    bl sub_08044A8C   @ FreeTournamentBuildBattle
     ldrb r1, [r5]
     adds r1, #4
     strb r1, [r5]
@@ -32458,10 +32458,10 @@ dat_0803314C:
 dat_080331CC:
     incrom 0x331CC, 0x80
     .global dat_0803324C
-dat_0803324C:
+dat_0803324C:   @ BN4_STATUS_BASE_UI_LIST
     incrom 0x3324C, 0x10
     .global dat_0803325C
-dat_0803325C:
+dat_0803325C:   @ BN4_STATUS_SOUL_SPAWN_LIST
     incrom 0x3325C, 0x1C
     .global dat_08033278
 dat_08033278:
@@ -32780,7 +32780,7 @@ _0803354C:
 _08033550:
     .word 0x00000280
 _08033554:
-    .word dat_0803324C
+    .word dat_0803324C   @ BN4_STATUS_BASE_UI_LIST
     incrom 0x33558, 0x8
 _08033560:
     .word 0x42345745
@@ -35450,7 +35450,7 @@ _08034A6C:
 _08034A70:
     .word 0x0201D000
 _08034A74:
-    .word dat_0803325C
+    .word dat_0803325C   @ BN4_STATUS_SOUL_SPAWN_LIST
     .global dat_08034A78
 dat_08034A78:   @ BN4_STATUS_SOUL_FLAGS
     incrom 0x34A78, 0x8

@@ -30507,7 +30507,7 @@ dat_08044A88:
 
     .global sub_08044A8C
     .thumb_func
-sub_08044A8C:
+sub_08044A8C:   @ FreeTournamentBuildBattle
     push {r4, r5, r6, r7, lr}
     push {r4, r5, r6, r7}
     bl sub_08007C90
@@ -30624,7 +30624,7 @@ dat_08044B4C:
 
     .global sub_08044B58
     .thumb_func
-sub_08044B58:
+sub_08044B58:   @ FreeTournamentSetupSides
     push {r4, r5, r6, r7, lr}
     adds r6, r1, #0
     adds r7, r2, #0
@@ -30654,7 +30654,7 @@ sub_08044B80:
     movs r0, #1
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -30673,7 +30673,7 @@ sub_08044B80:
     adds r1, r6, #0
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -30699,7 +30699,7 @@ _08044BEA:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -30740,7 +30740,7 @@ _08044C44:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -30779,7 +30779,7 @@ _08044C9E:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r0, #1
     movs r1, #4
     lsls r1, r1, #0x18
@@ -30825,7 +30825,7 @@ sub_08044CF0:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -30980,7 +30980,7 @@ sub_08044E38:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2
@@ -31124,7 +31124,7 @@ _08044F7C:
 
     .global sub_08044F80
     .thumb_func
-sub_08044F80:
+sub_08044F80:   @ FreeTournamentSetupPlayerMatch
     push {r4, r5, r6, r7, lr}
     ldr r6, _08045064
     ldrb r0, [r6, #3]
@@ -31135,7 +31135,7 @@ sub_08044F80:
     bl sub_08044B40
     adds r4, r2, #0
     movs r3, #0
-    bl sub_0800EB98
+    bl sub_0800EB98   @ BattleSetSideTradedNavi
     movs r1, #4
     lsls r1, r1, #0x18
     movs r2, #2

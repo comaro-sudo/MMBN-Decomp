@@ -12668,7 +12668,7 @@ _080F5C8E:
     ldr r0, [sp]
     movs r1, #1
     eors r0, r1
-    bl sub_0800EBAA
+    bl sub_0800EBAA   @ BattleGetSideWaitingRoomSlot
     movs r1, #0xe0
     muls r0, r1, r0
     mov r7, sl

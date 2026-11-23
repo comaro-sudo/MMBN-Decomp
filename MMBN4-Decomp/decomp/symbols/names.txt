@@ -1052,3 +1052,27 @@
 0809E1D8 0809E1E4 code   GEMINI       NumberTraderRefundFlag           Clears the Number Trader code's event flag (stored at [r5+0x6C]) when a SubChip reward cannot fit in the pack
 0804E4B8 0804E4C0 code   GEMINI       MapGetDialogueArchive            Resolves (group, map, story_phase) -> LZ77 dialogue text archive via dat_0804E504 and dat_0804E518
 0801913E 0801913E code   CLAUDE       ChipGive                         r0 chip id, r1 code, r2 qty: adds to the pack, sets Library flag 0x16C0+id, writes the chip key (used by patch WP-D3)
+
+# --- Round 3-5 RE names (Gemini: lobby-npcs, free-tournament-battle-data, status-screen-*, waiting-room, patch-test-*; merged by Claude 2026-11-23) ---
+08000D56 08000D56 code   GEMINI       GetCompletionStars_SoulCountCmp  cmp r5, #6 (06 2D): must be patched to cmp r5, #12 (0C 2D) alongside FS_STAR_SOUL_FLAGS
+0800EB98 0800EB98 code   GEMINI       BattleSetSideTradedNavi          r0 side, r1 waiting_room_slot, r2 soul_idx, r3 flags: writes side's traded Navi descriptor for type-0x04 AI
+0800EBAA 0800EBAA code   GEMINI       BattleGetSideWaitingRoomSlot     r0 side: returns waiting_room_slot (0..7) used to index save slots +0x78 (x0x40) and +0x7C (x0xE0)
+08026748 0802674C code   GEMINI       NpcSpawnList                     r0 ptr to 0xFF-terminated u32 NPC script list: spawns an overworld object for each entry
+08029C94 08029C98 data   GEMINI       BN4_RW_MAP_NPCS                  6 RW group pointers -> per-map NPC script lists (Higsby's (00,06) at 0x0805444C -> 0x08056550 RS)
+08029E14 08029E18 data   GEMINI       BN4_CW_MAP_NPCS                  21 CW group pointers -> per-map NPC script lists
+0802A2E8 0802A2EC code   GEMINI       MapCheckJackIn                   Checks facing jack-in tile (1..15), flag 0x1150+slot, and warp target at 0x0200B6D0+slot*4; runs dat_0809CDA8
+0802A3D2 0802A3D6 code   GEMINI       MapSpawnNPCs                     Looks up (group, map) in dat_08029C94 (RW) / dat_08029E14 (CW) and spawns NPCs via sub_08026748
+0803324C 08033250 data   GEMINI       BN4_STATUS_BASE_UI_LIST          3 x 4-byte UI spawn entries (types 0x13, 0x14, 0x49: cursor, MegaMan sprite, arrows) for Status screen
+0803325C 08033260 data   GEMINI       BN4_STATUS_SOUL_SPAWN_LIST       6 x 4-byte UI-object-0x45 spawn entries (slots 0..5), 0xFFFFFFFF-terminated; passed to sub_08053F8C
+08044A8C 08044A94 code   GEMINI       FreeTournamentBuildBattle        Initializes RAM battle record and dispatches to sub_08044B58 for the current Free Tournament match
+08044B58 08044B60 code   GEMINI       FreeTournamentSetupSides         Dispatches on side-0 entrant class (dat_08044B70: 0 traded, 1 filler, 2 AI, 3 MegaMan -> sub_08044F80)
+08044F80 08044F88 code   GEMINI       FreeTournamentSetupPlayerMatch   Sets up MegaMan's match: case 0 spawns type-0x04 traded Navi (reads +0x78/+0x7C); case 1 spawns type-0x01 filler
+080523F8 08052400 data   GEMINI       BN4_RW_EXAMINE_ARCHIVES          6 RW group pointers -> per-map examine-object text archives (Higsby's (00,06) @ 0x08052540 -> 0x0876D368)
+08054540 0805454C data   GEMINI       MapInit_ACDCTown                 ACDC Town (00,00) map-init script; unlocks jack-in flags 0x1152..0x1156
+08054E3C 08054E48 data   GEMINI       MapInit_Higsbys                  Higsby's (00,06) map-init script (no jack-in flags)
+080A8598 080A85A4 code   GEMINI       NpcRunScript                     Overworld NPC bytecode interpreter (dispatch table dat_080A85D0: 0x14 pos, 0x16 dir, 0x17 sprite, 0x18 msg, 0x36 call)
+0810D9D4 0810D9E8 code   GEMINI       StatusSoulIconTask               UI object 0x45 (Status screen Soul icon): dispatches to StatusSoulIconInit (0x0810D9F8) and StatusSoulIconUpdate (0x0810DAD4)
+0810D9F8 0810DA0C code   GEMINI       StatusSoulIconInit               Reads owned Soul flag from 0x0201D000[slot], loads sprite 0x37 frame & palette, sets VRAM tile & (X,Y)
+0810DAB8 0810DACC data   GEMINI       BN4_STATUS_ICON_SOUL_FLAGS       0xFF-terminated u8 list of 6 Soul flags mapped to sprite 0x37 anims (dat_0810DAC5) and palettes (dat_0810DACB)
+0810DAD4 0810DAE8 code   GEMINI       StatusSoulIconUpdate             Applies menu slide-in X offset to dat_0810DAF8[slot].x and calls BN4_SPRITE_UPDATE
+0810DF40 0810DF54 code   GEMINI       StatusMegaManSpriteTask          UI object 0x49: renders MegaMan's standing sprite (0x39) at (56, 80) on the Status screen
