@@ -340,7 +340,7 @@ lobby_npc_trashcan:
     .byte   0x18, 0xFC
     .byte   0x14
     .halfword (-150) & 0xFFFF, (-90) & 0xFFFF, 0
-    .byte   0x16, 3
+    .byte   0x16, 0                 ; anim 0: list[7] 0x44 has only anims 0-2 (3 drew a white circle; Gemini round 10)
     .byte   0x36
     .word   NPC_IDLE_TALK_LOOP
 @@hide:
