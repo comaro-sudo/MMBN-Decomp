@@ -5,7 +5,8 @@
 ; event flag 0x0015 (Double Soul unlocked) + flag 0x17 + idx + WriteChipKey(0x161 + idx); WriteChipKey
 ; applies the running ROM's own XOR key, so the same code works in RS and BM.
 ;
-; idx: 0 Roll, 1 Guts, 2 Wind, 3 Search, 4 Fire, 5 Thunder, 6 Proto, 7 Number, 8 Metal, 9 Junk, 10 Aqua, 11 Wood
+; idx: 0 Roll, 1 Guts, 2 Wind, 3 Search, 4 Fire, 5 Thunder, 6 Proto, 7 Number, 8 Metal, 9 Junk, 10 Aqua, 11 Wood,
+; 12 Duo
 ; (the BN4_SOUL_FLAGS order). The handler follows the ScriptGroup_FC convention used by the lobby and the
 ; Frequency Tuner handlers: r4 = script pointer, argument at [r4, 2]; advance r4 by 3; return r0 = 1.
 ; The FC table (wp_d3_lobby_rematches.asm, lobby_fc_table) gets this as entry 0x0C.
@@ -14,8 +15,8 @@
 .org FS_GRANT_SOUL
 grant_soul_fc:                      ; FC 0C <idx>
     push    r4-r7, r14
-    ldrb    r5, [r4, 2]             ; idx 0..11
-    cmp     r5, 11
+    ldrb    r5, [r4, 2]             ; idx 0..12 (12 = DuoSoul: flag 0x0023, key 0x16D; wp_d4_duo_soul.asm)
+    cmp     r5, 12
     bhi     @@done                  ; ignore a bad index
     mov     r0, 0x15                ; Double Soul unlocked
     ldr     r3, =SET_EVENT_FLAG | 1

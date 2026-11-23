@@ -40,6 +40,13 @@
   - A Duo V1 win in the Meteor Comp rematch grants it too (if not yet owned).
 - Still open: the exact Duo palette colours, the passive and charge-shot choice, and which chips get unite class `0x0D`. Claude proposes defaults when building.
 
+## Built (Claude, 2026-11-23, `patch/src/common/wp_d4_duo_soul.asm` + `wp_d2_duo_story_grant.asm`)
+
+- Unite (class `0x0D`, flag `0x0023`, 13-Soul loop), MetalSoul's sprite for form 13, MetalFist at 180 as the charge shot, MetalSoul's icon, ten unite chips (Guard1–3, Barrier, HolyPanl, AntiNavi, AntiDmg, AntiRecv, LifeAura, Duo), `FC 0C 0C`.
+- **Grant:** on any Duo deletion (story or rematch), if not owned. Duo's `r5[0x04]` is its version, and the original only sets flag `0x006F` for α/β/Ω.
+- Checks on Gemini's design: `0x0800E1CA` is GutsSoul's +30 to Null/break chips in the hand, **not SuperArmor**; MetalFist's `[r7,#0xC]` word is `0x06050601`, not `0x0808`. So the passive is left out for now.
+- **Still to do:** the Duo palette (where the battle loads the form's OBJ palette; Duo's own init uses `BN4_SPRITE_PALETTE_SET` `0x08002DEC` with an index, maybe the way in), a passive (default to propose), the 3rd status page. In-game test of everything.
+
 ## Next
 
 Gemini's research (round 9, `decomp/notes/task-gemini-round9.md`), then an owner decision on scope: full Soul / palette-swap Soul / drop the idea.

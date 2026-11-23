@@ -53,15 +53,18 @@ FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul hand
 FS_GRANT_SOUL_SIZE        equ 0x40
 FS_CHIP_ART               equ 0x087FAA70    ; WP-D2: Duo/GP Power pictures, palettes, icons (0xBC0; private builds only)
 FS_CHIP_ART_SIZE          equ 0xC00
-FS_DUO_GRANT              equ 0x087FB670    ; WP-D2: Duo defeat state handler (story win gives Duo D)
-FS_DUO_GRANT_SIZE         equ 0x60
+; 0x087FB670-0x087FB6D0 free (0x60): the first Duo grant handler's slot, moved to FS_DUO_GRANT below
 FS_DUO_REMATCH            equ 0x087FB6D0    ; WP-D3 Duo rematch (FC 0D, 4 battle records, Meteor Comp 1 NPC list + NPC)
 FS_DUO_REMATCH_SIZE       equ 0x100
 FS_GPP_MD                 equ 0x087FB7D0    ; WP-D2 GP Power BMD: ACDC Area 2 MD list + CW NPC list + spawn script
 FS_MD_ACDC2_LIST          equ 0x087FB7D0    ;   3 existing + 1 new BMD + place + cont (0x60 B)
 FS_CW_NPC_ACDC2           equ 0x087FB830    ;   13 existing + 1 new spawn ptr + 11 B script (0x48 B)
 FS_GPP_MD_SIZE            equ 0xA8
-; next free slot:             0x087FB878 (code/data packages must stay below FS_TEXT)
+FS_DUO_SOUL               equ 0x087FB878    ; WP-D4 Duo Soul: 13-entry unite tables, form-sprite redirect, charge shot
+FS_DUO_SOUL_SIZE          equ 0x60
+FS_DUO_GRANT              equ 0x087FB8D8    ; WP-D2/D4: Duo deletion handler (Duo Soul + Duo D + flag 0x006F)
+FS_DUO_GRANT_SIZE         equ 0x90
+; next free slot:             0x087FB968 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 

@@ -27,7 +27,7 @@ Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are i
 - armips gotchas met today: labels are **case-insensitive** (a label `duo_defeat_state` clashed with the equ `DUO_DEFEAT_STATE`); `.macro` can't be defined inside a false `.if`; `.incbin` names are resolved even inside a false `.if` (`build.py` points them at an empty `build/chipart/<v>/none.bin`).
 - Lobby dialogue archive (in `wp_d3_lobby_rematches.asm`): entries `0x00`–`0x0F` = talk index `0xF0`–`0xFF`. `0x0D` is now Duo's prompt; the shared "No" target moved to `0x0F`.
 - Lobby marker byte `0x020015EF` = `0x80 | id`; id 0–11 Navis, **13 = Duo** (so `0x0E40 + id*2` gives Duo's flags `0x0E5A`). `0x0E5C` is reserved for Duo's SP+ step; `0x020015EE` for the SP+ flag (Gemini).
-- Free space: next free slot **`0x087FB878`**; code/data must stay below `FS_TEXT` `0x087FC000`.
+- Free space: next free slot **`0x087FB968`** (plus a 0x60 hole at `0x087FB670`); code/data must stay below `FS_TEXT` `0x087FC000`.
 - Rules: stage by explicit path; never commit ROM bytes; LF line endings (the Edit tool left CRLF in `defines.asm` once: run `sed -i 's/\r$//'` if git warns).
 
 ## Modified & Relevant Files
