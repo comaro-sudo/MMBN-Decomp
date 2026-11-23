@@ -29,5 +29,6 @@
 .include "common/wp_d2_duo_chip_reward.asm"  ; Violet Eclipse: Duo-beta/omega drop the Duo chip (after random drops)
 .include "common/wp_d4_status_two_pages.asm" ; Violet Eclipse: status screen shows 12 Souls on two pages (L/R)
 .include "common/wp_d0_npc_lists.asm"        ; infrastructure: Higsby's and ACDC Town NPC lists in free space
+.include "common/wp_d2_zsaver_md.asm"        ; Violet Eclipse: Z-Saver Z Blue Mystery Data in Undernet 1
 
 .close
