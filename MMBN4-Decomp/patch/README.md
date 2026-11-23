@@ -29,7 +29,7 @@ The pipeline: verify the ROM hashes, run armips, fix the header checksum, then c
 | `wp_a2_zenny_battle.asm` | WP-A2 | Battle Zenny × 1.5; the shown and granted amounts match | Built; in-game check pending |
 | `wp_d4_twelve_souls.asm` | WP-D4 | All 12 Double Souls can unite in both versions | Built; confirmed in-game |
 | `wp_d3_bass_both_chips.asm` | WP-D3 | A Bass battle also grants the other version's chip (Bass ↔ BassAnly, BlakBarr ↔ DeltaRay) | Built, disassembly-checked; not tested in-game |
-| `wp_d4_star_twelve_souls.asm` | WP-D4 | The Souls completion star needs all 12 Souls | Built, checked; not tested in-game |
+| `wp_d4_star_twelve_souls.asm` | WP-D4 | The Souls completion star needs all 12 Souls (12-entry list, and the count compare raised to 12) | The first version failed Gemini's runtime test (6 Souls still earned the star); fixed in `79398a4`, re-test pending |
 | `wp_d2_random_version_drops.asm` | WP-D2 | Drops that differ by version come from either version's table, 50/50 | Built, disassembly-checked; not tested in-game |
 
 The owner's decisions behind them are in [`../docs/completion/bosses.md`](../docs/completion/bosses.md) and `../plan/DEFINITIVE-EDITION.md` §7. The ones still pending are in [`../docs/pending/`](../docs/pending/).

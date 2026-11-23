@@ -74,7 +74,12 @@ Building now **needs both ROMs**: the other version's drop table is copied at bu
 - **In-game testing** of WP-A2, WP-D3, WP-D4 star and WP-D2 (mGBA, or the PC port's `--test`).
   - Done so far: a **boot smoke test** (2026-11-23, PC port `--test 1500`, START then A). The patched RS and BM runs match their originals: the same final frame, the same audio sample count, and in RS the same RNG state.
   - That only shows boot isn't affected. The packages act in battles and on menus, so they need test saves at the right point (e.g. `ref/saves/` converted with `patch/tools/savetool.py`, plus `--state-in`).
-- **The status screen** lists only 6 Souls: a 12-entry list may overflow the layout (Gemini's round-3 task 3).
+- **The status screen** lists only 6 Souls. Gemini confirmed at runtime that a 2 × 6 grid isn't possible: the NAVIGATOR box starts at Y = 94. The plan is **two pages of 6**; Gemini's round-5 task 3 designs it, and Claude writes the patch.
+- **WP-D4 star:** a runtime bug was found by Gemini and fixed (`79398a4`: the `cmp r5, #6` at `0x08000D56` is now 12). Re-test pending (Gemini round 5).
+- **Lobby plan:**
+  - the waiting room (option A, preferred) is being researched by Gemini (round 5, task 1);
+  - fallback B is inside and outside Higsby's;
+  - JunkMan's trash can is to be added **outside Higsby's entrance**: BN4 has no trash-can comp, and Higsby's has no jack-in objects (Gemini round 4).
 - **Owner decisions still open:**
   - whether to use the Free Tournament fix at all (pending doc);
   - the RS/BM version choice in the merged ROM (`DEFINITIVE-EDITION.md` §7 q1; the canon lineup assumes one merged story);
