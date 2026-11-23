@@ -54,7 +54,14 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
     | Fallback 2 | After the first fight, a **blue** Mystery Data (Unlocker) and a **purple** Mystery Data (the other chip) appear nearby |
     | Fallback 3 | The Bass form **roams the same area** (Black Earth 2) and can be fought again |
 
-    This applies to Bass (Bass/BassAnly), BassΩ and BassXX (BlakBarr/DeltaRay). The notes below give implementation details. Where they set a different order, the table wins.
+    This applies to Bass (Bass/BassAnly), BassΩ and BassXX (BlakBarr/DeltaRay).
+
+    **Main option implemented (2026-11-23):** `patch/src/common/wp_d3_bass_both_chips.asm`, based on Gemini's `decomp/notes/bass-rematch.md`.
+    - The results screen's chip grant (`bl CHIP_GIVE` at RS `0x080216E2` / BM `0x080216E6`) now calls a helper. The helper does the original grant, then grants the other version's pair: Bass ↔ BassAnly X, BlakBarr A ↔ DeltaRay Z.
+    - The helper sits in a dead 86-byte block of `code_03` (RS `0x08037C58` / BM `0x08037C60`), which nothing branches to or points at.
+    - Builds in both versions. The emitted code and the table were checked by disassembly.
+    - (T: not yet tested in-game. The results screen still names only the battle's own chip, and the pair is added silently.)
+    - Also from Gemini's note: **BassΩ and BassXX already roam Black Earth 2 forever** after Bass V1 sets flag `0x9F` (BassXX appears instead of BassΩ while a Mod Card is loaded). Only Bass V1 is a one-time fight. With this patch, one Bass V1 win plus one BassΩ/BassXX win at Busting Level 7+ gives all four chips. The notes below give implementation details. Where they set a different order, the table wins.
   - **Earlier notes (2026-11-23):**
     - **Bass (V1):** if he doesn't appear again after the story battle, add him to Black Earth 2's roaming table, the same area as BassΩ (a new entry in the `+0x10` ghost table, or a second `+0x10`-style table behind its own flag). If that isn't possible, his story battle **drops both chips**, Bass and BassAnly.
     - **BassΩ:** if the in-game check shows he doesn't come back after a win, he **drops both chips**, BlakBarr and DeltaRay.
