@@ -87,7 +87,19 @@ Gemini's notes don't settle which one it is yet. It's a short static read of the
    - No bracket screen is involved.
 3. That's 4 Soul Navis × 3 tournaments = **all 12 in one playthrough**.
 
-**Details to settle (owner):**
+**Owner decisions (2026-11-23), these replace the proposals below where they differ:**
+- **The "canon" Navi fights in the story.** In each tournament, the story fight is against the one Soul Navi that fits the story best. The other three Soul Navis of that tournament become **three exhibition (friendly) matches**.
+  - Example only: if FireMan is the canon Navi of the 1st tournament, the friendly matches are GutsMan, NumberMan and AquaMan.
+  - So each tournament has 1 story fight + 3 friendly matches, and the playthrough gets 3 + 9 = all 12.
+  - **Which Navi is canon in each tournament is still open.** Proposal: decide from the game's own story text (which Navi the tournament's cutscenes and the version's plot refer to; TextPet script dumps, RE), then confirm with the owner. RS and BM may give different answers; the merged-version decision (§7 question 1) affects this.
+- **Accepted for the friendly matches:**
+  - tier: the game's normal tier for that playthrough, like the other story fights;
+  - **winning gives that Navi's Soul**, so all 12 Souls are obtainable in one run;
+  - losing can be retried right away, with no game over;
+  - the match counts as **meeting** the Navi, win or lose, so its operator appears in the lobby.
+- **Still open:** when the friendly matches happen: before the bracket (qualifiers), after the final, or spread around the tournament day.
+
+**Details to settle (earlier proposals; see the owner decisions above):**
 - **Which Navi goes in the exhibition?** Proposal: one of the other version's pair, so the version's own story stays as it was. The final keeps its original opponent.
 - **Its tier:** the game's own tier (V1 on the first playthrough, raised by the playthrough as usual), the same as the other story fights.
 - **Does winning give that Navi's Soul?** That would give all 12 Souls in one run (criterion C1, WP-B1). Proposal: yes. How the story grants a Soul is Gemini's round-2 task 2.
