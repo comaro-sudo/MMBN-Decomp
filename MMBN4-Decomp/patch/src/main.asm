@@ -27,5 +27,6 @@
 .include "common/wp_d4_star_twelve_souls.asm" ; Violet Eclipse: the Souls completion star needs all 12
 .include "common/wp_d2_random_version_drops.asm" ; Violet Eclipse: version-specific drops at random, 50/50
 .include "common/wp_d4_status_two_pages.asm" ; Violet Eclipse: status screen shows 12 Souls on two pages (L/R)
+.include "common/wp_d0_npc_lists.asm"        ; infrastructure: Higsby's and ACDC Town NPC lists in free space
 
 .close
