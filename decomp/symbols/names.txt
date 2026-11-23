@@ -956,3 +956,8 @@
 080514A8 080514B4 code   CLAUDE       ScriptCmd_spriteRotate           script command handler: FA 01:spriteRotate
 080514E0 080514EC code   CLAUDE       ScriptGroup_FF                   script command handler: FF:group
 080514FC 08051508 code   CLAUDE       ScriptCmd_ereaderName            script command handler: FF 00:ereaderName, FF 01:ereaderDesc
+# --- Shops (docs/re/shops.md), Claude 2026-11-22 ---
+08005858 08005858 code   CLAUDE       ShopOpen                         r0 the shop: ShopInit, map place saved in the game state, mode 0x24, transition (from ScriptCmd_startShop)
+08049DB4 08049DBC code   CLAUDE       ShopInit                         r0 the shop: state 0x0200A740 zeroed, +4 index, +0x1C BN4_SHOP_RECORDS + n*0x10, +0x24 0x02026000
+08049CA4 08049CAC data   CLAUDE       BN4_SHOP_RECORDS                 17 x 16 bytes: +0 kind, +4 dialogue archive (LZ77), +8 n*0x40, +0xC event-flag base for purchases
+0200A740 0200A740 ram    CLAUDE       BN4_SHOP_STATE                   the open shop: +0 state (dispatched by sub_08049DEC), +4 index, +0x1C its record, +0x24 a work buffer
