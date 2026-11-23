@@ -1812,7 +1812,7 @@ _0806FE18:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FE28
@@ -1829,7 +1829,7 @@ _0806FE34:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FE44
@@ -1846,7 +1846,7 @@ _0806FE50:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FE60
@@ -1863,7 +1863,7 @@ _0806FE6C:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FE7C
@@ -1880,7 +1880,7 @@ _0806FE88:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FE98
@@ -1897,7 +1897,7 @@ _0806FEA4:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FEB4
@@ -1914,7 +1914,7 @@ _0806FEC0:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_0806FED0
@@ -1931,7 +1931,7 @@ _0806FEDC:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x52
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 _0806FEEC:
     .word dat_0806EA68

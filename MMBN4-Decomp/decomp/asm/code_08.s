@@ -366,7 +366,7 @@ _080D0388:
     movs r0, #6
     bl sub_08012F74
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldr r3, [r5, #0x60]
     ldrb r0, [r3]
     adds r0, #1
@@ -3209,7 +3209,7 @@ _080D19B0:
     movs r0, #7
     bl sub_08012F74
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_08012DC0
     bl sub_08012D62
     movs r0, #4
@@ -8397,7 +8397,7 @@ _080D41E6:
     movs r0, #0
     bl sub_08012F74
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_08012D62
     ldrb r0, [r5, #5]
     movs r1, #0x50
@@ -9695,7 +9695,7 @@ _080D4B9C:
     movs r0, #0
     bl sub_08012F74
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_08012D62
     movs r0, #9
     strh r0, [r5, #0x20]
@@ -10242,7 +10242,7 @@ _080D4FD6:
     str r5, [r3]
 _080D4FF8:
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xf
     strh r0, [r5, #0x20]
     movs r0, #0
@@ -10625,10 +10625,10 @@ sub_080D52DE:
     str r1, [r0, #0x4c]
     adds r5, r0, #0
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #1
     lsls r0, r0, #0x13
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
     strb r0, [r5, #0x14]
@@ -10648,10 +10648,10 @@ sub_080D5312:
     movs r1, #4
     strh r1, [r5, #0xa]
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #1
     lsls r0, r0, #0x13
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
     strb r0, [r5, #0x14]
@@ -14515,7 +14515,7 @@ _080D7136:
     movs r0, #0x80
     bl sub_08012DC8
     ldr r0, _080D7288
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_08012D62
     ldrb r0, [r5, #4]
     adds r0, r0, r0
@@ -24528,7 +24528,7 @@ _080DBE54:
     movs r3, #3
     bl sub_080129AC
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldr r0, _080DC044
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -32857,7 +32857,7 @@ sub_080DFDF2:
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_0800AB88
     ldr r1, _080DFF40
     muls r0, r1, r0
@@ -56919,13 +56919,13 @@ sub_080EB200:
     push {lr}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     ldrb r0, [r7, #0x16]
     ldrb r1, [r7, #0x17]
     bl sub_0800AD2A   @ BN4_CAN_MOVE
     beq _080EB24E
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldrb r0, [r7, #0x16]
     ldrb r1, [r7, #0x17]
     strb r0, [r5, #0x14]
@@ -57034,10 +57034,10 @@ sub_080EB2E0:
     strh r0, [r7, #0x10]
     bne _080EB304
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #1
     lsls r0, r0, #0x13
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldrh r0, [r7, #0x18]
     strh r0, [r7, #0x10]
     movs r0, #0
@@ -57090,7 +57090,7 @@ sub_080EB334:
     strb r0, [r5, #0x11]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -57229,7 +57229,7 @@ _080EB452:
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -57470,7 +57470,7 @@ _080EB63E:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x15
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -57730,7 +57730,7 @@ sub_080EB874:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     b _080EB99A
@@ -57962,7 +57962,7 @@ sub_080EBA70:
     bne _080EBAF2
     movs r0, #1
     lsls r0, r0, #0x10
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldr r0, _080EBB10
     bl sub_0800BFC0   @ BN4_AI_REQUESTS_CLEAR
     movs r0, #0x44
@@ -57987,7 +57987,7 @@ sub_080EBA70:
     adds r0, #0xff
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0x40
     bl sub_0800BFC0   @ BN4_AI_REQUESTS_CLEAR
     ldr r1, [r5, #0x58]
@@ -58192,7 +58192,7 @@ _080EBC78:
     bge _080EBCAC
     movs r0, #1
     lsls r0, r0, #0x10
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r1, #0x24
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     cmp r0, #0xf
@@ -58246,7 +58246,7 @@ sub_080EBCCC:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x17
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -58321,7 +58321,7 @@ sub_080EBD48:
     bl sub_080E18EE
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -58398,7 +58398,7 @@ sub_080EBDE4:
     strh r0, [r7, #0x12]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strh r0, [r7]
     pop {pc}
@@ -58531,7 +58531,7 @@ sub_080EBEAC:
     bl sub_0800AB64
     bl sub_08012D9A
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r1, #0x24
     movs r2, #0
     push {r2}
@@ -58616,7 +58616,7 @@ sub_080EBF88:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x17
     strh r0, [r7, #0x10]
     movs r0, #0xa4
@@ -58709,7 +58709,7 @@ sub_080EC03C:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -58788,7 +58788,7 @@ sub_080EC0C4:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xb7
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #0
@@ -58891,7 +58891,7 @@ sub_080EC184:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -58993,7 +58993,7 @@ sub_080EC24C:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59074,7 +59074,7 @@ sub_080EC2D8:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xa
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59202,7 +59202,7 @@ sub_080EC3C4:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59322,7 +59322,7 @@ sub_080EC468:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59435,7 +59435,7 @@ sub_080EC594:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59542,7 +59542,7 @@ sub_080EC660:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -59699,7 +59699,7 @@ sub_080EC780:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -59825,7 +59825,7 @@ _080EC890:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #1
@@ -60040,7 +60040,7 @@ sub_080ECA34:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xf
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -60125,7 +60125,7 @@ sub_080ECACC:
     strh r0, [r7, #0x10]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     push {r7}
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
@@ -60235,7 +60235,7 @@ sub_080ECB94:
     strh r0, [r7, #0x10]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     push {r7}
     movs r1, #0x23
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
@@ -60337,7 +60337,7 @@ sub_080ECC4C:
     strb r0, [r7, #1]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
 _080ECC6C:
@@ -60453,10 +60453,10 @@ sub_080ECD0C:
     bl sub_080D2338
     pop {r7}
     movs r0, #1
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0
@@ -60508,7 +60508,7 @@ _080ECDAE:
     movs r0, #0
     str r0, [r5, #0x4c]
     movs r0, #1
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
 _080ECDB8:
     ldrh r0, [r7, #0x10]
     adds r0, #1
@@ -60519,7 +60519,7 @@ _080ECDB8:
     movs r0, #0
     str r0, [r5, #0x4c]
     movs r0, #1
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     bl sub_0800C9FC   @ BN4_CHIP_ATTACK_END
 _080ECDD2:
     pop {r4, r6, pc}
@@ -60571,7 +60571,7 @@ sub_080ECE34:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -60658,7 +60658,7 @@ sub_080ECECC:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0xf
@@ -60761,7 +60761,7 @@ _080ECF8E:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0x2a
@@ -60868,7 +60868,7 @@ sub_080ED048:
     strb r0, [r5, #0x11]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -60980,7 +60980,7 @@ sub_080ED11C:
     strb r0, [r5, #0x11]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -61179,7 +61179,7 @@ sub_080ED280:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strh r0, [r7]
     ldrb r0, [r7, #3]
@@ -61300,7 +61300,7 @@ sub_080ED350:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     bl sub_0800ACA6
     lsls r4, r0, #8
     adds r4, #0x40
@@ -61417,7 +61417,7 @@ sub_080ED430:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x24
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -61502,7 +61502,7 @@ sub_080ED4E8:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     ldrb r0, [r7, #3]
     movs r1, #7
     muls r0, r1, r0
@@ -61667,7 +61667,7 @@ sub_080ED5F6:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x15
     strh r0, [r7, #0x10]
     ldrb r0, [r5, #0x16]
@@ -61977,7 +61977,7 @@ _080ED8B2:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x15
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -62264,7 +62264,7 @@ sub_080EDAA4:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x15
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -62362,7 +62362,7 @@ sub_080EDB80:
     bne _080EDBBC
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #5
     strh r0, [r7, #0x12]
     bl sub_0800FB3C
@@ -62502,7 +62502,7 @@ sub_080EDC78:
     bne _080EDCC4
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xd
     ldrb r1, [r7, #0xc]
     cmp r1, #3
@@ -62583,7 +62583,7 @@ _080EDD10:
     bge _080EDD2C
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0
@@ -62634,7 +62634,7 @@ sub_080EDD54:
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #1
     strb r0, [r7, #0x1a]
     movs r0, #4
@@ -62682,10 +62682,10 @@ _080EDDCE:
     strh r0, [r7, #0x10]
     bgt _080EDDE8
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #1
     lsls r0, r0, #0x13
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #8
     strh r0, [r7]
 _080EDDE8:
@@ -62750,7 +62750,7 @@ sub_080EDE44:
     bne _080EDE90
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xd
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -62966,7 +62966,7 @@ _080EDFF4:
     bge _080EE010
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0
@@ -63002,7 +63002,7 @@ sub_080EE034:
     bne _080EE080
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xd
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -63173,7 +63173,7 @@ _080EE184:
     bge _080EE1A0
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0
@@ -63397,7 +63397,7 @@ _080EE306:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -63531,7 +63531,7 @@ sub_080EE448:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x28
     strh r0, [r7, #0x10]
     mov r0, sl
@@ -63659,7 +63659,7 @@ sub_080EE554:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -63750,7 +63750,7 @@ sub_080EE60C:
     push {lr}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #5
     strh r0, [r7, #0x12]
     movs r0, #0
@@ -63844,7 +63844,7 @@ sub_080EE6AC:
     push {r4, lr}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0xa
     strh r0, [r7, #0x12]
     bl sub_0800AB88
@@ -63981,7 +63981,7 @@ sub_080EE798:
     push {lr}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0
     strb r0, [r7, #0x12]
     movs r0, #3
@@ -64230,7 +64230,7 @@ sub_080EE958:
     pop {r7}
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     movs r0, #0
@@ -64322,7 +64322,7 @@ sub_080EEA1C:
     bne _080EEA42
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     adds r0, r5, #0
     movs r1, #0x91
     ldr r2, [r7, #8]
@@ -64374,7 +64374,7 @@ sub_080EEA78:
     bl sub_0800BA66   @ BN4_COUNTER_WINDOW
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -66128,11 +66128,11 @@ sub_080EF8B4:
     strb r0, [r5, #0x10]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     b _080EF908
@@ -66175,7 +66175,7 @@ _080EF930:
     strh r0, [r7, #0x10]
     bgt _080EF942
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #8
     strh r0, [r7]
 _080EF942:
@@ -66312,7 +66312,7 @@ sub_080EFA14:
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     b _080EFA3C
@@ -66353,7 +66353,7 @@ _080EFA68:
     strh r0, [r7, #0x10]
     bgt _080EFA7A
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0x1c
     strh r0, [r7]
 _080EFA7A:
@@ -66412,7 +66412,7 @@ sub_080EFAC0:
     strb r0, [r5, #0x10]
     movs r0, #1
     lsls r0, r0, #0x16
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x14
     bl sub_0800AFBC
     movs r0, #4
@@ -66528,7 +66528,7 @@ sub_080EFB90:
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     b _080EFBD0
@@ -66572,7 +66572,7 @@ _080EFBFC:
     strh r0, [r7, #0x10]
     bgt _080EFC0E
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #8
     strh r0, [r7]
 _080EFC0E:
@@ -66634,7 +66634,7 @@ sub_080EFC42:
     adds r3, r3, r0
     bl sub_080E3AD8
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #0x96
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #4
@@ -66682,7 +66682,7 @@ _080EFCCE:
     strh r0, [r7, #0x10]
     bgt _080EFCE0
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #0x14
     strh r0, [r7]
 _080EFCE0:
@@ -66747,7 +66747,7 @@ sub_080EFD3C:
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #4
     strb r0, [r7, #1]
     b _080EFD70
@@ -66788,7 +66788,7 @@ _080EFD9C:
     strh r0, [r7, #0x10]
     bgt _080EFDAE
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #8
     strh r0, [r7]
 _080EFDAE:
@@ -66994,7 +66994,7 @@ sub_080EFEEC:
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #0x40
-    bl sub_08012F82   @ BN4_SET_FLAG
+    bl sub_08012F82   @ BattleSetStatusBits
     movs r0, #1
     strb r0, [r7, #0x1a]
     movs r0, #4
@@ -67039,7 +67039,7 @@ _080EFF60:
     strh r0, [r7, #0x10]
     bgt _080EFF72
     movs r0, #0x40
-    bl sub_08012F8C
+    bl sub_08012F8C   @ BattleClearStatusBits
     movs r0, #8
     strh r0, [r7]
 _080EFF72:

@@ -8363,7 +8363,7 @@ _08025044:
 
     .global sub_08025048
     .thumb_func
-sub_08025048:   @ SetEventFlagHL
+sub_08025048:   @ SetEventFlagPair
     lsls r0, r0, #8
     orrs r0, r1
 
@@ -23032,7 +23032,7 @@ sub_0802E158:
 sub_0802E168:
     push {lr}
     movs r0, #0
-    bl sub_08043F4C   @ BN4_MEGAMAN_ROUNDS
+    bl sub_08043F4C   @ TournamentGetRound
     bl sub_0802DF2C
     pop {pc}
     .hword 0x0000

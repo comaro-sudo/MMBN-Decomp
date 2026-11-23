@@ -990,7 +990,7 @@ _08010798:
 
     .global sub_0801079C
     .thumb_func
-sub_0801079C:
+sub_0801079C:   @ BattleMegaManLoadFormSprite
     push {r4, lr}
     ldr r4, [r5, #0x58]
     movs r1, #0x24
@@ -5756,7 +5756,7 @@ sub_08012F7A:
 
     .global sub_08012F82
     .thumb_func
-sub_08012F82:   @ BN4_SET_FLAG
+sub_08012F82:   @ BattleSetStatusBits
     ldr r1, [r5, #0x54]
     ldr r2, [r1, #0x64]
     orrs r2, r0
@@ -5765,7 +5765,7 @@ sub_08012F82:   @ BN4_SET_FLAG
 
     .global sub_08012F8C
     .thumb_func
-sub_08012F8C:
+sub_08012F8C:   @ BattleClearStatusBits
     ldr r1, [r5, #0x54]
     ldr r2, [r1, #0x64]
     bics r2, r0
@@ -11055,7 +11055,7 @@ dat_08015910:
 
     .global sub_0801592C
     .thumb_func
-sub_0801592C:
+sub_0801592C:   @ BattleInitEwram
     push {lr}
     ldr r0, _080159D8
     movs r1, #0x50

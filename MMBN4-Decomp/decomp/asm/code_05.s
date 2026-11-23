@@ -180,7 +180,7 @@ _08071526:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_08071536
@@ -197,7 +197,7 @@ _08071542:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_08071552
@@ -214,7 +214,7 @@ _0807155E:
     bl sub_08002048   @ BN4_PALETTE_ANIM
     movs r0, #0x11
     movs r1, #0x51
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
     .hword 0x0000
 _08071570:
@@ -334,7 +334,7 @@ _0807343E:
     beq _08073454
     movs r0, #8
     movs r1, #0x53
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     b _0807345C
 _08073454:
     movs r0, #8
@@ -3670,7 +3670,7 @@ sub_08088F4C:
     bne _08088F66
     movs r0, #0
     movs r1, #0xa2
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0x11
     bl sub_080430AC
 _08088F66:
@@ -3721,13 +3721,13 @@ sub_0808963C:
     bne _0808967A
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808967A:
     cmp r2, #4
     bne _08089686
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08089686:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -3855,7 +3855,7 @@ _08089756:
     beq _08089770
     movs r0, #1
     movs r1, #0x61
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08089770:
     movs r0, #0
     pop {r7, pc}
@@ -3870,7 +3870,7 @@ _08089774:
     beq _080897A4
     movs r0, #1
     movs r1, #0x63
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808978E:
     cmp r2, #3
     bne _080897A4
@@ -3880,7 +3880,7 @@ _0808978E:
     beq _080897A4
     movs r0, #1
     movs r1, #0x66
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080897A4:
     movs r0, #0
     pop {r7, pc}
@@ -3893,7 +3893,7 @@ _080897A8:
     beq _080897EE
     movs r0, #1
     movs r1, #0x69
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080897BE:
     cmp r2, #4
     bne _080897D8
@@ -3915,7 +3915,7 @@ _080897D8:
     beq _080897EE
     movs r0, #1
     movs r1, #0x73
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080897EE:
     movs r0, #0
     pop {r7, pc}
@@ -4415,13 +4415,13 @@ sub_08089FB8:
     bne _08089FF6
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08089FF6:
     cmp r2, #4
     bne _0808A002
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A002:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -4575,7 +4575,7 @@ _0808A112:
     beq _0808A12C
     movs r0, #1
     movs r1, #0x61
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A12C:
     movs r0, #0
     pop {r7, pc}
@@ -4590,7 +4590,7 @@ _0808A130:
     beq _0808A160
     movs r0, #1
     movs r1, #0x63
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A14A:
     cmp r2, #3
     bne _0808A160
@@ -4600,7 +4600,7 @@ _0808A14A:
     beq _0808A160
     movs r0, #1
     movs r1, #0x66
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A160:
     movs r0, #0
     pop {r7, pc}
@@ -4613,7 +4613,7 @@ _0808A164:
     beq _0808A1AA
     movs r0, #1
     movs r1, #0x69
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A17A:
     cmp r2, #4
     bne _0808A194
@@ -4635,7 +4635,7 @@ _0808A194:
     beq _0808A1AA
     movs r0, #1
     movs r1, #0x73
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0808A1AA:
     movs r0, #0
     pop {r7, pc}

@@ -4030,13 +4030,13 @@ sub_08050EE4:   @ ScriptCmd_menuFinishStory
     bne _08050F3C
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08050F3C:
     cmp r2, #4
     bne _08050F48
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08050F48:
     adds r4, #2
     movs r0, #1
@@ -4133,13 +4133,13 @@ sub_08050FF8:   @ ScriptCmd_menuNextStory
     bne _08051030
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08051030:
     cmp r2, #4
     bne _0805103C
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0805103C:
     adds r4, #2
     movs r0, #1
@@ -7158,7 +7158,7 @@ _08053FF2:
     bne _0805401A
     push {r0, r5, r7}
     adds r5, #0x20
-    bl sub_0800295C
+    bl sub_0800295C   @ SpriteCopyPaletteToShadow
     pop {r0, r5, r7}
 _0805401A:
     movs r1, #0x20

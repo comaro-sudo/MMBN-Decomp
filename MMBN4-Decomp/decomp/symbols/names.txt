@@ -1106,3 +1106,20 @@
 080A8880 080A888C code   GEMINI       NpcCmd_SetCharSprite             NPC script opcode 0x17: sets overworld NPC sprite from list[6] (BN4_SPRITE_LIST_CHARS)
 080A8980 080A898C code   GEMINI       NpcCmd_SetPropSprite             NPC script opcode 0x1F: sets overworld NPC sprite from list[7] (BN4_SPRITE_LIST_PROPS)
 080C4780 080C478C code   GEMINI       DuoDefeatedSetFlag               Post-Duo battle cutscene callback: sets event flag 0x0528 (Duo defeated) and advances ending
+
+# --- Round 10-11 names (Gemini: friendly-matches, battle-exit, form-palette, duo-soul-passive; merged 2026-11-23) ---
+0800295C 0800295C code   GEMINI       SpriteCopyPaletteToShadow        Copies 32B OBJ palette from [sprite_hdr+0x34] (if non-zero) or sprite archive into 0x03002640[slot]
+08006E1E 08006E1E code   GEMINI       BattleExitCleanup                Universal battle exit handler (win, loss, flee, game over); runs after BattleResultsGrantReward
+0800D8C2 0800D8C2 code   GEMINI       BattleResetFormPassives          Resets B+Left command, status bits (Air/FloatShoes), and form companions on Soul change/end
+0800E194 0800E194 code   GEMINI       BattleBoostHandNull10            r0 side: adds +10 ATK to damage chips of class 0x0C in hand (NumberSoul enter)
+0800E1CA 0800E1CA code   GEMINI       BattleBoostHandNullBreak30       r0 side: adds +30 ATK to damage chips of class 0x08/0x0C in hand (GutsSoul enter)
+0800E208 0800E208 code   GEMINI       BattleBoostHandWind10            r0 side: adds +10 ATK to damage chips of class 0x0A in hand (WindSoul enter)
+0801079C 0801079C code   GEMINI       BattleMegaManLoadFormSprite      Loads MegaMan's form sprite (BattleGetFormSprite), OBJ palette (BN4_SPRITE_PALETTE_SET), and BN4_FORM_STATE
+08012F82 08012F82 code   GEMINI       BattleSetStatusBits              r0 mask: ORs bits into [r5+0x54]->[0x64] (0x10 AirShoes, 0x20 FloatShoes)
+08012F8C 08012F8C code   GEMINI       BattleClearStatusBits            r0 mask: clears bits in [r5+0x54]->[0x64]
+0801592C 0801592C code   GEMINI       BattleInitEwram                  Clears per-battle EWRAM state (incl. 0x0203BF88 used-Souls bitmask) at battle start
+08025048 0802504C code   GEMINI       SetEventFlagPair                 r0 hi_byte, r1 lo_byte: sets event flag (r0<<8 | r1) (called by DuoDefeatedSetFlag)
+08043F4C 08043F54 code   GEMINI       TournamentGetRound               r0 tournament (0..2): returns current round (0..2), or 0xFF if not active
+080A8BDA 080A8BE6 code   GEMINI       NpcCmd_JumpIfStoryPhaseInRange   NPC script opcode 0x3B: jumps if story_phase ([sl+0x40]+6) is within [lo, hi]
+080A8C80 080A8C8C code   GEMINI       NpcCmd_JumpIfTournamentRound     NPC script opcode 0x42: jumps if tournament t (0..2) is currently at round r (0..2)
+080A8C9C 080A8CA8 code   GEMINI       NpcCmd_JumpIfTournamentRoundNe   NPC script opcode 0x43: jumps if tournament t (0..2) is NOT at round r

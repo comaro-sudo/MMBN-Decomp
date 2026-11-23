@@ -133,7 +133,7 @@ _08035180:
     bl sub_08042A58
     movs r0, #0
     movs r1, #0x2c
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {r0, r1, r2}
     mov r8, r0
     mov sb, r1
@@ -7994,7 +7994,7 @@ _08039B3A:
     ldr r6, [r6, r4]
     movs r0, #0x18
     movs r1, #0xc0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0x18
     movs r1, #0xc0
     lsls r0, r0, #8
@@ -8309,7 +8309,7 @@ _08039D92:
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #0
     movs r1, #0x71
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     bl sub_08048858
 _08039DB0:
     pop {r4, r6, r7, pc}
@@ -9934,7 +9934,7 @@ sub_0803AA24:
     beq _0803AA4E
     movs r0, #0x11
     movs r1, #0x84
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0803AA4E:
     pop {r7, pc}
     incrom 0x3AA50, 0x1C
@@ -10964,7 +10964,7 @@ sub_0803B304:
     strh r1, [r0, #0xc]
     movs r0, #0x11
     movs r1, #0x8b
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {r5, pc}
 _0803B344:
     .word 0x00004000
@@ -21670,10 +21670,10 @@ _080407CA:
     bl sub_08000568   @ BN4_PLAY_MUSIC
     movs r0, #0x11
     movs r1, #0x87
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0x11
     movs r1, #0x8b
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     bl sub_0804131C
     beq _08040870
     bl sub_0803B304
@@ -24300,7 +24300,7 @@ sub_08041CB8:
     push {r7, lr}
     movs r0, #0xc
     movs r1, #0x49
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     bl sub_08041B0C
     bl sub_08041B18
     bl sub_08041B48
@@ -26316,7 +26316,7 @@ _08042A64:
     bx r7
     movs r0, #0x11
     movs r1, #0x83
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08042A8A:
     adds r6, #1
     cmp r6, #0x10
@@ -26356,7 +26356,7 @@ _08042AB0:
     bx r7
     movs r0, #0x11
     movs r1, #0x80
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _08042AD6:
     adds r6, #1
     cmp r6, #0x10
@@ -27385,7 +27385,7 @@ sub_08043190:
     push {lr}
     movs r0, #0x11
     movs r1, #0x65
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     mov r0, sl
     ldr r0, [r0, #0x40]
     movs r1, #0xff
@@ -28992,7 +28992,7 @@ _08043F48:
 
     .global sub_08043F4C
     .thumb_func
-sub_08043F4C:   @ BN4_MEGAMAN_ROUNDS
+sub_08043F4C:   @ TournamentGetRound
     push {r4, lr}
     ldr r1, _08043F9C
     ldrb r1, [r1, r0]
@@ -30205,7 +30205,7 @@ sub_0804480C:   @ TournamentCheckSoulPairSwap
 _08044836:
     movs r0, #0
     movs r1, #0x9b
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r4, #1
 _08044840:
     tst r4, r4
@@ -34635,7 +34635,7 @@ _0804809C:
     push {r0, r1, r2, r3}
     movs r0, #0
     movs r1, #0x27
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {r0, r1, r2, r3}
 _080480AC:
     strb r2, [r5, #3]
@@ -35712,7 +35712,7 @@ _080488D6:
     pop {r0, r1, r2}
     movs r0, #0x11
     movs r1, #0x66
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 
@@ -35751,7 +35751,7 @@ _08048912:
     movs r4, #0
     movs r0, #0x11
     movs r1, #0x66
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     b _08048948
 _0804893A:
     movs r4, #1
@@ -35907,7 +35907,7 @@ _08048A28:
 _08048A4E:
     movs r0, #0x11
     movs r1, #0x88
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 
@@ -35961,7 +35961,7 @@ _08048AAA:
     bne _08048ABA
     movs r0, #0x11
     movs r1, #0x88
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _08048ABA:
@@ -45735,7 +45735,7 @@ _0804E88E:
     bl sub_0800286E
     strh r6, [r5, #6]
     pop {r7}
-    bl sub_0800295C
+    bl sub_0800295C   @ SpriteCopyPaletteToShadow
     bl sub_080029B8
     movs r0, #0
     movs r1, #0

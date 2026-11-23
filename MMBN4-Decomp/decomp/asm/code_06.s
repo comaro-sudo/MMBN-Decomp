@@ -568,7 +568,7 @@ sub_0809856C:
     push {r4, r5, r6, r7, lr}
     movs r0, #1
     movs r1, #0xad
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     incrom 0x9857A, 0x10E
@@ -745,7 +745,7 @@ sub_0809C9C4:   @ BassV1PostWinGrant
 _0809C9DA:
     movs r0, #0
     movs r1, #0x9f
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {pc}
     .hword 0x0000
@@ -767,7 +767,7 @@ sub_0809CCE0:
     bl sub_0801913E   @ ChipGive
     movs r0, #0
     movs r1, #0x9e
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0809CCFE:
     movs r0, #0
     pop {r4, pc}
@@ -942,7 +942,7 @@ sub_0809D648:
     bne _0809D672
     movs r0, #0x11
     movs r1, #0x82
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0809D672:
     ldrb r0, [r5, #4]
     bl sub_0802A4C8
@@ -2263,7 +2263,7 @@ sub_0809ED24:
     bl sub_0809ECE0
     movs r0, #1
     movs r1, #0x4c
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0809ED46:
     pop {r7, pc}
 
@@ -2514,13 +2514,13 @@ _0809F0FA:
     bne _0809F120
     movs r0, #0x11
     movs r1, #0
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0809F120:
     cmp r2, #4
     bne _0809F12C
     movs r0, #0x11
     movs r1, #1
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _0809F12C:
     movs r0, #0
     pop {r1}
@@ -3583,7 +3583,7 @@ _0809FA32:
     bne _0809FA5E
     movs r0, #6
     movs r1, #0x64
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     ldrb r0, [r5, #3]
     adds r0, #1
     strb r0, [r5, #3]
@@ -3727,13 +3727,13 @@ sub_0809FB58:
     push {r4, r5, r6, r7, lr}
     movs r0, #6
     movs r1, #0x5b
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #6
     movs r1, #0x5a
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #6
     movs r1, #0x64
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #6
     movs r1, #0x5c
     movs r2, #4
@@ -4746,7 +4746,7 @@ sub_080A0614:
     bne _080A062A
     movs r0, #1
     movs r1, #0x8a
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A062A:
     pop {r7, pc}
 
@@ -5224,7 +5224,7 @@ sub_080A0CA8:
     bne _080A0CD0
     movs r0, #0x11
     movs r1, #0x81
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A0CD0:
     movs r0, #0
     pop {pc}
@@ -5386,7 +5386,7 @@ _080A0DEA:
 _080A0DEE:
     movs r0, #1
     movs r1, #0x83
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     ldrb r0, [r7]
     movs r1, #1
     bics r0, r1
@@ -5591,7 +5591,7 @@ sub_080A14CC:
     bne _080A14F4
     movs r0, #0x11
     movs r1, #0x81
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A14F4:
     movs r0, #0
     pop {pc}
@@ -5645,7 +5645,7 @@ _080A153E:
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #1
     movs r1, #0x83
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     b _080A155E
 _080A1558:
     adds r7, #0xd8
@@ -7543,7 +7543,7 @@ sub_080A334E:
     strb r0, [r3, #7]
     movs r0, #9
     movs r1, #0xd7
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 
@@ -7601,7 +7601,7 @@ sub_080A33A4:
     strb r0, [r3, #7]
     movs r0, #9
     movs r1, #0xda
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A33CA:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
@@ -9877,7 +9877,7 @@ sub_080A4D9C:
     bne _080A4DC2
     movs r0, #9
     movs r1, #0xb2
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     movs r4, #1
 _080A4DC2:
     adds r0, r4, #0
@@ -12414,7 +12414,7 @@ _080A6496:
 _080A649C:
     movs r0, #0x11
     movs r1, #0x77
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
     .hword 0x0000
 _080A64A8:
@@ -13328,7 +13328,7 @@ sub_080A6CDA:
     push {lr}
     movs r0, #0x11
     movs r1, #0x74
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_080A6CE6
@@ -13349,7 +13349,7 @@ sub_080A6CF2:
     push {lr}
     movs r0, #0x11
     movs r1, #0x79
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     bl sub_080A6CE6
     pop {pc}
     .hword 0x46F7
@@ -13433,7 +13433,7 @@ sub_080A6D7C:
     strb r0, [r3, #2]
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_080A6D8C
@@ -13449,7 +13449,7 @@ sub_080A6D8C:
     strb r0, [r3, #0x15]
     movs r0, #0x11
     movs r1, #0x7a
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
     pop {pc}
 
     .global sub_080A6DA6
@@ -13851,7 +13851,7 @@ sub_080A6F86:
     strh r0, [r7, r2]
     movs r0, #0x11
     movs r1, #0x78
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A6FB6:
     pop {r7, pc}
 
@@ -13964,7 +13964,7 @@ sub_080A701C:
     strh r1, [r7, r2]
     movs r0, #0x11
     movs r1, #0x76
-    bl sub_08025048   @ SetEventFlagHL
+    bl sub_08025048   @ SetEventFlagPair
 _080A7092:
     pop {r7, pc}
 _080A7094:
@@ -15387,15 +15387,15 @@ dat_080A85D0:   @ where_bn4_plays.objects
     .word sub_080A8B82
     .word sub_080A8BA8
     .word sub_080A8BD4
-    .word sub_080A8BDA
+    .word sub_080A8BDA   @ NpcCmd_JumpIfStoryPhaseInRange
     .word sub_080A8BFC
     .word sub_080A8C0C
     .word sub_080A8C2A
     .word sub_080A8C48
     .word sub_080A8C60
     .word sub_080A8C70
-    .word sub_080A8C80
-    .word sub_080A8C9C
+    .word sub_080A8C80   @ NpcCmd_JumpIfTournamentRound
+    .word sub_080A8C9C   @ NpcCmd_JumpIfTournamentRoundNe
     .word sub_080A8CB8
     .word sub_080A8CD4
     .word sub_080A8CF0
@@ -16214,7 +16214,7 @@ sub_080A8BD4:
 
     .global sub_080A8BDA
     .thumb_func
-sub_080A8BDA:
+sub_080A8BDA:   @ NpcCmd_JumpIfStoryPhaseInRange
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x40]
@@ -16324,10 +16324,10 @@ sub_080A8C70:
 
     .global sub_080A8C80
     .thumb_func
-sub_080A8C80:
+sub_080A8C80:   @ NpcCmd_JumpIfTournamentRound
     push {lr}
     ldrb r0, [r6, #1]
-    bl sub_08043F4C   @ BN4_MEGAMAN_ROUNDS
+    bl sub_08043F4C   @ TournamentGetRound
     ldrb r1, [r6, #2]
     cmp r0, r1
     bne _080A8C98
@@ -16341,10 +16341,10 @@ _080A8C98:
 
     .global sub_080A8C9C
     .thumb_func
-sub_080A8C9C:
+sub_080A8C9C:   @ NpcCmd_JumpIfTournamentRoundNe
     push {lr}
     ldrb r0, [r6, #1]
-    bl sub_08043F4C   @ BN4_MEGAMAN_ROUNDS
+    bl sub_08043F4C   @ TournamentGetRound
     ldrb r1, [r6, #2]
     cmp r0, r1
     beq _080A8CB4
