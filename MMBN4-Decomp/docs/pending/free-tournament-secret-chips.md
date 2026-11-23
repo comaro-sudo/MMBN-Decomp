@@ -155,7 +155,7 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
   1. **two pages of 6**, switched with L/R: no risk to the screen's graphics memory (Gemini's recommendation);
   2. a taller **2 × 6 grid**, only if the space below the current grid is free on screen and in graphics memory (to verify).
 
-## Where the operators stand (owner, 2026-11-23): **A preferred, B as the fallback**
+## Where the operators stand (owner, 2026-11-23): **superseded**, the waiting room is dropped; see "The operator split" above
 
 - **Option A, a waiting room in an existing room:** BN4 may already have an unused or rarely used room that looks like a shop interior (a debug map, another shop). The street door leads into it, and it has a door into the real Higsby's. The patch only redirects doors, with no new tilemap.
   - It would be enabled only after a flag (e.g. once the Free Tournament or post-game opens), so story scenes that walk Lan straight into Higsby's still work.
@@ -175,7 +175,7 @@ From `decomp/notes/lobby-npcs.md`, `free-tournament-battle-data.md` and `status-
   1. 9 inside and 2 outside (inside becomes 13/16, outside 3/3), keeping the trash can outside;
   2. hide one existing ACDC Town NPC after the flag that enables the operators;
   3. make the trash can a background tile with an examine/jack-in hook instead of an NPC. Real trash cans elsewhere in BN4 are BG tiles, but this needs a map tile and collision edit, the harder route.
-- Whether this split **replaces the waiting room (option A)** is for the owner to confirm.
+- **This split replaces the waiting room (owner, 2026-11-23: "no more waiting room").** Option A (DomeRoom) is dropped, and the operators stand in Higsby's and on the ACDC Town street only.
 
 ## Gemini's round-5 findings (2026-11-23, `6898fae`, `decomp/notes/waiting-room.md`)
 
