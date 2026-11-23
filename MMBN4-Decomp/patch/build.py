@@ -32,6 +32,7 @@ VERSIONS = {
         "sha1": "5e017c803ddc768efb8010314b46bc17e9757f71",
         "version_file": PATCH / "src" / "bm" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4b_chip_table.asm",
+        "reward_rows": 0x080F5F5C,      # BN4_REWARD_ROWS (RE-06): 276 rows x 40 bytes
     },
     "rs": {
         "name": "Red Sun (USA)",
@@ -39,8 +40,22 @@ VERSIONS = {
         "sha1": "a97e96a7da03abd70f7953328e511b9fa29179f1",
         "version_file": PATCH / "src" / "rs" / "version.asm",
         "chip_table": CHIP_TABLES / "bn4r_chip_table.asm",
+        "reward_rows": 0x080F5F50,
     },
 }
+REWARD_ROWS_SIZE = 276 * 40
+
+
+def other_reward_rows(key: str) -> Path:
+    """The other version's drop table, read from the player's own other ROM into build/ (never committed).
+    WP-D2 random drops (patch/src/common/wp_d2_random_version_drops.asm) pick between the two tables."""
+    other = "rs" if key == "bm" else "bm"
+    o = check_inputs(other)
+    data = o["rom"].read_bytes()
+    off = o["reward_rows"] - 0x08000000
+    out = BUILD / f"reward_rows_from_{other}.bin"
+    out.write_bytes(data[off:off + REWARD_ROWS_SIZE])
+    return out
 
 
 def sha1(path: Path) -> str:
@@ -101,7 +116,8 @@ def build(key: str, hello: bool) -> None:
     print(f"== {v['name']}")
 
     armips(PATCH / "src" / "main.asm", v["rom"], out_rom, v["version_file"],
-           ["-definelabel", "HELLO", "1" if hello else "0"])
+           ["-definelabel", "HELLO", "1" if hello else "0",
+            "-strequ", "OTHER_REWARD_ROWS", other_reward_rows(key).as_posix()])
     fix_header_checksum(out_rom)
 
     original = v["rom"].read_bytes()

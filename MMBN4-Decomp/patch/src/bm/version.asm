@@ -9,3 +9,6 @@ SOUL_FLAGS      equ 0x08020018      ; BN4_SOUL_FLAGS, 12 bytes (docs/re/save-and
 REWARD_DECODE   equ 0x08021A9C      ; battle reward word -> r0 kind, r1 amount (docs/re/save-and-flags.md §4b); 0x38 bytes + literal
 BASS_PAIR_HOOK  equ 0x080216E6      ; results screen: the bl CHIP_GIVE between push {r0} / pop {r0} (decomp/notes/bass-rematch.md 3)
 BASS_PAIR_SPACE equ 0x08037C60      ; dead 86-byte block after an unconditional b in sub_08037BE4 (code_03; unreferenced)
+REWARD_ROW_PTR  equ 0x080F5F4C      ; RewardGetRowPtr: r0 row -> &BN4_REWARD_ROWS[row] (RE-06); 12 bytes + literal
+REWARD_ROWS     equ 0x080F5F5C      ; BN4_REWARD_ROWS, 276 x 40 bytes
+RANDOM_ROW_SPACE equ 0x08037D38     ; second dead 86-byte block after an unconditional b in code_03 (unreferenced)

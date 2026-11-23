@@ -25,5 +25,6 @@
 .include "common/wp_d4_twelve_souls.asm"     ; Violet Eclipse: all 12 Souls unite (both versions)
 .include "common/wp_d3_bass_both_chips.asm"  ; Violet Eclipse: a Bass battle gives both versions' chips
 .include "common/wp_d4_star_twelve_souls.asm" ; Violet Eclipse: the Souls completion star needs all 12
+.include "common/wp_d2_random_version_drops.asm" ; Violet Eclipse: version-specific drops at random, 50/50
 
 .close

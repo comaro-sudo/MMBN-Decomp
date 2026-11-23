@@ -40,6 +40,10 @@ That makes the merged-content work (WP-D4) much smaller: no Navi data has to be 
 
 **Owner decision (2026-11-23), `plan/DEFINITIVE-EDITION.md` §7 question 4:**
 - **Random per drop.** Wherever the two versions' drop rows differ, a drop gives the Red Sun or the Blue Moon item at random (50/50), each time.
+  - **Implemented (2026-11-23):** `patch/src/common/wp_d2_random_version_drops.asm`.
+    - `RewardGetRowPtr`, which every reward path uses, returns the row from this ROM's table or, on one RNG bit, from the other version's table.
+    - `build.py` copies the other version's table from the player's other ROM at build time (11 KiB at `0x087F7420`; the BPS stays about 1 KB). So **building now needs both ROMs.**
+    - Checked by disassembly in both versions. (T: not yet tested in-game.)
   - Implementation idea: keep both versions' rows. After `BN4_REWARD_PICK` (`0x080F580C`) picks its slot, choose the RS or BM row with one RNG bit. The table costs about 64 × 40 bytes (2.5 KiB) in free space (`docs/re/free-space.md`).
 - **Bass is repeatable.** Bass, BassΩ and BassXX must be fightable as many times as the player wants, so that the random rule eventually gives all four chips: Bass, BassAnly, BlakBarr and DeltaRay.
   - Bass's every drop column gives his chip, so any Busting Level works. BlakBarr/DeltaRay need columns 3–4 (Busting Level 7 or higher, RE-06 §3).

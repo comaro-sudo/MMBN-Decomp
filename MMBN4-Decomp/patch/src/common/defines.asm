@@ -27,7 +27,12 @@ STAR_SOUL_FLAGS_PTR equ 0x08000DB0
 FREE_SPACE_START        equ 0x087F7400
 FS_STAR_SOUL_FLAGS      equ 0x087F7400      ; WP-D4 star: 13 u16 = 26 bytes
 FS_STAR_SOUL_FLAGS_SIZE equ 0x20
-; next free slot:           0x087F7420
+FS_OTHER_REWARD_ROWS      equ 0x087F7420    ; WP-D2 random drops: the other version's 276 x 40 drop rows
+FS_OTHER_REWARD_ROWS_SIZE equ 0x2B20
+; next free slot:             0x087F9F40
+
+; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
+GET_RNG             equ 0x08001B16
 
 ; Address of a field of a chip entry
 .macro chip_field_org, id, field
