@@ -87,6 +87,20 @@ Building now **needs both ROMs**: the other version's drop table is copied at bu
   - key-item prices (WP-A3).
 - `TODO.md` (Gemini's) doesn't list this session's patches yet.
 
+## Status-screen two-page patch: implementation plan (checked by Claude, 2026-11-23, V)
+
+Based on Gemini's `decomp/notes/status-screen-two-pages.md`, with these corrections and checks:
+- **The per-frame stub call is at RS `0x08033674` / BM `0x08033678`** (`bl sub_08034EB0`), not `0x0803367A`. The next call, `sub_08034E64`, doesn't read `r1`–`r3`, so a veneer that clobbers `r3` is safe. The toggle must keep `r4`–`r7` (`r5` = status state).
+- **Each of the four old tables has exactly one reference**, so moving them frees their bytes:
+  - status list RS `0x08034A78` (8 bytes, ref `0x08034A6C`);
+  - icon flags, anims and pals RS `0x0810DAB8` / `DAC5` / `DACB` (refs `0x0810DA78` / `DA88` / `DA8C`; about 28 free bytes up to `0x0810DAD3`).
+  - BM addresses: `+4` in `code_02`, `+0x14` in `code_10`.
+- **Placement** (the free space at `0x087F9F40+` is more than 4 MiB from the hooks, out of `bl` range):
+  - `StatusSoulLoadFlag` (about 14 bytes + 1 literal) goes **directly into the freed `0x0810DAB8` bytes**, within `bl` range of `StatusSoulIconInit`;
+  - a page-toggle veneer goes in the freed 8 bytes at `0x08034A78`: `ldr r3,[pc]; bx r3; .word Toggle|1`, with `StatusSoulPageToggle` (~96 bytes) in free space, returning with `pop {r4-r7, pc}`;
+  - an init-page veneer goes in the old star list at `0x08000DB4` (14 bytes, unreferenced since WP-D4), pointing at an `InitPage` in free space that clears `0x0201D018` and tail-jumps (`bx`) to `sub_08053F8C` with `lr` intact.
+- **The new tables (same in both versions):** flags `17..22 FF`, anims `00..0B`, pals `00 01 01 01 00 00 00 01 02 00 02 01`. RS's own were anims `00..05` / pals `000101010000`; BM's anims `06..0B` / pals `000102000201`.
+
 ## Immediate Next Steps
 
 1. When the regeneration finishes: both compares, then commit the 14 names (`symbols/names.txt` + `asm/`).
