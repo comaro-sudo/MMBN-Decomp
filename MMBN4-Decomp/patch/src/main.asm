@@ -38,5 +38,6 @@
 .include "common/wp_d2_special_chip_art.asm" ; Duo / GP Power chip art (private builds; build.py --public leaves it out)
 .include "common/wp_d2_duo_story_grant.asm"  ; beating Duo in the story gives Duo D
 .include "common/wp_d3_duo_rematch.asm"     ; Duo rematches in Meteor Comp 1 (post-game), V1 -> alpha -> beta -> omega
+.include "common/wp_d2_gpp_md.asm"           ; Grand Prix Power G in a Blue Mystery Data, ACDC Area 2
 
 .close

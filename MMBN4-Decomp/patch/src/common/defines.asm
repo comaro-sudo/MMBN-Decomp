@@ -57,7 +57,11 @@ FS_DUO_GRANT              equ 0x087FB670    ; WP-D2: Duo defeat state handler (s
 FS_DUO_GRANT_SIZE         equ 0x60
 FS_DUO_REMATCH            equ 0x087FB6D0    ; WP-D3 Duo rematch (FC 0D, 4 battle records, Meteor Comp 1 NPC list + NPC)
 FS_DUO_REMATCH_SIZE       equ 0x100
-; next free slot:             0x087FB7D0 (code/data packages must stay below FS_TEXT)
+FS_GPP_MD                 equ 0x087FB7D0    ; WP-D2 GP Power BMD: ACDC Area 2 MD list + CW NPC list + spawn script
+FS_MD_ACDC2_LIST          equ 0x087FB7D0    ;   3 existing + 1 new BMD + place + cont (0x60 B)
+FS_CW_NPC_ACDC2           equ 0x087FB830    ;   13 existing + 1 new spawn ptr + 11 B script (0x48 B)
+FS_GPP_MD_SIZE            equ 0xA8
+; next free slot:             0x087FB878 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 

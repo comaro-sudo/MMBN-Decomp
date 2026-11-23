@@ -53,6 +53,7 @@ GunSolEX, also once thought to be special, has an in-game source: a Number Lotto
     - Blue, so no Unlocker is needed.
   - **Placement (owner, 2026-11-23): one in an Undernet dead end, one in a quiet corner of an early area (ACDC).**
     - Split (owner confirmed, 2026-11-23): **Z-Saver in the Undernet** (a rare sword for a hidden, dangerous place) and **Grand Prix Power in ACDC** (an early surprise).
+    - **Built (2026-11-23):** Z-Saver in `patch/src/common/wp_d2_zsaver_md.asm` (PASS in-game); Grand Prix Power G in `wp_d2_gpp_md.asm`, ACDC Area 2 `(90,01)` at (106, 326), flag `0x0D0B` (in-game test pending).
     - The exact spots, a dead end off the main path in each area, come from the maps (`ref/maps/`, local) and the areas' Mystery Data coordinates (RE-07).
 - *(Superseded: Z-Saver and Grand Prix Power sold at Higsby's shop at a very high price. Kept for the record.)*
 - **Chip art for Duo and Grand Prix Power (owner, 2026-11-23).**

@@ -76,3 +76,9 @@ DUO_DEFEAT_STATE        equ 0x080C4780      ; sub_080C4780: Duo defeated (sets f
 NPC_SLOT_METEOR1        equ 0x0806DA1C      ; Meteor Comp 1 (82,00) CW NPC list pointer (Gemini, duo-rematch-research.md)
 NPC_LIST_METEOR1        equ 0x0806DCCC
 NPC_COUNT_METEOR1       equ 3
+MD_SLOT_ACDC2           equ 0x080AA434      ; ACDC Area 2 (90,01) Mystery Data list pointer (special-chip-md-design.md)
+MD_LIST_ACDC2           equ 0x080AA6B4
+MD_COUNT_ACDC2          equ 3
+CW_NPC_SLOT_ACDC2       equ 0x0807748C      ; ACDC Area 2 (90,01) CW NPC/object list pointer
+CW_NPC_LIST_ACDC2       equ 0x080780F4
+CW_NPC_COUNT_ACDC2      equ 13
