@@ -18600,7 +18600,7 @@ sub_0803F14C:
 
     .global sub_0803F15C
     .thumb_func
-sub_0803F15C:
+sub_0803F15C:   @ WaitingRoomDeleteEntry
     push {r7, lr}
     movs r0, #0x28
     bl sub_08053918
@@ -18980,7 +18980,7 @@ _0803F44E:
 
     .global sub_0803F450
     .thumb_func
-sub_0803F450:
+sub_0803F450:   @ WaitingRoomClearSlotForSend
     push {lr}
     bl sub_080482F0
     str r0, [r5, #0x44]
@@ -19667,7 +19667,7 @@ dat_0803F93C:
 
     .global sub_0803F948
     .thumb_func
-sub_0803F948:
+sub_0803F948:   @ SyncTradedNavisToPool
     push {r6, r7, lr}
     ldr r7, _0803F96C
     ldr r4, _0803F970
@@ -19696,7 +19696,7 @@ _0803F970:
 
     .global sub_0803F980
     .thumb_func
-sub_0803F980:
+sub_0803F980:   @ WaitingRoomFillDebugPreset
     push {r0, r1, r2, r3, lr}
     ldr r0, _0803F9A4
     ldr r2, _0803F99C
@@ -19723,7 +19723,7 @@ dat_0803F9A8:
 
     .global sub_0803F9B0
     .thumb_func
-sub_0803F9B0:
+sub_0803F9B0:   @ WaitingRoomValidateIncomingNavi
     push {r4, r5, r6, r7, lr}
     ldr r7, [r5, #0x38]
     ldrh r0, [r7, #0xa]
@@ -19852,7 +19852,7 @@ dat_0803FA84:
 
     .global sub_0803FA90
     .thumb_func
-sub_0803FA90:
+sub_0803FA90:   @ WaitingRoomReceiveTradedNavi
     push {r4, r5, r6, r7, lr}
     ldrh r6, [r5, #0x34]
     ldr r7, [r5, #0x38]
@@ -28972,7 +28972,7 @@ _08044210:
 
     .global sub_0804422C
     .thumb_func
-sub_0804422C:
+sub_0804422C:   @ TournamentFillGenericPoolA
     push {r4, r5, r6, r7, lr}
     ldr r7, _080445CC
     ldrb r7, [r7, #5]
@@ -29020,7 +29020,7 @@ dat_08044278:
 
     .global sub_0804428C
     .thumb_func
-sub_0804428C:
+sub_0804428C:   @ TournamentFillGenericPoolB
     push {r4, r5, r6, r7, lr}
     ldr r7, _080445CC
     ldrb r7, [r7, #5]
@@ -29785,7 +29785,7 @@ _08044808:
 
     .global sub_0804480C
     .thumb_func
-sub_0804480C:
+sub_0804480C:   @ TournamentCheckSoulPairSwap
     push {r4, r6, r7, lr}
     movs r4, #0
     tst r7, r7
@@ -29849,7 +29849,7 @@ _080448BC:
 
     .global sub_080448C0
     .thumb_func
-sub_080448C0:
+sub_080448C0:   @ FreeTournamentSetup
     push {r4, r5, r6, r7, lr}
     bl sub_080448A8
     ldr r7, _0804496C
@@ -29947,7 +29947,7 @@ _08044970:
 
     .global sub_08044974
     .thumb_func
-sub_08044974:
+sub_08044974:   @ FreeTournamentSetSlot
     push {r4, r5, r6, r7, lr}
     ldr r4, _08044988
     movs r2, #4
@@ -29963,7 +29963,7 @@ _08044988:
 
     .global sub_0804498C
     .thumb_func
-sub_0804498C:
+sub_0804498C:   @ FreeTournamentPickMatch
     push {r4, r5, r6, r7, lr}
     ldr r7, _080449D0
     ldr r3, _080449D4
@@ -30013,7 +30013,7 @@ dat_080449DC:
 
     .global sub_080449E0
     .thumb_func
-sub_080449E0:
+sub_080449E0:   @ FreeTournamentRecordWinner
     push {r4, r5, r6, r7, lr}
     mov r0, sl
     ldr r0, [r0, #0x40]
@@ -30172,7 +30172,7 @@ _08044AF8:
 
     .global sub_08044AFC
     .thumb_func
-sub_08044AFC:
+sub_08044AFC:   @ FreeTournamentClassifyEntrant
     push {r4, r5, r6, r7, lr}
     movs r1, #4
     muls r0, r1, r0
@@ -31360,7 +31360,7 @@ _08045456:
 
     .global sub_08045458
     .thumb_func
-sub_08045458:
+sub_08045458:   @ FreeTournamentSelectPrize
     push {r7, lr}
     ldrb r0, [r5, #2]
     movs r1, #4
@@ -31425,7 +31425,7 @@ dat_080454D6:
 
     .global sub_080454E4
     .thumb_func
-sub_080454E4:
+sub_080454E4:   @ FreeTournamentPickSecretChip
     push {r4, r6, r7, lr}
     mov r1, r8
     push {r1}
@@ -31467,7 +31467,7 @@ dat_08045528:
 
     .global sub_08045540
     .thumb_func
-sub_08045540:
+sub_08045540:   @ FreeTournamentPickMissingSecretChip
     push {r4, r6, r7, lr}
     mov r1, r8
     push {r1}

@@ -1002,3 +1002,22 @@
 080F53D8 080F53E4 code   GEMINI       Overworld_TryRandomEncounter     Step-counter encounter trigger; calls BN4_ROLL with NaviCust element mask (fallback 0x1F)
 080F5998 080F59A4 code   GEMINI       RewardPickBustingOffset          Computes byte offset in 40-byte reward row from Busting Level, RNG, and HP <= 3/8
 080F5F40 080F5F4C code   GEMINI       RewardGetRowPtr                  r0 row: returns &BN4_REWARD_ROWS[row] (row * 0x28)
+
+# --- RE-04 Tournaments Remainder (decomp/notes/re04-tournaments-remainder.md), Gemini 2026-11-22 ---
+0803F15C 0803F164 code   GEMINI       WaitingRoomDeleteEntry           Deletes Waiting Room entry from 0x020014F0 and 0x02006F40 (BN4_TRADED_NAVIS)
+0803F450 0803F458 code   GEMINI       WaitingRoomClearSlotForSend      Clears 0x02006F40[idx]+1 to 0xFF before overwriting a Waiting Room slot
+0803F948 0803F950 code   GEMINI       SyncTradedNavisToPool            Copies valid Navi IDs from Waiting Room (0x020014F0) to BN4_TRADED_NAVIS (0x02006F40)
+0803F980 0803F988 code   GEMINI       WaitingRoomFillDebugPreset       Debug helper: fills 0x020014F0 with 5 Navi IDs from dat_0803F9A8
+0803F9B0 0803F9B8 code   GEMINI       WaitingRoomValidateIncomingNavi  Validates incoming link-trade Navi (12 Soul Navis, max 2 copies, unique ID)
+0803FA90 0803FA98 code   GEMINI       WaitingRoomReceiveTradedNavi     Link-trade receive: writes 0x020014F0, slots +0x78/+0x7C, names, and syncs 0x02006F40
+0804422C 08044234 code   GEMINI       TournamentFillGenericPoolA       Fills tournament pool +7/+8 from dat_08044278
+0804428C 08044294 code   GEMINI       TournamentFillGenericPoolB       Fills tournament pool +9/+10 from dat_080442D8
+0804480C 08044814 code   GEMINI       TournamentCheckSoulPairSwap      Playthrough 2 (flag 0x9B): swaps Soul Navi pair order on tournaments 1/2
+080448C0 080448C8 code   GEMINI       FreeTournamentSetup              Builds/shuffles Free Tournament 8-entrant bracket from 0x020014F0 into 0x020014C0
+08044974 0804497C code   GEMINI       FreeTournamentSetSlot            Writes one 4-byte Free Tournament bracket slot in 0x020014C0
+0804498C 08044994 code   GEMINI       FreeTournamentPickMatch          Picks next round pairing in 0x020014C0 -> 0x020015E0+2/+3
+080449E0 080449E8 code   GEMINI       FreeTournamentRecordWinner       Sets round win bit on the winning Free Tournament entrant
+08044AFC 08044B04 code   GEMINI       FreeTournamentClassifyEntrant    Classifies 0x020014C0 entrant: 0=TradedNavi, 1=NormalNavi, 2=HealNavi, 3=MegaMan
+08045458 08045460 code   GEMINI       FreeTournamentSelectPrize        Selects Free Tournament prize (Zenny, BugFrags, or Secret Chip by Busting Level)
+080454E4 080454EC code   GEMINI       FreeTournamentPickSecretChip     Awards V1/V2/V3 secret chip (dat_08045528 + tier) with random valid code
+08045540 08045548 code   GEMINI       FreeTournamentPickMissingSecretChip Busting 10/S: awards highest unowned secret chip (V3->V1) checking Library 0x16C0+id
