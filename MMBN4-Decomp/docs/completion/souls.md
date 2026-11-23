@@ -36,6 +36,12 @@ With the 12-entry flag table (`patch/src/common/wp_d4_twelve_souls.asm`, now in 
 
 Red Sun enters Blue Moon's Navis in tournaments when its traded-Navi list holds them, and a community Red Sun save has Blue Moon's Soul flags and all 36 secret chips ([`../re/tournaments.md`](../re/tournaments.md) §5, [`../re/community-saves.md`](../re/community-saves.md) §3). If the Soul forms are present too (CE's tool reads all twelve from Red Sun), step 1 above shrinks to filling that list or the entrant tables. The test: patch the Soul flag table, load save `22565`, and unite with ProtoSoul.
 
+## Owner decision: the Black Earth gate keeps 6 Souls (2026-11-23)
+
+- The only script that still counts Souls is the Black Earth gate (`ScriptCmd_checkDoubleSouls`, opcode `EE 2B`, RS `0x0804F494` / BM `0x0804F4A0`; its one caller is the script at RS `0x08777AE8`, *"Show the union of 6 souls."*). It requires the version's own 6 Soul flags: RS `0x17`–`0x1C`, BM `0x1D`–`0x22` (`decomp/notes/soul-grant-patch-design.md`, Gemini).
+- **Decision: option (a), keep 6.** The version's own 6 Souls still open Black Earth, and it is **not** raised to 12. So no patch is needed there.
+- Everything else that lists or counts Souls is already 12 (the Custom Screen's unite check), or patched: the completion star (`wp_d4_star_twelve_souls.asm`) and the status screen (`wp_d4_status_two_pages.asm`).
+
 ## Open
 
-- Where the story sets a Soul's flag is still unknown. A runtime watch on the flag byte from a late-game save will find it.
+- ~~Where the story sets a Soul's flag~~: found by Gemini (`decomp/notes/soul-grant.md`). Both ROMs contain all 12 grant scripts, each setting flag `0x17 + idx` and calling `WriteChipKey(0x161 + idx)`.
