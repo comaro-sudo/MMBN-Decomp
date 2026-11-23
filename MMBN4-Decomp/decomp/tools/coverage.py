@@ -14,17 +14,21 @@ import sys
 import tomllib
 from pathlib import Path
 
+import merge_bm
+
 DECOMP = Path(__file__).resolve().parents[1]
 INCROM_RE = re.compile(r"^\s*incrom\s+0x[0-9A-Fa-f]+\s*,\s*0x([0-9A-Fa-f]+)\b")
 
 
 def asm_path(version: str, name: str) -> Path:
-    return DECOMP / "asm" / ("" if version == "rs" else version) / f"{name}.s"
+    """Shared source asm/<seg>.s, or a not-yet-merged BM view asm/bm/<seg>.s."""
+    view = DECOMP / "asm" / version / f"{name}.s"
+    return view if version != "rs" and view.exists() else DECOMP / "asm" / f"{name}.s"
 
 
-def incrom_bytes(path: Path) -> int:
+def incrom_bytes(path: Path, version: str) -> int:
     total = 0
-    for line in path.read_text().splitlines():
+    for line in merge_bm.active_lines(path.read_text(), version):
         match = INCROM_RE.match(line)
         if match:
             total += int(match.group(1), 16)
@@ -44,7 +48,7 @@ def main() -> None:
         if not path.exists():
             sys.exit(f"missing generated source: {path.relative_to(DECOMP)}")
         total = segment["end"] - segment["start"]
-        raw = incrom_bytes(path)
+        raw = incrom_bytes(path, version)
         if raw > total:
             sys.exit(f"incrom ranges exceed {segment['name']} by {raw - total:#x} bytes")
         rows.append((segment["name"], total, total - raw, raw))

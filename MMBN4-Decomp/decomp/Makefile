@@ -45,12 +45,12 @@ $(BUILD)/baserom.gba: $(BASEROM)
 	ln -sf ../../../roms/$(notdir $<) $@
 
 # The splitter writes a version-addressed ROM source and its external-symbol
-# table. RS sources live in asm/; BM's parallel generated view lives in
-# asm/bm/. This keeps both ROMs byte-matching while their insertion shifts are
-# still being reconciled into shared source.
+# table. Both versions assemble the shared source in asm/ (DC-4); version
+# differences are .if VERSION_BM blocks. A freshly regenerated, not yet merged
+# asm/bm/<seg>.s is picked up too (see tools/split.py and tools/merge_bm.py).
 $(SRC): config/segments_$(VERSION).toml symbols/functions_$(VERSION).txt \
         $(wildcard asm/*.s) $(wildcard asm/$(VERSION)/*.s) $(wildcard data/*.s) \
-        $(wildcard include/*.inc) tools/split.py
+        $(wildcard include/*.inc) tools/split.py tools/merge_bm.py
 	@mkdir -p $(BUILD)
 	python3 tools/split.py $(VERSION)
 

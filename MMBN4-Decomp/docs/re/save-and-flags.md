@@ -1,6 +1,6 @@
 # RE-01 / RE-02 / RE-03: save layout, event flags, playthrough counter
 
-Claude's reverse-engineering lane, 2026-11-22. This note is based on static reading of Gemini's generated assembly in `decomp/asm/` (RS at `decomp/asm/`, BM at `decomp/asm/bm/`) and on small reads of the player's ROMs. Nothing from the ROM is reproduced here beyond addresses, offsets and constants.
+Claude's reverse-engineering lane, 2026-11-22. This note is based on static reading of Gemini's generated assembly in `decomp/asm/` (at the time RS was in `decomp/asm/` and BM in `decomp/asm/bm/`; since DC-4 both share `decomp/asm/`) and on small reads of the player's ROMs. Nothing from the ROM is reproduced here beyond addresses, offsets and constants.
 
 **Status legend.**
 - **V**: verified by reading the code, in both versions where a BM address is given.

@@ -448,7 +448,10 @@ def main() -> None:
     out.parent.mkdir(exist_ok=True)
     # GNU as reports paths relative to decomp/.  Keep the retry parser in
     # sync with the versioned output location (asm/code_*.s for RS,
-    # asm/bm/code_*.s for Blue Moon).
+    # asm/bm/code_*.s for Blue Moon, which split.py assembles from its renamed
+    # copy build/bm/norm/asm/bm/code_*.s with the same line numbers).
+    # DC-4: after `disasm.py rs X` and `disasm.py bm X`, run
+    # `tools/merge_bm.py X` to fold the BM view back into the shared asm/X.s.
     out_rel = out.relative_to(DECOMP).as_posix()
 
     for attempt in range(1, 9):
@@ -459,7 +462,7 @@ def main() -> None:
         ok, log = build(args.version)
         if not ok:
             errs = [(int(m.group(1)), m.group(2)) for m in
-                    re.finditer(rf"{re.escape(out_rel)}:(\d+): Error: ([^\n]*)", log)]
+                    re.finditer(rf"(?:build/bm/norm/)?{re.escape(out_rel)}:(\d+): Error: ([^\n]*)", log)]
             # A rejected instruction emits no bytes, so later labels shift and
             # healthy pc-relative loads report "invalid offset". Fix primary
             # errors first; offset errors only when nothing else is left.
@@ -472,7 +475,7 @@ def main() -> None:
             seg.raw |= hit
             print(f"attempt {attempt}: {len(hit)} instruction(s) rejected by as -> raw")
             msgs = {}
-            for m in re.finditer(rf"{re.escape(out_rel)}:\d+: Error: ([^\n]*)", log):
+            for m in re.finditer(rf"(?:build/bm/norm/)?{re.escape(out_rel)}:\d+: Error: ([^\n]*)", log):
                 key = re.sub(r"`[^`]*'", "`...'", m.group(1))
                 msgs.setdefault(key, m.group(1))
             for k, example in list(msgs.items())[:4]:
