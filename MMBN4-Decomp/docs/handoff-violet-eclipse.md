@@ -1,5 +1,21 @@
 # Handoff: Claude, decomp + Violet Eclipse design and patches (2026-11-22/23)
 
+> **Latest state (2026-11-23, later):**
+> - `TODO.md` holds the current ordered backlog, and `patch/README.md` the status of every package. Read those first.
+> - Since this file was written:
+>   - Gemini's patch sprint (owner-approved, in `patch/`) added the Z-Saver Mystery Data, WP-B1 fixed tournaments, the Free Tournament fix, the lobby rematches with JunkMan's trash can, and the Frequency Tuner. Claude reviewed it: builds pass, and the flags don't collide.
+>   - Claude added `FC 0C <idx>` (grant any Soul), the NPC lists in free space and the Duo drop rows. The Duo rows have **no effect**: the fight skips the results screen, and the chip is blank in the US ROMs.
+>   - **The TextPet text pipeline works and is wired into `build.py`** (`plan/text-insertion.md`).
+>   - Names were merged through Gemini's round 7.
+> - Owner decisions since:
+>   - the Black Earth gate keeps 6 Souls;
+>   - Z-Saver in a Blue Mystery Data (done), Grand Prix Power in ACDC Area 2; Duo from Duo's highest tier;
+>   - the lobby is 9 operators inside Higsby's and 2 outside with the trash can; no waiting room;
+>   - **SP+**: a 5th lobby step, 4,095 HP, attack × 1.5, speed × 1.25, a big Zenny/BugFrag reward; shared Navis get it via their roaming SP ghost (`docs/pending/boss-double-hp.md`);
+>   - the MMBN Principia Trilogy plan (BN1–3 merged, ports only).
+> - Gemini round 8 (in progress): lobby fixes (sprites, the "met" flags, JunkMan's map), SP+ attack/speed research, Duo and Grand Prix Power art from the JP ROM.
+> - Next for Claude: the friendly-match dialogues as TextPet scripts with `FC 0C`, once the tournament-cutscene hook is known; then SP+ and Duo/Grand Prix Power from Gemini's research.
+
 Replaces `docs/handoff-re.md` as Claude's current handoff (that file covers the earlier RE lane, 2026-11-22). Paths are inside `MMBN4-Decomp/` unless they start with `/`.
 
 ## Goal & Current Status
