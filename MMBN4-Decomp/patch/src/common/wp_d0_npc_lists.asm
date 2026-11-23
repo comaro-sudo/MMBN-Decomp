@@ -19,7 +19,15 @@
 
 .org FS_NPC_HIGSBY
     .incbin ROM_IN, NPC_LIST_HIGSBY - 0x08000000, NPC_COUNT_HIGSBY * 4
-    ; (lobby operators go here)
+    .word lobby_npc_chaud
+    .word lobby_npc_mayl
+    .word lobby_npc_dex
+    .word lobby_npc_match
+    .word lobby_npc_shuko
+    .word lobby_npc_lily
+    .word lobby_npc_tamako
+    .word lobby_npc_sal
+    .word lobby_npc_number
     .word 0xFF
 .if . > FS_NPC_HIGSBY + FS_NPC_LIST_SIZE
     .error "WP-D0: Higsby's NPC list overruns its slot"
@@ -27,7 +35,9 @@
 
 .org FS_NPC_ACDC
     .incbin ROM_IN, NPC_LIST_ACDC - 0x08000000, NPC_COUNT_ACDC * 4
-    ; (the 2 street operators and JunkMan's trash can go here)
+    .word lobby_npc_raika
+    .word lobby_npc_raoul
+    .word lobby_npc_trashcan
     .word 0xFF
 .if . > FS_NPC_ACDC + FS_NPC_LIST_SIZE
     .error "WP-D0: ACDC Town's NPC list overruns its slot"

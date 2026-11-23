@@ -32,5 +32,6 @@
 .include "common/wp_d2_zsaver_md.asm"        ; Violet Eclipse: Z-Saver Z Blue Mystery Data in Undernet 1
 .include "common/wp_b1_tournaments.asm"      ; WP-B1: deterministic story tournaments & canon Soul Navi pairs
 .include "common/wp_d4_free_tournament.asm"  ; Violet Eclipse: Free Tournament 36-secret-chip fix
+.include "common/wp_d3_lobby_rematches.asm"  ; Violet Eclipse: 11 lobby operators + JunkMan trash can rematches
 
 .close

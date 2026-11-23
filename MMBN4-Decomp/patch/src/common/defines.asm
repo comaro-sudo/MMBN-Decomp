@@ -44,9 +44,17 @@ FS_CW_NPC_UNDER1          equ 0x087FA108    ;   6 existing + 1 new spawn ptr + 1
 FS_ZSAVER_MD_SIZE         equ 0x98
 FS_FREE_TOURN_FILL        equ 0x087FA140    ; WP-D4 Free Tournament: missing-chips-first selector + case 0 spawner
 FS_FREE_TOURN_SIZE        equ 0xF0
-; next free slot:             0x087FA230
+FS_LOBBY_REMATCH          equ 0x087FA230    ; WP-D3 Lobby Rematches + JunkMan Trash Can (code, NPCs, dialogue, FC table)
+FS_LOBBY_REMATCH_SIZE     equ 0x700
+; next free slot:             0x087FA930
 
+BN4_GET_CHIP        equ 0x080190D0      ; BN4_GET_CHIP(r0 chip_id) -> r0 ptr to chip entry; same in RS and BM
+INIT_BATTLE_REC     equ 0x08007C90      ; sub_08007C90; same in RS and BM
+SET_BATTLE_PARAMS   equ 0x08007C74      ; sub_08007C74; same in RS and BM
 BATTLE_ADD_ACTOR    equ 0x08007CB0      ; BattleAddActor(slot, packed); same in RS and BM
+START_OW_BATTLE     equ 0x08005544      ; sub_08005544(r0 rec, r1=1, r2=0xFF, r3=1); same in RS and BM
+SET_MODE_FLAGS      equ 0x08005AFC      ; sub_08005AFC(r0, r1); same in RS and BM
+WARP_BY_TABLE       equ 0x08005664      ; where_bn4_plays.warp_2(r0 table, r1 idx); same in RS and BM
 
 PLAY_SFX            equ 0x08000560      ; PlaySoundEffect(r0); same in RS and BM
 VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes, unreferenced since WP-D4 star)
