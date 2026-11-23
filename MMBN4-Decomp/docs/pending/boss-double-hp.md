@@ -29,7 +29,7 @@ Claude's recommendation: **C, built on the hook**. It gives every boss an extra 
 3. **Updated by the owner (2026-11-23): every boss's SP+ has exactly 4,095 HP** (the 12-bit maximum), not 2× SP.
    - *(Earlier wording: SP+ HP = min(2 × SP HP, 4095).)*
    - Bosses without an operator reach SP+ through **option (a): their roaming SP ghosts become SP+ after an S rank** (see the issues below). This covers the 8 shared Navis; Duo and Bass reach it through their own rematch routes. The cap means the 7 overflowing bosses (above) stop at 4,095, so the 12-bit field is enough and **HP can be pure data** (no HP hook needed).
-4. **Reward: a high amount of Zenny or BugFrags.** The amount is to set; e.g. 30,000Z or 50 BugFrags (T).
+4. **Reward: a high amount of Zenny or BugFrags.** **Owner, 2026-11-23: random, 50/50** between **50 BugFrags** (`0xC032`) and **15,000 Zenny** (`0x7A98`). A reward halfword holds at most 16,383 (`RewardDecode`, Gemini's `sp-plus-design.md` §3).
 5. **Attack × 1.5, speed × 1.25.**
 
 ## Issues these raise (Claude, for the owner and for research)

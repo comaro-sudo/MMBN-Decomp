@@ -5,6 +5,6 @@ Each `.tpl` here holds **only our scripts** for one existing text archive of the
 | File | Archive | Scripts |
 |---|---|---|
 | `chip_names_1.tpl` | Chip names, bank 1 (chips `0x100`–`0x184`; RS `0x748C14` / BM `0x748708`) | 55 Duo, 56 GP Power (blank e-Reader names in the US ROMs) |
-| `chip_descs_1.tpl` | Chip descriptions, bank 1 (`0x100`–`0x170`; RS `0x74F03C` / BM `0x74EACC`) | 55 Duo ("Fist of Justice: MetKnukl!", owner), 56 GP Power (**provisional**, Gemini's wording; owner to confirm) |
+| `chip_descs_1.tpl` | Chip descriptions, bank 1 (`0x100`–`0x170`; RS `0x74F03C` / BM `0x74EACC`) | 55 Duo ("Fist of Justice: MetKnukl!", owner), 56 GP Power ("Speedy / trio / attack!", Gemini's wording, approved by the owner) |
 
 Names are at most 8 characters; descriptions are 3 lines of up to 9.
