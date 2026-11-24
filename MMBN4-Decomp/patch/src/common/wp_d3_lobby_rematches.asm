@@ -39,12 +39,18 @@
 ; ---- 5. Code, tables, NPC scripts, and dialogue archive in free space ------------------------
 .org FS_LOBBY_REMATCH
 
-; -- 5a. OpenMapDialogue redirect hook --
+; -- 5a. OpenMapDialogue redirect hook (0xF0..0xFF lobby, 0xE0..0xEF friendly matches) --
 lobby_open_dialogue:
     push    r4, r5, r14
     mov     r1, r0
     cmp     r1, 0xF0
+    bge     @@lobby
+    cmp     r1, 0xE0
     blt     @@vanilla
+    ldr     r0, =friendly_dialogue_archive
+    sub     r1, 0xE0
+    b       @@open
+@@lobby:
     ldr     r0, =lobby_dialogue_archive
     sub     r1, 0xF0
     b       @@open
@@ -183,7 +189,17 @@ lobby_results_hook:
     mov     r1, 0x80
     tst     r4, r1
     bne     @@is_lobby
-    bl      sp_plus_unlock_roam     ; not a lobby rematch: check roaming SP S-rank unlock
+    mov     r1, 0x40
+    tst     r4, r1
+    beq     @@not_ours
+    mov     r1, 0
+    strb    r1, [r0]                ; clear friendly-match marker
+    mov     r0, r4
+    sub     r0, 0x40                ; soul_idx (0..11)
+    bl      friendly_grant_soul
+    b       @@ret
+@@not_ours:
+    bl      sp_plus_unlock_roam     ; not a lobby/friendly match: check roaming SP S-rank unlock
     b       @@ret
 @@is_lobby:
     mov     r1, 0
@@ -312,6 +328,7 @@ lobby_fc_table:
     .word   freq_tuner_fc_cycle | 1 ; FC 0B 00 (WP-B2 Frequency Tuner)
     .word   grant_soul_fc | 1       ; FC 0C <idx> (WP-D4 grant Soul, wp_d4_grant_soul.asm)
     .word   duo_fc_rematch | 1      ; FC 0D 00 (WP-D3 Duo rematch, wp_d3_duo_rematch.asm)
+    .word   friendly_fc_battle | 1  ; FC 0E <eid> <sidx> (WP-B1 friendly matches)
 
 ; -- 5f. Trash Can warp descriptor -> WtrGodComp1 (8E,00) at (0, 0, 0) facing 7 --
 .align 4

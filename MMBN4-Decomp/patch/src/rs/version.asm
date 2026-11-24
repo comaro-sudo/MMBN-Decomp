@@ -87,3 +87,9 @@ CHIP_NAME_EREADER_MIN   equ 0x0802F1BC      ; sub_0802F154's literal 0x137 (patc
 CHIP_DESC_EREADER_MIN   equ 0x08106C28      ; sub_08106BF0's literal 0x137
 SP_REWARD_HOOK          equ 0x080F57F6      ; bl BN4_REWARD_PICK inside BN4_REWARD_CHOOSER (sp-plus-design-2.md)
 SP_REWARD_PICK          equ 0x080F580C      ; BN4_REWARD_PICK
+NPC_SLOT_DENDOME_HALL   equ 0x080593D8      ; DenDome Hall (02,01) RW NPC list pointer (friendly-matches-design.md)
+NPC_LIST_DENDOME_HALL   equ 0x0805B024
+NPC_SLOT_CASTILLO_WAIT  equ 0x0805D794      ; Castillo WaitRm (03,02) RW NPC list pointer
+NPC_LIST_CASTILLO_WAIT  equ 0x0805FE0C
+NPC_SLOT_COLOSSEUM_LOBBY equ 0x08062B50     ; Colosseum Lobby (04,06) RW NPC list pointer
+NPC_LIST_COLOSSEUM_LOBBY equ 0x08066770

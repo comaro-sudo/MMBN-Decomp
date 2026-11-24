@@ -44,5 +44,6 @@
 .include "common/wp_d2_gpp_md.asm"           ; Grand Prix Power G in a Blue Mystery Data, ACDC Area 2
 .include "common/wp_d4_duo_soul.asm"         ; Duo Soul (13th): unite, MetalSoul sprite, palette, passive, charge shot, icon
 .include "common/wp_d3_sp_plus.asm"          ; WP-D3: SP+ boss difficulty (4,095 HP, ATK x1.5, Speed x1.25, 80/20 reward)
+.include "common/wp_b1_friendly_matches.asm" ; WP-B1: 9 friendly tournament matches (3 per tournament, FC 0E)
 
 .close
