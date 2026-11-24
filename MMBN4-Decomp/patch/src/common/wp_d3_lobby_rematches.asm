@@ -340,8 +340,7 @@ lobby_npc lobby_npc_raoul,    0x32, 0x001C, 0xF8, -164, -56, 7 ; ThunderMan (0x0
 .align 4
 lobby_npc_trashcan:
     .byte   0x08
-    .byte   0x25, 0x08, 0x1C        ; list[7] 0x08, an uncompressed crystal prop: 0x44 is LZ77-compressed and drew a
-                                    ; white circle (Gemini round 11). A junk-looking uncompressed prop is still to pick
+    .byte   0x25, 0x4A, 0x1C        ; list[7] 0x4A, uncompressed debris/wreckage pile (prop-sprites.md)
     .byte   0x05, 0x20, 0x00        ; hide while JunkSoul (0x0020) is clear
     .word   @@hide
     .byte   0x18, 0xFC

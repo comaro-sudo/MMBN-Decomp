@@ -73,8 +73,8 @@ duo_fc_rematch:
 
 ; ---- 3. Battle records: story battle 93/94's header as a plain battle, one per Duo version ----
 .macro duo_rec, objs
-    .byte   0x00, 0x00, 0x64, 0x16, 0x33, 0x17, 0x9F, 0x00  ; b1 = 0, as nearly every story battle
-                                    ; (0x13 still skipped the results screen, Gemini round 11)
+    .byte   0x00, 0x00, 0x64, 0x16, 0x3F, 0x17, 0xDF, 0x00  ; b1=0, b4=0x3F, b6=0xDF (results screen ON, no auto tier raise)
+                                    ; preserves Duo's arena (b3=0x16) and Duo's music (b5=0x17)
     .word   objs
 .endmacro
 .macro duo_objs, enemy
@@ -108,8 +108,7 @@ duo_npc_list_meteor1:
 .align 4
 duo_npc_signal:
     .byte   0x08
-    .byte   0x25, 0x08, 0x1C        ; list[7] 0x08, an uncompressed crystal: list[6] 0x63 (Duo's probe) is
-                                    ; LZ77-compressed and drew a white circle (Gemini round 11)
+    .byte   0x25, 0x07, 0x1C        ; list[7] 0x07, uncompressed Duo hexagonal crest (prop-sprites.md)
     .byte   0x05, 0x00, 0x05        ; hide until Game Clear (0x0500)
     .word   @@hide
     .byte   0x18, 0xFD              ; lobby archive entry 0x0D: "Fight Duo?"
