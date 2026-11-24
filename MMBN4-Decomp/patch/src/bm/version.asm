@@ -91,3 +91,4 @@ NPC_SLOT_CASTILLO_WAIT  equ 0x0805D7AC      ; Castillo WaitRm (03,02) RW NPC lis
 NPC_LIST_CASTILLO_WAIT  equ 0x0805FE24
 NPC_SLOT_COLOSSEUM_LOBBY equ 0x08062B64     ; Colosseum Lobby (04,06) RW NPC list pointer
 NPC_LIST_COLOSSEUM_LOBBY equ 0x0806677C
+SHOP_STOCK_INIT         equ 0x0804ADA8      ; BN4_SHOP_STOCK_INIT (docs/re/shops.md); WP-A3 key-item prices
