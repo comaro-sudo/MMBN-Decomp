@@ -47,6 +47,24 @@ METAL_SOUL_CHIP     equ 0x169
 .org 0x0800CAE0                     ; BN4_POWER_ATTACKS[0x19]
     .word   duo_charge_shot | 1
 
+; ---- 4. Passive (Option A, duo-soul-passive.md): AirShoes + FloatShoes + B+Left Reflect -------
+.org 0x0800E0D4                     ; BN4_FORM_ENTERS[13] (RS == BM)
+    .word   duo_soul_enter | 1
+
+; ---- 4b. Duo palette hook (form-palette-hook.md): override [sprite_hdr+0x34] for form 13 ------
+.org 0x080107E8                     ; bl sub_08002DEC inside BattleMegaManLoadFormSprite (RS == BM)
+    bl      VENEER_DUO_PAL
+.org VENEER_DUO_PAL
+    ldr     r3, [r15, 0]
+    bx      r3
+    .word   duo_form_palette_hook | 1
+
+; ---- 4c. Emotion window face fix (duo-soul-transform.md): clamp OOB face in BN4_FACE_GET ------
+.org 0x08016A20                     ; BN4_FACE_GET (RS == BM, word-aligned)
+    ldr     r3, [r15, 0]
+    bx      r3
+    .word   duo_face_get | 1
+
 ; ---- 5. Unite chips ---------------------------------------------------------------------------
 .macro duo_unite, id
     chip_field_org id, 7
@@ -117,4 +135,79 @@ duo_charge_shot:                    ; MetalFist (0x0800CE28) at 180 damage
 
 .if . > FS_DUO_SOUL + FS_DUO_SOUL_SIZE
     .error "WP-D4 Duo Soul: overruns its free-space slot"
+.endif
+
+; ---- Free space (extension: face fix, palette hook + 3x32B palettes, passive) -----------------
+.org FS_DUO_EXT
+.align 2
+duo_face_get:
+    push    r14
+    bl      @@run_orig
+    .if VER_BM
+    cmp     r0, 11                  ; BM DuoSoul (13+4-6=11) -> MetalSoul face (7), keeps turns in r1
+    bne     @@chk_oob
+    mov     r0, 7
+    b       @@done
+    .endif
+@@chk_oob:
+    cmp     r0, 10                  ; unsigned: 0..10 valid; >=11 (or wrapped negative) -> clean face 0
+    bls     @@done
+    mov     r0, 0
+    mov     r1, 0
+@@done:
+    pop     r15
+@@run_orig:
+    push    r4, r14                 ; displaced 0x08016A20..0x08016A27
+    mov     r0, r10
+    ldr     r0, [r0, 0x18]
+    ldr     r0, [r0, 0x44]
+    ldr     r3, =0x08016A28 | 1
+    bx      r3
+
+.align 2
+duo_soul_enter:                     ; BN4_FORM_ENTERS[13]: AirShoes+FloatShoes (0x30) + Reflect Shield (0x6A)
+    push    r14
+    mov     r0, 0x30
+    ldr     r3, =0x08012F82 | 1     ; BattleSetStatusBits (RS == BM)
+    bl      @@call_r3
+    ldr     r0, [r5, 0x58]
+    mov     r1, 0x6A                ; B+Left Reflect Shield (auto-restored by sub_0800D8C2 on Soul end)
+    strb    r1, [r0]
+    pop     r15
+@@call_r3:
+    bx      r3
+
+.align 2
+duo_form_palette_hook:              ; replaces bl BN4_SPRITE_PALETTE_SET at 0x080107E8
+    push    r4, r14
+    ldr     r2, =0x08002DEC | 1     ; BN4_SPRITE_PALETTE_SET: returns sprite_hdr in r3
+    bl      @@call_r2
+    mov     r4, r3
+    mov     r1, 0x24                ; active form id
+    ldr     r2, =0x0800D7CA | 1     ; BN4_NAVI_BYTE (RS == BM)
+    bl      @@call_r2
+    mov     r1, 0
+    cmp     r0, 13                  ; form 13 = DuoSoul?
+    bne     @@store
+    ldr     r1, =duo_soul_pal_set
+@@store:
+    str     r1, [r4, 0x34]          ; [sprite_hdr + 0x34] custom palette override
+    pop     r4, r15
+@@call_r2:
+    bx      r2
+    .pool
+
+.align 4
+duo_soul_pal_set:
+    ; Palette 0: normal DuoSoul (duo-soul-design.md §1)
+    .halfword 0x0020, 0x0000, 0x0000, 0x1043, 0x149F, 0x0C36, 0x0810, 0x7EB0
+    .halfword 0x5CEB, 0x4488, 0x3045, 0x2024, 0x7F73, 0x037F, 0x48C9, 0x3466
+    ; Palette 1: hit-flash (MetalSoul @ 0x0826D91C, RS == BM)
+    .incbin ROM_IN, 0x0826D91C - 0x08000000, 0x20
+    ; Palette 2: shadow/dark (dimmed DuoSoul)
+    .halfword 0x0842, 0x0842, 0x0000, 0x0842, 0x0834, 0x0410, 0x0408, 0x4A30
+    .halfword 0x3466, 0x2444, 0x1822, 0x1002, 0x4A90, 0x0258, 0x2865, 0x1C23
+
+.if . > FS_DUO_EXT + FS_DUO_EXT_SIZE
+    .error "WP-D4 Duo Soul ext: overruns its free-space slot"
 .endif

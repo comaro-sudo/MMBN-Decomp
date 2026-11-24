@@ -68,7 +68,9 @@ FS_GMD_TIER               equ 0x087FB968    ; WP-B4: GMD content block follows t
 FS_GMD_TIER_SIZE          equ 0x60
 FS_BATTLE_EXIT            equ 0x087FB9C8    ; WP-D3: zero 0x020015EC-EF on every battle exit
 FS_BATTLE_EXIT_SIZE       equ 0x18
-; next free slot:             0x087FB9E0 (code/data packages must stay below FS_TEXT)
+FS_DUO_EXT                equ 0x087FB9E0    ; WP-D4 Duo Soul: face fix, Duo palette hook + 3 palettes, passive (Air/Float + Reflect)
+FS_DUO_EXT_SIZE           equ 0xF0
+; next free slot:             0x087FBAD0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 
