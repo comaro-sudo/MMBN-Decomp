@@ -93,3 +93,4 @@ NPC_LIST_CASTILLO_WAIT  equ 0x0805FE0C
 NPC_SLOT_COLOSSEUM_LOBBY equ 0x08062B50     ; Colosseum Lobby (04,06) RW NPC list pointer
 NPC_LIST_COLOSSEUM_LOBBY equ 0x08066770
 SHOP_STOCK_INIT         equ 0x0804ADA0      ; BN4_SHOP_STOCK_INIT (docs/re/shops.md); WP-A3 key-item prices
+WAITING_ROOM_RECEIVE    equ 0x0803FA90      ; WaitingRoomReceiveTradedNavi (waiting-room-bug.md); WP-B6 Guard A

@@ -74,7 +74,9 @@ FS_SP_PLUS                equ 0x087FBAD0    ; WP-D3 SP+: 4,095 HP, ATK x1.5, Spe
 FS_SP_PLUS_SIZE           equ 0x1A0
 FS_FRIENDLY               equ 0x087FBC70    ; WP-B1 Friendly Matches: FC 0E, 3 venue NPC lists, 9 NPCs, dialogue archive
 FS_FRIENDLY_SIZE          equ 0x500
-; next free slot:             0x087FC170 (code/data packages must stay below FS_TEXT)
+FS_WAITING_ROOM_GUARD     equ 0x087FC170    ; WP-B6 Guard A: WaitingRoomReceiveTradedNavi slot bounds check (1 <= r6 <= 7)
+FS_WAITING_ROOM_GUARD_SIZE equ 0x30
+; next free slot:             0x087FC1A0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FD000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x3000        ; up to the ROM end, 0x08800000
 

@@ -46,5 +46,6 @@
 .include "common/wp_d3_sp_plus.asm"          ; WP-D3: SP+ boss difficulty (4,095 HP, ATK x1.5, Speed x1.25, 80/20 reward)
 .include "common/wp_b1_friendly_matches.asm" ; WP-B1: 9 friendly tournament matches (3 per tournament, FC 0E)
 .include "common/wp_a3_key_item_prices.asm"  ; WP-A3: key-item/upgrade shop prices at 40% (Option 2)
+.include "common/wp_b6_waiting_room_guard.asm" ; WP-B6 Guard A: WaitingRoomReceiveTradedNavi slot bounds check (1..7)
 
 .close
