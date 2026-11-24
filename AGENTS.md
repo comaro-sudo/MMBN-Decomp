@@ -38,6 +38,8 @@ Edit only your own areas. If work needs a change in the other agent's area, **st
 
 To swap or change ownership, the owner edits these tables.
 
+**Temporary (owner, 2026-11-23, until Friday 2026-11-27):** Gemini handles most of the BN4 tasks and **may also edit `MMBN4-Decomp/patch/` and `MMBN4-Decomp/docs/`**. It follows Claude's handoff `MMBN4-Decomp/decomp/notes/handoff-claude-to-gemini-2026-11-23.md`, keeps `patch/README.md` current, and records its work in a `decomp/notes/handoff-*.md`. After Friday the tables above apply again.
+
 **Claude's reverse-engineering lane (approved by the owner, 2026-11-22).** At first Claude only read `decomp/` (see the update below).
 - Findings go in `docs/re/`.
 - Proposed symbol names go in `docs/re/proposed-names.txt`, in the `names.txt` format. Gemini merges them into `decomp/symbols/names.txt` and deletes the merged lines.

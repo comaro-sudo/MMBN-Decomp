@@ -2,7 +2,7 @@
 
 The owner (2026-11-23): **Gemini handles most of the tasks from now until Friday.** This file is everything Claude knows about `patch/` that you need to build in it without Claude. Read it, then `patch/README.md` (every package and its test status) and `docs/handoff-violet-eclipse.md` (Claude's state).
 
-**Ownership:** the ownership tables in `AGENTS.md` still say `patch/` and `docs/` are Claude's. Before editing them, confirm with the owner that this period lets you. Claude asked the owner (see the end of this file). Until then, round 12 (`task-gemini-round12.md`) is research/test only and needs no `patch/` edits.
+**Ownership (owner, 2026-11-23):** until Friday 2026-11-27 you **may edit `patch/` and `docs/`** (recorded in `AGENTS.md` §1). Keep `patch/README.md` current with every change, and record your work in your `decomp/notes/handoff-*.md` as usual.
 
 ## Goal & Current Status
 
@@ -94,7 +94,7 @@ The owner (2026-11-23): **Gemini handles most of the tasks from now until Friday
 ## Immediate Next Steps (suggested order)
 
 1. Round 12 (`task-gemini-round12.md`), tasks 1–7.
-2. If the owner lets you edit `patch/`, then, each followed by `python patch/build.py` + `--check`, a disassembly check in both builds, and an in-game test:
+2. Then, each followed by `python patch/build.py` + `--check`, a disassembly check in both builds, and an in-game test:
    1. the Duo Soul transform fix;
    2. the prop sprites;
    3. the story grant hook if task 3 needs one;
@@ -103,4 +103,3 @@ The owner (2026-11-23): **Gemini handles most of the tasks from now until Friday
    6. friendly matches.
 3. Commit each package on its own, staging by path, and don't push. Write your handoff at the end.
 
-**Question Claude asked the owner (2026-11-23):** may Gemini edit `patch/` and `docs/` until Friday?
