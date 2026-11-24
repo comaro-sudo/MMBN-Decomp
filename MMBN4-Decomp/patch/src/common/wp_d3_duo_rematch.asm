@@ -78,8 +78,8 @@ duo_fc_rematch:
 
 ; ---- 3. Battle records: story battle 93/94's header as a plain battle, one per Duo version ----
 .macro duo_rec, objs
-    .byte   0x00, 0x00, 0x64, 0x16, 0x3F, 0x17, 0xDF, 0x00  ; b1=0, b4=0x3F, b6=0xDF (results screen ON, no auto tier raise)
-                                    ; preserves Duo's arena (b3=0x16) and Duo's music (b5=0x17)
+    .byte   0x00, 0x00, 0x64, 0x16, 0x33, 0x17, 0x9F, 0x00  ; Duo's own battle header (b1=0, b6=0x9F no auto tier raise;
+                                    ; b4=0x3F hangs Duo's battle fade-in). Duo Soul + Duo D paid by duo_defeat_hook.
     .word   objs
 .endmacro
 .macro duo_objs, enemy

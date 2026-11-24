@@ -96,7 +96,7 @@ VENEER_BATTLE_EXIT  equ 0x0800A144      ; WP-D3 battle-exit clear (moved off Bas
 VENEER_SP_PLUS_1    equ 0x0800A14C      ; WP-D3 SP+ HP/roam scan (0x08006806)
 VENEER_SP_PLUS_2    equ 0x0800A154      ; WP-D3 SP+ ATK x1.5 (0x08013A06)
 VENEER_SP_PLUS_3    equ 0x0800A15C      ; WP-D3 SP+ Speed x1.25 (0x08003196)
-VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette (0x080107E8)
+VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette (0x080107E2)
 VENEER_SP_REWARD    equ 0x0800A16C      ; WP-D3 SP+ 80/20 reward (SP_REWARD_HOOK)
 
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM

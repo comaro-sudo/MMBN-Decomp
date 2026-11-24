@@ -148,14 +148,15 @@ sp_plus_spd_hook:                   ; replaces push {r7}; mov lr,pc; bx r0; pop 
     pop     r0, r5, r7, r15
 
 .align 2
-sp_plus_reward_hook:                ; replaces bl BN4_REWARD_PICK at SP_REWARD_HOOK
-    push    r14
-    ldr     r3, =SP_REWARD_PICK | 1
-    bl      sp_call_r3              ; r0 = normal reward word
+sp_plus_reward_hook:                ; replaces ldr r0,[sp,#0x1c]; ldr r1,[sp,#0x20] at BN4_REWARD_CHOOSER exit
+    push    r14                     ; sp -= 4 -> caller's [sp+0x1c] is [sp+0x20], [sp+0x20] is [sp+0x24]
+    ldr     r0, [sp, 0x20]          ; r0 = chosen reward word
+    cmp     r0, 0
+    beq     @@done                  ; no reward -> leave 0
     ldr     r1, =0x020015EE
     ldrb    r1, [r1]
     cmp     r1, 0
-    beq     @@done
+    beq     @@done                  ; not SP+ -> keep normal reward
     ldr     r3, =GET_RNG | 1
     bl      sp_call_r3
     lsr     r0, r0, 8
@@ -168,6 +169,7 @@ sp_plus_reward_hook:                ; replaces bl BN4_REWARD_PICK at SP_REWARD_H
 @@bf:
     ldr     r0, =0xC032             ; 0xC000 | 50 = 50 BugFrags
 @@done:
+    ldr     r1, [sp, 0x24]          ; restore r1 = [sp_caller + 0x20]
     pop     r15
 
 ; Helper called by lobby_fc_rematch (r0 = 0x0E5D + navi_id) and duo_fc_rematch (r0 = 0x0E5C)
@@ -218,6 +220,8 @@ sp_call_r3:
     bx      r3
 sp_call_r0:
     bx      r0
+sp_call_r7:
+    bx      r7
     .pool
 
 sp_roam_table:                      ; { enemy_id, flag_lo (0x0E00 | flag_lo) }

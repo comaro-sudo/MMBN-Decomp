@@ -84,8 +84,7 @@ CW_NPC_COUNT_ACDC2      equ 13
 GMD_CONTENT_TABLE       equ 0x080ADF68      ; MysteryDataGetContentTable (re07-mystery-data.md); WP-B4
 CHIP_NAME_EREADER_MIN   equ 0x0802F1C0      ; sub_0802F154's literal 0x137 (patch-test-results-4.md)
 CHIP_DESC_EREADER_MIN   equ 0x08106C34      ; sub_08106BF0's literal 0x137
-SP_REWARD_HOOK          equ 0x080F5802      ; bl BN4_REWARD_PICK inside BN4_REWARD_CHOOSER (sp-plus-design-2.md)
-SP_REWARD_PICK          equ 0x080F5818      ; BN4_REWARD_PICK
+SP_REWARD_HOOK          equ 0x080F5810      ; ldr r0,[sp,#0x1c]; ldr r1,[sp,#0x20] exit of BN4_REWARD_CHOOSER
 NPC_SLOT_DENDOME_HALL   equ 0x080593E4      ; DenDome Hall (02,01) RW NPC list pointer (friendly-matches-design.md)
 NPC_LIST_DENDOME_HALL   equ 0x0805B030
 NPC_SLOT_CASTILLO_WAIT  equ 0x0805D7AC      ; Castillo WaitRm (03,02) RW NPC list pointer

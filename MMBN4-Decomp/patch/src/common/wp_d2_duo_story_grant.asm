@@ -20,20 +20,21 @@ DUO_CHIP_GIVEN_FLAG equ 0x0E72
 
 .org FS_DUO_GRANT
 duo_defeat_hook:
-    push    r14
+    push    r4-r7, r14
     ldrb    r0, [r5, 0x0A]
     cmp     r0, 0
     bne     @@tail
     bl      duo_grant_rewards
 @@tail:
+    pop     r4-r7
     ldr     r3, =0x08010DF8 | 1     ; original Duo deletion state (RS == BM)
     bl      duo_call_r3
     pop     r15
 
 ; The Duo Soul if not owned, and Duo D once. Also called by the lobby results hook for a won Duo rematch.
-; Uses r0-r3 only.
+; Preserves r4-r7 (CHIP_GIVE / WriteChipKey may clobber them).
 duo_grant_rewards:
-    push    r14
+    push    r4-r7, r14
     mov     r0, 0x23                ; Duo Soul owned?
     ldr     r3, =TEST_EVENT_FLAG | 1
     bl      duo_call_r3
@@ -61,7 +62,7 @@ duo_grant_rewards:
     ldr     r3, =CHIP_GIVE | 1
     bl      duo_call_r3
 @@done:
-    pop     r15
+    pop     r4-r7, r15
 duo_call_r3:
     bx      r3
     .pool

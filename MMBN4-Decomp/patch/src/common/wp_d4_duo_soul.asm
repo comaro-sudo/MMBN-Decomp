@@ -52,7 +52,7 @@ METAL_SOUL_CHIP     equ 0x169
     .word   duo_soul_enter | 1
 
 ; ---- 4b. Duo palette hook (form-palette-hook.md): override [sprite_hdr+0x34] for form 13 ------
-.org 0x080107E8                     ; bl sub_08002DEC inside BattleMegaManLoadFormSprite (RS == BM)
+.org 0x080107E2                     ; bl sub_08002DEC (f2 f7 03 fb) inside BattleMegaManLoadFormSprite (RS == BM)
     bl      VENEER_DUO_PAL
 .org VENEER_DUO_PAL
     ldr     r3, [r15, 0]
