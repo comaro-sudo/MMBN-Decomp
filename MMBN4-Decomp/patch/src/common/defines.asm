@@ -76,7 +76,9 @@ FS_FRIENDLY               equ 0x087FBC70    ; WP-B1 Friendly Matches: FC 0E, 3 v
 FS_FRIENDLY_SIZE          equ 0x500
 FS_WAITING_ROOM_GUARD     equ 0x087FC170    ; WP-B6 Guard A: WaitingRoomReceiveTradedNavi slot bounds check (1 <= r6 <= 7)
 FS_WAITING_ROOM_GUARD_SIZE equ 0x30
-; next free slot:             0x087FC1A0 (code/data packages must stay below FS_TEXT)
+FS_DUO_RANK               equ 0x087FC1A0    ; WP-D3 Duo rematch S-rank tier climb (0x08007692 -> V1->a->b->o->SP+)
+FS_DUO_RANK_SIZE          equ 0xB0
+; next free slot:             0x087FC250 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FD000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x3000        ; up to the ROM end, 0x08800000
 
@@ -100,6 +102,8 @@ VENEER_SP_PLUS_2    equ 0x0800A154      ; WP-D3 SP+ ATK x1.5 (0x08013A06)
 VENEER_SP_PLUS_3    equ 0x0800A15C      ; WP-D3 SP+ Speed x1.25 (0x08003196)
 VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette (0x080107E2)
 VENEER_SP_REWARD    equ 0x0800A16C      ; WP-D3 SP+ 80/20 reward (SP_REWARD_HOOK)
+; Second veneer pool in verified dead code_00 function sub_08001784 (36 bytes = 4 slots, RS == BM; veneer-space.md)
+VENEER_DUO_RANK     equ 0x08001784      ; WP-D3 Duo rematch S-rank climb (0x08007692)
 
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
 GET_RNG             equ 0x08001B16

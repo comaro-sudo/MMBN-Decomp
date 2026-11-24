@@ -128,3 +128,87 @@ duo_npc_signal:
 .if . > FS_DUO_REMATCH + FS_DUO_REMATCH_SIZE
     .error "WP-D3 Duo rematch: overruns its free-space slot"
 .endif
+
+; ---- 5. Duo rematch S-rank tier climb (decomp/notes/duo-rematch-rank.md) ----
+; Duo's battle (b4 = 0x33) skips the results screen, so the lobby's results hook never runs.
+; However, sub_08007642 ALWAYS calls sub_08008558 (BattleCalcBustingLevel, RS == BM) at 0x08007692
+; on every win, returning 1..11 (11 = S-rank) using the standard boss formula.
+; Hook 0x08007692 -> VENEER_DUO_RANK (0x08001784) -> duo_rank_climb_hook:
+; on S-rank (r0 >= 11) in an active Duo rematch ([0x020015EF] == 0x80 | 13), climb
+; V1 (0) -> alpha (1) -> beta (2) -> omega (3) via flags 0x0E5A-0x0E5B, and on omega S-rank
+; set flag 0x0E5C to unlock Duo-omega SP+.
+
+.org 0x08007692
+    bl      VENEER_DUO_RANK
+
+.org VENEER_DUO_RANK
+.align 4
+    ldr     r3, =duo_rank_climb_hook | 1
+    bx      r3
+    .pool
+
+.org FS_DUO_RANK
+.align 4
+duo_rank_climb_hook:
+    push    r4-r7, r14
+    ldr     r3, =0x08008558 | 1     ; BattleCalcBustingLevel (RS == BM) -> r0 = 1..11 (11 = S)
+    bl      @@call_r3
+    mov     r4, r0                  ; preserve exact Busting Level to return in r0
+    cmp     r4, 11                  ; S-rank?
+    blt     @@done
+    ldr     r0, =0x020015EF
+    ldrb    r0, [r0]
+    cmp     r0, 0x80 | DUO_MARKER_ID
+    bne     @@done
+    ldr     r6, =0x0E5A             ; Duo 2-bit tier flags: 0x0E5A (bit 0), 0x0E5B (bit 1)
+    mov     r7, 0
+    mov     r0, r6
+    ldr     r3, =TEST_EVENT_FLAG | 1
+    bl      @@call_r3
+    beq     @@no_b0
+    add     r7, 1
+@@no_b0:
+    add     r0, r6, 1
+    ldr     r3, =TEST_EVENT_FLAG | 1
+    bl      @@call_r3
+    beq     @@no_b1
+    add     r7, 2
+@@no_b1:
+    cmp     r7, 3                   ; already Duo-omega? -> unlock Duo-omega SP+ (0x0E5C)
+    blt     @@climb
+    ldr     r0, =0x0E5C
+    ldr     r3, =SET_EVENT_FLAG | 1
+    bl      @@call_r3
+    b       @@done
+@@climb:
+    add     r7, 1                   ; next tier: 1 (alpha), 2 (beta), 3 (omega)
+    mov     r0, r6                  ; bit 0 -> 0x0E5A
+    mov     r1, 1
+    tst     r7, r1
+    beq     @@clr_b0
+    ldr     r3, =SET_EVENT_FLAG | 1
+    b       @@do_b0
+@@clr_b0:
+    ldr     r3, =CLEAR_EVENT_FLAG | 1
+@@do_b0:
+    bl      @@call_r3
+    add     r0, r6, 1               ; bit 1 -> 0x0E5B
+    mov     r1, 2
+    tst     r7, r1
+    beq     @@clr_b1
+    ldr     r3, =SET_EVENT_FLAG | 1
+    b       @@do_b1
+@@clr_b1:
+    ldr     r3, =CLEAR_EVENT_FLAG | 1
+@@do_b1:
+    bl      @@call_r3
+@@done:
+    mov     r0, r4
+    pop     r4-r7, r15
+@@call_r3:
+    bx      r3
+    .pool
+
+.if . > FS_DUO_RANK + FS_DUO_RANK_SIZE
+    .error "WP-D3 Duo rank climb: overruns its free-space slot"
+.endif
