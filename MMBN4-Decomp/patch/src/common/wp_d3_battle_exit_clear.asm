@@ -11,7 +11,7 @@
 .org 0x08006E20
     bl      VENEER_BATTLE_EXIT
 
-.org VENEER_BATTLE_EXIT             ; the first 8 of the 20 dead bytes after Duo's deletion thunk
+.org VENEER_BATTLE_EXIT             ; 0x0800A144 (sub_0800A144 dead-code veneer pool, RS == BM)
     ldr     r3, [r15, 0]
     bx      r3
     .word   battle_exit_clear | 1

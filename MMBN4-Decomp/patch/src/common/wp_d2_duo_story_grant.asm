@@ -1,32 +1,21 @@
 ; ============================================================
-; WP-D2 / WP-D4: beating Duo gives the Duo chip (D) and the Duo Soul.
+; WP-D2 / WP-D4: beating Duo gives the Duo Soul and Duo D.
 ; The story's final battle (story battles 93/94) skips the results screen, so the drop table never
-; pays out there (wp_d2_duo_chip_reward.asm only works in rematches). Gemini found Duo's deletion state
-; (decomp/notes/duo-gpp-research.md section 4, option A), state 2 of Duo's table at 0x080C474C:
+; pays out there (wp_d2_duo_chip_reward.asm only works in rematches). Round 12 (duo-story-grant-test.md)
+; proved that sub_080C4780 is Bass (sets flag 0x006F), whereas Duo (object kind 1, ID 0x2A) dispatches
+; its deletion state through the 4-byte table pointer dat_080C04F8[2] (RS 0x080C0500 / BM 0x080C050C),
+; originally pointing to sub_08010DF8 (RS == BM, exclusively referenced by Duo).
 ;
-;   sub_080C4780 (RS 0x080C4780 / BM 0x080C478C):
-;       if (r5[0x0A] == 0 && r5[0x04] != 0) SetEventFlagHL(0, 0x6F)
-;       sub_08010D4C()                                               ; uses r5 only
-;
-; r5[0x04] is Duo's version (0 Duo, 1 alpha, 2 beta, 3 omega: Duo's init sub_080C46B8 picks the palette
-; from it), so flag 0x006F (the final-boss star) only comes from a harder Duo. r5[0x0A] == 0 is the
-; deletion's first sub-state.
-;
-; Its entry becomes a thunk to free space (a bl can't reach 0x087F....). The new handler, when
-; r5[0x0A] == 0, on any version (a won rematch is also paid by the lobby results hook: Gemini's
-; round-11 test saw no grant from this state in a plain battle):
-;   - the Duo Soul, if not owned: flags 0x0015 (Double Soul) and 0x0023, WriteChipKey(0x16D)
-;     (owner: "beat the first version of Duo"; V1 is always the first one beaten);
-;   - the Duo chip D, once: guarded by flag 0x0E72 (free, Gemini's 0x0E3B-0x0E7F scan; after SP+'s
-;     0x0E5D-0x0E71), so it comes even on a first playthrough, where 0x006F stays clear;
-;   - then the original: flag 0x006F when the version isn't 0.
+; Replacing that 4-byte pointer needs no veneer and leaves Bass's sub_080C4780 untouched. When
+; r5[0x0A] == 0 (first frame of Duo's deletion state, in story OR rematch, any version V1/a/b/o):
+;   - the Duo Soul, if not owned: flags 0x0015 (Double Soul) and 0x0023, WriteChipKey(0x16D);
+;   - the Duo chip D, once: guarded by flag 0x0E72;
+;   - then tail-calls the original sub_08010DF8.
 ; ============================================================
 
 DUO_CHIP_GIVEN_FLAG equ 0x0E72
 
-.org DUO_DEFEAT_STATE               ; word-aligned in both versions; the 20 bytes after the thunk go unused
-    ldr     r3, [r15, 0]            ; = the literal below (pc = this + 4)
-    bx      r3
+.org DUO_DELETE_STATE_PTR           ; dat_080C04F8[2] (RS 0x080C0500 / BM 0x080C050C)
     .word   duo_defeat_hook | 1
 
 .org FS_DUO_GRANT
@@ -36,14 +25,8 @@ duo_defeat_hook:
     cmp     r0, 0
     bne     @@tail
     bl      duo_grant_rewards
-    ldrb    r0, [r5, 0x04]          ; the original: 0x006F for a harder Duo
-    cmp     r0, 0
-    beq     @@tail
-    mov     r0, 0x6F
-    ldr     r3, =SET_EVENT_FLAG | 1
-    bl      duo_call_r3
 @@tail:
-    ldr     r3, =0x08010D4C | 1     ; sub_08010D4C, same in RS and BM
+    ldr     r3, =0x08010DF8 | 1     ; original Duo deletion state (RS == BM)
     bl      duo_call_r3
     pop     r15
 

@@ -85,6 +85,14 @@ WARP_BY_TABLE       equ 0x08005664      ; where_bn4_plays.warp_2(r0 table, r1 id
 PLAY_SFX            equ 0x08000560      ; PlaySoundEffect(r0); same in RS and BM
 VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes, unreferenced since WP-D4 star)
 
+; Contiguous 6-slot veneer pool in verified dead function sub_0800A144 (54 bytes, RS == BM; decomp/notes/veneer-space.md)
+VENEER_BATTLE_EXIT  equ 0x0800A144      ; WP-D3 battle-exit clear (moved off Bass's 0x080C4788)
+VENEER_SP_PLUS_1    equ 0x0800A14C      ; WP-D3 SP+ HP/ATK
+VENEER_SP_PLUS_2    equ 0x0800A154      ; WP-D3 SP+ Speed
+VENEER_SP_PLUS_3    equ 0x0800A15C      ; WP-D3 SP+ Reward
+VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette
+VENEER_SPARE_1      equ 0x0800A16C      ; spare 8-byte veneer slot
+
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
 GET_RNG             equ 0x08001B16
 

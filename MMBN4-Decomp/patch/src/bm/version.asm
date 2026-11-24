@@ -71,7 +71,7 @@ NPC_SLOT_WTRGOD1        equ 0x08075F04
 NPC_LIST_WTRGOD1        equ 0x08076524
 NPC_COUNT_WTRGOD1       equ 1
 
-DUO_DEFEAT_STATE        equ 0x080C478C      ; sub_080C4780: Duo defeated (sets flag 0x006F); WP-D2 Duo story grant
+DUO_DELETE_STATE_PTR    equ 0x080C050C      ; dat_080C04F8[2] = sub_08010DF8 (exclusive Duo deletion state; duo-story-grant-test.md)
 NPC_SLOT_METEOR1        equ 0x0806DA28      ; Meteor Comp 1 (82,00) CW NPC list pointer (Gemini, duo-rematch-research.md)
 NPC_LIST_METEOR1        equ 0x0806DCD8
 NPC_COUNT_METEOR1       equ 3
@@ -84,4 +84,3 @@ CW_NPC_COUNT_ACDC2      equ 13
 GMD_CONTENT_TABLE       equ 0x080ADF68      ; MysteryDataGetContentTable (re07-mystery-data.md); WP-B4
 CHIP_NAME_EREADER_MIN   equ 0x0802F1C0      ; sub_0802F154's literal 0x137 (patch-test-results-4.md)
 CHIP_DESC_EREADER_MIN   equ 0x08106C34      ; sub_08106BF0's literal 0x137
-VENEER_BATTLE_EXIT      equ 0x080C4794      ; DUO_DEFEAT_STATE + 8 (dead bytes after the thunk); 1st of 2 veneers
