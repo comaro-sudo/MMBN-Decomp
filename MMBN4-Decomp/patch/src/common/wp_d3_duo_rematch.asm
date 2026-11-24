@@ -50,6 +50,11 @@ duo_fc_rematch:
     beq     @@no_b1
     add     r7, 2
 @@no_b1:
+    cmp     r7, 3                   ; Duo-omega -> activate SP+ if flag 0x0E5C is set
+    bne     @@sp_done
+    ldr     r0, =0x0E5C
+    bl      sp_plus_check_activate
+@@sp_done:
     lsl     r0, r7, 3
     lsl     r7, r7, 2
     add     r7, r0, r7              ; tier * 12

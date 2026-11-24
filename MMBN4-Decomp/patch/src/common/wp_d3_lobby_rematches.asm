@@ -87,6 +87,13 @@ lobby_fc_rematch:
     beq     @@no_b1
     add     r7, 2
 @@no_b1:
+    ; If tier == 3 (SP), activate SP+ when this Navi's SP+ flag (0x0E5D + navi_id) is set
+    cmp     r7, 3
+    bne     @@sp_done
+    ldr     r0, =0x0E5D
+    add     r0, r0, r4
+    bl      sp_plus_check_activate
+@@sp_done:
     ; Map navi_id (0..11) -> soul_index (1..12) -> enemy_id = 0x7C + soul_index*4 + tier
     mov     r2, r4
     ldr     r3, =FREE_TOURN_GET_SOUL | 1
@@ -175,10 +182,13 @@ lobby_results_hook:
     ldrb    r4, [r0]
     mov     r1, 0x80
     tst     r4, r1
-    beq     @@ret                   ; not a lobby rematch
+    bne     @@is_lobby
+    bl      sp_plus_unlock_roam     ; not a lobby rematch: check roaming SP S-rank unlock
+    b       @@ret
+@@is_lobby:
     mov     r1, 0
     strb    r1, [r0]                ; clear marker
-    sub     r4, 0x80                ; r4 = navi_id (0..11)
+    sub     r4, 0x80                ; r4 = navi_id (0..11) or 13 (Duo)
     ldrb    r6, [r5, 8]             ; r6 = Busting Level (1..11, 11=S)
     ; S-rank tier climb (V1 -> V2 -> V3 -> SP)
     cmp     r6, 11
@@ -200,7 +210,20 @@ lobby_results_hook:
     add     r7, 2
 @@t_b1:
     cmp     r7, 3
-    bge     @@grant_secret
+    blt     @@climb_tier
+    ; Already at SP / Duo-omega and got S rank -> unlock SP+!
+    cmp     r4, 12
+    blt     @@unlock_navi_sp
+    ldr     r0, =0x0E5C             ; Duo SP+ unlock flag
+    b       @@do_unlock_sp
+@@unlock_navi_sp:
+    ldr     r0, =0x0E5D
+    add     r0, r0, r4              ; 0x0E5D + navi_id
+@@do_unlock_sp:
+    ldr     r3, =SET_EVENT_FLAG | 1
+    bl      lobby_call_r3
+    b       @@grant_secret
+@@climb_tier:
     add     r7, 1
     ; Write bit 0
     mov     r0, r5

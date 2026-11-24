@@ -53,9 +53,9 @@ FS_GRANT_SOUL             equ 0x087FAA30    ; WP-D4: FC 0C <idx> grant-Soul hand
 FS_GRANT_SOUL_SIZE        equ 0x40
 FS_CHIP_ART               equ 0x087FAA70    ; WP-D2: Duo/GP Power pictures, palettes, icons (0xBC0; private builds only)
 FS_CHIP_ART_SIZE          equ 0xC00
-; 0x087FB670-0x087FB6D0 free (0x60): the first Duo grant handler's slot, moved to FS_DUO_GRANT below
-FS_DUO_REMATCH            equ 0x087FB6D0    ; WP-D3 Duo rematch (FC 0D, 4 battle records, Meteor Comp 1 NPC list + NPC)
-FS_DUO_REMATCH_SIZE       equ 0x100
+; 0x087FB670-0x087FB6B0 free (0x40): remainder of the first Duo grant slot
+FS_DUO_REMATCH            equ 0x087FB6B0    ; WP-D3 Duo rematch (FC 0D, 4 battle records, Meteor Comp 1 NPC list + NPC)
+FS_DUO_REMATCH_SIZE       equ 0x120
 FS_GPP_MD                 equ 0x087FB7D0    ; WP-D2 GP Power BMD: ACDC Area 2 MD list + CW NPC list + spawn script
 FS_MD_ACDC2_LIST          equ 0x087FB7D0    ;   3 existing + 1 new BMD + place + cont (0x60 B)
 FS_CW_NPC_ACDC2           equ 0x087FB830    ;   13 existing + 1 new spawn ptr + 11 B script (0x48 B)
@@ -70,7 +70,9 @@ FS_BATTLE_EXIT            equ 0x087FB9C8    ; WP-D3: zero 0x020015EC-EF on every
 FS_BATTLE_EXIT_SIZE       equ 0x18
 FS_DUO_EXT                equ 0x087FB9E0    ; WP-D4 Duo Soul: face fix, Duo palette hook + 3 palettes, passive (Air/Float + Reflect)
 FS_DUO_EXT_SIZE           equ 0xF0
-; next free slot:             0x087FBAD0 (code/data packages must stay below FS_TEXT)
+FS_SP_PLUS                equ 0x087FBAD0    ; WP-D3 SP+: 4,095 HP, ATK x1.5, Speed x1.25, 80/20 reward, roaming SP scan
+FS_SP_PLUS_SIZE           equ 0x1A0
+; next free slot:             0x087FBC70 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FC000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x4000        ; up to the ROM end, 0x08800000
 
@@ -89,11 +91,11 @@ VENEER_INIT_PAGE    equ 0x08000DB4      ; the old BN4_STAR_SOUL_FLAGS (14 bytes,
 
 ; Contiguous 6-slot veneer pool in verified dead function sub_0800A144 (54 bytes, RS == BM; decomp/notes/veneer-space.md)
 VENEER_BATTLE_EXIT  equ 0x0800A144      ; WP-D3 battle-exit clear (moved off Bass's 0x080C4788)
-VENEER_SP_PLUS_1    equ 0x0800A14C      ; WP-D3 SP+ HP/ATK
-VENEER_SP_PLUS_2    equ 0x0800A154      ; WP-D3 SP+ Speed
-VENEER_SP_PLUS_3    equ 0x0800A15C      ; WP-D3 SP+ Reward
-VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette
-VENEER_SPARE_1      equ 0x0800A16C      ; spare 8-byte veneer slot
+VENEER_SP_PLUS_1    equ 0x0800A14C      ; WP-D3 SP+ HP/roam scan (0x08006806)
+VENEER_SP_PLUS_2    equ 0x0800A154      ; WP-D3 SP+ ATK x1.5 (0x08013A06)
+VENEER_SP_PLUS_3    equ 0x0800A15C      ; WP-D3 SP+ Speed x1.25 (0x08003196)
+VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette (0x080107E8)
+VENEER_SP_REWARD    equ 0x0800A16C      ; WP-D3 SP+ 80/20 reward (SP_REWARD_HOOK)
 
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
 GET_RNG             equ 0x08001B16

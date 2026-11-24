@@ -42,6 +42,7 @@
 .include "common/wp_d2_duo_story_grant.asm"  ; beating Duo in the story gives Duo D
 .include "common/wp_d3_duo_rematch.asm"     ; Duo rematches in Meteor Comp 1 (post-game), V1 -> alpha -> beta -> omega
 .include "common/wp_d2_gpp_md.asm"           ; Grand Prix Power G in a Blue Mystery Data, ACDC Area 2
-.include "common/wp_d4_duo_soul.asm"         ; Duo Soul (13th): unite, MetalSoul sprite, charge shot, icon
+.include "common/wp_d4_duo_soul.asm"         ; Duo Soul (13th): unite, MetalSoul sprite, palette, passive, charge shot, icon
+.include "common/wp_d3_sp_plus.asm"          ; WP-D3: SP+ boss difficulty (4,095 HP, ATK x1.5, Speed x1.25, 80/20 reward)
 
 .close
