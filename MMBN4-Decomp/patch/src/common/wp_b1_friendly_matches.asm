@@ -46,7 +46,7 @@ friendly_fc_battle:                 ; FC 0E <enemy_id> <soul_idx>
     mov     r0, 0
     mov     r1, 0x64
     mov     r2, 0x14
-    mov     r3, 0x3F
+    mov     r3, 0x3D                ; BattleModeFlags[0x3D] = 0x003B: boss rank + retryable + SHOW RESULTS SCREEN!
     mov     r4, 3                   ; retryable (no Game Over on loss)
     mov     r5, 0x5F                ; bit 7 = 0 -> normal story playthrough tier
     mov     r6, 0
@@ -171,12 +171,12 @@ lbl:
 ; T0 Den Battle — DenDome Hall (02,01)
 fm_npc_round1  fm_npc_dex,    0x02, 0, 1, 0x0018, 0xE0, -120, 126, 3  ; Dex/GutsMan (after AquaMan)
 fm_npc_round01 fm_npc_match,  0x1D, 0,    0x001B, 0xE1,   16, 152, 5  ; Match/FireMan
-fm_npc_round01 fm_npc_higsby, 0x08, 0,    0x001E, 0xE2,   76, 196, 7  ; Higsby/NumberMan
+fm_npc_round01 fm_npc_higsby, 0x08, 0,    0x001E, 0xE2,   76, 196, 3  ; Higsby/NumberMan
 
 ; T1 Eagle / Hawk — Castillo Waiting Room (03,02)
 fm_npc_round01 fm_npc_lily,   0x34, 1,    0x0019, 0xE3,   36, -16, 5  ; Lily/WindMan
 fm_npc_round01 fm_npc_tamako, 0x1F, 1,    0x001F, 0xE4,   20,  24, 7  ; Tamako/MetalMan
-fm_npc_round01 fm_npc_sal,    0x2C, 1,    0x0022, 0xE5,  -40,  20, 3  ; Sal/WoodMan
+fm_npc_round01 fm_npc_sal,    0x2C, 1,    0x0022, 0xE5,  -40,  20, 1  ; Sal/WoodMan
 
 ; T2 Red Sun / Blue Moon — Colosseum Lobby (04,06)
 fm_npc_round1  fm_npc_raika,  0x3B, 2, 0, 0x001A, 0xE6,  -12,-108, 3  ; Raika/SearchMan (before Chaud)
@@ -197,7 +197,7 @@ fm_npc_junk:
     .word   @@hide
     .byte   0x18, 0xE8
     .byte   0x14
-    .halfword 56, 36, 0
+    .halfword 36, 48, 0
     .byte   0x16, 0
     .byte   0x36
     .word   NPC_IDLE_TALK_LOOP

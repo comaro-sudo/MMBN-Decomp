@@ -114,7 +114,7 @@ lobby_fc_rematch:
     mov     r0, 0
     mov     r1, 0x64
     mov     r2, 0x14
-    mov     r3, 0x3F
+    mov     r3, 0x3D                ; BattleModeFlags[0x3D] = 0x003B: boss rank + retryable + SHOW RESULTS SCREEN!
     mov     r4, 3
     mov     r5, 0xDF
     mov     r6, 0
