@@ -42,8 +42,8 @@ Owner decisions marked ⚠ come first.
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Saved for later in [`docs/pending/tier-a-leftovers-and-qol.md`](docs/pending/tier-a-leftovers-and-qol.md) |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
-| 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) → compile & test New 3DS `.3dsx` (needs devkitPro `3ds-dev`) → DSi | **PC (EL-0..PC-6 ARM64+x64), Wii U (WU-1..WU-6 in Cemu), and New 3DS source (`ports/3ds/`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
-| 5 | **Decomp, long term:** Expand DC-5 C (`decomp/src/`), decode cutscene bytecode in `code_04`–`code_05` | **DC-5 C pipeline live (`arm-none-eabi-gcc 13.2.1`)**, **62.1%** coverage, RS & BM byte-identical |
+| 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) → compile & test New 3DS `.3dsx` (install devkitPro `3ds-dev` interactively — `apt.devkitpro.org` is Cloudflare-gated for CLI) → DSi | **PC (EL-0..PC-6 ARM64+x64), Wii U (WU-1..WU-6 in Cemu), and New 3DS source (`ports/3ds/`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
+| 5 | **Decomp, long term:** Expand DC-5 C (`decomp/src/`; `agbcc` needed for exact `m4a`/`agb_sram` byte-matching), build bytecode disassembler macros for `code_04`–`code_05` (`decomp/notes/re-cutscene-bytecode.md`) | **DC-5 C pipeline live (`arm-none-eabi-gcc 13.2.1`)**, **62.1%** coverage, RS & BM byte-identical |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
