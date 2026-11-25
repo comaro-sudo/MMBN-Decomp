@@ -11069,7 +11069,102 @@ dat_0800591C:
     .word sub_08005C34
     .global dat_0800597C
 dat_0800597C:
-    incrom 0x597C, 0x180
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x00081010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x10081010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C1010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x100C1010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0A09
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x040C0A09
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0D0F
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x100C0D0F
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x00080D0F
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x10080D0F
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x00081010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x10081010
+    .word 0x03002C50
+    .word 0x030029A0
+    .word 0x000000FF
+    .word 0x00080100
+    .word 0x03002C50
+    .word 0x030029A0
+    .word 0x000000FF
+    .word 0x10080100
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0009
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x040C0009
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x100C0010
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0001
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x100C0001
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x000C0A09
+    .word 0x03002C50
+    .word 0x03002840
+    .word 0x000000FF
+    .word 0x050C0A09
+    .word 0x03002D70
+    .word 0x03002980
+    .word 0x000000FF
+    .word 0x000C0405
+    .word 0x03002D70
+    .word 0x03002980
+    .word 0x000000FF
+    .word 0x030C0405
 
     .global sub_08005AFC
     .thumb_func
@@ -15486,7 +15581,7 @@ sub_08007E30:
 
     .global sub_08007E46
     .thumb_func
-sub_08007E46:
+sub_08007E46:   @ BattleGetMode
     mov r0, sl
     ldr r0, [r0, #0x18]
     ldrb r0, [r0, #0xf]
@@ -15603,7 +15698,7 @@ sub_08007EE2:
 
     .global sub_08007EEC
     .thumb_func
-sub_08007EEC:
+sub_08007EEC:   @ BattleGetModeFlags
     mov r3, sl
     ldr r3, [r3, #0x18]
     ldrb r0, [r3, #0xf]
@@ -16014,7 +16109,7 @@ _08008190:
 _08008194:
     .word 0x0203DB70
 _08008198:
-    .word dat_08018787
+    .word dat_08018787   @ BN4_BATTLE_MODE_FLAGS
 _0800819C:
     .word 0x02001610
 _080081A0:
@@ -16034,7 +16129,7 @@ _080081B8:
 
     .global sub_080081BC
     .thumb_func
-sub_080081BC:
+sub_080081BC:   @ BattleScoreBustingLevel
     push {r4, r6, r7, lr}
     sub sp, #0x14
     movs r2, #0xf
@@ -16529,7 +16624,7 @@ dat_08008548:
 
     .global sub_08008558
     .thumb_func
-sub_08008558:
+sub_08008558:   @ BattleCalcBustingLevel
     push {lr}
     bl sub_08007E46
     cmp r0, #0x46

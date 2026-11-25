@@ -21512,7 +21512,21 @@ dat_0810310C:
     incrom 0x10310C, 0x8
 _08103114:
     .word 0x0200D908
-    incrom 0x103118, 0x1C6
+    .word dat_08103150
+    .word dat_08103160
+    .word dat_08103170
+    .word dat_08103180
+    .word dat_08103190
+    .word dat_081031A0
+    .word dat_081031B0
+    .word dat_081031C0
+    .word dat_081031D0
+    .word dat_081031D0
+    .word dat_081031D0
+    .word dat_081031D0
+    .word dat_081031E0
+    .word dat_081031F0
+    incrom 0x103150, 0x18E
     .global dat_081032DE
 dat_081032DE:
     incrom 0x1032DE, 0x60
@@ -21807,7 +21821,92 @@ _08103644:
     .word dat_08103648
     .global dat_08103648
 dat_08103648:
-    incrom 0x103648, 0x2A8
+    .word dat_08103650
+    .word dat_081036DC
+    .word dat_08103664
+    .word dat_0810367C
+    .word dat_08103694
+    .word dat_081036AC
+    .word dat_081036C4
+    .word dat_08103668
+    .word dat_0810379C
+    .word dat_081037A0
+    .word dat_081037A8
+    .word dat_081037B4
+    .word dat_081037C0
+    .word dat_08103680
+    .word dat_081037CC
+    .word dat_0810379C
+    .word dat_081037D4
+    .word dat_081037DC
+    .word dat_081037E8
+    .word dat_08103698
+    .word dat_081037F4
+    .word dat_08103800
+    .word dat_0810379C
+    .word dat_08103808
+    .word dat_08103814
+    .word dat_081036B0
+    .word dat_0810381C
+    .word dat_08103828
+    .word dat_08103834
+    .word dat_0810379C
+    .word dat_08103840
+    .word dat_081036C8
+    .word dat_0810384C
+    .word dat_08103858
+    .word dat_08103864
+    .word dat_0810386C
+    .word dat_0810379C
+    .word dat_081036F4
+    .word dat_08103710
+    .word dat_0810372C
+    .word dat_08103748
+    .word dat_08103764
+    .word dat_08103780
+    .word dat_081036F8
+    .word dat_0810379C
+    .word dat_08103878
+    .word dat_0810387C
+    .word dat_08103880
+    .word dat_08103884
+    .word dat_08103888
+    .word dat_08103714
+    .word dat_0810388C
+    .word dat_0810379C
+    .word dat_08103890
+    .word dat_08103894
+    .word dat_08103898
+    .word dat_0810389C
+    .word dat_08103730
+    .word dat_081038A0
+    .word dat_081038A4
+    .word dat_0810379C
+    .word dat_081038A8
+    .word dat_081038AC
+    .word dat_081038B0
+    .word dat_0810374C
+    .word dat_081038B4
+    .word dat_081038B8
+    .word dat_081038BC
+    .word dat_0810379C
+    .word dat_081038C0
+    .word dat_081038C4
+    .word dat_08103768
+    .word dat_081038C8
+    .word dat_081038CC
+    .word dat_081038D0
+    .word dat_081038D4
+    .word dat_0810379C
+    .word dat_081038D8
+    .word dat_08103784
+    .word dat_081038DC
+    .word dat_081038E0
+    .word dat_081038E4
+    .word dat_081038E8
+    .word dat_081038EC
+    .word dat_0810379C
+    incrom 0x10379C, 0x154
 _081038F0:
     .word dat_081038F4
     .global dat_081038F4
