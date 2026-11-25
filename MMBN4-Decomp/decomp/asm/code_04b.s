@@ -158,7 +158,24 @@ dat_0805D5D8:
     .word dat_0805D7EC
     .word dat_0805D7FC
     .word dat_0805D80C
-    incrom 0x5D7BC, 0x60
+    @ map script 0x0805D7BC..0x0805D7BD
+    ms_end
+    incrom 0x5D7BD, 0xF
+    @ map script 0x0805D7CC..0x0805D7CD
+    ms_end
+    incrom 0x5D7CD, 0xF
+    @ map script 0x0805D7DC..0x0805D7DD
+    ms_end
+    incrom 0x5D7DD, 0xF
+    @ map script 0x0805D7EC..0x0805D7ED
+    ms_end
+    incrom 0x5D7ED, 0xF
+    @ map script 0x0805D7FC..0x0805D7FD
+    ms_end
+    incrom 0x5D7FD, 0xF
+    @ map script 0x0805D80C..0x0805D80D
+    ms_end
+    incrom 0x5D80D, 0xF
     .global dat_0805D81C
 dat_0805D81C:
     incrom 0x5D81C, 0x61
@@ -170,15 +187,28 @@ dat_0805D81C:
     @ map-init dispatch 0x0805D897..0x0805D8A3
     cs_range 0x12, 0x12, dat_0805D8A3
     cs_jump dat_0805D905
-    incrom 0x5D8A3, 0x12
+    @ map script 0x0805D8A3..0x0805D8B5
+    ms_write_u32 0x0200B6D8, 0x08050101
+    ms_set_flag 0xFF, 0x1152
+    ms_jump dat_0805D905
     @ map-init dispatch 0x0805D8B5..0x0805D8C1
     cs_range 0x4D, 0x4D, dat_0805D8C1
     cs_jump dat_0805D905
-    incrom 0x5D8C1, 0x22
+    @ map script 0x0805D8C1..0x0805D8E3
+    ms_jump_if_flag2_set 0xFF, 0x0881, dat_0805D905
+    ms_jump_if_flag_set 0xFF, 0x0885, dat_0805D905
+    ms_write_u32 0x0200B6D4, 0x08035A01
+    ms_set_flag 0xFF, 0x1151
+    ms_jump dat_0805D905
     @ map-init dispatch 0x0805D8E3..0x0805D8EF
     cs_range 0x56, 0x56, dat_0805D8EF
     cs_jump dat_0805D905
-    incrom 0x5D8EF, 0x17
+    @ map script 0x0805D8EF..0x0805D905
+    ms_jump_if_flag_set 0xFF, 0x15CD, dat_0805D905
+    ms_start_cutscene dat_0809D480, 0x010D020C
+    ms_jump dat_0805D905
+    @ map script 0x0805D905..0x0805D906
+    ms_end
     @ map-init dispatch 0x0805D906..0x0805D919
     cs_range 0x10, 0x1F, dat_0805D919
     cs_range 0x40, 0x4F, dat_0805D94B
@@ -186,11 +216,28 @@ dat_0805D81C:
     @ map-init dispatch 0x0805D919..0x0805D925
     cs_range 0x12, 0x12, dat_0805D925
     cs_jump dat_0805D98C
-    incrom 0x5D925, 0x26
+    @ map script 0x0805D925..0x0805D94B
+    ms_jump_if_flag2_set 0xFF, 0x042C, dat_0805D98C
+    ms_jump_if_flag_set 0xFF, 0x040B, dat_0805D98C
+    ms_set_flag 0xFF, 0x040B
+    ms_set_flag 0xFF, 0x1175
+    ms_start_cutscene dat_08088188, 0x00000000
+    ms_jump dat_0805D98C
     @ map-init dispatch 0x0805D94B..0x0805D957
     cs_range 0x4D, 0x4D, dat_0805D957
     cs_jump dat_0805D98C
-    incrom 0x5D957, 0x77
+    @ map script 0x0805D957..0x0805D98C
+    ms_jump_if_flag2_set 0xFF, 0x0884, dat_0805D98C
+    ms_jump_if_u8 0x0D, 0x10, dat_0805D98C
+    ms_jump_if_flag_set 0xFF, 0x0885, dat_0805D98C
+    ms_set_flag 0xFF, 0x0885
+    ms_start_cutscene dat_080937C0, 0x00000000
+    ms_write_u32 0x0200B6D4, 0x00000000
+    ms_clear_flag 0xFF, 0x1151
+    ms_jump dat_0805D98C
+    @ map script 0x0805D98C..0x0805D98D
+    ms_end
+    incrom 0x5D98D, 0x41
     @ map-init dispatch 0x0805D9CE..0x0805D9EF
     cs_range 0x10, 0x1F, dat_0805D9EF
     cs_range 0x40, 0x4F, dat_0805DA7A
@@ -202,23 +249,93 @@ dat_0805D81C:
     cs_range 0x13, 0x14, dat_0805DA1B
     cs_range 0x15, 0x15, dat_0805DA68
     cs_jump dat_0805DBAD
-    incrom 0x5DA09, 0x71
+    @ map script 0x0805DA09..0x0805DA1B
+    ms_write_u32 0x0200B6E0, 0x08050401
+    ms_set_flag 0xFF, 0x1154
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DA1B..0x0805DA68
+    ms_write_u32 0x0200B6E0, 0x08050401
+    ms_set_flag 0xFF, 0x1154
+    ms_jump_if_flag2_set 0xFF, 0x0411, dat_0805DA34
+    ms_clear_flag 0xFF, 0x1130
+    ms_jump_if_flag2_set 0xFF, 0x0412, dat_0805DA40
+    ms_clear_flag 0xFF, 0x1131
+    ms_jump_if_flag2_set 0xFF, 0x0417, dat_0805DBAD
+    ms_jump_if_flag_set 0xFF, 0x0418, dat_0805DBAD
+    ms_set_flag 0xFF, 0x0418
+    ms_u8x2 0x1B, 0x04, 0xFF
+    ms_u8x2 0x28, 0x05, 0x06
+    ms_start_cutscene dat_08088C98, 0x00000000
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DA68..0x0805DA7A
+    ms_write_u32 0x0200B6E0, 0x08050401
+    ms_set_flag 0xFF, 0x1154
+    ms_jump dat_0805DBAD
     @ map-init dispatch 0x0805DA7A..0x0805DA8D
     cs_range 0x4B, 0x4B, dat_0805DA8D
     cs_range 0x4D, 0x4E, dat_0805DAA7
     cs_jump dat_0805DBAD
-    incrom 0x5DA8D, 0x37
+    @ map script 0x0805DA8D..0x0805DAA7
+    ms_jump_if_flag_set 0xFF, 0x0843, dat_0805DBAD
+    ms_set_flag 0xFF, 0x0843
+    ms_start_cutscene dat_08092D9C, 0x00000000
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DAA7..0x0805DAC4
+    ms_jump_if_flag_set 0xFF, 0x0882, dat_0805DBAD
+    ms_set_flag 0xFF, 0x0882
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080935A8, 0x00000000
+    ms_jump dat_0805DBAD
     @ map-init dispatch 0x0805DAC4..0x0805DAE5
     cs_range 0x54, 0x54, dat_0805DAE5
     cs_range 0x58, 0x58, dat_0805DAFB
     cs_range 0x59, 0x59, dat_0805DB15
     cs_range 0x5B, 0x5B, dat_0805DB57
     cs_jump dat_0805DBAD
-    incrom 0x5DAE5, 0x94
+    @ map script 0x0805DAE5..0x0805DAFB
+    ms_jump_if_flag_set 0xFF, 0x15CA, dat_0805DBAD
+    ms_start_cutscene dat_0809D480, 0x000A020A
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DAFB..0x0805DB15
+    ms_set_ptr_pair dat_080960C5, 0x00000000
+    ms_jump_if_flag_set 0xFF, 0x0984, dat_0805DBAD
+    ms_set_flag 0xFF, 0x1154
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DB15..0x0805DB57
+    ms_set_ptr_pair dat_080960C5, 0x00000000
+    ms_write_u32 0x0200B6D4, dat_08015C01
+    ms_set_flag 0xFF, 0x1151
+    ms_write_u32 0x0200B6D8, dat_08015C01
+    ms_set_flag 0xFF, 0x1152
+    ms_write_u32 0x0200B6DC, 0x08075C01
+    ms_set_flag 0xFF, 0x1153
+    ms_write_u32 0x0200B6E0, 0x08055C01
+    ms_set_flag 0xFF, 0x1154
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DB57..0x0805DB79
+    ms_jump_if_flag2_set 0xFF, 0x09C2, dat_0805DBAD
+    ms_jump_if_flag_set 0xFF, 0x09C3, dat_0805DBAD
+    ms_set_flag 0xFF, 0x09C3
+    ms_start_cutscene dat_0809693C, 0x00000000
+    ms_jump dat_0805DBAD
     @ map-init dispatch 0x0805DB79..0x0805DB85
     cs_range 0x6B, 0x6B, dat_0805DB85
     cs_jump dat_0805DBAD
-    incrom 0x5DB85, 0x47
+    @ map script 0x0805DB85..0x0805DBAD
+    ms_jump_if_flag2_set 0xFF, 0x0A82, dat_0805DBAD
+    ms_jump_if_flag_set 0xFF, 0x0A83, dat_0805DBAD
+    ms_set_flag 0xFF, 0x0A83
+    ms_u8x2 0x1B, 0x04, 0xFF
+    ms_u8x2 0x28, 0x05, 0xFF
+    ms_start_cutscene dat_08098500, 0x00000000
+    ms_jump dat_0805DBAD
+    @ map script 0x0805DBAD..0x0805DBAE
+    ms_end
+    @ map script 0x0805DBAE..0x0805DBCC
+    ms_jump_if_flag2_set 0xFF, 0x041A, dat_0805DBCC
+    ms_jump_if_flag_set 0xFF, 0x15E0, dat_0805DBCC
+    ms_start_cutscene dat_0809D480, 0x0020020A
+    ms_jump dat_0805DD84
     @ map-init dispatch 0x0805DBCC..0x0805DBE6
     cs_range 0x10, 0x1F, dat_0805DBE6
     cs_range 0x40, 0x4F, dat_0805DC52
@@ -228,19 +345,80 @@ dat_0805D81C:
     cs_range 0x12, 0x12, dat_0805DBF9
     cs_range 0x15, 0x15, dat_0805DC1F
     cs_jump dat_0805DD84
-    incrom 0x5DBF9, 0x59
+    @ map script 0x0805DBF9..0x0805DC1F
+    ms_jump_if_flag2_set 0xFF, 0x042F, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x040D, dat_0805DD84
+    ms_set_flag 0xFF, 0x040D
+    ms_set_flag 0xFF, 0x1175
+    ms_start_cutscene dat_080882CC, 0x00000000
+    ms_jump dat_0805DD84
+    @ map script 0x0805DC1F..0x0805DC52
+    ms_jump_if_flag2_set 0xFF, 0x043A, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x041A, dat_0805DD84
+    ms_set_flag 0xFF, 0x041A
+    ms_set_flag 0xFF, 0x1175
+    ms_write_u32 0x0200B6E0, 0x00000000
+    ms_clear_flag 0xFF, 0x1154
+    ms_start_cutscene dat_08088EB8, 0x00000000
+    ms_jump dat_0805DD84
     @ map-init dispatch 0x0805DC52..0x0805DC65
     cs_range 0x48, 0x48, dat_0805DC65
     cs_range 0x49, 0x49, dat_0805DC7F
     cs_jump dat_0805DD84
-    incrom 0x5DC65, 0x3C
+    @ map script 0x0805DC65..0x0805DC7F
+    ms_jump_if_flag_set 0xFF, 0x0802, dat_0805DC7F
+    ms_set_flag 0xFF, 0x0802
+    ms_start_cutscene dat_08092574, 0x00000000
+    ms_jump dat_0805DD84
+    @ map script 0x0805DC7F..0x0805DCA1
+    ms_jump_if_flag_set 0xFF, 0x0807, dat_0805DD84
+    ms_jump_if_flag2_set 0xFF, 0x080B, dat_0805DD84
+    ms_set_flag 0xFF, 0x0807
+    ms_start_cutscene dat_08092958, 0x00000000
+    ms_jump dat_0805DD84
     @ map-init dispatch 0x0805DCA1..0x0805DCC2
     cs_range 0x54, 0x54, dat_0805DCC2
     cs_range 0x55, 0x55, dat_0805DCE8
     cs_range 0x58, 0x58, dat_0805DD0E
     cs_range 0x5C, 0x5C, dat_0805DD66
     cs_jump dat_0805DD84
-    incrom 0x5DCC2, 0xDB
+    @ map script 0x0805DCC2..0x0805DCE8
+    ms_jump_if_flag2_set 0xFF, 0x0950, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x0945, dat_0805DD84
+    ms_set_flag 0xFF, 0x0945
+    ms_set_flag 0xFF, 0x1175
+    ms_start_cutscene dat_08095754, 0x00000000
+    ms_jump dat_0805DD84
+    @ map script 0x0805DCE8..0x0805DD0E
+    ms_jump_if_flag2_set 0xFF, 0x0951, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x0949, dat_0805DD84
+    ms_set_flag 0xFF, 0x0949
+    ms_set_flag 0xFF, 0x1175
+    ms_start_cutscene dat_08095A44, 0x00000000
+    ms_jump dat_0805DD84
+    @ map script 0x0805DD0E..0x0805DD66
+    ms_jump_if_u8 0x0D, 0x04, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x0984, dat_0805DD84
+    ms_set_flag 0xFF, 0x0984
+    ms_clear_flag 0xFF, 0x1154
+    ms_write_u32 0x0200B6D4, 0x08015C01
+    ms_set_flag 0xFF, 0x1151
+    ms_write_u32 0x0200B6D8, 0x08015C01
+    ms_set_flag 0xFF, 0x1152
+    ms_write_u32 0x0200B6DC, 0x08075C01
+    ms_set_flag 0xFF, 0x1153
+    ms_write_u32 0x0200B6E0, 0x08055C01
+    ms_set_flag 0xFF, 0x1154
+    ms_start_cutscene dat_08096000, 0x00000000
+    ms_jump dat_0805DD84
+    @ map script 0x0805DD66..0x0805DD84
+    ms_jump_if_flag2_set 0xFF, 0x09C3, dat_0805DD84
+    ms_jump_if_flag_set 0xFF, 0x15CF, dat_0805DD84
+    ms_start_cutscene dat_0809D480, 0x010F020A
+    ms_jump dat_0805DD84
+    @ map script 0x0805DD84..0x0805DD85
+    ms_end
+    incrom 0x5DD85, 0x18
     @ map-init dispatch 0x0805DD9D..0x0805DDB7
     cs_range 0x10, 0x1F, dat_0805DDB7
     cs_range 0x40, 0x4F, dat_0805DDE0
@@ -249,7 +427,12 @@ dat_0805D81C:
     @ map-init dispatch 0x0805DDB7..0x0805DDC3
     cs_range 0x16, 0x16, dat_0805DDC3
     cs_jump dat_0805DF48
-    incrom 0x5DDC3, 0x1D
+    @ map script 0x0805DDC3..0x0805DDE0
+    ms_jump_if_flag_set 0xFF, 0x041B, dat_0805DF48
+    ms_set_flag 0xFF, 0x041B
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08088F8C, 0x00000000
+    ms_jump dat_0805DF48
     @ map-init dispatch 0x0805DDE0..0x0805DE0F
     cs_range 0x48, 0x48, dat_0805DE0F
     cs_range 0x4A, 0x4A, dat_0805DE2C
@@ -258,21 +441,86 @@ dat_0805D81C:
     cs_range 0x4D, 0x4D, dat_0805DE79
     cs_range 0x4F, 0x4F, dat_0805DE96
     cs_jump dat_0805DF48
-    incrom 0x5DE0F, 0xA4
+    @ map script 0x0805DE0F..0x0805DE2C
+    ms_jump_if_flag_set 0xFF, 0x0801, dat_0805DF48
+    ms_set_flag 0xFF, 0x0801
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080924B4, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DE2C..0x0805DE46
+    ms_jump_if_flag2_set 0xFF, 0x0807, dat_0805DF48
+    ms_write_u32 0x0200B6D4, 0x08010101
+    ms_set_flag 0xFF, 0x1151
+    ms_jump dat_0805DF48
+    @ map script 0x0805DE46..0x0805DE63
+    ms_jump_if_flag_set 0xFF, 0x0841, dat_0805DF48
+    ms_set_flag 0xFF, 0x0841
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08092C7C, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DE63..0x0805DE79
+    ms_jump_if_flag_set 0xFF, 0x15C8, dat_0805DF48
+    ms_start_cutscene dat_0809D480, 0x0008020A
+    ms_jump dat_0805DF48
+    @ map script 0x0805DE79..0x0805DE96
+    ms_jump_if_flag_set 0xFF, 0x0881, dat_0805DF48
+    ms_set_flag 0xFF, 0x0881
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080934D0, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DE96..0x0805DEB3
+    ms_jump_if_flag_set 0xFF, 0x08C1, dat_0805DF48
+    ms_set_flag 0xFF, 0x08C1
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08093ED4, 0x00000000
+    ms_jump dat_0805DF48
     @ map-init dispatch 0x0805DEB3..0x0805DED4
     cs_range 0x52, 0x52, dat_0805DED4
     cs_range 0x54, 0x54, dat_0805DEF1
     cs_range 0x56, 0x56, dat_0805DF0E
     cs_range 0x5B, 0x5B, dat_0805DF2B
     cs_jump dat_0805DF48
-    incrom 0x5DED4, 0x75
+    @ map script 0x0805DED4..0x0805DEF1
+    ms_jump_if_flag_set 0xFF, 0x0901, dat_0805DF48
+    ms_set_flag 0xFF, 0x0901
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08094CC0, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DEF1..0x0805DF0E
+    ms_jump_if_flag_set 0xFF, 0x0941, dat_0805DF48
+    ms_set_flag 0xFF, 0x0941
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08095390, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DF0E..0x0805DF2B
+    ms_jump_if_flag_set 0xFF, 0x0981, dat_0805DF48
+    ms_set_flag 0xFF, 0x0981
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08095D3C, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DF2B..0x0805DF48
+    ms_jump_if_flag_set 0xFF, 0x09C1, dat_0805DF48
+    ms_set_flag 0xFF, 0x09C1
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08096674, 0x00000000
+    ms_jump dat_0805DF48
+    @ map script 0x0805DF48..0x0805DF49
+    ms_end
     @ map-init dispatch 0x0805DF49..0x0805DF55
     cs_range 0x40, 0x4F, dat_0805DF55
     cs_jump dat_0805DF83
     @ map-init dispatch 0x0805DF55..0x0805DF61
     cs_range 0x4E, 0x4E, dat_0805DF61
     cs_jump dat_0805DF83
-    incrom 0x5DF61, 0x40
+    @ map script 0x0805DF61..0x0805DF83
+    ms_jump_if_flag2_set 0xFF, 0x088E, dat_0805DF83
+    ms_jump_if_flag_set 0xFF, 0x0889, dat_0805DF83
+    ms_set_flag 0xFF, 0x0889
+    ms_start_cutscene dat_08093BE0, 0x00000000
+    ms_jump dat_0805DF83
+    @ map script 0x0805DF83..0x0805DF84
+    ms_end
+    incrom 0x5DF84, 0x1D
     @ map-init dispatch 0x0805DFA1..0x0805DFBB
     cs_range 0x10, 0x1F, dat_0805DFBB
     cs_range 0x40, 0x4F, dat_0805DFE1
@@ -281,13 +529,53 @@ dat_0805D81C:
     @ map-init dispatch 0x0805DFBB..0x0805DFC7
     cs_range 0x19, 0x19, dat_0805DFC7
     cs_jump dat_0805E21C
-    incrom 0x5DFC7, 0x1A
+    @ map script 0x0805DFC7..0x0805DFE1
+    ms_jump_if_flag2_set 0xFF, 0x041E, dat_0805E21C
+    ms_write_u32 0x0200B6D4, 0x08050001
+    ms_set_flag 0xFF, 0x1151
+    ms_jump dat_0805E21C
     @ map-init dispatch 0x0805DFE1..0x0805DFFB
     cs_range 0x4A, 0x4A, dat_0805DFFB
     cs_range 0x4C, 0x4C, dat_0805E035
     cs_range 0x4E, 0x4E, dat_0805E072
     cs_jump dat_0805E21C
-    incrom 0x5DFFB, 0xB1
+    @ map script 0x0805DFFB..0x0805E018
+    ms_jump_if_flag_set 0xFF, 0x0808, dat_0805E018
+    ms_set_flag 0xFF, 0x0808
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08092ABC, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E018..0x0805E035
+    ms_jump_if_flag_set 0xFF, 0x0809, dat_0805E21C
+    ms_set_flag 0xFF, 0x0809
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08092BD4, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E035..0x0805E055
+    ms_jump_if_flag_set 0xFF, 0x0847, dat_0805E055
+    ms_set_flag 0xFF, 0x0847
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_u8x2 0x28, 0x05, 0x09
+    ms_start_cutscene dat_08093264, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E055..0x0805E072
+    ms_jump_if_flag_set 0xFF, 0x0848, dat_0805E21C
+    ms_set_flag 0xFF, 0x0848
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080933BC, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E072..0x0805E08F
+    ms_jump_if_flag_set 0xFF, 0x088A, dat_0805E08F
+    ms_set_flag 0xFF, 0x088A
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08093D08, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E08F..0x0805E0AC
+    ms_jump_if_flag_set 0xFF, 0x088B, dat_0805E21C
+    ms_set_flag 0xFF, 0x088B
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08093E0C, 0x00000000
+    ms_jump dat_0805E21C
     @ map-init dispatch 0x0805E0AC..0x0805E0D4
     cs_range 0x50, 0x50, dat_0805E0D4
     cs_range 0x53, 0x53, dat_0805E111
@@ -295,7 +583,77 @@ dat_0805D81C:
     cs_range 0x5A, 0x5A, dat_0805E1A8
     cs_range 0x5F, 0x5F, dat_0805E1E2
     cs_jump dat_0805E21C
-    incrom 0x5E0D4, 0x149
+    @ map script 0x0805E0D4..0x0805E0F4
+    ms_jump_if_flag_set 0xFF, 0x08C5, dat_0805E0F4
+    ms_set_flag 0xFF, 0x08C5
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_u8x2 0x28, 0x05, 0x09
+    ms_start_cutscene dat_08094234, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E0F4..0x0805E111
+    ms_jump_if_flag_set 0xFF, 0x08C6, dat_0805E21C
+    ms_set_flag 0xFF, 0x08C6
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_0809439C, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E111..0x0805E12E
+    ms_jump_if_flag_set 0xFF, 0x0904, dat_0805E12E
+    ms_set_flag 0xFF, 0x0904
+    ms_u8x2 0x1B, 0x04, 0xFF
+    ms_start_cutscene dat_080950D8, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E12E..0x0805E14E
+    ms_jump_if_flag_set 0xFF, 0x0905, dat_0805E14E
+    ms_set_flag 0xFF, 0x0905
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_u8x2 0x28, 0x05, 0xFF
+    ms_start_cutscene dat_0809519C, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E14E..0x0805E16B
+    ms_jump_if_flag_set 0xFF, 0x0906, dat_0805E21C
+    ms_set_flag 0xFF, 0x0906
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080952CC, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E16B..0x0805E18B
+    ms_jump_if_flag_set 0xFF, 0x094A, dat_0805E18B
+    ms_set_flag 0xFF, 0x094A
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_u8x2 0x28, 0x05, 0x09
+    ms_start_cutscene dat_08095B34, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E18B..0x0805E1A8
+    ms_jump_if_flag_set 0xFF, 0x094B, dat_0805E21C
+    ms_set_flag 0xFF, 0x094B
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08095C68, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E1A8..0x0805E1C5
+    ms_jump_if_flag_set 0xFF, 0x0986, dat_0805E1C5
+    ms_set_flag 0xFF, 0x0986
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080963EC, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E1C5..0x0805E1E2
+    ms_jump_if_flag_set 0xFF, 0x0987, dat_0805E21C
+    ms_set_flag 0xFF, 0x0987
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08096548, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E1E2..0x0805E1FF
+    ms_jump_if_flag_set 0xFF, 0x09C9, dat_0805E1FF
+    ms_set_flag 0xFF, 0x09C9
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08096FB0, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E1FF..0x0805E21C
+    ms_jump_if_flag_set 0xFF, 0x09CA, dat_0805E21C
+    ms_set_flag 0xFF, 0x09CA
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080970D0, 0x00000000
+    ms_jump dat_0805E21C
+    @ map script 0x0805E21C..0x0805E21D
+    ms_end
     @ map-init dispatch 0x0805E21D..0x0805E229
     cs_range 0x10, 0x1F, dat_0805E229
     cs_jump dat_0805E2B2
@@ -304,7 +662,30 @@ dat_0805D81C:
     cs_range 0x18, 0x18, dat_0805E267
     cs_range 0x19, 0x19, dat_0805E28B
     cs_jump dat_0805E2B2
-    incrom 0x5E243, 0xA5
+    @ map script 0x0805E243..0x0805E267
+    ms_set_flag 0xFF, 0x1151
+    ms_jump_if_u8 0x0D, 0x01, dat_0805E2B2
+    ms_jump_if_flag_set 0xFF, 0x041C, dat_0805E2B2
+    ms_set_flag 0xFF, 0x041C
+    ms_start_cutscene dat_08089048, 0x00000000
+    ms_jump dat_0805E2B2
+    @ map script 0x0805E267..0x0805E28B
+    ms_set_flag 0xFF, 0x1151
+    ms_jump_if_u8 0x0D, 0x01, dat_0805E2B2
+    ms_jump_if_flag_set 0xFF, 0x041D, dat_0805E2B2
+    ms_set_flag 0xFF, 0x041D
+    ms_start_cutscene dat_080890F4, 0x00000000
+    ms_jump dat_0805E2B2
+    @ map script 0x0805E28B..0x0805E2B2
+    ms_jump_if_flag_set 0xFF, 0x041E, dat_0805E2B2
+    ms_set_flag 0xFF, 0x041E
+    ms_write_u32 0x0200B6D4, 0x08050001
+    ms_set_flag 0xFF, 0x1151
+    ms_start_cutscene dat_080891CC, 0x00000000
+    ms_jump dat_0805E2B2
+    @ map script 0x0805E2B2..0x0805E2B3
+    ms_end
+    incrom 0x5E2B3, 0x35
     @ map-init dispatch 0x0805E2E8..0x0805E302
     cs_range 0x10, 0x1F, dat_0805E302
     cs_range 0x40, 0x4F, dat_0805E360
@@ -314,39 +695,139 @@ dat_0805D81C:
     cs_range 0x12, 0x12, dat_0805E315
     cs_range 0x13, 0x14, dat_0805E34F
     cs_jump dat_0805E4C9
-    incrom 0x5E315, 0x4B
+    @ map script 0x0805E315..0x0805E34F
+    ms_jump_if_flag_set 0xFF, 0x040D, dat_0805E32A
+    ms_write_u32 0x0200B6D8, 0x08050101
+    ms_set_flag 0xFF, 0x1152
+    ms_jump_if_flag2_set 0xFF, 0x040E, dat_0805E4C9
+    ms_jump_if_flag_set 0xFF, 0x040F, dat_0805E4C9
+    ms_set_flag 0xFF, 0x040F
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080885D0, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E34F..0x0805E360
+    ms_jump_if_flag2_set 0xFF, 0x0410, dat_0805E4C9
+    ms_clear_flag 0xFF, 0x1130
+    ms_jump dat_0805E4C9
     @ map-init dispatch 0x0805E360..0x0805E37A
     cs_range 0x49, 0x49, dat_0805E37A
     cs_range 0x4B, 0x4B, dat_0805E397
     cs_range 0x4D, 0x4D, dat_0805E3B4
     cs_jump dat_0805E4C9
-    incrom 0x5E37A, 0xBE
+    @ map script 0x0805E37A..0x0805E397
+    ms_jump_if_flag_set 0xFF, 0x0803, dat_0805E4C9
+    ms_set_flag 0xFF, 0x0803
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08092658, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E397..0x0805E3B4
+    ms_jump_if_flag_set 0xFF, 0x0842, dat_0805E4C9
+    ms_set_flag 0xFF, 0x0842
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08092D10, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E3B4..0x0805E3E1
+    ms_jump_if_flag_set 0xFF, 0x0884, dat_0805E4C9
+    ms_set_flag 0xFF, 0x1132
+    ms_clear_flag 0xFF, 0x1134
+    ms_jump_if_flag_set 0xFF, 0x0883, dat_0805E3E1
+    ms_set_flag 0xFF, 0x0883
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_08093658, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E3E1..0x0805E438
+    ms_write_u32 0x0200B6D4, 0x08032801
+    ms_set_flag 0xFF, 0x1151
+    ms_write_u32 0x0200B6D8, 0x08052801
+    ms_set_flag 0xFF, 0x1152
+    ms_jump_if_flag2_set 0xFF, 0x0890, dat_0805E4C9
+    ms_set_flag 0xFF, 0x0884
+    ms_write_u32 0x0200B6D4, 0x00000000
+    ms_clear_flag 0xFF, 0x1151
+    ms_write_u32 0x0200B6D8, 0x00000000
+    ms_clear_flag 0xFF, 0x1152
+    ms_u8x2 0x1B, 0x04, 0xFF
+    ms_u8x2 0x27, 0x07, 0x7A
+    ms_u16 0x2D, 0xFFFF
+    ms_start_cutscene dat_08093714, 0x00000000
+    ms_jump dat_0805E4C9
     @ map-init dispatch 0x0805E438..0x0805E44B
     cs_range 0x5B, 0x5B, dat_0805E44B
     cs_range 0x5E, 0x5E, dat_0805E47C
     cs_jump dat_0805E4C9
-    incrom 0x5E44B, 0x7F
+    @ map script 0x0805E44B..0x0805E47C
+    ms_jump_if_flag_set 0xFF, 0x09C3, dat_0805E4C9
+    ms_jump_if_flag2_set 0xFF, 0x09C1, dat_0805E4C9
+    ms_clear_flag 0xFF, 0x01CC
+    ms_jump_if_flag_set 0xFF, 0x09C2, dat_0805E4C9
+    ms_set_flag 0xFF, 0x09C2
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_start_cutscene dat_080967BC, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E47C..0x0805E4B4
+    ms_jump_if_flag_set 0xFF, 0x09C8, dat_0805E4C9
+    ms_jump_if_flag2_set 0xFF, 0x09C6, dat_0805E4C9
+    ms_clear_flag 0xFF, 0x01CC
+    ms_clear_flag 0xFF, 0x01CD
+    ms_jump_if_flag_set 0xFF, 0x09C7, dat_0805E4B4
+    ms_set_flag 0xFF, 0x09C7
+    ms_u8x2 0x1B, 0x0C, 0xFF
+    ms_u8x2 0x28, 0x05, 0x09
+    ms_start_cutscene dat_08096B88, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E4B4..0x0805E4C9
+    ms_set_flag 0xFF, 0x09C8
+    ms_u8x2 0x1B, 0x04, 0xFF
+    ms_start_cutscene dat_08096C68, 0x00000000
+    ms_jump dat_0805E4C9
+    @ map script 0x0805E4C9..0x0805E4CA
+    ms_end
     @ map-init dispatch 0x0805E4CA..0x0805E4D6
     cs_range 0x40, 0x4F, dat_0805E4D6
     cs_jump dat_0805E4FF
     @ map-init dispatch 0x0805E4D6..0x0805E4E2
     cs_range 0x4F, 0x4F, dat_0805E4E2
     cs_jump dat_0805E4FF
-    incrom 0x5E4E2, 0x3E
+    incrom 0x5E4E2, 0x1D
+    @ map script 0x0805E4FF..0x0805E500
+    ms_end
+    incrom 0x5E500, 0x20
     @ map-init dispatch 0x0805E520..0x0805E52C
     cs_range 0x10, 0x1F, dat_0805E52C
     cs_jump dat_0805E565
     @ map-init dispatch 0x0805E52C..0x0805E538
     cs_range 0x14, 0x14, dat_0805E538
     cs_jump dat_0805E565
-    incrom 0x5E538, 0x3C
+    @ map script 0x0805E538..0x0805E565
+    ms_jump_if_flag2_set 0xFF, 0x0413, dat_0805E544
+    ms_clear_flag 0xFF, 0x1130
+    ms_u8 0x2B, 0xFF
+    ms_ptr 0x2A, dat_0805E568
+    ms_jump_if_flag_set 0xFF, 0x0414, dat_0805E565
+    ms_set_flag 0xFF, 0x0414
+    ms_start_cutscene dat_080888A8, 0x00000000
+    ms_jump dat_0805E565
+    @ map script 0x0805E565..0x0805E566
+    ms_end
+    incrom 0x5E566, 0xE
     @ map-init dispatch 0x0805E574..0x0805E580
     cs_range 0x10, 0x1F, dat_0805E580
     cs_jump dat_0805E5AC
     @ map-init dispatch 0x0805E580..0x0805E58C
     cs_range 0x12, 0x12, dat_0805E58C
     cs_jump dat_0805E5AC
-    incrom 0x5E58C, 0x50C
+    @ map script 0x0805E58C..0x0805E5AC
+    ms_jump_if_u8 0x0D, 0x10, dat_0805E5AC
+    ms_jump_if_flag_set 0xFF, 0x040E, dat_0805E5AC
+    ms_set_flag 0xFF, 0x040E
+    ms_start_cutscene dat_0808850C, 0x00000000
+    ms_jump dat_0805E5AC
+    @ map script 0x0805E5AC..0x0805E5AD
+    ms_end
+    @ map script 0x0805E5AD..0x0805E5B7
+    ms_set_ptr_pair dat_0809F5D9, 0x00000000
+    ms_end
+    incrom 0x5E5B7, 0x4E1
 
     .global sub_0805EA98
     .thumb_func

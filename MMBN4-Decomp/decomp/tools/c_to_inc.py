@@ -74,11 +74,20 @@ def main() -> None:
     out_lines = [f"@ Compiled from {src} by {compiler} (DC-5 C)", "    .thumb"]
     if use_agbcc:
         out_lines.append("    .syntax divided")
+    in_rodata = False
     for line in raw_asm.splitlines():
         s = line.strip()
         if not s or s.startswith("@"):
             continue
         first = s.split()[0]
+        if first == ".section":
+            in_rodata = ".rodata" in s
+            continue
+        if first == ".text":
+            in_rodata = False
+            continue
+        if in_rodata:
+            continue
         if first in SKIP_DIRECTIVES:
             continue
         if re.match(r"^\.Lfe\d+:$", s):
