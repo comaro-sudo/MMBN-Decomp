@@ -57,7 +57,14 @@ $(SRC): config/segments_$(VERSION).toml symbols/functions_$(VERSION).txt \
 $(BUILD)/externs.inc: $(SRC)
 	@test -f $@
 
-$(OBJ): $(SRC) $(BUILD)/externs.inc $(BUILD)/baserom.gba
+C_SRCS  := $(wildcard src/*.c)
+C_INCS  := $(patsubst src/%.c,$(BUILD)/c/%.s,$(C_SRCS))
+
+$(BUILD)/c/%.s: src/%.c tools/c_to_inc.py
+	@mkdir -p $(BUILD)/c
+	python3 tools/c_to_inc.py $< $@
+
+$(OBJ): $(SRC) $(BUILD)/externs.inc $(BUILD)/baserom.gba $(C_INCS)
 	$(AS) $(ASFLAGS) -o $@ $(SRC)
 
 $(ELF): $(OBJ) ld_script.ld

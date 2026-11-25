@@ -14932,55 +14932,7 @@ _08111872:
     bx r1
     .hword 0x0000
 
-    .global sub_08111878
-    .thumb_func
-sub_08111878:
-    svc #0xe
-    bx lr
-
-    .global sub_0811187C
-    .thumb_func
-sub_0811187C:   @ SWI_CpuFastSet
-    svc #0xc
-    bx lr
-
-    .global sub_08111880
-    .thumb_func
-sub_08111880:   @ SWI_CpuSet
-    svc #0xb
-    bx lr
-
-    .global sub_08111884
-    .thumb_func
-sub_08111884:   @ SWI_Div
-    svc #6
-    bx lr
-
-    .global sub_08111888
-    .thumb_func
-sub_08111888:   @ SWI_DivRem
-    svc #6
-    adds r0, r1, #0
-    bx lr
-    .hword 0x0000
-
-    .global sub_08111890
-    .thumb_func
-sub_08111890:   @ SWI_LZ77UnCompWram
-    svc #0x12
-    bx lr
-
-    .global sub_08111894
-    .thumb_func
-sub_08111894:   @ SWI_LZ77UnCompVram
-    svc #0x11
-    bx lr
-
-    .global sub_08111898
-    .thumb_func
-sub_08111898:   @ SWI_Sqrt
-    svc #8
-    bx lr
+    .include "c/bios_swi.s"
 
     .global sub_0811189C
     .thumb_func
