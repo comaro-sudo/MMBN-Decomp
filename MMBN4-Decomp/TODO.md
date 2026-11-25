@@ -39,17 +39,16 @@ Owner decisions marked ⚠ come first.
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Decide which Tier A items make 1.0 |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
-| 4 | ⚠ **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, 3DS, NDS | ⚠ Hardware owned; the GBARunner licence |
+| 4 | **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, New 3DS, DSi | Hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3` decided 2026-11-25). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
 | 5 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
-| 6 | ⚠ **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 |
+| 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
 
 - [ ] RS/BM version choice in the merged ROM (`plan/DEFINITIVE-EDITION.md` §7 q1). The canon lineup and the friendlies assume one merged story.
 - [ ] Tier A leftovers (story-battle rewards, ToyRobo, cutscene skip), Tier C content in 1.0, and D1–D9 ([`plan/00` §4](plan/00-decisions-and-feasibility.md)).
 - [ ] Placeholder/original Duo & Grand Prix Power art for `--public` builds.
-- [ ] Hardware owned for the console ports; the GBARunner licence ([`plan/emulation-layer/06`](plan/emulation-layer/06-milestones-and-risks.md)).
-- [ ] Principia Trilogy: the base engine, which mechanics survive, how the story joins, the name.
+- [ ] Ask Gericom about the GBARunner licence for DSi/NDS (`D-EL5`, [`plan/emulation-layer/06`](plan/emulation-layer/06-milestones-and-risks.md)). *(Hardware `D-EL1` = Wii U, New 3DS, DSi; ports licence `D-EL3` = GPL-3.0 OK; Principia Trilogy = later — decided 2026-11-25.)*
 
 ## Before committing
 
