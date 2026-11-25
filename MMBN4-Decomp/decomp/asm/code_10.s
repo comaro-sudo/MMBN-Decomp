@@ -14934,28 +14934,7 @@ _08111872:
 
     .include "c/bios_swi.s"
 
-    .global sub_0811189C
-    .thumb_func
-sub_0811189C:   @ MemCopyForward
-    push {r4, lr}
-    adds r4, r0, #0
-    subs r3, r2, #1
-    cmp r2, #0
-    beq _081118B8
-    movs r2, #1
-    rsbs r2, r2, #0
-_081118AA:
-    ldrb r0, [r4]
-    strb r0, [r1]
-    adds r4, #1
-    adds r1, #1
-    subs r3, #1
-    cmp r3, r2
-    bne _081118AA
-_081118B8:
-    pop {r4}
-    pop {r0}
-    bx r0
+    .include "c/agb_sram.s"
     .hword 0x0000
 
     .global sub_081118C0
@@ -20004,34 +19983,6 @@ _08113C08:
     .word 0xFF00FFFF
 _08113C0C:
     .word 0x00FFFFFF
-
-    .global sub_08113C10
-    .thumb_func
-sub_08113C10:
-    ldr r0, [r1, #0x40]
-    ldrb r2, [r0]
-    adds r0, r1, #0
-    adds r0, #0x24
-    strb r2, [r0]
-    ldr r0, [r1, #0x40]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
-    .hword 0x0000
-
-    .global sub_08113C24
-    .thumb_func
-sub_08113C24:
-    ldr r0, [r1, #0x40]
-    ldrb r2, [r0]
-    adds r0, r1, #0
-    adds r0, #0x2c
-    strb r2, [r0]
-    ldr r0, [r1, #0x40]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
-    .hword 0x0000
 
     .include "c/m4a_cmds.s"
 

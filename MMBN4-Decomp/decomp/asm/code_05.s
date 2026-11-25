@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "cutscene_macros.inc"
 
     .global sub_080711E4
     .thumb_func
@@ -317,7 +318,11 @@ dat_0807158C:
     .word dat_0807184C
     .word dat_0807184C
     .word dat_0807184C
-    incrom 0x7184C, 0x1788
+    incrom 0x7184C, 0x50
+    @ map-init dispatch 0x0807189C..0x080718A8
+    cs_range 0x00, 0x0F, dat_080718A8
+    cs_jump dat_0807191F
+    incrom 0x718A8, 0x172C
 
     .global sub_08072FD4
     .thumb_func
@@ -1152,7 +1157,11 @@ _080773B4:
     .word dat_080773B8
     .global dat_080773B8
 dat_080773B8:
-    incrom 0x773B8, 0xC6C
+    incrom 0x773B8, 0x125
+    @ map-init dispatch 0x080774DD..0x080774E9
+    cs_range 0x30, 0x3F, dat_080774E9
+    cs_jump dat_08077537
+    incrom 0x774E9, 0xB3B
 
     .global sub_08078024
     .thumb_func
@@ -1578,7 +1587,11 @@ dat_080799E6:
     .word dat_08079BF8
     .word dat_08079C08
     .word dat_08079C18
-    incrom 0x79BE8, 0x1538
+    incrom 0x79BE8, 0x44
+    @ map-init dispatch 0x08079C2C..0x08079C38
+    cs_range 0x30, 0x3F, dat_08079C38
+    cs_jump dat_08079C7E
+    incrom 0x79C38, 0x14E8
 
     .global sub_0807B120
     .thumb_func
@@ -1801,7 +1814,13 @@ _0807CC84:
     .word dat_0807CC88
     .global dat_0807CC88
 dat_0807CC88:
-    incrom 0x7CC88, 0x1110
+    incrom 0x7CC88, 0xD5
+    @ map-init dispatch 0x0807CD5D..0x0807CD77
+    cs_range 0x20, 0x2F, dat_0807CD77
+    cs_range 0x40, 0x4F, dat_0807CDCB
+    cs_range 0x50, 0x5F, dat_0807CE3D
+    cs_jump dat_0807CE7D
+    incrom 0x7CD77, 0x1021
 
     .global sub_0807DD98
     .thumb_func
@@ -2100,7 +2119,12 @@ dat_0807FCFC:
     .word dat_0807FF88
     .word dat_0807FF98
     .word dat_0807FFA8
-    incrom 0x7FF78, 0xDD0
+    incrom 0x7FF78, 0x44
+    @ map-init dispatch 0x0807FFBC..0x0807FFCF
+    cs_range 0x20, 0x2F, dat_0807FFCF
+    cs_range 0x60, 0x6F, dat_08080025
+    cs_jump dat_08080053
+    incrom 0x7FFCF, 0xD79
 
     .global sub_08080D48
     .thumb_func
@@ -2425,7 +2449,11 @@ dat_0808273C:
     .word dat_08082A90
     .word dat_08082AA0
     .word dat_08082AB0
-    incrom 0x82A40, 0xFB4
+    incrom 0x82A40, 0x89
+    @ map-init dispatch 0x08082AC9..0x08082AD5
+    cs_range 0x70, 0x7F, dat_08082AD5
+    cs_jump dat_08082B38
+    incrom 0x82AD5, 0xF1F
 
     .global sub_080839F4
     .thumb_func

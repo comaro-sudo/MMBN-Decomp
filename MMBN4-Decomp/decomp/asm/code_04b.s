@@ -46,6 +46,7 @@ dat_0805D46C:
 dat_0805D48C:
     incrom 0x5D48C, 0x20
     .thumb
+    .include "cutscene_macros.inc"
 
     .global sub_0805D4AC
     .thumb_func
@@ -159,7 +160,13 @@ dat_0805D5D8:
     incrom 0x5D7BC, 0x60
     .global dat_0805D81C
 dat_0805D81C:
-    incrom 0x5D81C, 0x127C
+    incrom 0x5D81C, 0x61
+    @ map-init dispatch 0x0805D87D..0x0805D897
+    cs_range 0x10, 0x1F, dat_0805D897
+    cs_range 0x40, 0x4F, dat_0805D8B5
+    cs_range 0x50, 0x5F, dat_0805D8E3
+    cs_jump dat_0805D905
+    incrom 0x5D897, 0x1201
 
     .global sub_0805EA98
     .thumb_func

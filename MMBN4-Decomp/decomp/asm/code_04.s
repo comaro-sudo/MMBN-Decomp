@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "cutscene_macros.inc"
 
     .global sub_0804F21C
     .thumb_func
@@ -7495,7 +7496,14 @@ dat_08054388:
     incrom 0x5446C, 0x70
     .global dat_080544DC
 dat_080544DC:
-    incrom 0x544DC, 0x2890
+    incrom 0x544DC, 0x64
+    @ map-init dispatch 0x08054540..0x08054561
+    cs_range 0x00, 0x0F, dat_08054561
+    cs_range 0x10, 0x1F, dat_080545C8
+    cs_range 0x40, 0x4F, dat_080545F9
+    cs_range 0x57, 0x57, dat_0805461F
+    cs_jump dat_0805463D
+    incrom 0x54561, 0x280B
     .global dat_08056D6C
 dat_08056D6C:
     incrom 0x56D6C, 0x9C
@@ -7588,7 +7596,11 @@ dat_08056ED4:
     incrom 0x56ED4, 0xA0
     .global dat_08056F74
 dat_08056F74:
-    incrom 0x56F74, 0x21B0
+    incrom 0x56F74, 0x2C
+    @ map-init dispatch 0x08056FA0..0x08056FAC
+    cs_range 0x00, 0x0F, dat_08056FAC
+    cs_jump dat_08056FF3
+    incrom 0x56FAC, 0x2178
     .global dat_08059124
 dat_08059124:
     incrom 0x59124, 0x110
@@ -7698,7 +7710,12 @@ dat_0805931C:
     incrom 0x593F4, 0x40
     .global dat_08059434
 dat_08059434:
-    incrom 0x59434, 0x1B40
+    incrom 0x59434, 0x38
+    @ map-init dispatch 0x0805946C..0x0805947F
+    cs_range 0x30, 0x3F, dat_0805947F
+    cs_range 0x40, 0x4F, dat_080594C9
+    cs_jump dat_080594F2
+    incrom 0x5947F, 0x1AF5
 
     .global sub_0805AF74
     .thumb_func

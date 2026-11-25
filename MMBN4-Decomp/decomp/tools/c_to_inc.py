@@ -10,6 +10,7 @@ Uses pret/agbcc (GCC 2.9, matching Nintendo's original GBA SDK compiler) when
 """
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -17,21 +18,27 @@ from pathlib import Path
 DECOMP = Path(__file__).resolve().parents[1]
 AGBCC = DECOMP.parent / "tools" / "agbcc" / "tools" / "agbcc" / "bin" / "agbcc"
 
-SKIP_PREFIXES = (
-    ".cpu ", ".arch ", ".fpu ", ".eabi_attribute ", ".file ",
-    ".text", ".section ", ".ident ", ".code ", ".syntax ",
-    ".size ", ".type ", ".bss", ".data", ".gcc2_compiled",
-)
+SKIP_DIRECTIVES = {
+    ".cpu", ".arch", ".fpu", ".eabi_attribute", ".file",
+    ".text", ".section", ".ident", ".code", ".syntax",
+    ".size", ".type", ".bss", ".data", ".gcc2_compiled.", ".gcc2_compiled.:",
+}
 
 
 def main() -> None:
     args = sys.argv[1:]
     use_agbcc = False
-    if args and args[0] == "--agbcc":
-        use_agbcc = True
-        args = args[1:]
+    opt = "-O2"
+    while args and args[0].startswith("--"):
+        flag = args.pop(0)
+        if flag == "--agbcc":
+            use_agbcc = True
+        elif flag == "--O1":
+            opt = "-O1"
+        else:
+            sys.exit(f"unknown flag {flag}")
     if len(args) != 2:
-        sys.exit("usage: c_to_inc.py [--agbcc] <in.c> <out.s>")
+        sys.exit("usage: c_to_inc.py [--agbcc] [--O1] <in.c> <out.s>")
     src, dst = Path(args[0]), Path(args[1])
     dst.parent.mkdir(parents=True, exist_ok=True)
 
@@ -41,7 +48,7 @@ def main() -> None:
         tmp_i = dst.with_suffix(".i")
         tmp_s = dst.with_suffix(".raw.s")
         subprocess.run(["arm-none-eabi-cpp", "-nostdinc", str(src), "-o", str(tmp_i)], check=True)
-        subprocess.run([str(AGBCC), "-O2", "-mthumb-interwork", "-fhex-asm", str(tmp_i), "-o", str(tmp_s)], check=True)
+        subprocess.run([str(AGBCC), opt, "-mthumb-interwork", "-fhex-asm", str(tmp_i), "-o", str(tmp_s)], check=True)
         raw_asm = tmp_s.read_text(encoding="utf-8")
         tmp_i.unlink(missing_ok=True)
         tmp_s.unlink(missing_ok=True)
@@ -56,6 +63,8 @@ def main() -> None:
         raw_asm = res.stdout
 
     compiler = "agbcc" if use_agbcc else "arm-none-eabi-gcc"
+    stem = re.sub(r"[^A-Za-z0-9_]", "_", src.stem)
+    l_re = re.compile(r"\.L([A-Za-z0-9_]+)\b")
     out_lines = [f"@ Compiled from {src} by {compiler} (DC-5 C)", "    .thumb"]
     if use_agbcc:
         out_lines.append("    .syntax divided")
@@ -63,10 +72,15 @@ def main() -> None:
         s = line.strip()
         if not s or s.startswith("@"):
             continue
-        if any(s.startswith(p) for p in SKIP_PREFIXES):
+        first = s.split()[0]
+        if first in SKIP_DIRECTIVES:
             continue
-        if not use_agbcc and (s.startswith(".align ") or s.startswith(".p2align ")):
+        if re.match(r"^\.Lfe\d+:$", s):
             continue
+        if not use_agbcc and first in (".align", ".p2align"):
+            continue
+        # Namespace compiler-generated local labels (.L1 -> .L_<stem>_1)
+        line = l_re.sub(rf".L_{stem}_\1", line)
         out_lines.append(line)
     if use_agbcc:
         out_lines.append("    .syntax unified")

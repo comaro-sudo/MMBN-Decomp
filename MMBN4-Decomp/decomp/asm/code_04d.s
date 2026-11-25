@@ -7,6 +7,7 @@
 dat_0806765C:
     incrom 0x6765C, 0x4E0
     .thumb
+    .include "cutscene_macros.inc"
 
     .global sub_08067B3C
     .thumb_func
@@ -113,7 +114,13 @@ dat_08067C50:
     incrom 0x67CB0, 0x40
     .global dat_08067CF0
 dat_08067CF0:
-    incrom 0x67CF0, 0xD9C
+    incrom 0x67CF0, 0x38
+    @ map-init dispatch 0x08067D28..0x08067D42
+    cs_range 0x00, 0x0F, dat_08067D42
+    cs_range 0x10, 0x1F, dat_08067D8F
+    cs_range 0x20, 0x2F, dat_08067DB8
+    cs_jump dat_08067E0D
+    incrom 0x67D42, 0xD4A
 
     .global sub_08068A8C
     .thumb_func
@@ -371,7 +378,11 @@ _08069578:
     .word dat_0806957C
     .global dat_0806957C
 dat_0806957C:
-    incrom 0x6957C, 0x45C
+    incrom 0x6957C, 0xA4
+    @ map-init dispatch 0x08069620..0x0806962C
+    cs_range 0x00, 0x0F, dat_0806962C
+    cs_jump dat_08069643
+    incrom 0x6962C, 0x3AC
     .word dat_0809E785
     .word dat_0809E870
     .word dat_0809E97B
@@ -750,7 +761,11 @@ dat_0806AA9C:
     .word dat_0806AB0C
     .word dat_0806AB1C
     .word dat_0806AB2C
-    incrom 0x6AAFC, 0x1470
+    incrom 0x6AAFC, 0x5A
+    @ map-init dispatch 0x0806AB56..0x0806AB62
+    cs_range 0x10, 0x1F, dat_0806AB62
+    cs_jump dat_0806AB99
+    incrom 0x6AB62, 0x140A
     .word dat_0806C308
     .word dat_0806C378
     .word dat_0806C038
@@ -1648,7 +1663,11 @@ dat_0806D92C:
     .word dat_0806DA64
     .word dat_0806DA74
     .word dat_0806DA84
-    incrom 0x6DA44, 0x264
+    incrom 0x6DA44, 0x6B
+    @ map-init dispatch 0x0806DAAF..0x0806DABB
+    cs_range 0x20, 0x2F, dat_0806DABB
+    cs_jump dat_0806DAE1
+    incrom 0x6DABB, 0x1ED
 
     .global sub_0806DCA8
     .thumb_func

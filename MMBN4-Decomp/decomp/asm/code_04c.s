@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0x14   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "cutscene_macros.inc"
 
     .global sub_080612C8
     .thumb_func
@@ -337,7 +338,12 @@ dat_08062890:
     incrom 0x62B88, 0xA0
     .global dat_08062C28
 dat_08062C28:
-    incrom 0x62C28, 0xA44
+    incrom 0x62C28, 0xA4
+    @ map-init dispatch 0x08062CCC..0x08062CDF
+    cs_range 0x20, 0x2F, dat_08062CDF
+    cs_range 0x70, 0x7F, dat_08062D14
+    cs_jump dat_08062D98
+    incrom 0x62CDF, 0x98D
 
     .global sub_0806366C
     .thumb_func
