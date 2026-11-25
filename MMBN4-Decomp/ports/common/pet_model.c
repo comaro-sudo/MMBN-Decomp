@@ -72,8 +72,14 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
             uint32_t fbase = sb + game->off_folder1;
             for (int i = 0; i < PET_FOLDER_SIZE; ++i) {
                 uint16_t w = (uint16_t) emu_read16(emu, fbase + (uint32_t) i * 2u);
-                m->folder[i].chip_id = (uint16_t) (w & 0x1FFu);
+                uint16_t cid = (uint16_t) (w & 0x1FFu);
+                m->folder[i].chip_id = cid;
                 m->folder[i].code    = (uint8_t) ((w >> 9) & 0x1Fu);
+                if (game->rom_chip_table && cid > 0 && cid < 389) {
+                    uint32_t entry = game->rom_chip_table + (uint32_t) cid * 0x2Cu;
+                    m->folder[i].element = (uint8_t) emu_read8(emu, entry + 0x04u);
+                    m->folder[i].damage  = (uint16_t) emu_read16(emu, entry + 0x1Au);
+                }
             }
         }
     }

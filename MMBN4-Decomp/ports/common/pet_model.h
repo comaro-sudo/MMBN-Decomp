@@ -21,6 +21,8 @@ typedef struct {
 typedef struct {
     uint16_t chip_id;  /* 0..511 */
     uint8_t code;      /* 0..25 = A..Z, 26 = '*' */
+    uint8_t element;   /* 0=None, 1=Fire, 2=Aqua, 3=Elec, 4=Wood */
+    uint16_t damage;   /* live base ATK from BN4_CHIP_TABLE in ROM */
 } PetChip;
 
 typedef struct {

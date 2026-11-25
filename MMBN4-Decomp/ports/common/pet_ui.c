@@ -175,7 +175,7 @@ static void draw_folder_tab(const UiDraw* ui, const PetModel* m, const PetUiStat
     draw_button(ui, w - 58, y - 1, 52, 14, (st->folder_page & 1u) ? "1-15" : "16-30", false);
     y += 18;
 
-    /* Two columns of 8 rows (15 chips per page) */
+    /* Two columns of 8 rows (15 chips per page) with live ROM damage & element */
     int col_w = (w - 12) / 2;
     for (int i = 0; i < 15; ++i) {
         int idx = start + i;
@@ -183,9 +183,19 @@ static void draw_folder_tab(const UiDraw* ui, const PetModel* m, const PetUiStat
         int row = i % 8;
         char row_txt[32];
         const PetChip* c = &m->folder[idx];
-        snprintf(row_txt, sizeof row_txt, "%02d: #%03u [%c]",
-                 idx + 1, (unsigned) c->chip_id, chip_code_char(c->code));
-        ui->text(ui->ctx, 6 + col * col_w, y + row * 18, row_txt, c->chip_id ? text_col : muted);
+        UiColor col_c = c->chip_id ? text_col : muted;
+        if (c->element == 1) col_c = ui_rgb(255, 130, 80);       /* Fire */
+        else if (c->element == 2) col_c = ui_rgb(90, 190, 255);  /* Aqua */
+        else if (c->element == 3) col_c = ui_rgb(255, 225, 80);  /* Elec */
+        else if (c->element == 4) col_c = ui_rgb(100, 230, 110); /* Wood */
+        if (c->damage > 0) {
+            snprintf(row_txt, sizeof row_txt, "%02d:#%03u[%c] %3u",
+                     idx + 1, (unsigned) c->chip_id, chip_code_char(c->code), (unsigned) c->damage);
+        } else {
+            snprintf(row_txt, sizeof row_txt, "%02d:#%03u[%c]  --",
+                     idx + 1, (unsigned) c->chip_id, chip_code_char(c->code));
+        }
+        ui->text(ui->ctx, 6 + col * col_w, y + row * 18, row_txt, col_c);
     }
 
     int fy = h - 14;

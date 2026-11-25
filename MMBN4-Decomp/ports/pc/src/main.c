@@ -16,6 +16,7 @@
 #include "game.h"
 #include "pet.h"
 #include "pet_model.h"
+#include "ui_draw_sdl3.h"
 
 #define SAMPLE_RATE 48000
 #define SCALE 4
@@ -323,7 +324,7 @@ int main(int argc, char** argv) {
 
     SDL_Gamepad* pad = NULL;
     int16_t samples[4096 * 2];
-    bool running = true, fullscreen = false;
+    bool running = true, fullscreen = false, off_tv = false;
     const char* message = NULL;
     Uint64 message_until = 0;
     Uint64 next = SDL_GetTicksNS();
@@ -352,9 +353,18 @@ int main(int argc, char** argv) {
                 }
                 break;
             case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                if (pet.window && e.button.windowID == SDL_GetWindowID(pet.window) &&
-                    e.button.button == SDL_BUTTON_LEFT) {
-                    const char* act = pet_click(&pet, &pet_model, e.button.x, e.button.y, emu, game);
+                if (e.button.button == SDL_BUTTON_LEFT) {
+                    const char* act = NULL;
+                    if (!off_tv && pet.window && e.button.windowID == SDL_GetWindowID(pet.window)) {
+                        act = pet_click(&pet, &pet_model, e.button.x, e.button.y, emu, game);
+                    } else if (off_tv && e.button.windowID == SDL_GetWindowID(window)) {
+                        float lx = 0, ly = 0;
+                        SDL_RenderCoordinatesFromWindow(renderer, e.button.x, e.button.y, &lx, &ly);
+                        if ((int) lx >= EMU_WIDTH) {
+                            act = pet_ui_click(&pet.ui, &pet_model, PET_LAYOUT_QVGA,
+                                               (int) lx - EMU_WIDTH, (int) ly, emu, game);
+                        }
+                    }
                     if (act) {
                         message = act;
                         message_until = SDL_GetTicksNS() + SDL_NS_PER_SECOND * 2;
@@ -364,7 +374,23 @@ int main(int argc, char** argv) {
             case SDL_EVENT_KEY_DOWN:
                 if (e.key.repeat) break;
                 if (e.key.key == SDLK_ESCAPE) running = false;
-                else if (e.key.key == SDLK_F1 && pet.window) pet_toggle(&pet);
+                else if (e.key.key == SDLK_F1 && pet.window && !off_tv) pet_toggle(&pet);
+                else if (e.key.key == SDLK_F2) {
+                    off_tv = !off_tv;
+                    if (off_tv) {
+                        if (pet.window && pet.visible) pet_toggle(&pet);
+                        SDL_SetRenderLogicalPresentation(renderer, EMU_WIDTH + PET_QVGA_W, PET_QVGA_H,
+                                                         SDL_LOGICAL_PRESENTATION_LETTERBOX);
+                        message = "Off-TV single-window ON (F2)";
+                    } else {
+                        SDL_SetRenderViewport(renderer, NULL);
+                        SDL_SetRenderLogicalPresentation(renderer, EMU_WIDTH, EMU_HEIGHT,
+                                                         SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
+                        if (pet.window && !pet.visible) pet_toggle(&pet);
+                        message = "Off-TV OFF (dual window)";
+                    }
+                    message_until = SDL_GetTicksNS() + SDL_NS_PER_SECOND * 2;
+                }
                 else if (e.key.key == SDLK_F11) {
                     fullscreen = !fullscreen;
                     SDL_SetWindowFullscreen(window, fullscreen);
@@ -392,12 +418,6 @@ int main(int argc, char** argv) {
             if (audio && !ff && n > 0) SDL_PutAudioStreamData(audio, samples, n * 4);
         }
 
-        SDL_UpdateTexture(screen, NULL, emu_video(emu), EMU_WIDTH * 4);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, screen, NULL, NULL);
-        SDL_RenderPresent(renderer);
-
         Uint64 now = SDL_GetTicksNS();
         if (now - fps_t0 >= SDL_NS_PER_SECOND / 2) {
             fps = (emu_frame(emu) - fps_f0) * 1e9 / (double) (now - fps_t0);
@@ -406,7 +426,25 @@ int main(int argc, char** argv) {
         }
         PetStatus st = { fps, ff, keys, message };
         pet_model_update(&pet_model, emu, game, code, &st);
-        pet_draw(&pet, &pet_model);
+
+        SDL_UpdateTexture(screen, NULL, emu_video(emu), EMU_WIDTH * 4);
+        SDL_SetRenderViewport(renderer, NULL);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        if (off_tv) {
+            SDL_FRect game_dst = { 0.0f, (float) ((PET_QVGA_H - EMU_HEIGHT) / 2),
+                                   (float) EMU_WIDTH, (float) EMU_HEIGHT };
+            SDL_RenderTexture(renderer, screen, NULL, &game_dst);
+            SDL_Rect pet_vp = { EMU_WIDTH, 0, PET_QVGA_W, PET_QVGA_H };
+            SDL_SetRenderViewport(renderer, &pet_vp);
+            UiDraw ui = ui_draw_sdl3(renderer);
+            pet_ui_draw(&ui, &pet_model, &pet.ui, PET_LAYOUT_QVGA);
+            SDL_SetRenderViewport(renderer, NULL);
+        } else {
+            SDL_RenderTexture(renderer, screen, NULL, NULL);
+            pet_draw(&pet, &pet_model);
+        }
+        SDL_RenderPresent(renderer);
 
         /* --quit-after N [--pet-shot file.bmp]: dev check of the windowed
          * path; saves the PET window's own pixels (not the desktop). */
