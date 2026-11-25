@@ -52,19 +52,19 @@ Completed and verified both requested unblocked workstreams:
 
 ## Open Issues / Blockers
 
-- **Wii U `.wuhb` link:** `devkitPPC`, `wut`, and `wiiu-sdl2` are installed in WSL `/opt/devkitpro`, and `ports/wiiu/src/main.c` + `ports/common/*.c` pass `powerpc-eabi-gcc -Wall -Wextra -Werror` cleanly (`07232d6`), but `cmake` is not yet installed in WSL Ubuntu (`sudo apt install cmake` unblocks `python3 ports/wiiu/build_wiiu.py` to build `libmgba.a` and `mmbn4.wuhb`).
-- **New 3DS (`ports/3ds/`):** `devkitARM` / `libctru` are not yet installed in `/opt/devkitpro`.
+- **DC-5 C:** `arm-none-eabi-gcc` is not yet installed in WSL Ubuntu (only `binutils-arm-none-eabi` is installed); run `sudo apt install gcc-arm-none-eabi` to unblock DC-5 C compilation.
+- **New 3DS (`ports/3ds/`):** `devkitARM` / `libctru` / `citro2d` are not yet installed in `/opt/devkitpro`.
 - **DSi:** still awaits `D-EL5` (GBARunner licence check with Gericom).
 
 ## Immediate Next Steps
 
-1. **Wii U build & hardware benchmark:** Run `sudo apt install cmake` in WSL, then `python3 ports/wiiu/build_wiiu.py` to produce `build/wiiu/mmbn4.wuhb`; test on Cemu ARM64 and run the `L+R` / `bench.txt` real-hardware benchmark on Wii U (Gate G-WU: `< 12.0 ms` mean single-threaded).
-2. **Wii U WU-4 (GX2 GamePad PET):** Add `ui_draw_gx2.c` (reusing GPL-3.0 Silent Hill GX2/GamePad code) to render `PET_LAYOUT_WIDE` (`854x480`) on the GamePad alongside 6× TV output.
-3. **New 3DS (`ports/3ds/`):** Install `devkitARM` + `libctru` + `citro2d` and stand up `ports/3ds/` on top of `ports/common/`.
-4. **Decomp:** Start DC-5 C (first leaf functions compiled with `arm-none-eabi-gcc` and verified byte-identical) or decode the cutscene bytecode blocks in `code_04`–`code_05`.
+1. **Wii U WU-4 (GX2 GamePad PET):** Port `ui_draw_gx2.c` (reusing GPL-3.0 Silent Hill GX2/GamePad code in `C:\proyectos\Silent-Hill-Decomp\sh-gc-disc\wiiu_port\src\gamepad_screen.c`) to render `PET_LAYOUT_WIDE` (`854x480`) on the GamePad alongside 6× TV output, and test in Cemu + real Wii U hardware.
+2. **New 3DS (`ports/3ds/`):** Install `devkitARM` + `libctru` + `citro2d`, wire `ui_draw_c2d.c` on top of `ports/common/`, and test in Citra/Azahar + real New 3DS hardware.
+3. **DC-5 C:** Install `gcc-arm-none-eabi` in WSL, compile first leaf functions with `arm-none-eabi-gcc -mthumb -O2`, and verify byte-identical RS & BM ROMs.
 
-## Follow-up Round 2 Commits (2026-11-25)
+## Follow-up Round 2 & 3 Commits (2026-11-25)
 
 - `8094af4` — **PC-2**: Interactive 4-tab PET (`Status`, `Folder`, `NetMap`, `Custom`), live EWRAM Folder 1 reader, area-name decoder & topology grid, live Frequency Tuner write buttons (`0x0E58..0x0E59`), and Custom Screen touch input pulse queue (`pet_ui_click` / `pet_ui_pop_keys`), visually verified across all 4 tabs (`--pet-tab 0..3 --pet-shot`).
-- `07232d6` — **Wii U (`ports/wiiu/`)**: `CMakeLists.txt`, `build_wiiu.py`, `src/main.c` (WUT + SDL2 + VPAD + built-in `L+R` / `bench.txt` hardware benchmark), `README.md`; verified `-Wall -Wextra -Werror` clean with `devkitPPC`.
-- **Decomp (`code_04`–`code_05`)**: Carved 28 additional 100%-pointer tables (`+2,724B`, **62.1%** total coverage, `732,312 / 1,179,456` bytes, `make -B compare` OK on both RS and BM).
+- `288d986` — **PC-3**: Live ROM `BN4_CHIP_TABLE` (`0x080197EC`) damage & element color-coding in Folder tab + `F2` Off-TV single-window mode (game + PET side-by-side).
+- `07232d6` + Wii U build commit — **Wii U (`ports/wiiu/`)**: `wiiu_toolchain.cmake`, `CMakeLists.txt`, `build_wiiu.py` (using venv `cmake 4.4.5` + `devkitPPC` + `wut` + `wiiu-sdl2`), `src/main.c`, `README.md`. Built static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) and `build/wiiu/mmbn4.wuhb` (949 KB). **Verified in Cemu ARM64:** booted `bn4_rs_overhaul.gba` (`AGB-B4WE`), executed 600 frames, and wrote `bench.log` (`mean_ms=14.668`, `68.2 fps` in Cemu).
+- `5c46201` — **Decomp (`code_04`–`code_05`)**: Carved 28 additional 100%-pointer tables (`+2,724B`, **62.1%** total coverage, `732,312 / 1,179,456` bytes, `make -B compare` OK on both RS and BM).

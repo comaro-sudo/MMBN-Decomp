@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-25 by Gemini, after EL-0 (`c934453`), PC-2 (`8094af4`), Wii U WU-1/2/3 (`07232d6`), and decomp table carving (`62.1%`).
+Updated: 2026-11-25 by Gemini, after PC-3 (`288d986`) and Wii U `mmbn4.wuhb` Cemu boot + 600-frame benchmark verification.
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
@@ -23,8 +23,8 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 | Area | What | Where |
 |---|---|---|
 | Decomp | RS and BM build from one shared tree (DC-4); **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 35 mixed/pointer tables carved across `code_00/02/03/04..05/09` (+10,044B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907`, `5c46201` |
-| Ports (PC / EL-0 + PC-2) | **EL-0 & PC-2 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c`, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `--bench`, `--pet-tab`); verified on RS & BM (1,033–1,302 fps on ARM64) | `c934453`, `8094af4` |
-| Ports (Wii U / WU-1..3) | **Wii U port skeleton (`ports/wiiu/`)**: WUT + SDL2 + VPAD + `ports/common/` + built-in hardware `--bench` (`L+R` or `bench.txt` -> `sd:/wiiu/apps/mmbn4/bench.log`); verified `-Wall -Wextra -Werror` clean with `devkitPPC` `powerpc-eabi-gcc` (needs `sudo apt install cmake` in WSL to compile `libmgba.a` and link `.wuhb`) | `07232d6` |
+| Ports (PC / EL-0..PC-3) | **EL-0, PC-2 & PC-3 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c` with live ROM chip ATK/element, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `--bench`, `--pet-tab`, **`F2` Off-TV single-window mode**); verified on RS & BM (1,033–1,302 fps on ARM64) | `c934453`, `8094af4`, `288d986` |
+| Ports (Wii U / WU-1..3) | **WU-1 / WU-2 / WU-3 built & verified in Cemu ARM64**: static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) + `build/wiiu/mmbn4.wuhb` (949 KB) via `python3 ports/wiiu/build_wiiu.py`; **verified booting `bn4_rs_overhaul.gba` (`AGB-B4WE`) in Cemu**, running 600 frames, and writing `bench.log` (`68.2 fps` in Cemu; real Wii U hardware bench next) | `07232d6` + follow-up |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
 | Patch: Souls & Duo Soul | All 12 + **13th Duo Soul** (unite, MetalSoul sprite + custom Duo palette, Air/Float + B+Left Reflect passive, clean emotion window, MetalSoul icon); completion star needs 12; **3-page Status screen (L/R)**; Black Earth gate keeps 6 (owner, no patch); `FC 0C` grant-Soul command | PASS in-game (`4c71998`, `31261d5`, `patch-test-results-6.md`) |
 | Patch: tournaments & friendly matches | WP-B1 canon pairs (AquaMan, Roll, ProtoMan) & deterministic bracket; Free Tournament fields all 12 Soul Navis (36 secret chips); **9 friendly tournament matches** (3 per venue, `FC 0E`, round-gated, retry on loss, win grants Soul & hides NPC, `b4 = 0x3D` results fix, Higsby & Sal lazy LZ77 sprite load) | PASS in-game (`bac8ce9`, `c9d36cf`, `9ab3301`, `a6cf221`) |
@@ -41,8 +41,8 @@ Owner decisions marked ⚠ come first.
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Saved for later in [`docs/pending/tier-a-leftovers-and-qol.md`](docs/pending/tier-a-leftovers-and-qol.md) |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
-| 4 | **Ports:** Wii U `.wuhb` build & real-hardware `bench.log` (Gate G-WU) + GX2 GamePad PET → New 3DS → DSi | **EL-0 (`c934453`), PC-2 (`8094af4`), Wii U WU-1..3 (`07232d6`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). Install `cmake` in WSL to link `mmbn4.wuhb`. ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
-| 5 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
+| 4 | **Ports:** Wii U WU-4 (GX2 GamePad `PET_WIDE` reusing Silent Hill GX2/GamePad code) + real Wii U `bench.log` → New 3DS (`devkitARM` + `libctru` + `citro2d`) → DSi | **EL-0, PC-2, PC-3, and Wii U `.wuhb` Cemu boot verified**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
+| 5 | **Decomp, long term:** DC-5 C (needs `sudo apt install gcc-arm-none-eabi` in WSL), decode cutscene bytecode in `code_04`–`code_05`, reduce version blocks | Currently **62.1%** (`732,312 / 1,179,456` bytes, RS & BM byte-identical) |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
