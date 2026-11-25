@@ -78,7 +78,11 @@ FS_WAITING_ROOM_GUARD     equ 0x087FC170    ; WP-B6 Guard A: WaitingRoomReceiveT
 FS_WAITING_ROOM_GUARD_SIZE equ 0x30
 FS_DUO_RANK               equ 0x087FC1A0    ; WP-D3 Duo rematch S-rank tier climb (0x08007692 -> V1->a->b->o->SP+)
 FS_DUO_RANK_SIZE          equ 0xB0
-; next free slot:             0x087FC250 (code/data packages must stay below FS_TEXT)
+FS_SPRITE_LAZY            equ 0x087FC250    ; WP-D0 on-demand LZ77 sprite cache load for Higsby (0x08) & Sal (0x2C)
+FS_SPRITE_LAZY_SIZE       equ 0x80
+FS_SAVE_LOAD_SYNC         equ 0x087FC2D0    ; WP-A3 existing-save shop price sync hook (SaveLoad -> SaveRelocateBlock)
+FS_SAVE_LOAD_SYNC_SIZE    equ 0x110
+; next free slot:             0x087FC3E0 (code/data packages must stay below FS_TEXT)
 FS_TEXT                   equ 0x087FD000    ; TextPet --free-space for new/grown text archives (build.py reads this line)
 FS_TEXT_SIZE              equ 0x3000        ; up to the ROM end, 0x08800000
 
@@ -104,6 +108,8 @@ VENEER_DUO_PAL      equ 0x0800A164      ; WP-D4 DuoSoul palette (0x080107E2)
 VENEER_SP_REWARD    equ 0x0800A16C      ; WP-D3 SP+ 80/20 reward (SP_REWARD_HOOK)
 ; Second veneer pool in verified dead code_00 function sub_08001784 (36 bytes = 4 slots, RS == BM; veneer-space.md)
 VENEER_DUO_RANK     equ 0x08001784      ; WP-D3 Duo rematch S-rank climb (0x08007692)
+VENEER_SPRITE_LAZY  equ 0x0800178C      ; WP-D0 lazy LZ77 sprite load for Higsby/Sal (0x08002894)
+VENEER_SAVE_LOAD    equ 0x08001794      ; WP-A3 existing-save shop sync (SAVE_LOAD_RELOC_HOOK)
 
 ; GetPositiveSignedRNG: r0 = random 0..0x7FFFFFFF (uses r0-r3); same address in RS and BM
 GET_RNG             equ 0x08001B16

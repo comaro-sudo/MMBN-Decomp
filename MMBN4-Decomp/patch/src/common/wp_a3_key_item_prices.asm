@@ -64,3 +64,128 @@ shop_price  9, 2,  16               ; MelSquar      Unlocker  4,000Z -> 1,600Z
 shop_price 10, 1,  16               ; ColosseumAve  Unlocker  4,000Z -> 1,600Z
 shop_price 10, 2,  40               ; ColosseumAve  LocEnemy 10,000Z -> 4,000Z
 shop_price 11, 2,  16               ; YumRuins      Unlocker  4,000Z -> 1,600Z
+
+; ---- 4. Existing-save load hook (SaveLoad -> SaveRelocateBlock) ----
+; Syncs pre-existing saves' shop stock ([sl+0x58], shops 0..15) to WP-A3's 40% prices on load.
+; Completely stateless and idempotent:
+;   - Unlocker (kind=1, id=181) -> 16 (1,600Z)
+;   - LocEnemy (kind=1, id=180) -> 40 (4,000Z)
+;   - Zenny NaviCust (shops 14-15, kind=3) -> copy price from SHOP_STOCK_INIT[shop] matching id
+;   - HPMemory (kind=1, id=160) -> match (shop, vanilla_price) in 14-entry table (disjoint per shop)
+
+.org SAVE_LOAD_RELOC_HOOK           ; RS 0x08048948 / BM 0x08048950 (bl 0x08006128)
+    bl      VENEER_SAVE_LOAD
+
+.org VENEER_SAVE_LOAD
+.align 4
+    ldr     r3, =save_load_sync_shops | 1
+    bx      r3
+    .pool
+
+.org FS_SAVE_LOAD_SYNC
+.align 4
+save_load_sync_shops:
+    push    r4-r7, r14
+    ldr     r3, =0x08006128 | 1     ; SaveRelocateBlock (RS == BM): rebuilds [sl+0x58]
+    bl      @@call_r3
+    cmp     r4, 0                   ; r4 == 0 -> valid save loaded
+    bne     @@done
+    mov     r0, r10
+    ldr     r5, [r0, 0x58]          ; r5 = save shop stock buffer (shops 0..15)
+    mov     r6, 0                   ; r6 = flat slot index 0..127
+@@slot_loop:
+    lsl     r7, r6, 3
+    add     r7, r5, r7              ; r7 = &save_shop[r6]
+    ldrb    r0, [r7, 0]             ; kind
+    cmp     r0, 0
+    beq     @@next_slot
+    ldrh    r1, [r7, 2]             ; item/program id
+    cmp     r0, 1
+    beq     @@is_item
+    cmp     r0, 3
+    bne     @@next_slot
+    ; NaviCust program: only Zenny shops 14-15
+    lsr     r2, r6, 3               ; shop_idx
+    cmp     r2, 14
+    blt     @@next_slot
+    lsl     r2, r2, 6               ; shop_idx * 0x40
+    ldr     r3, =SHOP_STOCK_INIT
+    add     r3, r3, r2              ; &SHOP_STOCK_INIT[shop][0]
+    mov     r4, 0
+@@nc_loop:
+    ldrh    r0, [r3, 2]
+    cmp     r0, r1
+    bne     @@nc_next
+    ldrh    r0, [r3, 6]             ; copy patched ROM price
+    strh    r0, [r7, 6]
+    b       @@next_slot
+@@nc_next:
+    add     r3, 8
+    add     r4, 1
+    cmp     r4, 8
+    blt     @@nc_loop
+    b       @@next_slot
+@@is_item:
+    cmp     r1, 181                 ; Unlocker -> 16 (1,600Z)
+    bne     @@chk_loc
+    mov     r0, 16
+    strh    r0, [r7, 6]
+    b       @@next_slot
+@@chk_loc:
+    cmp     r1, 180                 ; LocEnemy -> 40 (4,000Z)
+    bne     @@chk_hp
+    mov     r0, 40
+    strh    r0, [r7, 6]
+    b       @@next_slot
+@@chk_hp:
+    cmp     r1, 160                 ; HPMemory
+    bne     @@next_slot
+    lsr     r2, r6, 3               ; r2 = shop_idx
+    ldrh    r1, [r7, 6]             ; r1 = current price
+    ldr     r3, =@@hp_map
+@@hp_loop:
+    ldrh    r0, [r3, 0]             ; entry shop (0xFFFF = end)
+    cmp     r0, 0xFF
+    bgt     @@next_slot
+    cmp     r0, r2
+    bne     @@hp_next
+    ldrh    r0, [r3, 2]             ; vanilla price
+    cmp     r0, r1
+    bne     @@hp_next
+    ldrh    r0, [r3, 4]             ; patched 40% price
+    strh    r0, [r7, 6]
+    b       @@next_slot
+@@hp_next:
+    add     r3, 6
+    b       @@hp_loop
+@@next_slot:
+    add     r6, 1
+    cmp     r6, 128
+    blt     @@slot_loop
+@@done:
+    pop     r4-r7, r15
+@@call_r3:
+    bx      r3
+    .pool
+
+.align 2
+@@hp_map:
+    .halfword 5,  10,   4
+    .halfword 5,  32,  13
+    .halfword 0,  25,  10
+    .halfword 0,  60,  24
+    .halfword 0, 100,  40
+    .halfword 1,  60,  24
+    .halfword 1, 100,  40
+    .halfword 1, 140,  56
+    .halfword 2, 100,  40
+    .halfword 2, 150,  60
+    .halfword 2, 200,  80
+    .halfword 2, 300, 120
+    .halfword 3, 300, 120
+    .halfword 3, 500, 200
+    .halfword 0xFFFF
+
+.if . > FS_SAVE_LOAD_SYNC + FS_SAVE_LOAD_SYNC_SIZE
+    .error "WP-A3 save-load shop sync: overruns its free-space slot"
+.endif

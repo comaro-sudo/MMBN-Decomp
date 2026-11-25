@@ -93,3 +93,5 @@ NPC_SLOT_COLOSSEUM_LOBBY equ 0x08062B64     ; Colosseum Lobby (04,06) RW NPC lis
 NPC_LIST_COLOSSEUM_LOBBY equ 0x0806677C
 SHOP_STOCK_INIT         equ 0x0804ADA8      ; BN4_SHOP_STOCK_INIT (docs/re/shops.md); WP-A3 key-item prices
 WAITING_ROOM_RECEIVE    equ 0x0803FA98      ; WaitingRoomReceiveTradedNavi (waiting-room-bug.md); WP-B6 Guard A
+SPRITE_LIST_6           equ 0x08027CEC      ; BN4_SPRITE_LIST_6 (humans/Navis); WP-D0 sprite lazy load
+SAVE_LOAD_RELOC_HOOK    equ 0x08048950      ; SaveLoad's bl 0x08006128 (SaveRelocateBlock); WP-A3 existing-save sync
