@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-25 by Gemini, after Wii U WU-4 dual-screen TV+GamePad PET (`d5625d0`) and PC-6 config/keybinds/x64/packager.
+Updated: 2026-11-25 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and DC-5 C pipeline (`src/bios_swi.c` byte-identical on RS & BM).
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
@@ -22,9 +22,10 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 
 | Area | What | Where |
 |---|---|---|
-| Decomp | RS and BM build from one shared tree (DC-4); **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 35 mixed/pointer tables carved across `code_00/02/03/04..05/09` (+10,044B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907`, `5c46201` |
+| Decomp | RS and BM build from one shared tree (DC-4) + **DC-5 C pipeline live (`arm-none-eabi-gcc 13.2.1`, `tools/c_to_inc.py`, `src/bios_swi.c` — 8 BIOS SWIs compiled from C, byte-identical on RS & BM)**; **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907`, `5c46201` + DC-5 |
 | Ports (PC / EL-0..PC-6) | **EL-0 through PC-6 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c` with live ROM chip ATK/element, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `config.c` `mmbn4.ini` remappable keys, `F2` Off-TV single-window mode, `--bench`, `--pet-tab`, `package_pc.py`); **ARM64 & x64 builds + release zips verified** | `c934453`, `8094af4`, `288d986`, `27b37ef` |
-| Ports (Wii U / WU-1..4) | **WU-1 through WU-4 built & verified in Cemu ARM64**: static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) + `build/wiiu/mmbn4.wuhb` (966 KB) via `python3 ports/wiiu/build_wiiu.py`; **dual-screen TV (6× centered) + GamePad touch PET (`ui_draw_sdl2.c` + `pet_ui.c` + calibrated VPAD touch + `ZR` Off-TV toggle)**; verified booting `bn4_rs_overhaul.gba` (`AGB-B4WE`) + 600-frame `bench.log` in Cemu | `07232d6`, `7fe5a68`, `d5625d0` |
+| Ports (Wii U / WU-1..6) | **WU-1 through WU-6 built & verified in Cemu ARM64**: static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) + `build/wiiu/mmbn4.wuhb` (1.1 MB) via `python3 ports/wiiu/build_wiiu.py`; **dual-screen TV (6× centered) + GamePad touch PET (`ui_draw_sdl2.c` + calibrated VPAD touch + `ZR` Off-TV) + Pro Controller (`KPAD`) + original Violet Eclipse icon/TV/DRC splash art**; verified booting `bn4_rs_overhaul.gba` (`AGB-B4WE`) + 600-frame `bench.log` in Cemu | `07232d6`, `7fe5a68`, `d5625d0`, `a3f14ed` |
+| Ports (New 3DS / 3DS-1..3) | **New 3DS port (`ports/3ds/`) written on `ports/common/`**: `citro2d` bottom-screen PET + touchscreen (`ui_draw_c2d.c`), 804 MHz speedup, top-screen GBA blit, `L+R` / `bench.txt` hardware benchmark, `build_3ds.py` (awaiting `devkitARM` + `libctru` + `citro2d` in `/opt/devkitpro` to compile `.3dsx`) | `e01a011` |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
 | Patch: Souls & Duo Soul | All 12 + **13th Duo Soul** (unite, MetalSoul sprite + custom Duo palette, Air/Float + B+Left Reflect passive, clean emotion window, MetalSoul icon); completion star needs 12; **3-page Status screen (L/R)**; Black Earth gate keeps 6 (owner, no patch); `FC 0C` grant-Soul command | PASS in-game (`4c71998`, `31261d5`, `patch-test-results-6.md`) |
 | Patch: tournaments & friendly matches | WP-B1 canon pairs (AquaMan, Roll, ProtoMan) & deterministic bracket; Free Tournament fields all 12 Soul Navis (36 secret chips); **9 friendly tournament matches** (3 per venue, `FC 0E`, round-gated, retry on loss, win grants Soul & hides NPC, `b4 = 0x3D` results fix, Higsby & Sal lazy LZ77 sprite load) | PASS in-game (`bac8ce9`, `c9d36cf`, `9ab3301`, `a6cf221`) |
@@ -41,8 +42,8 @@ Owner decisions marked ⚠ come first.
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Saved for later in [`docs/pending/tier-a-leftovers-and-qol.md`](docs/pending/tier-a-leftovers-and-qol.md) |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
-| 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) + Pro Controller (WU-6) → New 3DS (`devkitARM` + `libctru` + `citro2d`) → DSi | **PC (EL-0..PC-6 ARM64+x64) & Wii U (WU-1..WU-4 dual-screen TV+GamePad PET in Cemu) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
-| 5 | **Decomp, long term:** DC-5 C (needs `sudo apt install gcc-arm-none-eabi` in WSL), decode cutscene bytecode in `code_04`–`code_05`, reduce version blocks | Currently **62.1%** (`732,312 / 1,179,456` bytes, RS & BM byte-identical) |
+| 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) → compile & test New 3DS `.3dsx` (needs devkitPro `3ds-dev`) → DSi | **PC (EL-0..PC-6 ARM64+x64), Wii U (WU-1..WU-6 in Cemu), and New 3DS source (`ports/3ds/`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
+| 5 | **Decomp, long term:** Expand DC-5 C (`decomp/src/`), decode cutscene bytecode in `code_04`–`code_05` | **DC-5 C pipeline live (`arm-none-eabi-gcc 13.2.1`)**, **62.1%** coverage, RS & BM byte-identical |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
