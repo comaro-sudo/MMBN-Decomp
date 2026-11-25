@@ -24,9 +24,13 @@ typedef struct {
     uint32_t off_bugfrags;      /* u32 */
     uint32_t off_playthrough;   /* u8 (0-based; display +1) */
     uint32_t off_flags;         /* event flag bitfield (MSB-first per byte) */
+    uint32_t off_folder1;       /* 30 x u16: chip_id | (code << 9) */
 } GameInfo;
 
 /* code: mGBA's game code, e.g. "AGB-B4WE" or "AGB-B4BE". */
 const GameInfo* game_identify(const char* code);
+
+/* Human-readable area name for BN4 (map_group, map_id). */
+const char* game_map_name(uint8_t group, uint8_t id);
 
 #endif

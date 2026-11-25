@@ -16,6 +16,13 @@ typedef struct {
     const char* message;  /* last status message, may be NULL */
 } PetStatus;
 
+#define PET_FOLDER_SIZE 30
+
+typedef struct {
+    uint16_t chip_id;  /* 0..511 */
+    uint8_t code;      /* 0..25 = A..Z, 26 = '*' */
+} PetChip;
+
 typedef struct {
     char game_code[16];
     const char* short_name;
@@ -28,20 +35,27 @@ typedef struct {
     uint16_t battle_hp_p2;
 
     bool save_valid;
+    uint32_t save_block;   /* active relocated EWRAM base */
     uint16_t cur_hp;
     uint16_t max_hp;
     uint32_t zenny;
     uint32_t bugfrags;
     uint8_t map_group;
     uint8_t map_id;
+    const char* map_name;
     uint8_t playthrough;   /* 1-based display value (1..3+) */
     uint16_t souls_mask;   /* 12 bits for Double Soul flags 0x0017..0x0022 */
     uint8_t souls_count;   /* 0..12 */
     uint8_t tuner_mode;    /* 0=Auto, 1=T1, 2=T2, 3=T3 (flags 0x0E58..0x0E59) */
+    PetChip folder[PET_FOLDER_SIZE];
 
     PetStatus status;
 } PetModel;
 
 void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* code, const PetStatus* st);
+
+/* Writes the Frequency Tuner mode (0=Auto, 1=T1, 2=T2, 3=T3) directly to
+ * event flags 0x0E58..0x0E59 in EWRAM. Returns true on success. */
+bool pet_model_set_tuner(Emu* emu, const GameInfo* game, uint8_t mode);
 
 #endif

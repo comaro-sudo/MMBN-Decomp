@@ -7,6 +7,15 @@ static bool read_event_flag(Emu* emu, uint32_t flags_base, uint32_t flag) {
     return (byte_val & (0x80u >> (flag & 7u))) != 0;
 }
 
+static void write_event_flag(Emu* emu, uint32_t flags_base, uint32_t flag, bool set) {
+    uint32_t addr = flags_base + (flag >> 3);
+    uint8_t mask = (uint8_t) (0x80u >> (flag & 7u));
+    uint8_t v = (uint8_t) emu_read8(emu, addr);
+    if (set) v |= mask;
+    else v &= (uint8_t) ~mask;
+    emu_write8(emu, addr, v);
+}
+
 void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* code, const PetStatus* st) {
     memset(m, 0, sizeof(*m));
     if (code) {
@@ -32,12 +41,14 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
     uint16_t max_hp = (uint16_t) emu_read16(emu, sb + game->off_max_hp);
     if (max_hp >= 100 && max_hp <= 9999 && cur_hp <= max_hp) {
         m->save_valid = true;
+        m->save_block = sb;
         m->cur_hp = cur_hp;
         m->max_hp = max_hp;
         m->zenny = emu_read32(emu, sb + game->off_zenny);
         m->bugfrags = emu_read32(emu, sb + game->off_bugfrags);
         m->map_group = (uint8_t) emu_read8(emu, sb + game->off_map_group);
         m->map_id = (uint8_t) emu_read8(emu, sb + game->off_map_id);
+        m->map_name = game_map_name(m->map_group, m->map_id);
         m->playthrough = (uint8_t) ((emu_read8(emu, sb + game->off_playthrough) & 0xFFu) + 1u);
 
         uint32_t flags_base = sb + game->off_flags;
@@ -56,5 +67,23 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
         if (read_event_flag(emu, flags_base, 0x0E58u)) t |= 1u;
         if (read_event_flag(emu, flags_base, 0x0E59u)) t |= 2u;
         m->tuner_mode = t;
+
+        if (game->off_folder1) {
+            uint32_t fbase = sb + game->off_folder1;
+            for (int i = 0; i < PET_FOLDER_SIZE; ++i) {
+                uint16_t w = (uint16_t) emu_read16(emu, fbase + (uint32_t) i * 2u);
+                m->folder[i].chip_id = (uint16_t) (w & 0x1FFu);
+                m->folder[i].code    = (uint8_t) ((w >> 9) & 0x1Fu);
+            }
+        }
     }
+}
+
+bool pet_model_set_tuner(Emu* emu, const GameInfo* game, uint8_t mode) {
+    if (!emu || !game || !game->ram_save_base || !(emu_caps(emu) & EMU_CAP_MEMORY)) return false;
+    uint32_t shift = emu_read32(emu, game->ram_save_shift) & 0x1FEu;
+    uint32_t flags_base = game->ram_save_base + shift + game->off_flags;
+    write_event_flag(emu, flags_base, 0x0E58u, (mode & 1u) != 0);
+    write_event_flag(emu, flags_base, 0x0E59u, (mode & 2u) != 0);
+    return true;
 }

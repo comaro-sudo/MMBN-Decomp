@@ -183,7 +183,7 @@ static void fail(const char* msg) {
 }
 
 int main(int argc, char** argv) {
-    int test_frames = 0, quit_after = 0, bench_frames = 0;
+    int test_frames = 0, quit_after = 0, bench_frames = 0, pet_tab = 0;
     const char *shot = NULL, *script = NULL, *test_save = "build/test.sav", *pet_shot = NULL, *bench_state = NULL;
     TestExtras extras = { 0 };
     for (int i = 2; i + 1 < argc; ++i) {
@@ -194,6 +194,7 @@ int main(int argc, char** argv) {
         }
         else if (!strcmp(argv[i], "--quit-after")) quit_after = SDL_atoi(argv[++i]);
         else if (!strcmp(argv[i], "--pet-shot")) pet_shot = argv[++i];
+        else if (!strcmp(argv[i], "--pet-tab")) pet_tab = SDL_atoi(argv[++i]);
         else if (!strcmp(argv[i], "--shot")) shot = argv[++i];
         else if (!strcmp(argv[i], "--input")) script = argv[++i];
         else if (!strcmp(argv[i], "--save")) test_save = argv[++i];
@@ -304,11 +305,16 @@ int main(int argc, char** argv) {
 
     Pet pet = { 0 };
     if (!pet_create(&pet)) SDL_Log("PET window failed: %s", SDL_GetError());
-    else if (pet_place_next_to.w > 0) {
-        SDL_SetWindowSize(pet.window, pet_place_next_to.w, pet_place_next_to.h);
-        SDL_SetWindowPosition(pet.window, pet_place_next_to.x, pet_place_next_to.y);
+    else {
+        if (pet_tab >= 0 && pet_tab < PET_TAB_COUNT) pet.ui.active_tab = (PetTab) pet_tab;
+        if (pet_place_next_to.w > 0) {
+            SDL_SetWindowSize(pet.window, pet_place_next_to.w, pet_place_next_to.h);
+            SDL_SetWindowPosition(pet.window, pet_place_next_to.x, pet_place_next_to.y);
+        }
     }
     SDL_RaiseWindow(window);
+
+    PetModel pet_model = { 0 };
 
     SDL_AudioSpec spec = { SDL_AUDIO_S16, 2, SAMPLE_RATE };
     SDL_AudioStream* audio = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &spec, NULL, NULL);
@@ -345,6 +351,16 @@ int main(int argc, char** argv) {
                     pad = NULL;
                 }
                 break;
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                if (pet.window && e.button.windowID == SDL_GetWindowID(pet.window) &&
+                    e.button.button == SDL_BUTTON_LEFT) {
+                    const char* act = pet_click(&pet, &pet_model, e.button.x, e.button.y, emu, game);
+                    if (act) {
+                        message = act;
+                        message_until = SDL_GetTicksNS() + SDL_NS_PER_SECOND * 2;
+                    }
+                }
+                break;
             case SDL_EVENT_KEY_DOWN:
                 if (e.key.repeat) break;
                 if (e.key.key == SDLK_ESCAPE) running = false;
@@ -364,7 +380,7 @@ int main(int argc, char** argv) {
         }
         if (message && SDL_GetTicksNS() > message_until) message = NULL;
 
-        uint32_t keys = keyboard_keys() | gamepad_keys(pad);
+        uint32_t keys = keyboard_keys() | gamepad_keys(pad) | pet_ui_pop_keys(&pet.ui);
         const bool* kb = SDL_GetKeyboardState(NULL);
         bool ff = kb[SDL_SCANCODE_TAB] || gamepad_fast_forward(pad);
         emu_set_keys(emu, keys);
@@ -389,7 +405,6 @@ int main(int argc, char** argv) {
             fps_f0 = emu_frame(emu);
         }
         PetStatus st = { fps, ff, keys, message };
-        PetModel pet_model;
         pet_model_update(&pet_model, emu, game, code, &st);
         pet_draw(&pet, &pet_model);
 
