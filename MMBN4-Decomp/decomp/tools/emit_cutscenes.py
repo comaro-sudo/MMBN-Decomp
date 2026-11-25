@@ -36,61 +36,51 @@ def seg_delta(addr: int) -> int | None:
 
 
 def collect_tables(rs: bytes, bm: bytes) -> dict[str, list[tuple[int, int, list[str]]]]:
+    """Scan all of code_04..code_05 for RS+BM-identical story-progress dispatch
+    chains (0x02 range ops ending in 0x01 unconditional jump, >= 2 ops)."""
     by_seg: dict[str, list[tuple[int, int, list[str]]]] = {s[0]: [] for s in SEG_INFO}
-    seen: set[int] = set()
 
-    for a in range(0x0802B1BC, 0x0802BCCC, 8):
-        _, ptr = struct.unpack_from("<2I", rs, a - BASE)
-        d = seg_delta(ptr)
-        if d is None:
-            continue
-        seg_name = next(n for n, s0, s1, _ in SEG_INFO if s0 <= ptr < s1)
-        for skip in range(0, 0x30):
-            start = ptr + skip
-            if start in seen:
-                break
-            rs_lines, rs_end = decode_dispatch(rs, start)
-            if len(rs_lines) < 2:
-                continue
-            bm_lines, bm_end = decode_dispatch(bm, start + d)
-            if (bm_end - (start + d)) != (rs_end - start) or len(bm_lines) != len(rs_lines):
-                break
-            # Verify every op has identical opcode/range and BM target == RS target + seg_delta(target)
-            ok = True
-            cur = start
-            for _ in rs_lines:
-                ro = cur - BASE
-                bo = cur + d - BASE
-                op = rs[ro]
-                if bm[bo] != op:
-                    ok = False
-                    break
-                if op == 0x02:
-                    if rs[ro + 1:ro + 3] != bm[bo + 1:bo + 3]:
-                        ok = False
-                        break
-                    rt = struct.unpack_from("<I", rs, ro + 3)[0]
-                    bt = struct.unpack_from("<I", bm, bo + 3)[0]
-                    td = seg_delta(rt)
-                    if td is None or bt != rt + td:
-                        ok = False
-                        break
-                    cur += 7
-                else:
-                    rt = struct.unpack_from("<I", rs, ro + 1)[0]
-                    bt = struct.unpack_from("<I", bm, bo + 1)[0]
-                    td = seg_delta(rt)
-                    if td is None or bt != rt + td:
-                        ok = False
-                        break
-                    cur += 5
-            if ok:
-                seen.add(start)
-                by_seg[seg_name].append((start, rs_end, rs_lines))
-            break
-
-    for k in by_seg:
-        by_seg[k].sort()
+    for seg_name, s0, s1, d in SEG_INFO:
+        cur = s0
+        while cur < s1 - 12:
+            if rs[cur - BASE] == 0x02:
+                rs_lines, rs_end = decode_dispatch(rs, cur)
+                if len(rs_lines) >= 2 and rs_lines[-1].strip().startswith("cs_jump"):
+                    bm_lines, bm_end = decode_dispatch(bm, cur + d)
+                    if len(bm_lines) == len(rs_lines) and (bm_end - (cur + d)) == (rs_end - cur):
+                        ok = True
+                        p = cur
+                        for _ in rs_lines:
+                            ro = p - BASE
+                            bo = p + d - BASE
+                            op = rs[ro]
+                            if bm[bo] != op:
+                                ok = False
+                                break
+                            if op == 0x02:
+                                if rs[ro + 1:ro + 3] != bm[bo + 1:bo + 3]:
+                                    ok = False
+                                    break
+                                rt = struct.unpack_from("<I", rs, ro + 3)[0]
+                                bt = struct.unpack_from("<I", bm, bo + 3)[0]
+                                td = seg_delta(rt)
+                                if td is None or bt != rt + td:
+                                    ok = False
+                                    break
+                                p += 7
+                            else:
+                                rt = struct.unpack_from("<I", rs, ro + 1)[0]
+                                bt = struct.unpack_from("<I", bm, bo + 1)[0]
+                                td = seg_delta(rt)
+                                if td is None or bt != rt + td:
+                                    ok = False
+                                    break
+                                p += 5
+                        if ok:
+                            by_seg[seg_name].append((cur, rs_end, rs_lines))
+                            cur = rs_end
+                            continue
+            cur += 1
     return by_seg
 
 

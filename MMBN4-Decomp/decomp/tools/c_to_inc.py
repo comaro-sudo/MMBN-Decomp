@@ -17,6 +17,7 @@ from pathlib import Path
 
 DECOMP = Path(__file__).resolve().parents[1]
 AGBCC = DECOMP.parent / "tools" / "agbcc" / "tools" / "agbcc" / "bin" / "agbcc"
+OLD_AGBCC = DECOMP.parent / "tools" / "agbcc" / "tools" / "agbcc" / "bin" / "old_agbcc"
 
 SKIP_DIRECTIVES = {
     ".cpu", ".arch", ".fpu", ".eabi_attribute", ".file",
@@ -28,27 +29,32 @@ SKIP_DIRECTIVES = {
 def main() -> None:
     args = sys.argv[1:]
     use_agbcc = False
+    use_old = False
     opt = "-O2"
     while args and args[0].startswith("--"):
         flag = args.pop(0)
         if flag == "--agbcc":
             use_agbcc = True
+        elif flag == "--old-agbcc":
+            use_agbcc = True
+            use_old = True
         elif flag == "--O1":
             opt = "-O1"
         else:
             sys.exit(f"unknown flag {flag}")
     if len(args) != 2:
-        sys.exit("usage: c_to_inc.py [--agbcc] [--O1] <in.c> <out.s>")
+        sys.exit("usage: c_to_inc.py [--agbcc|--old-agbcc] [--O1] <in.c> <out.s>")
     src, dst = Path(args[0]), Path(args[1])
     dst.parent.mkdir(parents=True, exist_ok=True)
 
     if use_agbcc:
-        if not AGBCC.exists():
-            sys.exit(f"missing agbcc at {AGBCC}")
+        cc = OLD_AGBCC if use_old else AGBCC
+        if not cc.exists():
+            sys.exit(f"missing agbcc at {cc}")
         tmp_i = dst.with_suffix(".i")
         tmp_s = dst.with_suffix(".raw.s")
         subprocess.run(["arm-none-eabi-cpp", "-nostdinc", str(src), "-o", str(tmp_i)], check=True)
-        subprocess.run([str(AGBCC), opt, "-mthumb-interwork", "-fhex-asm", str(tmp_i), "-o", str(tmp_s)], check=True)
+        subprocess.run([str(cc), opt, "-mthumb-interwork", "-fhex-asm", str(tmp_i), "-o", str(tmp_s)], check=True)
         raw_asm = tmp_s.read_text(encoding="utf-8")
         tmp_i.unlink(missing_ok=True)
         tmp_s.unlink(missing_ok=True)
