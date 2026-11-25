@@ -15,14 +15,14 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [x] **Push to GitHub:** `origin/main` is up to date through Round 13 + RS/BM C1–C5 matrix & decomp symbol merge.
-- [ ] **Merge Round 13 commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
+- [x] **Push to GitHub:** `origin/main` is up to date through EL-0, PC-2, Wii U WU-1..3, and 62.1% decomp (`854583f`).
+- [ ] **Merge Round 13 + EL-0/PC-2/Wii U commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
-## Done (through 2026-11-24, Round 13)
+## Done (through 2026-11-25)
 
 | Area | What | Where |
 |---|---|---|
-| Decomp | RS and BM build from one shared tree (DC-4); **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 35 mixed/pointer tables carved across `code_00/02/03/04..05/09` (+10,044B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907` |
+| Decomp | RS and BM build from one shared tree (DC-4); **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 35 mixed/pointer tables carved across `code_00/02/03/04..05/09` (+10,044B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907`, `5c46201` |
 | Ports (PC / EL-0 + PC-2) | **EL-0 & PC-2 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c`, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `--bench`, `--pet-tab`); verified on RS & BM (1,033–1,302 fps on ARM64) | `c934453`, `8094af4` |
 | Ports (Wii U / WU-1..3) | **Wii U port skeleton (`ports/wiiu/`)**: WUT + SDL2 + VPAD + `ports/common/` + built-in hardware `--bench` (`L+R` or `bench.txt` -> `sd:/wiiu/apps/mmbn4/bench.log`); verified `-Wall -Wextra -Werror` clean with `devkitPPC` `powerpc-eabi-gcc` (needs `sudo apt install cmake` in WSL to compile `libmgba.a` and link `.wuhb`) | `07232d6` |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
