@@ -1,8 +1,12 @@
-/* MMBN4 Violet Eclipse - Wii U port (WU-1 / WU-2 / WU-3 hardware bench).
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* MMBN4 Violet Eclipse - Wii U port (WU-1..WU-4: dual-screen TV + GamePad PET).
  *
  * Uses ports/common/ (mGBA 0.10.5 static core, endian-safe RAM reader,
- * portable PET model, portable bench_run) + WUT (WHBProc, VPAD, OSGetSystemTime)
- * + SDL2 for initial TV/GamePad presentation and 48 kHz audio.
+ * interactive 4-tab PET UI, portable bench_run) + WUT (WHBProc, VPAD,
+ * OSGetSystemTime) + wiiu-sdl2 dual-window GX2 backend:
+ *   - TV (1920x1080): GBA game at integer 6x (1440x960 centered)
+ *   - GamePad DRC (854x480): Interactive PET (Status/Folder/NetMap/Custom)
+ *     with calibrated VPAD touch input; press ZR to toggle Off-TV play.
  *
  * SD card layout:
  *   sd:/wiiu/apps/mmbn4/mmbn4.wuhb
@@ -11,8 +15,7 @@
  *
  * Real-hardware benchmark (Gate G-WU: < 12 ms mean single-threaded):
  *   Hold L + R while launching (or create sd:/wiiu/apps/mmbn4/bench.txt).
- *   Runs 600 unthrottled frames (using bench.ss if present) and writes
- *   mean / p90 / p99 / max ms + FPS to sd:/wiiu/apps/mmbn4/bench.log.
+ *   Runs 600 unthrottled frames and writes sd:/wiiu/apps/mmbn4/bench.log.
  */
 #include <SDL2/SDL.h>
 #include <coreinit/time.h>
@@ -29,8 +32,14 @@
 #include "emu_backend.h"
 #include "game.h"
 #include "pet_model.h"
+#include "pet_ui.h"
+#include "ui_draw_sdl2.h"
 
 #define SAMPLE_RATE 48000
+#define TV_W        1920
+#define TV_H        1080
+#define DRC_W       854
+#define DRC_H       480
 #define APP_DIR     "fs:/vol/external01/wiiu/apps/mmbn4"
 #define SAVES_DIR   APP_DIR "/saves"
 
@@ -71,7 +80,6 @@ static uint32_t vpad_to_gba_keys(const VPADStatus* v) {
     if (h & VPAD_BUTTON_DOWN)  keys |= EMU_KEY_DOWN;
     if (h & VPAD_BUTTON_R)     keys |= EMU_KEY_R;
     if (h & VPAD_BUTTON_L)     keys |= EMU_KEY_L;
-    /* Left stick snapped to clean 4-way for BN4 battle grid */
     float sx = v->leftStick.x, sy = v->leftStick.y;
     float ax = sx < 0 ? -sx : sx;
     float ay = sy < 0 ? -sy : sy;
@@ -119,7 +127,6 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    /* Name save by ROM header game code (0xAC), matching PC port. */
     char short_code[5] = "GAME";
     {
         FILE* rf = fopen(rom, "rb");
@@ -141,7 +148,6 @@ int main(int argc, char** argv) {
     emu_game_code(emu, code);
     const GameInfo* game = game_identify(code);
 
-    /* Check if L+R held at launch or bench.txt exists on SD -> run WU-3 bench */
     VPADStatus vpad = { 0 };
     VPADReadError verr = VPAD_READ_SUCCESS;
     VPADRead(VPAD_CHAN_0, &vpad, 1, &verr);
@@ -157,12 +163,20 @@ int main(int argc, char** argv) {
         return 3;
     }
 
-    SDL_Window* win = SDL_CreateWindow("MMBN4 Violet Eclipse", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                       1280, 720, SDL_WINDOW_SHOWN);
-    SDL_Renderer* ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    SDL_RenderSetLogicalSize(ren, EMU_WIDTH, EMU_HEIGHT);
-    SDL_Texture* tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING,
-                                         EMU_WIDTH, EMU_HEIGHT);
+    /* Dual-screen Wii U GX2 setup via wiiu-sdl2:
+     *   TV  (1920x1080): GBA game at integer 6x (1440x960 centered)
+     *   DRC (854x480)  : Interactive PET (logical 320x240 scaled cleanly) */
+    SDL_Window* tv_win = SDL_CreateWindow("MMBN4 TV", 0, 0, TV_W, TV_H, SDL_WINDOW_WIIU_TV_ONLY);
+    SDL_Renderer* tv_ren = SDL_CreateRenderer(tv_win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Texture* tv_tex = SDL_CreateTexture(tv_ren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING,
+                                            EMU_WIDTH, EMU_HEIGHT);
+
+    SDL_Window* drc_win = SDL_CreateWindow("MMBN4 PET", 0, 0, DRC_W, DRC_H,
+                                           SDL_WINDOW_WIIU_GAMEPAD_ONLY | SDL_WINDOW_WIIU_PREVENT_SWAP);
+    SDL_Renderer* drc_ren = drc_win ? SDL_CreateRenderer(drc_win, -1, SDL_RENDERER_ACCELERATED) : NULL;
+    SDL_Texture* drc_game_tex = drc_ren ? SDL_CreateTexture(drc_ren, SDL_PIXELFORMAT_ABGR8888,
+                                                            SDL_TEXTUREACCESS_STREAMING, EMU_WIDTH, EMU_HEIGHT) : NULL;
+    if (drc_ren) SDL_RenderSetLogicalSize(drc_ren, PET_QVGA_W, PET_QVGA_H);
 
     SDL_AudioSpec want = { 0 }, have = { 0 };
     want.freq = SAMPLE_RATE;
@@ -172,12 +186,53 @@ int main(int argc, char** argv) {
     SDL_AudioDeviceID aud = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
     if (aud) SDL_PauseAudioDevice(aud, 0);
 
+    PetUiState pet_ui;
+    pet_ui_init(&pet_ui);
+    PetModel pet_model = { 0 };
+    bool off_tv = false;
+    bool was_touched = false;
+    const char* message = NULL;
+    uint64_t msg_until = 0;
+    uint64_t fps_t0 = wiiu_now_ns();
+    uint32_t fps_f0 = emu_frame(emu);
+    double fps = 59.7;
+
     int16_t samples[4096 * 2];
+    const SDL_Rect tv_dst = { (TV_W - EMU_WIDTH * 6) / 2, (TV_H - EMU_HEIGHT * 6) / 2,
+                              EMU_WIDTH * 6, EMU_HEIGHT * 6 };
+
     while (WHBProcIsRunning()) {
+        uint32_t keys = 0;
         VPADRead(VPAD_CHAN_0, &vpad, 1, &verr);
         if (verr == VPAD_READ_SUCCESS) {
-            emu_set_keys(emu, vpad_to_gba_keys(&vpad));
+            if (vpad.trigger & VPAD_BUTTON_ZR) {
+                off_tv = !off_tv;
+                if (drc_ren) {
+                    SDL_RenderSetLogicalSize(drc_ren, off_tv ? EMU_WIDTH : PET_QVGA_W,
+                                             off_tv ? EMU_HEIGHT : PET_QVGA_H);
+                }
+                message = off_tv ? "Off-TV ON (ZR)" : "Off-TV OFF (ZR)";
+                msg_until = wiiu_now_ns() + 2000000000ULL;
+            }
+            keys = vpad_to_gba_keys(&vpad);
+
+            /* GamePad touch -> interactive PET (rising edge) */
+            bool touched = vpad.tpNormal.touched && !vpad.tpNormal.validity;
+            if (touched && !was_touched && !off_tv) {
+                VPADTouchData cal = { 0 };
+                VPADGetTPCalibratedPoint(VPAD_CHAN_0, &cal, &vpad.tpNormal);
+                int px = (int) cal.x * PET_QVGA_W / 1280;
+                int py = (int) cal.y * PET_QVGA_H / 720;
+                const char* act = pet_ui_click(&pet_ui, &pet_model, PET_LAYOUT_QVGA, px, py, emu, game);
+                if (act) {
+                    message = act;
+                    msg_until = wiiu_now_ns() + 2000000000ULL;
+                }
+            }
+            was_touched = touched;
         }
+        keys |= pet_ui_pop_keys(&pet_ui);
+        emu_set_keys(emu, keys);
 
         emu_run_frame(emu);
         int n = emu_read_audio(emu, samples, 4096);
@@ -185,16 +240,47 @@ int main(int argc, char** argv) {
             SDL_QueueAudio(aud, samples, (uint32_t) (n * 4));
         }
 
-        SDL_UpdateTexture(tex, NULL, emu_video(emu), EMU_WIDTH * 4);
-        SDL_RenderClear(ren);
-        SDL_RenderCopy(ren, tex, NULL, NULL);
-        SDL_RenderPresent(ren);
+        uint64_t now = wiiu_now_ns();
+        if (message && now > msg_until) message = NULL;
+        if (now - fps_t0 >= 500000000ULL) {
+            fps = (double) (emu_frame(emu) - fps_f0) * 1e9 / (double) (now - fps_t0);
+            fps_t0 = now;
+            fps_f0 = emu_frame(emu);
+        }
+
+        /* TV render */
+        SDL_SetRenderDrawColor(tv_ren, 0, 0, 0, 255);
+        SDL_RenderClear(tv_ren);
+        if (!off_tv) {
+            SDL_UpdateTexture(tv_tex, NULL, emu_video(emu), EMU_WIDTH * 4);
+            SDL_RenderCopy(tv_ren, tv_tex, NULL, &tv_dst);
+        }
+        SDL_RenderPresent(tv_ren);
+
+        /* GamePad DRC render: PET (normal) or GBA game (Off-TV) */
+        if (drc_ren) {
+            if (off_tv && drc_game_tex) {
+                SDL_SetRenderDrawColor(drc_ren, 0, 0, 0, 255);
+                SDL_RenderClear(drc_ren);
+                SDL_UpdateTexture(drc_game_tex, NULL, emu_video(emu), EMU_WIDTH * 4);
+                SDL_RenderCopy(drc_ren, drc_game_tex, NULL, NULL);
+            } else {
+                PetStatus st = { fps, false, keys, message };
+                pet_model_update(&pet_model, emu, game, code, &st);
+                UiDraw ui = ui_draw_sdl2(drc_ren);
+                pet_ui_draw(&ui, &pet_model, &pet_ui, PET_LAYOUT_QVGA);
+            }
+            SDL_RenderPresent(drc_ren);
+        }
     }
 
     if (aud) SDL_CloseAudioDevice(aud);
-    SDL_DestroyTexture(tex);
-    SDL_DestroyRenderer(ren);
-    SDL_DestroyWindow(win);
+    if (drc_game_tex) SDL_DestroyTexture(drc_game_tex);
+    if (drc_ren) SDL_DestroyRenderer(drc_ren);
+    if (drc_win) SDL_DestroyWindow(drc_win);
+    SDL_DestroyTexture(tv_tex);
+    SDL_DestroyRenderer(tv_ren);
+    SDL_DestroyWindow(tv_win);
     SDL_Quit();
     emu_close(emu);
     WHBProcShutdown();
