@@ -45,10 +45,9 @@ Owner decisions marked ⚠ come first.
 
 ## Owner decisions still open
 
-- [ ] RS/BM version choice in the merged ROM (`plan/DEFINITIVE-EDITION.md` §7 q1). The canon lineup and the friendlies assume one merged story.
-- [ ] Tier A leftovers (story-battle rewards, ToyRobo, cutscene skip), Tier C content in 1.0, and D1–D9 ([`plan/00` §4](plan/00-decisions-and-feasibility.md)).
+- [ ] Tier A leftovers (story-battle rewards, ToyRobo, cutscene skip, non-Soul boss rematches), Tier C content in 1.0, and D1–D9 ([`plan/00` §4](plan/00-decisions-and-feasibility.md)).
 - [ ] Placeholder/original Duo & Grand Prix Power art for `--public` builds.
-- [ ] Ask Gericom about the GBARunner licence for DSi/NDS (`D-EL5`, [`plan/emulation-layer/06`](plan/emulation-layer/06-milestones-and-risks.md)). *(Hardware `D-EL1` = Wii U, New 3DS, DSi; ports licence `D-EL3` = GPL-3.0 OK; Principia Trilogy = later — decided 2026-11-25.)*
+- [ ] Ask Gericom about the GBARunner licence for DSi/NDS (`D-EL5`, [`plan/emulation-layer/06`](plan/emulation-layer/06-milestones-and-risks.md)). *(Decided 2026-11-25: RS/BM = **Option C** two complete patches; hardware `D-EL1` = Wii U, New 3DS, DSi; ports licence `D-EL3` = GPL-3.0 OK; Principia Trilogy = later.)*
 
 ## Before committing
 
