@@ -285,7 +285,56 @@ _0806288C:
     .word dat_08062890
     .global dat_08062890
 dat_08062890:
-    incrom 0x62890, 0x398
+    incrom 0x62890, 0x258
+    .word dat_08062CC8
+    .word dat_08062E44
+    .word dat_08062F3C
+    .word dat_08063140
+    .word dat_08063308
+    .word dat_08063690
+    .word dat_080636FC
+    .word dat_08063740
+    .word dat_08063940
+    .word dat_08063A64
+    .word dat_08062D99
+    .word dat_08062EC8
+    .word dat_080630D3
+    .word dat_080632CC
+    .word dat_080635E3
+    .word dat_080636D1
+    .word dat_0806373D
+    .word dat_080638D1
+    .word dat_080639BB
+    .word dat_08063B4D
+    .word dat_08063BBC
+    .word dat_08063FD4
+    .word dat_0806454C
+    .word dat_08064AF8
+    .word dat_080651A0
+    .if VERSION_BM
+    .word dat_08066574
+    .word dat_08066768
+    .word dat_08066934
+    .word dat_0806726C
+    .word dat_08067404
+    .else
+    .word dat_0806657C
+    .word dat_08066770
+    .word dat_0806693C
+    .word dat_08067274
+    .word dat_0806740C
+    .endif
+    .word dat_08062B88
+    .word dat_08062B98
+    .word dat_08062BA8
+    .word dat_08062BB8
+    .word dat_08062BC8
+    .word dat_08062BD8
+    .word dat_08062BE8
+    .word dat_08062BF8
+    .word dat_08062C08
+    .word dat_08062C18
+    incrom 0x62B88, 0xA0
     .global dat_08062C28
 dat_08062C28:
     incrom 0x62C28, 0xA44

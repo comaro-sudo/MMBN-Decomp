@@ -131,7 +131,32 @@ _0805D5D4:
     .word dat_0805D5D8
     .global dat_0805D5D8
 dat_0805D5D8:
-    incrom 0x5D5D8, 0x244
+    incrom 0x5D5D8, 0x184
+    .word dat_0805D870
+    .word dat_0805D990
+    .word dat_0805DD88
+    .word dat_0805DF84
+    .word dat_0805E2BC
+    .word dat_0805E500
+    .word dat_0805D906
+    .word dat_0805DBAE
+    .word dat_0805DF49
+    .word dat_0805E21D
+    .word dat_0805E4CA
+    .word dat_0805E574
+    .word dat_0805E5B8
+    .word dat_0805EB2C
+    .word dat_0805FE0C
+    .word dat_08060598
+    .word dat_08061424
+    .word dat_08062230
+    .word dat_0805D7BC
+    .word dat_0805D7CC
+    .word dat_0805D7DC
+    .word dat_0805D7EC
+    .word dat_0805D7FC
+    .word dat_0805D80C
+    incrom 0x5D7BC, 0x60
     .global dat_0805D81C
 dat_0805D81C:
     incrom 0x5D81C, 0x127C

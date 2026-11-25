@@ -186,6 +186,8 @@ end = 0x0805CF74
 kind = "code"
 mode = "thumb"
 data_tables = [
+    { start = 0x08054408, end = 0x08054478, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x080593C0, end = 0x08059400, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
     { start = 0x080523CC, end = 0x08053904, fmt = "word" }, # 723-pointer sprite/object table
     { start = 0x0804FAAC, end = 0x0804FADC, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
     { start = 0x0804FB7C, end = 0x0804FBA0, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
@@ -204,6 +206,9 @@ start = 0x0805CF74
 end = 0x080612DC
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x0805D774, end = 0x0805D7D4, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+]
 
 [[segment]]
 name = "code_04c"
@@ -211,6 +216,9 @@ start = 0x080612DC
 end = 0x08067668
 kind = "code"
 mode = "thumb"
+data_tables = [
+    { start = 0x08062AFC, end = 0x08062B9C, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+]
 
 [[segment]]
 name = "code_04d"
@@ -219,6 +227,16 @@ end = 0x080711F0
 kind = "code"
 mode = "thumb"
 data_tables = [
+    { start = 0x08067C7C, end = 0x08067CBC, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x080699E4, end = 0x08069A24, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806AAC8, end = 0x0806AB08, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806BF78, end = 0x0806BFB8, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806C86C, end = 0x0806C8AC, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806C91C, end = 0x0806C95C, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806C960, end = 0x0806C9A0, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0806DA00, end = 0x0806DA50, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x080700EC, end = 0x0807016C, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08070DE4, end = 0x08070E24, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
     { start = 0x0806FDF8, end = 0x0806FE18, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
 ]
 
@@ -229,6 +247,20 @@ end = 0x08094764
 kind = "code"
 mode = "thumb"
 data_tables = [
+    { start = 0x08071598, end = 0x080715D8, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08071758, end = 0x08071858, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08074048, end = 0x08074108, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08075524, end = 0x08075564, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x080758C8, end = 0x08075908, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08075BE8, end = 0x08075C28, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08075E84, end = 0x08075F84, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08079BB4, end = 0x08079BF4, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0807C3B4, end = 0x0807C3F4, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0807E5F4, end = 0x0807E634, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x0807FF44, end = 0x0807FF84, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x080829CC, end = 0x08082A4C, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08085648, end = 0x080856B8, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
+    { start = 0x08085A5C, end = 0x08085ACC, fmt = "word" },   # pointer table (100% ROM pointers, RS/BM verified)
     { start = 0x080843FC, end = 0x08085404, fmt = "word" }, # 370-pointer table
     { start = 0x080712D4, end = 0x08071324, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
     { start = 0x080714E4, end = 0x08071524, fmt = "word" },   # pointer table (auto, 90%+ ROM pointers)
