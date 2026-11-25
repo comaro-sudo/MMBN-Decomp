@@ -1,11 +1,11 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-24 by Gemini, after Round 13 + follow-up (`ede0993`).
+Updated: 2026-11-25 by Gemini, after EL-0 ports refactor (`c934453`) + decomp table carving (`a57a907`).
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
 - [`docs/handoff-violet-eclipse.md`](docs/handoff-violet-eclipse.md) (Claude);
-- [`decomp/notes/handoff-2026-11-24-gemini-round13.md`](decomp/notes/handoff-2026-11-24-gemini-round13.md) (Gemini).
+- [`decomp/notes/handoff-2026-11-25-gemini-el0-decomp.md`](decomp/notes/handoff-2026-11-25-gemini-el0-decomp.md) (Gemini).
 
 Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch packages and their test status: [`patch/README.md`](patch/README.md).
 
@@ -22,7 +22,8 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 
 | Area | What | Where |
 |---|---|---|
-| Decomp | RS and BM build from one shared tree (DC-4); 61.2% coverage (`make -B compare` OK on RS & BM); names merged through Round 13 (`1110` symbols) | `95c6e92`, `92538c0` |
+| Decomp | RS and BM build from one shared tree (DC-4); **61.9% coverage** (`729,588 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 7 mixed/pointer tables carved across `code_00/02/03/09` (+7,320B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907` |
+| Ports (PC / EL-0) | **EL-0 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM**, `ui_draw.h`, `pet_model.c`, `pet_ui.c`, `bench.c`) + thin SDL3 PC frontend (`ui_draw_sdl3.c`, `--bench`); verified on RS & BM (1,033–1,302 fps on ARM64) | `c934453` |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
 | Patch: Souls & Duo Soul | All 12 + **13th Duo Soul** (unite, MetalSoul sprite + custom Duo palette, Air/Float + B+Left Reflect passive, clean emotion window, MetalSoul icon); completion star needs 12; **3-page Status screen (L/R)**; Black Earth gate keeps 6 (owner, no patch); `FC 0C` grant-Soul command | PASS in-game (`4c71998`, `31261d5`, `patch-test-results-6.md`) |
 | Patch: tournaments & friendly matches | WP-B1 canon pairs (AquaMan, Roll, ProtoMan) & deterministic bracket; Free Tournament fields all 12 Soul Navis (36 secret chips); **9 friendly tournament matches** (3 per venue, `FC 0E`, round-gated, retry on loss, win grants Soul & hides NPC, `b4 = 0x3D` results fix, Higsby & Sal lazy LZ77 sprite load) | PASS in-game (`bac8ce9`, `c9d36cf`, `9ab3301`, `a6cf221`) |
@@ -39,7 +40,7 @@ Owner decisions marked ⚠ come first.
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Saved for later in [`docs/pending/tier-a-leftovers-and-qol.md`](docs/pending/tier-a-leftovers-and-qol.md) |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
-| 4 | **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, New 3DS, DSi | Hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3` decided 2026-11-25). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
+| 4 | **Ports:** PC-2 (PET screen tabs, touch Custom Screen, net map) → Wii U (GX2/GamePad) → New 3DS → DSi | **EL-0 done (`c934453`)**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
 | 5 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
