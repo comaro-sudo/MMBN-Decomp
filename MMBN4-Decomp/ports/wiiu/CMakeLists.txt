@@ -15,6 +15,8 @@ add_executable(mmbn4
     ../common/game.c
     ../common/pet_model.c
     ../common/pet_ui.c
+    ${MGBA_DIR}/src/util/vfs/vfs-fd.c
+    ${MGBA_DIR}/src/util/vfs/vfs-dirent.c
     src/main.c
 )
 
@@ -28,6 +30,9 @@ target_include_directories(mmbn4 PRIVATE
 
 target_compile_definitions(mmbn4 PRIVATE
     BUILD_STATIC
+    MINIMAL_CORE=1
+    _GNU_SOURCE
+    _DEFAULT_SOURCE
     __WIIU__
 )
 
