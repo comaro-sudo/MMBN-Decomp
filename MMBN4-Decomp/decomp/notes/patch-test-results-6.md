@@ -21,9 +21,17 @@
    - **Fix:** Changed `mov r3, 0x3F` to **`mov r3, 0x3D`** (`BattleModeFlags[0x3D] = 0x003B`: identical boss rank + retryable/no-Game-Over flags, plus bit 1 = show results screen ON) in both files. Re-tested both flows end-to-end: **PASS**.
 2. **Placement (`a6cf221`): JunkMan's Colosseum signal crystal (`fm_npc_junk`)** moved from `(56, 36)` (overlapping the stone wall) to **`(36, 48)`** (cleanly on walkable grass in `t5_fm_t2_r0.bmp`).
 
-## Known Visual Polish Item (Found During Testing)
+## Known Visual Polish Item — RESOLVED (`ede0993`)
 
-- **LZ77-compressed character sprites (`Higsby 0x08` and `Sal 0x2C`) draw as a white circle on maps that do not preload them:**
-  - In `BN4_SPRITE_LIST_6`, `Dex (0x02)`, `Match (0x1D)`, `Lily (0x34)`, `Tamako (0x1F)`, `Raika (0x3B)`, and `Raoul (0x32)` are **uncompressed** (`bit 31 = 0`) and render cleanly on every map.
-  - `Higsby (0x08, ptr 0x884070FC)` and `Sal (0x2C, ptr 0x884382CC)` are **LZ77-compressed** (`bit 31 = 1`). Higsby renders cleanly inside Higsby's shop (`00,06`) because that map preloads `0x08`, but draws a white circle in DenDome Hall (`02,01`); Sal draws a white circle in both Higsby's (`00,06`) and Castillo WaitRm (`03,02`). Both NPCs are still fully talkable and functional.
-  - **Recommended follow-up:** Either add `0x08` / `0x2C` to those maps' compressed-sprite preload lists, or decompress `0x08` / `0x2C` at build time (no ROM bytes committed) or use uncompressed fallback/copied sprites.
+- **LZ77-compressed character sprites (`Higsby 0x08` and `Sal 0x2C`) — FIXED & PASS in-game:**
+  - Added `wp_d0_sprite_lazy.asm` (`0x08002894` via `VENEER_SPRITE_LAZY` `0x0800178C`), lazily decompressing `0x1808` (Higsby) and `0x182C` (Sal) into overworld `BN4_SPRITE_CACHE` (`0x0200F720`, `0x02038800`–`0x02040000`) via BIOS `swi 0x11`.
+  - Visually confirmed zero white circles: Higsby in DenDome Hall (`r14_dendome_higsby.bmp`), Sal in Castillo WaitRm (`r14_castillo_sal.bmp`), and Sal in Higsby's (`r14_higsby_sal.bmp`).
+
+## Follow-Up Smoke Tests (`ede0993` + post-Round 13)
+
+| Feature / Package | Result | Evidence |
+|---|---|---|
+| **WP-A3 Existing-Save Shop Sync (`SaveLoad` hook)** | **PASS** | Vanilla save prices migrated idempotently on load (`Shop 3,1` HPMemry `50,000Z -> 20,000Z`, `Shop 7,2` LocEnemy `10,000Z -> 4,000Z`, `Shop 6,2` Unlocker `4,000Z -> 1,600Z`, `Shop 14,0` HP+100 `3,400Z -> 1,400Z`, `Shop 15,5` Reflect `13,000Z -> 5,200Z`); shifted already-bought slots untouched. |
+| **WP-D2 Grand Prix Power BMD + e-Reader Chip Text** | **PASS** | ACDC Area 2 BMD at `(106, 326)` opened cleanly, displayed `"GP Power G"`, set `0x0D0B = True` and Library flag `0x16C0 + 0x138 = True` (`r14_gpp_open.bmp`). |
+| **WP-B4 GMD Tier Override (`wp_b4_gmd_tier.asm`)** | **PASS** | On PT1 (`playthrough = 0`), opening ACDC Area 2 GMD `0x0D09` at `(206, 290)` with identical RNG seed gave `"300 Zennys"` on **Auto** (`r15_gmd_auto_res.bmp`) vs `"700 Zennys"` on **Tier 3** (`r15_gmd_t3_res.bmp`). |
+| **WP-D3 Roaming SP+ Unlock (`wp_d3_sp_plus.asm`)** | **PASS** | Non-lobby S-rank (`0x020015EF = 0`, `0x020015EC = 0xE5` BassΩ) set `0x0E71 = True` and cleared `marker = 00000000`. |

@@ -15,7 +15,7 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [ ] **Push to GitHub:** local `main` is 7 commits ahead of `origin/main` (`4de9524`..`ede0993`). The owner decides when.
+- [ ] **Push to GitHub:** local `main` is 9 commits ahead of `origin/main`. The owner decides when.
 - [ ] **Merge Round 13 commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-24, Round 13)
@@ -36,13 +36,12 @@ Owner decisions marked ⚠ come first.
 
 | # | Task | Depends on / notes |
 |---|---|---|
-| 1 | **Smoke-test the last 2 unchecked details:** `wp_b4_gmd_tier.asm` (GMD tier override on Tier 3 vs Auto) and roaming SP+ ghosts (`0x0E69`–`0x0E71`) | Quick verification pass |
-| 2 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Decide which Tier A items make 1.0 |
-| 3 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
-| 4 | **Full-playthrough and completion testing (C1–C5)** on the PC port (RS & BM) | Validates every package together end-to-end |
-| 5 | ⚠ **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, 3DS, NDS | ⚠ Hardware owned; the GBARunner licence |
-| 6 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
-| 7 | ⚠ **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 |
+| 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Decide which Tier A items make 1.0 |
+| 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
+| 3 | **Full-playthrough and completion testing (C1–C5)** on the PC port (RS & BM) | Validates every package together end-to-end |
+| 4 | ⚠ **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, 3DS, NDS | ⚠ Hardware owned; the GBARunner licence |
+| 5 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
+| 6 | ⚠ **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 |
 
 ## Owner decisions still open
 
