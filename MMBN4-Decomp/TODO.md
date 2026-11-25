@@ -15,14 +15,14 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [ ] **Push to GitHub:** local `main` is 9 commits ahead of `origin/main`. The owner decides when.
+- [x] **Push to GitHub:** `origin/main` is up to date through Round 13 + RS/BM C1–C5 matrix & decomp symbol merge.
 - [ ] **Merge Round 13 commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-24, Round 13)
 
 | Area | What | Where |
 |---|---|---|
-| Decomp | RS and BM build from one shared tree (DC-4); 59.4% coverage; names merged through Round 10 + full regeneration | `95c6e92`, `92538c0` |
+| Decomp | RS and BM build from one shared tree (DC-4); 61.2% coverage (`make -B compare` OK on RS & BM); names merged through Round 13 (`1110` symbols) | `95c6e92`, `92538c0` |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
 | Patch: Souls & Duo Soul | All 12 + **13th Duo Soul** (unite, MetalSoul sprite + custom Duo palette, Air/Float + B+Left Reflect passive, clean emotion window, MetalSoul icon); completion star needs 12; **3-page Status screen (L/R)**; Black Earth gate keeps 6 (owner, no patch); `FC 0C` grant-Soul command | PASS in-game (`4c71998`, `31261d5`, `patch-test-results-6.md`) |
 | Patch: tournaments & friendly matches | WP-B1 canon pairs (AquaMan, Roll, ProtoMan) & deterministic bracket; Free Tournament fields all 12 Soul Navis (36 secret chips); **9 friendly tournament matches** (3 per venue, `FC 0E`, round-gated, retry on loss, win grants Soul & hides NPC, `b4 = 0x3D` results fix, Higsby & Sal lazy LZ77 sprite load) | PASS in-game (`bac8ce9`, `c9d36cf`, `9ab3301`, `a6cf221`) |
@@ -38,7 +38,7 @@ Owner decisions marked ⚠ come first.
 |---|---|---|
 | 1 | ⚠ **Tier A leftovers & QoL:** story-battle rewards, ToyRobo, cutscene skip, and any remaining non-Soul boss rematches | Decide which Tier A items make 1.0 |
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
-| 3 | **Full-playthrough and completion testing (C1–C5)** on the PC port (RS & BM) | Validates every package together end-to-end |
+| 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
 | 4 | ⚠ **Ports:** EL-0 refactor → PC-2 (PET screen, touch Custom Screen, net map) → Wii U, 3DS, NDS | ⚠ Hardware owned; the GBARunner licence |
 | 5 | **Decomp, long term:** carve mixed tables once decoded, reduce version blocks, DC-5 C | Ongoing, between steps |
 | 6 | ⚠ **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 |

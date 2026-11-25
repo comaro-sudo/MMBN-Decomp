@@ -1105,7 +1105,7 @@
 080A8750 080A875C code   GEMINI       NpcCmd_JumpIfFlagClear           NPC script opcode 0x06: jumps to target if event flag u16 is clear
 080A8880 080A888C code   GEMINI       NpcCmd_SetCharSprite             NPC script opcode 0x17: sets overworld NPC sprite from list[6] (BN4_SPRITE_LIST_CHARS)
 080A8980 080A898C code   GEMINI       NpcCmd_SetPropSprite             NPC script opcode 0x1F: sets overworld NPC sprite from list[7] (BN4_SPRITE_LIST_PROPS)
-080C4780 080C478C code   GEMINI       DuoDefeatedSetFlag               Post-Duo battle cutscene callback: sets event flag 0x0528 (Duo defeated) and advances ending
+080C4780 080C478C code   GEMINI       BassDefeatedSetFlag              Bass deletion callback: sets event flag 0x006F (Bass defeated; corrected from Duo in Round 12)
 
 # --- Round 10-11 names (Gemini: friendly-matches, battle-exit, form-palette, duo-soul-passive; merged 2026-11-23) ---
 0800295C 0800295C code   GEMINI       SpriteCopyPaletteToShadow        Copies 32B OBJ palette from [sprite_hdr+0x34] (if non-zero) or sprite archive into 0x03002640[slot]
@@ -1123,3 +1123,11 @@
 080A8BDA 080A8BE6 code   GEMINI       NpcCmd_JumpIfStoryPhaseInRange   NPC script opcode 0x3B: jumps if story_phase ([sl+0x40]+6) is within [lo, hi]
 080A8C80 080A8C8C code   GEMINI       NpcCmd_JumpIfTournamentRound     NPC script opcode 0x42: jumps if tournament t (0..2) is currently at round r (0..2)
 080A8C9C 080A8CA8 code   GEMINI       NpcCmd_JumpIfTournamentRoundNe   NPC script opcode 0x43: jumps if tournament t (0..2) is NOT at round r
+
+# --- Round 12-13 names (Gemini: Duo deletion, BattleModeFlags, Busting Level; merged 2026-11-24) ---
+08007E46 08007E46 code   GEMINI       BattleGetMode                    Returns battle header mode byte b4 from [BattleState+0x0F]
+08007EEC 08007EEC code   GEMINI       BattleGetModeFlags               Returns u16 BN4_BATTLE_MODE_FLAGS[[BattleState+0x0F]] (bit 1=results, bit 3=boss rank, bit 5=no Game Over)
+080081BC 080081BC code   GEMINI       BattleScoreBustingLevel          Core Busting Level scoring formula (r0=is_boss, r1=player -> 1..11, 11=S)
+08008558 08008558 code   GEMINI       BattleCalcBustingLevel           Computes Busting Level on every win (stored at [BattleState+0x1E]); calls BattleScoreBustingLevel
+08010DF8 08010DF8 code   GEMINI       DuoDeletionState                 Exclusive Duo deletion state (dat_080C04F8[2]); fades screen to white and deletes Duo
+08018787 08018787 data   GEMINI       BN4_BATTLE_MODE_FLAGS            u16 bitmask table indexed by b4*2 (unaligned in ROM); bit 1=show results screen, bit 3=boss rank, bit 5=retryable
