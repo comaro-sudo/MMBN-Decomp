@@ -11,15 +11,20 @@ set(MGBA_BUILD "" CACHE PATH "libmgba build dir")
 find_package(SDL3 REQUIRED CONFIG)
 
 add_executable(mmbn4 WIN32
+    ../common/bench.c
+    ../common/emu_mgba.c
+    ../common/game.c
+    ../common/pet_model.c
+    ../common/pet_ui.c
     src/main.c
-    src/emu.c
-    src/game.c
     src/pet.c
+    src/ui_draw_sdl3.c
 )
 
 set_target_properties(mmbn4 PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED ON)
 
 target_include_directories(mmbn4 PRIVATE
+    ../common
     ${MGBA_DIR}/include
     ${MGBA_BUILD}/include
 )

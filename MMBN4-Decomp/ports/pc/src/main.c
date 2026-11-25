@@ -11,9 +11,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "emu.h"
+#include "bench.h"
+#include "emu_backend.h"
 #include "game.h"
 #include "pet.h"
+#include "pet_model.h"
 
 #define SAMPLE_RATE 48000
 #define SCALE 4
@@ -157,17 +159,39 @@ static int run_test(const char* rom, int frames, const char* shot, const char* s
     return 0;
 }
 
+static uint64_t sdl_now_ns(void) { return (uint64_t) SDL_GetTicksNS(); }
+
+static int run_bench(const char* rom, const char* state_path, int frames, const char* save) {
+    Emu* emu = emu_open(rom, save, SAMPLE_RATE);
+    if (!emu) return 2;
+    char code[16];
+    emu_game_code(emu, code);
+    const GameInfo* game = game_identify(code);
+    BenchResult res = { 0 };
+    bool ok = bench_run(emu, state_path, frames, sdl_now_ns, &res);
+    emu_close(emu);
+    if (!ok) return 3;
+    printf("bench game=%s (%s) state=%s frames=%d mean_ms=%.3f p90_ms=%.3f p99_ms=%.3f max_ms=%.3f fps=%.1f\n",
+           code, game->short_name, state_path ? state_path : "-", res.frames,
+           res.mean_ms, res.p90_ms, res.p99_ms, res.max_ms, res.fps);
+    return 0;
+}
+
 static void fail(const char* msg) {
     fprintf(stderr, "%s\n", msg);
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "MMBN4", msg, NULL);
 }
 
 int main(int argc, char** argv) {
-    int test_frames = 0, quit_after = 0;
-    const char *shot = NULL, *script = NULL, *test_save = "build/test.sav", *pet_shot = NULL;
+    int test_frames = 0, quit_after = 0, bench_frames = 0;
+    const char *shot = NULL, *script = NULL, *test_save = "build/test.sav", *pet_shot = NULL, *bench_state = NULL;
     TestExtras extras = { 0 };
     for (int i = 2; i + 1 < argc; ++i) {
         if (!strcmp(argv[i], "--test")) test_frames = SDL_atoi(argv[++i]);
+        else if (!strcmp(argv[i], "--bench") && i + 2 < argc) {
+            bench_state = argv[++i];
+            bench_frames = SDL_atoi(argv[++i]);
+        }
         else if (!strcmp(argv[i], "--quit-after")) quit_after = SDL_atoi(argv[++i]);
         else if (!strcmp(argv[i], "--pet-shot")) pet_shot = argv[++i];
         else if (!strcmp(argv[i], "--shot")) shot = argv[++i];
@@ -176,6 +200,12 @@ int main(int argc, char** argv) {
         else if (!strcmp(argv[i], "--dump")) extras.dump = argv[++i];
         else if (!strcmp(argv[i], "--state-in")) extras.state_in = argv[++i];
         else if (!strcmp(argv[i], "--state-out")) extras.state_out = argv[++i];
+    }
+    if (bench_frames > 0) {
+        SDL_Init(0);
+        int rc = run_bench(argv[1], bench_state, bench_frames, test_save);
+        SDL_Quit();
+        return rc;
     }
     if (test_frames > 0) {
         SDL_Init(0);
@@ -219,6 +249,9 @@ int main(int argc, char** argv) {
         fail("Could not load the ROM.");
         SDL_Quit();
         return 1;
+    }
+    if (extras.state_in && !emu_load_state(emu, extras.state_in)) {
+        SDL_Log("could not load state %s", extras.state_in);
     }
     char code[16];
     emu_game_code(emu, code);
@@ -356,13 +389,15 @@ int main(int argc, char** argv) {
             fps_f0 = emu_frame(emu);
         }
         PetStatus st = { fps, ff, keys, message };
-        pet_draw(&pet, emu, game, code, &st);
+        PetModel pet_model;
+        pet_model_update(&pet_model, emu, game, code, &st);
+        pet_draw(&pet, &pet_model);
 
         /* --quit-after N [--pet-shot file.bmp]: dev check of the windowed
          * path; saves the PET window's own pixels (not the desktop). */
         if (quit_after > 0 && emu_frame(emu) >= (uint32_t) quit_after) {
             if (pet_shot && pet.renderer) {
-                pet_render(&pet, emu, game, code, &st);  /* read back before presenting */
+                pet_render(&pet, &pet_model);  /* read back before presenting */
                 SDL_Surface* s = SDL_RenderReadPixels(pet.renderer, NULL);
                 if (s) {
                     SDL_SaveBMP(s, pet_shot);

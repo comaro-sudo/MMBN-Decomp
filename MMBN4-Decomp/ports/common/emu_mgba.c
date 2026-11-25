@@ -1,6 +1,8 @@
-#include "emu.h"
+/* mGBA 0.10.5 (MPL-2.0) implementation of emu_backend.h. */
+#include "emu_backend.h"
 
 #include <fcntl.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +11,6 @@
 #include <mgba/core/config.h>
 #include <mgba/core/core.h>
 #include <mgba/core/log.h>
-#include <stdarg.h>
 #include <mgba-util/vfs.h>
 
 struct Emu {
@@ -47,8 +48,11 @@ Emu* emu_open(const char* rom_path, const char* save_path, int sample_rate) {
         free(emu);
         return NULL;
     }
-    /* No config file is read: defaults only (no BIOS, HLE BIOS calls). */
+    /* No config file is read: defaults only (no BIOS, HLE BIOS calls).
+     * Enable mGBA's idle-loop detector so slow hosts (Wii U / 3DS) skip
+     * busy-wait spins cleanly. */
     mCoreInitConfig(core, NULL);
+    mCoreConfigSetDefaultValue(&core->config, "idleOptimization", "detect");
     mCoreLoadConfig(core);
 
     unsigned w, h;
@@ -63,9 +67,11 @@ Emu* emu_open(const char* rom_path, const char* save_path, int sample_rate) {
         return NULL;
     }
 
-    struct VFile* save = VFileOpen(save_path, O_CREAT | O_RDWR);
-    if (!save || !core->loadSave(core, save)) {
-        fprintf(stderr, "emu: could not open save %s (continuing without)\n", save_path);
+    if (save_path && save_path[0]) {
+        struct VFile* save = VFileOpen(save_path, O_CREAT | O_RDWR);
+        if (!save || !core->loadSave(core, save)) {
+            fprintf(stderr, "emu: could not open save %s (continuing without)\n", save_path);
+        }
     }
 
     core->reset(core);
@@ -88,6 +94,11 @@ void emu_close(Emu* emu) {
     free(emu);
 }
 
+uint32_t emu_caps(const Emu* emu) {
+    (void) emu;
+    return EMU_CAP_MEMORY | EMU_CAP_SAVESTATE | EMU_CAP_IDLE_HOOK | EMU_CAP_AUDIO;
+}
+
 void emu_run_frame(Emu* emu) { emu->core->runFrame(emu->core); }
 
 void emu_set_keys(Emu* emu, uint32_t keys) { emu->core->setKeys(emu->core, keys); }
@@ -103,10 +114,23 @@ int emu_read_audio(Emu* emu, int16_t* out, int max_frames) {
     return avail;
 }
 
-/* busRead* goes through the GBA memory map without side effects on timing. */
+/* busRead* / busWrite* go through the GBA memory map without side effects on timing. */
 uint32_t emu_read8(Emu* emu, uint32_t addr) { return emu->core->busRead8(emu->core, addr); }
 uint32_t emu_read16(Emu* emu, uint32_t addr) { return emu->core->busRead16(emu->core, addr); }
 uint32_t emu_read32(Emu* emu, uint32_t addr) { return emu->core->busRead32(emu->core, addr); }
+
+void emu_write8(Emu* emu, uint32_t addr, uint8_t val) { emu->core->busWrite8(emu->core, addr, val); }
+void emu_write16(Emu* emu, uint32_t addr, uint16_t val) { emu->core->busWrite16(emu->core, addr, val); }
+void emu_write32(Emu* emu, uint32_t addr, uint32_t val) { emu->core->busWrite32(emu->core, addr, val); }
+
+uint8_t* emu_mem_ptr(Emu* emu, EmuMemRegion region, size_t* out_size) {
+    size_t sz = 0;
+    /* GBA memory region IDs in mGBA: 0x2 = EWRAM, 0x3 = IWRAM. */
+    size_t id = (region == EMU_MEM_IWRAM) ? 0x3u : 0x2u;
+    void* ptr = emu->core->getMemoryBlock(emu->core, id, &sz);
+    if (out_size) *out_size = sz;
+    return (uint8_t*) ptr;
+}
 
 bool emu_save_state(Emu* emu, const char* path) {
     size_t size = emu->core->stateSize(emu->core);
