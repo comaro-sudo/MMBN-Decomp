@@ -20033,57 +20033,7 @@ sub_08113C24:
     bx lr
     .hword 0x0000
 
-    .global sub_08113C38
-    .thumb_func
-sub_08113C38:
-    ldr r0, [r1, #0x40]
-    ldrb r0, [r0]
-    adds r2, r1, #0
-    adds r2, #0x2d
-    strb r0, [r2]
-    ldr r0, [r1, #0x40]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
-    .hword 0x0000
-
-    .global sub_08113C4C
-    .thumb_func
-sub_08113C4C:
-    ldr r0, [r1, #0x40]
-    ldrb r0, [r0]
-    adds r2, r1, #0
-    adds r2, #0x2e
-    strb r0, [r2]
-    ldr r0, [r1, #0x40]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
-    .hword 0x0000
-
-    .global sub_08113C60
-    .thumb_func
-sub_08113C60:
-    ldr r0, [r1, #0x40]
-    ldrb r0, [r0]
-    adds r2, r1, #0
-    adds r2, #0x2f
-    strb r0, [r2]
-    ldr r0, [r1, #0x40]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
-    .hword 0x0000
-
-    .global sub_08113C74
-    .thumb_func
-sub_08113C74:
-    ldr r0, [r1, #0x40]
-    ldrb r2, [r0]
-    strb r2, [r1, #0x1e]
-    adds r0, #1
-    str r0, [r1, #0x40]
-    bx lr
+    .include "c/m4a_cmds.s"
 
     .global sub_08113C80
     .thumb_func
