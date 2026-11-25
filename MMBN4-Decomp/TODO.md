@@ -15,7 +15,7 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [x] **Push to GitHub:** `origin/main` is up to date through EL-0, PC-2, PC-3, Wii U `.wuhb` Cemu verification (`7fe5a68`), and 62.1% decomp (`5c46201`).
+- [x] **Push to GitHub:** `origin/main` is up to date through EL-0..PC-6 (`27b37ef`), Wii U WU-1..WU-4 (`d5625d0`), and 62.1% decomp (`5c46201`).
 - [ ] **Merge Round 13 + EL-0/PC-2/Wii U commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-25)
@@ -23,7 +23,7 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 | Area | What | Where |
 |---|---|---|
 | Decomp | RS and BM build from one shared tree (DC-4); **62.1% coverage** (`732,312 / 1,179,456` bytes, `make -B compare` OK on RS & BM); 35 mixed/pointer tables carved across `code_00/02/03/04..05/09` (+10,044B); `1,110` symbols | `95c6e92`, `a3884fb`, `a57a907`, `5c46201` |
-| Ports (PC / EL-0..PC-6) | **EL-0 through PC-6 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c` with live ROM chip ATK/element, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `config.c` `mmbn4.ini` remappable keys, `F2` Off-TV single-window mode, `--bench`, `--pet-tab`, `package_pc.py`); **ARM64 & x64 builds + release zips verified** | `c934453`, `8094af4`, `288d986` + PC-6 |
+| Ports (PC / EL-0..PC-6) | **EL-0 through PC-6 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c` with live ROM chip ATK/element, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `config.c` `mmbn4.ini` remappable keys, `F2` Off-TV single-window mode, `--bench`, `--pet-tab`, `package_pc.py`); **ARM64 & x64 builds + release zips verified** | `c934453`, `8094af4`, `288d986`, `27b37ef` |
 | Ports (Wii U / WU-1..4) | **WU-1 through WU-4 built & verified in Cemu ARM64**: static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) + `build/wiiu/mmbn4.wuhb` (966 KB) via `python3 ports/wiiu/build_wiiu.py`; **dual-screen TV (6× centered) + GamePad touch PET (`ui_draw_sdl2.c` + `pet_ui.c` + calibrated VPAD touch + `ZR` Off-TV toggle)**; verified booting `bn4_rs_overhaul.gba` (`AGB-B4WE`) + 600-frame `bench.log` in Cemu | `07232d6`, `7fe5a68`, `d5625d0` |
 | Patch: economy & drops | WP-A1 WoodMan fix; WP-A2 Zenny × 1.5; **WP-A3 key-item/upgrade shop prices at 40% (Option 2, 34 slots + existing-save `SaveLoad` sync hook)**; WP-D2 random RS/BM drops; WP-D3 Bass gives both chips | PASS in-game (`4de9524`, `patch-test-results-6.md`) |
 | Patch: Souls & Duo Soul | All 12 + **13th Duo Soul** (unite, MetalSoul sprite + custom Duo palette, Air/Float + B+Left Reflect passive, clean emotion window, MetalSoul icon); completion star needs 12; **3-page Status screen (L/R)**; Black Earth gate keeps 6 (owner, no patch); `FC 0C` grant-Soul command | PASS in-game (`4c71998`, `31261d5`, `patch-test-results-6.md`) |
