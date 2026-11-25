@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-24 by Gemini, after Round 13 (`b08a41e`).
+Updated: 2026-11-24 by Gemini, after Round 13 + follow-up (`ede0993`).
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
@@ -15,7 +15,7 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [ ] **Push to GitHub:** local `main` is 5 commits ahead of `origin/main` (`4de9524`..`b08a41e`). The owner decides when.
+- [ ] **Push to GitHub:** local `main` is 7 commits ahead of `origin/main` (`4de9524`..`ede0993`). The owner decides when.
 - [ ] **Merge Round 13 commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-24, Round 13)
