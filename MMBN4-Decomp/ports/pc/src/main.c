@@ -12,6 +12,7 @@
 #include <string.h>
 
 #include "bench.h"
+#include "config.h"
 #include "emu_backend.h"
 #include "game.h"
 #include "pet.h"
@@ -33,19 +34,19 @@ static const char* find_rom(int argc, char** argv) {
     return NULL;
 }
 
-static uint32_t keyboard_keys(void) {
+static uint32_t keyboard_keys(const PcConfig* cfg) {
     const bool* k = SDL_GetKeyboardState(NULL);
     uint32_t keys = 0;
-    if (k[SDL_SCANCODE_X]) keys |= EMU_KEY_A;
-    if (k[SDL_SCANCODE_Z]) keys |= EMU_KEY_B;
-    if (k[SDL_SCANCODE_BACKSPACE]) keys |= EMU_KEY_SELECT;
-    if (k[SDL_SCANCODE_RETURN]) keys |= EMU_KEY_START;
-    if (k[SDL_SCANCODE_RIGHT]) keys |= EMU_KEY_RIGHT;
-    if (k[SDL_SCANCODE_LEFT]) keys |= EMU_KEY_LEFT;
-    if (k[SDL_SCANCODE_UP]) keys |= EMU_KEY_UP;
-    if (k[SDL_SCANCODE_DOWN]) keys |= EMU_KEY_DOWN;
-    if (k[SDL_SCANCODE_S]) keys |= EMU_KEY_R;
-    if (k[SDL_SCANCODE_A]) keys |= EMU_KEY_L;
+    if (k[cfg->key_a])      keys |= EMU_KEY_A;
+    if (k[cfg->key_b])      keys |= EMU_KEY_B;
+    if (k[cfg->key_select]) keys |= EMU_KEY_SELECT;
+    if (k[cfg->key_start])  keys |= EMU_KEY_START;
+    if (k[cfg->key_right])  keys |= EMU_KEY_RIGHT;
+    if (k[cfg->key_left])   keys |= EMU_KEY_LEFT;
+    if (k[cfg->key_up])     keys |= EMU_KEY_UP;
+    if (k[cfg->key_down])   keys |= EMU_KEY_DOWN;
+    if (k[cfg->key_r])      keys |= EMU_KEY_R;
+    if (k[cfg->key_l])      keys |= EMU_KEY_L;
     return keys;
 }
 
@@ -231,7 +232,10 @@ int main(int argc, char** argv) {
     }
 
     char* data_dir = SDL_GetPrefPath("MMBN4Overhaul", "PC");
-    char save_path[1024], state_path[1024];
+    char save_path[1024], state_path[1024], cfg_path[1024];
+    snprintf(cfg_path, sizeof cfg_path, "%smmbn4.ini", data_dir);
+    PcConfig cfg;
+    pc_config_load(&cfg, cfg_path);
 
     /* The save is named by the header's game code (0xAC), so patched and
      * original builds of the same version share one save. */
@@ -324,7 +328,12 @@ int main(int argc, char** argv) {
 
     SDL_Gamepad* pad = NULL;
     int16_t samples[4096 * 2];
-    bool running = true, fullscreen = false, off_tv = false;
+    bool running = true, fullscreen = false, off_tv = cfg.off_tv;
+    if (off_tv) {
+        if (pet.window && pet.visible) pet_toggle(&pet);
+        SDL_SetRenderLogicalPresentation(renderer, EMU_WIDTH + PET_QVGA_W, PET_QVGA_H,
+                                         SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    }
     const char* message = NULL;
     Uint64 message_until = 0;
     Uint64 next = SDL_GetTicksNS();
@@ -377,6 +386,8 @@ int main(int argc, char** argv) {
                 else if (e.key.key == SDLK_F1 && pet.window && !off_tv) pet_toggle(&pet);
                 else if (e.key.key == SDLK_F2) {
                     off_tv = !off_tv;
+                    cfg.off_tv = off_tv;
+                    pc_config_save(&cfg, cfg_path);
                     if (off_tv) {
                         if (pet.window && pet.visible) pet_toggle(&pet);
                         SDL_SetRenderLogicalPresentation(renderer, EMU_WIDTH + PET_QVGA_W, PET_QVGA_H,
@@ -406,9 +417,9 @@ int main(int argc, char** argv) {
         }
         if (message && SDL_GetTicksNS() > message_until) message = NULL;
 
-        uint32_t keys = keyboard_keys() | gamepad_keys(pad) | pet_ui_pop_keys(&pet.ui);
+        uint32_t keys = keyboard_keys(&cfg) | gamepad_keys(pad) | pet_ui_pop_keys(&pet.ui);
         const bool* kb = SDL_GetKeyboardState(NULL);
-        bool ff = kb[SDL_SCANCODE_TAB] || gamepad_fast_forward(pad);
+        bool ff = kb[cfg.key_ff] || gamepad_fast_forward(pad);
         emu_set_keys(emu, keys);
 
         int frames = ff ? FAST_FORWARD_FRAMES : 1;

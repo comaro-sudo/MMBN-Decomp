@@ -16,6 +16,7 @@ add_executable(mmbn4 WIN32
     ../common/game.c
     ../common/pet_model.c
     ../common/pet_ui.c
+    src/config.c
     src/main.c
     src/pet.c
     src/ui_draw_sdl3.c
