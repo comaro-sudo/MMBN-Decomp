@@ -19,6 +19,8 @@
  */
 #include <SDL2/SDL.h>
 #include <coreinit/time.h>
+#include <padscore/kpad.h>
+#include <padscore/wpad.h>
 #include <sys/stat.h>
 #include <vpad/input.h>
 #include <whb/proc.h>
@@ -93,6 +95,33 @@ static uint32_t vpad_to_gba_keys(const VPADStatus* v) {
     return keys;
 }
 
+static uint32_t kpad_pro_to_gba_keys(const KPADStatus* k) {
+    if (k->extensionType != WPAD_EXT_PRO_CONTROLLER) return 0;
+    uint32_t keys = 0;
+    uint32_t h = k->pro.hold;
+    if (h & WPAD_PRO_BUTTON_A)     keys |= EMU_KEY_A;
+    if (h & WPAD_PRO_BUTTON_B)     keys |= EMU_KEY_B;
+    if (h & WPAD_PRO_BUTTON_MINUS) keys |= EMU_KEY_SELECT;
+    if (h & WPAD_PRO_BUTTON_PLUS)  keys |= EMU_KEY_START;
+    if (h & WPAD_PRO_BUTTON_RIGHT) keys |= EMU_KEY_RIGHT;
+    if (h & WPAD_PRO_BUTTON_LEFT)  keys |= EMU_KEY_LEFT;
+    if (h & WPAD_PRO_BUTTON_UP)    keys |= EMU_KEY_UP;
+    if (h & WPAD_PRO_BUTTON_DOWN)  keys |= EMU_KEY_DOWN;
+    if (h & WPAD_PRO_TRIGGER_R)    keys |= EMU_KEY_R;
+    if (h & WPAD_PRO_TRIGGER_L)    keys |= EMU_KEY_L;
+    float sx = k->pro.leftStick.x, sy = k->pro.leftStick.y;
+    float ax = sx < 0 ? -sx : sx;
+    float ay = sy < 0 ? -sy : sy;
+    if (ax > ay) {
+        if (sx > 0.45f)  keys |= EMU_KEY_RIGHT;
+        if (sx < -0.45f) keys |= EMU_KEY_LEFT;
+    } else {
+        if (sy > 0.45f)  keys |= EMU_KEY_UP;
+        if (sy < -0.45f) keys |= EMU_KEY_DOWN;
+    }
+    return keys;
+}
+
 static void run_hardware_bench(Emu* emu, const GameInfo* game, const char* code) {
     const char* state = file_exists(APP_DIR "/bench.ss") ? (APP_DIR "/bench.ss") : NULL;
     BenchResult res = { 0 };
@@ -119,6 +148,8 @@ int main(int argc, char** argv) {
     (void) argv;
 
     WHBProcInit();
+    KPADInit();
+    WPADEnableURCC(TRUE);
     mkdir(SAVES_DIR, 0777);
 
     const char* rom = find_rom();
@@ -230,6 +261,21 @@ int main(int argc, char** argv) {
                 }
             }
             was_touched = touched;
+        }
+        /* Wii U Pro Controller (KPAD channel 0) */
+        KPADStatus kpad = { 0 };
+        KPADError kerr = KPAD_ERROR_OK;
+        if (KPADReadEx(WPAD_CHAN_0, &kpad, 1, &kerr) > 0 && kerr == KPAD_ERROR_OK) {
+            if (kpad.extensionType == WPAD_EXT_PRO_CONTROLLER && (kpad.pro.trigger & WPAD_PRO_TRIGGER_ZR)) {
+                off_tv = !off_tv;
+                if (drc_ren) {
+                    SDL_RenderSetLogicalSize(drc_ren, off_tv ? EMU_WIDTH : PET_QVGA_W,
+                                             off_tv ? EMU_HEIGHT : PET_QVGA_H);
+                }
+                message = off_tv ? "Off-TV ON (ZR)" : "Off-TV OFF (ZR)";
+                msg_until = wiiu_now_ns() + 2000000000ULL;
+            }
+            keys |= kpad_pro_to_gba_keys(&kpad);
         }
         keys |= pet_ui_pop_keys(&pet_ui);
         emu_set_keys(emu, keys);

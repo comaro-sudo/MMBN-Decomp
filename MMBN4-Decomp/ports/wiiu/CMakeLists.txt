@@ -53,4 +53,7 @@ wut_create_wuhb(mmbn4
     NAME "MMBN4 Violet Eclipse"
     SHORTNAME "MMBN4 VE"
     AUTHOR "MMBN-Decomp"
+    ICON "${CMAKE_CURRENT_SOURCE_DIR}/assets/icon.png"
+    TVSPLASH "${CMAKE_CURRENT_SOURCE_DIR}/assets/tv_splash.png"
+    DRCSPLASH "${CMAKE_CURRENT_SOURCE_DIR}/assets/drc_splash.png"
 )
