@@ -1158,6 +1158,27 @@ static void test_boss_patterns_and_fade(void) {
     assert(palDst[0] == Rgb555Pack(15, 0, 0) && palDst[1] == Rgb555Pack(0, 8, 15));
 }
 
+/* core_fixed_math.c */
+s32 Fx16Mul(s32 a, s32 b);
+s32 Fx16Lerp(s32 a, s32 b, s32 t);
+s32 MathAbsS32(s32 v);
+s32 MathManhattan(s32 x0, s32 y0, s32 x1, s32 y1);
+void MathFacingToDelta(u8 dir, s8 *outDx, s8 *outDy);
+
+static void test_fixed_math(void) {
+    s8 dx = 0, dy = 0;
+
+    assert(Fx16Mul(1 << 16, 3 << 16) == (3 << 16));
+    assert(Fx16Mul(3 << 15, 2 << 16) == (3 << 16)); /* 1.5 * 2.0 = 3.0 */
+    assert(Fx16Lerp(10 << 16, 20 << 16, 1 << 15) == (15 << 16));
+    assert(MathAbsS32(-42) == 42 && MathAbsS32(42) == 42);
+    assert(MathManhattan(1, 1, 6, 3) == 7);
+    MathFacingToDelta(1, &dx, &dy); /* NE */
+    assert(dx == 1 && dy == -1);
+    MathFacingToDelta(5, &dx, &dy); /* SW */
+    assert(dx == -1 && dy == 1);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1179,6 +1200,7 @@ int main(void) {
     test_mail_stats_and_projectiles();
     test_camera_rewards_and_virus_ai();
     test_boss_patterns_and_fade();
+    test_fixed_math();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

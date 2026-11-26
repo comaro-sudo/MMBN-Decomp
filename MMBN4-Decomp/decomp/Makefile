@@ -35,7 +35,7 @@ ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork -I $(BUILD) -I include -I . \
            --defsym VERSION_RS=$(if $(filter rs,$(VERSION)),1,0) \
            --defsym VERSION_BM=$(if $(filter bm,$(VERSION)),1,0)
 
-.PHONY: all compare modern-check modern-test clean
+.PHONY: all compare modern-check modern-lib modern-test clean
 all: $(ROM)
 
 # baserom.gba inside the build dir, so .incbin "baserom.gba" finds it via -I.
@@ -120,9 +120,21 @@ modern-check: $(MODERN_SRCS)
 	done
 	@echo "modern-check: OK ($(words $(MODERN_SRCS)) files)"
 
-modern-test: $(MODERN_SRCS) tests/test_modern.c
+MODERN_HOST_OBJS := $(patsubst src/modern/%.c,build/modern/host_%.o,$(MODERN_SRCS))
+MODERN_LIB := build/modern/libmmbn4_modern.a
+
+build/modern/host_%.o: src/modern/%.c
 	@mkdir -p build/modern
-	gcc -O2 -Wall -Wextra -Werror -I include $(MODERN_SRCS) tests/test_modern.c -o build/modern/test_modern
+	gcc -O2 -Wall -Wextra -Werror -I include -c $< -o $@
+
+$(MODERN_LIB): $(MODERN_HOST_OBJS)
+	ar rcs $@ $(MODERN_HOST_OBJS)
+
+modern-lib: $(MODERN_LIB)
+	@echo "modern-lib: OK ($(MODERN_LIB), $(words $(MODERN_SRCS)) modules)"
+
+modern-test: $(MODERN_LIB) tests/test_modern.c
+	gcc -O2 -Wall -Wextra -Werror -I include tests/test_modern.c $(MODERN_LIB) -o build/modern/test_modern
 	./build/modern/test_modern
 
 clean:

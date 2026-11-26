@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after C2/D3 `core_fade.c` & `core_boss_patterns.c` — **209 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; **147 portable C functions** across 34 `src/modern/` files = **209 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after C2/E2 `core_fixed_math.c` + `libmmbn4_modern.a` — **214 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; **152 portable C functions** across 35 `src/modern/` files packaged as `libmmbn4_modern.a` = **214 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
@@ -47,7 +47,7 @@ Goal: Establish canonical C headers (`include/gba.h`, `include/structs.h`, `incl
 | Task | Scope | Target |
 |---|---|---|
 | **C1** | ~~**Core headers & Toolkit struct (`include/`):**~~ **DONE (2026-11-26):** `include/gba_types.h`, `include/gba_io.h`, `include/gamestate.h` (`MainState`, `JoypadState`, `GameState`, `ProgressState`), `include/toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`), and `include/battle.h` (`BattleChipData`, `BattleNaviState`, `DoubleSoulId`, RNG). Verified with `_Static_assert` + `gcc`/`agbcc`/`old_agbcc`. | Shared C headers |
-| **C2** | **Core utility & math (`code_00`):** *(In progress: `core_progress.c` [11], `core_input.c` [5], `core_lz77.c` [2], `core_oam_dma.c` [4], `core_sound_mgr.c` [5], `core_camera.c` [3], `core_fade.c` [3: RGB555 black/white palette fade], verified by `make modern-check` + `make modern-test`.)* Remaining: affine/BG rotation helpers. | `src/modern/core_*.c` |
+| **C2** | **Core utility & math (`code_00`):** *(In progress: `core_progress.c` [11], `core_input.c` [5], `core_lz77.c` [2], `core_oam_dma.c` [4], `core_sound_mgr.c` [5], `core_camera.c` [3], `core_fade.c` [3], `core_fixed_math.c` [5: Q16.16 mul/lerp, Manhattan, 8-way facing], verified by `make modern-check` + `make modern-test`.)* | `src/modern/core_*.c` |
 | **C3** | **Overworld, flags, save & inventory (`code_01`–`code_02`):** *(In progress: `src/modern/core_save.c` [5 funcs], `src/modern/core_inventory.c` [9 funcs], `src/modern/core_folder.c` [3 funcs: `FolderValidate`, `FolderCanSetRegular`, `FolderShuffleDeck`], `src/modern/core_map.c` [4 funcs], verified by `make modern-test`.)* Remaining: full map tile/collision loader, overworld script VM. | `src/modern/core_*.c` |
 | **C4** | **Menus, text & UI (`code_03`–`code_04`):** *(In progress: `src/modern/core_world.c` [4], `core_shop.c` [5], `core_subchips.c` [3], `core_chip_trader.c` [3], `core_navicust.c` [5], `core_navi_stats.c` [4], `core_mail.c` [4], `core_text_script.c` [3], `core_library.c` [4], all verified by `make modern-test`.)* Remaining: PET menu renderer/layout hooks. | `src/modern/core_*.c` |
 
@@ -70,7 +70,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 | Task | Scope | Target |
 |---|---|---|
 | **E1** | **100% matching RS & BM verification:** Both `make -B compare VERSION=rs` and `VERSION=bm` pass with 0 `incrom` code bytes left. | 100% matching decomp |
-| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 34 modules / 147 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
+| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-lib` [`build/modern/libmmbn4_modern.a`] + `make modern-test` [links `libmmbn4_modern.a` — ALL PASSED across 35 modules / 152 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
 
 ## Recommended Execution Order
 
