@@ -552,6 +552,69 @@ static void test_text_script_decoder(void) {
     assert(TextScriptStep(&st, &tk, &glyph) == 3 && st.lastExtArg == 0x42u);
 }
 
+/* core_lz77.c */
+u32 Lz77GetUncompressedSize(const u8 *src, u32 srcLen);
+u32 Lz77Decompress(const u8 *src, u32 srcLen, u8 *dst, u32 dstCap);
+
+/* core_battle_loop.c */
+struct BattleActorState {
+    s16 hp;
+    s16 maxHp;
+    u16 invFrames;
+    u16 hitstunFrames;
+    u16 invisFrames;
+    u8 guardActive;
+    u8 shadowActive;
+    u8 barrierKind;
+    s16 barrierHp;
+    u8 deleted;
+};
+
+void BattleActorTickTimers(struct BattleActorState *actor);
+s32 BattleActorApplyHit(struct BattleActorState *actor, s32 rawDamage, u32 flags);
+s32 BattleActorHeal(struct BattleActorState *actor, s32 amount);
+
+static void test_lz77_and_battle_loop(void) {
+    /*
+     * GBA LZ77 stream encoding "ABABABAB" (8 bytes):
+     *   header: 0x10, 0x08, 0x00, 0x00
+     *   flags:  0x20 (bit 0=0 literal 'A', bit 1=0 literal 'B',
+     *                 bit 2=1 back-ref len=6 (nibble=3), disp=2 (raw=1))
+     */
+    const u8 lzStream[] = { 0x10, 0x08, 0x00, 0x00, 0x20, 'A', 'B', 0x30, 0x01 };
+    u8 out[16];
+    struct BattleActorState navi;
+
+    assert(Lz77GetUncompressedSize(lzStream, sizeof(lzStream)) == 8u);
+    assert(Lz77Decompress(lzStream, sizeof(lzStream), out, sizeof(out)) == 8u);
+    assert(memcmp(out, "ABABABAB", 8) == 0);
+    assert(Lz77Decompress(lzStream, sizeof(lzStream), out, 4) == 0u); /* dst too small */
+
+    /* BattleActorState: Aura, Barrier, Invis, Wind, Flinch, Heal, Deletion */
+    memset(&navi, 0, sizeof(navi));
+    navi.hp = 500;
+    navi.maxHp = 500;
+    navi.barrierKind = 2; /* Aura 100 */
+    navi.barrierHp = 100;
+
+    assert(BattleActorApplyHit(&navi, 80, 0) == 0 && navi.barrierKind == 2);  /* Aura blocks < 100 */
+    assert(BattleActorApplyHit(&navi, 100, 0) == 0 && navi.barrierKind == 0); /* Aura breaks at 100 */
+
+    navi.barrierKind = 1; /* Barrier 50 */
+    navi.barrierHp = 50;
+    assert(BattleActorApplyHit(&navi, 40, (1u << 1)) == 40 && navi.hp == 460 && navi.barrierKind == 0); /* Wind strips & hits */
+
+    assert(BattleActorApplyHit(&navi, 60, (1u << 4)) == 60 && navi.hp == 400 && navi.invFrames == 120u);
+    assert(BattleActorApplyHit(&navi, 60, 0) == 0); /* flashing i-frames */
+    BattleActorTickTimers(&navi);
+    assert(navi.invFrames == 119u && navi.hitstunFrames == 15u);
+
+    assert(BattleActorHeal(&navi, 150) == 100 && navi.hp == 500);
+    navi.invFrames = 0;
+    assert(BattleActorApplyHit(&navi, 999, 0) == 500 && navi.hp == 0 && navi.deleted == 1);
+    assert(BattleActorHeal(&navi, 100) == 0);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -564,6 +627,7 @@ int main(void) {
     test_emotion_and_karma();
     test_enemy_ai_and_sp_scaling();
     test_text_script_decoder();
+    test_lz77_and_battle_loop();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
