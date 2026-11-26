@@ -1076,6 +1076,45 @@ static void test_map_vm_pa_catalog_and_battle_sim(void) {
     assert(BattleSimTick(&sim) == 0u && sim.turn.phase == 3u); /* VICTORY */
 }
 
+static void test_chip_attacks2(void) {
+    struct BattlePanel grid[18];
+    s8 wx = 1, bx = 1, by = 3;
+    s16 barrier = 100;
+    u16 invis = 2;
+
+    /* AreaGrab steals col 4, then col 5, preserves col 6 unless allowLastColumn=1 */
+    BattleGridInitDefault(grid);
+    assert(ChipAreaGrabStealColumn(grid, 0) == 3u);
+    assert(ChipAreaGrabStealColumn(grid, 0) == 3u);
+    assert(ChipAreaGrabStealColumn(grid, 0) == 0u);
+    assert(ChipAreaGrabStealColumn(grid, 1) == 3u);
+
+    /* ShockWave stops on broken panel */
+    BattleGridInitDefault(grid);
+    grid[BattleGridIndex(3, 2)].state = 2u;
+    assert(ChipShockWaveStep(grid, &wx, 2, 1) == 1u && wx == 2);
+    assert(ChipShockWaveStep(grid, &wx, 2, 1) == 0u && wx == 2);
+
+    /* Boomerang perimeter sweep: (1,3)->(6,3)->(6,1)->(1,1) = 12 steps then 0 */
+    {
+        u32 steps = 0u;
+        while (ChipBoomerangPerimeterStep(&bx, &by)) {
+            steps++;
+        }
+        assert(steps == 12u && bx == 1 && by == 1);
+    }
+
+    /* Barrier absorb + overflow + wind shatter */
+    assert(ChipBarrierAbsorbHit(&barrier, 40, 0) == 0 && barrier == 60);
+    assert(ChipBarrierAbsorbHit(&barrier, 80, 0) == 20 && barrier == 0);
+    barrier = 200;
+    assert(ChipBarrierAbsorbHit(&barrier, 10, 1) == 0 && barrier == 0); /* Wind shatters */
+
+    /* Invisible timer */
+    assert(ChipInvisTick(&invis) == 1u && invis == 1u);
+    assert(ChipInvisTick(&invis) == 0u && invis == 0u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1108,6 +1147,7 @@ int main(void) {
     test_map_collision_and_pet_menu();
     test_soul_navi_ai_and_npc_vm();
     test_map_vm_pa_catalog_and_battle_sim();
+    test_chip_attacks2();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

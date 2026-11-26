@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **82.6% decomp (86.3% excl. audio) + 300 C functions (63 DC-5 + 237 portable across 60 modules in `libmmbn4_modern.a`)**.
+Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **82.6% decomp (86.3% excl. audio) + 305 C functions (63 DC-5 + 242 portable across 61 modules in `libmmbn4_modern.a`) + 1,278 verified symbols**.
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:

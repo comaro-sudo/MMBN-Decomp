@@ -690,6 +690,13 @@ s32 BattleSimPlayerAttack(struct BattleSimState *sim, s32 damage, u32 hitFlags);
 s32 BattleSimEnemyAttack(struct BattleSimState *sim, s32 damage, u32 hitFlags);
 u32 BattleSimTick(struct BattleSimState *sim);
 
+/* --- core_chip_attacks2.c --- */
+u32 ChipAreaGrabStealColumn(struct BattlePanel grid[18], u8 allowLastColumn);
+u32 ChipShockWaveStep(const struct BattlePanel grid[18], s8 *x, s8 y, s8 dir);
+u32 ChipBoomerangPerimeterStep(s8 *x, s8 *y);
+s32 ChipBarrierAbsorbHit(s16 *barrierHp, s32 damage, u8 isWind);
+u32 ChipInvisTick(u16 *invisFrames);
+
 #ifdef __cplusplus
 }
 #endif

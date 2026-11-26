@@ -11,9 +11,9 @@
   - **Matching DC-5 C (`decomp/src/*.c`, 100% byte-identical RS & BM):** **63 functions across 16 files** (`bios_swi.c` [8], `bios_sound_bias.c` [1: SWI `0x2A` `SoundBias`], complete `agb_sram.c` [6], `m4a_api.c` [11], `m4a_body.c` [3], complete `m4a_cgb.c` [3: `CgbOscOff`, `CgbModVol`, `CgbSound`], `m4a_cmds.c` [9], `m4a_ctrl.c` [3], `m4a_freq.c` [1], `m4a_imminit.c` [2], `m4a_init.c` [9], `m4a_lfo.c` [2], `m4a_start.c` [1], `m4a_stop.c` [1], `m4a_xcmd.c` [2], `m4a_xwave.c` [1]).
   - **Portable C & Core Headers (`decomp/include/*.h`, `decomp/src/modern/*.c`):**
     - **Phase C1 complete:** `gba_types.h`, `gba_io.h`, `gamestate.h`, `toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`, `_Static_assert`-verified), `battle.h` (`BattleChipData` `0x2C` B).
-    - **Phases C2–D3 / E2:** **237 portable C functions across 60 files** packaged as `build/modern/libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` (`make modern-lib`), giving **300 C functions combined** (all core engine, overworld/VM, menu, NaviCust, battle, chip/P.A., virus/boss AI, and headless `BattleSimTick` modules).
+    - **Phases C2–D3 / E2:** **242 portable C functions across 61 files** packaged as `build/modern/libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` (`make modern-lib`), giving **305 C functions combined** (all core engine, overworld/VM, menu, NaviCust, battle, chip/P.A., virus/boss AI, and headless `BattleSimTick` modules).
     - Verified by `make modern-check` (ARM7TDMI Thumb `-Wall -Wextra -Werror`) and `make modern-test` (native host unit test suite `tests/test_modern.c` — ALL PASSED).
-  - **Symbols:** **1,236** verified symbols in `decomp/symbols/names.txt` (+126 promoted in Phase A6).
+  - **Symbols:** **1,278** verified symbols in `decomp/symbols/names.txt` (+168 promoted in Phase A6, including all `StartNewGamePlus` backup/restore pairs, 2D/3D trig/parabola helpers, `AppearBits_*`, RNG, and BG/Palette/Render commit routines).
 
 ## Key Decisions & Constraints
 - Both RS and BM share one tree (`decomp/asm/*.s`); `make compare VERSION=rs` and `make compare VERSION=bm` must print `OK`.

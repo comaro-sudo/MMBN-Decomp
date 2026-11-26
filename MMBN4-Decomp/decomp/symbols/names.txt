@@ -1259,3 +1259,45 @@
 08001288 08001288 code   GEMINI       NgPlus_RestoreShopAndMailData    StartNewGamePlus: restores sl[+0x5C..+0x70] persistent blocks
 08001308 08001308 code   GEMINI       NgPlus_BackupSoulIcons           StartNewGamePlus: backs up 0x02006F40 (0x0E) & 0x020014F0 (0x0E)
 08001324 08001324 code   GEMINI       NgPlus_RestoreSoulIcons          StartNewGamePlus: restores 0x02006F40 (0x0E) & 0x020014F0 (0x0E)
+0800143C 0800143C code   GEMINI       NgPlus_BackupItemsAndSubChips    StartNewGamePlus: backs up sl[+0x48]+0x1A0 (0x80 B) & sl[+0x74] (0x800 B)
+08001460 08001460 code   GEMINI       NgPlus_RestoreItemsAndSubChips   StartNewGamePlus: restores sl[+0x48]+0x1A0 (0x80 B) & sl[+0x74] (0x800 B)
+08001490 08001490 code   GEMINI       NgPlus_BackupKeyItems            StartNewGamePlus: backs up sl[+0x48]+0x00 (0x20 B) key items
+080014A6 080014A6 code   GEMINI       NgPlus_RestoreKeyItems           StartNewGamePlus: restores sl[+0x48]+0x00 (0x20 B) key items
+080014C4 080014C4 code   GEMINI       NgPlus_BackupExtraSaveSlots      StartNewGamePlus: backs up sl[+0x80..+0x98] & fixed EWRAM mirrors
+0800158C 0800158C code   GEMINI       NgPlus_RestoreExtraSaveSlots     StartNewGamePlus: restores sl[+0x80..+0x98] & fixed EWRAM mirrors
+08001680 08001680 code   GEMINI       NgPlus_BackupCoreStats           StartNewGamePlus: backs up Zenny, BugFrags, MaxHP, CurHP & core progress fields
+080016F0 080016F0 code   GEMINI       NgPlus_RestoreCoreStats          StartNewGamePlus: restores Zenny, BugFrags, MaxHP, CurHP & core progress fields
+08001760 08001760 code   GEMINI       Atan2_8Bit                       computes 8-bit angle [0..255] from Q16.16 (dy=r0, dx=r1) via BIOS SWI ArcTan2
+0800176E 0800176E code   GEMINI       VecToCardinalDir4                returns 0 if (r0|r1)==0 else 1..4 cardinal direction from Q16.16 vector (r0, r1)
+08001784 08001784 code   GEMINI       AngleDiffToPlayer                returns signed 8-bit angle delta from actor r5 to player minus heading r0
+080017A8 080017A8 code   GEMINI       PolarToCartesian                 converts 8-bit angle r0 and radius r1 into (r0=dx, r1=dy) via Q8 sin/cos tables
+080017C8 080017C8 code   GEMINI       CardinalDirToVec                 converts cardinal dir r0 (1..4) and speed r1 into (dx, dy) via PolarToCartesian
+080017DE 080017DE code   GEMINI       IsPointInSquareRadius            returns 1 if (r0, r1) lies within half-extent r4 of (r2, r3), else 0
+080017F8 080017F8 code   GEMINI       IsPointInCircleRadius            returns 1 if (r0 - r2)^2 + (r1 - r3)^2 <= r4^2, else 0
+08001816 08001816 code   GEMINI       IsActorWithinPlayerRadius        returns 1 if actor r5 (pos>>12) is within circle radius r4 of player
+08001834 08001834 code   GEMINI       CalcParabolaVzAndFrames          computes parabolic flight frames (r1) & initial Vz (r0) from start r0 to (r1,r2,r3)
+080018AE 080018AE code   GEMINI       CalcParabolaVelFromVz            computes flight frames (r0) and (vx=r1, vy=r2) given start r0, target, Vz=r3, g=r4
+080018EC 080018EC code   GEMINI       CalcArcVelocityByApex            computes parabolic (vx, vy, vz, g, dir8) from start r0 to (r1,r2) with apex r4
+08001956 08001956 code   GEMINI       CalcArcVelocityByFrames          computes parabolic (vx=r0, vy=r1, vz=r2) from start r0 to (r1,r2,r3) in r4 frames
+080019A8 080019A8 code   GEMINI       AppearBits_Set                   sets bits r0 in actor/map appear bitmask (sl[+0x18]->[+0x64])
+080019B4 080019B4 code   GEMINI       AppearBits_Clear                 clears bits r0 in actor/map appear bitmask (sl[+0x18]->[+0x64])
+080019C0 080019C0 code   GEMINI       AppearBits_Get                   reads actor/map appear bitmask (sl[+0x18]->[+0x64])
+080019C8 080019C8 code   GEMINI       AppearBits_Write                 writes r0 to actor/map appear bitmask (sl[+0x18]->[+0x64])
+08001AF8 08001AF8 code   GEMINI       SeedRNG                          seeds primary RNG state at 0x02001790 with 0xA338244F
+08001B00 08001B00 code   GEMINI       GetRNG                           steps primary RNG at 0x02001790 (rol1 + 1 ^ 0x873CA9E5)
+08001B16 08001B16 code   GEMINI       GetPositiveSignedRNG             steps primary RNG at 0x02001790 and clears bit 31
+08001B30 08001B30 code   GEMINI       GetSecondaryRNG                  steps secondary RNG at 0x020015D4
+08001B46 08001B46 code   GEMINI       GetPositiveSignedSecondaryRNG    steps secondary RNG at 0x020015D4 and clears bit 31
+08001B60 08001B60 code   GEMINI       GetTertiaryRNG                   steps tertiary RNG at 0x02001E98
+08001B98 08001B98 code   GEMINI       ClearBgTilemapAndQueues          clears VRAM 0x0600E000 (0x2000 B) and resets BG tilemap buffers
+08001BB4 08001BB4 code   GEMINI       CommitBgTilemapBuffer            DMAs sl[+0x28] to VRAM 0x0600E000 (0x2000 B) and resets dirty buffer
+08001BE8 08001BE8 code   GEMINI       SetBgPreset                      copies 8-byte BG0..3CNT preset r0 from gBgPresets into sl[+8]+4
+08001C04 08001C04 data   GEMINI       gBgPresets                       22x8-byte table of GBA BG0CNT..BG3CNT display presets
+08001CB4 08001CB4 code   GEMINI       SetMapBgPreset                   looks up map (group=r0, id=r1) BG preset byte and calls SetBgPreset
+08001CD8 08001CD8 code   GEMINI       Render_CommitRegisters           commits shadow MOSAIC, BG0..3, WIN0/1, BLD, and DISPCNT to GBA I/O
+08001D24 08001D24 code   GEMINI       ClearBgCharBlocks                clears base tiles of VRAM charblocks 0x06000000..0x0600C000
+08001D58 08001D58 code   GEMINI       ClearPaletteStagingBuffer        clears staging palette buffer at 0x03002A50
+08001D64 08001D64 code   GEMINI       ClearPaletteStagingAndHw         clears staging palette buffer (0x03002A50) and hardware PRAM (0x05000000)
+08001D80 08001D80 code   GEMINI       ClearBlendRegs                   zeroes 8-byte shadow BLDCNT/BLDALPHA/BLDY struct at sl[+0x20]
+08001D8E 08001D8E code   GEMINI       FlushFadePaletteToHw             DMAs 512-byte fade palette buffer (0x03002C50) to hardware PRAM (0x05000000)
+08001DA8 08001DA8 code   GEMINI       ClearBgTileIdBlocks              zeroes BG tilemap staging buffer pointed to by sl[+0x28]
