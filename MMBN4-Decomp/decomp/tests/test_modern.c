@@ -615,6 +615,60 @@ static void test_lz77_and_battle_loop(void) {
     assert(BattleActorHeal(&navi, 100) == 0);
 }
 
+/* core_chips.c */
+u8 BusterClampStat(s32 rawStat);
+u16 BusterChargeDamage(u8 attackStat);
+u16 BusterChargeFrames(u8 chargeStat);
+u32 DarkChipApplyHpPenalty(u16 *maxHp, u16 *curHp);
+u32 ChipCanSacrificeForSoul(u8 chipElement, u8 chipClass, u8 targetElem);
+
+/* core_map.c */
+struct MapWarpTarget {
+    u8 mapGroup;
+    u8 mapId;
+    s16 x;
+    s16 y;
+    s16 z;
+    u8 facing;
+};
+
+u16 MapPackKey(u8 mapGroup, u8 mapId);
+u32 MapIsCyberworld(u8 mapGroup);
+void MapApplyWarp(struct GameState *gs, const struct MapWarpTarget *warp);
+u32 MapStepEncounter(u16 *stepCounter, u16 stepDelta, u16 threshold,
+                     u8 sneakRunActive, u16 playerMaxHp, u16 enemyMaxHp);
+
+static void test_chips_and_map(void) {
+    u16 maxHp = 100, curHp = 100;
+    struct GameState gs;
+    struct MapWarpTarget warp = { 0x90, 0x02, 10, 20, 0, 1 };
+    u16 steps = 0;
+
+    /* Buster stats & DarkChip penalty */
+    assert(BusterClampStat(0) == 1 && BusterClampStat(9) == 5);
+    assert(BusterChargeDamage(3) == 30u);
+    assert(BusterChargeFrames(1) == 90u && BusterChargeFrames(5) == 30u);
+    assert(DarkChipApplyHpPenalty(&maxHp, &curHp) == 1 && maxHp == 99u && curHp == 99u);
+    maxHp = 1;
+    assert(DarkChipApplyHpPenalty(&maxHp, &curHp) == 0 && maxHp == 1u);
+
+    /* DoubleSoul sacrifice eligibility */
+    assert(ChipCanSacrificeForSoul(1, 0, 1) == 1u); /* Fire Standard for FireSoul */
+    assert(ChipCanSacrificeForSoul(1, 1, 1) == 0u); /* Mega chip rejected */
+    assert(ChipCanSacrificeForSoul(2, 0, 1) == 0u); /* Wrong element */
+
+    /* Map key, cyberworld check, warp, encounter counter & SneakRun */
+    assert(MapPackKey(0x90, 0x02) == 0x9002u);
+    assert(MapIsCyberworld(0x01) == 0u && MapIsCyberworld(0x90) == 1u);
+    memset(&gs, 0, sizeof(gs));
+    MapApplyWarp(&gs, &warp);
+    assert(gs.mapGroup == 0x90 && gs.mapNumber == 0x02);
+
+    assert(MapStepEncounter(&steps, 40, 100, 0, 500, 200) == 0u && steps == 40u);
+    assert(MapStepEncounter(&steps, 70, 100, 1, 500, 200) == 0u && steps == 0u); /* SneakRun suppresses */
+    assert(MapStepEncounter(&steps, 100, 100, 1, 200, 500) == 1u); /* stronger enemy triggers */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -628,6 +682,7 @@ int main(void) {
     test_enemy_ai_and_sp_scaling();
     test_text_script_decoder();
     test_lz77_and_battle_loop();
+    test_chips_and_map();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
