@@ -968,6 +968,36 @@ static void test_chip_attacks_and_duo_bass(void) {
     assert(BossBassAuraBreaks(10, 200, 1) == 1u); /* Wind strips Aura */
 }
 
+static void test_map_collision_and_pet_menu(void) {
+    /* 3x3 overworld tile map: 0=walk, 1=wall, 2=warp */
+    const u8 tiles[9] = {
+        0, 1, 2,
+        0, 0, 0,
+        1, 0, 0
+    };
+    struct MapCollisionGrid map = { tiles, 3, 3 };
+    s32 px = 0, py = 1;
+    struct MenuCursorState mc;
+
+    /* Map collision & step */
+    assert(MapGridIsWalkable(&map, 1, 0) == 0u);
+    assert(MapGridIsWarpTile(&map, 2, 0) == 1u);
+    assert(MapGridTryStep(&map, &px, &py, 2) == 1u && px == 1 && py == 1); /* East */
+    assert(MapGridTryStep(&map, &px, &py, 0) == 0u && px == 1 && py == 1); /* North blocked by wall */
+    assert(MapGridTryStep(&map, &px, &py, 2) == 1u && px == 2 && py == 1); /* East */
+    assert(MapGridTryStep(&map, &px, &py, 0) == 1u && px == 2 && py == 0); /* North -> warp tile */
+    assert(MapGridIsWarpTile(&map, px, py) == 1u);
+
+    /* PET scrolling list cursor */
+    MenuCursorInit(&mc, 12, 5);
+    MenuCursorMove(&mc, -1); /* wrap to bottom */
+    assert(mc.cursor == 11u && mc.scrollTop == 7u && MenuCursorVisibleRow(&mc) == 4u);
+    MenuCursorMove(&mc, 1); /* wrap to top */
+    assert(mc.cursor == 0u && mc.scrollTop == 0u);
+    MenuCursorPage(&mc, 1); /* R page down */
+    assert(mc.cursor == 5u && mc.scrollTop == 1u && MenuCursorVisibleRow(&mc) == 4u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -997,6 +1027,7 @@ int main(void) {
     test_anim_bracket_and_counter();
     test_obstacle_save_slots_and_cutscene_vm();
     test_chip_attacks_and_duo_bass();
+    test_map_collision_and_pet_menu();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

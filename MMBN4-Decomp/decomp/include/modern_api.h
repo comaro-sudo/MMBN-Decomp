@@ -600,6 +600,31 @@ u32 BossDuoGigaLaserHits(s8 laserRow, s8 playerX, s8 playerY);
 u32 BossBassDarkArmBladeHits(s8 bassX, s8 playerX, s8 playerY);
 u32 BossBassAuraBreaks(s32 damage, s32 auraThreshold, u8 isWind);
 
+/* --- core_map_collision.c --- */
+struct MapCollisionGrid {
+    const u8 *tiles;
+    u32 width;
+    u32 height;
+};
+
+u8 MapGridGetTile(const struct MapCollisionGrid *grid, s32 tx, s32 ty);
+u32 MapGridIsWalkable(const struct MapCollisionGrid *grid, s32 tx, s32 ty);
+u32 MapGridIsWarpTile(const struct MapCollisionGrid *grid, s32 tx, s32 ty);
+u32 MapGridTryStep(const struct MapCollisionGrid *grid, s32 *tx, s32 *ty, u8 dir);
+
+/* --- core_pet_menu.c --- */
+struct MenuCursorState {
+    u16 cursor;
+    u16 scrollTop;
+    u16 itemCount;
+    u16 visibleRows;
+};
+
+void MenuCursorInit(struct MenuCursorState *mc, u16 itemCount, u16 visibleRows);
+void MenuCursorMove(struct MenuCursorState *mc, s32 delta);
+void MenuCursorPage(struct MenuCursorState *mc, s32 pageDir);
+u16 MenuCursorVisibleRow(const struct MenuCursorState *mc);
+
 #ifdef __cplusplus
 }
 #endif
