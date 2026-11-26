@@ -60,6 +60,7 @@ dat_0805D48C:
     .thumb
     .include "npc_macros.inc"
     .include "npc_macros.inc"
+    .include "npc_macros.inc"
     .include "cutscene_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -2772,7 +2773,10 @@ _0805EAE0:
     npc_set_pos 0x004E, 0x0004, 0x0000
     npc_set_facing 0x05
     npc_call dat_080A8EE8
-    incrom 0x5FDB8, 0xC
+    @ npc script 0x0805FDB8..0x0805FDC4
+    .4byte dat_0805FDC4
+    .4byte dat_0805FDFA
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x0805FDC4..0x0805FDFA
     npc_op 0x08
     npc_op 0x1F

@@ -310,4 +310,24 @@
     .4byte \p1
 .endm
 
+@ Version-specific ROM archive pointers (e.g. 0x3A compressed text archives
+@ in 0x887Bxxxx..0x887Fxxxx whose BM offsets vary with dialogue size).
+.macro csc_ptr_v op, rs_ptr, bm_ptr
+    .byte \op
+    .if VERSION_BM
+    .4byte \bm_ptr
+    .else
+    .4byte \rs_ptr
+    .endif
+.endm
+
+.macro csc_b1_ptr_v op, a, rs_ptr, bm_ptr
+    .byte \op, \a
+    .if VERSION_BM
+    .4byte \bm_ptr
+    .else
+    .4byte \rs_ptr
+    .endif
+.endm
+
 .endif

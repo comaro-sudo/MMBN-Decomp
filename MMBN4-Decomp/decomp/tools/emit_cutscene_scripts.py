@@ -183,16 +183,21 @@ def decode_one(rom: bytes, addr: int):
     return (op, sz, ptrs, branches, is_term)
 
 
-def format_u32(rv: int, bv: int) -> str | None:
+def format_u32(rv: int, bv: int) -> str | tuple[str, str] | None:
     if BASE <= rv < BASE + 0x800000:
         sym = f"dat_{rv:08X}"
         if merge_bm.bm_value(sym) == bv:
             return sym
         if rv == bv:
             return f"0x{rv:08X}"
-        return None
     if rv == bv:
         return f"0x{rv:08X}"
+    # Version-specific ROM data/compressed-archive pointers (0x08120000..0x08800000
+    # or bit-31 compressed 0x88120000..0x88800000).
+    if ((rv >> 24) == (bv >> 24)
+            and 0x08120000 <= (rv & 0x7FFFFFFF) < 0x08800000
+            and 0x08120000 <= (bv & 0x7FFFFFFF) < 0x08800000):
+        return (f"0x{rv:08X}", f"0x{bv:08X}")
     return None
 
 
@@ -228,12 +233,18 @@ def format_instr(rs: bytes, bm: bytes, addr: int, d: int) -> tuple[int, str] | N
     if op == 0x10:
         return (1, "    csc_thread_end")
     if op == 0x11:
+        if isinstance(p_strs[2], tuple):
+            return None
         return (6, f"    csc_spawn 0x{b(1):02X}, {p_strs[2]}")
     if op == 0x14:
+        if isinstance(p_strs[1], tuple):
+            return None
         return (5, f"    csc_jump {p_strs[1]}")
     if op == 0x45:
         if sz == 2:
             return (2, f"    csc_b1 0x45, 0x{b(1):02X}")
+        if any(isinstance(v, tuple) for v in p_strs.values()):
+            return None
         if sz == 13:
             return (13, f"    csc_45_13 0x{b(1):02X}, 0x{b(2):02X}, 0x{h(3):04X}, 0x{h(5):04X}, 0x{h(7):04X}, {p_strs[9]}")
         if sz == 14:
@@ -250,13 +261,23 @@ def format_instr(rs: bytes, bm: bytes, addr: int, d: int) -> tuple[int, str] | N
 
     if ptrs == [1]:
         if sz == 5:
+            if isinstance(p_strs[1], tuple):
+                rs_p, bm_p = p_strs[1]
+                return (5, f"    csc_ptr_v 0x{op:02X}, {rs_p}, {bm_p}")
             return (5, f"    csc_ptr 0x{op:02X}, {p_strs[1]}")
+        if isinstance(p_strs[1], tuple):
+            return None
         if sz == 6:
             return (6, f"    csc_ptr_b1 0x{op:02X}, {p_strs[1]}, 0x{b(5):02X}")
         if sz == 7:
             return (7, f"    csc_ptr_b2 0x{op:02X}, {p_strs[1]}, 0x{b(5):02X}, 0x{b(6):02X}")
     if ptrs == [2] and sz == 6:
+        if isinstance(p_strs[2], tuple):
+            rs_p, bm_p = p_strs[2]
+            return (6, f"    csc_b1_ptr_v 0x{op:02X}, 0x{b(1):02X}, {rs_p}, {bm_p}")
         return (6, f"    csc_b1_ptr 0x{op:02X}, 0x{b(1):02X}, {p_strs[2]}")
+    if any(isinstance(v, tuple) for v in p_strs.values()):
+        return None
     if ptrs == [3] and sz == 7:
         return (7, f"    csc_b2_ptr 0x{op:02X}, 0x{b(1):02X}, 0x{b(2):02X}, {p_strs[3]}")
     if ptrs == [4] and sz == 8:

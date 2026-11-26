@@ -7089,7 +7089,10 @@ _0807804E:
     npc_b2 0x28, 0x5A, 0x01
     npc_b1 0x2E, 0x02
     npc_call dat_080A8EE8
-    incrom 0x780BC, 0x34
+    @ npc script 0x080780BC..0x080780C4
+    .4byte dat_080780C4
+    .4byte 0x000000FF   @ npc list end
+    incrom 0x780C4, 0x2C
     @ ptr table 0x080780F0..0x08078128 (14 entries)
     .4byte dat_080A8EE8
     .4byte dat_0807812C
@@ -19199,7 +19202,8 @@ dat_0808273C:
     csc_b3 0x29, 0x03, 0x0E, 0x45
     csc_b3 0x03, 0x0E, 0x03, 0x00
     csc_end
-    incrom 0x83548, 0x4
+    @ npc script 0x08083548..0x0808354C
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x0808354C..0x08083554
     .4byte dat_08083554
     .4byte 0x000000FF   @ npc list end
