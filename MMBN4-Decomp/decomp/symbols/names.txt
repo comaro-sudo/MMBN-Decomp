@@ -1283,18 +1283,11 @@
 080019B4 080019B4 code   GEMINI       AppearBits_Clear                 clears bits r0 in actor/map appear bitmask (sl[+0x18]->[+0x64])
 080019C0 080019C0 code   GEMINI       AppearBits_Get                   reads actor/map appear bitmask (sl[+0x18]->[+0x64])
 080019C8 080019C8 code   GEMINI       AppearBits_Write                 writes r0 to actor/map appear bitmask (sl[+0x18]->[+0x64])
-08001AF8 08001AF8 code   GEMINI       SeedRNG                          seeds primary RNG state at 0x02001790 with 0xA338244F
-08001B00 08001B00 code   GEMINI       GetRNG                           steps primary RNG at 0x02001790 (rol1 + 1 ^ 0x873CA9E5)
-08001B16 08001B16 code   GEMINI       GetPositiveSignedRNG             steps primary RNG at 0x02001790 and clears bit 31
-08001B30 08001B30 code   GEMINI       GetSecondaryRNG                  steps secondary RNG at 0x020015D4
-08001B46 08001B46 code   GEMINI       GetPositiveSignedSecondaryRNG    steps secondary RNG at 0x020015D4 and clears bit 31
-08001B60 08001B60 code   GEMINI       GetTertiaryRNG                   steps tertiary RNG at 0x02001E98
 08001B98 08001B98 code   GEMINI       ClearBgTilemapAndQueues          clears VRAM 0x0600E000 (0x2000 B) and resets BG tilemap buffers
 08001BB4 08001BB4 code   GEMINI       CommitBgTilemapBuffer            DMAs sl[+0x28] to VRAM 0x0600E000 (0x2000 B) and resets dirty buffer
 08001BE8 08001BE8 code   GEMINI       SetBgPreset                      copies 8-byte BG0..3CNT preset r0 from gBgPresets into sl[+8]+4
 08001C04 08001C04 data   GEMINI       gBgPresets                       22x8-byte table of GBA BG0CNT..BG3CNT display presets
 08001CB4 08001CB4 code   GEMINI       SetMapBgPreset                   looks up map (group=r0, id=r1) BG preset byte and calls SetBgPreset
-08001CD8 08001CD8 code   GEMINI       Render_CommitRegisters           commits shadow MOSAIC, BG0..3, WIN0/1, BLD, and DISPCNT to GBA I/O
 08001D24 08001D24 code   GEMINI       ClearBgCharBlocks                clears base tiles of VRAM charblocks 0x06000000..0x0600C000
 08001D58 08001D58 code   GEMINI       ClearPaletteStagingBuffer        clears staging palette buffer at 0x03002A50
 08001D64 08001D64 code   GEMINI       ClearPaletteStagingAndHw         clears staging palette buffer (0x03002A50) and hardware PRAM (0x05000000)
@@ -1312,7 +1305,6 @@
 08001E7C 08001E7C code   GEMINI       SetHBlankAndVBlankCallbacks      stores (r0, r1, r2) callbacks at 0x0200ACF0 and registers HBlank IRQ 0x0C
 08001E94 08001E94 code   GEMINI       ResetHBlankAndVBlankCallbacks    resets 0x0200ACF0 callbacks to NullCallback_Fade & default IWRAM HBlank 0x0300593D
 08001EB4 08001EB4 code   GEMINI       RunHBlankPrepCallback            invokes function pointer at [0x0200ACF0 + 0]
-08001EC0 08001EC0 code   GEMINI       ScreenFade_Update                invokes fade/vblank callback pointer at [0x0200ACF0 + 8]
 08001ED0 08001ED0 code   GEMINI       NullCallback_BgScroll            no-op BG scroll callback (mov pc, lr)
 08001ED2 08001ED2 code   GEMINI       BgScroll_Bg1DiagLeftUp           scrolls BG1HOFS (-8/16) and BG1VOFS (-4/16) via 0x0200A150 accumulator
 08001EEE 08001EEE code   GEMINI       BgScroll_Bg3DiagLeftUp           scrolls BG3HOFS (-8/16) and BG3VOFS (-4/16) via 0x0200A150 accumulator
@@ -1339,3 +1331,33 @@
 080021B8 080021B8 code   GEMINI       TileAnimHandler_ComposeTiles     tile anim type 1: copies/flips 8x8 4bpp tiles to scratch buffer and queues DMA
 08002210 08002210 data   GEMINI       gTileCopyFlipHandlers            4-entry 8x8 4bpp tile copy/flip jump table (normal, H, V, HV)
 08002220 08002220 code   GEMINI       CopyTile4bpp_Normal              copies 32-byte 8x8 4bpp tile from r4 to r5 without flipping
+08002242 08002242 code   CLAUDE       CopyTile4bpp_HFlip               copies 8x8 4bpp tile r4 -> r5 reversing the 8 nibbles of each row (masks 0xFF00FF00 / 0xF0F0F0F0)
+0800236A 0800236A code   CLAUDE       CopyTile4bpp_VFlip               copies 8x8 4bpp tile r4 -> r5 with row order reversed
+0800238C 0800238C code   CLAUDE       CopyTile4bpp_HVFlip              copies 8x8 4bpp tile r4 -> r5 nibble-reversed and row-reversed
+080024BC 080024BC code   CLAUDE       TileAnimHandler_PaletteEffect    tile anim type 3: starts palette effect (PaletteEffect_Set) from frame word & slot fields
+080024D6 080024D6 code   CLAUDE       TileAnimHandler_PlaySound        tile anim type 4: calls PlaySoundEffect (0x08000560) with frame word if >= 0
+080024E4 080024E4 code   CLAUDE       TileAnimHandler_EventFlag        tile anim type 5: frame word >= 0 sets that event flag, bit 31 set clears it
+08002500 08002500 code   CLAUDE       TileAnim_StartList               calls TileAnim_Start for each descriptor pointer in r0 until a negative word
+08002514 08002514 code   CLAUDE       PaletteEffect_ClearAll           zeroes all 22 palette effect slots at 0x0200A230 (12 B each, 0x108 B)
+08002524 08002524 code   CLAUDE       PaletteEffect_Set                slot r3: mode r0, data r1, count r2, arg r4; active only if r1 and r2 are non-zero
+08002546 08002546 code   CLAUDE       PaletteEffect_Stop               clears active byte of palette effect slot r0
+08002554 08002554 code   CLAUDE       PaletteEffect_ClearFirst18       zeroes the first 18 palette effect slots (0xD8 B) at 0x0200A230
+08002564 08002564 code   CLAUDE       PaletteEffect_IsActive           returns active byte of palette effect slot r0 (flags set)
+08002572 08002572 code   CLAUDE       PaletteEffect_AnyActive          returns first non-zero active byte across all 22 slots, else 0
+0800258C 0800258C code   CLAUDE       PaletteEffect_ApplyAll           copies BG/OBJ base palettes into fade buffers, then runs each active slot via IWRAM handlers
+080025FC 080025FC data   CLAUDE       gPaletteEffectIwramHandlers      4 IWRAM palette effect handler pointers (0x03005AC9 x2, 0x03005B51 x2)
+08002614 08002614 code   CLAUDE       ScreenEffect_Start               clears 0x0200AAC0 (0x50 B), stores callbacks r0 (update) / r1 (end) / arg r2, marks active
+08002630 08002630 code   CLAUDE       ScreenEffect_Stop                runs end callback [+8] if active, then clears 0x0200AAC0
+0800264E 0800264E code   CLAUDE       ScreenEffect_Clear               zeroes 0x0200AAC0 (0x50 B) without calling callbacks
+0800265A 0800265A code   CLAUDE       ScreenEffect_Update              calls update callback [+4] of 0x0200AAC0 while active
+0800266C 0800266C code   CLAUDE       ScreenEffect_IsActive            returns active byte of 0x0200AAC0 (flags set)
+08002678 08002678 code   CLAUDE       SetupCenteredWindowBox_B         like SetupCenteredWindowBox_A but uses BG offset entry dat_08002770+4
+08002684 08002684 code   CLAUDE       SetupCenteredWindowBox_A         w=r2 x h=r3 box at the projected point: sets BG scroll (dat_08002770+0) and clamps WIN0H/WIN0V
+08002770 08002770 data   CLAUDE       gWindowBoxBgRegOffsets           2x4-byte {hofs, vofs, bg, pad} offsets used by SetupCenteredWindowBox_A/B
+080027B8 080027B8 code   CLAUDE       ObjInitAll                       clears OAM (0x400 B) and OBJ VRAM 0x06010000 (0x8000 B), loads default OBJ palette, resets sprite managers
+080027FC 080027FC code   CLAUDE       FlushObjPaletteToHw              DMAs 512-byte OBJ palette buffer (0x03002840) to hardware OBJ PRAM (0x05000200)
+08002814 08002814 code   CLAUDE       LoadDefaultObjPalette            copies 32-byte default OBJ palette dat_08002778 into 0x03002820
+0800282C 0800282C code   CLAUDE       IwramSpriteCall_602C             trampoline calling IWRAM sprite helper at 0x0300602D
+0800283C 0800283C code   CLAUDE       IwramSpriteCall_632C_Obj         adds object r5's sprite sub-offset ([r5+2] & 0xF0) and calls IWRAM 0x0300632D
+0800284E 0800284E code   CLAUDE       IwramSpriteCall_632C             trampoline calling IWRAM sprite helper at 0x0300632D
+0800286E 0800286E code   CLAUDE       IwramSpriteUpdate_Raw            BN4_SPRITE_UPDATE without the object sub-offset adjust (IWRAM 0x03006377)
