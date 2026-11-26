@@ -142,7 +142,17 @@ def decode_one(rom: bytes, addr: int):
     if op not in CS_SPEC:
         return None
     sz, ptrs, branches, is_term = CS_SPEC[op]
-    if op == 0x36:
+    if op == 0x1A:
+        b1 = rom[off + 1]
+        if b1 == 0:
+            sz, ptrs, branches = 11, [2, 6], [6]
+        elif b1 == 1:
+            sz, ptrs, branches = 12, [2, 6], [6]
+        elif b1 == 2:
+            sz, ptrs, branches = 14, [2, 6], [6]
+        else:
+            return None
+    elif op == 0x36:
         sz = 3 if rom[off + 1] == 0xFF else 2
     elif op == 0x41:
         b1 = rom[off + 1]
@@ -192,11 +202,12 @@ def format_u32(rv: int, bv: int) -> str | tuple[str, str] | None:
             return f"0x{rv:08X}"
     if rv == bv:
         return f"0x{rv:08X}"
-    # Version-specific ROM data/compressed-archive pointers (0x08120000..0x08800000
-    # or bit-31 compressed 0x88120000..0x88800000).
+    # Version-specific ROM pointers (0x08000000..0x08800000 or bit-31
+    # compressed 0x88000000..0x88800000), e.g. 0x3A dialogue archives or
+    # 0x46 NPC spawn lists whose BM offsets vary with version-specific content.
     if ((rv >> 24) == (bv >> 24)
-            and 0x08120000 <= (rv & 0x7FFFFFFF) < 0x08800000
-            and 0x08120000 <= (bv & 0x7FFFFFFF) < 0x08800000):
+            and 0x08000000 <= (rv & 0x7FFFFFFF) < 0x08800000
+            and 0x08000000 <= (bv & 0x7FFFFFFF) < 0x08800000):
         return (f"0x{rv:08X}", f"0x{bv:08X}")
     return None
 
@@ -240,6 +251,16 @@ def format_instr(rs: bytes, bm: bytes, addr: int, d: int) -> tuple[int, str] | N
         if isinstance(p_strs[1], tuple):
             return None
         return (5, f"    csc_jump {p_strs[1]}")
+    if op == 0x1A:
+        if any(isinstance(v, tuple) for v in p_strs.values()):
+            return None
+        if sz == 11:
+            return (11, f"    csc_1a_u8 {p_strs[2]}, {p_strs[6]}, 0x{b(10):02X}")
+        if sz == 12:
+            return (12, f"    csc_1a_u16 {p_strs[2]}, {p_strs[6]}, 0x{h(10):04X}")
+        if sz == 14:
+            v = struct.unpack_from("<I", rs, ro + 10)[0]
+            return (14, f"    csc_1a_u32 {p_strs[2]}, {p_strs[6]}, 0x{v:08X}")
     if op == 0x45:
         if sz == 2:
             return (2, f"    csc_b1 0x45, 0x{b(1):02X}")

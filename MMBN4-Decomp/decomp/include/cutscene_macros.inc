@@ -330,4 +330,22 @@
     .endif
 .endm
 
+@ 0x1A: compare RAM u8/u16/u32 at addr against imm, jump to target if equal.
+.macro csc_1a_u8 addr, target, val
+    .byte 0x1A, 0x00
+    .4byte \addr, \target
+    .byte \val
+.endm
+
+.macro csc_1a_u16 addr, target, val
+    .byte 0x1A, 0x01
+    .4byte \addr, \target
+    .2byte \val
+.endm
+
+.macro csc_1a_u32 addr, target, val
+    .byte 0x1A, 0x02
+    .4byte \addr, \target, \val
+.endm
+
 .endif

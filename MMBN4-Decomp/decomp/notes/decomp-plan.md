@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after A3 Part 4 `code_05` cutscene reclaim — **78.6% total / 82.1% excl. audio tail!**): **78.6% code ownership** (`927,137 / 1,179,456` bytes, `252,319` bytes `incrom` remaining — **82.1%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after A3 Part 5 `0x1A` + versioned `0x46` ptrs — **78.8% total / 82.3% excl. audio tail!**): **78.8% code ownership** (`929,431 / 1,179,456` bytes, `250,025` bytes `incrom` remaining — **82.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
@@ -22,7 +22,7 @@ Goal: Eliminate nearly all opaque `incrom` inside `code_00`..`code_10` using ver
 |---|---|---|
 | **A1** | ~~**Finish current batch:**~~ **DONE (2026-11-26):** Added cycle guards to `emit_map_scripts.py` & `emit_cutscene_scripts.py`, emitted 379 pointer tables + 197 cutscene blocks + 127 map-script blocks (`+14,506 B`), verified RS & BM `OK`. | `code_04`..`code_06` (**66.8%**) |
 | **A2** | ~~**Audit `code_10` tail (`0x08113CB6..0x08120000`, `50 KB`):**~~ **DONE (2026-11-26):** Confirmed `0x08113CB8..0x08120000` (`49,992 B`, already marked `data_from` in `segments_rs.toml`) is the build timestamp (`"Apr 16 2004 14:40:18"`) + `m4a` audio data (stays `incrom` per no-ROM-data rule; real `code_10` code is already **86.8%** owned). | `code_10` audited |
-| **A3** | **Complete `code_04`–`code_06` script & data decoding:** *(Parts 1–4 DONE: emitted **3,036 NPC lists & script blocks / +81,356 B** + **1,240 cutscene blocks / +48,820 B**; `code_05` jumped **51.5% → 73.9%** and `code_06` **54.2% → 68.4%**!)* Remaining: `0x07`/`0x1A`/`0x39` variable-length ops and remaining non-script event/warp/prop structs. | `code_04`..`code_06` (now 53.6–73.9% → 80%+) |
+| **A3** | **Complete `code_04`–`code_06` script & data decoding:** *(Parts 1–5 DONE: emitted **3,036 NPC lists & script blocks / +81,356 B** + **1,280 cutscene blocks / +51,114 B** incl. `0x1A` + `csc_b1_ptr_v`; `code_05` is **73.9%** and `code_06` crossed **70.4%**!)* Remaining: `0x39` multi-way jump tables and remaining non-script event/warp/prop/VRAM descriptor structs. | `code_04`..`code_06` (now 53.6–73.9% → 80%+) |
 | **A4** | **Carve remaining `code_00`–`code_03` tables (`39 KB`):** *(Pointer tables DONE: +128 tables / +3,124 B; `intr_table` 48/48 B **100%** DONE; `code_00..03` now 85.2%–91.2%.)* Remaining: struct arrays (`uuww`, `uw`, DMA/VRAM/map/menu descriptors). | `code_00`..`code_03` (85–91% → 97%+) |
 | **A5** | **Carve remaining `code_07`–`code_09` tables (`34 KB`):** *(Pointer tables DONE: +314 tables / +6,172 B; now 84.1%–93.9%.)* Remaining: battle chip/enemy/AI/attack/animation descriptor tables. | `code_07`..`code_09` (84–94% → 97%+) |
 | **A6** | **Clean up version-specific script/table gaps:** Handle remaining RS-vs-BM differing script blocks cleanly where needed, and promote high-value unnamed `dat_`/`sub_` labels into `symbols/names.txt`. | All segments (~90–95%+) |
