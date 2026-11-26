@@ -941,6 +941,33 @@ static void test_obstacle_save_slots_and_cutscene_vm(void) {
     assert(CutsceneVmIsHalted(&vm) == 1u);
 }
 
+static void test_chip_attacks_and_duo_bass(void) {
+    const s8 tx[3] = { 6, 4, 5 };
+    const s8 ty[3] = { 2, 2, 1 };
+    const u8 alive[3] = { 1, 1, 1 };
+    struct BattlePanel grid[18];
+
+    /* Concrete chip hitboxes: Cannon, WideSword, LongSword, MiniBomb */
+    assert(ChipCannonFindTarget(2, 2, tx, ty, alive, 3) == 1); /* hits closest x=4 before x=6 */
+    assert(ChipCannonFindTarget(2, 3, tx, ty, alive, 3) == -1);
+    assert(ChipWideSwordHits(3, 2, 4, 1) == 1u && ChipWideSwordHits(3, 2, 4, 3) == 1u);
+    assert(ChipWideSwordHits(3, 2, 5, 2) == 0u);
+    assert(ChipLongSwordHits(3, 2, 4, 2) == 1u && ChipLongSwordHits(3, 2, 5, 2) == 1u);
+    assert(ChipLongSwordHits(3, 2, 4, 1) == 0u);
+    assert(ChipLobBombHits(2, 2, 3, 5, 2) == 1u);
+    assert(ChipLobBombHits(4, 2, 3, 7, 2) == 0u); /* out of bounds */
+
+    /* Duo & Bass attack patterns */
+    BattleGridInitDefault(grid);
+    assert(BossDuoMeteorImpact(grid, 2, 2, 2, 2) == 1u);
+    assert(grid[BattleGridIndex(2, 2)].state == 1u); /* panel cracked */
+    assert(BossDuoGigaLaserHits(2, 3, 2) == 1u && BossDuoGigaLaserHits(2, 3, 1) == 0u);
+    assert(BossBassDarkArmBladeHits(4, 2, 1) == 1u && BossBassDarkArmBladeHits(4, 1, 1) == 0u);
+    assert(BossBassAuraBreaks(180, 200, 0) == 0u);
+    assert(BossBassAuraBreaks(200, 200, 0) == 1u);
+    assert(BossBassAuraBreaks(10, 200, 1) == 1u); /* Wind strips Aura */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -969,6 +996,7 @@ int main(void) {
     test_friendly_matches_and_navicust_bugs();
     test_anim_bracket_and_counter();
     test_obstacle_save_slots_and_cutscene_vm();
+    test_chip_attacks_and_duo_bass();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

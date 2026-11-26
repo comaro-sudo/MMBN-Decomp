@@ -586,6 +586,20 @@ void CutsceneVmHalt(struct CutsceneVmState *vm);
 u16 CutsceneVmGetWaitFrames(const struct CutsceneVmState *vm);
 void CutsceneVmReset(struct CutsceneVmState *vm);
 
+/* --- core_chip_attacks.c --- */
+s32 ChipCannonFindTarget(s8 px, s8 py, const s8 *targetX, const s8 *targetY,
+                         const u8 *targetAlive, u32 count);
+u32 ChipWideSwordHits(s8 px, s8 py, s8 tx, s8 ty);
+u32 ChipLongSwordHits(s8 px, s8 py, s8 tx, s8 ty);
+u32 ChipLobBombHits(s8 px, s8 py, s8 throwDist, s8 tx, s8 ty);
+
+/* --- core_boss_duo_bass.c --- */
+u32 BossDuoMeteorImpact(struct BattlePanel grid[18],
+                        s8 targetX, s8 targetY, s8 playerX, s8 playerY);
+u32 BossDuoGigaLaserHits(s8 laserRow, s8 playerX, s8 playerY);
+u32 BossBassDarkArmBladeHits(s8 bassX, s8 playerX, s8 playerY);
+u32 BossBassAuraBreaks(s32 damage, s32 auraThreshold, u8 isWind);
+
 #ifdef __cplusplus
 }
 #endif
