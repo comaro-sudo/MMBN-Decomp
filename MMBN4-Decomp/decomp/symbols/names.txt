@@ -1202,3 +1202,12 @@
 0802C73C 0802C740 code   GEMINI       CutsceneOp39_JumpChoice          cutscene VM op 0x39: jumps to u32 table entry indexed by dialogue choice result
 0802C752 0802C756 code   GEMINI       CutsceneOp3A_LoadTextArchive     cutscene VM op 0x3A: loads (or LZ77-decompresses to 0x02036800) text archive pointer
 08053928 08053934 code   GEMINI       GetDialogueChoiceResult          returns player's last dialogue menu choice index (0, 1, ...)
+08000464 08000464 code   GEMINI       GameInitCommon                   shared cold-boot / soft-reset subsystem initializer (r0=1 on soft reset)
+08000540 08000540 code   GEMINI       SoundMainWrapper                 wrapper calling m4aSoundMain
+08000558 08000558 code   GEMINI       SoundVSyncWrapper                wrapper calling m4aSoundVSync
+0800059E 0800059E code   GEMINI       SoundQueue_SongNumStart          enqueues m4aSongNumStart on the deferred sound queue (0x0200A800)
+080005B0 080005B0 code   GEMINI       SoundQueue_MPlayAllStop          enqueues m4aMPlayAllStop on the deferred sound queue
+080005C2 080005C2 code   GEMINI       SoundQueue_MPlayVolumeControl    enqueues m4aMPlayVolumeControl via gMusicPlayerPtrTable
+080005DA 080005DA code   GEMINI       SoundQueue_MPlayFadeOut          enqueues MPlayFadeOut via gMusicPlayerPtrTable
+08000654 08000654 data   GEMINI       gMusicPlayerPtrTable             array of MusicPlayerInfo* indexed by player slot
+08111878 0811188C code   GEMINI       BgAffineSet                      bios_swi.c: GBA BIOS SWI 0x0E (BgAffineSet)
