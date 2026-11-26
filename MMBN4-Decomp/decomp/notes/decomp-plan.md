@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after B1 `ClearChain`/`Clear64byte`/`SoundInit`/`SampleFreqSet`/`MPlayStart` batch): **74.4% code ownership** (`877,392 / 1,179,456` bytes, `302,064` bytes `incrom` remaining — `77.7%` excluding `code_10`'s `49,992 B` audio tail; **47 byte-identical C functions** across 11 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after B1 `m4a_body.c` — 50 C functions milestone!): **74.4% code ownership** (`877,392 / 1,179,456` bytes, `302,064` bytes `incrom` remaining — `77.7%` excluding `code_10`'s `49,992 B` audio tail; **50 byte-identical C functions** across 12 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
