@@ -46,8 +46,8 @@ Goal: Establish canonical C headers (`include/gba.h`, `include/structs.h`, `incl
 
 | Task | Scope | Target |
 |---|---|---|
-| **C1** | **Core headers & Toolkit struct (`include/`):** *(Started 2026-11-26: `include/gba_types.h`, `include/gamestate.h` [`MainState`, `JoypadState`, `GameState`, `ProgressState`], and `include/toolkit.h` [all 39 `sl`/`r10` slots `+0x00..+0x98`] created and `_Static_assert`-verified under `gcc`/`agbcc`/`old_agbcc`.)* Remaining: `BattleState`, `Entity`, `DMA/VRAM` structs. | Shared C headers |
-| **C2** | **Core utility & math (`code_00`):** RNG, `ZeroFillByWord`, `CopyWords`, LZ77/VRAM/DMA queue helpers, input/joypad, OAM/sprite managers, sound wrappers (`BN4_PLAY_MUSIC`). | `src/core_*.c` |
+| **C1** | ~~**Core headers & Toolkit struct (`include/`):**~~ **DONE (2026-11-26):** `include/gba_types.h`, `include/gba_io.h`, `include/gamestate.h` (`MainState`, `JoypadState`, `GameState`, `ProgressState`), `include/toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`), and `include/battle.h` (`BattleChipData`, `BattleNaviState`, `DoubleSoulId`, RNG). Verified with `_Static_assert` + `gcc`/`agbcc`/`old_agbcc`. | Shared C headers |
+| **C2** | **Core utility & math (`code_00`):** *(Started 2026-11-26: `src/modern/core_progress.c` — 11 portable C functions covering `CapIncrementGameTimeFrames`, `GetPlaythrough`/`Tier`/`Inc`, `SeedRNG`/`StepRNG`, `EventFlagSet`/`Clear`/`Toggle`/`Test`, verified by `make modern-check`.)* Remaining: `ZeroFillByWord`, `CopyWords`, `Joypad_Poll`, LZ77/VRAM/DMA queue helpers, OAM/sprite managers, `BN4_PLAY_MUSIC`. | `src/modern/core_*.c` |
 | **C3** | **Overworld, flags, save & inventory (`code_01`–`code_02`):** Save/load & anti-cheat relocation, event flag bitfields, key items, chip pack/folder helpers, map loader, `map_scripts_commands` & `BN4_CUTSCENE_COMMANDS` interpreters. | `src/overworld_*.c`, `src/save.c`, `src/scripts.c` |
 | **C4** | **Menus, text & UI (`code_03`–`code_04`):** Text/dialogue bytecode engine (`ScriptCmd_*`), PET menus (Folder, NaviCust, Mail, Status, Key Items, Network/Link), shops, tournaments. | `src/menu_*.c`, `src/text.c` |
 

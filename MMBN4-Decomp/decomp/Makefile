@@ -35,7 +35,7 @@ ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork -I $(BUILD) -I include -I . \
            --defsym VERSION_RS=$(if $(filter rs,$(VERSION)),1,0) \
            --defsym VERSION_BM=$(if $(filter bm,$(VERSION)),1,0)
 
-.PHONY: all compare clean
+.PHONY: all compare modern-check clean
 all: $(ROM)
 
 # baserom.gba inside the build dir, so .incbin "baserom.gba" finds it via -I.
@@ -111,6 +111,14 @@ $(ROM): $(ELF)
 
 compare: $(ROM)
 	@echo "$(SHA1)  $(ROM)" | sha1sum -c -
+
+MODERN_SRCS := $(wildcard src/modern/*.c)
+modern-check: $(MODERN_SRCS)
+	@mkdir -p build/modern
+	@for f in $(MODERN_SRCS); do \
+	  $(PREFIX)gcc -mcpu=arm7tdmi -mthumb -O2 -Wall -Wextra -Werror -I include -c $$f -o build/modern/$$(basename $$f .c).o || exit 1; \
+	done
+	@echo "modern-check: OK ($(words $(MODERN_SRCS)) files)"
 
 clean:
 	rm -rf build
