@@ -76,6 +76,10 @@ $(BUILD)/c/m4a_lfo.s: src/m4a_lfo.c tools/c_to_inc.py
 	@mkdir -p $(BUILD)/c
 	python3 tools/c_to_inc.py --old-agbcc $< $@
 
+$(BUILD)/c/m4a_start.s: src/m4a_start.c tools/c_to_inc.py
+	@mkdir -p $(BUILD)/c
+	python3 tools/c_to_inc.py --old-agbcc $< $@
+
 $(BUILD)/c/m4a_%.s: src/m4a_%.c tools/c_to_inc.py
 	@mkdir -p $(BUILD)/c
 	python3 tools/c_to_inc.py --agbcc $< $@
