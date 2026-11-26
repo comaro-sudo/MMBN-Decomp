@@ -3,8 +3,8 @@
 
     .set SEG_BM_DELTA, 0x0   @ Blue Moon = RS + this, inside this segment
 
-    .global gIntrTableTemplate
-gIntrTableTemplate:
+    .global dat_0800022C
+dat_0800022C:   @ gIntrTableTemplate
     .word 0x0300593F   @ IRQ 0: VBlank (IWRAM Thumb handler)
     .word 0x0300593D   @ IRQ 1: HBlank (IWRAM empty handler)
     .word 0x0300593D   @ IRQ 2: VCount

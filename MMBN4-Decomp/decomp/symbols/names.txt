@@ -1131,3 +1131,70 @@
 08008558 08008558 code   GEMINI       BattleCalcBustingLevel           Computes Busting Level on every win (stored at [BattleState+0x1E]); calls BattleScoreBustingLevel
 08010DF8 08010DF8 code   GEMINI       DuoDeletionState                 Exclusive Duo deletion state (dat_080C04F8[2]); fades screen to white and deletes Duo
 08018787 08018787 data   GEMINI       BN4_BATTLE_MODE_FLAGS            u16 bitmask table indexed by b4*2 (unaligned in ROM); bit 1=show results screen, bit 3=boss rank, bit 5=retryable
+
+# --- Phase A6 / B1 SDK, SRAM, m4a & boot symbols (Gemini: verified byte-identical DC-5 C; 2026-11-26) ---
+0800022C 0800022C data   GEMINI       gIntrTableTemplate               Initial 12-slot GBA IRQ handler pointer table copied to IWRAM at boot (VBlank 0x0300593F, others 0x0300593D)
+081118A0 081118B4 code   GEMINI       ReadSram_Core                    Nintendo AGB SRAM library: byte-wise SRAM read core (agb_sram.c, copied to RAM)
+081118C0 081118D4 code   GEMINI       ReadSram                         Nintendo AGB SRAM library: copies ReadSram_Core to RAM and executes it
+081118F0 08111904 code   GEMINI       WriteSram                        Nintendo AGB SRAM library: writes bytes to 0x0E000000 SRAM
+08111924 08111938 code   GEMINI       VerifySram_Core                  Nintendo AGB SRAM library: byte-wise SRAM verify core (returns mismatch address or 0)
+08111954 08111968 code   GEMINI       VerifySram                       Nintendo AGB SRAM library: copies VerifySram_Core to RAM and executes it
+08111994 081119A8 code   GEMINI       WriteSramEx                      Nintendo AGB SRAM library: write-and-verify with up to 3 retries
+0811241C 08112430 code   GEMINI       TrackStop                        m4a_1.s: stops all active sound channels owned by a MusicPlayerTrack
+08112460 08112474 code   GEMINI       ChnVolSetAsm                     m4a_1.s: computes left/right channel volumes from velocity, pan, and track volume
+08112490 081124A4 code   GEMINI       ply_note                         m4a_1.s: allocates PCM/CGB channel and starts a note
+08112690 081126A4 code   GEMINI       ply_endtie                       m4a_1.s: releases a tied note matching key
+081126D0 081126E4 code   GEMINI       clear_modM                       m4a_1.s: clears track LFO modulation state
+08112720 08112734 code   GEMINI       MidiKey2Freq                     m4a_freq.c: computes PCM sample frequency from WaveData, MIDI key, and fine pitch
+08112788 0811279C code   GEMINI       MPlayContinue                    m4a: clears MUSICPLAYER_STATUS_PAUSE on a MusicPlayerInfo
+081127A4 081127B8 code   GEMINI       MPlayFadeOut                     m4a: starts fade-out on a MusicPlayerInfo
+081127C4 081127D8 code   GEMINI       m4aSoundInit                     m4a_api.c: initializes SoundMainRAM, SoundInfo, CGB channels, and all 32 MusicPlayers
+08112874 08112888 code   GEMINI       m4aSongNumStartOrChange          m4a_api.c: starts song if different or stopped/paused
+081128C0 081128D4 code   GEMINI       m4aSongNumStartOrContinue        m4a_api.c: starts song if different/stopped, or resumes if paused
+08112914 08112928 code   GEMINI       m4aSongNumStop_Real              m4a_api.c: stops MusicPlayer if currently playing song n
+08112948 0811295C code   GEMINI       m4aSongNumContinue               m4a_api.c: resumes MusicPlayer if currently playing song n
+081129A8 081129BC code   GEMINI       m4aMPlayContinue                 m4a_api.c: public wrapper calling MPlayContinue
+081129B4 081129C8 code   GEMINI       m4aMPlayAllContinue              m4a_api.c: resumes all 32 MusicPlayers
+081129E0 081129F4 code   GEMINI       m4aMPlayFadeOut                  m4a_api.c: public wrapper calling MPlayFadeOut
+081129F0 08112A04 code   GEMINI       m4aMPlayFadeOutTemporarily       m4a: starts temporary fade-out (pauses on completion)
+08112A10 08112A24 code   GEMINI       m4aMPlayFadeIn                   m4a: starts fade-in and unpauses MusicPlayerInfo
+08112A38 08112A4C code   GEMINI       m4aMPlayImmInit                  m4a_imminit.c: initializes all tracks with MPT_FLG_START set
+08112A80 08112A94 code   GEMINI       MPlayExtender                    m4a_imminit.c: resets CGB hardware, initializes 4 CgbChannels, installs MPlayJumpTable
+08112B98 08112BAC code   GEMINI       m4aSoundVSync                    m4a: GBA BIOS SWI 0x2A (SoundDriverVSync)
+08112B9C 08112BB0 code   GEMINI       ClearChain                       m4a_init.c: unlinks a SoundChannel from its track's doubly-linked list
+08112BB0 08112BC4 code   GEMINI       Clear64byte                      m4a_init.c: clears 64 bytes (16 words) to 0
+08112BC4 08112BD8 code   GEMINI       SoundInit                        m4a_init.c: initializes SoundInfo, DMA/Timer0, and default 13379 Hz mode
+08112CBC 08112CD0 code   GEMINI       SampleFreqSet                    m4a_init.c: configures Timer0 reload, pcmSamplesPerVBlank, and divFreq
+08112D60 08112D74 code   GEMINI       m4aSoundMode                     m4a_init.c: configures reverb, maxChans, masterVolume, freq, and DAC bit-depth
+08112DF8 08112E0C code   GEMINI       m4aSoundClear                    m4a_init.c: stops all PCM/CGB channels and zeroes DMA PCM buffer
+08112E4C 08112E60 code   GEMINI       m4aSoundVSyncOff                 m4a_init.c: disables DirectSound DMA1/DMA2 and sets pcmDmaCounter=255
+08112EC8 08112EDC code   GEMINI       m4aSoundVSyncOn                  m4a_init.c: re-enables DirectSound VSync DMA
+08112F04 08112F18 code   GEMINI       m4aMPlayInit                     m4a_init.c: initializes a MusicPlayerInfo and links it into SoundInfo->musicPlayerHead
+08112F7C 08112F90 code   GEMINI       MPlayStart                       m4a_start.c: loads a SongHeader into a MusicPlayerInfo and starts playback
+08113060 08113074 code   GEMINI       m4aMPlayStop                     m4a_stop.c: pauses a MusicPlayerInfo and stops all its tracks
+081130A0 081130B4 code   GEMINI       FadeOutBody                      m4a_body.c: steps active fade-out/fade-in envelope on a MusicPlayerInfo
+08113168 0811317C code   GEMINI       TrkVolPitSet                     m4a_body.c: recomputes track volume/pan and pitch/key from modulation and bends
+0811321C 08113230 code   GEMINI       MidiKeyToCgbFreq                 m4a_body.c: converts MIDI key + fine pitch to GBA CGB ch1-4 frequency register
+081132C4 081132D8 code   GEMINI       CgbOscOff                        m4a_cgb.c: silences CGB hardware channel 1..4
+08113314 08113328 code   GEMINI       CgbModVol                        m4a_cgb.c: computes CGB stereo pan, envelopeGoal, and sustainGoal
+0811337C 08113390 code   GEMINI       CgbSound                         m4a_cgb.c: per-frame CGB ch1-4 envelope, pseudo-echo, SOUNDBIAS pitch fix, and NR register driver
+081137C8 081137DC code   GEMINI       m4aMPlayTempoControl             m4a: sets MusicPlayerInfo tempoU and recomputes tempoI
+081137F0 08113804 code   GEMINI       m4aMPlayVolumeControl            m4a_ctrl.c: sets external volume multiplier (volX) on masked tracks
+08113858 0811386C code   GEMINI       m4aMPlayPitchControl             m4a_ctrl.c: sets external pitch offset (keyM/pitX) on masked tracks
+081138CC 081138E0 code   GEMINI       m4aMPlayPanpotControl            m4a_ctrl.c: sets external pan offset (panX) on masked tracks
+08113934 08113948 code   GEMINI       ClearModM                        m4a: clears track LFO modulation state (C version)
+08113954 08113968 code   GEMINI       m4aMPlayModDepthSet              m4a_lfo.c: sets LFO modulation depth on masked tracks
+081139C8 081139DC code   GEMINI       m4aMPlayLFOSpeedSet              m4a_lfo.c: sets LFO speed on masked tracks
+08113A3C 08113A50 code   GEMINI       ply_memacc                       m4a: sequence memory-access & conditional branch opcode (18 sub-ops)
+08113B94 08113BA8 code   GEMINI       ply_xcmd                         m4a_xcmd.c: dispatches extended sequence command via dat_0820A42C
+08113BB4 08113BC8 code   GEMINI       ply_xcmd_00                      m4a_xcmd.c: extended command 0x00 (calls MPlayJumpTable[0])
+08113BC8 08113BDC code   GEMINI       ply_xwave                        m4a_xwave.c: reads unaligned 4-byte wave pointer into track->tone.wav
+08113C10 08113C24 code   GEMINI       ply_bendr                        m4a_cmds.c: sets track pitch-bend range
+08113C1C 08113C30 code   GEMINI       ply_lfo_2c                       m4a_cmds.c: track command 0x2C
+08113C2C 08113C40 code   GEMINI       ply_lfos                         m4a_cmds.c: sets track LFO speed
+08113C3C 08113C50 code   GEMINI       ply_lfodl                        m4a_cmds.c: sets track LFO delay
+08113C48 08113C5C code   GEMINI       ply_mod                          m4a_cmds.c: sets track LFO modulation depth
+08113C5C 08113C70 code   GEMINI       ply_modt                         m4a_cmds.c: sets track LFO modulation type
+08113C74 08113C88 code   GEMINI       ply_tune                         m4a_cmds.c: sets track fine tuning
+08113C84 08113C98 code   GEMINI       ply_unk26                        m4a_cmds.c: track command 0x26
+08113C94 08113CA8 code   GEMINI       ply_unk27                        m4a_cmds.c: track command 0x27

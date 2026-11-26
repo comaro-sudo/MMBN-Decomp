@@ -25,7 +25,7 @@ Goal: Eliminate nearly all opaque `incrom` inside `code_00`..`code_10` using ver
 | **A3** | **Complete `code_04`–`code_06` script & data decoding:** *(Parts 1–5 DONE: emitted **3,036 NPC lists & script blocks / +81,356 B** + **1,280 cutscene blocks / +51,114 B** incl. `0x1A` + `csc_b1_ptr_v`; `code_05` is **73.9%** and `code_06` crossed **70.4%**!)* Remaining: `0x39` multi-way jump tables and remaining non-script event/warp/prop/VRAM descriptor structs. | `code_04`..`code_06` (now 53.6–73.9% → 80%+) |
 | **A4** | **Carve remaining `code_00`–`code_03` tables (`35.8 KB`):** *(Pointer tables + `intr_table` 100% + `emit_desc_tables.py` DONE: `code_00` **92.3%**, `code_01` **87.9%**, `code_02` **90.9%**, `code_03` **86.0%**.)* Remaining: static lookup/menu/non-pointer structs. | `code_00`..`code_03` (86–92% → 97%+) |
 | **A5** | **Carve remaining `code_07`–`code_09` tables (`24.1 KB`):** *(Pointer tables + `emit_desc_tables.py` DONE: `code_07` **96.6%**, `code_08` **96.6%**, `code_09` **85.7%**!)* Remaining: battle chip/enemy/AI non-pointer structs. | `code_07`..`code_09` (86–97% → 97%+) |
-| **A6** | **Clean up version-specific script/table gaps:** Handle remaining RS-vs-BM differing script blocks cleanly where needed, and promote high-value unnamed `dat_`/`sub_` labels into `symbols/names.txt`. | All segments (~90–95%+) |
+| **A6** | **Clean up version-specific script/table gaps:** *(Started 2026-11-26: promoted **+65** verified `agb_sram`, `m4a`, and `gIntrTableTemplate` symbols into `symbols/names.txt` → **1,175** symbols.)* Remaining: handle remaining RS-vs-BM differing script blocks and promote high-value engine `sub_`/`dat_` labels. | All segments (~90–95%+) |
 
 ---
 
