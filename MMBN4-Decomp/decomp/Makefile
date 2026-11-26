@@ -132,6 +132,7 @@ $(MODERN_LIB): $(MODERN_HOST_OBJS)
 
 modern-lib: $(MODERN_LIB) include/modern_api.h
 	gcc -O2 -Wall -Wextra -Werror -I include -fsyntax-only -x c include/modern_api.h
+	g++ -O2 -Wall -Wextra -Werror -I include -fsyntax-only -x c++ include/modern_api.h
 	@echo "modern-lib: OK ($(MODERN_LIB), $(words $(MODERN_SRCS)) modules)"
 
 modern-test: $(MODERN_LIB) tests/test_modern.c

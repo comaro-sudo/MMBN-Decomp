@@ -791,6 +791,28 @@ static void test_chip_combo_and_net_security(void) {
     assert(NetResolveTunerTier(&tk, 3) == 2u); /* Forced SuperHard -> tier 2 */
 }
 
+static void test_link_battle_and_pet_upgrades(void) {
+    u8 p1w = 0, p2w = 0;
+    u8 regMem = 48;
+    u8 subCap = 7;
+
+    /* NetBattle tiebreak & best-of-3 */
+    assert(NetBattleResolveTiebreak(300, 1000, 400, 1000) == 2u);
+    assert(NetBattleResolveTiebreak(500, 500, 800, 1000) == 1u);
+    assert(NetBattleResolveTiebreak(500, 1000, 250, 500) == 0u);
+    assert(NetBattleIsTurnLimitReached(14) == 0u && NetBattleIsTurnLimitReached(15) == 1u);
+    assert(NetBattleRecordRoundWin(&p1w, &p2w, 1, 2) == 0u);
+    assert(NetBattleRecordRoundWin(&p1w, &p2w, 1, 2) == 1u);
+
+    /* PET RegUP, SubMem & SpinParts */
+    assert(PetApplyRegUp(&regMem, 3) == 50u && regMem == 50u);
+    assert(PetApplySubMem(&subCap) == 1u && subCap == 8u);
+    assert(PetApplySubMem(&subCap) == 0u);
+    assert(PetCanRotateColor(0x05u, 0) == 1u);
+    assert(PetCanRotateColor(0x05u, 1) == 0u);
+    assert(PetCanRotateColor(0x05u, 2) == 1u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -815,6 +837,7 @@ int main(void) {
     test_fixed_math();
     test_chip_effects_souls_and_npc();
     test_chip_combo_and_net_security();
+    test_link_battle_and_pet_upgrades();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

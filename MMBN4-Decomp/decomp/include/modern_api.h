@@ -487,6 +487,16 @@ u32 NetCanOpenBlackEarthGate(const struct Toolkit *tk, u32 soulMask,
 u32 NetCanUnlockSecurityCube(const struct Toolkit *tk, u16 openedFlag, u8 keyItemId);
 u8 NetResolveTunerTier(const struct Toolkit *tk, u8 tunerSetting);
 
+/* --- core_link_battle.c --- */
+u32 NetBattleResolveTiebreak(u16 p1Hp, u16 p1MaxHp, u16 p2Hp, u16 p2MaxHp);
+u32 NetBattleIsTurnLimitReached(u8 turnNumber);
+u32 NetBattleRecordRoundWin(u8 *p1Wins, u8 *p2Wins, u8 winner, u8 targetWins);
+
+/* --- core_key_items.c --- */
+u8 PetApplyRegUp(u8 *regMemory, u8 deltaMb);
+u32 PetApplySubMem(u8 *subMemCap);
+u32 PetCanRotateColor(u8 spinPartsMask, u8 colorIndex);
+
 #ifdef __cplusplus
 }
 #endif
