@@ -60,6 +60,10 @@ $(BUILD)/externs.inc: $(SRC)
 C_SRCS  := $(wildcard src/*.c)
 C_INCS  := $(patsubst src/%.c,$(BUILD)/c/%.s,$(C_SRCS))
 
+$(BUILD)/c/m4a_api.s: src/m4a_api.c tools/c_to_inc.py
+	@mkdir -p $(BUILD)/c
+	python3 tools/c_to_inc.py --old-agbcc $< $@
+
 $(BUILD)/c/m4a_%.s: src/m4a_%.c tools/c_to_inc.py
 	@mkdir -p $(BUILD)/c
 	python3 tools/c_to_inc.py --agbcc $< $@

@@ -82,4 +82,11 @@ Completed and verified both requested unblocked workstreams:
   - Decompiled the **entire Nintendo AGB SRAM library** in `src/agb_sram.c` (**all 6 functions**: `sub_0811189C` `ReadSram_Core`, `sub_081118C0` `ReadSram`, `sub_08111924` `WriteSram`, `sub_08111964` `VerifySram_Core`, `sub_08111994` `VerifySram`, `sub_081119F8` `WriteSramEx`, compiled with `agbcc -O1`, `.thumb_set _call_via_r3, sub_08111A3C`).
   - Expanded `src/m4a_cmds.c` with 3 more `m4a` track command handlers (`sub_08113C80` `ply_tune`, `sub_08113C8C` `ply_unk26`, `sub_08113CA0` `ply_unk27`, compiled with `agbcc -O2`, total **9 `m4a` functions**).
   - Total DC-5 C: **23 byte-identical C functions** across 3 files (`bios_swi.c` 8, `agb_sram.c` 6, `m4a_cmds.c` 9), verified `make -B compare VERSION=rs` and `VERSION=bm` both **OK**.
+- **BN4_CUTSCENE_COMMANDS (`dat_0802C140`) cutscene script emission (`tools/emit_cutscene_scripts.py`, `include/cutscene_macros.inc`)**:
+  - Mapped all 103 opcodes (`0x00..0x66`, incl. all 5 sub-handlers of `0x45` at `dat_0802CA94`) and emitted **253 RS+BM-identical cutscene script blocks (`+6,436B`)** into `asm/code_05.s` (`156` blocks, `3,538B`) and `asm/code_06.s` (`97` blocks, `2,898B`, lifting `code_06` to **50.0%**) with zero new `.if VERSION_BM` blocks.
+  - Total code ownership: **65.5%** (`772,949 / 1,179,456` bytes, `7,584` externs).
+- **DC-5 C (`src/m4a_api.c`, `tools/split.py`, `Makefile`)**:
+  - Extended `tools/split.py` to scan `src/*.c` for `dat_*`/`sub_*` externs so C modules can reference ROM tables directly.
+  - Decompiled 6 Nintendo `m4a` public API functions in `src/m4a_api.c` (`old_agbcc -O2`): `sub_0811283C` (`m4aSoundMain`), `sub_08112848` (`m4aSongNumStart`), `sub_08112874` (`m4aSongNumStartOrChange`), `sub_081128C0` (`m4aSongNumStartOrContinue`), `sub_08112914` (`m4aSongNumStop`), `sub_08112948` (`m4aSongNumContinue`).
+  - Total DC-5 C: **29 byte-identical C functions** across 4 files (`bios_swi.c` 8, `agb_sram.c` 6, `m4a_api.c` 6, `m4a_cmds.c` 9), verified `make -B compare VERSION=rs` and `VERSION=bm` both **OK**.
 - **New 3DS blocker note**: `apt.devkitpro.org` / `pkg.devkitpro.org` return HTTP 403 (Cloudflare anti-bot gate) to CLI clients; install devkitPro `3ds-dev` interactively to build `ports/3ds/build_3ds.py`.
