@@ -201,6 +201,7 @@ def main() -> None:
     bm = (DECOMP / "../roms/bn4_bm_us.gba").read_bytes()
 
     targets = [
+        ("code_04",  0x5AFC6, 0x1F96, 0x1FA2, 0x0C),
         ("code_04b", 0x60264, 0x1064, 0x1060, 0x18),
         ("code_04c", 0x6544C, 0x2210, 0x2208, 0x14),
     ]
@@ -214,7 +215,9 @@ def main() -> None:
             f"    incrom 0x{rs_off:X}, 0x{rs_sz:X}\n"
             f"    .endif"
         )
-        assert old_block in txt, f"block not found in {seg}.s"
+        if old_block not in txt:
+            print(f"{seg:8s}: already decoded (skipped)")
+            continue
         bm_lines, bm_dec = decode_region(bm, rs_off + delta, bm_sz, True, delta)
         rs_lines, rs_dec = decode_region(rs, rs_off, rs_sz, False, 0)
         new_block = (

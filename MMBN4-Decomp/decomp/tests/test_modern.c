@@ -496,6 +496,62 @@ static void test_enemy_ai_and_sp_scaling(void) {
     assert(BossAdvanceRematchRank(4, 11, 1) == 4); /* capped at SP+ */
 }
 
+struct TextScriptState {
+    const u8 *buf;
+    u32 len;
+    u32 pos;
+    u8 mugshotId;
+    u8 textSpeed;
+    u8 delayFrames;
+    u8 lastOp;
+    u16 lastSoundId;
+    u16 lastExtArg;
+    u32 lineCount;
+};
+
+void TextScriptInit(struct TextScriptState *st, const u8 *buf, u32 len);
+u32 TextScriptInstrLen(const u8 *buf, u32 len, u32 pos);
+u32 TextScriptStep(struct TextScriptState *st, struct Toolkit *tk, u8 *outGlyph);
+
+static void test_text_script_decoder(void) {
+    struct Toolkit tk;
+    struct TextScriptState st;
+    u8 glyph = 0;
+    /* Mugshot(5), 'A'(0x0A), Newline, WaitKey, SetFlag(0x0123), Ext(0x0C, 0x0D), End */
+    const u8 script[] = {
+        0xEB, 0x05,
+        0x0A,
+        0xE7,
+        0xE8,
+        0xF2, 0x02, 0x23, 0x01,
+        0xFC, 0x0C, 0x0D,
+        0xE6
+    };
+    const u8 branchScript[] = {
+        0xF2, 0x00, 0x23, 0x01, 0x42,
+        0xE6
+    };
+
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+
+    TextScriptInit(&st, script, sizeof(script));
+    assert(TextScriptInstrLen(script, sizeof(script), 0) == 2);
+    assert(TextScriptStep(&st, &tk, &glyph) == 1 && st.mugshotId == 5);
+    assert(TextScriptStep(&st, &tk, &glyph) == 0 && glyph == 0x0A);
+    assert(TextScriptStep(&st, &tk, &glyph) == 1 && st.lineCount == 1);
+    assert(TextScriptStep(&st, &tk, &glyph) == 2); /* WaitKey */
+    assert(TextScriptStep(&st, &tk, &glyph) == 1 && EventFlagTest(&tk, 0x0123) == 1);
+    assert(TextScriptStep(&st, &tk, &glyph) == 1 && st.lastExtArg == 0x0C0Du);
+    assert(TextScriptStep(&st, &tk, &glyph) == 3); /* End */
+    assert(TextScriptStep(&st, &tk, &glyph) == 4); /* EOF error */
+
+    /* Flag-set branch jumps to 0x42 */
+    TextScriptInit(&st, branchScript, sizeof(branchScript));
+    assert(TextScriptStep(&st, &tk, &glyph) == 3 && st.lastExtArg == 0x42u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -507,6 +563,7 @@ int main(void) {
     test_custom_screen_and_pa();
     test_emotion_and_karma();
     test_enemy_ai_and_sp_scaling();
+    test_text_script_decoder();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
