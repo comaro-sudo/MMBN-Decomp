@@ -518,6 +518,39 @@ u32 NaviCustEvalPartBugs(const struct NaviCustPartDesc *desc,
                          const u8 gridPartIds[25],
                          const u8 gridColors[25]);
 
+/* --- core_sprite_anim.c --- */
+struct SpriteAnimState {
+    u16 frameIndex;
+    u16 frameCount;
+    u16 timer;
+    u8 looping;
+    u8 finished;
+};
+
+void SpriteAnimInit(struct SpriteAnimState *anim, u16 frameCount,
+                    u16 firstDelay, u8 looping);
+u32 SpriteAnimStep(struct SpriteAnimState *anim, const u16 *durations);
+
+/* --- core_tournament_bracket.c --- */
+u8 BracketQfOpponentSlot(u8 slot);
+u32 BracketHasWonRound(const struct TournamentBracketSlot bracket[8],
+                       u8 slot, u8 roundIdx);
+void BracketMarkRoundWin(struct TournamentBracketSlot bracket[8],
+                         u8 slot, u8 roundIdx);
+u8 BracketGetChampion(const struct TournamentBracketSlot bracket[8]);
+
+/* --- core_counter_hit.c --- */
+u32 DarkChipShouldOffer(u16 curHp, u16 maxHp, enum EmotionState emotion,
+                        u8 darkChipsBanned);
+u32 BattleResolveCounterHit(struct BossPatternState *boss,
+                            struct BattleStatusState *bossStatus,
+                            enum EmotionState *playerEmotion,
+                            s16 playerKarma);
+u32 BattleIsDoubleDamageEmotion(enum EmotionState emotion);
+u32 BattleShouldTriggerDarkSoul(s16 karma, u8 usedDarkChipThisTurn);
+u8 BattleCalcHpPercent(u16 curHp, u16 maxHp);
+u32 BattleIsLowHp(u16 curHp, u16 maxHp);
+
 #ifdef __cplusplus
 }
 #endif

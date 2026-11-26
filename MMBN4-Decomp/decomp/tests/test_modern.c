@@ -856,6 +856,48 @@ static void test_friendly_matches_and_navicust_bugs(void) {
     assert((NaviCustEvalPartBugs(&prog, 1, pids, cols) & (1u << 3)) != 0u);
 }
 
+static void test_anim_bracket_and_counter(void) {
+    struct SpriteAnimState anim;
+    const u16 durs[3] = { 2, 1, 2 };
+    struct TournamentBracketSlot br[8];
+    struct BossPatternState boss;
+    struct BattleStatusState bst;
+    enum EmotionState emo = EMOTION_NORMAL;
+
+    /* SpriteAnim */
+    SpriteAnimInit(&anim, 3, durs[0], 0);
+    assert(SpriteAnimStep(&anim, durs) == 0u && anim.frameIndex == 0u);
+    assert(SpriteAnimStep(&anim, durs) == 1u && anim.frameIndex == 1u);
+    assert(SpriteAnimStep(&anim, durs) == 1u && anim.frameIndex == 2u);
+    assert(SpriteAnimStep(&anim, durs) == 0u && anim.finished == 0u);
+    assert(SpriteAnimStep(&anim, durs) == 0u && anim.finished == 1u);
+
+    /* Tournament bracket */
+    memset(br, 0, sizeof(br));
+    br[2].entrantId = 0x1E;
+    assert(BracketQfOpponentSlot(2) == 3u);
+    assert(BracketGetChampion(br) == 0xFFu);
+    BracketMarkRoundWin(br, 2, 0);
+    BracketMarkRoundWin(br, 2, 1);
+    BracketMarkRoundWin(br, 2, 2);
+    assert(BracketHasWonRound(br, 2, 2) == 1u);
+    assert(BracketGetChampion(br) == 0x1Eu);
+
+    /* DarkChip offer & Counter-Hit resolution */
+    assert(DarkChipShouldOffer(600, 1000, EMOTION_NORMAL, 0) == 0u);
+    assert(DarkChipShouldOffer(500, 1000, EMOTION_NORMAL, 0) == 1u);
+    assert(DarkChipShouldOffer(500, 1000, EMOTION_NORMAL, 1) == 0u); /* banned */
+    assert(BattleCalcHpPercent(250, 1000) == 25u && BattleIsLowHp(250, 1000) == 1u);
+
+    memset(&boss, 0, sizeof(boss));
+    memset(&bst, 0, sizeof(bst));
+    boss.counterWindow = 5;
+    assert(BattleResolveCounterHit(&boss, &bst, &emo, 512) == 1u);
+    assert(bst.activeStatus == 1u && bst.durationFrames == 90u);
+    assert(emo == EMOTION_FULL_SYNCHRO && BattleIsDoubleDamageEmotion(emo) == 1u);
+    assert(BattleShouldTriggerDarkSoul(100, 1) == 1u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -882,6 +924,7 @@ int main(void) {
     test_chip_combo_and_net_security();
     test_link_battle_and_pet_upgrades();
     test_friendly_matches_and_navicust_bugs();
+    test_anim_bracket_and_counter();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
