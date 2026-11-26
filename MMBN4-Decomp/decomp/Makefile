@@ -48,7 +48,7 @@ $(BUILD)/baserom.gba: $(BASEROM)
 # table. Both versions assemble the shared source in asm/ (DC-4); version
 # differences are .if VERSION_BM blocks. A freshly regenerated, not yet merged
 # asm/bm/<seg>.s is picked up too (see tools/split.py and tools/merge_bm.py).
-$(SRC): config/segments_$(VERSION).toml symbols/functions_$(VERSION).txt \
+$(SRC): config/segments_$(VERSION).toml symbols/functions_$(VERSION).txt symbols/names.txt \
         $(wildcard asm/*.s) $(wildcard asm/$(VERSION)/*.s) $(wildcard data/*.s) \
         $(wildcard include/*.inc) tools/split.py tools/merge_bm.py
 	@mkdir -p $(BUILD)

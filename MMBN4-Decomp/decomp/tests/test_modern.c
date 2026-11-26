@@ -815,6 +815,76 @@ static void test_library_and_status(void) {
     assert(st.activeStatus == 0u);
 }
 
+/* core_subchips.c */
+struct SubChipState {
+    u8 qty[6];
+    u8 maxPerSlot;
+    u8 sneakRunActive;
+    u8 untrapActive;
+    u8 locEnemyActive;
+};
+
+u32 SubChipAdd(struct SubChipState *sc, u8 id, u8 amount);
+u32 SubChipUseRecovery(struct SubChipState *sc, u8 id, u16 *curHp, u16 maxHp);
+u32 SubChipActivateField(struct SubChipState *sc, u8 id);
+
+/* core_battle_turn.c */
+struct BattleTurnState {
+    u8 phase;
+    u8 turnNumber;
+    u8 activeSoul;
+    u8 soulTurnsLeft;
+    u16 customGauge;
+    u16 gaugeSpeed;
+    u32 totalCombatFrames;
+    u8 enemiesAlive;
+    u8 playerDeleted;
+};
+
+void BattleTurnInit(struct BattleTurnState *bt, u8 enemiesAlive, u16 gaugeSpeed);
+void BattleTurnEnterCustom(struct BattleTurnState *bt);
+void BattleTurnStartCombat(struct BattleTurnState *bt, u8 newSoulId);
+u32 BattleTurnStepCombat(struct BattleTurnState *bt);
+
+static void test_subchips_and_battle_turn(void) {
+    struct SubChipState sc;
+    u16 hp = 120;
+    struct BattleTurnState bt;
+
+    /* SubChips */
+    memset(&sc, 0, sizeof(sc));
+    sc.maxPerSlot = 4;
+    assert(SubChipAdd(&sc, 0, 6) == 4u && sc.qty[0] == 4u); /* MiniEnrg clamped to 4 */
+    assert(SubChipUseRecovery(&sc, 0, &hp, 200) == 1u && hp == 170u && sc.qty[0] == 3u);
+    assert(SubChipAdd(&sc, 1, 1) == 1u); /* FullEnrg */
+    assert(SubChipUseRecovery(&sc, 1, &hp, 200) == 1u && hp == 200u && sc.qty[1] == 0u);
+    assert(SubChipUseRecovery(&sc, 0, &hp, 200) == 0u); /* already at max HP */
+    assert(SubChipAdd(&sc, 2, 1) == 1u); /* SneakRun */
+    assert(SubChipActivateField(&sc, 2) == 1u && sc.sneakRunActive == 1u && sc.qty[2] == 0u);
+
+    /* Battle Turn Coordinator & DoubleSoul 3-turn expiration */
+    BattleTurnInit(&bt, 2, 0x2000u);
+    assert(bt.phase == 0u);
+    BattleTurnEnterCustom(&bt);
+    assert(bt.phase == 1u && bt.turnNumber == 1u);
+    BattleTurnStartCombat(&bt, 13); /* Duo Soul (3 turns) */
+    assert(bt.phase == 2u && bt.activeSoul == 13u && bt.soulTurnsLeft == 3u);
+    assert(BattleTurnStepCombat(&bt) == 0u && bt.totalCombatFrames == 1u);
+    assert(BattleTurnStepCombat(&bt) == 1u && bt.customGauge == 0x4000u);
+
+    /* Turn 2 -> 3 -> 4 reverts Duo Soul */
+    BattleTurnEnterCustom(&bt); assert(bt.soulTurnsLeft == 2u && bt.activeSoul == 13u);
+    BattleTurnStartCombat(&bt, 0);
+    BattleTurnEnterCustom(&bt); assert(bt.soulTurnsLeft == 1u && bt.activeSoul == 13u);
+    BattleTurnStartCombat(&bt, 0);
+    BattleTurnEnterCustom(&bt); assert(bt.soulTurnsLeft == 0u && bt.activeSoul == 0u);
+
+    /* Victory transition when enemiesAlive hits 0 */
+    BattleTurnStartCombat(&bt, 0);
+    bt.enemiesAlive = 0;
+    assert(BattleTurnStepCombat(&bt) == 0u && bt.phase == 3u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -831,6 +901,7 @@ int main(void) {
     test_chips_and_map();
     test_oam_dma_and_folder();
     test_library_and_status();
+    test_subchips_and_battle_turn();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
