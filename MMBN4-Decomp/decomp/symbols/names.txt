@@ -1301,3 +1301,41 @@
 08001D80 08001D80 code   GEMINI       ClearBlendRegs                   zeroes 8-byte shadow BLDCNT/BLDALPHA/BLDY struct at sl[+0x20]
 08001D8E 08001D8E code   GEMINI       FlushFadePaletteToHw             DMAs 512-byte fade palette buffer (0x03002C50) to hardware PRAM (0x05000000)
 08001DA8 08001DA8 code   GEMINI       ClearBgTileIdBlocks              zeroes BG tilemap staging buffer pointed to by sl[+0x28]
+08001DBC 08001DBC code   GEMINI       LoadDefaultFontAndPalette        DMAs default font tiles to VRAM 0x0600D800 (0x800 B) and palette to 0x03002C30
+08001DE8 08001DE8 code   GEMINI       SetBgTileEntry                   writes halfword r3 into sl[+0x28] BG tilemap at (x=r0, y=r1, bg=r2)
+08001DFC 08001DFC code   GEMINI       IwramBgCopyTilemap1              trampoline calling IWRAM BG tilemap helper at 0x030059E9
+08001E06 08001E06 code   GEMINI       IwramBgCopyTilemap2              trampoline calling IWRAM BG tilemap helper at 0x03005A23
+08001E18 08001E18 code   GEMINI       BgFillRect                       trampoline calling IWRAM BG rect fill helper at 0x03005A5D
+08001E22 08001E22 code   GEMINI       IwramBgFillRect2                 trampoline calling IWRAM BG rect fill helper at 0x03005A93
+08001E34 08001E34 code   GEMINI       WriteBgTileRowWrap               copies r4 u16 tiles from r3 horizontally into BG r2 row r1 wrapping mod 32
+08001E58 08001E58 code   GEMINI       WriteBgTileColWrap               copies r4 u16 tiles from r3 vertically into BG r2 col r0 wrapping mod 32
+08001E7C 08001E7C code   GEMINI       SetHBlankAndVBlankCallbacks      stores (r0, r1, r2) callbacks at 0x0200ACF0 and registers HBlank IRQ 0x0C
+08001E94 08001E94 code   GEMINI       ResetHBlankAndVBlankCallbacks    resets 0x0200ACF0 callbacks to NullCallback_Fade & default IWRAM HBlank 0x0300593D
+08001EB4 08001EB4 code   GEMINI       RunHBlankPrepCallback            invokes function pointer at [0x0200ACF0 + 0]
+08001EC0 08001EC0 code   GEMINI       ScreenFade_Update                invokes fade/vblank callback pointer at [0x0200ACF0 + 8]
+08001ED0 08001ED0 code   GEMINI       NullCallback_BgScroll            no-op BG scroll callback (mov pc, lr)
+08001ED2 08001ED2 code   GEMINI       BgScroll_Bg1DiagLeftUp           scrolls BG1HOFS (-8/16) and BG1VOFS (-4/16) via 0x0200A150 accumulator
+08001EEE 08001EEE code   GEMINI       BgScroll_Bg3DiagLeftUp           scrolls BG3HOFS (-8/16) and BG3VOFS (-4/16) via 0x0200A150 accumulator
+08001F0A 08001F0A code   GEMINI       BgScroll_Bg3Up                   scrolls BG3VOFS (-4/16) via 0x0200A150 accumulator
+08001F1C 08001F1C code   GEMINI       BgScroll_Bg1Up                   scrolls BG1VOFS (-4/16) via 0x0200A150 accumulator
+08001F2E 08001F2E code   GEMINI       BgScroll_Bg1Down                 scrolls BG1VOFS (+4/16) via 0x0200A150 accumulator
+08001F40 08001F40 code   GEMINI       BgScroll_Bg3Down                 scrolls BG3VOFS (+4/16) via 0x0200A150 accumulator
+08001F52 08001F52 code   GEMINI       BgScroll_Bg1Right                scrolls BG1HOFS (+8/16) via 0x0200A150 accumulator
+08001F64 08001F64 code   GEMINI       BgScroll_Bg1Left                 scrolls BG1HOFS (-8/16) via 0x0200A150 accumulator
+08001F76 08001F76 code   GEMINI       BgScroll_Bg3Left                 scrolls BG3HOFS (-8/16) via 0x0200A150 accumulator
+08001F88 08001F88 code   GEMINI       BgScroll_Bg1AccelLeft            accelerates BG1HOFS leftward by 0x1000/frame clamped to -0x40000
+08001FB4 08001FB4 code   GEMINI       NullCallback_Fade                no-op fade callback (mov pc, lr)
+08001FB8 08001FB8 data   GEMINI       gTileAnimScratchBuffers          28-entry EWRAM staging buffer pointer table for tile animations
+08002028 08002028 code   GEMINI       TileAnim_ClearAll                zeroes all 18 tile/palette animation slots at 0x02009F50 (0x1B0 B)
+08002038 08002038 code   GEMINI       TileAnim_GetScratchBuffer        returns gTileAnimScratchBuffers[r0]
+08002048 08002048 code   GEMINI       TileAnim_Start                   starts tile/palette animation descriptor r0 in 0x02009F50 slot
+08002098 08002098 code   GEMINI       TileAnim_Stop                    deactivates tile/palette animation slot r0 and runs cleanup
+080020B0 080020B0 code   GEMINI       TileAnim_IsActive                returns active status byte of tile/palette animation slot r0
+080020C0 080020C0 code   GEMINI       TileAnim_UpdateAll               ticks all 18 tile/palette animation slots and dispatches frame handlers
+08002134 08002134 data   GEMINI       gTileAnimFrameStrides            6-word frame entry stride table indexed by tile anim handler type
+0800214C 0800214C data   GEMINI       gTileAnimHandlers                6-entry handler jump table for tile/palette animation frames
+08002168 08002168 code   GEMINI       TileAnimHandler_DmaCopy          tile anim type 0: enqueues mode-2 DMA transfer of frame data
+08002176 08002176 code   GEMINI       TileAnimHandler_PatchMapTiles    tile anim type 2: patches map tilemap entries at 0x0200D8E0
+080021B8 080021B8 code   GEMINI       TileAnimHandler_ComposeTiles     tile anim type 1: copies/flips 8x8 4bpp tiles to scratch buffer and queues DMA
+08002210 08002210 data   GEMINI       gTileCopyFlipHandlers            4-entry 8x8 4bpp tile copy/flip jump table (normal, H, V, HV)
+08002220 08002220 code   GEMINI       CopyTile4bpp_Normal              copies 32-byte 8x8 4bpp tile from r4 to r5 without flipping

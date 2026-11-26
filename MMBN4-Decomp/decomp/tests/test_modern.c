@@ -1115,6 +1115,52 @@ static void test_chip_attacks2(void) {
     assert(ChipInvisTick(&invis) == 0u && invis == 0u);
 }
 
+static void test_panel_hazards(void) {
+    struct BattlePanel grid[18];
+    s8 px = 1, py = 2;
+    s16 hp = 120;
+    u16 timer = 0;
+    u32 i;
+
+    BattleGridInitDefault(grid);
+
+    /* Cracked -> Broken on step-off */
+    grid[BattleGridIndex(1, 1)].state = 1u;
+    assert(PanelStepOffCrack(grid, 1, 1) == 1u);
+    assert(grid[BattleGridIndex(1, 1)].state == 2u);
+    assert(PanelStepOffCrack(grid, 1, 1) == 0u);
+
+    /* Ice slide across (1,2) -> (2,2) -> (3,2) stopping at Normal (3,2) */
+    grid[BattleGridIndex(1, 2)].state = 3u;
+    grid[BattleGridIndex(2, 2)].state = 3u;
+    assert(PanelIceSlideStep(grid, &px, &py, 1, 0, 0, 0) == 2u);
+    assert(px == 3 && py == 2);
+    /* FloatShoes prevents sliding */
+    px = 1;
+    assert(PanelIceSlideStep(grid, &px, &py, 1, 0, 0, 1) == 0u && px == 1);
+
+    /* Lava deals 50 unless Fire (1) or FloatShoes */
+    grid[BattleGridIndex(2, 3)].state = 5u;
+    assert(PanelApplyLavaDamage(grid, 2, 3, &hp, 0, 0) == 50 && hp == 70);
+    assert(PanelApplyLavaDamage(grid, 2, 3, &hp, 1, 0) == 0 && hp == 70);
+    assert(PanelApplyLavaDamage(grid, 2, 3, &hp, 0, 1) == 0 && hp == 70);
+
+    /* Poison drains 1 HP every 10 frames */
+    grid[BattleGridIndex(3, 3)].state = 6u;
+    for (i = 0; i < 9; i++) {
+        assert(PanelTickPoisonDamage(grid, 3, 3, &hp, &timer, 0) == 0u);
+    }
+    assert(PanelTickPoisonDamage(grid, 3, 3, &hp, &timer, 0) == 1u && hp == 69);
+
+    /* Grass heals Wood-element (4) 1 HP every 10 frames */
+    grid[BattleGridIndex(1, 3)].state = 4u;
+    timer = 0;
+    for (i = 0; i < 9; i++) {
+        assert(PanelTickGrassHeal(grid, 1, 3, &hp, 100, &timer, 4) == 0u);
+    }
+    assert(PanelTickGrassHeal(grid, 1, 3, &hp, 100, &timer, 4) == 1u && hp == 70);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1148,6 +1194,7 @@ int main(void) {
     test_soul_navi_ai_and_npc_vm();
     test_map_vm_pa_catalog_and_battle_sim();
     test_chip_attacks2();
+    test_panel_hazards();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

@@ -697,6 +697,17 @@ u32 ChipBoomerangPerimeterStep(s8 *x, s8 *y);
 s32 ChipBarrierAbsorbHit(s16 *barrierHp, s32 damage, u8 isWind);
 u32 ChipInvisTick(u16 *invisFrames);
 
+/* --- core_panel_hazards.c --- */
+u32 PanelStepOffCrack(struct BattlePanel grid[18], u8 x, u8 y);
+u32 PanelIceSlideStep(const struct BattlePanel grid[18], s8 *x, s8 *y,
+                      s8 dx, s8 dy, u8 owner, u8 hasFloatShoes);
+s32 PanelApplyLavaDamage(const struct BattlePanel grid[18], u8 x, u8 y,
+                         s16 *hp, u8 element, u8 hasFloatShoes);
+u32 PanelTickPoisonDamage(const struct BattlePanel grid[18], u8 x, u8 y,
+                          s16 *hp, u16 *poisonTimer, u8 hasFloatShoes);
+u32 PanelTickGrassHeal(const struct BattlePanel grid[18], u8 x, u8 y,
+                       s16 *hp, s16 maxHp, u16 *healTimer, u8 element);
+
 #ifdef __cplusplus
 }
 #endif
