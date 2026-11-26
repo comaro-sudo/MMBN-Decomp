@@ -757,6 +757,64 @@ static void test_oam_dma_and_folder(void) {
     }
 }
 
+/* core_library.c */
+u32 LibraryBitTest(const u8 *bits, u32 idx, u32 maxEntries);
+u32 LibraryBitSet(u8 *bits, u32 idx, u32 maxEntries);
+u32 LibraryCountRecorded(const u8 *bits, u32 maxEntries);
+u32 LibraryHasSoulStar(u32 soulMask, u32 requiredCount);
+
+/* core_status_effects.c */
+struct BattleStatusState {
+    u8 activeStatus;
+    u16 durationFrames;
+    u8 statusGuard;
+};
+
+u32 StatusInflict(struct BattleStatusState *st, u8 statusKind, u16 frames);
+void StatusTick(struct BattleStatusState *st);
+u32 StatusIsImmobilized(const struct BattleStatusState *st);
+s32 StatusApplyHitBonus(struct BattleStatusState *st, s32 damage,
+                        u8 isBreak, u8 element);
+
+static void test_library_and_status(void) {
+    u8 stdBits[20];
+    struct BattleStatusState st;
+
+    /* Library bitfields & Violet Eclipse 12-Soul star */
+    memset(stdBits, 0, sizeof(stdBits));
+    assert(LibraryBitSet(stdBits, 0, 150) == 1u);
+    assert(LibraryBitSet(stdBits, 0, 150) == 0u); /* duplicate */
+    assert(LibraryBitSet(stdBits, 149, 150) == 1u);
+    assert(LibraryBitSet(stdBits, 150, 150) == 0u); /* out of bounds */
+    assert(LibraryBitTest(stdBits, 149, 150) == 1u);
+    assert(LibraryCountRecorded(stdBits, 150) == 2u);
+
+    assert(LibraryHasSoulStar(0x003Fu, 6) == 1u);  /* 6 Souls (vanilla) */
+    assert(LibraryHasSoulStar(0x0FFEu, 12) == 0u); /* 11 Souls */
+    assert(LibraryHasSoulStar(0x0FFFu, 12) == 1u); /* 12 Souls (Violet Eclipse) */
+    assert(LibraryHasSoulStar(0x1FFEu, 12) == 0u); /* Duo Soul bit 12 doesn't replace base Soul */
+
+    /* Status effects, StatusGuard & Freeze+Break / Bubble+Elec 2x shatter */
+    memset(&st, 0, sizeof(st));
+    st.statusGuard = 1;
+    assert(StatusInflict(&st, 1, 60) == 0u); /* blocked by StatusGuard */
+    st.statusGuard = 0;
+
+    assert(StatusInflict(&st, 2, 2) == 1u); /* Freeze for 2 frames */
+    assert(StatusIsImmobilized(&st) == 1u);
+    assert(StatusApplyHitBonus(&st, 100, 1, 0) == 200 && st.activeStatus == 0u); /* Break shatters */
+
+    assert(StatusInflict(&st, 3, 2) == 1u); /* Bubble for 2 frames */
+    assert(StatusApplyHitBonus(&st, 80, 0, 3) == 160 && st.activeStatus == 0u); /* Elec pops */
+
+    assert(StatusInflict(&st, 4, 2) == 1u); /* Confuse (not immobilized) */
+    assert(StatusIsImmobilized(&st) == 0u);
+    StatusTick(&st);
+    assert(st.activeStatus == 4u && st.durationFrames == 1u);
+    StatusTick(&st);
+    assert(st.activeStatus == 0u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -772,6 +830,7 @@ int main(void) {
     test_lz77_and_battle_loop();
     test_chips_and_map();
     test_oam_dma_and_folder();
+    test_library_and_status();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

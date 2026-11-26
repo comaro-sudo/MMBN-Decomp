@@ -1198,3 +1198,7 @@
 08113C74 08113C88 code   GEMINI       ply_tune                         m4a_cmds.c: sets track fine tuning
 08113C84 08113C98 code   GEMINI       ply_unk26                        m4a_cmds.c: track command 0x26
 08113C94 08113CA8 code   GEMINI       ply_unk27                        m4a_cmds.c: track command 0x27
+0802AFB4 0802AFB8 code   GEMINI       CutsceneReadU32                  cutscene VM: reads unaligned little-endian u32 at [r7 + r6] into r4
+0802C73C 0802C740 code   GEMINI       CutsceneOp39_JumpChoice          cutscene VM op 0x39: jumps to u32 table entry indexed by dialogue choice result
+0802C752 0802C756 code   GEMINI       CutsceneOp3A_LoadTextArchive     cutscene VM op 0x3A: loads (or LZ77-decompresses to 0x02036800) text archive pointer
+08053928 08053934 code   GEMINI       GetDialogueChoiceResult          returns player's last dialogue menu choice index (0, 1, ...)
