@@ -64,6 +64,29 @@ s32 ScoreBustingMultiDelete(u8 maxSimultaneousDeletes);
 s32 ScoreBustingHpRatio(u16 currentHp, u16 maxHp);
 u8 ClampBustingLevel(s32 rawScore);
 
+/* core_world.c */
+struct TournamentBracketSlot {
+    u8 entrantId;
+    u8 roundBits;
+    u8 unk02;
+    u8 unk03;
+};
+struct MysteryDataEntry {
+    u8 type;
+    u8 pad01;
+    u16 flag;
+    u32 arg1;
+    u32 arg2;
+};
+u8 TournamentGetRound(
+    const u8 *tournamentEntered,
+    const struct TournamentBracketSlot (*brackets)[8],
+    u8 tournamentId
+);
+int MysteryDataSetSlot(struct Toolkit *tk, u16 flag, u8 lo, u8 hi);
+u16 MysteryDataGetSlot(const struct Toolkit *tk, u16 flag);
+u32 MysteryDataResetList(struct Toolkit *tk, const struct MysteryDataEntry *entries);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -226,11 +249,54 @@ static void test_battle_score_and_id_raise(void) {
     assert(ClampBustingLevel(15) == 11);
 }
 
+static void test_world_tournaments_and_md(void) {
+    struct Toolkit tk;
+    u8 entered[3] = {0, 1, 1};
+    struct TournamentBracketSlot brackets[3][8];
+    struct MysteryDataEntry mdList[4] = {
+        {1, 0, 0x0D05, 0, 0},
+        {5, 0, 0x0D06, 0, 0}, /* type 5 skipped */
+        {2, 0, 0x0D07, 0, 0},
+        {0, 0, 0, 0, 0},      /* terminator */
+    };
+
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    memset(brackets, 0, sizeof(brackets));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+
+    /* TournamentGetRound */
+    assert(TournamentGetRound(entered, brackets, 0) == 4); /* not entered */
+    brackets[1][3].entrantId = 0x1E;
+    brackets[1][3].roundBits = 0x00;
+    assert(TournamentGetRound(entered, brackets, 1) == 0);
+    brackets[1][3].roundBits = 0x01;
+    assert(TournamentGetRound(entered, brackets, 1) == 1);
+    brackets[1][3].roundBits = 0x03;
+    assert(TournamentGetRound(entered, brackets, 1) == 2);
+    brackets[1][3].roundBits = 0x07;
+    assert(TournamentGetRound(entered, brackets, 1) == 3);
+
+    /* Mystery Data slots & list reset */
+    assert(MysteryDataSetSlot(&tk, 0x0D05, 0x34, 0x12) == 1);
+    assert(MysteryDataGetSlot(&tk, 0x0D05) == 0x1234);
+    assert(MysteryDataSetSlot(&tk, 0x0100, 0, 0) == 0); /* out of range */
+
+    EventFlagSet(&tk, 0x0D05);
+    EventFlagSet(&tk, 0x0D06);
+    EventFlagSet(&tk, 0x0D07);
+    assert(MysteryDataResetList(&tk, mdList) == 2);
+    assert(!EventFlagTest(&tk, 0x0D05));
+    assert(EventFlagTest(&tk, 0x0D06)); /* type 5 stayed set */
+    assert(!EventFlagTest(&tk, 0x0D07));
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
     test_save_inventory_and_souls();
     test_battle_score_and_id_raise();
+    test_world_tournaments_and_md();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
