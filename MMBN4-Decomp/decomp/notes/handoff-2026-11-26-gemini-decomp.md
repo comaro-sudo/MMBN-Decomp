@@ -23,7 +23,7 @@
 
 ## Modified & Relevant Files
 - `MMBN4-Decomp/decomp/Makefile` — `old_agbcc`/`agbcc` rules, `modern-check`, `modern-test`.
-- `MMBN4-Decomp/decomp/include/{gba_types.h,gba_io.h,gamestate.h,toolkit.h,battle.h,cutscene_macros.inc,desc_macros.inc}`
+- `MMBN4-Decomp/decomp/include/{gba_types.h,gba_io.h,gamestate.h,toolkit.h,battle.h,modern_api.h,cutscene_macros.inc,desc_macros.inc}`
 - `MMBN4-Decomp/decomp/src/{m4a_api.c,m4a_cgb.c,m4a_xwave.c}` (plus existing 12 C files)
 - `MMBN4-Decomp/decomp/src/modern/*.c` (13 files) & `MMBN4-Decomp/decomp/tests/test_modern.c`
 - `MMBN4-Decomp/decomp/tools/{emit_cutscene_scripts.py,emit_desc_tables.py}`
