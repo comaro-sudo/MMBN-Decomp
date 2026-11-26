@@ -813,6 +813,49 @@ static void test_link_battle_and_pet_upgrades(void) {
     assert(PetCanRotateColor(0x05u, 2) == 1u);
 }
 
+static void test_friendly_matches_and_navicust_bugs(void) {
+    struct Toolkit tk;
+    u8 pids[25];
+    u8 cols[25];
+    struct NaviCustPartDesc prog = { 1, 1, 0 };  /* textured program */
+    struct NaviCustPartDesc solid = { 2, 2, 1 }; /* solid stat part */
+
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+
+    /* Friendly matches: round-gated, retry-on-loss, win grants Soul & hides NPC */
+    assert(FriendlyMatchIsAvailable(&tk, 0, 1, 0x0310) == 0u);
+    assert(FriendlyMatchIsAvailable(&tk, 1, 1, 0x0310) == 1u);
+    assert(FriendlyMatchResolve(&tk, 0, 0x0310, 0x0320) == 0u); /* loss -> retry */
+    assert(FriendlyMatchIsAvailable(&tk, 1, 1, 0x0310) == 1u);
+    assert(FriendlyMatchResolve(&tk, 1, 0x0310, 0x0320) == 1u); /* win -> grants Soul */
+    assert(FriendlyMatchIsAvailable(&tk, 1, 1, 0x0310) == 0u);
+    assert(EventFlagTest(&tk, 0x0320) == 1);
+
+    /* Lobby vs Duo rematch ladders */
+    assert(RematchLadderOnWin(0, 8, 0) == 1u);  /* Lobby advances on any win */
+    assert(RematchLadderOnWin(0, 10, 1) == 0u); /* Duo needs S-rank (11) */
+    assert(RematchLadderOnWin(0, 11, 1) == 1u);
+
+    /* NaviCust bug detection */
+    memset(pids, 0, sizeof(pids));
+    memset(cols, 0, sizeof(cols));
+    pids[12] = 1; cols[12] = 1; /* center (row 2) */
+    assert(NaviCustEvalPartBugs(&prog, 1, pids, cols) == 0u);  /* OK on command line */
+    assert(NaviCustEvalPartBugs(&prog, 0, pids, cols) == (1u << 1)); /* off cmd line bug */
+    assert(NaviCustEvalPartBugs(&solid, 1, pids, cols) == (1u << 2)); /* solid on cmd line bug */
+
+    /* Same-color adjacent parts clash */
+    pids[13] = 2; cols[13] = 1;
+    assert(NaviCustHasColorClash(pids, cols) == 1u);
+
+    /* 5 distinct colors -> too many colors bug */
+    cols[0] = 1; cols[1] = 2; cols[2] = 3; cols[3] = 4; cols[4] = 5;
+    assert(NaviCustCountDistinctColors(cols) == 5u);
+    assert((NaviCustEvalPartBugs(&prog, 1, pids, cols) & (1u << 3)) != 0u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -838,6 +881,7 @@ int main(void) {
     test_chip_effects_souls_and_npc();
     test_chip_combo_and_net_security();
     test_link_battle_and_pet_upgrades();
+    test_friendly_matches_and_navicust_bugs();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

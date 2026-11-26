@@ -497,6 +497,27 @@ u8 PetApplyRegUp(u8 *regMemory, u8 deltaMb);
 u32 PetApplySubMem(u8 *subMemCap);
 u32 PetCanRotateColor(u8 spinPartsMask, u8 colorIndex);
 
+/* --- core_friendly_matches.c --- */
+u32 FriendlyMatchIsAvailable(const struct Toolkit *tk, u8 currentRound,
+                             u8 requiredRound, u16 clearedFlag);
+u32 FriendlyMatchResolve(struct Toolkit *tk, u8 playerWon,
+                         u16 clearedFlag, u16 soulFlag);
+u8 RematchLadderOnWin(u8 currentTier, u8 bustingLevel, u8 isDuo);
+
+/* --- core_navicust_bugs.c --- */
+struct NaviCustPartDesc {
+    u8 partId;
+    u8 color;
+    u8 isSolid;
+};
+
+u32 NaviCustHasColorClash(const u8 gridPartIds[25], const u8 gridColors[25]);
+u32 NaviCustCountDistinctColors(const u8 gridColors[25]);
+u32 NaviCustEvalPartBugs(const struct NaviCustPartDesc *desc,
+                         u8 touchesCmdLine,
+                         const u8 gridPartIds[25],
+                         const u8 gridColors[25]);
+
 #ifdef __cplusplus
 }
 #endif
