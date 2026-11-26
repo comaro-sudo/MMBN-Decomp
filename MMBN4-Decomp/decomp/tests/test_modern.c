@@ -669,6 +669,94 @@ static void test_chips_and_map(void) {
     assert(MapStepEncounter(&steps, 100, 100, 1, 200, 500) == 1u); /* stronger enemy triggers */
 }
 
+/* core_oam_dma.c */
+struct OamAttr {
+    u16 attr0;
+    u16 attr1;
+    u16 attr2;
+    s16 affine;
+};
+
+struct DmaQueueEntry {
+    const void *src;
+    void *dst;
+    u32 control;
+};
+
+struct DmaQueue {
+    struct DmaQueueEntry entries[32];
+    u32 count;
+};
+
+void OamClearBuffer(struct OamAttr *oam, u32 count);
+void OamSetSprite(struct OamAttr *entry, s16 x, s16 y, u8 shape, u8 size,
+                  u16 tile, u8 pal, u8 prio, u8 hFlip, u8 vFlip);
+void DmaQueueReset(struct DmaQueue *q);
+u32 DmaQueuePush(struct DmaQueue *q, const void *src, void *dst, u32 control);
+
+/* core_folder.c */
+struct FolderChipMeta {
+    u16 chipId;
+    u8 code;
+    u8 chipClass;
+};
+
+u32 FolderValidate(const struct FolderChipMeta *chips, u32 count,
+                   u8 megaLimit, u8 gigaLimit);
+u32 FolderCanSetRegular(u8 chipMb, u8 regMemory);
+void FolderShuffleDeck(u8 deck[30], u8 regIndex, u32 *rngSeed);
+
+static void test_oam_dma_and_folder(void) {
+    struct OamAttr oam[4];
+    struct DmaQueue dq;
+    struct FolderChipMeta folder[30];
+    u8 deck[30];
+    u8 seen[30];
+    u32 seed = 0x12345678u;
+    u32 i;
+
+    /* OAM & DMA queue */
+    OamClearBuffer(oam, 4);
+    assert(oam[0].attr0 == 0x0200u && oam[3].attr0 == 0x0200u);
+    OamSetSprite(&oam[0], 120, 80, 1, 2, 0x40, 3, 1, 1, 0);
+    assert((oam[0].attr0 & 0xFFu) == 80u && (oam[0].attr0 >> 14) == 1u);
+    assert((oam[0].attr1 & 0x1FFu) == 120u && (oam[0].attr1 & (1u << 12)) != 0u);
+    assert((oam[0].attr2 & 0x3FFu) == 0x40u && (oam[0].attr2 >> 12) == 3u);
+
+    DmaQueueReset(&dq);
+    assert(DmaQueuePush(&dq, oam, oam, 0x84000010u) == 1u && dq.count == 1u);
+
+    /* Folder validation */
+    for (i = 0; i < 30; i++) {
+        folder[i].chipId = (u16)(1 + (i / 4)); /* max 4 copies each */
+        folder[i].code = 0;
+        folder[i].chipClass = 0;
+    }
+    folder[28].chipId = 200; folder[28].chipClass = 1; /* 1 Mega */
+    folder[29].chipId = 250; folder[29].chipClass = 2; /* 1 Giga */
+    assert(FolderValidate(folder, 30, 5, 1) == 0u);
+
+    folder[27].chipId = 251; folder[27].chipClass = 2; /* 2nd Giga -> rejected */
+    assert(FolderValidate(folder, 30, 5, 1) == 4u);
+    folder[27].chipClass = 3; /* DarkChip -> banned */
+    assert(FolderValidate(folder, 30, 5, 1) == 5u);
+
+    assert(FolderCanSetRegular(12, 16) == 1u);
+    assert(FolderCanSetRegular(20, 16) == 0u);
+
+    /* Deck shuffle preserves Regular Chip at slot 0 & is a valid permutation */
+    FolderShuffleDeck(deck, 17, &seed);
+    assert(deck[0] == 17u);
+    memset(seen, 0, sizeof(seen));
+    for (i = 0; i < 30; i++) {
+        assert(deck[i] < 30u);
+        seen[deck[i]]++;
+    }
+    for (i = 0; i < 30; i++) {
+        assert(seen[i] == 1u);
+    }
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -683,6 +771,7 @@ int main(void) {
     test_text_script_decoder();
     test_lz77_and_battle_loop();
     test_chips_and_map();
+    test_oam_dma_and_folder();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
