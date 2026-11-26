@@ -885,6 +885,64 @@ static void test_subchips_and_battle_turn(void) {
     assert(BattleTurnStepCombat(&bt) == 0u && bt.phase == 3u);
 }
 
+/* core_sound_mgr.c */
+struct SoundMgrState {
+    u8 activeBgm;
+    u8 savedBgm;
+    u8 muted;
+    u8 fadeFrames;
+    u8 fanfareActive;
+};
+
+void SoundMgrInit(struct SoundMgrState *sm);
+u32 SoundMgrPlayBgm(struct SoundMgrState *sm, struct GameState *gs, u8 trackId);
+void SoundMgrPlayFanfare(struct SoundMgrState *sm, u8 fanfareId);
+u8 SoundMgrResumeBgm(struct SoundMgrState *sm, struct GameState *gs);
+u32 SoundMgrTickFade(struct SoundMgrState *sm);
+
+/* core_chip_trader.c */
+struct TraderPoolEntry {
+    u16 chipId;
+    u8 code;
+    u8 weight;
+};
+
+u32 TraderRequiredCost(u8 kind);
+u32 TraderCanSpin(u8 kind, u32 available);
+const struct TraderPoolEntry *TraderRoll(const struct TraderPoolEntry *pool,
+                                         u32 poolLen, u32 *rngSeed);
+
+static void test_sound_and_trader(void) {
+    struct SoundMgrState sm;
+    struct GameState gs;
+    const struct TraderPoolEntry pool[3] = {
+        { 1, 0, 50 },
+        { 29, 26, 30 },
+        { 200, 1, 20 }
+    };
+    u32 seed = 0xCAFEBABEu;
+    const struct TraderPoolEntry *pick;
+
+    /* Sound manager: play, dedup, fanfare save/resume, fade */
+    memset(&gs, 0, sizeof(gs));
+    SoundMgrInit(&sm);
+    assert(SoundMgrPlayBgm(&sm, &gs, 0x05) == 1u && gs.currentBgm == 0x05);
+    assert(SoundMgrPlayBgm(&sm, &gs, 0x05) == 0u); /* already playing */
+    SoundMgrPlayFanfare(&sm, 0x20);
+    assert(sm.activeBgm == 0x20 && sm.fanfareActive == 1u);
+    assert(SoundMgrResumeBgm(&sm, &gs) == 0x05 && gs.currentBgm == 0x05);
+    sm.fadeFrames = 2;
+    assert(SoundMgrTickFade(&sm) == 0u);
+    assert(SoundMgrTickFade(&sm) == 1u && sm.activeBgm == 0xFFu);
+
+    /* Chip Trader */
+    assert(TraderRequiredCost(0) == 3u && TraderRequiredCost(1) == 10u && TraderRequiredCost(2) == 10u);
+    assert(TraderCanSpin(0, 2) == 0u && TraderCanSpin(0, 3) == 1u);
+    assert(TraderCanSpin(2, 10) == 1u);
+    pick = TraderRoll(pool, 3, &seed);
+    assert(pick != 0 && (pick->chipId == 1 || pick->chipId == 29 || pick->chipId == 200));
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -902,6 +960,7 @@ int main(void) {
     test_oam_dma_and_folder();
     test_library_and_status();
     test_subchips_and_battle_turn();
+    test_sound_and_trader();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
