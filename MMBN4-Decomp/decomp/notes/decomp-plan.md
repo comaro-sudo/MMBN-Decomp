@@ -48,7 +48,7 @@ Goal: Establish canonical C headers (`include/gba.h`, `include/structs.h`, `incl
 |---|---|---|
 | **C1** | ~~**Core headers & Toolkit struct (`include/`):**~~ **DONE (2026-11-26):** `include/gba_types.h`, `include/gba_io.h`, `include/gamestate.h` (`MainState`, `JoypadState`, `GameState`, `ProgressState`), `include/toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`), and `include/battle.h` (`BattleChipData`, `BattleNaviState`, `DoubleSoulId`, RNG). Verified with `_Static_assert` + `gcc`/`agbcc`/`old_agbcc`. | Shared C headers |
 | **C2** | **Core utility & math (`code_00`):** *(In progress: `src/modern/core_progress.c` [11 funcs: game time, playthrough, RNG, event flags] + `src/modern/core_input.c` [5 funcs: `Joypad_Poll`, `CheckSoftReset`, `ZeroFillByWord`, `CopyBytes`, `CopyWords`], verified by `make modern-check`.)* Remaining: LZ77/VRAM/DMA queue helpers, OAM/sprite managers, `BN4_PLAY_MUSIC`. | `src/modern/core_*.c` |
-| **C3** | **Overworld, flags, save & inventory (`code_01`–`code_02`):** *(Started 2026-11-26: `src/modern/core_save.c` [5 funcs: `RebuildSavePointers`, `XorSaveImage`, `ComputeSaveChecksum`, `WriteSaveMagic`, `VerifySaveMagic`].)* Remaining: key items, chip pack/folder helpers, map loader, script interpreters. | `src/modern/core_save.c`, `overworld_*.c` |
+| **C3** | **Overworld, flags, save & inventory (`code_01`–`code_02`):** *(In progress: `src/modern/core_save.c` [5 funcs: `RebuildSavePointers`, `XorSaveImage`, `ComputeSaveChecksum`, `WriteSaveMagic`, `VerifySaveMagic`] + `src/modern/core_inventory.c` [9 funcs: `GetChipRecord`, folder bitfield helpers, `ChipPackCountById`, `AddZenny`, `AddBugFrags`, `GetItemCount`/`AddItemClamped`].)* Remaining: map loader, script interpreters. | `src/modern/core_*.c` |
 | **C4** | **Menus, text & UI (`code_03`–`code_04`):** Text/dialogue bytecode engine (`ScriptCmd_*`), PET menus (Folder, NaviCust, Mail, Status, Key Items, Network/Link), shops, tournaments. | `src/menu_*.c`, `src/text.c` |
 
 ---
@@ -59,7 +59,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 
 | Task | Scope | Target |
 |---|---|---|
-| **D1** | **Battle core & Custom Screen (`code_07`):** Grid/panel state, battle loop, Custom Gauge, chip selection, Double Soul / Dark Soul / emotion window, hit/damage/element calculation. | `src/battle_*.c` |
+| **D1** | **Battle core & Custom Screen (`code_07`):** *(Started 2026-11-26: `src/modern/core_battle_soul.c` [`FindDoubleSoulForChip` / `BN4_UNITE_CHECK` for RS, BM, and Violet Eclipse all-12 Souls].)* Remaining: grid/panel state, battle loop, Custom Gauge, chip selection, emotion window, hit/damage/element calculation. | `src/modern/core_battle_*.c` |
 | **D2** | **Chip attacks & projectiles (`code_07`–`code_08`):** Standard, Mega, Giga, Dark, and P.A. attack state machines. | `src/chips_*.c` |
 | **D3** | **Virus & Navi AI (`code_08`–`code_09`):** Virus AI, Soul Navi bosses, Duo, Bass, and SP/SP+ scaling hooks. | `src/ai_*.c` |
 

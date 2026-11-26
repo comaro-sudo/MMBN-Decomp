@@ -34,14 +34,15 @@ enum DoubleSoulId {
 
 #define SOUL_USED_BITS (*(vu16 *)0x0203BF88)
 
-/* Battle Chip table entry (ROM 0x080197EC, 0x20 bytes per chip) */
+/* Battle Chip table entry (ROM 0x080197EC, 0x2C = 44 bytes per chip;
+ * verified against BN4_GET_CHIP sub_080190D0 & BN4_UNITE_CHECK sub_0801FF84). */
 struct BattleChipData {
     u8 codes[4];         /* +0x00: up to 4 valid chip codes (26 = '*', 0xFF = none) */
     u8 element;          /* +0x04: 0=Null, 1=Fire, 2=Aqua, 3=Elec, 4=Wood, ... */
     u8 rarity;           /* +0x05 */
     u8 chipClass;        /* +0x06: 0=Std, 1=Mega, 2=Giga, 3=Dark */
-    u8 mb;               /* +0x07: Regular memory MB */
-    u8 kind;             /* +0x08: chip family / Double Soul sacrifice kind */
+    u8 kind;             /* +0x07: Double Soul sacrifice kind (BN4_UNITE_CHECK) */
+    u8 mb;               /* +0x08: Regular memory MB */
     u8 flags;            /* +0x09 */
     u16 attackPower;     /* +0x0A: base damage */
     u16 libraryIndex;    /* +0x0C */
@@ -50,6 +51,7 @@ struct BattleChipData {
     const void *artPtr;  /* +0x14 */
     const void *palPtr;  /* +0x18 */
     u32 unk1C;           /* +0x1C */
+    u8 unk20[0x0C];      /* +0x20..+0x2B */
 };
 
 #define gBattleChipTable ((const struct BattleChipData *)0x080197EC)
