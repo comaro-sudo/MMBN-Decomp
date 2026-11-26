@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after B1 `m4a_body.c` — 50 C functions milestone!): **74.4% code ownership** (`877,392 / 1,179,456` bytes, `302,064` bytes `incrom` remaining — `77.7%` excluding `code_10`'s `49,992 B` audio tail; **50 byte-identical C functions** across 12 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after B1 `m4a_cgb.c` complete CGB engine + `m4a_xwave.c` — 57 C functions!): **74.4% code ownership** (`877,392 / 1,179,456` bytes, `302,064` bytes `incrom` remaining — `77.7%` excluding `code_10`'s `49,992 B` audio tail; **57 byte-identical C functions** across 15 files + `include/gba_types.h`; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
@@ -35,7 +35,7 @@ Goal: Finish all third-party/SDK C libraries first — they are cleanly compiled
 
 | Task | Scope | Target |
 |---|---|---|
-| **B1** | **Complete `m4a` C (`src/m4a_*.c`):** Decompile remaining `m4a` functions (`m4aSoundVSyncOff`/`On`, `m4aMPlayInit`, `m4aMPlayStop`, `m4aMPlayFadeOut*`, `MPlayMain`, `TrackStop`, `CgbSound`/`CgbOscOff`/`CgbModVol`, `ply_*` handlers, `m4aSoundInit`). | `code_10` (~30–40 more C funcs) |
+| **B1** | **Complete `m4a` C (`src/m4a_*.c`):** *(43 C funcs done: `m4a_api.c` [6], `m4a_body.c` [3], complete `m4a_cgb.c` [3: `CgbOscOff`, `CgbModVol`, `CgbSound`], `m4a_cmds.c` [9], `m4a_ctrl.c` [3], `m4a_freq.c` [1], `m4a_imminit.c` [2], `m4a_init.c` [9], `m4a_lfo.c` [2], `m4a_start.c` [1], `m4a_stop.c` [1], `m4a_xcmd.c` [2], `m4a_xwave.c` [1].)* Remaining: `m4aSoundInit`, `MPlayContinue`/`MPlayFadeOut*`, `m4aMPlayAllStop`/`Continue`, `m4aMPlayTempoControl`, `ClearModM`, `ply_memacc`, `TrackStop`/`MPlayMain`. | `code_10` (~10–15 C funcs left) |
 | **B2** | **GBA BIOS / libc / libgcc helpers (`code_10`):** Verify `bios_swi.c` (8 done), `agb_sram.c` (6/6 done), and decompile/document remaining runtime helpers (`__aeabi`/div/mod/call_via_rX, `MultiBoot` if present). | `code_10` SDK complete |
 
 ---
