@@ -1110,6 +1110,54 @@ static void test_camera_rewards_and_virus_ai(void) {
     assert(rx >= 4 && rx <= 6 && ry >= 1 && ry <= 3);
 }
 
+/* core_boss_patterns.c */
+struct BossPatternState {
+    s16 hp;
+    s16 maxHp;
+    u8 phase;
+    u16 auraRegenTimer;
+    u16 auraRegenPeriod;
+    u16 counterWindow;
+};
+
+u8 BossUpdatePhase(struct BossPatternState *b);
+u32 BossTickAuraRegen(struct BossPatternState *b, u8 auraActive);
+u32 BossCheckCounterHit(struct BossPatternState *b);
+
+/* core_fade.c */
+u16 Rgb555Pack(u8 r, u8 g, u8 b);
+u16 Rgb555FadeColor(u16 color, u8 coeff, u8 toWhite);
+void Rgb555FadePalette(const u16 *src, u16 *dst, u32 count, u8 coeff, u8 toWhite);
+
+static void test_boss_patterns_and_fade(void) {
+    struct BossPatternState boss;
+    u16 palSrc[2];
+    u16 palDst[2];
+
+    /* Boss phase-2 enrage, Bass Aura regen, counter-hit window */
+    memset(&boss, 0, sizeof(boss));
+    boss.hp = 1200; boss.maxHp = 2000;
+    boss.auraRegenTimer = 2; boss.auraRegenPeriod = 180;
+    boss.counterWindow = 8;
+    assert(BossUpdatePhase(&boss) == 0u);
+    boss.hp = 1000;
+    assert(BossUpdatePhase(&boss) == 1u);
+    assert(BossTickAuraRegen(&boss, 1) == 0u); /* Aura still active */
+    assert(BossTickAuraRegen(&boss, 0) == 0u && boss.auraRegenTimer == 1u);
+    assert(BossTickAuraRegen(&boss, 0) == 1u && boss.auraRegenTimer == 180u);
+    assert(BossCheckCounterHit(&boss) == 1u && boss.counterWindow == 0u);
+    assert(BossCheckCounterHit(&boss) == 0u);
+
+    /* RGB555 palette fade */
+    palSrc[0] = Rgb555Pack(31, 0, 0);
+    palSrc[1] = Rgb555Pack(0, 16, 31);
+    assert(Rgb555FadeColor(palSrc[0], 0, 0) == palSrc[0]);
+    assert(Rgb555FadeColor(palSrc[0], 16, 0) == 0u);
+    assert(Rgb555FadeColor(palSrc[0], 16, 1) == 0x7FFFu);
+    Rgb555FadePalette(palSrc, palDst, 2, 8, 0);
+    assert(palDst[0] == Rgb555Pack(15, 0, 0) && palDst[1] == Rgb555Pack(0, 8, 15));
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1130,6 +1178,7 @@ int main(void) {
     test_sound_and_trader();
     test_mail_stats_and_projectiles();
     test_camera_rewards_and_virus_ai();
+    test_boss_patterns_and_fade();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
