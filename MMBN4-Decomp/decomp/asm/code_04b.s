@@ -61,6 +61,7 @@ dat_0805D48C:
     .include "npc_macros.inc"
     .include "npc_macros.inc"
     .include "npc_macros.inc"
+    .include "npc_macros.inc"
     .include "cutscene_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -2360,7 +2361,50 @@ _0805EAE0:
     @ map script 0x0805F86C..0x0805F871
     ms_clear_flag2 0x27, 0x1708
     ms_end
-    incrom 0x5F871, 0x97
+    incrom 0x5F871, 0x20
+    @ npc script 0x0805F891..0x0805F8C8
+    npc_op 0x1F
+    npc_op 0x27
+    npc_op 0x08
+    npc_set_sprite 0x26
+    npc_set_pos 0xFFF8, 0x0054, 0x0000
+    npc_set_facing 0x07
+    npc_b2 0x3E, 0x0B, 0x01
+    npc_set_facing 0x03
+    npc_b2 0x3E, 0x0B, 0x02
+    npc_set_facing 0x07
+    npc_b2 0x3E, 0x08, 0x01
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x0A
+    npc_b3 0x15, 0x05, 0x08, 0x01
+    npc_set_facing 0x05
+    npc_b2 0x3C, 0x09, 0x01
+    npc_b2 0x3E, 0x08, 0x02
+    npc_set_facing 0x07
+    npc_b2 0x3E, 0x08, 0x03
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805F8C8..0x0805F8F0
+    npc_op 0x08
+    npc_set_sprite 0x2B
+    npc_set_pos 0xFFF8, 0x0032, 0x0000
+    npc_set_facing 0x03
+    npc_b2 0x3E, 0x0B, 0x02
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x08, 0x01
+    npc_set_facing 0x03
+    npc_b2 0x3C, 0x0B, 0x03
+    npc_b2 0x3E, 0x08, 0x01
+    npc_set_facing 0x0A
+    npc_b3 0x15, 0x05, 0x08, 0x10
+    npc_call dat_080A8EE8
+    @ npc script 0x0805F8F0..0x0805F901
+    npc_op 0x08
+    npc_set_sprite 0x2D
+    npc_set_pos 0x004E, 0x0004, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    incrom 0x5F901, 0x7
     @ ptr table 0x0805F908..0x0805F928 (8 entries)
     .4byte dat_0805F92C
     .4byte dat_0805F952
@@ -2544,7 +2588,10 @@ _0805EAE0:
     npc_b2 0x3C, 0x08, 0x02
     npc_set_facing 0x01
     npc_call dat_080A8EE8
-    incrom 0x5FB10, 0xC
+    @ npc script 0x0805FB10..0x0805FB1C
+    .4byte dat_0805FB1C
+    .4byte dat_0805FB4A
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x0805FB1C..0x0805FB4A
     npc_op 0x08
     npc_op 0x1F

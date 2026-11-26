@@ -9254,7 +9254,10 @@ dat_080544DC:
     npc_set_pos 0xFFC2, 0xFFE2, 0x0000
     npc_set_facing 0x07
     npc_call dat_080A8EE8
-    incrom 0x55E28, 0xC
+    @ npc script 0x08055E28..0x08055E34
+    .4byte dat_08055E34
+    .4byte dat_08055EAB
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x08055E34..0x08055E87
     npc_op 0x08
     npc_op 0x1F
@@ -9502,7 +9505,10 @@ dat_080544DC:
     npc_set_pos 0x000C, 0x002A, 0x0010
     npc_set_facing 0x01
     npc_call dat_080A8EE8
-    incrom 0x56114, 0xC
+    @ npc script 0x08056114..0x08056120
+    .4byte dat_08056120
+    .4byte dat_08056144
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x08056120..0x08056144
     npc_op 0x08
     npc_set_talk 0x00
@@ -12280,7 +12286,9 @@ dat_08056F74:
     npc_b1 0x2A, 0xC0
     npc_set_facing 0x1B
     npc_call dat_080A8EE8
-    incrom 0x58774, 0x8
+    @ npc script 0x08058774..0x0805877C
+    .4byte dat_0805877C
+    .4byte 0x000000FF   @ npc list end
     @ npc script 0x0805877C..0x080587D6
     npc_op 0x08
     npc_op 0x1F
