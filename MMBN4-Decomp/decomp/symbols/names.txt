@@ -1245,3 +1245,17 @@
 0800139E 0800139E code   GEMINI       NgPlus_RestoreMysteryData        StartNewGamePlus: restores sl[+0x58] (0xDC0 B) from scratch buffer r7
 080013B4 080013B4 code   GEMINI       NgPlus_BackupFoldersAndPack      StartNewGamePlus: backs up chip folders (sl[+0x4C]) & chip pack (sl[+0x50])
 080013EC 080013EC code   GEMINI       NgPlus_RestoreFoldersAndPack     StartNewGamePlus: restores chip folders (sl[+0x4C]) & chip pack (sl[+0x50])
+08000F68 08000F68 code   GEMINI       NgPlus_BackupTournamentFlags     StartNewGamePlus: backs up 12 tournament/soul flags (0x15D0..0x15DB) + 0x2D/0x2E
+08000FB0 08000FB0 code   GEMINI       NgPlus_RestoreTournamentFlags    StartNewGamePlus: restores tournament/soul flags into 0x75..0x82
+08000FEE 08000FEE code   GEMINI       NgPlus_BackupLibraryBits         StartNewGamePlus: backs up 3x0x40 B chip library bitfields (sl[+0x48]+0x2D8..0x397)
+08001028 08001028 code   GEMINI       NgPlus_RestoreLibraryBits        StartNewGamePlus: restores 3x0x40 B chip library bitfields
+0800107C 0800107C code   GEMINI       NgPlus_BackupPaLibraryBits       StartNewGamePlus: backs up 8 B Program Advance library bitfield (sl[+0x48]+0x3D8)
+08001092 08001092 code   GEMINI       NgPlus_RestorePaLibraryBits      StartNewGamePlus: restores 8 B Program Advance library bitfield
+080010B0 080010B0 code   GEMINI       NgPlus_BackupNaviCustAndRecords  StartNewGamePlus: backs up NaviCust (sl[+0x78/+0x7C]) & SP record blocks
+0800111A 0800111A code   GEMINI       NgPlus_RestoreNaviCustAndRecords StartNewGamePlus: restores NaviCust (sl[+0x78/+0x7C]) & SP record blocks
+080011BC 080011BC code   GEMINI       NgPlus_BackupLinkAndVsData       StartNewGamePlus: backs up 0x020008A0 (0xBC0), 0x02000520 (0xB8), 0x02001770 (0x20)
+080011E4 080011E4 code   GEMINI       NgPlus_RestoreLinkAndVsData      StartNewGamePlus: restores 0x020008A0, 0x02000520, 0x02001770
+08001224 08001224 code   GEMINI       NgPlus_BackupShopAndMailData     StartNewGamePlus: backs up sl[+0x5C..+0x70] persistent blocks
+08001288 08001288 code   GEMINI       NgPlus_RestoreShopAndMailData    StartNewGamePlus: restores sl[+0x5C..+0x70] persistent blocks
+08001308 08001308 code   GEMINI       NgPlus_BackupSoulIcons           StartNewGamePlus: backs up 0x02006F40 (0x0E) & 0x020014F0 (0x0E)
+08001324 08001324 code   GEMINI       NgPlus_RestoreSoulIcons          StartNewGamePlus: restores 0x02006F40 (0x0E) & 0x020014F0 (0x0E)

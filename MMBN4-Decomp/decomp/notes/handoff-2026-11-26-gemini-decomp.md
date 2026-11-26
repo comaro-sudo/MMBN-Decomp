@@ -13,7 +13,7 @@
     - **Phase C1 complete:** `gba_types.h`, `gba_io.h`, `gamestate.h`, `toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`, `_Static_assert`-verified), `battle.h` (`BattleChipData` `0x2C` B).
     - **Phases C2–D3 / E2:** **237 portable C functions across 60 files** packaged as `build/modern/libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` (`make modern-lib`), giving **300 C functions combined** (all core engine, overworld/VM, menu, NaviCust, battle, chip/P.A., virus/boss AI, and headless `BattleSimTick` modules).
     - Verified by `make modern-check` (ARM7TDMI Thumb `-Wall -Wextra -Werror`) and `make modern-test` (native host unit test suite `tests/test_modern.c` — ALL PASSED).
-  - **Symbols:** **1,222** verified symbols in `decomp/symbols/names.txt` (+112 promoted in Phase A6).
+  - **Symbols:** **1,236** verified symbols in `decomp/symbols/names.txt` (+126 promoted in Phase A6).
 
 ## Key Decisions & Constraints
 - Both RS and BM share one tree (`decomp/asm/*.s`); `make compare VERSION=rs` and `make compare VERSION=bm` must print `OK`.
