@@ -943,6 +943,90 @@ static void test_sound_and_trader(void) {
     assert(pick != 0 && (pick->chipId == 1 || pick->chipId == 29 || pick->chipId == 200));
 }
 
+/* core_mail.c */
+struct MailState {
+    u8 received[8];
+    u8 read[8];
+    u8 claimed[8];
+};
+
+u32 MailDeliver(struct MailState *ms, u32 id);
+u32 MailMarkRead(struct MailState *ms, u32 id);
+u32 MailClaimAttachment(struct MailState *ms, u32 id);
+u32 MailCountUnread(const struct MailState *ms);
+
+/* core_navi_stats.c */
+struct NaviBuildBonuses {
+    u16 hpMemoryCount;
+    s16 naviCustHpBonus;
+    u16 darkChipPenalty;
+    u8 customPlus;
+    u8 megaFolderPlus;
+    u8 gigaFolderPlus;
+};
+
+u16 NaviCalcMaxHp(const struct NaviBuildBonuses *b);
+u8 NaviCalcCustomHandSize(const struct NaviBuildBonuses *b);
+u8 NaviCalcMegaLimit(const struct NaviBuildBonuses *b);
+u8 NaviCalcGigaLimit(const struct NaviBuildBonuses *b);
+
+/* core_projectiles.c */
+struct BattleProjectile {
+    u8 active;
+    u8 owner;
+    u8 piercing;
+    s8 dx;
+    s8 x;
+    s8 y;
+    u16 damage;
+    u16 moveDelay;
+    u16 timer;
+};
+
+void ProjectileSpawn(struct BattleProjectile *p, u8 owner, s8 x, s8 y,
+                     s8 dx, u16 damage, u16 moveDelay, u8 piercing);
+u32 ProjectileStep(struct BattleProjectile *p);
+u16 ProjectileCheckHit(struct BattleProjectile *p, u8 targetOwner, s8 tx, s8 ty);
+
+static void test_mail_stats_and_projectiles(void) {
+    struct MailState ms;
+    struct NaviBuildBonuses b;
+    struct BattleProjectile proj;
+
+    /* PET Mail */
+    memset(&ms, 0, sizeof(ms));
+    assert(MailDeliver(&ms, 3) == 1u && MailDeliver(&ms, 3) == 0u);
+    assert(MailDeliver(&ms, 7) == 1u && MailCountUnread(&ms) == 2u);
+    assert(MailMarkRead(&ms, 3) == 1u && MailCountUnread(&ms) == 1u);
+    assert(MailClaimAttachment(&ms, 3) == 1u && MailClaimAttachment(&ms, 3) == 0u);
+
+    /* MegaMan Stat Aggregation */
+    memset(&b, 0, sizeof(b));
+    b.hpMemoryCount = 45;     /* +900 -> 1000 */
+    b.naviCustHpBonus = 500;  /* 1500 */
+    b.darkChipPenalty = 10;   /* 1490 */
+    b.customPlus = 2;         /* 7 */
+    b.megaFolderPlus = 2;     /* 7 */
+    b.gigaFolderPlus = 1;     /* 2 */
+    assert(NaviCalcMaxHp(&b) == 1490u);
+    assert(NaviCalcCustomHandSize(&b) == 7u);
+    assert(NaviCalcMegaLimit(&b) == 7u);
+    assert(NaviCalcGigaLimit(&b) == 2u);
+
+    /* Battle Projectiles */
+    ProjectileSpawn(&proj, 0, 2, 2, 1, 60, 2, 0);
+    assert(ProjectileStep(&proj) == 0u && proj.x == 2); /* timer 2->1 */
+    assert(ProjectileStep(&proj) == 1u && proj.x == 3); /* moves to x=3 */
+    assert(ProjectileCheckHit(&proj, 0, 3, 2) == 0u);   /* friendly fire ignored */
+    assert(ProjectileCheckHit(&proj, 1, 3, 2) == 60u && proj.active == 0u);
+
+    /* Piercing wave exits right edge (x=6 -> x=7 deactivates) */
+    ProjectileSpawn(&proj, 0, 5, 1, 1, 80, 1, 1);
+    assert(ProjectileStep(&proj) == 1u && proj.x == 6);
+    assert(ProjectileCheckHit(&proj, 1, 6, 1) == 80u && proj.active == 1u);
+    assert(ProjectileStep(&proj) == 0u && proj.active == 0u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -961,6 +1045,7 @@ int main(void) {
     test_library_and_status();
     test_subchips_and_battle_turn();
     test_sound_and_trader();
+    test_mail_stats_and_projectiles();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
