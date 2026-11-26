@@ -1614,7 +1614,11 @@ dat_08062804:
     .4byte dat_08062858
     .4byte dat_0806285C
     .4byte dat_08062860
-    incrom 0x6282C, 0x34
+    incrom 0x6282C, 0xC
+    .4byte dat_080624E4
+    .4byte dat_08062514
+    .4byte dat_08062544
+    incrom 0x62844, 0x1C
     @ ptr table 0x08062860..0x08062874 (5 entries)
     .4byte dat_080625C4
     .4byte dat_0806260C

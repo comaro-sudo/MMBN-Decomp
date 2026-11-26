@@ -2125,7 +2125,10 @@ _08050174:
     .word dat_08050178
     .global dat_08050178
 dat_08050178:
-    incrom 0x50178, 0x14
+    .4byte sub_080501B8
+    .4byte sub_080501F4
+    .4byte sub_08050228
+    incrom 0x50184, 0x8
     @ ptr table 0x0805018C..0x0805019C (4 entries)
     .4byte dat_0805025D
     .4byte dat_08050281
@@ -4749,7 +4752,8 @@ _08051428:
     .word dat_0805142C
     .global dat_0805142C
 dat_0805142C:
-    incrom 0x5142C, 0x8
+    .4byte sub_08051434
+    .4byte sub_08051448
 
     .global sub_08051434
     .thumb_func
@@ -4811,7 +4815,8 @@ _08051484:
     .word dat_08051488
     .global dat_08051488
 dat_08051488:
-    incrom 0x51488, 0x8
+    .4byte sub_08051490
+    .4byte sub_080514A8
 
     .global sub_08051490
     .thumb_func
@@ -4877,7 +4882,8 @@ _080514F0:
     .word dat_080514F4
     .global dat_080514F4
 dat_080514F4:
-    incrom 0x514F4, 0x8
+    .4byte sub_080514FC
+    .4byte sub_080514FC
 
     .global sub_080514FC
     .thumb_func
@@ -4922,7 +4928,16 @@ _08051544:
     .word dat_08051548
     .global dat_08051548
 dat_08051548:
-    incrom 0x51548, 0x28
+    .4byte 0x02001770
+    .4byte 0x02001780
+    .4byte 0x02000522
+    .4byte 0x0200057E
+    .4byte 0x02001EA0
+    .4byte 0x02001EFC
+    .4byte 0x02001F58
+    .4byte 0x02001FB4
+    .4byte 0x02002010
+    .4byte 0x0200206C
 
     .global sub_08051570
     .thumb_func
@@ -4939,7 +4954,8 @@ _08051580:
     .word dat_08051584
     .global dat_08051584
 dat_08051584:
-    incrom 0x51584, 0x8
+    .4byte sub_0805158C
+    .4byte sub_0805158C
 
     .global sub_0805158C
     .thumb_func
@@ -6727,7 +6743,8 @@ _08053C14:
     .word dat_08053C18
     .global dat_08053C18
 dat_08053C18:
-    incrom 0x53C18, 0x8
+    .4byte dat_080515E0
+    .4byte dat_08051CC4
 
     .global sub_08053C20
     .thumb_func
@@ -10419,7 +10436,10 @@ dat_080544DC:
     incrom 0x56D46, 0x26
     .global dat_08056D6C
 dat_08056D6C:
-    incrom 0x56D6C, 0x9C
+    .4byte dat_08056D78
+    .4byte dat_08056DA8
+    .4byte dat_08056DE8
+    incrom 0x56D78, 0x90
 
     .global sub_08056E08
     .thumb_func
@@ -10472,7 +10492,10 @@ _08056E70:
     .word dat_08056E74
     .global dat_08056E74
 dat_08056E74:
-    incrom 0x56E74, 0x1C
+    .4byte dat_08056E80
+    .4byte dat_08056E86
+    .4byte dat_08056E8C
+    incrom 0x56E80, 0x10
 
     .global sub_08056E90
     .thumb_func
@@ -10488,7 +10511,10 @@ _08056EA0:
     .word dat_08056EA4
     .global dat_08056EA4
 dat_08056EA4:
-    incrom 0x56EA4, 0x18
+    .4byte dat_08056EB0
+    .4byte dat_08056EB4
+    .4byte dat_08056EB8
+    incrom 0x56EB0, 0xC
 
     .global sub_08056EBC
     .thumb_func
@@ -10506,7 +10532,10 @@ _08056ED0:
     .word dat_08056ED4
     .global dat_08056ED4
 dat_08056ED4:
-    incrom 0x56ED4, 0x20
+    .4byte dat_08056EE0
+    .4byte dat_08056EF8
+    .4byte dat_08056F10
+    incrom 0x56EE0, 0x14
     @ npc script 0x08056EF4..0x08056EF8
     .4byte 0x000000FF   @ npc list end
     incrom 0x56EF8, 0x1C
@@ -10534,7 +10563,10 @@ dat_08056ED4:
     incrom 0x56F65, 0xF
     .global dat_08056F74
 dat_08056F74:
-    incrom 0x56F74, 0x2C
+    .4byte dat_08056F80
+    .4byte dat_08056F88
+    .4byte dat_08056F90
+    incrom 0x56F80, 0x20
     @ map-init dispatch 0x08056FA0..0x08056FAC
     cs_range 0x00, 0x0F, dat_08056FAC
     cs_jump dat_08056FF3

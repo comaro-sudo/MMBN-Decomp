@@ -20,10 +20,23 @@ dat_0805CF5C:
     incrom 0x5CF95, 0xBF
     .global dat_0805D054
 dat_0805D054:
-    incrom 0x5D054, 0x90
+    incrom 0x5D054, 0x8
+    anim_frame 0xFFFF0000, dat_0868862C
+    anim_frame 0x0000000A, dat_0868864C
+    anim_frame 0x0000000A, dat_0868866C
+    anim_frame 0x0000000A, dat_0868868C
+    incrom 0x5D07C, 0x68
     .global dat_0805D0E4
 dat_0805D0E4:
-    incrom 0x5D0E4, 0x48
+    incrom 0x5D0E4, 0x8
+    anim_frame 0xFFFF0100, dat_0853DD00
+    anim_frame 0x00000008, dat_08606E20
+    anim_frame 0x00000008, dat_08606E40
+    anim_frame 0x00000008, dat_08606E60
+    anim_frame 0x00000010, dat_08606E80
+    anim_frame 0x00000008, dat_08606EA0
+    anim_frame 0x00000008, dat_08606EC0
+    incrom 0x5D124, 0x8
     .global dat_0805D12C
 dat_0805D12C:
     incrom 0x5D12C, 0x18
@@ -32,7 +45,31 @@ dat_0805D144:
     incrom 0x5D144, 0x18
     .global dat_0805D15C
 dat_0805D15C:
-    incrom 0x5D15C, 0xCC
+    incrom 0x5D15C, 0x8
+    anim_frame 0xFFFF0200, dat_0853DD20
+    anim_frame 0x00000008, dat_08606EE4
+    anim_frame 0x00000008, dat_08606F04
+    anim_frame 0x00000008, dat_08606F24
+    anim_frame 0x00000010, dat_08606F44
+    anim_frame 0x00000008, dat_08606F64
+    anim_frame 0x00000008, dat_08606F84
+    anim_frame 0x0000000A, dat_08606F64
+    anim_frame 0x00000008, dat_08606F44
+    anim_frame 0x00000008, dat_08606F64
+    anim_frame 0x00000008, dat_08606F84
+    anim_frame 0x0000000A, dat_08606F64
+    anim_frame 0x00000008, dat_08606F44
+    anim_frame 0x00000008, dat_08606F64
+    anim_frame 0x00000008, dat_08606F84
+    anim_frame 0x0000000A, dat_08606F64
+    anim_frame 0x00000008, dat_08606F44
+    anim_frame 0x00000008, dat_08606F64
+    anim_frame 0x00000008, dat_08606F84
+    anim_frame 0x0000000A, dat_08606F64
+    anim_frame 0x00000008, dat_08606F44
+    anim_frame 0x00000008, dat_08606F64
+    anim_frame 0x00000008, dat_08606F84
+    incrom 0x5D21C, 0xC
     .global dat_0805D228
 dat_0805D228:
     incrom 0x5D228, 0x18
@@ -41,10 +78,65 @@ dat_0805D240:
     incrom 0x5D240, 0x1C
     .global dat_0805D25C
 dat_0805D25C:
-    incrom 0x5D25C, 0x148
+    incrom 0x5D25C, 0x8
+    anim_frame 0xFFFF0300, dat_0853DD40
+    anim_frame 0x0000000C, dat_08606FA8
+    anim_frame 0x0000000C, dat_08606FC8
+    anim_frame 0x0000000C, dat_08606FE8
+    anim_frame 0x0000000C, dat_08607008
+    anim_frame 0x00000010, dat_08607028
+    anim_frame 0x0000000C, dat_08607048
+    anim_frame 0x0000001C, dat_08607028
+    anim_frame 0x0000000C, dat_08607008
+    anim_frame 0x00000010, dat_08606FE8
+    anim_frame 0x0000000C, dat_08606FC8
+    anim_frame 0x0000000C, dat_0853DD40
+    incrom 0x5D2C4, 0x10
+    anim_frame 0xFFFF0400, dat_0853DD60
+    anim_frame 0x0000000E, dat_0860706C
+    anim_frame 0x0000000E, dat_0860708C
+    anim_frame 0x0000000E, dat_086070AC
+    anim_frame 0x0000000E, dat_086070CC
+    anim_frame 0x0000000E, dat_086070EC
+    anim_frame 0x0000000E, dat_0860710C
+    anim_frame 0x0000000E, dat_0860712C
+    anim_frame 0x0000000E, dat_0860714C
+    anim_frame 0x0000000E, dat_0860716C
+    anim_frame 0x0000000E, dat_0860718C
+    anim_frame 0x0000000E, dat_086071AC
+    anim_frame 0x0000000E, dat_086071CC
+    anim_frame 0x0000000E, dat_086071EC
+    anim_frame 0x0000000E, dat_0860720C
+    anim_frame 0x0000000E, dat_0860722C
+    incrom 0x5D354, 0x10
+    anim_frame 0xFFFF0500, dat_0853DCE0
+    anim_frame 0x0000000C, dat_086073F4
+    anim_frame 0x0000000C, dat_08607414
+    anim_frame 0x0000000C, dat_08607434
+    anim_frame 0x0000000C, dat_08607454
+    anim_frame 0x0000000C, dat_08607474
+    anim_frame 0x0000000C, dat_08607494
+    incrom 0x5D39C, 0x8
     .global dat_0805D3A4
 dat_0805D3A4:
-    incrom 0x5D3A4, 0x94
+    incrom 0x5D3A4, 0x8
+    anim_frame 0xFFFF0600, dat_086074B8
+    anim_frame 0x0000000C, dat_086074D8
+    anim_frame 0x0000000C, dat_086074F8
+    anim_frame 0x0000000C, dat_08607518
+    anim_frame 0x0000000C, dat_08607538
+    anim_frame 0x0000000C, dat_08607558
+    anim_frame 0x0000000C, dat_08607578
+    anim_frame 0x0000000C, dat_08607598
+    anim_frame 0x0000000C, dat_086075B8
+    anim_frame 0x0000000C, dat_086075D8
+    anim_frame 0x0000000C, dat_08607538
+    anim_frame 0x0000000C, dat_08607558
+    anim_frame 0x0000000C, dat_08607578
+    anim_frame 0x0000000C, dat_08607598
+    anim_frame 0x0000000C, dat_086075B8
+    anim_frame 0x0000000C, dat_086075D8
+    incrom 0x5D42C, 0xC
     .global dat_0805D438
 dat_0805D438:
     incrom 0x5D438, 0x18
@@ -145,7 +237,10 @@ dat_0805D584:
     .4byte dat_0805D5A8
     .4byte dat_0805D5B0
     .4byte dat_0805D5B4
-    incrom 0x5D59C, 0x24
+    incrom 0x5D59C, 0x18
+    .4byte dat_0805D2CC
+    .4byte dat_0805D35C
+    incrom 0x5D5BC, 0x4
 
     .global sub_0805D5C0
     .thumb_func

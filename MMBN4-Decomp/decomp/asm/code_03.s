@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0x8   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "desc_macros.inc"
 
     .global sub_08035088
     .thumb_func
@@ -179,7 +180,10 @@ _080351CC:
     .word dat_080351D0
     .global dat_080351D0
 dat_080351D0:
-    incrom 0x351D0, 0x14
+    incrom 0x351D0, 0x8
+    .4byte 0x0200A3D0
+    .4byte 0x02001EA0
+    .4byte 0x0202A800
 _080351E4:
     .word 0x0200A3D0
 _080351E8:
@@ -1202,7 +1206,9 @@ _08035ACC:
     .word dat_08035AD0
     .global dat_08035AD0
 dat_08035AD0:
-    incrom 0x35AD0, 0xC
+    .4byte dat_086EE0F8
+    .4byte dat_086EE4B0
+    .4byte dat_086EE868
 
     .global sub_08035ADC
     .thumb_func
@@ -5877,12 +5883,14 @@ _08038134:
     .word dat_08038138
     .global dat_08038138
 dat_08038138:
-    incrom 0x38138, 0x8
+    .4byte dat_087481D8
+    .4byte dat_08748C14
 _08038140:
     .word dat_08038144
     .global dat_08038144
 dat_08038144:
-    incrom 0x38144, 0x8
+    .4byte dat_086DEFFC
+    .4byte dat_086DEFFC
 _0803814C:
     .word 0x00000200
 
@@ -7325,7 +7333,9 @@ _080395F8:
     .word dat_080395FC
     .global dat_080395FC
 dat_080395FC:
-    incrom 0x395FC, 0xC
+    .4byte sub_08039608
+    .4byte sub_0803961C
+    .4byte sub_0803AC3C
 
     .global sub_08039608
     .thumb_func
@@ -7393,7 +7403,9 @@ _0803967C:
     .word dat_08039680
     .global dat_08039680
 dat_08039680:
-    incrom 0x39680, 0xC
+    .4byte sub_0803AC14
+    .4byte sub_0803968C
+    .4byte sub_0803AC3C
 
     .global sub_0803968C
     .thumb_func
@@ -9474,7 +9486,8 @@ _0803A65C:
     .word dat_0803A660
     .global dat_0803A660
 dat_0803A660:
-    incrom 0x3A660, 0x8
+    .4byte sub_0803A668
+    .4byte sub_0803A670
 
     .global sub_0803A668
     .thumb_func
@@ -9511,7 +9524,9 @@ _0803A694:
     .word dat_0803A698
     .global dat_0803A698
 dat_0803A698:
-    incrom 0x3A698, 0xC
+    .4byte sub_0803A6A4
+    .4byte sub_0803A6C8
+    .4byte sub_0803A704
 
     .global sub_0803A6A4
     .thumb_func
@@ -9630,7 +9645,8 @@ _0803A7AC:
     .word dat_0803A7B0
     .global dat_0803A7B0
 dat_0803A7B0:
-    incrom 0x3A7B0, 0x8
+    .4byte sub_0803A7B8
+    .4byte sub_0803A808
 
     .global sub_0803A7B8
     .thumb_func
@@ -12156,7 +12172,9 @@ _0803BAFC:
     .word dat_0803BB00
     .global dat_0803BB00
 dat_0803BB00:
-    incrom 0x3BB00, 0xC
+    .4byte sub_0803BB0C
+    .4byte sub_0803BD24
+    .4byte sub_0803BDE8
 
     .global sub_0803BB0C
     .thumb_func
@@ -12512,7 +12530,8 @@ _0803BDF8:
     .word dat_0803BDFC
     .global dat_0803BDFC
 dat_0803BDFC:
-    incrom 0x3BDFC, 0x8
+    .4byte sub_0803BE04
+    .4byte sub_0803BE20
 
     .global sub_0803BE04
     .thumb_func
@@ -12768,7 +12787,8 @@ _0803C020:
     pop {r4, r5, r6, r7, pc}
 _0803C034:
     .word dat_0874A780
-    incrom 0x3C038, 0x8
+    .4byte dat_0803C03C
+    .4byte dat_086DEFFC
 _0803C040:
     .word 0x00000200
 
@@ -13713,7 +13733,9 @@ _0803C7F4:
     .word dat_0803C7F8
     .global dat_0803C7F8
 dat_0803C7F8:
-    incrom 0x3C7F8, 0xC
+    .4byte sub_0803C804
+    .4byte sub_0803C824
+    .4byte sub_0803C834
 
     .global sub_0803C804
     .thumb_func
@@ -15344,7 +15366,14 @@ _0803D4A8:
     .word dat_0803D4AC
     .global dat_0803D4AC
 dat_0803D4AC:
-    incrom 0x3D4AC, 0x20
+    .4byte 0x02028000
+    .4byte 0x02028800
+    .4byte 0x0201D000
+    .4byte 0x0201D010
+    .4byte 0x0201D000
+    .4byte 0x0201D010
+    .4byte 0x0201D000
+    .4byte 0x0201D010
 _0803D4CC:
     .word 0x42345745
 _0803D4D0:
@@ -15538,7 +15567,8 @@ _0803D630:
     .word dat_0803D634
     .global dat_0803D634
 dat_0803D634:
-    incrom 0x3D634, 0x8
+    .4byte dat_0803C5D0
+    .4byte dat_0803C5E8
 
     .global sub_0803D63C
     .thumb_func
@@ -16662,7 +16692,9 @@ _0803E08C:
     .word dat_0803E090
     .global dat_0803E090
 dat_0803E090:
-    incrom 0x3E090, 0xC
+    .4byte sub_0803E09C
+    .4byte sub_0803E0B8
+    .4byte sub_0803E0C8
 
     .global sub_0803E09C
     .thumb_func
@@ -18561,7 +18593,9 @@ _0803EEB4:
     .word dat_0803EEB8
     .global dat_0803EEB8
 dat_0803EEB8:
-    incrom 0x3EEB8, 0xC
+    .4byte sub_0803EEC4
+    .4byte sub_0803F074
+    .4byte sub_0803F4D0
 
     .global sub_0803EEC4
     .thumb_func
@@ -18701,7 +18735,9 @@ _0803F010:
     .word 0x06010020
 _0803F014:
     .word 0x00000420
-    incrom 0x3F018, 0x1C
+    incrom 0x3F018, 0x4
+    dma_desc 0x03002780, 0x00000020, dat_0868DCDC
+    dma_desc 0x06010440, 0x00000180, dat_086F810C
 _0803F034:
     .word 0x03002B50
 _0803F038:
@@ -18755,7 +18791,9 @@ _0803F098:
     .word dat_0803F09C
     .global dat_0803F09C
 dat_0803F09C:
-    incrom 0x3F09C, 0xC
+    .4byte sub_0803F0A8
+    .4byte sub_0803F12C
+    .4byte sub_0803F1F4
 
     .global sub_0803F0A8
     .thumb_func
@@ -18833,7 +18871,9 @@ _0803F13C:
     .word dat_0803F140
     .global dat_0803F140
 dat_0803F140:
-    incrom 0x3F140, 0xC
+    .4byte sub_0803F14C
+    .4byte sub_0803F15C
+    .4byte sub_0803F1DC
 
     .global sub_0803F14C
     .thumb_func
@@ -19316,7 +19356,8 @@ _0803F4E0:
     .word dat_0803F4E4
     .global dat_0803F4E4
 dat_0803F4E4:
-    incrom 0x3F4E4, 0x8
+    .4byte sub_0803F4EC
+    .4byte sub_0803F504
 
     .global sub_0803F4EC
     .thumb_func
@@ -19830,7 +19871,8 @@ _0803F868:
     .word 0x40000000
 _0803F86C:
     .word dat_0803F878
-    incrom 0x3F870, 0x8
+    .4byte dat_0803F934
+    .4byte dat_0803F938
     .global dat_0803F878
 dat_0803F878:
     incrom 0x3F878, 0x28
@@ -20308,7 +20350,9 @@ _0803FC38:
     .word dat_0803FC3C
     .global dat_0803FC3C
 dat_0803FC3C:
-    incrom 0x3FC3C, 0xC
+    .4byte sub_0803FC48
+    .4byte sub_0803FDF4
+    .4byte sub_080400E0
 
     .global sub_0803FC48
     .thumb_func
@@ -20446,7 +20490,9 @@ _0803FD90:
     .word 0x06010020
 _0803FD94:
     .word 0x00000420
-    incrom 0x3FD98, 0x1C
+    incrom 0x3FD98, 0x4
+    dma_desc 0x03002780, 0x00000020, dat_0868DCDC
+    dma_desc 0x06010440, 0x00000180, dat_086F810C
 _0803FDB4:
     .word 0x03002B50
 _0803FDB8:
@@ -20500,7 +20546,9 @@ _0803FE18:
     .word dat_0803FE1C
     .global dat_0803FE1C
 dat_0803FE1C:
-    incrom 0x3FE1C, 0xC
+    .4byte sub_0803FE28
+    .4byte sub_0803FE3C
+    .4byte sub_0803FE70
 
     .global sub_0803FE28
     .thumb_func
@@ -20893,7 +20941,8 @@ _080400F0:
     .word dat_080400F4
     .global dat_080400F4
 dat_080400F4:
-    incrom 0x400F4, 0x8
+    .4byte sub_080400FC
+    .4byte sub_08040114
 
     .global sub_080400FC
     .thumb_func
@@ -21419,7 +21468,8 @@ _08040488:
     .word 0x40000000
 _0804048C:
     .word dat_08040498
-    incrom 0x40490, 0x8
+    .4byte dat_08040548
+    .4byte dat_0804054C
     .global dat_08040498
 dat_08040498:
     incrom 0x40498, 0x28
@@ -22482,7 +22532,8 @@ _08040D98:
     .word dat_08040D9C
     .global dat_08040D9C
 dat_08040D9C:
-    incrom 0x40D9C, 0x8
+    .4byte sub_08040DA4
+    .4byte sub_08040E48
 
     .global sub_08040DA4
     .thumb_func
@@ -22638,7 +22689,8 @@ _08040EE0:
     .word dat_08040EE4
     .global dat_08040EE4
 dat_08040EE4:
-    incrom 0x40EE4, 0x8
+    .4byte sub_08040EEC
+    .4byte sub_08040F58
 
     .global sub_08040EEC
     .thumb_func
@@ -23546,7 +23598,9 @@ _0804159C:
     .word dat_080415A0
     .global dat_080415A0
 dat_080415A0:
-    incrom 0x415A0, 0xC
+    .4byte sub_080415AC
+    .4byte sub_08041644
+    .4byte sub_08041808
 
     .global sub_080415AC
     .thumb_func
@@ -23953,7 +24007,15 @@ _080418AC:
     .word dat_080418B0
     .global dat_080418B0
 dat_080418B0:
-    incrom 0x418B0, 0x24
+    .4byte 0x03002A50
+    .4byte 0x06000000
+    .4byte 0x03002640
+    .4byte 0x06010000
+    .4byte 0x06010200
+    .4byte 0x06010400
+    .4byte 0x06010600
+    .4byte 0x06010800
+    .4byte 0x06010A00
 
     .global sub_080418D4
     .thumb_func
@@ -27818,7 +27880,9 @@ _08043340:
     .word dat_08043344
     .global dat_08043344
 dat_08043344:
-    incrom 0x43344, 0xC
+    .4byte sub_08043354
+    .4byte sub_080436D4
+    .4byte sub_08043714
 _08043350:
     .word 0x0200D908
 
@@ -28057,7 +28121,19 @@ _08043588:
     .word dat_0804358C
     .global dat_0804358C
 dat_0804358C:
-    incrom 0x4358C, 0x34
+    incrom 0x4358C, 0x4
+    .4byte 0x0201A000
+    .4byte 0x0201C000
+    .4byte 0x0201E000
+    .4byte 0x02020000
+    .4byte 0x02022000
+    incrom 0x435A4, 0x4
+    .4byte 0x0201A000
+    .4byte 0x0201C000
+    .4byte 0x0201E000
+    .4byte 0x02020000
+    .4byte 0x02022000
+    .4byte 0x02024000
 _080435C0:
     .word dat_080435C4
     .global dat_080435C4
@@ -28151,7 +28227,8 @@ _080436EC:
     .word dat_080436F0
     .global dat_080436F0
 dat_080436F0:
-    incrom 0x436F0, 0x8
+    .4byte sub_080436F8
+    .4byte sub_08043700
 
     .global sub_080436F8
     .thumb_func
@@ -28183,7 +28260,10 @@ sub_08043714:
     bl sub_080A6D62
     bl sub_0802DF2C
     pop {pc}
-    incrom 0x4372C, 0x30
+    .4byte dat_08043730
+    .4byte dat_08043738
+    .4byte dat_08043749
+    incrom 0x43738, 0x24
 
     .global sub_0804375C
     .thumb_func
@@ -28275,7 +28355,11 @@ _08043810:
     .word 0x02024000
     .global dat_08043814
 dat_08043814:   @ BN4_BRACKET_CYCLES
-    incrom 0x43814, 0x70
+    incrom 0x43814, 0x8
+    anim_frame 0xFFFF0000, dat_086C5B2C
+    anim_frame 0x0000000A, dat_086C5B8C
+    anim_frame 0x0000000A, dat_086C5BAC
+    incrom 0x43834, 0x50
     .global dat_08043884
 dat_08043884:
     incrom 0x43884, 0x40
@@ -28373,7 +28457,9 @@ _0804396C:
     .word dat_08043970   @ BN4_BRACKET_STATES
     .global dat_08043970
 dat_08043970:   @ BN4_BRACKET_STATES
-    incrom 0x43970, 0xC
+    .4byte sub_08043980
+    .4byte sub_08043A88
+    .4byte sub_08043BA8
 _0804397C:
     .word 0x0200ACC0
 
@@ -28543,7 +28629,9 @@ _08043AD4:
     .word dat_08043AD8
     .global dat_08043AD8
 dat_08043AD8:
-    incrom 0x43AD8, 0xC
+    .4byte sub_08043B34
+    .4byte sub_08043B90
+    .4byte sub_08043B98
 _08043AE4:
     .word dat_086C5B0C
 _08043AE8:
@@ -28751,7 +28839,8 @@ _08043C60:
     .word dat_08043C64
     .global dat_08043C64
 dat_08043C64:
-    incrom 0x43C64, 0x8
+    .4byte sub_08043C88
+    .4byte sub_08043C6C
 
     .global sub_08043C6C
     .thumb_func
@@ -29300,7 +29389,10 @@ _08044040:
     .word dat_08044044   @ BN4_TOURNAMENT_SOUL_PAIRS
     .global dat_08044044
 dat_08044044:   @ BN4_TOURNAMENT_SOUL_PAIRS
-    incrom 0x44044, 0x14
+    .4byte dat_08044050
+    .4byte dat_08044052
+    .4byte dat_08044054
+    incrom 0x44050, 0x8
 
     .global sub_08044058
     .thumb_func
@@ -29525,12 +29617,16 @@ _080441E8:
     .word dat_080441EC   @ BN4_TOURNAMENT_ENTRANTS
     .global dat_080441EC
 dat_080441EC:   @ BN4_TOURNAMENT_ENTRANTS
-    incrom 0x441EC, 0xC
+    .4byte dat_08044214
+    .4byte dat_08044219
+    .4byte dat_0804421E
 _080441F8:
     .word dat_080441FC
     .global dat_080441FC
 dat_080441FC:
-    incrom 0x441FC, 0xC
+    .4byte dat_08044223
+    .4byte dat_08044225
+    .4byte dat_08044227
 _08044208:
     .word 0x020073A0
 _0804420C:
@@ -29585,7 +29681,10 @@ _08044274:
     .word dat_08044278
     .global dat_08044278
 dat_08044278:
-    incrom 0x44278, 0x14
+    .4byte dat_08044284
+    .4byte dat_08044287
+    .4byte dat_0804428A
+    incrom 0x44284, 0x8
 
     .global sub_0804428C
     .thumb_func
@@ -29633,7 +29732,10 @@ _080442D4:
     .word dat_080442D8
     .global dat_080442D8
 dat_080442D8:
-    incrom 0x442D8, 0x14
+    .4byte dat_080442E4
+    .4byte dat_080442E7
+    .4byte dat_080442E9
+    incrom 0x442E4, 0x8
 
     .global sub_080442EC
     .thumb_func
@@ -31779,7 +31881,8 @@ _08045304:
     .word dat_08045308
     .global dat_08045308
 dat_08045308:
-    incrom 0x45308, 0x8
+    .4byte sub_08045310
+    .4byte sub_08045344
 
     .global sub_08045310
     .thumb_func
@@ -32162,7 +32265,11 @@ sub_080455F0:
     .hword 0x0000
     .global dat_08045610
 dat_08045610:
-    incrom 0x45610, 0x28
+    incrom 0x45610, 0x8
+    anim_frame 0xFFFF0000, dat_086C5B2C
+    anim_frame 0x0000000A, dat_086C5B8C
+    anim_frame 0x0000000A, dat_086C5BAC
+    incrom 0x45630, 0x8
 _08045638:
     .word dat_08045610
     .global dat_0804563C
@@ -33202,7 +33309,9 @@ _08046FF0:
     .word dat_08046FF4
     .global dat_08046FF4
 dat_08046FF4:
-    incrom 0x46FF4, 0xC
+    .4byte dat_08046AF0
+    .4byte dat_08046BD1
+    .4byte dat_08046CB2
 
     .global sub_08047000
     .thumb_func
@@ -35660,7 +35769,26 @@ dat_08048144:
     incrom 0x48144, 0x14
     .global dat_08048158
 dat_08048158:
-    incrom 0x48158, 0x50
+    .4byte 0x02037BC0
+    .4byte 0x0203AC10
+    .4byte 0x0203AC20
+    incrom 0x48164, 0x4
+    .4byte 0x0200B720
+    .4byte 0x02028000
+    .4byte 0x02028800
+    incrom 0x48174, 0x4
+    .4byte 0x0200B720
+    .4byte 0x02028000
+    .4byte 0x02028800
+    incrom 0x48184, 0x4
+    .4byte 0x0200B720
+    .4byte 0x0201D000
+    .4byte 0x0201D010
+    incrom 0x48194, 0x4
+    .4byte 0x0200B720
+    .4byte 0x02028000
+    .4byte 0x02028800
+    incrom 0x481A4, 0x4
 
     .global sub_080481A8
     .thumb_func
@@ -36249,7 +36377,9 @@ _08048560:
     .word dat_08048564
     .global dat_08048564
 dat_08048564:
-    incrom 0x48564, 0xC
+    .4byte sub_08048570
+    .4byte sub_0804859C
+    .4byte sub_08048620
 
     .global sub_08048570
     .thumb_func
@@ -36984,7 +37114,9 @@ _08048B04:
     .word dat_08048B08
     .global dat_08048B08
 dat_08048B08:
-    incrom 0x48B08, 0xC
+    .4byte sub_08048B18
+    .4byte sub_08048B58
+    .4byte sub_08048B7E
 _08048B14:
     .word 0x02010B88
 
@@ -37166,7 +37298,12 @@ _08048C74:
     .word dat_08048C78
     .global dat_08048C78
 dat_08048C78:
-    incrom 0x48C78, 0x18
+    .4byte dat_086ADDBC
+    ptr_v 0x886AE24C, 0x886ADD90
+    incrom 0x48C80, 0x4
+    .4byte dat_086AE07C
+    .4byte dat_086AE194
+    incrom 0x48C8C, 0x4
 _08048C90:
     .word dat_08048C94
     .global dat_08048C94
@@ -37187,7 +37324,42 @@ dat_08048F8C:
     incrom 0x48F8C, 0x80
     .global dat_0804900C
 dat_0804900C:
-    incrom 0x4900C, 0xD8
+    incrom 0x4900C, 0x10
+    .4byte 0x02001500
+    .4byte 0x02001520
+    .4byte 0x020017A0
+    .4byte dat_086FB1C8
+    .4byte dat_086FB89C
+    incrom 0x49030, 0x10
+    .4byte 0x02001504
+    .4byte 0x02001524
+    .4byte 0x020017E0
+    .4byte dat_086FB1C8
+    .4byte dat_086FB8E0
+    incrom 0x49054, 0x10
+    .4byte 0x02001508
+    .4byte 0x02001528
+    .4byte 0x02001820
+    .4byte dat_086FB1C8
+    .4byte dat_086FB89C
+    incrom 0x49078, 0x10
+    .4byte 0x0200150C
+    .4byte 0x0200152C
+    .4byte 0x02001860
+    .4byte dat_086FB1C8
+    .4byte dat_086FB8E0
+    incrom 0x4909C, 0x10
+    .4byte 0x02001510
+    .4byte 0x02001530
+    .4byte 0x020018A0
+    .4byte dat_086FB1C8
+    .4byte dat_086FB8E0
+    incrom 0x490C0, 0x10
+    .4byte 0x02001514
+    .4byte 0x02001534
+    .4byte 0x020018E0
+    .4byte dat_086FB1C8
+    .4byte dat_086FB924
     .global dat_080490E4
 dat_080490E4:
     .word dat_086FCA80
@@ -39685,7 +39857,8 @@ _0804A7C0:
     .word dat_0804A7C4
     .global dat_0804A7C4
 dat_0804A7C4:
-    incrom 0x4A7C4, 0x8
+    .4byte dat_087481D8
+    .4byte dat_08748C14
 _0804A7CC:
     .word 0x02014000
 _0804A7D0:
@@ -45527,7 +45700,18 @@ _0804DE08:
     .word dat_0804DE0C
     .global dat_0804DE0C
 dat_0804DE0C:
-    incrom 0x4DE0C, 0x30
+    incrom 0x4DE0C, 0x4
+    .4byte dat_0804CFF8
+    .4byte dat_0804CF94
+    incrom 0x4DE18, 0x4
+    .4byte dat_0804D796
+    .4byte dat_0804CF99
+    incrom 0x4DE24, 0x4
+    .4byte dat_0804D160
+    .4byte dat_0804CF99
+    incrom 0x4DE30, 0x4
+    .4byte dat_0804D3E8
+    .4byte dat_0804CF99
     .global dat_0804DE3C
 dat_0804DE3C:   @ BN4_NUMBER_TRADER_TABLE
     .byte 0x02, 0xFF
@@ -46346,7 +46530,8 @@ _0804E54C:
     .word dat_0804E550
     .global dat_0804E550
 dat_0804E550:
-    incrom 0x4E550, 0x8
+    .4byte dat_080523F8
+    .4byte dat_08052464
 
     .global sub_0804E558
     .thumb_func
@@ -46419,7 +46604,8 @@ _0804E5D4:
     .word dat_0804E5D8
     .global dat_0804E5D8
 dat_0804E5D8:
-    incrom 0x4E5D8, 0x8
+    .4byte dat_0804E5E4
+    .4byte dat_0804E5E4
 _0804E5E0:
     .word 0x0000E3F8
     incrom 0x4E5E4, 0x2C
@@ -47464,7 +47650,8 @@ _0804EDD4:
     .word dat_0804EDD8
     .global dat_0804EDD8
 dat_0804EDD8:
-    incrom 0x4EDD8, 0x8
+    .4byte sub_0804E684
+    .4byte sub_0804E720
 _0804EDE0:
     .word 0x00000100
 

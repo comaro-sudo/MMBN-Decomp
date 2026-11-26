@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "desc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -37,7 +38,8 @@ _0809477C:
     .word dat_08094780
     .global dat_08094780
 dat_08094780:
-    incrom 0x94780, 0x8
+    .4byte sub_08094788
+    .4byte sub_080947C8
 
     .global sub_08094788
     .thumb_func
@@ -105,7 +107,8 @@ _080947F4:
     .word dat_080947F8
     .global dat_080947F8
 dat_080947F8:
-    incrom 0x947F8, 0x8
+    .4byte sub_08094800
+    .4byte sub_0809481C
 
     .global sub_08094800
     .thumb_func
@@ -157,7 +160,8 @@ _08094848:
     .word dat_0809484C
     .global dat_0809484C
 dat_0809484C:
-    incrom 0x9484C, 0x8
+    .4byte sub_08094854
+    .4byte sub_080947C8
 
     .global sub_08094854
     .thumb_func
@@ -347,7 +351,10 @@ _08094AA0:
     .word dat_08094AA4
     .global dat_08094AA4
 dat_08094AA4:
-    incrom 0x94AA4, 0x3C
+    .4byte dat_08094AB0
+    .4byte dat_08094AC0
+    .4byte dat_08094AD0
+    incrom 0x94AB0, 0x30
     @ cutscene script 0x08094AE0..0x08094AEB
     csc_b9 0x3D, 0x08, 0xFF, 0x80, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00
     csc_thread_end
@@ -420,7 +427,9 @@ _08094B94:
     .word dat_08094B98
     .global dat_08094B98
 dat_08094B98:
-    incrom 0x94B98, 0xC
+    .4byte dat_08073290
+    .4byte dat_080732EC
+    .4byte dat_08073348
 _08094BA4:
     .word 0x0200AAB0
 
@@ -4370,7 +4379,10 @@ sub_08098688:
     @ cutscene script 0x08098F48..0x08098F50
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_08098F07
-    incrom 0x98F50, 0x20
+    anim_frame 0xC0FC4000, dat_080000F8
+    anim_frame 0xC0064000, dat_080000F8
+    anim_frame 0xC0FC4000, dat_08000006
+    anim_frame 0xC0064000, dat_08000006
     @ cutscene script 0x08098F70..0x08098F94
     csc_b1 0x3B, 0x00
     csc_op 0x06
@@ -4668,7 +4680,13 @@ sub_08098688:
     csc_op 0x07
     csc_b1 0x3B, 0x04
     csc_end
-    incrom 0x996CC, 0x83
+    anim_frame 0x14400038, dat_080996B1
+    anim_frame 0xC0054000, dat_080000FF
+    anim_frame 0xC0054000, dat_080000FF
+    incrom 0x996E4, 0x5C
+    .4byte dat_08099748
+    .4byte dat_080997B3
+    incrom 0x99748, 0x7
     @ cutscene script 0x0809974F..0x08099758
     csc_b3 0x26, 0xFF, 0x47, 0x0A
     csc_jump dat_080997A1
@@ -9925,13 +9943,68 @@ _0809E414:
     .4byte dat_0809E5FD
     .4byte dat_0809E62A
     .4byte dat_0809E657
-    incrom 0x9E5E0, 0x3B4
+    anim_frame 0xBC008414, dat_08000000
+    anim_frame 0x28120538, dat_0809EB7C
+    anim_frame 0x28120138, dat_0809EB74
+    incrom 0x9E5F8, 0x100
+    anim_frame 0x020809EB, dat_0809E6DB
+    anim_frame 0xFCFFC414, dat_080000FE
+    anim_frame 0x28140138, dat_0809EB74
+    anim_frame 0x28140538, dat_0809EB7C
+    incrom 0x9E718, 0xE8
+    anim_frame 0x020809EB, dat_0809E7E3
+    anim_frame 0x8A00C414, dat_080000FF
+    anim_frame 0x10140538, dat_0809EB7C
+    anim_frame 0x10140338, dat_0809EB84
+    anim_frame 0x10140138, dat_0809EB74
+    anim_frame 0x10140738, dat_0809EB8C
+    incrom 0x9E830, 0xD8
+    anim_frame 0x020809EB, dat_0809E8FB
+    anim_frame 0x8C00C814, dat_08000000
+    anim_frame 0x10160738, dat_0809EB8C
+    anim_frame 0x10160538, dat_0809EB7C
+    anim_frame 0x0C160338, dat_0809EB84
+    anim_frame 0x10160538, dat_0809EB7C
+    anim_frame 0x14160338, dat_0809EB84
+    anim_frame 0x10160138, dat_0809EB74
+    .4byte 0x08160738
+    .4byte dat_0809EB8C
+    .4byte 0x08160138
+    .4byte dat_0809EB74
+    .4byte 0x08160738
+    .4byte dat_0809EB8C
+    .4byte 0x08160138
+    .4byte dat_0809EB74
+    incrom 0x9E968, 0x2C
     @ ptr table 0x0809E994..0x0809E9A4 (4 entries)
     .4byte dat_0809E9A4
     .4byte dat_0809EA01
     .4byte dat_0809EA3E
     .4byte dat_0809EA6B
-    incrom 0x9E9A4, 0x1BF
+    incrom 0x9E9A4, 0x4
+    .4byte dat_08000001
+    .4byte 0x080C0738
+    .4byte dat_0809EB8C
+    .4byte 0x080C0138
+    .4byte dat_0809EB74
+    .4byte 0x080C0738
+    .4byte dat_0809EB8C
+    .4byte 0x080C0138
+    .4byte dat_0809EB74
+    anim_frame 0x100C0738, dat_0809EB8C
+    anim_frame 0x100C0538, dat_0809EB7C
+    anim_frame 0x0C0C0338, dat_0809EB84
+    anim_frame 0x100C0538, dat_0809EB7C
+    anim_frame 0x140C0338, dat_0809EB84
+    anim_frame 0x100C0138, dat_0809EB74
+    incrom 0x9E9FC, 0xE8
+    anim_frame 0x020809EB, dat_0809EAD7
+    anim_frame 0x0E004614, dat_080000FF
+    anim_frame 0x10200338, dat_0809EB84
+    anim_frame 0x10200138, dat_0809EB74
+    anim_frame 0x10200738, dat_0809EB8C
+    anim_frame 0x10200538, dat_0809EB7C
+    incrom 0x9EB14, 0x4F
     @ npc script 0x0809EB63..0x0809EB64
     npc_hide
     incrom 0x9EB64, 0x30
@@ -10045,7 +10118,9 @@ _0809EC90:
     .word dat_0809EC94
     .global dat_0809EC94
 dat_0809EC94:
-    incrom 0x9EC94, 0x20
+    .4byte dat_0809EC9C
+    .4byte dat_0809ECA8
+    incrom 0x9EC9C, 0x18
 
     .global sub_0809ECB4
     .thumb_func
@@ -10257,7 +10332,8 @@ _0809EE74:
     .word dat_0809EE78
     .global dat_0809EE78
 dat_0809EE78:
-    incrom 0x9EE78, 0x8
+    .4byte dat_08069888
+    .4byte dat_080699D8
 _0809EE80:
     .word dat_0809EB94
 _0809EE84:
@@ -12132,7 +12208,13 @@ _0809FFD8:
     .word 0x020004D0
     .global dat_0809FFDC
 dat_0809FFDC:
-    incrom 0x9FFDC, 0x274
+    anim_frame 0x00000090, dat_080A0010
+    anim_frame 0x00000190, dat_080A0070
+    anim_frame 0x00000290, dat_080A00D0
+    anim_frame 0x00000091, dat_080A0130
+    anim_frame 0x00000191, dat_080A0190
+    anim_frame 0x00000291, dat_080A01F0
+    incrom 0xA000C, 0x244
 
     .global sub_080A0250
     .thumb_func
@@ -12698,7 +12780,8 @@ _080A066C:
     .word dat_080A0670
     .global dat_080A0670
 dat_080A0670:
-    incrom 0xA0670, 0x8
+    .4byte sub_080A0678
+    .4byte sub_080A0698
 
     .global sub_080A0678
     .thumb_func
@@ -13287,7 +13370,9 @@ _080A0C98:
     .word dat_080A0C9C
     .global dat_080A0C9C
 dat_080A0C9C:
-    incrom 0xA0C9C, 0xC
+    .4byte dat_080A0F54
+    .4byte dat_080A1098
+    .4byte dat_080A11F4
 
     .global sub_080A0CA8
     .thumb_func
@@ -13691,7 +13776,11 @@ dat_080A0E88:
     npc_set_talk 0x01
     npc_set_pos 0x0090, 0x0076, 0x0000
     npc_call_ex 0x01, 0x08, 0x05, dat_080A0F24
-    incrom 0xA10D8, 0x1D
+    .4byte 0x08080338
+    .4byte dat_080A0F3C
+    .4byte 0x08080738
+    .4byte dat_080A0F48
+    incrom 0xA10E8, 0xD
     @ npc script 0x080A10F5..0x080A1109
     npc_op 0x08
     npc_set_sprite 0x46
@@ -13801,7 +13890,10 @@ dat_080A0E88:
     npc_set_talk 0x01
     npc_set_pos 0x00C4, 0xFFFE, 0x0000
     npc_call_ex 0x03, 0x08, 0x12, dat_080A0F3C
-    incrom 0xA12D8, 0x1D
+    anim_frame 0x0F080538, dat_080A0F30
+    anim_frame 0x0F080138, dat_080A0F24
+    anim_frame 0x12080738, dat_080A0F48
+    incrom 0xA12F0, 0x5
     @ npc script 0x080A12F5..0x080A1309
     npc_op 0x08
     npc_set_sprite 0x46
@@ -14018,7 +14110,9 @@ _080A14B4:
     .word dat_080A14B8
     .global dat_080A14B8
 dat_080A14B8:
-    incrom 0xA14B8, 0xC
+    .4byte dat_080A1584
+    .4byte dat_080A1720
+    .4byte dat_080A18D8
 _080A14C4:
     .word sub_0810F8B8
 _080A14C8:
@@ -14272,7 +14366,10 @@ _080A1578:
     npc_b2 0x25, 0x2F, 0x10
     npc_set_pos 0xFF22, 0x00B8, 0x0040
     npc_call_ex 0x07, 0x1A, 0x0C, dat_080A157C
-    incrom 0xA1798, 0x1D
+    anim_frame 0x0B1A0138, dat_080A157C
+    anim_frame 0x0C1A0338, dat_080A157C
+    anim_frame 0x0B1A0538, dat_080A157C
+    incrom 0xA17B0, 0x5
     @ npc script 0x080A17B5..0x080A17CC
     npc_op 0x08
     npc_op 0x1F
@@ -14282,7 +14379,13 @@ _080A1578:
     npc_b2 0x25, 0x2F, 0x10
     npc_set_pos 0x00BC, 0xFFF0, 0x0000
     npc_call_ex 0x07, 0x18, 0x08, dat_080A157C
-    incrom 0xA17CC, 0x1D
+    .4byte 0x08180538
+    .4byte dat_080A157C
+    .4byte 0x08180338
+    .4byte dat_080A157C
+    .4byte 0x08180138
+    .4byte dat_080A157C
+    incrom 0xA17E4, 0x5
     @ npc script 0x080A17E9..0x080A1801
     npc_op 0x08
     npc_op 0x41
@@ -14448,7 +14551,13 @@ _080A1578:
     npc_b2 0x25, 0x2F, 0x10
     npc_set_pos 0xFFE4, 0xFFAA, 0x0040
     npc_call_ex 0x05, 0x1A, 0x0B, dat_080A157C
-    incrom 0xA1A98, 0x1D
+    .4byte 0x081A0738
+    .4byte dat_080A157C
+    incrom 0xA1AA0, 0x4
+    .4byte dat_080A157C
+    .4byte 0x081A0338
+    .4byte dat_080A157C
+    incrom 0xA1AB0, 0x5
     @ npc script 0x080A1AB5..0x080A1AD4
     npc_jump_if_flag_clear 0x0887, dat_080A1AD4
     npc_jump_if_flag_set 0x0888, dat_080A1AD4
@@ -14657,7 +14766,10 @@ _080A1C30:
     pop {r4, r5, r6, r7, pc}
     .global dat_080A1C34
 dat_080A1C34:
-    incrom 0xA1C34, 0x3F4
+    .4byte dat_080A1C40
+    .4byte dat_080A1D30
+    .4byte dat_080A1E6C
+    incrom 0xA1C40, 0x3E8
 
     .global sub_080A2028
     .thumb_func
@@ -14798,7 +14910,10 @@ _080A2158:
     .word 0x020005E0
     .global dat_080A215C
 dat_080A215C:
-    incrom 0xA215C, 0xD0
+    anim_frame 0x00000190, dat_080A2178
+    anim_frame 0x00000191, dat_080A2230
+    anim_frame 0x00000292, dat_080A2310
+    incrom 0xA2174, 0xB8
     @ npc script 0x080A222C..0x080A2230
     .4byte 0x000000FF   @ npc list end
     incrom 0xA2230, 0xDC
@@ -14857,10 +14972,18 @@ dat_080A2420:
     incrom 0xA2430, 0xA0
     .global dat_080A24D0
 dat_080A24D0:
-    incrom 0xA24D0, 0x68
+    incrom 0xA24D0, 0x4
+    anim_frame 0x00000020, dat_080A2502
+    anim_frame 0x00000020, dat_080A2514
+    anim_frame 0x00000020, dat_080A2526
+    incrom 0xA24EC, 0x4C
     .global dat_080A2538
 dat_080A2538:
-    incrom 0xA2538, 0x224
+    anim_frame 0x00000082, dat_080A255C
+    anim_frame 0x00000182, dat_080A25DC
+    anim_frame 0x00000282, dat_080A265C
+    anim_frame 0x00000382, dat_080A26DC
+    incrom 0xA2558, 0x204
 
     .global sub_080A275C
     .thumb_func
@@ -17677,7 +17800,13 @@ dat_080A3D68:
     .4byte dat_080A3D98
     .4byte dat_080A3DA8
     .4byte dat_080A3DD8
-    incrom 0xA3D7C, 0x1E0
+    incrom 0xA3D7C, 0x28
+    anim_frame 0x00000000, dat_080A3E4A
+    anim_frame 0x00000020, dat_080A3E82
+    anim_frame 0x00000020, dat_080A3EB2
+    anim_frame 0x00000020, dat_080A3EF2
+    anim_frame 0x00000020, dat_080A3F1A
+    incrom 0xA3DCC, 0x190
 
     .global sub_080A3F5C
     .thumb_func
@@ -18386,7 +18515,9 @@ _080A4448:
     .word dat_080A444C
     .global dat_080A444C
 dat_080A444C:
-    incrom 0xA444C, 0xC
+    .4byte sub_080A445C
+    .4byte sub_080A448A
+    .4byte sub_080A44B2
 _080A4458:
     .word 0x02000870
 
@@ -18461,7 +18592,9 @@ _080A44D8:
     .word dat_080A44DC
     .global dat_080A44DC
 dat_080A44DC:
-    incrom 0xA44DC, 0xC
+    .4byte sub_080A44EC
+    .4byte sub_080A451A
+    .4byte sub_080A4542
 _080A44E8:
     .word 0x02000870
 
@@ -18546,7 +18679,10 @@ dat_080A45AC:
     incrom 0xA45B6, 0x216
     .global dat_080A47CC
 dat_080A47CC:
-    incrom 0xA47CC, 0x20
+    incrom 0xA47CC, 0x10
+    .4byte dat_08000800
+    .4byte dat_08000800
+    incrom 0xA47E4, 0x8
     .global dat_080A47EC
 dat_080A47EC:
     @ cutscene script 0x080A47EC..0x080A47F0
@@ -19635,7 +19771,9 @@ _080A53C4:
     .word dat_080A53C8
     .global dat_080A53C8
 dat_080A53C8:
-    incrom 0xA53C8, 0xC
+    .4byte sub_080A53D4
+    .4byte sub_080A53FA
+    .4byte sub_080A5432
 
     .global sub_080A53D4
     .thumb_func
@@ -19719,7 +19857,9 @@ _080A545C:
     .word dat_080A5460
     .global dat_080A5460
 dat_080A5460:
-    incrom 0xA5460, 0xC
+    .4byte sub_080A546C
+    .4byte sub_080A54A6
+    .4byte sub_080A54FE
 
     .global sub_080A546C
     .thumb_func
@@ -19833,7 +19973,8 @@ _080A5538:
     .word dat_080A553C
     .global dat_080A553C
 dat_080A553C:
-    incrom 0xA553C, 0x8
+    .4byte sub_080A5544
+    .4byte sub_080A5576
 
     .global sub_080A5544
     .thumb_func
@@ -20278,7 +20419,9 @@ _080A5880:
     .word dat_080A5884
     .global dat_080A5884
 dat_080A5884:
-    incrom 0xA5884, 0x10
+    .4byte dat_084C4444
+    ptr_v 0x884C44CC, 0x884C4454
+    incrom 0xA588C, 0x8
 _080A5894:
     .word dat_080A5898
     .global dat_080A5898
@@ -20364,7 +20507,9 @@ _080A5CC8:
     .word dat_080A5CCC
     .global dat_080A5CCC
 dat_080A5CCC:
-    incrom 0xA5CCC, 0xC
+    .4byte sub_080A5CE0
+    .4byte sub_080A5D64
+    .4byte sub_080A624C
 _080A5CD8:
     .word 0x02000890
     .word 0x0200B1F0
@@ -20709,7 +20854,8 @@ _080A5F98:
     .hword 0x0000
     .global dat_080A5F9C
 dat_080A5F9C:
-    incrom 0xA5F9C, 0x8
+    .4byte sub_080A5FA8
+    .4byte sub_080A5FF8
 _080A5FA4:
     .word dat_080A5F9C
 
@@ -20879,7 +21025,8 @@ _080A60E0:
     .hword 0x0000
     .global dat_080A60E4
 dat_080A60E4:
-    incrom 0xA60E4, 0x8
+    .4byte sub_080A60F0
+    .4byte sub_080A613C
 _080A60EC:
     .word dat_080A60E4
 
@@ -20986,7 +21133,9 @@ _080A61A2:
     pop {pc}
     .global dat_080A61A4
 dat_080A61A4:
-    incrom 0xA61A4, 0xC
+    .4byte sub_080A61B4
+    .4byte sub_080A61D4
+    .4byte sub_080A61E4
 _080A61B0:
     .word dat_080A61A4
 
@@ -21057,7 +21206,8 @@ sub_080A6204:
     .hword 0x0000
     .global dat_080A6214
 dat_080A6214:
-    incrom 0xA6214, 0x8
+    .4byte sub_080A6220
+    .4byte sub_080A6236
 _080A621C:
     .word dat_080A6214
 
@@ -21603,7 +21753,9 @@ _080A6602:
     pop {pc}
     .global dat_080A6604
 dat_080A6604:
-    incrom 0xA6604, 0xC
+    .4byte sub_080A6614
+    .4byte sub_080A664C
+    .4byte sub_080A668C
 _080A6610:
     .word dat_080A6604
 
@@ -23813,7 +23965,9 @@ sub_080A80C4:
     .hword 0x0000
     .global dat_080A80D4
 dat_080A80D4:
-    incrom 0xA80D4, 0xC
+    .4byte sub_080A80E4
+    .4byte sub_080A812C
+    .4byte sub_080A84A2
 _080A80E0:
     .word dat_080A80D4
 
@@ -23988,7 +24142,8 @@ sub_080A8224:
     .hword 0x0000
     .global dat_080A8238
 dat_080A8238:
-    incrom 0xA8238, 0x8
+    .4byte sub_080A8244
+    .4byte sub_080A8318
 _080A8240:
     .word dat_080A8238
 
@@ -24066,7 +24221,8 @@ _080A8304:
     .word dat_080A82BE
 _080A8308:
     .word 0x00080000
-    incrom 0xA830C, 0x8
+    .4byte dat_080A82EE
+    .4byte dat_080A82F6
 _080A8314:
     .word 0x00000FFF
 
@@ -24147,7 +24303,8 @@ sub_080A839C:
     .hword 0x0000
     .global dat_080A83B0
 dat_080A83B0:
-    incrom 0xA83B0, 0x8
+    .4byte sub_080A83BC
+    .4byte sub_080A83D6
 _080A83B8:
     .word dat_080A83B0
 
@@ -24316,7 +24473,8 @@ sub_080A84CC:
     .hword 0x0000
     .global dat_080A84DC
 dat_080A84DC:
-    incrom 0xA84DC, 0x8
+    .4byte sub_080A84E8
+    .4byte sub_080A855C
 _080A84E4:
     .word dat_080A84DC
 
@@ -31379,7 +31537,9 @@ _080AE3E0:
     .word dat_080AE3E4
     .global dat_080AE3E4
 dat_080AE3E4:
-    incrom 0xAE3E4, 0xC
+    .4byte sub_080AE3F4
+    .4byte sub_080AE446
+    .4byte sub_080AE484
 _080AE3F0:
     .word dat_080AE050
 
@@ -31475,7 +31635,9 @@ _080AE49C:
     .word dat_080AE4A0
     .global dat_080AE4A0
 dat_080AE4A0:
-    incrom 0xAE4A0, 0xC
+    .4byte sub_080AE4AC
+    .4byte sub_080AE4C0
+    .4byte sub_080AE5A4
 
     .global sub_080AE4AC
     .thumb_func
@@ -31608,7 +31770,9 @@ _080AE5BC:
     .word dat_080AE5C0
     .global dat_080AE5C0
 dat_080AE5C0:
-    incrom 0xAE5C0, 0xC
+    .4byte sub_080AE5CC
+    .4byte sub_080AE616
+    .4byte sub_080AE62A
 
     .global sub_080AE5CC
     .thumb_func
@@ -31799,7 +31963,9 @@ _080AE850:
     .word dat_080AE854
     .global dat_080AE854
 dat_080AE854:
-    incrom 0xAE854, 0xC
+    .4byte sub_080AE864
+    .4byte sub_080AE8C4
+    .4byte sub_080AE8F0
 _080AE860:
     .word dat_080AE760
 
@@ -31895,7 +32061,9 @@ _080AE928:
     .word dat_080AE92C
     .global dat_080AE92C
 dat_080AE92C:
-    incrom 0xAE92C, 0xC
+    .4byte sub_080AE93C
+    .4byte sub_080AE992
+    .4byte sub_080AE9B2
 _080AE938:
     .word dat_080AE8F8
 
@@ -32019,7 +32187,9 @@ _080AEEB8:
     .word dat_080AEEBC
     .global dat_080AEEBC
 dat_080AEEBC:
-    incrom 0xAEEBC, 0xC
+    .4byte sub_080AEECC
+    .4byte sub_080AEF12
+    .4byte sub_080AEF5C
 _080AEEC8:
     .word dat_080AEA00
 
@@ -32115,7 +32285,9 @@ _080AEF74:
     .word dat_080AEF78
     .global dat_080AEF78
 dat_080AEF78:
-    incrom 0xAEF78, 0xC
+    .4byte sub_080AEF84
+    .4byte sub_080AEFBE
+    .4byte sub_080AF018
 
     .global sub_080AEF84
     .thumb_func
@@ -32455,7 +32627,9 @@ _080AF224:
     .word dat_080AF228
     .global dat_080AF228
 dat_080AF228:
-    incrom 0xAF228, 0xC
+    .4byte sub_080AF234
+    .4byte sub_080AF248
+    .4byte sub_080AF310
 
     .global sub_080AF234
     .thumb_func
@@ -32875,7 +33049,8 @@ _080AFAF0:
     .word dat_080AFAF4
     .global dat_080AFAF4
 dat_080AFAF4:
-    incrom 0xAFAF4, 0x8
+    .4byte sub_080AFAFC
+    .4byte sub_080AFB58
 
     .global sub_080AFAFC
     .thumb_func

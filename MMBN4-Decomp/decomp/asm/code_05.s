@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "desc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -139,7 +140,54 @@ _08071354:
     .word dat_08071358
     .global dat_08071358
 dat_08071358:
-    incrom 0x71358, 0x100
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71360, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71370, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71380, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71390, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713A0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713B0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713C0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713D0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713E0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x713F0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71400, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71410, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71420, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71430, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71440, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x71450, 0x8
 _08071458:
     .word dat_0807145C
     .global dat_0807145C
@@ -162,7 +210,9 @@ dat_0807145C:
     .4byte dat_0807149C
     .4byte dat_0807149C
     .4byte dat_086197F4
-    incrom 0x714A0, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_08619898
+    dma_desc 0x02012C00, 0x03001800, dat_08619ABC
+    incrom 0x714B8, 0x8
 
     .global sub_080714C0
     .thumb_func
@@ -2021,7 +2071,11 @@ dat_0807158C:
     .4byte dat_08072F40
     .4byte dat_08072F62
     .4byte dat_08072F84
-    incrom 0x72E00, 0x1D4
+    incrom 0x72E00, 0x38
+    anim_frame 0x3C1A161E, dat_083E0208
+    anim_frame 0x3C031607, dat_083E0808
+    anim_frame 0x3C1A1609, dat_083E0A08
+    incrom 0x72E50, 0x184
 
     .global sub_08072FD4
     .thumb_func
@@ -2298,7 +2352,15 @@ _0807301A:
     npc_b2 0x29, 0x54, 0x10
     npc_b2 0x45, 0x54, 0x10
     npc_hide
-    incrom 0x73290, 0x114
+    .4byte dat_0807329C
+    .4byte dat_08073285
+    incrom 0x73298, 0x54
+    .4byte dat_080732F8
+    .4byte dat_08073285
+    incrom 0x732F4, 0x54
+    .4byte dat_08073354
+    .4byte dat_08073285
+    incrom 0x73350, 0x54
     @ npc script 0x080733A4..0x080733B0
     .4byte dat_080733B0
     .4byte dat_080733C6
@@ -2932,7 +2994,42 @@ _08073A20:
     .word dat_08073A24
     .global dat_08073A24
 dat_08073A24:
-    incrom 0x73A24, 0xC0
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A2C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A3C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A4C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A5C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A6C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A7C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A8C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73A9C, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73AAC, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73ABC, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73ACC, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x73ADC, 0x8
 _08073AE4:
     .word dat_08073AE8
     .global dat_08073AE8
@@ -2951,7 +3048,9 @@ dat_08073AE8:
     .4byte dat_08073B18
     .4byte dat_08073B18
     .4byte dat_086197F4
-    incrom 0x73B1C, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_08619898
+    dma_desc 0x02012C00, 0x03001800, dat_08619ABC
+    incrom 0x73B34, 0x8
 
     .global sub_08073B3C
     .thumb_func
@@ -4663,7 +4762,54 @@ _080759FC:
     .word dat_08075A00
     .global dat_08075A00
 dat_08075A00:
-    incrom 0x75A00, 0x100
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A08, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A18, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A28, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A38, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A48, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A58, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A68, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A78, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A88, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75A98, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AA8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AB8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AC8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AD8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AE8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x75AF8, 0x8
 _08075B00:
     .word dat_08075B04
     .global dat_08075B04
@@ -4686,7 +4832,9 @@ dat_08075B04:
     .4byte dat_08075B44
     .4byte dat_08075B44
     .4byte dat_086197F4
-    incrom 0x75B48, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_08619898
+    dma_desc 0x02012C00, 0x03001800, dat_08619ABC
+    incrom 0x75B60, 0x8
 
     .global sub_08075B68
     .thumb_func
@@ -6130,7 +6278,38 @@ dat_08075BDC:
     incrom 0x76E7F, 0x1
     .global dat_08076E80
 dat_08076E80:
-    incrom 0x76E80, 0x1DC
+    .4byte dat_08076E8C
+    .4byte dat_08076EBC
+    .4byte dat_08076F1C
+    incrom 0x76E8C, 0xE8
+    anim_frame 0xFFFF0000, dat_085BE4A8
+    anim_frame 0x0000000C, dat_0860CA24
+    anim_frame 0x0000000C, dat_0860CA44
+    anim_frame 0x0000000C, dat_0860CA64
+    anim_frame 0x0000000C, dat_0860CA84
+    anim_frame 0x0000000C, dat_0860CAA4
+    anim_frame 0x0000000C, dat_0860CA84
+    anim_frame 0x0000000C, dat_0860CA64
+    anim_frame 0x0000000C, dat_0860CA44
+    anim_frame 0x0000000C, dat_0860CA24
+    incrom 0x76FC4, 0x10
+    anim_frame 0x041B0104, dat_0807705C
+    anim_frame 0x00000050, dat_08077092
+    anim_frame 0x00000010, dat_080770C8
+    anim_frame 0x00000010, dat_080770FE
+    anim_frame 0x00000010, dat_08077134
+    anim_frame 0x00000010, dat_0807716A
+    anim_frame 0x00000010, dat_080771A0
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x0000000C, dat_08077092
+    anim_frame 0x0000000C, dat_080770C8
+    anim_frame 0x0000000A, dat_080770FE
+    anim_frame 0x00000008, dat_08077134
+    anim_frame 0x00000006, dat_0807716A
+    anim_frame 0x00000004, dat_080771A0
+    anim_frame 0x00000004, dat_080771D6
+    incrom 0x77054, 0x8
     @ cutscene script 0x0807705C..0x08077064
     csc_b3 0x03, 0x00, 0x03, 0x04
     csc_b1 0x05, 0x00
@@ -6141,7 +6320,10 @@ dat_08076E80:
     csc_b3 0x03, 0x00, 0x03, 0x04
     csc_op 0x0B
     csc_end
-    incrom 0x77098, 0x66
+    incrom 0x77098, 0x10
+    .4byte 0x08070407
+    .4byte 0x080F0808
+    incrom 0x770B0, 0x4E
     @ cutscene script 0x080770FE..0x08077106
     csc_b3 0x03, 0x00, 0x03, 0x04
     csc_b1 0x05, 0x00
@@ -6218,7 +6400,10 @@ _0807726C:
     .word dat_08077270
     .global dat_08077270
 dat_08077270:
-    incrom 0x77270, 0x1E
+    .4byte dat_0807727C
+    .4byte dat_08077282
+    .4byte dat_08077288
+    incrom 0x7727C, 0x12
 
     .global sub_0807728E
     .thumb_func
@@ -6239,7 +6424,13 @@ dat_080772A0:
     .4byte dat_080772C4
     .4byte dat_08076F6C
     .4byte dat_08076FCC
-    incrom 0x772B4, 0x1C
+    incrom 0x772B4, 0x4
+    .4byte dat_08076F6C
+    .4byte dat_08076FCC
+    incrom 0x772C0, 0x4
+    .4byte dat_08076F6C
+    .4byte dat_08076FCC
+    incrom 0x772CC, 0x4
 
     .global sub_080772D0
     .thumb_func
@@ -6275,7 +6466,15 @@ _0807730C:
     .word dat_08077310
     .global dat_08077310
 dat_08077310:
-    incrom 0x77310, 0x30
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x77318, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x77328, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x77338, 0x8
 _08077340:
     .word dat_08077344
     .global dat_08077344
@@ -6285,7 +6484,9 @@ dat_08077344:
     .4byte dat_08077350
     .4byte dat_08077350
     .4byte dat_08619F88
-    incrom 0x77354, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861A2D4
+    incrom 0x7736C, 0x8
 
     .global sub_08077374
     .thumb_func
@@ -6304,7 +6505,10 @@ _08077388:
     .word dat_0807738C
     .global dat_0807738C
 dat_0807738C:
-    incrom 0x7738C, 0x12
+    .4byte dat_08077399
+    .4byte dat_0807739B
+    .4byte dat_0807739D
+    incrom 0x77398, 0x6
 
     .global sub_0807739E
     .thumb_func
@@ -6323,7 +6527,10 @@ _080773B4:
     .word dat_080773B8
     .global dat_080773B8
 dat_080773B8:
-    incrom 0x773B8, 0x48
+    .4byte dat_080773C4
+    .4byte dat_08077404
+    .4byte dat_08077430
+    incrom 0x773C4, 0x3C
     @ npc script 0x08077400..0x08077404
     .4byte 0x000000FF   @ npc list end
     incrom 0x77404, 0x28
@@ -8742,7 +8949,55 @@ dat_08079424:
     .4byte dat_08079474
     .4byte dat_08079514
     .4byte dat_08079544
-    incrom 0x79434, 0x2E0
+    incrom 0x79434, 0x148
+    anim_frame 0xFFFF0000, dat_085C7774
+    anim_frame 0x0000000C, dat_0860CC28
+    anim_frame 0x0000000C, dat_0860CC48
+    anim_frame 0x0000000C, dat_0860CC68
+    anim_frame 0x0000000C, dat_0860CC88
+    anim_frame 0x0000000C, dat_0860CCA8
+    anim_frame 0x0000000C, dat_0860CC88
+    anim_frame 0x0000000C, dat_0860CC68
+    anim_frame 0x0000000C, dat_0860CC48
+    anim_frame 0x0000000C, dat_0860CC28
+    incrom 0x795CC, 0x10
+    anim_frame 0xFFFF0100, dat_085C7754
+    anim_frame 0x0000000E, dat_0860CCC8
+    anim_frame 0x0000000E, dat_0860CCE8
+    anim_frame 0x0000000E, dat_0860CD08
+    anim_frame 0x0000000E, dat_0860CD28
+    anim_frame 0x0000000E, dat_0860CD48
+    anim_frame 0x0000000E, dat_0860CD28
+    anim_frame 0x0000000E, dat_0860CD08
+    anim_frame 0x0000000E, dat_0860CCE8
+    anim_frame 0x0000000E, dat_0860CCC8
+    incrom 0x7962C, 0x10
+    anim_frame 0x061B0204, dat_0807705C
+    anim_frame 0x00000008, dat_08077092
+    anim_frame 0x00000008, dat_080770C8
+    anim_frame 0x00000050, dat_080770FE
+    anim_frame 0x00000010, dat_08077134
+    anim_frame 0x00000010, dat_0807716A
+    anim_frame 0x00000010, dat_080771A0
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x00000010, dat_08077092
+    anim_frame 0x00000010, dat_080770C8
+    anim_frame 0x0000000C, dat_080770FE
+    anim_frame 0x0000000C, dat_08077134
+    anim_frame 0x0000000A, dat_0807716A
+    anim_frame 0x00000008, dat_080771A0
+    anim_frame 0x00000006, dat_080771D6
+    incrom 0x796BC, 0x10
+    anim_frame 0xFFFF0300, dat_085CDDE4
+    anim_frame 0x00000002, dat_0860CE2C
+    anim_frame 0x00000002, dat_0860CE4C
+    anim_frame 0x00000002, dat_0860CE6C
+    anim_frame 0x00000002, dat_0860CE8C
+    anim_frame 0x00000002, dat_0860CEAC
+    anim_frame 0x00000002, dat_0860CECC
+    anim_frame 0x00000002, dat_0860CEEC
+    incrom 0x7970C, 0x8
 
     .global sub_08079714
     .thumb_func
@@ -8817,7 +9072,15 @@ dat_080797B4:
     .4byte dat_08079574
     .4byte dat_080795D4
     .4byte dat_08079634
-    incrom 0x797D0, 0x24
+    incrom 0x797D0, 0x4
+    .4byte dat_08079574
+    .4byte dat_080795D4
+    .4byte dat_08079634
+    incrom 0x797E0, 0x4
+    .4byte dat_08079574
+    .4byte dat_080795D4
+    .4byte dat_08079634
+    incrom 0x797F0, 0x4
     @ ptr table 0x080797F4..0x08079804 (4 entries)
     .4byte dat_08079574
     .4byte dat_080795D4
@@ -8859,7 +9122,18 @@ _08079844:
     .word dat_08079848
     .global dat_08079848
 dat_08079848:
-    incrom 0x79848, 0x40
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x79850, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x79860, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x79870, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x79880, 0x8
 _08079888:
     .word dat_0807988C
     .global dat_0807988C
@@ -8870,7 +9144,9 @@ dat_0807988C:
     .4byte dat_0807989C
     .4byte dat_0807989C
     .4byte dat_08619F88
-    incrom 0x798A0, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861A8A4
+    incrom 0x798B8, 0x8
 
     .global sub_080798C0
     .thumb_func
@@ -12395,7 +12671,65 @@ _0807B188:
     incrom 0x7C7DD, 0x3
     .global dat_0807C7E0
 dat_0807C7E0:
-    incrom 0x7C7E0, 0x2E4
+    .4byte dat_0807C7EC
+    .4byte dat_0807C83C
+    .4byte dat_0807C8DC
+    incrom 0x7C7EC, 0x108
+    .4byte 0x081B0004
+    .4byte dat_0807705C
+    anim_frame 0x00000006, dat_08077092
+    anim_frame 0x00000004, dat_080770C8
+    anim_frame 0x00000008, dat_080770FE
+    anim_frame 0x00000008, dat_08077134
+    anim_frame 0x00000050, dat_0807716A
+    anim_frame 0x00000010, dat_080771A0
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x00000010, dat_08077092
+    anim_frame 0x00000010, dat_080770C8
+    anim_frame 0x00000010, dat_080770FE
+    anim_frame 0x00000010, dat_08077134
+    anim_frame 0x0000000C, dat_0807716A
+    anim_frame 0x0000000C, dat_080771A0
+    anim_frame 0x0000000A, dat_080771D6
+    incrom 0x7C974, 0x10
+    anim_frame 0xFFFF0100, dat_085D4B58
+    anim_frame 0x0000000C, dat_0860D030
+    anim_frame 0x0000000C, dat_0860D050
+    anim_frame 0x0000000C, dat_0860D070
+    anim_frame 0x0000000C, dat_0860D090
+    anim_frame 0x0000000C, dat_0860D0B0
+    anim_frame 0x0000000C, dat_0860D090
+    anim_frame 0x0000000C, dat_0860D070
+    anim_frame 0x0000000C, dat_0860D050
+    anim_frame 0x0000000C, dat_0860D030
+    incrom 0x7C9D4, 0x10
+    anim_frame 0xFFFF0200, dat_085D4B38
+    anim_frame 0x0000000E, dat_0860D0D0
+    anim_frame 0x0000000E, dat_0860D0F0
+    anim_frame 0x0000000E, dat_0860D110
+    anim_frame 0x0000000E, dat_0860D130
+    anim_frame 0x0000000E, dat_0860D150
+    anim_frame 0x0000000E, dat_0860D170
+    anim_frame 0x0000000E, dat_0860D150
+    anim_frame 0x0000000E, dat_0860D130
+    anim_frame 0x0000000E, dat_0860D110
+    anim_frame 0x0000000E, dat_0860D0F0
+    anim_frame 0x0000000E, dat_0860D0D0
+    incrom 0x7CA44, 0x10
+    anim_frame 0xFFFF0300, dat_0860D190
+    anim_frame 0x0000000A, dat_0860D1B0
+    anim_frame 0x0000000A, dat_0860D1D0
+    incrom 0x7CA6C, 0x10
+    anim_frame 0xFFFF0400, dat_085D4AF8
+    anim_frame 0x00000002, dat_0860D234
+    anim_frame 0x00000002, dat_0860D254
+    anim_frame 0x00000002, dat_0860D274
+    anim_frame 0x00000002, dat_0860D294
+    anim_frame 0x00000002, dat_0860D2B4
+    anim_frame 0x00000002, dat_0860D2D4
+    anim_frame 0x00000002, dat_0860D2F4
+    incrom 0x7CABC, 0x8
 
     .global sub_0807CAC4
     .thumb_func
@@ -12442,7 +12776,10 @@ _0807CB24:
     .word dat_0807CB28
     .global dat_0807CB28
 dat_0807CB28:
-    incrom 0x7CB28, 0x1E
+    .4byte dat_0807CB34
+    .4byte dat_0807CB38
+    .4byte dat_0807CB3E
+    incrom 0x7CB34, 0x12
 
     .global sub_0807CB46
     .thumb_func
@@ -12513,7 +12850,15 @@ _0807CBDC:
     .word dat_0807CBE0
     .global dat_0807CBE0
 dat_0807CBE0:
-    incrom 0x7CBE0, 0x30
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7CBE8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7CBF8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7CC08, 0x8
 _0807CC10:
     .word dat_0807CC14
     .global dat_0807CC14
@@ -12523,7 +12868,9 @@ dat_0807CC14:
     .4byte dat_0807CC20
     .4byte dat_0807CC20
     .4byte dat_08619F88
-    incrom 0x7CC24, 0x20
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861A8C8
+    incrom 0x7CC3C, 0x8
 
     .global sub_0807CC44
     .thumb_func
@@ -12542,7 +12889,10 @@ _0807CC58:
     .word dat_0807CC5C
     .global dat_0807CC5C
 dat_0807CC5C:
-    incrom 0x7CC5C, 0x12
+    .4byte dat_0807CC69
+    .4byte dat_0807CC6B
+    .4byte dat_0807CC6D
+    incrom 0x7CC68, 0x6
 
     .global sub_0807CC6E
     .thumb_func
@@ -12561,7 +12911,10 @@ _0807CC84:
     .word dat_0807CC88
     .global dat_0807CC88
 dat_0807CC88:
-    incrom 0x7CC88, 0x20
+    .4byte dat_0807CC94
+    .4byte dat_0807CCAC
+    .4byte dat_0807CCD8
+    incrom 0x7CC94, 0x14
     @ npc script 0x0807CCA8..0x0807CCAC
     .4byte 0x000000FF   @ npc list end
     incrom 0x7CCAC, 0x28
@@ -13874,7 +14227,9 @@ _0807DF2E:
     npc_set_pos 0xFF9C, 0x00F6, 0x0000
     npc_b2 0x3E, 0x09, 0x02
     npc_call_ex 0x03, 0x08, 0x08, dat_080A0F3C
-    incrom 0x7E0C4, 0xD
+    .4byte 0x08080738
+    .4byte dat_080A0F48
+    incrom 0x7E0CC, 0x5
     @ npc script 0x0807E0D1..0x0807E0E8
     npc_op 0x08
     npc_set_sprite 0x46
@@ -15437,7 +15792,35 @@ dat_0807F38C:
     .4byte dat_0807F3CC
     .4byte dat_0807F40C
     .4byte dat_0807F43C
-    incrom 0x7F39C, 0x206
+    incrom 0x7F39C, 0xE8
+    anim_frame 0xFFFF0000, dat_085E0718
+    anim_frame 0x0000000E, dat_0860D438
+    anim_frame 0x0000000E, dat_0860D458
+    anim_frame 0x0000000E, dat_0860D478
+    anim_frame 0x0000000E, dat_0860D498
+    anim_frame 0x0000000E, dat_0860D4B8
+    anim_frame 0x0000000E, dat_0860D498
+    anim_frame 0x0000000E, dat_0860D478
+    anim_frame 0x0000000E, dat_0860D458
+    anim_frame 0x0000000E, dat_0860D438
+    incrom 0x7F4D4, 0x10
+    anim_frame 0x0A1B0104, dat_0807705C
+    anim_frame 0x00000050, dat_08077092
+    anim_frame 0x00000010, dat_0807F56C
+    anim_frame 0x00000010, dat_080770FE
+    anim_frame 0x00000010, dat_0807F5A2
+    anim_frame 0x00000010, dat_0807716A
+    anim_frame 0x00000010, dat_0807F5D8
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x0000000C, dat_08077092
+    anim_frame 0x0000000C, dat_0807F56C
+    anim_frame 0x0000000A, dat_080770FE
+    anim_frame 0x00000008, dat_0807F5A2
+    anim_frame 0x00000006, dat_0807716A
+    anim_frame 0x00000004, dat_0807F5D8
+    anim_frame 0x00000004, dat_080771D6
+    incrom 0x7F564, 0x3E
     @ cutscene script 0x0807F5A2..0x0807F5AA
     csc_b3 0x03, 0x00, 0x03, 0x04
     csc_b1 0x05, 0x00
@@ -15449,12 +15832,144 @@ dat_0807F38C:
     csc_b1 0x05, 0x00
     csc_op 0x06
     csc_end
-    incrom 0x7F5E0, 0x3D0
+    incrom 0x7F5E0, 0x38
+    anim_frame 0xFFFF0000, dat_085E35E0
+    anim_frame 0x0000000C, dat_0860D63C
+    anim_frame 0x0000000C, dat_0860D65C
+    anim_frame 0x0000000C, dat_0860D67C
+    anim_frame 0x0000000C, dat_0860D69C
+    anim_frame 0x0000000C, dat_0860D6BC
+    anim_frame 0x0000000C, dat_0860D69C
+    anim_frame 0x0000000C, dat_0860D67C
+    anim_frame 0x0000000C, dat_0860D65C
+    anim_frame 0x0000000C, dat_0860D63C
+    incrom 0x7F668, 0x10
+    anim_frame 0x171B0104, dat_0807705C
+    anim_frame 0x00000008, dat_08077092
+    anim_frame 0x00000008, dat_0807F56C
+    anim_frame 0x00000050, dat_080770FE
+    anim_frame 0x00000010, dat_0807F5A2
+    anim_frame 0x00000010, dat_0807716A
+    anim_frame 0x00000010, dat_0807F5D8
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x00000010, dat_08077092
+    anim_frame 0x00000010, dat_0807F56C
+    anim_frame 0x0000000C, dat_080770FE
+    anim_frame 0x0000000C, dat_0807F5A2
+    anim_frame 0x0000000A, dat_0807716A
+    anim_frame 0x00000008, dat_0807F5D8
+    anim_frame 0x00000006, dat_080771D6
+    incrom 0x7F6F8, 0x10
+    anim_frame 0xFFFF0000, dat_085E624C
+    anim_frame 0x0000000C, dat_0860D840
+    anim_frame 0x0000000C, dat_0860D860
+    anim_frame 0x0000000C, dat_0860D880
+    anim_frame 0x0000000C, dat_0860D8A0
+    anim_frame 0x0000000C, dat_0860D8C0
+    anim_frame 0x0000000C, dat_0860D8A0
+    anim_frame 0x0000000C, dat_0860D880
+    anim_frame 0x0000000C, dat_0860D860
+    anim_frame 0x0000000C, dat_0860D840
+    incrom 0x7F758, 0x10
+    anim_frame 0xFFFF0100, dat_085E622C
+    anim_frame 0x0000000E, dat_0860D8E0
+    anim_frame 0x0000000E, dat_0860D900
+    anim_frame 0x0000000E, dat_0860D920
+    anim_frame 0x0000000E, dat_0860D940
+    anim_frame 0x0000000E, dat_0860D960
+    anim_frame 0x0000000E, dat_0860D940
+    anim_frame 0x0000000E, dat_0860D920
+    anim_frame 0x0000000E, dat_0860D900
+    anim_frame 0x0000000E, dat_0860D8E0
+    incrom 0x7F7B8, 0x10
+    anim_frame 0xFFFF0200, dat_085E61EC
+    anim_frame 0x0000000E, dat_0860DA44
+    anim_frame 0x0000000E, dat_0860DA64
+    anim_frame 0x0000000E, dat_0860DA84
+    anim_frame 0x0000000E, dat_0860DAA4
+    anim_frame 0x0000000E, dat_0860DAC4
+    anim_frame 0x0000000E, dat_0860DAE4
+    anim_frame 0x0000000E, dat_0860DB04
+    incrom 0x7F808, 0x10
+    anim_frame 0x181B0304, dat_0807705C
+    anim_frame 0x00000006, dat_08077092
+    anim_frame 0x00000004, dat_0807F56C
+    anim_frame 0x00000008, dat_080770FE
+    anim_frame 0x00000008, dat_0807F5A2
+    anim_frame 0x00000050, dat_0807716A
+    anim_frame 0x00000010, dat_0807F5D8
+    anim_frame 0x00000010, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x00000010, dat_08077092
+    anim_frame 0x00000010, dat_0807F56C
+    anim_frame 0x00000010, dat_080770FE
+    anim_frame 0x00000010, dat_0807F5A2
+    anim_frame 0x0000000C, dat_0807716A
+    anim_frame 0x0000000C, dat_0807F5D8
+    anim_frame 0x0000000A, dat_080771D6
+    incrom 0x7F898, 0x10
+    anim_frame 0xFFFF0000, dat_085E8F24
+    anim_frame 0x0000000C, dat_0860DC48
+    anim_frame 0x0000000C, dat_0860DC68
+    anim_frame 0x0000000C, dat_0860DC88
+    anim_frame 0x0000000C, dat_0860DCA8
+    anim_frame 0x0000000C, dat_0860DCC8
+    anim_frame 0x0000000C, dat_0860DCA8
+    anim_frame 0x0000000C, dat_0860DC88
+    anim_frame 0x0000000C, dat_0860DC68
+    anim_frame 0x0000000C, dat_0860DC48
+    incrom 0x7F8F8, 0x10
+    anim_frame 0xFFFF0100, dat_085E8F04
+    anim_frame 0x0000000E, dat_0860DCE8
+    anim_frame 0x0000000E, dat_0860DD08
+    anim_frame 0x0000000E, dat_0860DD28
+    anim_frame 0x0000000E, dat_0860DD48
+    anim_frame 0x0000000E, dat_0860DD68
+    anim_frame 0x0000000E, dat_0860DD48
+    anim_frame 0x0000000E, dat_0860DD28
+    anim_frame 0x0000000E, dat_0860DD08
+    anim_frame 0x0000000E, dat_0860DCE8
+    incrom 0x7F958, 0x10
+    anim_frame 0xFFFF0200, dat_085E8EC4
+    anim_frame 0x0000000E, dat_0860DE4C
+    anim_frame 0x0000000E, dat_0860DE6C
+    anim_frame 0x0000000E, dat_0860DE8C
+    anim_frame 0x0000000E, dat_0860DEAC
+    anim_frame 0x0000000E, dat_0860DECC
+    anim_frame 0x0000000E, dat_0860DEEC
+    anim_frame 0x0000000E, dat_0860DF0C
+    incrom 0x7F9A8, 0x8
     @ cutscene script 0x0807F9B0..0x0807F9B8
     csc_b2 0x30, 0x2B, 0x00
     csc_b3 0x03, 0x20, 0x00, 0x00
     csc_end
-    incrom 0x7F9B8, 0xD8
+    anim_frame 0xFFFF0300, dat_085E8E84
+    anim_frame 0x0000000E, dat_0860DF2C
+    anim_frame 0x0000000E, dat_0860DF4C
+    anim_frame 0x0000000E, dat_0860DF6C
+    anim_frame 0x0000000E, dat_0860DF8C
+    anim_frame 0x0000000E, dat_0860DFAC
+    anim_frame 0x0000000E, dat_0860DFCC
+    anim_frame 0x0000000E, dat_0860DFEC
+    incrom 0x7F9F8, 0x10
+    anim_frame 0x191B0404, dat_0807705C
+    anim_frame 0x0000000A, dat_08077092
+    anim_frame 0x00000008, dat_0807F56C
+    anim_frame 0x00000006, dat_080770FE
+    anim_frame 0x00000004, dat_0807F5A2
+    anim_frame 0x00000008, dat_0807716A
+    anim_frame 0x00000008, dat_0807F5D8
+    anim_frame 0x00000050, dat_080771D6
+    anim_frame 0x00000010, dat_0807705C
+    anim_frame 0x00000010, dat_08077092
+    anim_frame 0x00000010, dat_0807F56C
+    anim_frame 0x00000010, dat_080770FE
+    anim_frame 0x00000010, dat_0807F5A2
+    anim_frame 0x00000010, dat_0807716A
+    anim_frame 0x00000010, dat_0807F5D8
+    anim_frame 0x0000000C, dat_080771D6
+    incrom 0x7FA88, 0x8
 
     .global sub_0807FA90
     .thumb_func
@@ -15528,7 +16043,10 @@ dat_0807FB3C:
     .4byte dat_0807FB78
     .4byte dat_0807F47C
     .4byte dat_0807F4DC
-    incrom 0x7FB54, 0x10
+    incrom 0x7FB54, 0x4
+    .4byte dat_0807F610
+    .4byte dat_0807F670
+    incrom 0x7FB60, 0x4
     @ ptr table 0x0807FB64..0x0807FB74 (4 entries)
     .4byte dat_0807F700
     .4byte dat_0807F760
@@ -15577,7 +16095,18 @@ _0807FBCC:
     .word dat_0807FBD0
     .global dat_0807FBD0
 dat_0807FBD0:
-    incrom 0x7FBD0, 0x40
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7FBD8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7FBE8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7FBF8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001EEE
+    incrom 0x7FC08, 0x8
 _0807FC10:
     .word dat_0807FC14
     .global dat_0807FC14
@@ -15588,7 +16117,18 @@ dat_0807FC14:
     .4byte dat_0807FC6C
     .4byte dat_0807FC90
     .4byte dat_08619F88
-    incrom 0x7FC28, 0x8C
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861A8EC
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861ACB0
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861ACD4
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x0600CC80, dat_0861A084
+    dma_desc 0x02012C00, 0x03001800, dat_0861ACF8
+    incrom 0x7FCAC, 0x8
 
     .global sub_0807FCB4
     .thumb_func
@@ -18361,12 +18901,33 @@ dat_080820B0:
     .4byte dat_08082290
     .4byte dat_080822E0
     .4byte dat_08082300
-    incrom 0x820D0, 0x308
+    incrom 0x820D0, 0x268
+    anim_frame 0xFFFF0000, dat_085F126C
+    anim_frame 0x0000000E, dat_0860E050
+    anim_frame 0x0000000E, dat_0860E070
+    anim_frame 0x0000000E, dat_0860E090
+    anim_frame 0x0000000E, dat_0860E0B0
+    anim_frame 0x0000000E, dat_0860E090
+    anim_frame 0x0000000E, dat_0860E070
+    anim_frame 0x0000000E, dat_0860E050
+    incrom 0x82378, 0x10
+    anim_frame 0xFFFF0100, dat_085F128C
+    anim_frame 0x0000000C, dat_0860E0D0
+    anim_frame 0x0000000C, dat_0860E0F0
+    anim_frame 0x0000000C, dat_0860E110
+    incrom 0x823A8, 0x30
     @ cutscene script 0x080823D8..0x080823DC
     csc_b1 0x05, 0x00
     csc_op 0x06
     csc_end
-    incrom 0x823DC, 0x50
+    incrom 0x823DC, 0xC
+    anim_frame 0x12060204, dat_08082420
+    anim_frame 0x00000010, dat_0808242C
+    anim_frame 0x00000010, dat_08082438
+    anim_frame 0x00000010, dat_08082444
+    anim_frame 0x00000010, dat_08082438
+    anim_frame 0x00000010, dat_0808242C
+    incrom 0x82418, 0x14
     @ cutscene script 0x0808242C..0x0808242E
     csc_op 0x07
     csc_end
@@ -18461,7 +19022,35 @@ dat_08082510:
     .4byte dat_08082330
     .4byte dat_08082380
     .4byte dat_080823B0
-    incrom 0x8253C, 0x74
+    incrom 0x8253C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823B0
+    incrom 0x8254C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823B0
+    incrom 0x8255C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823B0
+    incrom 0x8256C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823B0
+    incrom 0x8257C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823B0
+    incrom 0x8258C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823E0
+    incrom 0x8259C, 0x4
+    .4byte dat_08082330
+    .4byte dat_08082380
+    .4byte dat_080823E0
+    incrom 0x825AC, 0x4
 
     .global sub_080825B0
     .thumb_func
@@ -18497,7 +19086,30 @@ _080825EC:
     .word dat_080825F0
     .global dat_080825F0
 dat_080825F0:
-    incrom 0x825F0, 0x80
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x825F8, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82608, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82618, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82628, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82638, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82648, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82658, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x82668, 0x8
 _08082670:
     .word dat_08082674
     .global dat_08082674
@@ -18512,7 +19124,12 @@ dat_08082674:
     .4byte dat_080826B8
     .4byte dat_080826B8
     .4byte dat_0861AD1C
-    incrom 0x82698, 0x44
+    dma_desc 0x02012800, 0x0600CF00, dat_0861AD78
+    dma_desc 0x02012C00, 0x03001800, dat_0861AF84
+    dma_desc 0x03002A50, 0x00000020, dat_0861AD1C
+    dma_desc 0x02012800, 0x0600CF00, dat_0861B2D0
+    dma_desc 0x02012C00, 0x03001800, dat_0861B4F4
+    incrom 0x826D4, 0x8
 
     .global sub_080826DC
     .thumb_func
@@ -21838,7 +22455,87 @@ _08085484:
     .word dat_08085488   @ BN4_BATTLE_BG_SCROLL
     .global dat_08085488
 dat_08085488:   @ BN4_BATTLE_BG_SCROLL
-    incrom 0x85488, 0x1B0
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85490, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F2E
+    incrom 0x854A0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F64
+    incrom 0x854B0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x854C0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x854D0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x854E0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x854F0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85500, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x85510, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85520, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85530, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85540, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F1C
+    incrom 0x85550, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85560, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85570, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001FB4
+    incrom 0x85580, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x85590, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED0
+    incrom 0x855A0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x855B0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x855C0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x855D0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x855E0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001ED2
+    incrom 0x855F0, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F88
+    incrom 0x85600, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F64
+    incrom 0x85610, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F64
+    incrom 0x85620, 0x8
+    .4byte sub_08001FB4
+    .4byte sub_08001F64
+    incrom 0x85630, 0x8
 _08085638:
     .word dat_0808563C   @ BN4_BATTLE_BGS
     .global dat_0808563C
@@ -21871,7 +22568,84 @@ dat_0808563C:   @ BN4_BATTLE_BGS
     .word dat_08085A08
     .word dat_08085A2C
     .word dat_0860EC98
-    incrom 0x856AC, 0x3A4
+    dma_desc 0x02012800, 0x06000020, dat_0860F0F0
+    dma_desc 0x02012E00, 0x03000800, dat_0860EF0C
+    dma_desc 0x03002A50, 0x00000020, dat_0860F314
+    dma_desc 0x02012800, 0x06000020, dat_086104B0
+    dma_desc 0x02013000, 0x03000800, dat_0860F82C
+    dma_desc 0x03002A50, 0x00000020, dat_086149D8
+    dma_desc 0x02012800, 0x06000020, dat_08615058
+    dma_desc 0x02012E00, 0x03000800, dat_08614D6C
+    dma_desc 0x03002A50, 0x00000020, dat_086197F4
+    dma_desc 0x02012800, 0x06000020, dat_08619D64
+    dma_desc 0x02012E00, 0x03000800, dat_08619ABC
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861A2D4
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861A8A4
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861A8C8
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861A8EC
+    dma_desc 0x03002A50, 0x00000020, dat_0861AD1C
+    dma_desc 0x02012800, 0x06000020, dat_0861B0C8
+    dma_desc 0x02012C00, 0x03000800, dat_0861AF84
+    dma_desc 0x03002A50, 0x00000020, dat_08612B38
+    dma_desc 0x02012800, 0x06000020, dat_086133F0
+    dma_desc 0x02013000, 0x03000800, dat_08612F6C
+    dma_desc 0x03002A50, 0x00000020, dat_086152FC
+    dma_desc 0x02012800, 0x06000020, dat_08615B84
+    dma_desc 0x02012E00, 0x03000800, dat_08615760
+    dma_desc 0x03002A50, 0x00000020, dat_086152FC
+    dma_desc 0x02012800, 0x06000020, dat_0861650C
+    dma_desc 0x02012E00, 0x03000800, dat_08616008
+    dma_desc 0x03002A50, 0x00000020, dat_086152FC
+    dma_desc 0x02012800, 0x06000020, dat_08617184
+    dma_desc 0x02012E00, 0x03000800, dat_086169A0
+    dma_desc 0x03002A50, 0x00000020, dat_086173B8
+    dma_desc 0x02012800, 0x06000020, dat_086177EC
+    dma_desc 0x02012E00, 0x03000800, dat_086177C8
+    dma_desc 0x03002A50, 0x00000020, dat_086152FC
+    dma_desc 0x02012800, 0x06000020, dat_08618078
+    dma_desc 0x02012E00, 0x03000800, dat_08617C54
+    dma_desc 0x03002A50, 0x00000020, dat_086152FC
+    dma_desc 0x02012800, 0x06000020, dat_08618CBC
+    dma_desc 0x02012E00, 0x03000800, dat_086184F8
+    dma_desc 0x03002A50, 0x00000020, dat_0861AD1C
+    dma_desc 0x02012800, 0x06000020, dat_0861B858
+    dma_desc 0x02012C00, 0x03000800, dat_0861B4F4
+    dma_desc 0x03002A50, 0x00000020, dat_0860F314
+    dma_desc 0x02012800, 0x06000020, dat_08610DDC
+    dma_desc 0x02013000, 0x03000800, dat_08610A34
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861ACB0
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861ACD4
+    dma_desc 0x03002A50, 0x00000020, dat_08619F88
+    dma_desc 0x02012800, 0x06000020, dat_0861A658
+    dma_desc 0x02012E00, 0x03000800, dat_0861ACF8
+    dma_desc 0x03002A50, 0x00000020, dat_08618F1C
+    dma_desc 0x02012800, 0x06000020, dat_08619548
+    dma_desc 0x02012E00, 0x03000800, dat_08619480
+    dma_desc 0x03002A50, 0x00000020, dat_08613BF0
+    dma_desc 0x02012800, 0x06000020, dat_086146A8
+    dma_desc 0x02013800, 0x03000800, dat_08614244
+    dma_desc 0x03002A50, 0x00000020, dat_0860E250
+    dma_desc 0x02012800, 0x06000020, dat_0860E8EC
+    dma_desc 0x02013800, 0x03000800, dat_0860E8A4
+    dma_desc 0x03002A50, 0x00000020, dat_0860E250
+    dma_desc 0x02012800, 0x06000020, dat_0860E8EC
+    dma_desc 0x02013800, 0x03000800, dat_0860EC08
+    dma_desc 0x03002A50, 0x00000020, dat_0860E250
+    dma_desc 0x02012800, 0x06000020, dat_0860E8EC
+    dma_desc 0x02013800, 0x03000800, dat_0860EC50
+    incrom 0x85A48, 0x8
     .global dat_08085A50
 dat_08085A50:   @ BN4_BATTLE_BG_ANIMS
     .word dat_08085ABC
@@ -21908,7 +22682,36 @@ dat_08085A50:   @ BN4_BATTLE_BG_ANIMS
     .4byte dat_08084A94
     .4byte dat_08084AE4
     .4byte dat_08084B1C
-    incrom 0x85AD4, 0xD8
+    incrom 0x85AD4, 0xC
+    .4byte dat_08084B54
+    .4byte dat_08070FB8
+    anim_frame 0xFFFFFFFF, dat_08084BDC
+    anim_frame 0xFFFFFFFF, dat_08084C6C
+    anim_frame 0xFFFFFFFF, dat_08084CFC
+    anim_frame 0xFFFFFFFF, dat_08084D8C
+    anim_frame 0xFFFFFFFF, dat_08084E1C
+    anim_frame 0xFFFFFFFF, dat_08084B54
+    .4byte dat_08070FB8
+    .4byte dat_0807115C
+    anim_frame 0xFFFFFFFF, dat_08084E3C
+    anim_frame 0xFFFFFFFF, dat_08084ED0
+    anim_frame 0xFFFFFFFF, dat_08084F38
+    anim_frame 0xFFFFFFFF, dat_08084F88
+    incrom 0x85B40, 0x4
+    anim_frame 0xFFFFFFFF, dat_08084FC8
+    anim_frame 0xFFFFFFFF, dat_08085018
+    anim_frame 0xFFFFFFFF, dat_08085068
+    anim_frame 0xFFFFFFFF, dat_080850A8
+    incrom 0x85B64, 0x4
+    anim_frame 0xFFFFFFFF, dat_08085198
+    anim_frame 0xFFFFFFFF, dat_08085228
+    anim_frame 0xFFFFFFFF, dat_080852B8
+    anim_frame 0xFFFFFFFF, dat_0806FA0C
+    anim_frame 0xFFFFFFFF, dat_08085348
+    anim_frame 0xFFFFFFFF, dat_08085398
+    anim_frame 0xFFFFFFFF, dat_080853B8
+    anim_frame 0xFFFFFFFF, dat_080853D8
+    incrom 0x85BA8, 0x4
 
     .global sub_08085BAC
     .thumb_func
@@ -21934,7 +22737,14 @@ _08085BCC:
     .word dat_08085BD0   @ BN4_MAP_BACKDROPS
     .global dat_08085BD0
 dat_08085BD0:   @ BN4_MAP_BACKDROPS
-    incrom 0x85BD0, 0x40
+    .4byte dat_08085C24
+    .4byte dat_08085C34
+    .4byte dat_08085C44
+    incrom 0x85BDC, 0x24
+    .4byte dat_08085C64
+    .4byte dat_08085C64
+    .4byte dat_08085C64
+    incrom 0x85C0C, 0x4
     @ ptr table 0x08085C10..0x08085C24 (5 entries)
     .4byte dat_08085C74
     .4byte dat_08085C84
@@ -25729,7 +26539,10 @@ sub_08088C60:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_08088D2D
     incrom 0x88D55, 0x3F
-    incrom 0x88D94, 0xFA
+    incrom 0x88D94, 0x64
+    .4byte dat_08320808
+    .4byte 0x08090807
+    incrom 0x88E00, 0x8E
     @ cutscene script 0x08088E8E..0x08088E9B
     csc_b2 0x02, 0xFF, 0x1E
     csc_b3 0x24, 0xFF, 0x08, 0x08
@@ -31102,7 +31915,13 @@ dat_0808D780:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_0808DBFF
     incrom 0x8DC28, 0x64
-    incrom 0x8DC8C, 0x167
+    incrom 0x8DC8C, 0x20
+    .4byte dat_0808DDFC
+    .4byte 0x0808FF24
+    incrom 0x8DCB4, 0x7C
+    .4byte dat_0808DC66
+    .4byte 0x08083208
+    incrom 0x8DD38, 0xBB
     @ cutscene script 0x0808DDF3..0x0808DDFC
     csc_op 0x60
     csc_b2 0x51, 0x0D, 0x01
@@ -32058,7 +32877,10 @@ _0808EC38:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_0808ED04
     incrom 0x8ED43, 0x59
-    incrom 0x8ED9C, 0xF2
+    incrom 0x8ED9C, 0xA4
+    .4byte sub_0810EDE4
+    .4byte sub_0810EE0C
+    incrom 0x8EE48, 0x46
     @ cutscene script 0x0808EE8E..0x0808EE97
     csc_op 0x60
     csc_b2 0x51, 0x0E, 0x01
@@ -32614,7 +33436,10 @@ _0808F436:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_0808F5D3
     incrom 0x8F61D, 0x5B
-    incrom 0x8F678, 0x102
+    incrom 0x8F678, 0xA0
+    .4byte sub_0810EDE4
+    .4byte sub_0810EE0C
+    incrom 0x8F720, 0x5A
     @ cutscene script 0x0808F77A..0x0808F783
     csc_op 0x60
     csc_b2 0x51, 0x1E, 0x01
@@ -33099,7 +33924,10 @@ sub_0808FEB4:
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
     incrom 0x8FED4, 0x58
-    incrom 0x8FF2C, 0xEE
+    incrom 0x8FF2C, 0xA0
+    .4byte sub_0810EDE4
+    .4byte sub_0810EE0C
+    incrom 0x8FFD4, 0x46
     @ cutscene script 0x0809001A..0x08090023
     csc_op 0x60
     csc_b2 0x51, 0x1F, 0x01
@@ -33990,7 +34818,10 @@ sub_08090960:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_08090C80
     incrom 0x90CC4, 0x74
-    incrom 0x90D38, 0x100
+    incrom 0x90D38, 0xF4
+    .4byte sub_0810EDE4
+    .4byte sub_0810EE0C
+    incrom 0x90E34, 0x4
     @ cutscene script 0x08090E38..0x08090E41
     csc_op 0x60
     csc_b2 0x51, 0x24, 0x01
@@ -34663,7 +35494,10 @@ _080913C0:
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_080918C9
     incrom 0x91909, 0x2B
-    incrom 0x91934, 0x136
+    incrom 0x91934, 0xF8
+    .4byte dat_08321EFF
+    .4byte 0x08080907
+    incrom 0x91A34, 0x36
     @ cutscene script 0x08091A6A..0x08091A77
     csc_b3 0x28, 0x03, 0xA1, 0x07
     csc_b3 0x26, 0xFF, 0x46, 0x01
@@ -34671,7 +35505,10 @@ _080913C0:
     csc_b1 0x3B, 0x04
     csc_end
     incrom 0x91A77, 0x8D
-    incrom 0x91B04, 0xDA
+    incrom 0x91B04, 0x8C
+    .4byte sub_0810EDE4
+    .4byte sub_0810EE0C
+    incrom 0x91B98, 0x46
     @ cutscene script 0x08091BDE..0x08091BE7
     csc_op 0x60
     csc_b2 0x51, 0x2E, 0x01
@@ -37178,7 +38015,8 @@ _08094704:
     .word dat_08094708
     .global dat_08094708
 dat_08094708:
-    incrom 0x94708, 0x8
+    .4byte sub_08094710
+    .4byte sub_08094720
 
     .global sub_08094710
     .thumb_func
