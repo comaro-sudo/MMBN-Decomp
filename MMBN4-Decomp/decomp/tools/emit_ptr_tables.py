@@ -17,12 +17,20 @@ DECOMP = Path(__file__).resolve().parents[1]
 BASE = 0x08000000
 
 TARGET_SEGS = [
+    ("code_00",  0x0800019C, 0x0800FF6A, 0x00),
+    ("code_01",  0x0800FF6A, 0x08020CAC, 0x00),
+    ("code_02",  0x08020CAC, 0x08034FC8, 0x04),
+    ("code_03",  0x08034FC8, 0x0804F21C, 0x08),
     ("code_04",  0x0804F21C, 0x0805CF5C, 0x0C),
     ("code_04b", 0x0805CF5C, 0x080612C8, 0x18),
     ("code_04c", 0x080612C8, 0x0806765C, 0x14),
     ("code_04d", 0x0806765C, 0x080711E4, 0x0C),
     ("code_05",  0x080711E4, 0x08094758, 0x0C),
     ("code_06",  0x08094758, 0x080B01DE, 0x0C),
+    ("code_07",  0x080B01DE, 0x080D00B8, 0x0C),
+    ("code_08",  0x080D00B8, 0x080F0012, 0x0C),
+    ("code_09",  0x080F0012, 0x08109EF0, 0x0C),
+    ("code_10",  0x08109EF0, 0x08113CB8, 0x14),
 ]
 
 
@@ -44,7 +52,7 @@ def main() -> None:
 
     total_tables = 0
     total_bytes = 0
-    for seg_name, _, _, d in TARGET_SEGS:
+    for seg_name, _, seg_end, d in TARGET_SEGS:
         path = DECOMP / f"asm/{seg_name}.s"
         lines = path.read_text().splitlines()
         out: list[str] = []
@@ -63,13 +71,14 @@ def main() -> None:
                 indent, off_s, sz_s, _ = m.groups()
                 g_start = BASE + int(off_s, 16)
                 g_end = g_start + int(sz_s, 16)
+                scan_end = min(g_end, seg_end)
                 # Find 4-byte aligned pointer runs (>= 4 pointers = 16 bytes)
                 runs: list[tuple[int, int, list[str]]] = []
                 p = (g_start + 3) & ~3
-                while p + 16 <= g_end:
+                while p + 16 <= scan_end:
                     syms: list[str] = []
                     q = p
-                    while q + 4 <= g_end:
+                    while q + 4 <= scan_end:
                         s = is_valid_rom_ptr(rs, bm, q, d)
                         if s is None:
                             break

@@ -1089,7 +1089,11 @@ _0801087C:
     .word dat_08010880
     .global dat_08010880
 dat_08010880:
-    incrom 0x10880, 0x10
+    @ ptr table 0x08010880..0x08010890 (4 entries)
+    .4byte dat_08010891
+    .4byte dat_080108CB
+    .4byte dat_08010901
+    .4byte dat_08010915
 
     .global sub_08010890
     .thumb_func
@@ -2758,7 +2762,13 @@ _080115B0:
     .word dat_080115B4
     .global dat_080115B4
 dat_080115B4:
-    incrom 0x115B4, 0x18
+    @ ptr table 0x080115B4..0x080115CC (6 entries)
+    .4byte dat_080115CD
+    .4byte dat_08011625
+    .4byte dat_08011643
+    .4byte dat_08011657
+    .4byte dat_0801169B
+    .4byte dat_080116E9
 
     .global sub_080115CC
     .thumb_func
@@ -8994,7 +9004,11 @@ _08014920:
     .word dat_08014924
     .global dat_08014924
 dat_08014924:
-    incrom 0x14924, 0x10
+    @ ptr table 0x08014924..0x08014934 (4 entries)
+    .4byte dat_08014995
+    .4byte dat_080149CF
+    .4byte dat_080149E7
+    .4byte dat_08014A15
 
     .global sub_08014934
     .thumb_func
@@ -9017,7 +9031,11 @@ _08014950:
     .word dat_08014954
     .global dat_08014954
 dat_08014954:
-    incrom 0x14954, 0x10
+    @ ptr table 0x08014954..0x08014964 (4 entries)
+    .4byte dat_08014995
+    .4byte dat_080149CF
+    .4byte dat_080149E7
+    .4byte dat_08014A25
 
     .global sub_08014964
     .thumb_func
@@ -9040,7 +9058,11 @@ _08014980:
     .word dat_08014984
     .global dat_08014984
 dat_08014984:
-    incrom 0x14984, 0x10
+    @ ptr table 0x08014984..0x08014994 (4 entries)
+    .4byte dat_08014995
+    .4byte dat_080149CF
+    .4byte dat_080149E7
+    .4byte dat_08014A39
 
     .global sub_08014994
     .thumb_func
@@ -9523,7 +9545,11 @@ _08014CF4:
     .word dat_08014CF8   @ tiles_pointers
     .global dat_08014CF8
 dat_08014CF8:   @ tiles_pointers
-    incrom 0x14CF8, 0x10
+    @ ptr table 0x08014CF8..0x08014D08 (4 entries)
+    .4byte dat_0870A7C0
+    .4byte dat_0870A940
+    .4byte dat_0870AAC0
+    .4byte dat_0870AC40
 _08014D08:
     .word 0x06017480
 _08014D0C:
@@ -14397,7 +14423,20 @@ dat_08017A28:
     .word dat_08017A84
     .global dat_08017A54
 dat_08017A54:
-    incrom 0x17A54, 0x70
+    @ ptr table 0x08017A54..0x08017A84 (12 entries)
+    .4byte dat_08707F20
+    .4byte dat_08707F60
+    .4byte dat_08707FA0
+    .4byte dat_08707FE0
+    .4byte dat_08708020
+    .4byte dat_08708060
+    .4byte dat_087080A0
+    .4byte dat_087080E0
+    .4byte dat_08708120
+    .4byte dat_08708160
+    .4byte dat_08017A84
+    .4byte dat_087081E0
+    incrom 0x17A84, 0x40
 
     .global sub_08017AC4
     .thumb_func
@@ -14812,13 +14851,24 @@ dat_08018530:
     incrom 0x18530, 0x20
     .global dat_08018550
 dat_08018550:
-    incrom 0x18550, 0x90
+    @ ptr table 0x08018550..0x08018560 (4 entries)
+    .4byte dat_08018560
+    .4byte dat_08018580
+    .4byte dat_080185A0
+    .4byte dat_080185C0
+    incrom 0x18560, 0x80
     .global dat_080185E0
 dat_080185E0:   @ BN4_BARRIER_KINDS
     incrom 0x185E0, 0x30
     .global dat_08018610
 dat_08018610:
-    incrom 0x18610, 0x12C
+    incrom 0x18610, 0x100
+    @ ptr table 0x08018710..0x08018720 (4 entries)
+    .4byte dat_08017EA8
+    .4byte dat_08017EE4
+    .4byte dat_08017F20
+    .4byte dat_08017F5C
+    incrom 0x18720, 0x1C
     .global dat_0801873C
 dat_0801873C:
     incrom 0x1873C, 0x4B
@@ -17867,7 +17917,27 @@ sub_0801DAC8:
     mov pc, lr
     .global dat_0801DAD0
 dat_0801DAD0:
-    incrom 0x1DAD0, 0xF0
+    @ ptr table 0x0801DAD0..0x0801DB1C (19 entries)
+    .4byte dat_0801DB1C
+    .4byte dat_0801DB25
+    .4byte dat_0801DB28
+    .4byte dat_0801DB2F
+    .4byte dat_0801DB36
+    .4byte dat_0801DB39
+    .4byte dat_0801DB3C
+    .4byte dat_0801DB47
+    .4byte dat_0801DB4A
+    .4byte dat_0801DB51
+    .4byte dat_0801DB56
+    .4byte dat_0801DB5D
+    .4byte dat_0801DB6A
+    .4byte dat_0801DB7D
+    .4byte dat_0801DB86
+    .4byte dat_0801DB93
+    .4byte dat_0801DBA4
+    .4byte dat_0801DBAF
+    .4byte dat_0801DBBA
+    incrom 0x1DB1C, 0xA4
 _0801DBC0:
     .word dat_0801DAD0
 
@@ -18285,7 +18355,13 @@ _0801DF98:
     .word dat_0801DF9C
     .global dat_0801DF9C
 dat_0801DF9C:
-    incrom 0x1DF9C, 0x18
+    @ ptr table 0x0801DF9C..0x0801DFB4 (6 entries)
+    .4byte dat_0801EBB0
+    .4byte dat_0801EBF0
+    .4byte dat_0801EC30
+    .4byte dat_0801EC70
+    .4byte dat_0801ECB0
+    .4byte dat_0801ECF0
 _0801DFB4:
     .word 0x21082106
 _0801DFB8:
@@ -18619,7 +18695,14 @@ _0801E224:
     .word dat_0801E228
     .global dat_0801E228
 dat_0801E228:
-    incrom 0x1E228, 0x1C
+    @ ptr table 0x0801E228..0x0801E244 (7 entries)
+    .4byte dat_0801E245
+    .4byte dat_0801E3D9
+    .4byte dat_0801E325
+    .4byte dat_0801E59D
+    .4byte dat_0801E609
+    .4byte dat_0801E8BD
+    .4byte dat_0801E96D
 
     .global sub_0801E244
     .thumb_func
@@ -22449,7 +22532,12 @@ _08020074:
     .word dat_08020078
     .global dat_08020078
 dat_08020078:
-    incrom 0x20078, 0x7C
+    @ ptr table 0x08020078..0x08020088 (4 entries)
+    .4byte dat_080200C4
+    .4byte dat_080200D0
+    .4byte dat_080200E8
+    .4byte dat_080200DC
+    incrom 0x20088, 0x6C
 
     .global sub_080200F4
     .thumb_func
@@ -22983,17 +23071,50 @@ _080204BC:
     .word dat_080204C0
     .global dat_080204C0
 dat_080204C0:
-    incrom 0x204C0, 0x54
+    @ ptr table 0x080204C0..0x080204E8 (10 entries)
+    .4byte dat_080204E8
+    .4byte dat_080204EA
+    .4byte dat_080204ED
+    .4byte dat_080204F1
+    .4byte dat_080204F6
+    .4byte dat_080204FC
+    .4byte dat_080204FF
+    .4byte dat_08020503
+    .4byte dat_08020508
+    .4byte dat_0802050D
+    incrom 0x204E8, 0x2C
 _08020514:
     .word dat_08020518
     .global dat_08020518
 dat_08020518:
-    incrom 0x20518, 0x4C
+    @ ptr table 0x08020518..0x08020540 (10 entries)
+    .4byte dat_08020540
+    .4byte dat_08020546
+    .4byte dat_0802054B
+    .4byte dat_0802054F
+    .4byte dat_08020551
+    .4byte dat_08020552
+    .4byte dat_08020557
+    .4byte dat_0802055B
+    .4byte dat_0802055E
+    .4byte dat_08020560
+    incrom 0x20540, 0x24
 _08020564:
     .word dat_08020568
     .global dat_08020568
 dat_08020568:
-    incrom 0x20568, 0x50
+    @ ptr table 0x08020568..0x08020590 (10 entries)
+    .4byte dat_08020590
+    .4byte dat_08020591
+    .4byte dat_08020593
+    .4byte dat_08020596
+    .4byte dat_0802059A
+    .4byte dat_0802059F
+    .4byte dat_080205A0
+    .4byte dat_080205A2
+    .4byte dat_080205A5
+    .4byte dat_080205AC
+    incrom 0x20590, 0x28
 
     .global sub_080205B8
     .thumb_func
@@ -23314,7 +23435,14 @@ _08020824:
     .word dat_08020828
     .global dat_08020828
 dat_08020828:
-    incrom 0x20828, 0x1C
+    @ ptr table 0x08020828..0x08020844 (7 entries)
+    .4byte dat_08020845
+    .4byte dat_08020885
+    .4byte dat_0802089B
+    .4byte dat_080208C5
+    .4byte dat_080208DD
+    .4byte dat_080208F5
+    .4byte dat_0802095F
 
     .global sub_08020844
     .thumb_func
@@ -23640,7 +23768,12 @@ _08020A8C:
     .word dat_08020A90
     .global dat_08020A90
 dat_08020A90:
-    incrom 0x20A90, 0x14
+    @ ptr table 0x08020A90..0x08020AA4 (5 entries)
+    .4byte dat_08020AA5
+    .4byte dat_08020AAD
+    .4byte dat_08020C2D
+    .4byte dat_08020C45
+    .4byte dat_08020D6D
 
     .global sub_08020AA4
     .thumb_func
@@ -23720,12 +23853,21 @@ _08020B2C:
     .word dat_08020B30
     .global dat_08020B30
 dat_08020B30:
-    incrom 0x20B30, 0xE8
+    @ ptr table 0x08020B30..0x08020B40 (4 entries)
+    .4byte dat_08020B40
+    .4byte dat_08020B94
+    .4byte dat_08020BD8
+    .4byte dat_08020BF0
+    incrom 0x20B40, 0xD8
 _08020C18:
     .word dat_08020C1C
     .global dat_08020C1C
 dat_08020C1C:
-    incrom 0x20C1C, 0x10
+    @ ptr table 0x08020C1C..0x08020C2C (4 entries)
+    .4byte dat_0874B0B0
+    .4byte dat_0874BA44
+    .4byte dat_0874C0D8
+    .4byte dat_0874C6F4
 
     .global sub_08020C2C
     .thumb_func

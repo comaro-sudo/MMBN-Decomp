@@ -225,18 +225,68 @@ def main() -> None:
             if in_target(a):
                 list_ptrs.add(a)
 
+    # Also find any 0x000000FF-terminated NPC pointer list right after an existing ptr table
+    # or inside shared incrom in code_04..code_06
+    for sn, s0, s1, d in TARGET_SEGS:
+        txt = (DECOMP / f"asm/{sn}.s").read_text()
+        for m in re.finditer(r"^\s*incrom\s+0x([0-9A-Fa-f]+),\s*0x([0-9A-Fa-f]+)", txt, re.M):
+            g0 = BASE + int(m.group(1), 16)
+            g1 = g0 + int(m.group(2), 16)
+            # Check for 0x000000FF followed by a valid NPC script opcode (0x08/0x04/0x05/0x3B/0x42)
+            for p in range((g0 + 3) & ~3, g1 - 4, 4):
+                if struct.unpack_from("<I", rs, p - BASE)[0] == 0x000000FF:
+                    nxt = rs[p + 4 - BASE]
+                    if nxt in (0x04, 0x05, 0x08, 0x17, 0x3B, 0x42, 0x43):
+                        # Walk backward to find the list start (up to 32 pointers)
+                        q = p - 4
+                        while q >= s0 and (p - q) <= 128:
+                            v = struct.unpack_from("<I", rs, q - BASE)[0]
+                            if not in_target(v):
+                                break
+                            q -= 4
+                        if q + 4 < p:
+                            list_ptrs.add(q + 4)
+                        else:
+                            # Even if pointers were already emitted above, p+4 is an NPC script!
+                            if p + 4 < g1:
+                                list_ptrs.add(p)
+
     seeds: set[int] = set()
+    npc_lists_by_seg: dict[str, list[tuple[int, int, list[str]]]] = {s[0]: [] for s in TARGET_SEGS}
     for mp in sorted(list_ptrs):
+        ti = in_target(mp)
+        if not ti:
+            continue
+        sn, d = ti
         q = mp
-        for _ in range(32):
-            v = struct.unpack_from("<I", rs, q - BASE)[0]
-            if v == 0x000000FF:
+        entries: list[str] = []
+        list_ok = True
+        for _ in range(33):
+            rv = struct.unpack_from("<I", rs, q - BASE)[0]
+            bv = struct.unpack_from("<I", bm, q + d - BASE)[0]
+            if rv == 0x000000FF:
+                if bv != 0x000000FF:
+                    list_ok = False
+                else:
+                    entries.append("    .4byte 0x000000FF   @ npc list end")
+                q += 4
                 break
-            if in_target(v):
-                seeds.add(v)
+            if in_target(rv):
+                seeds.add(rv)
+                s = format_u32(rv, bv)
+                if s is None:
+                    list_ok = False
+                else:
+                    entries.append(f"    .4byte {s}")
             else:
+                list_ok = False
                 break
             q += 4
+        if list_ok and entries and entries[-1].startswith("    .4byte 0x000000FF"):
+            npc_lists_by_seg[sn].append((mp, q, entries))
+            # Also seed the script immediately following 0x000000FF if it starts with a common NPC op
+            if in_target(q) and rs[q - BASE] in (0x04, 0x05, 0x08, 0x17, 0x3B, 0x42, 0x43):
+                seeds.add(q)
 
     # Collect shared incrom ranges
     inc_re = re.compile(r"^(\s*)incrom\s+0x([0-9A-Fa-f]+),\s*0x([0-9A-Fa-f]+)(.*)$")
@@ -322,7 +372,7 @@ def main() -> None:
     total_blocks = 0
     total_bytes = 0
     for seg_name, _, _, _ in TARGET_SEGS:
-        blocks = sorted(blocks_by_seg[seg_name], key=lambda x: x[0])
+        blocks = sorted(blocks_by_seg[seg_name] + npc_lists_by_seg[seg_name], key=lambda x: x[0])
         if not blocks:
             continue
         path = DECOMP / f"asm/{seg_name}.s"
