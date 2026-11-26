@@ -109,6 +109,20 @@ u8 NaviCustGetCell(const struct Toolkit *tk, u8 x, u8 y);
 u32 NaviCustCountPlaced(const struct Toolkit *tk);
 int NaviCustOnCommandLine(const struct Toolkit *tk, u8 slotIndex);
 
+/* core_battle_grid.c */
+struct BattlePanel {
+    u8 owner;
+    u8 state;
+    u16 crackTimer;
+};
+int BattleGridInBounds(u8 col, u8 row);
+int BattleGridIndex(u8 col, u8 row);
+void BattleGridInitDefault(struct BattlePanel grid[18]);
+int BattleIsElementWeakness(u8 attackerElem, u8 defenderElem);
+u16 BattleCalcHitDamage(u16 baseDamage, u8 attackerElem, u8 defenderElem, u8 panelState);
+void BattlePanelCrack(struct BattlePanel *panel, int forceBreak);
+int BattlePanelIsWalkable(const struct BattlePanel *panel, u8 hasAirShoes, u8 hasFloatShoes);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -349,6 +363,38 @@ static void test_shop_and_navicust(void) {
     assert(NaviCustCountPlaced(&tk) == 2);
 }
 
+static void test_battle_grid_and_damage(void) {
+    struct BattlePanel grid[18];
+
+    assert(!BattleGridInBounds(0, 1));
+    assert(!BattleGridInBounds(7, 1));
+    assert(BattleGridInBounds(1, 1) && BattleGridIndex(1, 1) == 0);
+    assert(BattleGridInBounds(6, 3) && BattleGridIndex(6, 3) == 17);
+
+    BattleGridInitDefault(grid);
+    assert(grid[BattleGridIndex(3, 2)].owner == 0);
+    assert(grid[BattleGridIndex(4, 2)].owner == 1);
+
+    /* Element triangle & panel multipliers */
+    assert(BattleIsElementWeakness(1, 4) == 1); /* Fire > Wood */
+    assert(BattleIsElementWeakness(4, 3) == 1); /* Wood > Elec */
+    assert(BattleIsElementWeakness(3, 2) == 1); /* Elec > Aqua */
+    assert(BattleIsElementWeakness(2, 1) == 1); /* Aqua > Fire */
+    assert(BattleIsElementWeakness(1, 2) == 0);
+
+    assert(BattleCalcHitDamage(100, 1, 4, 0) == 200); /* Fire vs Wood */
+    assert(BattleCalcHitDamage(100, 1, 4, 4) == 400); /* Fire vs Wood on Grass */
+    assert(BattleCalcHitDamage(100, 3, 0, 5) == 200); /* Elec on Ice */
+    assert(BattleCalcHitDamage(100, 0, 0, 7) == 50);  /* Holy panel halves */
+
+    /* Panel cracking & AirShoes */
+    BattlePanelCrack(&grid[0], 0);
+    assert(grid[0].state == 1 && BattlePanelIsWalkable(&grid[0], 0, 0) == 1);
+    BattlePanelCrack(&grid[0], 0);
+    assert(grid[0].state == 2 && BattlePanelIsWalkable(&grid[0], 0, 0) == 0);
+    assert(BattlePanelIsWalkable(&grid[0], 1, 0) == 1);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -356,6 +402,7 @@ int main(void) {
     test_battle_score_and_id_raise();
     test_world_tournaments_and_md();
     test_shop_and_navicust();
+    test_battle_grid_and_damage();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
