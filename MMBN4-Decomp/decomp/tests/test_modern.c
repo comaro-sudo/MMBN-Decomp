@@ -56,6 +56,14 @@ enum DoubleSoulId FindDoubleSoulForChip(
 );
 const u8 *GetAllDoubleSoulFlags(void);
 
+/* core_battle_score.c */
+u8 RaiseEnemyIdForPlaythrough(u8 enemyId, u8 enemyRankField, u8 playthrough, u8 battleFlags);
+s32 ScoreBustingFlinch(s32 flinchCount);
+s32 ScoreBustingMovement(s32 moveCount);
+s32 ScoreBustingMultiDelete(u8 maxSimultaneousDeletes);
+s32 ScoreBustingHpRatio(u16 currentHp, u16 maxHp);
+u8 ClampBustingLevel(s32 rawScore);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -187,10 +195,42 @@ static void test_save_inventory_and_souls(void) {
     assert(FindDoubleSoulForChip(&tk, &chip, GetAllDoubleSoulFlags(), 0) == SOUL_WOOD);
 }
 
+static void test_battle_score_and_id_raise(void) {
+    /* Virus scaling: +2 per tier, capped by (5 - rankField) */
+    assert(RaiseEnemyIdForPlaythrough(0x10, 0, 0, 0) == 0x10);
+    assert(RaiseEnemyIdForPlaythrough(0x10, 0, 1, 0) == 0x12);
+    assert(RaiseEnemyIdForPlaythrough(0x10, 0, 2, 0) == 0x14);
+    assert(RaiseEnemyIdForPlaythrough(0x10, 0, 5, 0) == 0x14); /* tier capped at 2 */
+    assert(RaiseEnemyIdForPlaythrough(0x10, 4, 2, 0) == 0x11); /* maxRaise = 1 */
+    assert(RaiseEnemyIdForPlaythrough(0x10, 0, 2, 0x80) == 0x10); /* fixed-tier flag */
+
+    /* Navi scaling: +1 per tier, capped by (2 - rankField) */
+    assert(RaiseEnemyIdForPlaythrough(0x90, 0, 1, 0) == 0x91);
+    assert(RaiseEnemyIdForPlaythrough(0x90, 0, 2, 0) == 0x92);
+    assert(RaiseEnemyIdForPlaythrough(0x90, 1, 2, 0) == 0x91);
+    assert(RaiseEnemyIdForPlaythrough(0xE4, 0, 2, 0) == 0xE4); /* >= 0xE4 untouched */
+
+    /* Busting Level sub-scores */
+    assert(ScoreBustingFlinch(0) == 1);
+    assert(ScoreBustingFlinch(1) == 0);
+    assert(ScoreBustingFlinch(4) == -3);
+    assert(ScoreBustingMovement(2) == 1);
+    assert(ScoreBustingMovement(3) == 0);
+    assert(ScoreBustingMultiDelete(1) == 0);
+    assert(ScoreBustingMultiDelete(3) == 4);
+    assert(ScoreBustingHpRatio(49, 100) == 0);
+    assert(ScoreBustingHpRatio(50, 100) == 1);
+    assert(ScoreBustingHpRatio(75, 100) == 2);
+    assert(ScoreBustingHpRatio(100, 100) == 3);
+    assert(ClampBustingLevel(-5) == 1);
+    assert(ClampBustingLevel(15) == 11);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
     test_save_inventory_and_souls();
+    test_battle_score_and_id_raise();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
