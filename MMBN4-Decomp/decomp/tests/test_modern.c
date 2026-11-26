@@ -998,6 +998,43 @@ static void test_map_collision_and_pet_menu(void) {
     assert(mc.cursor == 5u && mc.scrollTop == 1u && MenuCursorVisibleRow(&mc) == 4u);
 }
 
+static void test_soul_navi_ai_and_npc_vm(void) {
+    struct BattlePanel grid[18];
+    s8 px = 0, py = 0;
+    struct Toolkit tk;
+    struct NpcVmState npc;
+    /* SetSprite(0x10), SetPos(0x38, 0x28, 0x40), SetFacing(1), SetTalk(3), SetFlag(0x0210), End */
+    const u8 npcScript[] = {
+        0x17, 0x10,
+        0x14, 0x38, 0x00, 0x28, 0x00, 0x40, 0x00,
+        0x16, 0x01,
+        0x18, 0x03,
+        0x06, 0x10, 0x02,
+        0x00
+    };
+
+    /* Soul Navi AI helpers */
+    BattleGridInitDefault(grid);
+    assert(BossGutsPunchCrack(grid, 4, 2) == 2u);
+    assert(grid[BattleGridIndex(3, 2)].state == 1u && grid[BattleGridIndex(2, 2)].state == 1u);
+    assert(BossProtoStepTarget(2, 2, &px, &py) == 1u && px == 3 && py == 2);
+    assert(BossProtoStepTarget(6, 2, &px, &py) == 0u);
+    assert(BossCrossExplosionHits(2, 2, 2, 1) == 1u && BossCrossExplosionHits(2, 2, 3, 3) == 0u);
+    assert(BossSearchScopeLocks(2, 3, 2, 3) == 1u);
+
+    /* NpcRunScript VM */
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+
+    NpcVmInit(&npc, npcScript, sizeof(npcScript));
+    assert(NpcVmRun(&npc, &tk, 32) == 6u);
+    assert(npc.halted == 1u && npc.spriteId == 0x10u);
+    assert(npc.x == 0x38 && npc.y == 0x28 && npc.z == 0x40);
+    assert(npc.facing == 1u && npc.talkIdx == 3u);
+    assert(EventFlagTest(&tk, 0x0210) == 1);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1028,6 +1065,7 @@ int main(void) {
     test_obstacle_save_slots_and_cutscene_vm();
     test_chip_attacks_and_duo_bass();
     test_map_collision_and_pet_menu();
+    test_soul_navi_ai_and_npc_vm();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

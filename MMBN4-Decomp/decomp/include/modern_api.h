@@ -625,6 +625,31 @@ void MenuCursorMove(struct MenuCursorState *mc, s32 delta);
 void MenuCursorPage(struct MenuCursorState *mc, s32 pageDir);
 u16 MenuCursorVisibleRow(const struct MenuCursorState *mc);
 
+/* --- core_soul_navi_ai.c --- */
+u32 BossGutsPunchCrack(struct BattlePanel grid[18], s8 gutsX, s8 gutsY);
+u32 BossProtoStepTarget(s8 playerX, s8 playerY, s8 *outX, s8 *outY);
+u32 BossCrossExplosionHits(s8 cx, s8 cy, s8 playerX, s8 playerY);
+u32 BossSearchScopeLocks(s8 scopeX, s8 scopeY, s8 playerX, s8 playerY);
+
+/* --- core_npc_vm.c --- */
+struct NpcVmState {
+    const u8 *code;
+    u32 len;
+    u32 pc;
+    s16 x;
+    s16 y;
+    s16 z;
+    u8 facing;
+    u8 spriteId;
+    u8 talkIdx;
+    u8 hidden;
+    u8 halted;
+};
+
+void NpcVmInit(struct NpcVmState *vm, const u8 *code, u32 len);
+u32 NpcVmStep(struct NpcVmState *vm, struct Toolkit *tk);
+u32 NpcVmRun(struct NpcVmState *vm, struct Toolkit *tk, u32 maxSteps);
+
 #ifdef __cplusplus
 }
 #endif
