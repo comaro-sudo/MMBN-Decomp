@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
     .global sub_0804F21C
@@ -8162,7 +8163,464 @@ dat_080544DC:
     .4byte dat_080555C2
     .4byte dat_080555DD
     .4byte dat_0805560F
-    incrom 0x54F8C, 0x7BC
+    incrom 0x54F8C, 0x4
+    @ npc script 0x08054F90..0x08054F98
+    npc_jump_if_phase 0x01, 0x01, dat_08054F98
+    npc_hide
+    @ npc script 0x08054F98..0x08054FAB
+    npc_op 0x08
+    npc_set_talk 0x00
+    npc_set_sprite 0x02
+    npc_set_pos 0x007C, 0xFFA8, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08054FAB..0x08055042
+    npc_op 0x08
+    npc_set_sprite 0x09
+    npc_jump_if_phase 0x27, 0x28, dat_08055102
+    npc_jump_if_phase 0x26, 0x26, dat_080550F2
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_080550E2
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_080550E2
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_080550E2
+    npc_jump_if_phase 0x22, 0x22, dat_080550CF
+    npc_jump_if_phase 0x20, 0x20, dat_080550CF
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_080550BC
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_080550BC
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_080550BC
+    npc_jump_if_phase 0x15, 0x16, dat_080550BC
+    npc_jump_if_phase 0x10, 0x12, dat_080550A9
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08055096
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08055096
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08055096
+    npc_jump_if_phase 0x0A, 0x0A, dat_08055096
+    npc_jump_if_phase 0x08, 0x09, dat_08055083
+    npc_jump_if_phase 0x07, 0x07, dat_08055073
+    npc_jump_if_phase 0x05, 0x06, dat_08055063
+    npc_jump_if_phase 0x04, 0x04, dat_08055053
+    npc_jump_if_phase 0x01, 0x03, dat_08055042
+    npc_hide
+    @ npc script 0x08055042..0x08055053
+    npc_op 0x08
+    npc_set_talk 0x02
+    npc_set_pos 0xFF34, 0xFFE4, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055053..0x08055063
+    npc_set_talk 0x0A
+    npc_set_pos 0xFF5E, 0xFFC0, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055063..0x08055073
+    npc_set_talk 0x0F
+    npc_set_pos 0xFF60, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055073..0x08055083
+    npc_set_talk 0x19
+    npc_set_pos 0xFFCC, 0xFFC4, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055083..0x08055096
+    npc_set_talk 0x23
+    npc_set_pos 0xFFCA, 0x0004, 0x0000
+    npc_set_facing 0x07
+    npc_call_ex 0x07, 0x06, 0x04, dat_080A8F20
+    @ npc script 0x08055096..0x080550A9
+    npc_set_talk 0x28
+    npc_set_pos 0xFF8C, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x080550A9..0x080550BC
+    npc_set_talk 0x00
+    npc_set_pos 0x0054, 0x0046, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x06, dat_080A8F38
+    @ npc script 0x080550BC..0x080550CF
+    npc_set_talk 0x1E
+    npc_set_pos 0x00FC, 0xFF86, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x080550CF..0x080550E2
+    npc_set_talk 0x00
+    npc_set_pos 0xFF66, 0xFFF8, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x080550E2..0x080550F2
+    npc_set_talk 0x14
+    npc_set_pos 0xFFCC, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080550F2..0x08055102
+    npc_set_talk 0x2D
+    npc_set_pos 0x00FC, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055102..0x08055115
+    npc_set_talk 0x2D
+    npc_set_pos 0xFF8E, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x06, dat_080A8F38
+    @ npc script 0x08055115..0x080551AC
+    npc_op 0x08
+    npc_set_sprite 0x0B
+    npc_jump_if_phase 0x27, 0x28, dat_08055265
+    npc_jump_if_phase 0x26, 0x26, dat_08055252
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805523F
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805523F
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805523F
+    npc_jump_if_phase 0x22, 0x22, dat_0805522F
+    npc_jump_if_phase 0x20, 0x20, dat_0805522F
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_0805521C
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_0805521C
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_0805521C
+    npc_jump_if_phase 0x15, 0x16, dat_0805521C
+    npc_jump_if_phase 0x10, 0x12, dat_0805520C
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_080551FC
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_080551FC
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_080551FC
+    npc_jump_if_phase 0x0A, 0x0A, dat_080551FC
+    npc_jump_if_phase 0x08, 0x09, dat_080551EC
+    npc_jump_if_phase 0x07, 0x07, dat_080551DC
+    npc_jump_if_phase 0x05, 0x06, dat_080551CC
+    npc_jump_if_phase 0x04, 0x04, dat_080551BC
+    npc_jump_if_phase 0x01, 0x03, dat_080551AC
+    npc_hide
+    @ npc script 0x080551AC..0x080551BC
+    npc_set_talk 0x03
+    npc_set_pos 0xFF5A, 0x002A, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080551BC..0x080551CC
+    npc_set_talk 0x0B
+    npc_set_pos 0xFF46, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080551CC..0x080551DC
+    npc_set_talk 0x10
+    npc_set_pos 0xFF18, 0x0046, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080551DC..0x080551EC
+    npc_set_talk 0x1A
+    npc_set_pos 0xFF28, 0xFFFA, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080551EC..0x080551FC
+    npc_set_talk 0x24
+    npc_set_pos 0xFF42, 0xFFDE, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080551FC..0x0805520C
+    npc_set_talk 0x29
+    npc_set_pos 0xFF30, 0xFFA6, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805520C..0x0805521C
+    npc_set_talk 0x01
+    npc_set_pos 0xFF28, 0xFFAA, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805521C..0x0805522F
+    npc_set_talk 0x1F
+    npc_set_pos 0xFFCA, 0x002C, 0x0000
+    npc_set_facing 0x07
+    npc_call_ex 0x07, 0x06, 0x04, dat_080A8F20
+    @ npc script 0x0805522F..0x0805523F
+    npc_set_talk 0x01
+    npc_set_pos 0x00AC, 0x0044, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805523F..0x08055252
+    npc_set_talk 0x15
+    npc_set_pos 0x0064, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08055252..0x08055265
+    npc_set_talk 0x2E
+    npc_set_pos 0xFF0A, 0xFFC4, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x08, dat_080A8F08
+    @ npc script 0x08055265..0x08055275
+    npc_set_talk 0x2E
+    npc_set_pos 0xFF64, 0xFFF8, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055275..0x080552E9
+    npc_op 0x08
+    npc_set_sprite 0x0E
+    npc_jump_if_phase 0x27, 0x28, dat_0805537F
+    npc_jump_if_phase 0x26, 0x26, dat_0805536C
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08055359
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08055359
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08055359
+    npc_jump_if_phase 0x22, 0x22, dat_08055349
+    npc_jump_if_phase 0x20, 0x20, dat_08055349
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08055339
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08055339
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08055339
+    npc_jump_if_phase 0x15, 0x16, dat_08055339
+    npc_jump_if_phase 0x10, 0x12, dat_08055329
+    npc_jump_if_phase 0x07, 0x07, dat_08055319
+    npc_jump_if_phase 0x05, 0x06, dat_08055309
+    npc_jump_if_phase 0x04, 0x04, dat_080552F9
+    npc_jump_if_phase 0x01, 0x03, dat_080552E9
+    npc_hide
+    @ npc script 0x080552E9..0x080552F9
+    npc_set_talk 0x04
+    npc_set_pos 0x00FA, 0xFF9E, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080552F9..0x08055309
+    npc_set_talk 0x0C
+    npc_set_pos 0x00FA, 0xFFF8, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055309..0x08055319
+    npc_set_talk 0x11
+    npc_set_pos 0x00B0, 0x0042, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055319..0x08055329
+    npc_set_talk 0x1B
+    npc_set_pos 0x009C, 0x00A0, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055329..0x08055339
+    npc_set_talk 0x02
+    npc_set_pos 0xFFCA, 0xFFC2, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055339..0x08055349
+    npc_set_talk 0x20
+    npc_set_pos 0xFFCE, 0xFF64, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055349..0x08055359
+    npc_set_talk 0x02
+    npc_set_pos 0xFF32, 0xFFCC, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055359..0x0805536C
+    npc_set_talk 0x16
+    npc_set_pos 0xFF0A, 0xFFCE, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x0805536C..0x0805537F
+    npc_set_talk 0x2F
+    npc_set_pos 0x00FC, 0xFF62, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x06, dat_080A8F08
+    @ npc script 0x0805537F..0x0805538F
+    npc_set_talk 0x2F
+    npc_set_pos 0x00FE, 0x0042, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805538F..0x08055426
+    npc_op 0x08
+    npc_set_sprite 0x0D
+    npc_jump_if_phase 0x27, 0x28, dat_080554DC
+    npc_jump_if_phase 0x26, 0x26, dat_080554CC
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_080554BC
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_080554BC
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_080554BC
+    npc_jump_if_phase 0x22, 0x22, dat_080554A9
+    npc_jump_if_phase 0x20, 0x20, dat_080554A9
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08055499
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08055499
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08055499
+    npc_jump_if_phase 0x15, 0x16, dat_08055499
+    npc_jump_if_phase 0x10, 0x12, dat_08055489
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08055476
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08055476
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08055476
+    npc_jump_if_phase 0x0A, 0x0A, dat_08055476
+    npc_jump_if_phase 0x08, 0x09, dat_08055466
+    npc_jump_if_phase 0x07, 0x07, dat_08055456
+    npc_jump_if_phase 0x05, 0x06, dat_08055446
+    npc_jump_if_phase 0x04, 0x04, dat_08055436
+    npc_jump_if_phase 0x01, 0x03, dat_08055426
+    npc_hide
+    @ npc script 0x08055426..0x08055436
+    npc_set_talk 0x06
+    npc_set_pos 0x00FE, 0x0044, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055436..0x08055446
+    npc_set_talk 0x0D
+    npc_set_pos 0x0038, 0x0044, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055446..0x08055456
+    npc_set_talk 0x12
+    npc_set_pos 0xFFCA, 0x0046, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055456..0x08055466
+    npc_set_talk 0x1C
+    npc_set_pos 0xFF52, 0x0046, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055466..0x08055476
+    npc_set_talk 0x25
+    npc_set_pos 0xFFCC, 0xFF64, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055476..0x08055489
+    npc_set_talk 0x2A
+    npc_set_pos 0xFFCA, 0xFFC2, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x08055489..0x08055499
+    npc_set_talk 0x03
+    npc_set_pos 0x00FA, 0xFFFE, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055499..0x080554A9
+    npc_set_talk 0x21
+    npc_set_pos 0x00F8, 0xFFF8, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080554A9..0x080554BC
+    npc_set_talk 0x03
+    npc_set_pos 0x00FA, 0xFF6C, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x080554BC..0x080554CC
+    npc_set_talk 0x17
+    npc_set_pos 0xFFCE, 0xFF62, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080554CC..0x080554DC
+    npc_set_talk 0x30
+    npc_set_pos 0xFF8E, 0x0042, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080554DC..0x080554EF
+    npc_set_talk 0x30
+    npc_set_pos 0x0032, 0x00A2, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x12, dat_080A8F38
+    @ npc script 0x080554EF..0x080554F7
+    npc_jump_if_phase 0x38, 0x39, dat_080554F7
+    npc_hide
+    @ npc script 0x080554F7..0x0805551A
+    npc_jump_if_flag_clear 0x06C4, dat_0805551A
+    npc_set_talk 0x8D
+    npc_jump_if_flag_set 0x06CE, dat_08055509
+    npc_set_talk 0x8C
+    npc_op 0x08
+    npc_set_sprite 0x19
+    npc_set_pos 0xFF4E, 0xFFF4, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805551A..0x0805551B
+    npc_hide
+    @ npc script 0x0805551B..0x08055523
+    npc_jump_if_phase 0x38, 0x39, dat_08055523
+    npc_hide
+    @ npc script 0x08055523..0x08055546
+    npc_jump_if_flag_clear 0x06C4, dat_08055546
+    npc_set_talk 0x8E
+    npc_jump_if_flag_set 0x06CE, dat_08055535
+    npc_set_talk 0x8C
+    npc_op 0x08
+    npc_set_sprite 0x2A
+    npc_set_pos 0xFF4A, 0x000C, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055546..0x08055547
+    npc_hide
+    @ npc script 0x08055547..0x0805554F
+    npc_jump_if_phase 0x38, 0x39, dat_0805554F
+    npc_hide
+    @ npc script 0x0805554F..0x08055572
+    npc_jump_if_flag_clear 0x06C4, dat_08055572
+    npc_set_talk 0x8F
+    npc_jump_if_flag_set 0x06CE, dat_08055561
+    npc_set_talk 0x8C
+    npc_op 0x08
+    npc_set_sprite 0x1A
+    npc_set_pos 0xFF60, 0x0000, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055572..0x08055573
+    npc_hide
+    @ npc script 0x08055573..0x0805557B
+    npc_jump_if_phase 0x38, 0x39, dat_0805557B
+    npc_hide
+    @ npc script 0x0805557B..0x0805559E
+    npc_jump_if_flag_clear 0x06C4, dat_0805559E
+    npc_set_talk 0x90
+    npc_jump_if_flag_set 0x06CE, dat_0805558D
+    npc_set_talk 0x8C
+    npc_op 0x08
+    npc_set_sprite 0x2B
+    npc_set_pos 0xFF3A, 0xFFFE, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805559E..0x0805559F
+    npc_hide
+    @ npc script 0x0805559F..0x080555A7
+    npc_jump_if_phase 0x54, 0x54, dat_080555A7
+    npc_hide
+    @ npc script 0x080555A7..0x080555C1
+    npc_jump_if_flag_set 0x0942, dat_080555C1
+    npc_op 0x08
+    npc_set_talk 0x82
+    npc_set_sprite 0x07
+    npc_set_pos 0xFF54, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080555C1..0x080555C2
+    npc_hide
+    @ npc script 0x080555C2..0x080555CD
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_flag_set 0x030B, dat_080555CD
+    npc_hide
+    @ npc script 0x080555CD..0x080555DD
+    npc_set_talk 0xDC
+    npc_set_pos 0xFF0A, 0xFF62, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080555DD..0x080555EF
+    npc_op 0x08
+    npc_set_sprite 0x14
+    npc_jump_if_phase 0x29, 0x2A, dat_080555FF
+    npc_jump_if_phase 0x27, 0x28, dat_080555EF
+    npc_hide
+    @ npc script 0x080555EF..0x080555FF
+    npc_set_talk 0x36
+    npc_set_pos 0xFFCA, 0xFFBC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080555FF..0x0805560F
+    npc_set_talk 0x3C
+    npc_set_pos 0xFF60, 0x0010, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805560F..0x08055659
+    npc_op 0x08
+    npc_set_sprite 0x2B
+    npc_jump_if_flag_clear 0x0680, dat_08055669
+    npc_jump_if_phase 0x26, 0x2A, dat_08055659
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08055659
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08055659
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08055659
+    npc_jump_if_phase 0x20, 0x22, dat_08055659
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08055659
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08055659
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08055659
+    npc_jump_if_phase 0x10, 0x16, dat_08055659
+    npc_hide
+    @ npc script 0x08055659..0x08055669
+    npc_set_talk 0x64
+    npc_set_pos 0xFF0E, 0x00A0, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055669..0x0805566A
+    npc_hide
+    incrom 0x5566A, 0xDE
     @ ptr table 0x08055748..0x08055758 (4 entries)
     .4byte dat_0805575C
     .4byte dat_08055785
@@ -8191,13 +8649,575 @@ dat_080544DC:
     .4byte dat_08055A0C
     .4byte dat_08055A46
     .4byte dat_08055C06
-    incrom 0x55A08, 0xB48
+    incrom 0x55A08, 0x4
+    @ npc script 0x08055A0C..0x08055A25
+    npc_op 0x08
+    npc_set_sprite 0x05
+    npc_jump_if_flag_set 0x0306, dat_08055A45
+    npc_jump_if_phase 0x01, 0x01, dat_08055A35
+    npc_jump_if_phase 0x00, 0x00, dat_08055A25
+    npc_hide
+    @ npc script 0x08055A25..0x08055A35
+    npc_set_talk 0x00
+    npc_set_pos 0x0044, 0x0026, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055A35..0x08055A45
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFAA, 0xFFF8, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055A45..0x08055A46
+    npc_hide
+    @ npc script 0x08055A46..0x08055AEB
+    npc_op 0x08
+    npc_set_sprite 0x06
+    npc_jump_if_phase 0x56, 0x58, dat_08055B41
+    npc_jump_if_phase 0x4D, 0x4D, dat_08055B1E
+    npc_jump_if_phase 0x26, 0x2A, dat_08055BDE
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08055BCB
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08055BCB
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08055BCB
+    npc_jump_if_phase 0x4D, 0x4E, dat_08055BEE
+    npc_jump_if_phase 0x22, 0x22, dat_08055BBB
+    npc_jump_if_phase 0x20, 0x20, dat_08055B31
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08055B9B
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08055B9B
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08055B9B
+    npc_jump_if_phase 0x3E, 0x3F, dat_08055BAB
+    npc_jump_if_phase 0x12, 0x16, dat_08055B8B
+    npc_jump_if_phase 0x11, 0x11, dat_08055C05
+    npc_jump_if_phase 0x10, 0x10, dat_08055B74
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08055B64
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08055B64
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08055B64
+    npc_jump_if_phase 0x08, 0x0A, dat_08055B51
+    npc_jump_if_phase 0x04, 0x07, dat_08055B0B
+    npc_jump_if_phase 0x01, 0x01, dat_08055AFB
+    npc_jump_if_phase 0x00, 0x00, dat_08055AEB
+    npc_hide
+    @ npc script 0x08055AEB..0x08055AFB
+    npc_set_talk 0x02
+    npc_set_pos 0xFFA6, 0xFFEC, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055AFB..0x08055B0B
+    npc_set_talk 0x0F
+    npc_set_pos 0xFFC4, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B0B..0x08055B1E
+    npc_set_talk 0x14
+    npc_set_pos 0xFFC2, 0xFFEA, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08055B1E..0x08055B31
+    npc_set_talk 0x28
+    npc_set_pos 0xFFC2, 0xFFEA, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08055B31..0x08055B41
+    npc_set_talk 0x01
+    npc_set_pos 0xFFCE, 0xFFE6, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B41..0x08055B51
+    npc_set_talk 0x29
+    npc_set_pos 0x004C, 0x0016, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B51..0x08055B64
+    npc_set_talk 0x2D
+    npc_set_pos 0xFFC2, 0xFFEA, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08055B64..0x08055B74
+    npc_set_talk 0x3C
+    npc_set_pos 0x004A, 0x003E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B74..0x08055B8B
+    npc_jump_if_flag_set 0x0405, dat_08055C05
+    npc_set_talk 0x00
+    npc_set_pos 0x0036, 0xFFDA, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B8B..0x08055B9B
+    npc_set_talk 0x00
+    npc_set_pos 0xFFC2, 0xFFE2, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055B9B..0x08055BAB
+    npc_set_talk 0x14
+    npc_set_pos 0x004A, 0x003E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055BAB..0x08055BBB
+    npc_set_talk 0x50
+    npc_set_pos 0xFFC2, 0xFFE2, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08055BBB..0x08055BCB
+    npc_set_talk 0x05
+    npc_set_pos 0x0036, 0xFFDC, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08055BCB..0x08055BDE
+    npc_set_talk 0x05
+    npc_set_pos 0xFFC4, 0xFFEC, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08055BDE..0x08055BEE
+    npc_set_talk 0x19
+    npc_set_pos 0xFFAC, 0xFFFE, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08055BEE..0x08055C05
+    npc_jump_if_flag_clear 0x0886, dat_08055B9B
+    npc_set_talk 0x2F
+    npc_set_pos 0x0018, 0x000A, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055C05..0x08055C06
+    npc_hide
+    @ npc script 0x08055C06..0x08055C11
+    npc_op 0x08
+    npc_set_sprite 0x0F
+    npc_jump_if_phase 0x3D, 0x3F, dat_08055C11
+    npc_hide
+    @ npc script 0x08055C11..0x08055C28
+    npc_jump_if_flag_clear 0x0743, dat_08055C28
+    npc_set_talk 0x28
+    npc_set_pos 0x0044, 0x0026, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08055C28..0x08055C29
+    npc_hide
+    incrom 0x55C29, 0x41F
+    @ npc script 0x08056048..0x0805606F
+    npc_jump_if_flag_set 0x031D, dat_0805606E
+    npc_op 0x08
+    npc_set_talk 0x00
+    npc_op 0x13
+    npc_op 0x1F
+    npc_b2 0x25, 0x05, 0x1C
+    npc_set_pos 0x000C, 0x002A, 0x0010
+    npc_set_facing 0x01
+    npc_ptr 0x32, dat_0805606F
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x031D, dat_08056065
+    npc_hide
+    incrom 0x5606F, 0x11
+    @ npc script 0x08056080..0x0805608B
+    npc_op 0x08
+    npc_set_sprite 0x06
+    npc_jump_if_phase 0x10, 0x10, dat_0805608B
+    npc_hide
+    @ npc script 0x0805608B..0x080560A3
+    npc_jump_if_flag_clear 0x0405, dat_080560A3
+    npc_op 0x13
+    npc_set_talk 0x1E
+    npc_set_pos 0x0002, 0xFFF6, 0x0000
+    npc_set_facing 0x0C
+    npc_call dat_080A8EE8
+    @ npc script 0x080560A3..0x080560A4
+    npc_hide
+    @ npc script 0x080560A4..0x080560AC
+    npc_jump_if_phase 0x56, 0x59, dat_080560AC
+    npc_hide
+    @ npc script 0x080560AC..0x080560CF
+    npc_jump_if_flag_clear 0x0989, dat_080560CF
+    npc_jump_if_flag_set 0x0983, dat_080560CF
+    npc_op 0x08
+    npc_op 0x13
+    npc_op 0x0E
+    npc_op 0x1F
+    npc_b2 0x25, 0x5D, 0x1C
+    npc_set_pos 0x000C, 0x002A, 0x0010
+    npc_set_facing 0x00
+    npc_call dat_080A8EE8
+    @ npc script 0x080560CF..0x080560D0
+    npc_hide
+    incrom 0x560D0, 0x114
+    @ npc script 0x080561E4..0x08056227
+    npc_op 0x08
+    npc_set_sprite 0x01
+    npc_jump_if_phase 0x26, 0x2A, dat_08056277
+    npc_jump_if_phase 0x20, 0x22, dat_08056267
+    npc_jump_if_phase 0x10, 0x11, dat_08056237
+    npc_jump_if_phase 0x4B, 0x4B, dat_08056287
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08056257
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08056257
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08056257
+    npc_jump_if_phase 0x08, 0x0A, dat_08056247
+    npc_jump_if_phase 0x04, 0x07, dat_08056227
+    npc_hide
+    @ npc script 0x08056227..0x08056237
+    npc_set_talk 0x00
+    npc_set_pos 0xFFCC, 0x0034, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056237..0x08056247
+    npc_set_talk 0x01
+    npc_set_pos 0xFFD2, 0x0010, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056247..0x08056257
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFD6, 0x0010, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056257..0x08056267
+    npc_set_talk 0x19
+    npc_set_pos 0xFFCC, 0x0034, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056267..0x08056277
+    npc_set_talk 0x00
+    npc_set_pos 0xFFD6, 0x0010, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056277..0x08056287
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFCC, 0x0034, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056287..0x08056297
+    npc_set_talk 0x82
+    npc_set_pos 0xFFBE, 0x0018, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    incrom 0x56297, 0xAD
+    @ npc script 0x08056344..0x08056380
+    npc_op 0x08
+    npc_set_sprite 0x02
+    npc_jump_if_phase 0x26, 0x2A, dat_080563C0
+    npc_jump_if_phase 0x20, 0x22, dat_080563B0
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_080563A0
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_080563A0
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_080563A0
+    npc_jump_if_phase 0x15, 0x16, dat_080563A0
+    npc_jump_if_phase 0x10, 0x12, dat_08056390
+    npc_jump_if_phase 0x04, 0x07, dat_08056380
+    npc_hide
+    @ npc script 0x08056380..0x08056390
+    npc_set_talk 0x00
+    npc_set_pos 0xFFCC, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056390..0x080563A0
+    npc_set_talk 0x00
+    npc_set_pos 0xFFE0, 0x000C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080563A0..0x080563B0
+    npc_set_talk 0x0F
+    npc_set_pos 0xFFCC, 0x000E, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080563B0..0x080563C0
+    npc_set_talk 0x00
+    npc_set_pos 0xFFCC, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080563C0..0x080563D0
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFCC, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080563D0..0x08056405
+    npc_op 0x08
+    npc_set_sprite 0x21
+    npc_jump_if_phase 0x20, 0x22, dat_08056435
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08056425
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08056425
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08056425
+    npc_jump_if_phase 0x15, 0x16, dat_08056425
+    npc_jump_if_phase 0x10, 0x12, dat_08056415
+    npc_jump_if_phase 0x08, 0x0A, dat_08056405
+    npc_hide
+    @ npc script 0x08056405..0x08056415
+    npc_set_talk 0x08
+    npc_set_pos 0xFFCC, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056415..0x08056425
+    npc_set_talk 0x01
+    npc_set_pos 0xFFCC, 0x000C, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08056425..0x08056435
+    npc_set_talk 0x10
+    npc_set_pos 0xFFCC, 0x002A, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08056435..0x08056445
+    npc_set_talk 0x01
+    npc_set_pos 0xFFCA, 0x0014, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    incrom 0x56445, 0xB
+    @ npc script 0x08056450..0x080564B6
+    npc_op 0x08
+    npc_set_sprite 0x03
+    npc_jump_if_phase 0x26, 0x2A, dat_0805653C
+    npc_jump_if_phase 0x20, 0x22, dat_0805652C
+    npc_jump_if_phase 0x4B, 0x4C, dat_0805654C
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08056519
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08056519
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08056519
+    npc_jump_if_phase 0x15, 0x16, dat_08056509
+    npc_jump_if_phase 0x10, 0x12, dat_080564F9
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_080564E6
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_080564E6
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_080564E6
+    npc_jump_if_phase 0x08, 0x0A, dat_080564C6
+    npc_jump_if_phase 0x05, 0x07, dat_080564B6
+    npc_jump_if_phase 0x04, 0x04, dat_080564D6
+    npc_hide
+    @ npc script 0x080564B6..0x080564C6
+    npc_set_talk 0x00
+    npc_set_pos 0x0006, 0xFFEC, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080564C6..0x080564D6
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFAA, 0x0058, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080564D6..0x080564E6
+    npc_set_talk 0x03
+    npc_set_pos 0xFFFE, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080564E6..0x080564F9
+    npc_set_talk 0x19
+    npc_set_pos 0xFFAA, 0x001A, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x080564F9..0x08056509
+    npc_set_talk 0x00
+    npc_set_pos 0xFFFE, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056509..0x08056519
+    npc_set_talk 0x0F
+    npc_set_pos 0xFFFE, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056519..0x0805652C
+    npc_set_talk 0x14
+    npc_set_pos 0xFFAA, 0x001A, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x0805652C..0x0805653C
+    npc_set_talk 0x00
+    npc_set_pos 0xFFFE, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805653C..0x0805654C
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFFE, 0xFFFC, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805654C..0x0805654D
+    npc_hide
+    incrom 0x5654D, 0x3
     @ ptr table 0x08056550..0x08056560 (4 entries)
     .4byte dat_08056564
     .4byte dat_08056658
     .4byte dat_080567A8
     .4byte dat_08056820
-    incrom 0x56560, 0x310
+    incrom 0x56560, 0x4
+    @ npc script 0x08056564..0x080565CA
+    npc_op 0x08
+    npc_set_sprite 0x08
+    npc_jump_if_phase 0x26, 0x2A, dat_08056640
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08056640
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08056640
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08056640
+    npc_jump_if_phase 0x20, 0x22, dat_08056640
+    npc_jump_if_phase 0x57, 0x57, dat_0805661F
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08056601
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08056601
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08056601
+    npc_jump_if_phase 0x42, 0x42, dat_080565EA
+    npc_jump_if_phase 0x10, 0x2A, dat_08056601
+    npc_jump_if_phase 0x07, 0x07, dat_080565DA
+    npc_jump_if_phase 0x06, 0x06, dat_0805662F
+    npc_jump_if_phase 0x04, 0x05, dat_080565CA
+    npc_hide
+    @ npc script 0x080565CA..0x080565DA
+    npc_set_talk 0x00
+    npc_set_pos 0xFFD2, 0xFFE0, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080565DA..0x080565EA
+    npc_set_talk 0x0F
+    npc_set_pos 0xFFC0, 0x0000, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080565EA..0x08056601
+    npc_jump_if_flag_set 0x07C2, dat_08056657
+    npc_set_talk 0x1E
+    npc_set_pos 0xFFF2, 0x0030, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08056601..0x0805661F
+    npc_jump_if_phase 0x57, 0x57, dat_0805661F
+    npc_op 0x1F
+    npc_b3 0x0C, 0x00, 0x10, 0x00
+    npc_b1 0x0A, 0x06
+    npc_set_talk 0x03
+    npc_set_pos 0x000A, 0x000A, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805661F..0x0805662F
+    npc_set_talk 0x00
+    npc_set_pos 0xFFF2, 0x0030, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805662F..0x08056640
+    npc_set_talk 0x0A
+    npc_op 0x13
+    npc_set_pos 0xFFD2, 0xFFE0, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056640..0x08056657
+    npc_op 0x1F
+    npc_b3 0x0C, 0x00, 0x10, 0x00
+    npc_b1 0x0A, 0x06
+    npc_set_talk 0x28
+    npc_set_pos 0x000A, 0x000A, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056657..0x08056658
+    npc_hide
+    @ npc script 0x08056658..0x080566DA
+    npc_op 0x08
+    npc_set_sprite 0x1B
+    npc_jump_if_phase 0x26, 0x2A, dat_08056798
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08056788
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08056788
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08056788
+    npc_jump_if_phase 0x20, 0x22, dat_08056778
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08056768
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08056768
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08056768
+    npc_jump_if_phase 0x15, 0x16, dat_08056758
+    npc_jump_if_phase 0x10, 0x12, dat_08056748
+    npc_jump_if_phase 0x42, 0x43, dat_080566FA
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08056711
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08056711
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08056711
+    npc_jump_if_phase 0x08, 0x0A, dat_08056738
+    npc_jump_if_phase 0x07, 0x07, dat_080566EA
+    npc_jump_if_phase 0x05, 0x06, dat_08056727
+    npc_jump_if_phase 0x04, 0x04, dat_080566DA
+    npc_hide
+    @ npc script 0x080566DA..0x080566EA
+    npc_set_talk 0x01
+    npc_set_pos 0xFFAC, 0xFFE0, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080566EA..0x080566FA
+    npc_set_talk 0x10
+    npc_set_pos 0x0010, 0x0040, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080566FA..0x08056711
+    npc_op 0x1F
+    npc_b3 0x0C, 0x00, 0x0E, 0x00
+    npc_b1 0x0A, 0x06
+    npc_set_talk 0x28
+    npc_set_pos 0x000A, 0x000C, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056711..0x08056727
+    npc_b3 0x0C, 0x00, 0x0E, 0x00
+    npc_b1 0x0A, 0x06
+    npc_set_talk 0x1B
+    npc_set_pos 0x000A, 0x000A, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056727..0x08056738
+    npc_set_talk 0x06
+    npc_op 0x13
+    npc_set_pos 0xFFAC, 0xFFE0, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08056738..0x08056748
+    npc_set_talk 0x14
+    npc_set_pos 0x0010, 0x0040, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056748..0x08056758
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFD2, 0x000E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08056758..0x08056768
+    npc_set_talk 0x19
+    npc_set_pos 0xFFD0, 0x0010, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056768..0x08056778
+    npc_set_talk 0x23
+    npc_set_pos 0x0010, 0x0040, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056778..0x08056788
+    npc_set_talk 0x00
+    npc_set_pos 0x0020, 0x0050, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08056788..0x08056798
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFDE, 0x0030, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08056798..0x080567A8
+    npc_set_talk 0x19
+    npc_set_pos 0xFFB0, 0x002E, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080567A8..0x08056800
+    npc_op 0x08
+    npc_set_sprite 0x0A
+    npc_jump_if_phase 0x27, 0x28, dat_08056810
+    npc_jump_if_phase 0x26, 0x26, dat_08056810
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08056810
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08056810
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08056810
+    npc_jump_if_phase 0x22, 0x22, dat_08056810
+    npc_jump_if_phase 0x20, 0x20, dat_08056810
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08056810
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08056810
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08056810
+    npc_jump_if_phase 0x10, 0x16, dat_08056810
+    npc_jump_if_phase 0x04, 0x0A, dat_08056800
+    npc_hide
+    @ npc script 0x08056800..0x08056810
+    npc_set_talk 0x02
+    npc_set_pos 0xFFA0, 0x003E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08056810..0x08056820
+    npc_set_talk 0x0B
+    npc_set_pos 0xFFAC, 0xFFDA, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08056820..0x0805682B
+    npc_op 0x08
+    npc_set_sprite 0x0C
+    npc_jump_if_phase 0x12, 0x16, dat_0805682B
+    npc_hide
+    @ npc script 0x0805682B..0x0805683B
+    npc_set_talk 0x15
+    npc_set_pos 0xFF90, 0x004E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    incrom 0x5683B, 0x35
     @ ptr table 0x08056870..0x08056884 (5 entries)
     .4byte dat_080A8EE8
     .4byte dat_08056888
@@ -8351,7 +9371,11 @@ dat_08056F74:
     ms_end
     @ map script 0x08056FF4..0x08056FF5
     ms_end
-    incrom 0x56FF5, 0x2A
+    incrom 0x56FF5, 0xF
+    @ npc script 0x08057004..0x0805700A
+    npc_ptr 0x1C, 0x1601C7FF
+    npc_end
+    incrom 0x5700A, 0x15
     @ map-init dispatch 0x0805701F..0x08057032
     cs_range 0x00, 0x0F, dat_08057032
     cs_range 0x60, 0x6F, dat_080570F0
@@ -8620,7 +9644,287 @@ dat_08056F74:
     .4byte dat_080578D1
     .4byte dat_080578FB
     .4byte dat_08057927
-    incrom 0x57584, 0x3F0
+    incrom 0x57584, 0x4
+    @ npc script 0x08057588..0x080575FC
+    npc_op 0x08
+    npc_set_sprite 0x0C
+    npc_jump_if_phase 0x26, 0x28, dat_08057675
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08057662
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08057662
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08057662
+    npc_jump_if_phase 0x22, 0x22, dat_08057652
+    npc_jump_if_phase 0x20, 0x20, dat_08057652
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08057642
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08057642
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08057642
+    npc_jump_if_phase 0x10, 0x16, dat_0805762F
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805761C
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805761C
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805761C
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805761C
+    npc_jump_if_phase 0x08, 0x09, dat_0805760C
+    npc_jump_if_phase 0x02, 0x07, dat_080575FC
+    npc_hide
+    @ npc script 0x080575FC..0x0805760C
+    npc_set_talk 0x00
+    npc_set_pos 0x005E, 0x008A, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805760C..0x0805761C
+    npc_set_talk 0x19
+    npc_set_pos 0x0038, 0x0016, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805761C..0x0805762F
+    npc_set_talk 0x23
+    npc_set_pos 0x00A2, 0x011E, 0x0000
+    npc_set_facing 0x07
+    npc_call_ex 0x07, 0x06, 0x04, dat_080A8F20
+    @ npc script 0x0805762F..0x08057642
+    npc_set_talk 0x00
+    npc_set_pos 0x0040, 0x0012, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x04, dat_080A8F38
+    @ npc script 0x08057642..0x08057652
+    npc_set_talk 0x14
+    npc_set_pos 0x00A4, 0x0100, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057652..0x08057662
+    npc_set_talk 0x00
+    npc_set_pos 0x005E, 0x00BC, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057662..0x08057675
+    npc_set_talk 0x14
+    npc_set_pos 0x005E, 0x00BC, 0x0000
+    npc_set_facing 0x07
+    npc_call_ex 0x07, 0x06, 0x08, dat_080A8F20
+    @ npc script 0x08057675..0x08057685
+    npc_set_talk 0x2D
+    npc_set_pos 0x002C, 0x0012, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057685..0x080576B3
+    npc_op 0x08
+    npc_set_sprite 0x0F
+    npc_jump_if_phase 0x26, 0x28, dat_080576E3
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_080576C3
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_080576C3
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_080576C3
+    npc_jump_if_phase 0x15, 0x16, dat_080576D3
+    npc_jump_if_phase 0x02, 0x07, dat_080576B3
+    npc_hide
+    @ npc script 0x080576B3..0x080576C3
+    npc_set_talk 0x01
+    npc_set_pos 0xFF5C, 0x0006, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080576C3..0x080576D3
+    npc_set_talk 0x15
+    npc_set_pos 0xFFBA, 0x0010, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080576D3..0x080576E3
+    npc_set_talk 0x10
+    npc_set_pos 0xFFBA, 0x0010, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080576E3..0x080576F3
+    npc_set_talk 0x2E
+    npc_set_pos 0x0092, 0x0108, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080576F3..0x08057728
+    npc_op 0x08
+    npc_set_sprite 0x19
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805775B
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805775B
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805775B
+    npc_jump_if_phase 0x22, 0x22, dat_08057748
+    npc_jump_if_phase 0x20, 0x20, dat_08057748
+    npc_jump_if_phase 0x10, 0x14, dat_08057738
+    npc_jump_if_phase 0x02, 0x03, dat_08057728
+    npc_hide
+    @ npc script 0x08057728..0x08057738
+    npc_set_talk 0x02
+    npc_set_pos 0x0028, 0x0010, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057738..0x08057748
+    npc_set_talk 0x01
+    npc_set_pos 0x005C, 0x0080, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057748..0x0805775B
+    npc_set_talk 0x01
+    npc_set_pos 0x005E, 0x0042, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x06, dat_080A8F08
+    @ npc script 0x0805775B..0x0805776B
+    npc_set_talk 0x15
+    npc_set_pos 0xFFB2, 0x0018, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805776B..0x080577BC
+    npc_op 0x08
+    npc_set_sprite 0x1A
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_080577FC
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_080577FC
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_080577FC
+    npc_jump_if_phase 0x22, 0x22, dat_080577EC
+    npc_jump_if_phase 0x20, 0x20, dat_080577EC
+    npc_jump_if_phase 0x10, 0x14, dat_080577DC
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_080577CC
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_080577CC
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_080577CC
+    npc_jump_if_phase 0x0A, 0x0A, dat_080577CC
+    npc_jump_if_phase 0x02, 0x03, dat_080577BC
+    npc_hide
+    @ npc script 0x080577BC..0x080577CC
+    npc_set_talk 0x03
+    npc_set_pos 0x004C, 0x0042, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080577CC..0x080577DC
+    npc_set_talk 0x24
+    npc_set_pos 0x005E, 0x0048, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080577DC..0x080577EC
+    npc_set_talk 0x02
+    npc_set_pos 0x005E, 0x0090, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080577EC..0x080577FC
+    npc_set_talk 0x02
+    npc_set_pos 0x0034, 0x0014, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080577FC..0x0805780C
+    npc_set_talk 0x16
+    npc_set_pos 0xFF98, 0x0016, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805780C..0x08057825
+    npc_op 0x08
+    npc_set_sprite 0x0D
+    npc_jump_if_phase 0x29, 0x2A, dat_08057845
+    npc_jump_if_phase 0x26, 0x28, dat_08057835
+    npc_jump_if_phase 0x02, 0x04, dat_08057825
+    npc_hide
+    @ npc script 0x08057825..0x08057835
+    npc_set_talk 0x04
+    npc_set_pos 0xFF2C, 0xFFB0, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057835..0x08057845
+    npc_set_talk 0x2F
+    npc_set_pos 0xFF2E, 0xFF44, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057845..0x08057855
+    npc_set_talk 0x37
+    npc_set_pos 0xFF48, 0xFFE8, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057855..0x08057867
+    npc_op 0x08
+    npc_set_sprite 0x05
+    npc_jump_if_flag_set 0x0308, dat_08057877
+    npc_jump_if_phase 0x02, 0x04, dat_08057867
+    npc_hide
+    @ npc script 0x08057867..0x08057877
+    npc_set_talk 0x05
+    npc_set_pos 0x0060, 0x0104, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8FB0
+    @ npc script 0x08057877..0x08057878
+    npc_hide
+    @ npc script 0x08057878..0x08057883
+    npc_op 0x08
+    npc_set_sprite 0x20
+    npc_jump_if_phase 0x3B, 0x3B, dat_08057883
+    npc_hide
+    @ npc script 0x08057883..0x0805788B
+    npc_jump_if_flag_set 0x0709, dat_0805788B
+    npc_hide
+    @ npc script 0x0805788B..0x0805789B
+    npc_set_talk 0x82
+    npc_set_pos 0xFF74, 0xFFDE, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805789B..0x080578AE
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_set_talk 0xDC
+    npc_set_pos 0xFF7C, 0xFFA2, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080578AE..0x080578B9
+    npc_op 0x08
+    npc_set_sprite 0x24
+    npc_jump_if_phase 0x3B, 0x3B, dat_080578B9
+    npc_hide
+    @ npc script 0x080578B9..0x080578C1
+    npc_jump_if_flag_set 0x0709, dat_080578C1
+    npc_hide
+    @ npc script 0x080578C1..0x080578D1
+    npc_set_talk 0x84
+    npc_set_pos 0xFF7E, 0xFFEA, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080578D1..0x080578FA
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_jump_if_phase 0x29, 0x2A, dat_080578FA
+    npc_set_pos 0xFFF0, 0x0148, 0x0000
+    npc_set_facing 0x0B
+    npc_b3 0x15, 0x07, 0x20, 0x19
+    npc_set_facing 0x0A
+    npc_b3 0x15, 0x05, 0x20, 0x1D
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_080578D1
+    @ npc script 0x080578FA..0x080578FB
+    npc_hide
+    @ npc script 0x080578FB..0x08057926
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_b1 0x0F, 0x01
+    npc_jump_if_phase 0x29, 0x2A, dat_08057926
+    npc_set_pos 0xFF08, 0x0048, 0x0000
+    npc_set_facing 0x08
+    npc_b3 0x15, 0x01, 0x20, 0x24
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x20, 0x20
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_080578FB
+    @ npc script 0x08057926..0x08057927
+    npc_hide
+    @ npc script 0x08057927..0x08057963
+    npc_op 0x08
+    npc_set_sprite 0x15
+    npc_jump_if_phase 0x26, 0x2A, dat_08057963
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08057963
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08057963
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08057963
+    npc_jump_if_phase 0x20, 0x22, dat_08057963
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08057963
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08057963
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08057963
+    npc_hide
+    @ npc script 0x08057963..0x08057973
+    npc_set_talk 0x46
+    npc_set_pos 0x0050, 0x0140, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    incrom 0x57973, 0x1
     @ ptr table 0x08057974..0x080579A4 (12 entries)
     .4byte dat_080579A8
     .4byte dat_08057A03
@@ -8634,7 +9938,344 @@ dat_08056F74:
     .4byte dat_08057D89
     .4byte dat_08057DC0
     .4byte dat_08057DEA
-    incrom 0x579A4, 0x474
+    incrom 0x579A4, 0x4
+    @ npc script 0x080579A8..0x080579CF
+    npc_op 0x08
+    npc_set_sprite 0x01
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_080579F1
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_080579F1
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_080579F1
+    npc_jump_if_phase 0x10, 0x12, dat_080579DF
+    npc_jump_if_phase 0x02, 0x02, dat_080579CF
+    npc_hide
+    @ npc script 0x080579CF..0x080579DF
+    npc_set_talk 0x00
+    npc_set_pos 0xFF6E, 0x0040, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080579DF..0x080579F1
+    npc_set_sprite 0x0A
+    npc_set_talk 0x02
+    npc_set_pos 0xFFB2, 0x0068, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080579F1..0x08057A03
+    npc_set_sprite 0x0A
+    npc_set_talk 0x25
+    npc_set_pos 0xFFB2, 0x0068, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057A03..0x08057A0E
+    npc_op 0x08
+    npc_set_sprite 0x03
+    npc_jump_if_phase 0x02, 0x02, dat_08057A0E
+    npc_hide
+    @ npc script 0x08057A0E..0x08057A1E
+    npc_set_talk 0x01
+    npc_set_pos 0xFF6E, 0x002E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057A1E..0x08057A7D
+    npc_op 0x08
+    npc_set_sprite 0x11
+    npc_jump_if_phase 0x26, 0x2A, dat_08057AE4
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08057AD1
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08057AD1
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08057AD1
+    npc_jump_if_phase 0x22, 0x22, dat_08057ABE
+    npc_jump_if_phase 0x20, 0x20, dat_08057ABE
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08057AAE
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08057AAE
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08057AAE
+    npc_jump_if_flag_set 0x0313, dat_08057AAD
+    npc_jump_if_phase 0x05, 0x06, dat_08057A9D
+    npc_jump_if_flag_set 0x030B, dat_08057A8D
+    npc_jump_if_flag_set 0x030A, dat_08057A7D
+    npc_hide
+    @ npc script 0x08057A7D..0x08057A8D
+    npc_set_talk 0x06
+    npc_set_pos 0xFF6E, 0x0022, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057A8D..0x08057A9D
+    npc_set_talk 0x09
+    npc_set_pos 0xFF6E, 0x0022, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8ED4
+    @ npc script 0x08057A9D..0x08057AAD
+    npc_set_talk 0x06
+    npc_set_pos 0xFF6E, 0x0022, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057AAD..0x08057AAE
+    npc_hide
+    @ npc script 0x08057AAE..0x08057ABE
+    npc_set_talk 0x24
+    npc_set_pos 0xFF74, 0x0006, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057ABE..0x08057AD1
+    npc_op 0x08
+    npc_set_sprite 0x0F
+    npc_set_talk 0x00
+    npc_set_pos 0xFFAE, 0x006C, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057AD1..0x08057AE4
+    npc_op 0x08
+    npc_set_sprite 0x0F
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFAE, 0x006C, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8ED4
+    @ npc script 0x08057AE4..0x08057AF7
+    npc_op 0x08
+    npc_set_sprite 0x11
+    npc_set_talk 0x1A
+    npc_set_pos 0xFF74, 0x001A, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057AF7..0x08057B33
+    npc_op 0x08
+    npc_set_sprite 0x12
+    npc_jump_if_phase 0x26, 0x2A, dat_08057B74
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08057B64
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08057B64
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08057B64
+    npc_jump_if_flag_set 0x0313, dat_08057B63
+    npc_jump_if_phase 0x05, 0x06, dat_08057B53
+    npc_jump_if_flag_set 0x030B, dat_08057B43
+    npc_jump_if_flag_set 0x030A, dat_08057B33
+    npc_hide
+    @ npc script 0x08057B33..0x08057B43
+    npc_set_talk 0x07
+    npc_set_pos 0xFF6E, 0x0044, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057B43..0x08057B53
+    npc_set_talk 0x0A
+    npc_set_pos 0xFF6E, 0x0044, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8ED4
+    @ npc script 0x08057B53..0x08057B63
+    npc_set_talk 0x07
+    npc_set_pos 0xFF6E, 0x0044, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057B63..0x08057B64
+    npc_hide
+    @ npc script 0x08057B64..0x08057B74
+    npc_set_talk 0x23
+    npc_set_pos 0x0040, 0x006C, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057B74..0x08057B84
+    npc_set_talk 0x19
+    npc_set_pos 0xFFE4, 0x006E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057B84..0x08057BE3
+    npc_op 0x08
+    npc_set_sprite 0x17
+    npc_jump_if_phase 0x15, 0x16, dat_08057C59
+    npc_jump_if_phase 0x10, 0x12, dat_08057C59
+    npc_jump_if_flag_set 0x0300, dat_08057C6C
+    npc_jump_if_flag_set 0x031B, dat_08057C6C
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08057C48
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08057C48
+    npc_jump_if_phase 0x08, 0x0A, dat_08057C48
+    npc_jump_if_phase 0x07, 0x07, dat_08057C13
+    npc_jump_if_phase 0x05, 0x06, dat_08057C03
+    npc_jump_if_flag_set 0x030B, dat_08057BF3
+    npc_jump_if_flag_set 0x030A, dat_08057BE3
+    npc_jump_if_flag_set 0x0309, dat_08057C24
+    npc_jump_if_flag_set 0x0307, dat_08057C34
+    npc_hide
+    @ npc script 0x08057BE3..0x08057BF3
+    npc_set_talk 0x08
+    npc_set_pos 0xFF6E, 0x0032, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057BF3..0x08057C03
+    npc_set_talk 0x0B
+    npc_set_pos 0xFF6E, 0x0032, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8ED4
+    @ npc script 0x08057C03..0x08057C13
+    npc_set_talk 0x0B
+    npc_set_pos 0xFF6E, 0x0032, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C13..0x08057C24
+    npc_op 0x13
+    npc_set_talk 0x1A
+    npc_set_pos 0xFF6E, 0x002E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C24..0x08057C34
+    npc_set_talk 0x12
+    npc_set_pos 0x0056, 0x006C, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C34..0x08057C48
+    npc_op 0x08
+    npc_set_sprite 0x17
+    npc_op 0x13
+    npc_set_talk 0x12
+    npc_set_pos 0x0056, 0x006C, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C48..0x08057C59
+    npc_op 0x13
+    npc_set_talk 0x1F
+    npc_set_pos 0xFF76, 0x0000, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C59..0x08057C6C
+    npc_set_talk 0x01
+    npc_set_pos 0xFF76, 0xFFF0, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x04, dat_080A8F08
+    @ npc script 0x08057C6C..0x08057C6D
+    npc_hide
+    @ npc script 0x08057C6D..0x08057C86
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_phase 0x15, 0x15, dat_08057C97
+    npc_jump_if_flag_set 0x0311, dat_08057C96
+    npc_jump_if_flag_set 0x030D, dat_08057C86
+    npc_hide
+    @ npc script 0x08057C86..0x08057C96
+    npc_set_talk 0x17
+    npc_set_pos 0xFF76, 0xFF72, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057C96..0x08057C97
+    npc_hide
+    @ npc script 0x08057C97..0x08057CA7
+    npc_set_talk 0x14
+    npc_set_pos 0xFF88, 0xFF9C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057CA7..0x08057CE3
+    npc_op 0x08
+    npc_set_sprite 0x18
+    npc_jump_if_phase 0x15, 0x16, dat_08057D1A
+    npc_jump_if_phase 0x10, 0x12, dat_08057D1A
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08057D09
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08057D09
+    npc_jump_if_phase 0x08, 0x0A, dat_08057D09
+    npc_jump_if_phase 0x07, 0x07, dat_08057CE3
+    npc_jump_if_flag_set 0x0309, dat_08057D08
+    npc_jump_if_flag_set 0x0307, dat_08057CF4
+    npc_hide
+    @ npc script 0x08057CE3..0x08057CF4
+    npc_op 0x13
+    npc_set_talk 0x19
+    npc_set_pos 0xFF6E, 0x001E, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08057CF4..0x08057D08
+    npc_op 0x08
+    npc_set_sprite 0x18
+    npc_op 0x13
+    npc_set_talk 0x0E
+    npc_set_pos 0x0068, 0x006C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D08..0x08057D09
+    npc_hide
+    @ npc script 0x08057D09..0x08057D1A
+    npc_op 0x13
+    npc_set_talk 0x1E
+    npc_set_pos 0xFF76, 0x0016, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D1A..0x08057D2A
+    npc_set_talk 0x00
+    npc_set_pos 0xFF74, 0x0058, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D2A..0x08057D35
+    npc_op 0x08
+    npc_set_sprite 0x19
+    npc_jump_if_phase 0x07, 0x07, dat_08057D35
+    npc_hide
+    @ npc script 0x08057D35..0x08057D45
+    npc_set_talk 0x1B
+    npc_set_pos 0x0024, 0x006C, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D45..0x08057D55
+    npc_op 0x08
+    npc_jump_if_phase 0x36, 0x37, dat_08057D55
+    npc_jump_if_phase 0x38, 0x38, dat_08057D6E
+    npc_hide
+    @ npc script 0x08057D55..0x08057D6E
+    npc_jump_if_flag_clear 0x0682, dat_08057D88
+    npc_set_sprite 0x19
+    npc_set_talk 0x8C
+    npc_set_pos 0xFFC0, 0x0070, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D6E..0x08057D88
+    npc_jump_if_flag_set 0x06C4, dat_08057D88
+    npc_op 0x13
+    npc_set_sprite 0x1E
+    npc_set_talk 0x96
+    npc_set_pos 0xFFB2, 0x006E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08057D88..0x08057D89
+    npc_hide
+    @ npc script 0x08057D89..0x08057DB0
+    npc_op 0x08
+    npc_set_sprite 0x0E
+    npc_jump_if_phase 0x36, 0x37, dat_08057DB0
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08057DB0
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08057DB0
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_08057DB0
+    npc_jump_if_phase 0x08, 0x0A, dat_08057DB0
+    npc_hide
+    @ npc script 0x08057DB0..0x08057DC0
+    npc_set_talk 0x20
+    npc_set_pos 0xFF74, 0xFFBE, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08057DC0..0x08057DE9
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_jump_if_phase 0x29, 0x2A, dat_08057DE9
+    npc_set_pos 0x008A, 0x00D4, 0x0000
+    npc_set_facing 0x0A
+    npc_b3 0x15, 0x05, 0x20, 0x30
+    npc_set_facing 0x0B
+    npc_b3 0x15, 0x07, 0x20, 0x27
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_08057DC0
+    @ npc script 0x08057DE9..0x08057DEA
+    npc_hide
+    @ npc script 0x08057DEA..0x08057E15
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_b1 0x0F, 0x01
+    npc_jump_if_phase 0x29, 0x2A, dat_08057E15
+    npc_set_pos 0xFF40, 0xFF94, 0x0000
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x20, 0x22
+    npc_set_facing 0x08
+    npc_b3 0x15, 0x01, 0x20, 0x29
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_08057DEA
+    @ npc script 0x08057E15..0x08057E16
+    npc_hide
+    incrom 0x57E16, 0x2
     @ ptr table 0x08057E18..0x08057E2C (5 entries)
     .4byte dat_08057E30
     .4byte dat_08057C34
@@ -8682,7 +10323,380 @@ dat_08056F74:
     .4byte dat_080584D6
     .4byte dat_080584F1
     .4byte dat_08058527
-    incrom 0x58090, 0x4D0
+    incrom 0x58090, 0x4
+    @ npc script 0x08058094..0x08058108
+    npc_op 0x08
+    npc_set_sprite 0x09
+    npc_jump_if_phase 0x27, 0x28, dat_0805817E
+    npc_jump_if_phase 0x26, 0x26, dat_0805816E
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805815D
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805815D
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805815D
+    npc_jump_if_phase 0x22, 0x22, dat_0805814C
+    npc_jump_if_phase 0x20, 0x20, dat_0805814C
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_0805813B
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_0805813B
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_0805813B
+    npc_jump_if_phase 0x15, 0x16, dat_0805812A
+    npc_jump_if_phase 0x10, 0x12, dat_0805812A
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08058119
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08058119
+    npc_jump_if_flag_set 0x030A, dat_08058118
+    npc_jump_if_phase 0x03, 0x03, dat_08058108
+    npc_hide
+    @ npc script 0x08058108..0x08058118
+    npc_set_talk 0x00
+    npc_set_pos 0xFFE8, 0x006C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08058118..0x08058119
+    npc_hide
+    @ npc script 0x08058119..0x0805812A
+    npc_set_talk 0x2D
+    npc_op 0x13
+    npc_set_pos 0xFF6C, 0x009C, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805812A..0x0805813B
+    npc_set_talk 0x00
+    npc_op 0x13
+    npc_set_pos 0xFF68, 0x0068, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805813B..0x0805814C
+    npc_set_talk 0x19
+    npc_op 0x13
+    npc_set_pos 0xFF68, 0x0068, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805814C..0x0805815D
+    npc_set_talk 0x00
+    npc_op 0x13
+    npc_set_pos 0xFFC0, 0x005C, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805815D..0x0805816E
+    npc_set_talk 0x0A
+    npc_op 0x13
+    npc_set_pos 0xFFA8, 0x006E, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805816E..0x0805817E
+    npc_set_talk 0x1A
+    npc_set_pos 0x0002, 0x0072, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805817E..0x0805818F
+    npc_op 0x13
+    npc_set_talk 0x1A
+    npc_set_pos 0xFFC2, 0x0062, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8ED4
+    @ npc script 0x0805818F..0x08058203
+    npc_op 0x08
+    npc_set_sprite 0x0B
+    npc_jump_if_phase 0x27, 0x28, dat_08058279
+    npc_jump_if_phase 0x26, 0x26, dat_08058269
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_08058258
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_08058258
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_08058258
+    npc_jump_if_phase 0x22, 0x22, dat_08058247
+    npc_jump_if_phase 0x20, 0x20, dat_08058247
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_08058236
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_08058236
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_08058236
+    npc_jump_if_phase 0x15, 0x16, dat_08058225
+    npc_jump_if_phase 0x10, 0x12, dat_08058225
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_08058214
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_08058214
+    npc_jump_if_flag_set 0x030A, dat_08058213
+    npc_jump_if_phase 0x03, 0x03, dat_08058203
+    npc_hide
+    @ npc script 0x08058203..0x08058213
+    npc_set_talk 0x01
+    npc_set_pos 0xFFAE, 0x0060, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x08058213..0x08058214
+    npc_hide
+    @ npc script 0x08058214..0x08058225
+    npc_set_talk 0x2E
+    npc_op 0x13
+    npc_set_pos 0xFF84, 0x009C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08058225..0x08058236
+    npc_set_talk 0x01
+    npc_op 0x13
+    npc_set_pos 0xFF68, 0x007E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08058236..0x08058247
+    npc_set_talk 0x1A
+    npc_op 0x13
+    npc_set_pos 0xFF68, 0x007E, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08058247..0x08058258
+    npc_set_talk 0x01
+    npc_op 0x13
+    npc_set_pos 0xFFC0, 0x0074, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08058258..0x08058269
+    npc_op 0x13
+    npc_set_talk 0x0B
+    npc_set_pos 0xFFC0, 0x0070, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08058269..0x08058279
+    npc_set_talk 0x1B
+    npc_set_pos 0x0002, 0x005C, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08058279..0x0805828A
+    npc_op 0x13
+    npc_set_talk 0x1B
+    npc_set_pos 0xFFD8, 0x0050, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8ED4
+    @ npc script 0x0805828A..0x08058295
+    npc_op 0x08
+    npc_set_sprite 0x0E
+    npc_jump_if_phase 0x03, 0x03, dat_08058295
+    npc_hide
+    @ npc script 0x08058295..0x080582AA
+    npc_jump_if_flag_set 0x030A, dat_080582AA
+    npc_set_pos 0xFFE2, 0x0056, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080582AA..0x080582AB
+    npc_hide
+    @ npc script 0x080582AB..0x080582B6
+    npc_op 0x08
+    npc_set_sprite 0x0D
+    npc_jump_if_phase 0x03, 0x03, dat_080582B6
+    npc_hide
+    @ npc script 0x080582B6..0x080582CB
+    npc_jump_if_flag_set 0x030A, dat_080582CB
+    npc_set_pos 0xFFC8, 0x007C, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x080582CB..0x080582CC
+    npc_hide
+    @ npc script 0x080582CC..0x080582FA
+    npc_op 0x08
+    npc_set_sprite 0x15
+    npc_jump_if_phase 0x29, 0x2A, dat_08058340
+    npc_jump_if_phase 0x27, 0x28, dat_08058330
+    npc_jump_if_phase 0x26, 0x26, dat_08058320
+    npc_jump_if_phase 0x40, 0x40, dat_08058350
+    npc_jump_if_phase 0x07, 0x07, dat_08058310
+    npc_jump_if_phase 0x03, 0x03, dat_080582FA
+    npc_hide
+    @ npc script 0x080582FA..0x0805830F
+    npc_jump_if_flag_set 0x030A, dat_0805830F
+    npc_set_pos 0xFFB8, 0x0074, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805830F..0x08058310
+    npc_hide
+    @ npc script 0x08058310..0x08058320
+    npc_set_talk 0x01
+    npc_set_pos 0xFF84, 0x001A, 0x0050
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058320..0x08058330
+    npc_set_talk 0x19
+    npc_set_pos 0xFFC4, 0x003A, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08058330..0x08058340
+    npc_set_talk 0x19
+    npc_set_pos 0xFFC2, 0x0050, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058340..0x08058350
+    npc_set_talk 0x23
+    npc_set_pos 0xFFC2, 0x0050, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058350..0x08058367
+    npc_jump_if_flag_set 0x0783, dat_08058367
+    npc_set_sprite 0x27
+    npc_set_pos 0xFFE2, 0x0046, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058367..0x08058368
+    npc_hide
+    @ npc script 0x08058368..0x08058381
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_phase 0x40, 0x40, dat_08058391
+    npc_jump_if_phase 0x07, 0x07, dat_08058381
+    npc_jump_if_phase 0x03, 0x03, dat_080583A8
+    npc_hide
+    @ npc script 0x08058381..0x08058391
+    npc_set_talk 0x00
+    npc_set_pos 0xFFB0, 0x0032, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058391..0x080583A8
+    npc_jump_if_flag_set 0x0783, dat_080583BF
+    npc_set_sprite 0x26
+    npc_set_pos 0xFFC8, 0x004A, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080583A8..0x080583BF
+    npc_set_sprite 0x0F
+    npc_jump_if_flag_set 0x030A, dat_080583BF
+    npc_set_pos 0xFFC8, 0x0058, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080583BF..0x080583C0
+    npc_hide
+    @ npc script 0x080583C0..0x080583D2
+    npc_op 0x08
+    npc_set_sprite 0x0F
+    npc_jump_if_phase 0x09, 0x0A, dat_080583E2
+    npc_jump_if_phase 0x08, 0x08, dat_080583D2
+    npc_hide
+    @ npc script 0x080583D2..0x080583E2
+    npc_set_talk 0x0A
+    npc_set_pos 0xFFC8, 0x0058, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080583E2..0x080583F2
+    npc_set_talk 0x0F
+    npc_set_pos 0xFFC8, 0x0058, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080583F2..0x08058404
+    npc_op 0x08
+    npc_set_sprite 0x19
+    npc_jump_if_flag_set 0x0606, dat_08058414
+    npc_jump_if_flag_set 0x0602, dat_08058404
+    npc_hide
+    @ npc script 0x08058404..0x08058414
+    npc_set_talk 0x82
+    npc_set_pos 0xFF64, 0xFFBA, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08058414..0x08058415
+    npc_hide
+    @ npc script 0x08058415..0x0805842E
+    npc_jump_if_phase 0x54, 0x54, dat_08058460
+    npc_jump_if_phase 0x39, 0x39, dat_0805843E
+    npc_op 0x08
+    npc_set_sprite 0x14
+    npc_jump_if_phase 0x09, 0x0A, dat_0805842E
+    npc_hide
+    @ npc script 0x0805842E..0x0805843E
+    npc_set_talk 0x11
+    npc_set_pos 0xFFF4, 0x0050, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805843E..0x0805845F
+    npc_op 0x08
+    npc_set_sprite 0x1E
+    npc_jump_if_flag_clear 0x06C6, dat_0805845F
+    npc_jump_if_flag_set 0x06C7, dat_0805845F
+    npc_set_talk 0x00
+    npc_set_pos 0xFFF4, 0x0050, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805845F..0x08058460
+    npc_hide
+    @ npc script 0x08058460..0x08058481
+    npc_op 0x08
+    npc_set_sprite 0x07
+    npc_jump_if_flag_clear 0x0943, dat_08058481
+    npc_jump_if_flag_set 0x0944, dat_08058481
+    npc_set_talk 0x32
+    npc_set_pos 0x0000, 0x0068, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08058481..0x08058482
+    npc_hide
+    @ npc script 0x08058482..0x08058494
+    npc_jump_if_phase 0x39, 0x39, dat_080584A4
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_phase 0x09, 0x0A, dat_08058494
+    npc_hide
+    @ npc script 0x08058494..0x080584A4
+    npc_set_talk 0x17
+    npc_set_pos 0xFFF4, 0x0060, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080584A4..0x080584C5
+    npc_op 0x08
+    npc_set_sprite 0x28
+    npc_jump_if_flag_clear 0x06C6, dat_080584D5
+    npc_jump_if_flag_set 0x06C7, dat_080584C5
+    npc_set_talk 0x00
+    npc_set_pos 0xFFD4, 0x0050, 0x0000
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x080584C5..0x080584D5
+    npc_set_talk 0x8C
+    npc_set_pos 0xFFF4, 0x0040, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x080584D5..0x080584D6
+    npc_hide
+    @ npc script 0x080584D6..0x080584E1
+    npc_op 0x08
+    npc_set_sprite 0x16
+    npc_jump_if_phase 0x09, 0x0A, dat_080584E1
+    npc_hide
+    @ npc script 0x080584E1..0x080584F1
+    npc_set_talk 0x1E
+    npc_set_pos 0xFFF4, 0x0070, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x080584F1..0x08058526
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_jump_if_phase 0x29, 0x2A, dat_08058526
+    npc_set_pos 0xFF6C, 0x00EA, 0x0000
+    npc_set_facing 0x0B
+    npc_b3 0x15, 0x07, 0x18, 0x01
+    npc_set_facing 0x0A
+    npc_b3 0x15, 0x05, 0x18, 0x0A
+    npc_set_facing 0x0B
+    npc_b3 0x15, 0x07, 0x18, 0x06
+    npc_set_facing 0x0B
+    npc_b3 0x15, 0x07, 0x20, 0x1F
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_080584F1
+    @ npc script 0x08058526..0x08058527
+    npc_hide
+    @ npc script 0x08058527..0x0805855F
+    npc_op 0x08
+    npc_op 0x13
+    npc_op 0x0E
+    npc_b2 0x25, 0x24, 0x1C
+    npc_b1 0x0F, 0x01
+    npc_jump_if_phase 0x29, 0x2A, dat_0805855F
+    npc_set_pos 0xFF40, 0xFFBC, 0x0000
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x20, 0x1B
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x18, 0x06
+    npc_set_facing 0x08
+    npc_b3 0x15, 0x01, 0x18, 0x0B
+    npc_set_facing 0x09
+    npc_b3 0x15, 0x03, 0x18, 0x04
+    npc_b1 0x10, 0x01
+    npc_op 0x09
+    npc_b1 0x10, 0x1E
+    npc_jump dat_08058527
+    @ npc script 0x0805855F..0x08058560
+    npc_hide
     @ ptr table 0x08058560..0x08058584 (9 entries)
     .4byte dat_08058588
     .4byte dat_080585C2
@@ -8998,7 +11012,9 @@ dat_08059434:
     ms_jump dat_0805961F
     @ map script 0x0805961F..0x08059620
     ms_end
-    incrom 0x59620, 0xC
+    @ npc script 0x08059620..0x08059621
+    npc_hide
+    incrom 0x59621, 0xB
     @ map-init dispatch 0x0805962C..0x08059638
     cs_range 0x30, 0x3F, dat_08059638
     cs_jump dat_080596FC
@@ -9441,7 +11457,417 @@ dat_08059434:
     .4byte dat_0805A461
     .4byte dat_0805A4AA
     .4byte dat_0805A4E6
-    incrom 0x59F2C, 0x5EC
+    incrom 0x59F2C, 0x4
+    @ npc script 0x08059F30..0x08059F3F
+    npc_op 0x08
+    npc_set_sprite 0x1F
+    npc_jump_if_phase 0x36, 0x36, dat_08059F3F
+    npc_jump dat_08059F56
+    @ npc script 0x08059F3F..0x08059F56
+    npc_jump_if_flag_set 0x0682, dat_08059F56
+    npc_set_talk 0x8C
+    npc_set_pos 0x0068, 0x006C, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08059F56..0x08059F57
+    npc_hide
+    @ npc script 0x08059F57..0x08059F82
+    npc_op 0x08
+    npc_set_sprite 0x25
+    npc_jump_if_phase 0x34, 0x35, dat_08059FAB
+    npc_jump_if_phase 0x33, 0x33, dat_08059F82
+    npc_jump_if_phase 0x15, 0x15, dat_0805A015
+    npc_jump_if_phase 0x10, 0x12, dat_0805A005
+    npc_jump_if_phase 0x0A, 0x0A, dat_08059FF5
+    npc_jump dat_08059FF4
+    @ npc script 0x08059F82..0x08059F99
+    npc_set_talk 0x82
+    npc_jump_if_flag_set 0x0642, dat_08059F99
+    npc_set_pos 0xFF30, 0xFFDC, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x08059F99..0x08059FAB
+    npc_b3 0x0C, 0x00, 0x04, 0x00
+    npc_set_pos 0xFF30, 0xFFC4, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08059FAB..0x08059FD4
+    npc_set_talk 0x88
+    npc_jump_if_flag_set 0x0646, dat_08059FF4
+    npc_jump_if_flag_set 0x0645, dat_08059FE2
+    npc_jump_if_flag_set 0x0644, dat_08059FD4
+    npc_b3 0x0C, 0x00, 0x04, 0x00
+    npc_set_pos 0xFF30, 0xFFC4, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08059FD4..0x08059FE2
+    npc_set_pos 0xFF42, 0xFFDC, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x08059FE2..0x08059FF4
+    npc_b3 0x0C, 0x00, 0x04, 0x00
+    npc_set_pos 0xFF30, 0xFFC4, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x08059FF4..0x08059FF5
+    npc_hide
+    @ npc script 0x08059FF5..0x0805A005
+    npc_set_talk 0x05
+    npc_set_pos 0xFF4C, 0xFFDA, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A005..0x0805A015
+    npc_set_talk 0x01
+    npc_set_pos 0xFF48, 0xFFDA, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A015..0x0805A025
+    npc_set_talk 0x17
+    npc_set_pos 0xFF48, 0xFFDA, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A025..0x0805A03B
+    npc_op 0x08
+    npc_set_sprite 0x1D
+    npc_jump_if_phase 0x3A, 0x3B, dat_0805A05A
+    npc_jump_if_phase 0x34, 0x34, dat_0805A03B
+    npc_jump dat_0805A06D
+    @ npc script 0x0805A03B..0x0805A05A
+    npc_jump_if_flag_set 0x0645, dat_0805A06D
+    npc_jump_if_flag_clear 0x0644, dat_0805A06D
+    npc_set_talk 0x87
+    npc_op 0x13
+    npc_set_pos 0xFF30, 0xFFE0, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A05A..0x0805A06D
+    npc_op 0x08
+    npc_set_sprite 0x23
+    npc_set_talk 0x91
+    npc_set_pos 0xFFD2, 0xFFE8, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A06D..0x0805A06E
+    npc_hide
+    @ npc script 0x0805A06E..0x0805A0A3
+    npc_op 0x08
+    npc_set_sprite 0x0D
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_0805A0F9
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_0805A0E7
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_0805A0D5
+    npc_jump_if_phase 0x16, 0x16, dat_0805A0C3
+    npc_jump_if_phase 0x15, 0x15, dat_0805A0B3
+    npc_jump_if_phase 0x10, 0x12, dat_0805A10B
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A0A3
+    npc_hide
+    @ npc script 0x0805A0A3..0x0805A0B3
+    npc_set_talk 0x00
+    npc_set_pos 0x004C, 0x0036, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A0B3..0x0805A0C3
+    npc_set_talk 0x14
+    npc_set_pos 0xFF80, 0xFFAC, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A0C3..0x0805A0D5
+    npc_set_sprite 0x10
+    npc_set_talk 0x1E
+    npc_set_pos 0xFFAE, 0xFFCA, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A0D5..0x0805A0E7
+    npc_set_sprite 0x10
+    npc_set_talk 0x1F
+    npc_set_pos 0x000E, 0x004A, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A0E7..0x0805A0F9
+    npc_set_sprite 0x10
+    npc_set_talk 0x20
+    npc_set_pos 0x0048, 0x0050, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A0F9..0x0805A10B
+    npc_set_sprite 0x10
+    npc_set_talk 0x21
+    npc_set_pos 0x001C, 0x0033, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A10B..0x0805A11D
+    npc_set_sprite 0x0D
+    npc_set_talk 0x02
+    npc_set_pos 0xFFCA, 0xFFBC, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A11D..0x0805A167
+    npc_op 0x08
+    npc_set_sprite 0x0A
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805A1CD
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805A1CD
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805A1CD
+    npc_jump_if_phase 0x22, 0x22, dat_0805A1BD
+    npc_jump_if_phase 0x20, 0x20, dat_0805A1BD
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_0805A1AA
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_0805A197
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_0805A187
+    npc_jump_if_phase 0x15, 0x16, dat_0805A177
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A167
+    npc_hide
+    @ npc script 0x0805A167..0x0805A177
+    npc_set_talk 0x01
+    npc_set_pos 0x004E, 0x0042, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A177..0x0805A187
+    npc_set_talk 0x28
+    npc_set_pos 0x004E, 0x00D8, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A187..0x0805A197
+    npc_set_talk 0x29
+    npc_set_pos 0x0060, 0x006A, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A197..0x0805A1AA
+    npc_set_talk 0x2A
+    npc_set_pos 0x006E, 0x006C, 0x0040
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x10, dat_080A8F38
+    @ npc script 0x0805A1AA..0x0805A1BD
+    npc_set_talk 0x2B
+    npc_set_pos 0x006E, 0x006C, 0x0040
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x10, dat_080A8F38
+    @ npc script 0x0805A1BD..0x0805A1CD
+    npc_set_talk 0x00
+    npc_set_pos 0x006C, 0x009A, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A1CD..0x0805A1E0
+    npc_set_talk 0x14
+    npc_set_pos 0xFFBC, 0xFFBC, 0x0040
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x10, 0x08, dat_080A8F08
+    @ npc script 0x0805A1E0..0x0805A207
+    npc_op 0x08
+    npc_set_sprite 0x0E
+    npc_jump_if_tourney_eq 0x01, 0x02, dat_0805A24D
+    npc_jump_if_tourney_eq 0x01, 0x01, dat_0805A23B
+    npc_jump_if_tourney_eq 0x01, 0x00, dat_0805A229
+    npc_jump_if_phase 0x15, 0x16, dat_0805A217
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A207
+    npc_hide
+    @ npc script 0x0805A207..0x0805A217
+    npc_set_talk 0x02
+    npc_set_pos 0x004E, 0x0052, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A217..0x0805A229
+    npc_set_sprite 0x0F
+    npc_set_talk 0x32
+    npc_set_pos 0xFF32, 0x00B6, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A229..0x0805A23B
+    npc_set_sprite 0x0F
+    npc_set_talk 0x33
+    npc_set_pos 0xFF32, 0x00B6, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A23B..0x0805A24D
+    npc_set_sprite 0x0F
+    npc_set_talk 0x34
+    npc_set_pos 0xFF32, 0x00B6, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A24D..0x0805A25F
+    npc_set_sprite 0x0F
+    npc_set_talk 0x35
+    npc_set_pos 0xFF32, 0x00B6, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A25F..0x0805A29B
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_phase 0x29, 0x2A, dat_0805A2BE
+    npc_jump_if_phase 0x26, 0x28, dat_0805A2AB
+    npc_jump_if_phase 0x15, 0x15, dat_0805A2E1
+    npc_jump_if_phase 0x10, 0x12, dat_0805A2CE
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805A29B
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805A29B
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805A29B
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A29B
+    npc_hide
+    @ npc script 0x0805A29B..0x0805A2AB
+    npc_set_talk 0x03
+    npc_set_pos 0x0038, 0x0028, 0x0040
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A2AB..0x0805A2BE
+    npc_set_talk 0x32
+    npc_set_pos 0xFF9C, 0x003C, 0x0040
+    npc_set_facing 0x01
+    npc_call_ex 0x01, 0x08, 0x16, dat_080A8EF0
+    @ npc script 0x0805A2BE..0x0805A2CE
+    npc_set_talk 0x3C
+    npc_set_pos 0xFFBC, 0xFFBC, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A2CE..0x0805A2E1
+    npc_set_talk 0x00
+    npc_set_pos 0xFFBE, 0x003A, 0x0040
+    npc_set_facing 0x01
+    npc_call_ex 0x01, 0x08, 0x16, dat_080A8EF0
+    @ npc script 0x0805A2E1..0x0805A2F1
+    npc_set_talk 0x16
+    npc_set_pos 0xFF28, 0xFFE0, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A2F1..0x0805A342
+    npc_op 0x08
+    npc_set_sprite 0x10
+    npc_jump_if_phase 0x29, 0x2A, dat_0805A38D
+    npc_jump_if_phase 0x26, 0x28, dat_0805A378
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805A365
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805A365
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805A365
+    npc_jump_if_phase 0x22, 0x22, dat_0805A352
+    npc_jump_if_phase 0x20, 0x20, dat_0805A352
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805A342
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805A342
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805A342
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A342
+    npc_hide
+    @ npc script 0x0805A342..0x0805A352
+    npc_set_talk 0x04
+    npc_set_pos 0xFF80, 0x005E, 0x0040
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A352..0x0805A365
+    npc_set_talk 0x01
+    npc_set_pos 0xFF34, 0x0054, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x08, dat_080A8F08
+    @ npc script 0x0805A365..0x0805A378
+    npc_set_talk 0x15
+    npc_set_pos 0x006A, 0x006C, 0x0040
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x06, 0x06, dat_080A8F38
+    @ npc script 0x0805A378..0x0805A38D
+    npc_set_sprite 0x15
+    npc_set_talk 0x33
+    npc_set_pos 0xFF34, 0x0054, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x03, 0x06, 0x06, dat_080A8F08
+    @ npc script 0x0805A38D..0x0805A39F
+    npc_set_sprite 0x15
+    npc_set_talk 0x3D
+    npc_set_pos 0x003E, 0x006C, 0x0040
+    npc_set_facing 0x05
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A39F..0x0805A3E2
+    npc_op 0x08
+    npc_set_sprite 0x1A
+    npc_jump_if_tourney_eq 0x02, 0x02, dat_0805A404
+    npc_jump_if_tourney_eq 0x02, 0x01, dat_0805A404
+    npc_jump_if_tourney_eq 0x02, 0x00, dat_0805A404
+    npc_jump_if_phase 0x22, 0x22, dat_0805A3F2
+    npc_jump_if_phase 0x20, 0x20, dat_0805A3F2
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805A3E2
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805A3E2
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805A3E2
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A3E2
+    npc_hide
+    @ npc script 0x0805A3E2..0x0805A3F2
+    npc_set_talk 0x06
+    npc_set_pos 0x0050, 0x00DC, 0x0000
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A3F2..0x0805A404
+    npc_set_sprite 0x15
+    npc_set_talk 0x02
+    npc_set_pos 0xFF88, 0x0058, 0x0040
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A404..0x0805A416
+    npc_set_sprite 0x15
+    npc_set_talk 0x16
+    npc_set_pos 0xFF20, 0xFFE0, 0x0040
+    npc_set_facing 0x01
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A416..0x0805A43D
+    npc_op 0x08
+    npc_set_sprite 0x15
+    npc_jump_if_phase 0x3D, 0x3F, dat_0805A450
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805A43D
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805A43D
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805A43D
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A43D
+    npc_hide
+    @ npc script 0x0805A43D..0x0805A450
+    npc_set_talk 0x07
+    npc_set_pos 0xFF1E, 0x001C, 0x0000
+    npc_set_facing 0x03
+    npc_call_ex 0x03, 0x06, 0x06, dat_080A8F08
+    @ npc script 0x0805A450..0x0805A460
+    npc_set_talk 0x07
+    npc_set_pos 0xFF0C, 0x0014, 0x0000
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    incrom 0x5A460, 0x1
+    @ npc script 0x0805A461..0x0805A488
+    npc_op 0x08
+    npc_set_sprite 0x0C
+    npc_jump_if_phase 0x15, 0x15, dat_0805A498
+    npc_jump_if_tourney_eq 0x00, 0x02, dat_0805A488
+    npc_jump_if_tourney_eq 0x00, 0x01, dat_0805A488
+    npc_jump_if_tourney_eq 0x00, 0x00, dat_0805A488
+    npc_jump_if_phase 0x0A, 0x0A, dat_0805A488
+    npc_hide
+    @ npc script 0x0805A488..0x0805A498
+    npc_set_talk 0x08
+    npc_set_pos 0xFFD2, 0x0058, 0x0040
+    npc_set_facing 0x07
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A498..0x0805A4AA
+    npc_set_sprite 0x26
+    npc_set_talk 0x18
+    npc_set_pos 0x0062, 0x0094, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8FB0
+    @ npc script 0x0805A4AA..0x0805A4BC
+    npc_op 0x08
+    npc_set_sprite 0x3F
+    npc_jump_if_phase 0x15, 0x15, dat_0805A4D4
+    npc_jump_if_phase 0x3D, 0x3D, dat_0805A4BC
+    npc_hide
+    @ npc script 0x0805A4BC..0x0805A4D3
+    npc_jump_if_flag_set 0x0743, dat_0805A4D3
+    npc_set_talk 0x96
+    npc_set_pos 0x0032, 0x008C, 0x0040
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
+    @ npc script 0x0805A4D3..0x0805A4D4
+    npc_hide
+    @ npc script 0x0805A4D4..0x0805A4E6
+    npc_set_sprite 0x0B
+    npc_set_talk 0x19
+    npc_set_pos 0xFF94, 0x00D4, 0x0000
+    npc_set_facing 0x05
+    npc_call dat_080A8FB0
+    @ npc script 0x0805A4E6..0x0805A503
+    npc_op 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x24, 0x1C
+    npc_jump_if_phase 0x29, 0x2A, dat_0805A515
+    npc_set_pos 0x009A, 0x0102, 0x0000
+    npc_set_facing 0x05
+    npc_call_ex 0x05, 0x20, 0x38, dat_080A9008
+    incrom 0x5A503, 0x12
+    @ npc script 0x0805A515..0x0805A516
+    npc_hide
+    incrom 0x5A516, 0x2
     @ ptr table 0x0805A518..0x0805A540 (10 entries)
     .4byte dat_0805A544
     .4byte dat_0805A58D

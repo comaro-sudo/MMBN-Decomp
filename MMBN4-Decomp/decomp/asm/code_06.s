@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
     .global sub_08094758
@@ -3489,7 +3490,10 @@ _0809E414:
     .4byte dat_0809EA01
     .4byte dat_0809EA3E
     .4byte dat_0809EA6B
-    incrom 0x9E9A4, 0x1F0
+    incrom 0x9E9A4, 0x1BF
+    @ npc script 0x0809EB63..0x0809EB64
+    npc_hide
+    incrom 0x9EB64, 0x30
     .global dat_0809EB94
 dat_0809EB94:
     @ cutscene script 0x0809EB94..0x0809EB97
@@ -18553,7 +18557,77 @@ _080A8ECC:
     .word 0x00000D80
 _080A8ED0:
     .word 0x00000400
-    incrom 0xA8ED4, 0x164
+    @ npc script 0x080A8ED4..0x080A8EE7
+    npc_op 0x22
+    npc_b2 0x11, 0x9E, 0xDC
+    npc_op 0x21
+    npc_b1 0x10, 0x0F
+    npc_op 0x22
+    npc_b2 0x11, 0x9E, 0xDC
+    npc_op 0x21
+    npc_b1 0x10, 0x78
+    npc_jump dat_080A8ED4
+    incrom 0xA8EE7, 0x1
+    @ npc script 0x080A8EE8..0x080A8EEF
+    npc_b1 0x10, 0x01
+    npc_jump dat_080A8EE8
+    incrom 0xA8EEF, 0x1
+    @ npc script 0x080A8EF0..0x080A8F05
+    npc_set_facing 0x08
+    npc_b1 0x39, 0x00
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x0A
+    npc_b1 0x39, 0x04
+    npc_set_facing 0x05
+    npc_b1 0x10, 0x3C
+    npc_jump dat_080A8EF0
+    incrom 0xA8F05, 0x3
+    @ npc script 0x080A8F08..0x080A8F1D
+    npc_set_facing 0x09
+    npc_b1 0x39, 0x00
+    npc_set_facing 0x03
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x0B
+    npc_b1 0x39, 0x04
+    npc_set_facing 0x07
+    npc_b1 0x10, 0x3C
+    npc_jump dat_080A8F08
+    incrom 0xA8F1D, 0x3
+    @ npc script 0x080A8F20..0x080A8F35
+    npc_set_facing 0x0B
+    npc_b1 0x39, 0x00
+    npc_set_facing 0x07
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x09
+    npc_b1 0x39, 0x04
+    npc_set_facing 0x03
+    npc_b1 0x10, 0x3C
+    npc_jump dat_080A8F20
+    incrom 0xA8F35, 0x3
+    @ npc script 0x080A8F38..0x080A8F4D
+    npc_set_facing 0x0A
+    npc_b1 0x39, 0x00
+    npc_set_facing 0x05
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x08
+    npc_b1 0x39, 0x04
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x3C
+    npc_jump dat_080A8F38
+    incrom 0xA8F4D, 0x63
+    @ npc script 0x080A8FB0..0x080A8FBD
+    npc_set_facing 0x05
+    npc_b1 0x10, 0x3C
+    npc_set_facing 0x03
+    npc_b1 0x10, 0x3C
+    npc_jump dat_080A8FB0
+    incrom 0xA8FBD, 0x4B
+    @ npc script 0x080A9008..0x080A900D
+    npc_set_facing 0x0A
+    npc_b1 0x39, 0x00
+    npc_ret
+    incrom 0xA900D, 0x2B
 
     .global sub_080A9038
     .thumb_func
