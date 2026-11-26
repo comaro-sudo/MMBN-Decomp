@@ -154,6 +154,13 @@ enum EmotionState EmotionOnCounterHit(enum EmotionState cur, s16 karma);
 enum EmotionState EmotionOnTakeHit(enum EmotionState cur, u16 damage, u16 maxHp);
 u8 EmotionChipDamageMultiplier(enum EmotionState cur);
 
+/* core_enemy_ai.c */
+u16 BossCalcSpRecordBonus(u32 bestFrames);
+u16 BossScaleSpPlusHp(u16 baseHp);
+u16 BossScaleSpPlusAtk(u16 baseAtk);
+u16 BossScaleSpPlusSpeed(u16 baseSpeed);
+u8 BossAdvanceRematchRank(u8 currentRank, u8 bustingLevel, int requireSRank);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -473,6 +480,22 @@ static void test_emotion_and_karma(void) {
     assert(EmotionChipDamageMultiplier(EMOTION_NORMAL) == 1);
 }
 
+static void test_enemy_ai_and_sp_scaling(void) {
+    assert(BossCalcSpRecordBonus(0) == 0);
+    assert(BossCalcSpRecordBonus(600) == 100);  /* 10.0s -> +100 */
+    assert(BossCalcSpRecordBonus(1200) == 50);  /* 20.0s -> +50 */
+    assert(BossCalcSpRecordBonus(1800) == 0);   /* 30.0s -> +0 */
+
+    assert(BossScaleSpPlusHp(2500) == 4095);
+    assert(BossScaleSpPlusHp(1200) == 2400);
+    assert(BossScaleSpPlusAtk(200) == 300);
+    assert(BossScaleSpPlusSpeed(100) == 125);
+
+    assert(BossAdvanceRematchRank(0, 10, 1) == 0); /* needs S-rank */
+    assert(BossAdvanceRematchRank(0, 11, 1) == 1);
+    assert(BossAdvanceRematchRank(4, 11, 1) == 4); /* capped at SP+ */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -483,6 +506,7 @@ int main(void) {
     test_battle_grid_and_damage();
     test_custom_screen_and_pa();
     test_emotion_and_karma();
+    test_enemy_ai_and_sp_scaling();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
