@@ -475,6 +475,18 @@ u32 OverworldAabbOverlap(s32 ax, s32 ay, s32 ahw, s32 ahh,
 u32 OverworldCanTalkToNpc(s32 px, s32 py, u8 facing,
                           s32 nx, s32 ny, s32 reach, s32 npcRadius);
 
+/* --- core_chip_combo.c --- */
+u16 ChipApplyFlatModifiers(u16 baseDamage, u16 flatBonus, u8 panelsStolen);
+u16 ChipCalcFinalDamage(u16 baseDamage, u16 flatBonus,
+                        enum EmotionState emotion,
+                        u8 attackerElem, u8 defenderElem, u8 panelState);
+
+/* --- core_net_security.c --- */
+u32 NetCanOpenBlackEarthGate(const struct Toolkit *tk, u32 soulMask,
+                             u32 requiredSouls, u16 gateFlag);
+u32 NetCanUnlockSecurityCube(const struct Toolkit *tk, u16 openedFlag, u8 keyItemId);
+u8 NetResolveTunerTier(const struct Toolkit *tk, u8 tunerSetting);
+
 #ifdef __cplusplus
 }
 #endif

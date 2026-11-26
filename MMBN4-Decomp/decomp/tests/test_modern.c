@@ -767,6 +767,30 @@ static void test_chip_effects_souls_and_npc(void) {
     assert(OverworldCanTalkToNpc(100, 100, 6, 114, 100, 12, 8) == 0u); /* facing West away from NPC */
 }
 
+static void test_chip_combo_and_net_security(void) {
+    struct Toolkit tk;
+
+    /* Chip combo damage pipeline: (100 + 30) * 2 (FullSynchro) * 2 (Fire vs Wood) * 2 (Grass) = 1040 */
+    assert(ChipApplyFlatModifiers(100, 30, 3) == 160u);
+    assert(ChipCalcFinalDamage(100, 30, EMOTION_FULL_SYNCHRO, 1, 4, 4) == 1040u);
+    assert(ChipCalcFinalDamage(100, 0, EMOTION_NORMAL, 0, 0, 7) == 50u); /* Holy halves */
+
+    /* Black Earth gate, security cube & Violet Eclipse Frequency Tuner */
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+
+    assert(NetCanOpenBlackEarthGate(&tk, 0x001Fu, 6, 0) == 0u); /* only 5 Souls */
+    assert(NetCanOpenBlackEarthGate(&tk, 0x003Fu, 6, 0) == 1u); /* 6 Souls OK */
+    assert(NetCanUnlockSecurityCube(&tk, 0x0200, 12) == 0u);
+    AddItemClamped(&tk, 12, 1, 1);
+    assert(NetCanUnlockSecurityCube(&tk, 0x0200, 12) == 1u);
+
+    tk.progress->playthrough = 0;
+    assert(NetResolveTunerTier(&tk, 0) == 0u); /* Auto -> 1st run */
+    assert(NetResolveTunerTier(&tk, 3) == 2u); /* Forced SuperHard -> tier 2 */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -790,6 +814,7 @@ int main(void) {
     test_boss_patterns_and_fade();
     test_fixed_math();
     test_chip_effects_souls_and_npc();
+    test_chip_combo_and_net_security();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
