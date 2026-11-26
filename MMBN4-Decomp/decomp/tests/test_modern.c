@@ -87,6 +87,28 @@ int MysteryDataSetSlot(struct Toolkit *tk, u16 flag, u8 lo, u8 hi);
 u16 MysteryDataGetSlot(const struct Toolkit *tk, u16 flag);
 u32 MysteryDataResetList(struct Toolkit *tk, const struct MysteryDataEntry *entries);
 
+/* core_shop.c */
+struct ShopStockEntry {
+    u8 type;
+    u8 qty;
+    u16 id;
+    u8 code;
+    u8 isNew;
+    u16 price;
+};
+u32 ShopPriceToMoney(u32 shopKind, u16 rawPrice);
+struct ShopStockEntry *ShopGetStock(struct Toolkit *tk, u8 shopIndex);
+int ShopHasStock(const struct ShopStockEntry *slots, u32 slotCount);
+int ShopTakeStock(struct ShopStockEntry *slots, u32 slotCount, u8 type, u16 id, u8 code, int shiftUp);
+int ShopRestockItem(struct ShopStockEntry *slots, u32 slotCount, u16 id);
+
+/* core_navicust.c */
+void NaviCustClearGrid(struct Toolkit *tk);
+int NaviCustSetCell(struct Toolkit *tk, u8 x, u8 y, u8 slotIndex);
+u8 NaviCustGetCell(const struct Toolkit *tk, u8 x, u8 y);
+u32 NaviCustCountPlaced(const struct Toolkit *tk);
+int NaviCustOnCommandLine(const struct Toolkit *tk, u8 slotIndex);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -291,12 +313,49 @@ static void test_world_tournaments_and_md(void) {
     assert(!EventFlagTest(&tk, 0x0D07));
 }
 
+static void test_shop_and_navicust(void) {
+    struct Toolkit tk;
+    struct ShopStockEntry *s0;
+
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x020);
+
+    /* Shop pricing & stock */
+    assert(ShopPriceToMoney(0, 76) == 7600u);
+    assert(ShopPriceToMoney(1, 100) == 100u);
+
+    s0 = ShopGetStock(&tk, 0);
+    s0[0].type = 1; s0[0].qty = 1; s0[0].id = 160; s0[0].code = 0xFF; s0[0].price = 25;
+    s0[1].type = 2; s0[1].qty = 0xFF; s0[1].id = 1; s0[1].code = 0; s0[1].price = 8;
+    assert(ShopHasStock(s0, 8) == 1);
+    assert(ShopTakeStock(s0, 8, 1, 160, 0xFF, 1) == 1);
+    assert(s0[0].type == 2 && s0[0].id == 1); /* shifted up */
+    assert(ShopTakeStock(s0, 8, 2, 1, 0, 1) == 1);
+    assert(s0[0].qty == 0xFF); /* unlimited stays 0xFF */
+    s0[0].qty = 2;
+    assert(ShopRestockItem(s0, 8, 1) == 1);
+    assert(s0[0].qty == 3);
+
+    /* NaviCust 5x5 grid & command line */
+    NaviCustClearGrid(&tk);
+    assert(NaviCustSetCell(&tk, 2, 2, 1) == 1);
+    assert(NaviCustSetCell(&tk, 5, 0, 1) == 0);
+    assert(NaviCustGetCell(&tk, 2, 2) == 1);
+    assert(NaviCustOnCommandLine(&tk, 1) == 1);
+    assert(NaviCustOnCommandLine(&tk, 2) == 0);
+    tk.naviCustPlaced[0] = 0xC0;
+    tk.naviCustPlaced[8] = 0xC1;
+    assert(NaviCustCountPlaced(&tk) == 2);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
     test_save_inventory_and_souls();
     test_battle_score_and_id_raise();
     test_world_tournaments_and_md();
+    test_shop_and_navicust();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

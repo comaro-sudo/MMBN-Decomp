@@ -49,7 +49,7 @@ Goal: Establish canonical C headers (`include/gba.h`, `include/structs.h`, `incl
 | **C1** | ~~**Core headers & Toolkit struct (`include/`):**~~ **DONE (2026-11-26):** `include/gba_types.h`, `include/gba_io.h`, `include/gamestate.h` (`MainState`, `JoypadState`, `GameState`, `ProgressState`), `include/toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`), and `include/battle.h` (`BattleChipData`, `BattleNaviState`, `DoubleSoulId`, RNG). Verified with `_Static_assert` + `gcc`/`agbcc`/`old_agbcc`. | Shared C headers |
 | **C2** | **Core utility & math (`code_00`):** *(In progress: `src/modern/core_progress.c` [11 funcs: game time, playthrough, RNG, event flags] + `src/modern/core_input.c` [5 funcs: `Joypad_Poll`, `CheckSoftReset`, `ZeroFillByWord`, `CopyBytes`, `CopyWords`], verified by `make modern-check`.)* Remaining: LZ77/VRAM/DMA queue helpers, OAM/sprite managers, `BN4_PLAY_MUSIC`. | `src/modern/core_*.c` |
 | **C3** | **Overworld, flags, save & inventory (`code_01`–`code_02`):** *(In progress: `src/modern/core_save.c` [5 funcs: `RebuildSavePointers`, `XorSaveImage`, `ComputeSaveChecksum`, `WriteSaveMagic`, `VerifySaveMagic`] + `src/modern/core_inventory.c` [9 funcs: `GetChipRecord`, folder bitfield helpers, `ChipPackCountById`, `AddZenny`, `AddBugFrags`, `GetItemCount`/`AddItemClamped`].)* Remaining: map loader, script interpreters. | `src/modern/core_*.c` |
-| **C4** | **Menus, text & UI (`code_03`–`code_04`):** *(Started 2026-11-26: `src/modern/core_world.c` [4 funcs: `TournamentGetRound`, `MysteryDataSetSlot`/`GetSlot`/`ResetList`], verified by `make modern-test`.)* Remaining: text/dialogue bytecode engine (`ScriptCmd_*`), PET menus (Folder, NaviCust, Mail, Status, Key Items, Network/Link), shops. | `src/modern/core_*.c` |
+| **C4** | **Menus, text & UI (`code_03`–`code_04`):** *(In progress: `src/modern/core_world.c` [4 funcs: tournaments + Mystery Data], `src/modern/core_shop.c` [5 funcs: `ShopPriceToMoney`, `ShopGetStock`, `ShopHasStock`, `ShopTakeStock`, `ShopRestockItem`], `src/modern/core_navicust.c` [5 funcs: 5×5 grid, placed count, Command Line check], all verified by `make modern-test`.)* Remaining: text/dialogue bytecode engine (`ScriptCmd_*`), PET menus. | `src/modern/core_*.c` |
 
 ---
 
@@ -70,7 +70,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 | Task | Scope | Target |
 |---|---|---|
 | **E1** | **100% matching RS & BM verification:** Both `make -B compare VERSION=rs` and `VERSION=bm` pass with 0 `incrom` code bytes left. | 100% matching decomp |
-| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 7 modules / 42 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
+| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 9 modules / 52 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
 
 ## Recommended Execution Order
 
