@@ -1234,3 +1234,14 @@
 08000B82 08000B82 code   GEMINI       PickRandomByte_PrimaryRNG        returns r0[GetPositiveSignedRNG() % r1]
 08000B96 08000B96 code   GEMINI       SortByteArrayAscending           in-place ascending sort of u8 array r0[0..r1)
 08000C00 08000C00 data   GEMINI       gBcdTimeDivisors                 frame-count divisor table (10h..1s) for BN4_BCD_TIME
+08000C6A 08000C6A code   GEMINI       FramesToHoursMinutesSeconds      divides 60fps frame count r0 into hours (r1), minutes (r2), seconds (r3), frames (r4)
+08000CD6 08000CD6 code   GEMINI       CompactByteArrayFF               compacts non-0xFF bytes in r0[0..r1) to front and pads tail with 0xFF
+08000CFC 08000CFC code   GEMINI       CompactHalfwordArrayFFFF         compacts non-0xFFFF halfwords in r0[0..r1) to front and pads tail with 0xFFFF
+08000EC0 08000EC0 code   GEMINI       NgPlus_BackupEventFlags          StartNewGamePlus: backs up persistent event-flag ranges into scratch buffer r7
+08000F0C 08000F0C code   GEMINI       NgPlus_RestoreEventFlags         StartNewGamePlus: restores persistent event-flag ranges from scratch buffer r7
+08001350 08001350 code   GEMINI       NgPlus_BackupSoulPool            StartNewGamePlus: backs up 0x020073A0 (0x30 B) if NGPLUS_POOL_SOUL_FLAG is set
+0800136A 0800136A code   GEMINI       NgPlus_RestoreSoulPool           StartNewGamePlus: restores 0x020073A0 (0x30 B) if NGPLUS_POOL_SOUL_FLAG is set
+0800138C 0800138C code   GEMINI       NgPlus_BackupMysteryData         StartNewGamePlus: backs up sl[+0x58] (0xDC0 B) into scratch buffer r7
+0800139E 0800139E code   GEMINI       NgPlus_RestoreMysteryData        StartNewGamePlus: restores sl[+0x58] (0xDC0 B) from scratch buffer r7
+080013B4 080013B4 code   GEMINI       NgPlus_BackupFoldersAndPack      StartNewGamePlus: backs up chip folders (sl[+0x4C]) & chip pack (sl[+0x50])
+080013EC 080013EC code   GEMINI       NgPlus_RestoreFoldersAndPack     StartNewGamePlus: restores chip folders (sl[+0x4C]) & chip pack (sl[+0x50])
