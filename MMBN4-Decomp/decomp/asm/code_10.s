@@ -16867,58 +16867,7 @@ _0811271C:
     bx ip
     .hword 0x0000
 
-    .global sub_08112720
-    .thumb_func
-sub_08112720:
-    push {r4, r5, r6, r7, lr}
-    mov ip, r0
-    lsls r1, r1, #0x18
-    lsrs r6, r1, #0x18
-    lsls r7, r2, #0x18
-    cmp r6, #0xb2
-    bls _08112734
-    movs r6, #0xb2
-    movs r7, #0xff
-    lsls r7, r7, #0x18
-_08112734:
-    ldr r3, _0811277C
-    adds r0, r6, r3
-    ldrb r5, [r0]
-    ldr r4, _08112780
-    movs r2, #0xf
-    adds r0, r5, #0
-    ands r0, r2
-    lsls r0, r0, #2
-    adds r0, r0, r4
-    lsrs r1, r5, #4
-    ldr r5, [r0]
-    lsrs r5, r1
-    adds r0, r6, #1
-    adds r0, r0, r3
-    ldrb r1, [r0]
-    adds r0, r1, #0
-    ands r0, r2
-    lsls r0, r0, #2
-    adds r0, r0, r4
-    lsrs r1, r1, #4
-    ldr r0, [r0]
-    lsrs r0, r1
-    mov r1, ip
-    ldr r4, [r1, #4]
-    subs r0, r0, r5
-    adds r1, r7, #0
-    bl sub_08111B04
-    adds r1, r0, #0
-    adds r1, r5, r1
-    adds r0, r4, #0
-    bl sub_08111B04
-    pop {r4, r5, r6, r7}
-    pop {r1}
-    bx r1
-_0811277C:
-    .word dat_0820A214
-_08112780:
-    .word dat_0820A2C8
+    .include "c/m4a_freq.s"
     .word 0x00004770
 
     .global sub_08112788
@@ -17144,151 +17093,8 @@ _08112A30:
 _08112A34:
     .word 0x7FFFFFFF
 
+    .set gMaxLines_0, 0
     .include "c/m4a_imminit.s"
-
-    .global sub_08112A80
-    .thumb_func
-sub_08112A80:
-    push {r4, r5, r6, lr}
-    sub sp, #4
-    adds r5, r0, #0
-    ldr r1, _08112B48
-    movs r0, #0x8f
-    strh r0, [r1]
-    ldr r3, _08112B4C
-    movs r2, #0
-    strh r2, [r3]
-    ldr r0, _08112B50
-    movs r1, #8
-    strb r1, [r0]
-    adds r0, #6
-    strb r1, [r0]
-    adds r0, #0x10
-    strb r1, [r0]
-    subs r0, #0x14
-    movs r1, #0x80
-    strb r1, [r0]
-    adds r0, #8
-    strb r1, [r0]
-    adds r0, #0x10
-    strb r1, [r0]
-    subs r0, #0xd
-    strb r2, [r0]
-    movs r0, #0x77
-    strb r0, [r3]
-    ldr r0, _08112B54
-    ldr r4, [r0]
-    ldr r6, [r4]
-    ldr r0, _08112B58
-    cmp r6, r0
-    bne _08112B40
-    adds r0, r6, #1
-    str r0, [r4]
-    ldr r1, _08112B5C
-    ldr r0, _08112B60
-    str r0, [r1, #0x20]
-    ldr r0, _08112B64
-    str r0, [r1, #0x44]
-    ldr r0, _08112B68
-    str r0, [r1, #0x4c]
-    ldr r0, _08112B6C
-    str r0, [r1, #0x70]
-    ldr r0, _08112B70
-    str r0, [r1, #0x74]
-    ldr r0, _08112B74
-    str r0, [r1, #0x78]
-    ldr r0, _08112B78
-    str r0, [r1, #0x7c]
-    adds r2, r1, #0
-    adds r2, #0x80
-    ldr r0, _08112B7C
-    str r0, [r2]
-    adds r1, #0x84
-    ldr r0, _08112B80
-    str r0, [r1]
-    str r5, [r4, #0x1c]
-    ldr r0, _08112B84
-    str r0, [r4, #0x28]
-    ldr r0, _08112B88
-    str r0, [r4, #0x2c]
-    ldr r0, _08112B8C
-    str r0, [r4, #0x30]
-    ldr r0, _08112B90
-    movs r1, #0
-    strb r0, [r4, #0xc]
-    str r1, [sp]
-    ldr r2, _08112B94
-    mov r0, sp
-    adds r1, r5, #0
-    bl sub_08111880
-    movs r0, #1
-    strb r0, [r5, #1]
-    movs r0, #0x11
-    strb r0, [r5, #0x1c]
-    adds r1, r5, #0
-    adds r1, #0x41
-    movs r0, #2
-    strb r0, [r1]
-    adds r1, #0x1b
-    movs r0, #0x22
-    strb r0, [r1]
-    adds r1, #0x25
-    movs r0, #3
-    strb r0, [r1]
-    adds r1, #0x1b
-    movs r0, #0x44
-    strb r0, [r1]
-    adds r1, #0x24
-    movs r0, #4
-    strb r0, [r1, #1]
-    movs r0, #0x88
-    strb r0, [r1, #0x1c]
-    str r6, [r4]
-_08112B40:
-    add sp, #4
-    pop {r4, r5, r6}
-    pop {r0}
-    bx r0
-_08112B48:
-    .word 0x04000084
-_08112B4C:
-    .word 0x04000080
-_08112B50:
-    .word 0x04000063
-_08112B54:
-    .word 0x03007FF0
-_08112B58:
-    .word 0x68736D53
-_08112B5C:
-    .word 0x03004650
-_08112B60:
-    .word sub_08113A3C
-_08112B64:
-    .word sub_081126F8
-_08112B68:
-    .word sub_0811270C
-_08112B6C:
-    .word sub_08113B94
-_08112B70:
-    .word sub_08112690
-_08112B74:
-    .word sub_08112CBC
-_08112B78:
-    .word sub_0811241C
-_08112B7C:
-    .word sub_081130A0
-_08112B80:
-    .word sub_08113168
-_08112B84:
-    .word sub_0811337C
-_08112B88:
-    .word sub_081132C4
-_08112B8C:
-    .word sub_0811321C
-_08112B90:
-    .word 0x00000000
-_08112B94:
-    .word 0x05000040
 
     .global sub_08112B98
     .thumb_func
@@ -18205,37 +18011,8 @@ _08113B8E:
     pop {r0}
     bx r0
 
-    .global sub_08113B94
-    .thumb_func
-sub_08113B94:
-    push {lr}
-    ldr r2, [r1, #0x40]
-    ldrb r3, [r2]
-    adds r2, #1
-    str r2, [r1, #0x40]
-    ldr r2, _08113BB0
-    lsls r3, r3, #2
-    adds r3, r3, r2
-    ldr r2, [r3]
-    bl sub_08111A38
-    pop {r0}
-    bx r0
-    .hword 0x0000
-_08113BB0:
-    .word dat_0820A42C
-
-    .global sub_08113BB4
-    .thumb_func
-sub_08113BB4:
-    push {lr}
-    ldr r2, _08113BC4
-    ldr r2, [r2]
-    bl sub_08111A38
-    pop {r0}
-    bx r0
-    .hword 0x0000
-_08113BC4:
-    .word 0x03004650
+    .thumb_set _call_via_r2, sub_08111A38
+    .include "c/m4a_xcmd.s"
 
     .global sub_08113BC8
     .thumb_func

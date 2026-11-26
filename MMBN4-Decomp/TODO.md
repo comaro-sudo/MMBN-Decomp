@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **74.4% decomp + 50 DC-5 C functions**.
+Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **74.4% decomp + 54 DC-5 C functions**.
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
@@ -15,7 +15,7 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [x] **Push to GitHub:** `origin/main` is up to date through PC (`27b37ef`), Wii U WU-6 (`a3f14ed`), New 3DS (`e01a011`), and **74.4% decomp + 50 DC-5 C functions**.
+- [x] **Push to GitHub:** `origin/main` is up to date through PC (`27b37ef`), Wii U WU-6 (`a3f14ed`), New 3DS (`e01a011`), and **74.4% decomp + 54 DC-5 C functions**.
 - [ ] **Merge Round 13 + EL-0/PC-2/Wii U commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-25)
@@ -43,7 +43,7 @@ Owner decisions marked ⚠ come first.
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
 | 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) → compile & test New 3DS `.3dsx` (install devkitPro `3ds-dev` interactively — `apt.devkitpro.org` is Cloudflare-gated for CLI) → DSi | **PC (EL-0..PC-6 ARM64+x64), Wii U (WU-1..WU-6 in Cemu), and New 3DS source (`ports/3ds/`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
-| 5 | **Decomp, long term ([`decomp-plan.md`](decomp/notes/decomp-plan.md)):** Finish Phase A (**A3–A5** remaining descriptor structs) & Phase B (**B1**: remaining `m4a` C functions), then Phases C–E (core engine & battle C) | **A1 & A2 done; A3 Parts 1–2 & A4/A5 ptr tables done (+50.4 KB)**, **B1 in progress (`50` C functions across 12 files + `gba_types.h`)**, **74.4%** coverage (`877,392 / 1,179,456` B; `77.7%` excl. `code_10` audio tail), RS & BM byte-identical |
+| 5 | **Decomp, long term ([`decomp-plan.md`](decomp/notes/decomp-plan.md)):** Finish Phase A (**A3–A5** remaining descriptor structs) & Phase B (**B1**: remaining `m4a` C functions), then Phases C–E (core engine & battle C) | **A1 & A2 done; A3 Parts 1–2 & A4/A5 ptr tables done (+50.4 KB)**, **B1 in progress (`54` C functions across 14 files + `gba_types.h`)**, **74.4%** coverage (`877,392 / 1,179,456` B; `77.7%` excl. `code_10` audio tail), RS & BM byte-identical |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
