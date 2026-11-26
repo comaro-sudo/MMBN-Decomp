@@ -740,6 +740,33 @@ static void test_fixed_math(void) {
     assert(dx == -1 && dy == 1);
 }
 
+static void test_chip_effects_souls_and_npc(void) {
+    struct BattlePanel grid[18];
+
+    /* AreaGrab, Geddon1, Sanctuary */
+    BattleGridInitDefault(grid);
+    assert(ChipApplyAreaGrab(grid, 0) == 3u); /* steals col 4 */
+    assert(grid[BattleGridIndex(4, 2)].owner == 0u);
+    assert(ChipApplyAreaGrab(grid, 0) == 3u); /* steals col 5 */
+    assert(ChipApplyAreaGrab(grid, 0) == 0u); /* col 6 preserved for enemy */
+    assert(ChipApplySanctuary(grid, 0) == 15u);
+    assert(grid[BattleGridIndex(1, 1)].state == 7u);
+    ChipApplyGeddon1(grid);
+    assert(grid[BattleGridIndex(1, 1)].state == 1u); /* cracked */
+
+    /* DoubleSoul & Violet Eclipse Duo Soul passives */
+    assert((SoulGetPassiveFlags(13) & ((1u << 0) | (1u << 1) | (1u << 3)))
+        == ((1u << 0) | (1u << 1) | (1u << 3))); /* Duo: Air+Float+Reflect */
+    assert(SoulGetNullChipBonus(SOUL_GUTS) == 30u);
+    assert(SoulGetNullChipBonus(SOUL_NUMBER) == 10u);
+
+    /* Overworld AABB & NPC talk-ray */
+    assert(OverworldAabbOverlap(10, 10, 8, 8, 20, 10, 8, 8) == 1u);
+    assert(OverworldAabbOverlap(10, 10, 4, 4, 30, 10, 4, 4) == 0u);
+    assert(OverworldCanTalkToNpc(100, 100, 2, 114, 100, 12, 8) == 1u); /* facing East toward NPC */
+    assert(OverworldCanTalkToNpc(100, 100, 6, 114, 100, 12, 8) == 0u); /* facing West away from NPC */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -762,6 +789,7 @@ int main(void) {
     test_camera_rewards_and_virus_ai();
     test_boss_patterns_and_fade();
     test_fixed_math();
+    test_chip_effects_souls_and_npc();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

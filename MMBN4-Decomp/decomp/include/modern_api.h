@@ -460,6 +460,21 @@ void StatusTick(struct BattleStatusState *st);
 u32 StatusIsImmobilized(const struct BattleStatusState *st);
 s32 StatusApplyHitBonus(struct BattleStatusState *st, s32 damage, u8 isBreak, u8 element);
 
+/* --- core_chip_effects.c --- */
+u32 ChipApplyAreaGrab(struct BattlePanel grid[18], u8 attackerOwner);
+void ChipApplyGeddon1(struct BattlePanel grid[18]);
+u32 ChipApplySanctuary(struct BattlePanel grid[18], u8 owner);
+
+/* --- core_soul_passives.c --- */
+u32 SoulGetPassiveFlags(u8 soulId);
+u16 SoulGetNullChipBonus(u8 soulId);
+
+/* --- core_overworld_npc.c --- */
+u32 OverworldAabbOverlap(s32 ax, s32 ay, s32 ahw, s32 ahh,
+                         s32 bx, s32 by, s32 bhw, s32 bhh);
+u32 OverworldCanTalkToNpc(s32 px, s32 py, u8 facing,
+                          s32 nx, s32 ny, s32 reach, s32 npcRadius);
+
 #ifdef __cplusplus
 }
 #endif

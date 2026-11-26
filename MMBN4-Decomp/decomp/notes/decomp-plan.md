@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after C2/E2 `core_fixed_math.c` + `libmmbn4_modern.a` — **214 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; **152 portable C functions** across 35 `src/modern/` files packaged as `libmmbn4_modern.a` = **214 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after C3/D2 `core_chip_effects.c`, `core_soul_passives.c`, `core_overworld_npc.c` — **221 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; **159 portable C functions** across 38 `src/modern/` files packaged as `libmmbn4_modern.a` + `include/modern_api.h` = **221 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
@@ -70,7 +70,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 | Task | Scope | Target |
 |---|---|---|
 | **E1** | **100% matching RS & BM verification:** Both `make -B compare VERSION=rs` and `VERSION=bm` pass with 0 `incrom` code bytes left. | 100% matching decomp |
-| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `include/modern_api.h` public C/C++ header + `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-lib` [`build/modern/libmmbn4_modern.a`] + `make modern-test` [links `libmmbn4_modern.a` — ALL PASSED across 35 modules / 152 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
+| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `include/modern_api.h` public C/C++ header + `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-lib` [`build/modern/libmmbn4_modern.a`] + `make modern-test` [consumes `modern_api.h` + `libmmbn4_modern.a` — ALL PASSED across 38 modules / 159 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
 
 ## Recommended Execution Order
 
