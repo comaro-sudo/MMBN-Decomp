@@ -3,11 +3,11 @@
 ## Goal & Current Status
 - **Goal:** Advance the MMBN4 (Red Sun & Blue Moon) decompilation along [`decomp/notes/decomp-plan.md`](decomp-plan.md) while keeping both ROMs 100% byte-identical (`make compare VERSION=rs` and `VERSION=bm`).
 - **Verified Status (pushed to `origin/main`):**
-  - **Code ownership:** **81.0%** total (`954,775 / 1,179,456` bytes; **84.5%** excluding `code_10`'s `49,992 B` build-timestamp + `m4a` audio tail).
+  - **Code ownership:** **82.0%** total (`966,788 / 1,179,456` bytes; **85.6%** excluding `code_10`'s `49,992 B` build-timestamp + `m4a` audio tail).
     - `intr_table`: **100.0%** (`48 / 48 B`)
     - `code_07` & `code_08`: **96.6%** each
-    - `code_00`: **92.3%**, `code_02`: **90.9%**, `code_01`: **87.9%**, `code_03`: **86.0%**, `code_09`: **85.7%**
-    - `code_05`: **77.3%**, `code_04`: **73.4%**, `code_06`: **71.4%**, `code_04d`: **69.2%**, `code_04b`: **63.2%**, `code_04c`: **53.6%**
+    - `code_00`: **92.3%**, `code_02`: **90.9%**, `code_01`: **87.9%**, `code_04c`: **86.3%**, `code_03`: **86.0%**, `code_09`: **85.7%**, `code_04b`: **84.5%**
+    - `code_05`: **77.3%**, `code_04`: **73.4%**, `code_06`: **71.4%**, `code_04d`: **69.2%**
   - **Matching DC-5 C (`decomp/src/*.c`, 100% byte-identical RS & BM):** **62 functions across 15 files** (`bios_swi.c` [8], complete `agb_sram.c` [6], `m4a_api.c` [11], `m4a_body.c` [3], complete `m4a_cgb.c` [3: `CgbOscOff`, `CgbModVol`, `CgbSound`], `m4a_cmds.c` [9], `m4a_ctrl.c` [3], `m4a_freq.c` [1], `m4a_imminit.c` [2], `m4a_init.c` [9], `m4a_lfo.c` [2], `m4a_start.c` [1], `m4a_stop.c` [1], `m4a_xcmd.c` [2], `m4a_xwave.c` [1]).
   - **Portable C & Core Headers (`decomp/include/*.h`, `decomp/src/modern/*.c`):**
     - **Phase C1 complete:** `gba_types.h`, `gba_io.h`, `gamestate.h`, `toolkit.h` (all 39 `sl`/`r10` slots `+0x00..+0x98`, `_Static_assert`-verified), `battle.h` (`BattleChipData` `0x2C` B).
