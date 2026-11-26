@@ -59,7 +59,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 
 | Task | Scope | Target |
 |---|---|---|
-| **D1** | **Battle core & Custom Screen (`code_07`):** *(In progress: `src/modern/core_battle_soul.c` [`BN4_UNITE_CHECK`], `src/modern/core_battle_score.c` [`BN4_ID_RAISE` + `BattleScoreBustingLevel`], `src/modern/core_battle_grid.c` [6×3 panel grid, element weakness, Grass/Ice/Holy multipliers, crack/AirShoes], and `src/modern/core_custom_screen.c` [Custom Gauge, chip-select rules, P.A. matching], all verified by `make modern-test`.)* Remaining: battle loop, emotion window. | `src/modern/core_battle_*.c` |
+| **D1** | **Battle core & Custom Screen (`code_07`):** *(In progress: `src/modern/core_battle_soul.c` [`BN4_UNITE_CHECK`], `src/modern/core_battle_score.c` [`BN4_ID_RAISE` + `BattleScoreBustingLevel`], `src/modern/core_battle_grid.c` [6×3 panel grid, element weakness, Grass/Ice/Holy multipliers, crack/AirShoes], `src/modern/core_custom_screen.c` [Custom Gauge, chip-select rules, P.A. matching], and `src/modern/core_emotion.c` [Emotion Window & karma], all verified by `make modern-test`.)* Remaining: main battle tick loop. | `src/modern/core_*.c` |
 | **D2** | **Chip attacks & projectiles (`code_07`–`code_08`):** Standard, Mega, Giga, Dark, and P.A. attack state machines. | `src/chips_*.c` |
 | **D3** | **Virus & Navi AI (`code_08`–`code_09`):** Virus AI, Soul Navi bosses, Duo, Bass, and SP/SP+ scaling hooks. | `src/ai_*.c` |
 
@@ -70,7 +70,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 | Task | Scope | Target |
 |---|---|---|
 | **E1** | **100% matching RS & BM verification:** Both `make -B compare VERSION=rs` and `VERSION=bm` pass with 0 `incrom` code bytes left. | 100% matching decomp |
-| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 11 modules / 63 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
+| **E2** | **Non-matching / portable C build (`MODERN` target):** *(In progress: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 12 modules / 68 portable C functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
 
 ## Recommended Execution Order
 

@@ -139,6 +139,21 @@ int CustomCanSelectChip(const struct CustomChipSlot *selected, u32 selectedCount
 int CustomMatchesPA(const struct CustomChipSlot *seq, const struct ProgramAdvanceRecipe *recipe);
 u16 CustomFindPA(const struct CustomChipSlot *selected, u32 selectedCount, const struct ProgramAdvanceRecipe *recipes, u32 recipeCount, u32 *outStart);
 
+/* core_emotion.c */
+enum EmotionState {
+    EMOTION_NORMAL       = 0,
+    EMOTION_FULL_SYNCHRO = 1,
+    EMOTION_ANGER        = 2,
+    EMOTION_ANXIOUS      = 3,
+    EMOTION_EVIL         = 4,
+    EMOTION_DARK_SOUL    = 5,
+};
+s16 EmotionAdjustKarma(s16 karma, s16 delta);
+int EmotionIsEvilKarma(s16 karma);
+enum EmotionState EmotionOnCounterHit(enum EmotionState cur, s16 karma);
+enum EmotionState EmotionOnTakeHit(enum EmotionState cur, u16 damage, u16 maxHp);
+u8 EmotionChipDamageMultiplier(enum EmotionState cur);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -441,6 +456,23 @@ static void test_custom_screen_and_pa(void) {
     assert(CustomFindPA(sel, 4, recipes, 1, &paStart) == 0);
 }
 
+static void test_emotion_and_karma(void) {
+    s16 karma = 512;
+
+    karma = EmotionAdjustKarma(karma, -400);
+    assert(karma == 112 && EmotionIsEvilKarma(karma) == 1);
+    assert(EmotionOnCounterHit(EMOTION_NORMAL, karma) == EMOTION_NORMAL); /* Evil cannot Full Synchro */
+
+    karma = EmotionAdjustKarma(karma, 500);
+    assert(karma == 612 && EmotionIsEvilKarma(karma) == 0);
+    assert(EmotionOnCounterHit(EMOTION_NORMAL, karma) == EMOTION_FULL_SYNCHRO);
+    assert(EmotionChipDamageMultiplier(EMOTION_FULL_SYNCHRO) == 2);
+    assert(EmotionOnTakeHit(EMOTION_FULL_SYNCHRO, 10, 100) == EMOTION_NORMAL);
+    assert(EmotionOnTakeHit(EMOTION_NORMAL, 30, 100) == EMOTION_ANGER);
+    assert(EmotionChipDamageMultiplier(EMOTION_ANGER) == 2);
+    assert(EmotionChipDamageMultiplier(EMOTION_NORMAL) == 1);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -450,6 +482,7 @@ int main(void) {
     test_shop_and_navicust();
     test_battle_grid_and_damage();
     test_custom_screen_and_pa();
+    test_emotion_and_karma();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
