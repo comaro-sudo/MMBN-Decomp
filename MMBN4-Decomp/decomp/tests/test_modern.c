@@ -898,6 +898,49 @@ static void test_anim_bracket_and_counter(void) {
     assert(BattleShouldTriggerDarkSoul(100, 1) == 1u);
 }
 
+static void test_obstacle_save_slots_and_cutscene_vm(void) {
+    struct BattleObstacle cube;
+    u8 hrs = 0, mins = 0, secs = 0;
+    struct ProgressState prog;
+    struct CutsceneVmState vm;
+    /* Wait 2 frames, then Halt (0x00) */
+    const u8 script[] = { 0x02, 0x02, 0x00, 0x00 };
+
+    /* RockCube obstacle damage & AirShot 200-damage push collision */
+    ObstacleSpawn(&cube, 3, 2, 200, 200);
+    assert(ObstacleTakeDamage(&cube, 50) == 0u && cube.hp == 150);
+    assert(ObstaclePushSlide(&cube, 1, 5, 2) == 200u && cube.active == 0u);
+
+    ObstacleSpawn(&cube, 2, 1, 100, 200);
+    assert(ObstacleTakeDamage(&cube, 100) == 1u && cube.active == 0u);
+
+    /* Save playtime formatting, integrity check & title stars */
+    SaveFormatPlaytime((3661u) * 60u, &hrs, &mins, &secs);
+    assert(hrs == 1u && mins == 1u && secs == 1u);
+    SaveFormatPlaytime(0x0FFFFFFFu, &hrs, &mins, &secs);
+    assert(hrs == 99u && mins == 59u && secs == 59u);
+
+    memset(&prog, 0, sizeof(prog));
+    memset(gTestEwramImage, 0, sizeof(gTestEwramImage));
+    WriteSaveMagic(&prog);
+    prog.checksum = ComputeSaveChecksum(gTestEwramImage, &prog, 0x16u);
+    assert(SaveValidateIntegrity(gTestEwramImage, &prog, 0x16u) == 1u);
+    prog.checksum ^= 1u;
+    assert(SaveValidateIntegrity(gTestEwramImage, &prog, 0x16u) == 0u);
+    assert(SaveCountTitleStars(0x3Fu) == 6u);
+
+    /* Cutscene VM */
+    CutsceneVmInit(&vm, script, sizeof(script));
+    assert(CutsceneVmStep(&vm) == 0u && CutsceneVmGetWaitFrames(&vm) == 2u);
+    assert(CutsceneVmStep(&vm) == 0u && CutsceneVmGetWaitFrames(&vm) == 1u);
+    assert(CutsceneVmStep(&vm) == 0u && CutsceneVmGetWaitFrames(&vm) == 0u);
+    assert(CutsceneVmStep(&vm) == 1u && CutsceneVmIsHalted(&vm) == 1u);
+    CutsceneVmReset(&vm);
+    assert(CutsceneVmIsHalted(&vm) == 0u);
+    CutsceneVmHalt(&vm);
+    assert(CutsceneVmIsHalted(&vm) == 1u);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -925,6 +968,7 @@ int main(void) {
     test_link_battle_and_pet_upgrades();
     test_friendly_matches_and_navicust_bugs();
     test_anim_bracket_and_counter();
+    test_obstacle_save_slots_and_cutscene_vm();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }

@@ -551,6 +551,41 @@ u32 BattleShouldTriggerDarkSoul(s16 karma, u8 usedDarkChipThisTurn);
 u8 BattleCalcHpPercent(u16 curHp, u16 maxHp);
 u32 BattleIsLowHp(u16 curHp, u16 maxHp);
 
+/* --- core_obstacle.c --- */
+struct BattleObstacle {
+    u8 active;
+    s8 x;
+    s8 y;
+    s16 hp;
+    u16 slideDamage;
+};
+
+void ObstacleSpawn(struct BattleObstacle *ob, s8 x, s8 y, s16 hp, u16 slideDamage);
+u32 ObstacleTakeDamage(struct BattleObstacle *ob, s32 damage);
+u16 ObstaclePushSlide(struct BattleObstacle *ob, s8 dx, s8 targetX, s8 targetY);
+
+/* --- core_save_slots.c --- */
+void SaveFormatPlaytime(u32 gameTimeFrames, u8 *outHours, u8 *outMinutes, u8 *outSeconds);
+u32 SaveValidateIntegrity(const u8 *ewramImage, struct ProgressState *progress, u32 versionKey);
+u32 SaveCountTitleStars(u8 starMask);
+
+/* --- core_cutscene_vm.c --- */
+struct CutsceneVmState {
+    const u8 *code;
+    u32 len;
+    u32 pc;
+    u16 waitFrames;
+    u8 halted;
+    u8 lastOp;
+};
+
+void CutsceneVmInit(struct CutsceneVmState *vm, const u8 *code, u32 len);
+u32 CutsceneVmStep(struct CutsceneVmState *vm);
+u32 CutsceneVmIsHalted(const struct CutsceneVmState *vm);
+void CutsceneVmHalt(struct CutsceneVmState *vm);
+u16 CutsceneVmGetWaitFrames(const struct CutsceneVmState *vm);
+void CutsceneVmReset(struct CutsceneVmState *vm);
+
 #ifdef __cplusplus
 }
 #endif
