@@ -5,7 +5,19 @@
 
     .global dat_0805CF5C
 dat_0805CF5C:
-    incrom 0x5CF5C, 0xF8
+    @ ptr table 0x0805CF5C..0x0805CF74 (6 entries)
+    .4byte dat_0805CF74
+    .4byte dat_0805CF94
+    .4byte dat_0805CFD4
+    .4byte dat_0805CFF4
+    .4byte dat_0805D004
+    .4byte dat_0805D034
+    @ map script 0x0805CF74..0x0805CF75
+    ms_end
+    incrom 0x5CF75, 0x1F
+    @ map script 0x0805CF94..0x0805CF95
+    ms_end
+    incrom 0x5CF95, 0xBF
     .global dat_0805D054
 dat_0805D054:
     incrom 0x5D054, 0x90
@@ -100,7 +112,14 @@ _0805D514:
     .word dat_0805D518
     .global dat_0805D518
 dat_0805D518:
-    incrom 0x5D518, 0x5A
+    @ ptr table 0x0805D518..0x0805D530 (6 entries)
+    .4byte dat_0805D530
+    .4byte dat_0805D536
+    .4byte dat_0805D546
+    .4byte dat_0805D54A
+    .4byte dat_0805D556
+    .4byte dat_0805D568
+    incrom 0x5D530, 0x42
 
     .global sub_0805D572
     .thumb_func
@@ -115,7 +134,14 @@ _0805D580:
     .word dat_0805D584
     .global dat_0805D584
 dat_0805D584:
-    incrom 0x5D584, 0x3C
+    @ ptr table 0x0805D584..0x0805D59C (6 entries)
+    .4byte dat_0805D59C
+    .4byte dat_0805D5A0
+    .4byte dat_0805D5A4
+    .4byte dat_0805D5A8
+    .4byte dat_0805D5B0
+    .4byte dat_0805D5B4
+    incrom 0x5D59C, 0x24
 
     .global sub_0805D5C0
     .thumb_func
@@ -133,7 +159,14 @@ _0805D5D4:
     .word dat_0805D5D8
     .global dat_0805D5D8
 dat_0805D5D8:
-    incrom 0x5D5D8, 0x184
+    @ ptr table 0x0805D5D8..0x0805D5F0 (6 entries)
+    .4byte dat_0805D5F0
+    .4byte dat_0805D5F4
+    .4byte dat_0805D634
+    .4byte dat_0805D638
+    .4byte dat_0805D664
+    .4byte dat_0805D6CC
+    incrom 0x5D5F0, 0x16C
     .word dat_0805D870
     .word dat_0805D990
     .word dat_0805DD88
@@ -178,7 +211,14 @@ dat_0805D5D8:
     incrom 0x5D80D, 0xF
     .global dat_0805D81C
 dat_0805D81C:
-    incrom 0x5D81C, 0x61
+    @ ptr table 0x0805D81C..0x0805D834 (6 entries)
+    .4byte dat_0805D834
+    .4byte dat_0805D83C
+    .4byte dat_0805D844
+    .4byte dat_0805D84C
+    .4byte dat_0805D854
+    .4byte dat_0805D85C
+    incrom 0x5D834, 0x49
     @ map-init dispatch 0x0805D87D..0x0805D897
     cs_range 0x10, 0x1F, dat_0805D897
     cs_range 0x40, 0x4F, dat_0805D8B5
@@ -827,7 +867,27 @@ dat_0805D81C:
     @ map script 0x0805E5AD..0x0805E5B7
     ms_set_ptr_pair dat_0809F5D9, 0x00000000
     ms_end
-    incrom 0x5E5B7, 0x4E1
+    incrom 0x5E5B7, 0x1
+    @ ptr table 0x0805E5B8..0x0805E5E0 (10 entries)
+    .4byte dat_0805E5E4
+    .4byte dat_0805E663
+    .4byte dat_0805E6E2
+    .4byte dat_0805E73B
+    .4byte dat_0805E804
+    .4byte dat_0805E81F
+    .4byte dat_0805E897
+    .4byte dat_0805E8CC
+    .4byte dat_0805E8E7
+    .4byte dat_0805E902
+    incrom 0x5E5E0, 0x3CC
+    @ ptr table 0x0805E9AC..0x0805E9C4 (6 entries)
+    .4byte dat_080A8EE8
+    .4byte dat_0805E9C8
+    .4byte dat_0805EA40
+    .4byte dat_0805EAE2
+    .4byte dat_0805EB00
+    .4byte dat_0805EB16
+    incrom 0x5E9C4, 0xD4
 
     .global sub_0805EA98
     .thumb_func
@@ -875,7 +935,98 @@ sub_0805EAB8:
     bl sub_080A9038
 _0805EAE0:
     pop {r4, r5, r6, r7, pc}
-    incrom 0x5EAE2, 0x1766
+    incrom 0x5EAE2, 0x46
+    @ ptr table 0x0805EB28..0x0805EB64 (15 entries)
+    .4byte dat_080A8EE8
+    .4byte dat_0805EB68
+    .4byte dat_0805EBCB
+    .4byte dat_0805EC17
+    .4byte dat_0805EC63
+    .4byte dat_0805ED53
+    .4byte dat_0805EE6B
+    .4byte dat_0805EF65
+    .4byte dat_0805F05F
+    .4byte dat_0805F0FE
+    .4byte dat_0805F1F8
+    .4byte dat_0805F283
+    .4byte dat_0805F2ED
+    .4byte dat_0805F31F
+    .4byte dat_0805F349
+    incrom 0x5EB64, 0x804
+    @ ptr table 0x0805F368..0x0805F39C (13 entries)
+    .4byte dat_0805F3A0
+    .4byte dat_0805F478
+    .4byte dat_0805F552
+    .4byte dat_0805F599
+    .4byte dat_0805F5E5
+    .4byte dat_0805F61C
+    .4byte dat_0805F63D
+    .4byte dat_0805F65E
+    .4byte dat_0805F674
+    .4byte dat_0805F686
+    .4byte dat_0805F698
+    .4byte dat_0805F6AA
+    .4byte dat_0805F6BC
+    incrom 0x5F39C, 0x334
+    @ ptr table 0x0805F6D0..0x0805F6F0 (8 entries)
+    .4byte dat_0805F6F4
+    .4byte dat_0805F711
+    .4byte dat_0805F738
+    .4byte dat_0805F778
+    .4byte dat_0805F792
+    .4byte dat_0805F7AA
+    .4byte dat_0805F7C2
+    .4byte dat_0805F7DA
+    incrom 0x5F6F0, 0x168
+    @ ptr table 0x0805F858..0x0805F868 (4 entries)
+    .4byte dat_0805F86C
+    .4byte dat_0805F891
+    .4byte dat_0805F8C8
+    .4byte dat_0805F8F0
+    incrom 0x5F868, 0x4
+    @ map script 0x0805F86C..0x0805F871
+    ms_clear_flag2 0x27, 0x1708
+    ms_end
+    incrom 0x5F871, 0x97
+    @ ptr table 0x0805F908..0x0805F928 (8 entries)
+    .4byte dat_0805F92C
+    .4byte dat_0805F952
+    .4byte dat_0805F982
+    .4byte dat_0805F9B2
+    .4byte dat_0805F9F6
+    .4byte dat_0805FA42
+    .4byte dat_0805FA9A
+    .4byte dat_0805FAB0
+    incrom 0x5F928, 0x238
+    @ ptr table 0x0805FB60..0x0805FB74 (5 entries)
+    .4byte dat_0805FB78
+    .4byte dat_0805FB90
+    .4byte dat_0805FBA8
+    .4byte dat_0805FBCE
+    .4byte dat_0805FBE6
+    incrom 0x5FB74, 0x88
+    @ ptr table 0x0805FBFC..0x0805FC10 (5 entries)
+    .4byte dat_0805FC14
+    .4byte dat_0805FC6B
+    .4byte dat_0805FCAE
+    .4byte dat_0805FCC6
+    .4byte dat_0805FCDE
+    incrom 0x5FC10, 0xE4
+    @ ptr table 0x0805FCF4..0x0805FD0C (6 entries)
+    .4byte dat_0805FD10
+    .4byte dat_0805FD47
+    .4byte dat_0805FD5F
+    .4byte dat_0805FD77
+    .4byte dat_0805FD8F
+    .4byte dat_0805FDA5
+    incrom 0x5FD0C, 0x100
+    @ ptr table 0x0805FE0C..0x0805FE20 (5 entries)
+    .4byte dat_0805FE24
+    .4byte dat_0805FE3F
+    .4byte dat_0805FE62
+    .4byte dat_0805FE80
+    .4byte dat_0805FEA3
+    incrom 0x5FE20, 0x428
 
     .global sub_08060248
     .thumb_func

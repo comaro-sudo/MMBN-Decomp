@@ -64,6 +64,10 @@ $(BUILD)/c/m4a_api.s: src/m4a_api.c tools/c_to_inc.py
 	@mkdir -p $(BUILD)/c
 	python3 tools/c_to_inc.py --old-agbcc $< $@
 
+$(BUILD)/c/m4a_cgb.s: src/m4a_cgb.c tools/c_to_inc.py
+	@mkdir -p $(BUILD)/c
+	python3 tools/c_to_inc.py --old-agbcc $< $@
+
 $(BUILD)/c/m4a_%.s: src/m4a_%.c tools/c_to_inc.py
 	@mkdir -p $(BUILD)/c
 	python3 tools/c_to_inc.py --agbcc $< $@

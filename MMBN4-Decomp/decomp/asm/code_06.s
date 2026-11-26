@@ -313,7 +313,12 @@ dat_08094AA4:
     @ cutscene script 0x08094AE0..0x08094AEB
     csc_b9 0x3D, 0x08, 0xFF, 0x80, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00
     csc_thread_end
-    incrom 0x94AEB, 0x9
+    incrom 0x94AEB, 0x1
+    @ cutscene script 0x08094AEC..0x08094AF3
+    csc_ptr 0x40, 0x02006164
+    csc_op 0x08
+    csc_end
+    incrom 0x94AF3, 0x1
     @ cutscene script 0x08094AF4..0x08094B61
     csc_b3 0x24, 0xFF, 0x0C, 0x08
     csc_op 0x07
@@ -641,7 +646,10 @@ _08096374:
     csc_b1 0x3B, 0x18
     csc_b1 0x3B, 0x04
     csc_end
-    incrom 0x971DD, 0x4D
+    @ cutscene script 0x080971DD..0x080971E5
+    csc_b2 0x38, 0x00, 0x40
+    csc_jump dat_080971C0
+    incrom 0x971E5, 0x45
     @ cutscene script 0x0809722A..0x08097231
     csc_b3 0x27, 0xFF, 0xB3, 0x09
     csc_b1 0x3B, 0x04
@@ -654,7 +662,11 @@ _08096374:
     csc_b2_ptr 0x48, 0x01, 0x00, dat_080972A4
     csc_b1 0x3B, 0x04
     csc_end
-    incrom 0x9729C, 0x18
+    incrom 0x9729C, 0x8
+    @ cutscene script 0x080972A4..0x080972A9
+    csc_b3 0x03, 0x04, 0x00, 0x04
+    csc_end
+    incrom 0x972A9, 0xB
     .global dat_080972B4
 dat_080972B4:
     incrom 0x972B4, 0x38
@@ -679,7 +691,22 @@ dat_08097304:
     incrom 0x97304, 0x30
     .global dat_08097334
 dat_08097334:
-    incrom 0x97334, 0x2C
+    @ cutscene script 0x08097334..0x0809734C
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x47, dat_08097361
+    csc_ptr 0x47, dat_0809737D
+    csc_spawn 0x24, dat_0809734C
+    csc_b1 0x0A, 0x24
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809734C..0x0809735E
+    csc_b4 0x3E, 0xFF, 0x04, 0x40, 0x00
+    csc_b2 0x02, 0xFF, 0x1E
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_ptr 0x47, dat_080973D5
+    csc_thread_end
+    incrom 0x9735E, 0x2
 
     .global sub_08097360
     .thumb_func
@@ -1224,7 +1251,58 @@ sub_0809BAC4:
     incrom 0x9BAD4, 0x584
     .global dat_0809C058
 dat_0809C058:
-    incrom 0x9C058, 0xC0
+    @ cutscene script 0x0809C058..0x0809C0D0
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x3A, dat_087EDAF4
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b3 0x3C, 0x04, 0xFF, 0x04
+    csc_b3 0x43, 0x00, 0xFF, 0x04
+    csc_b1 0x04, 0x80
+    csc_b2 0x02, 0xFF, 0x0A
+    csc_ptr 0x47, dat_0809C119
+    csc_ptr 0x47, dat_0809C135
+    csc_b2 0x49, 0x9D, 0x01
+    csc_ptr 0x33, dat_080A3D30
+    csc_b2_ptr 0x1B, 0x04, 0x00, dat_0809C0FB
+    csc_b3_ptr 0x16, 0xFF, 0x92, 0x0B, dat_0809C0D0
+    csc_45_13 0x10, 0x00, 0x0000, 0x0000, 0x000C, 0x00000038
+    csc_b3 0x43, 0x00, 0xFF, 0x6E
+    csc_b2 0x02, 0xFF, 0x05
+    csc_ptr 0x47, dat_0809C18D
+    csc_b1 0x05, 0x80
+    csc_b2 0x02, 0xFF, 0x1E
+    csc_b2 0x36, 0xFF, 0x00
+    csc_b1 0x04, 0x80
+    csc_b2 0x02, 0xFF, 0x14
+    csc_b3 0x43, 0x00, 0xFF, 0x6F
+    csc_b1 0x05, 0x80
+    csc_b1 0x45, 0x30
+    csc_b2 0x02, 0xFF, 0x1E
+    csc_b2 0x36, 0xFF, 0x01
+    csc_b1 0x04, 0x80
+    csc_b3 0x26, 0xFF, 0x92, 0x0B
+    csc_jump dat_0809C105
+    @ cutscene script 0x0809C0D0..0x0809C0FB
+    csc_45_13 0x10, 0x00, 0x0000, 0x0000, 0x000C, 0x00000038
+    csc_b3 0x43, 0x00, 0xFF, 0x6E
+    csc_b2 0x02, 0xFF, 0x05
+    csc_ptr 0x47, dat_0809C18D
+    csc_b1 0x05, 0x80
+    csc_b2 0x02, 0xFF, 0x14
+    csc_b3 0x43, 0x00, 0xFF, 0x6F
+    csc_b1 0x05, 0x80
+    csc_b1 0x45, 0x30
+    csc_jump dat_0809C105
+    @ cutscene script 0x0809C0FB..0x0809C105
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_jump dat_0809C105
+    @ cutscene script 0x0809C105..0x0809C10D
+    csc_ptr 0x47, dat_0809C1BD
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9C10D, 0xB
 
     .global sub_0809C118
     .thumb_func
@@ -1503,7 +1581,9 @@ sub_0809C1BC:
     csc_b1 0x3B, 0x18
     csc_b1 0x3B, 0x04
     csc_end
-    incrom 0x9C43C, 0x8
+    @ cutscene script 0x0809C43C..0x0809C444
+    csc_b2 0x38, 0x00, 0x40
+    csc_jump dat_0809C412
     @ cutscene script 0x0809C444..0x0809C471
     csc_b1 0x3B, 0x00
     csc_op 0x06
@@ -1557,7 +1637,47 @@ sub_0809C1BC:
     incrom 0x9C4E0, 0x8
     .global dat_0809C4E8
 dat_0809C4E8:
-    incrom 0x9C4E8, 0x1B6
+    @ cutscene script 0x0809C4E8..0x0809C50D
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x3A, dat_087EDB3C
+    csc_ptr 0x47, dat_080A2B89
+    csc_b1 0x36, 0x04
+    csc_b1 0x04, 0x80
+    csc_b2_ptr 0x1B, 0x04, 0x03, dat_0809C50D
+    csc_ptr 0x47, dat_080A2B95
+    csc_ptr 0x47, dat_080A2BD7
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809C50D..0x0809C539
+    csc_b2 0x02, 0xFF, 0x1E
+    csc_b3_ptr 0x16, 0xFF, 0x7D, 0x11, dat_0809C539
+    csc_b2 0x4C, 0x08, 0x1F
+    csc_b3 0x24, 0xFF, 0x04, 0x02
+    csc_b2 0x25, 0x00, 0x02
+    csc_op 0x07
+    csc_b3 0x26, 0xFF, 0x4A, 0x0B
+    csc_ptr 0x47, dat_080A2B95
+    csc_b2 0x02, 0xFF, 0xF0
+    csc_b2_ptr 0x48, 0x01, 0x00, dat_0809C564
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809C539..0x0809C55A
+    csc_b2 0x4C, 0x08, 0x1F
+    csc_b3 0x24, 0xFF, 0x0C, 0x02
+    csc_b2 0x25, 0x08, 0x02
+    csc_op 0x07
+    csc_b3 0x26, 0xFF, 0x4A, 0x0B
+    csc_ptr 0x47, dat_080A2B95
+    csc_b2 0x02, 0xFF, 0xF0
+    csc_b2_ptr 0x48, 0x00, 0x00, dat_0809C564
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9C55A, 0xA
+    @ cutscene script 0x0809C564..0x0809C567
+    csc_b1 0x04, 0x09
+    csc_end
+    incrom 0x9C567, 0x137
     @ cutscene script 0x0809C69E..0x0809C6AD
     csc_b2 0x49, 0xF0, 0x00
     csc_b3 0x58, 0x00, 0x20, 0x00
@@ -1635,7 +1755,14 @@ _0809CD04:
     incrom 0x9CD08, 0x7C
     .global dat_0809CD84
 dat_0809CD84:
-    incrom 0x9CD84, 0x10
+    @ cutscene script 0x0809CD84..0x0809CD91
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x47, dat_0809CD95
+    csc_b1 0x04, 0x80
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9CD91, 0x3
 
     .global sub_0809CD94
     .thumb_func
@@ -1651,34 +1778,209 @@ _0809CDA4:
     .word 0x02033800
     .global dat_0809CDA8
 dat_0809CDA8:
-    incrom 0x9CDA8, 0x120
+    @ cutscene script 0x0809CDA8..0x0809CDC6
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b1 0x36, 0x05
+    csc_b1 0x04, 0x80
+    csc_b3_ptr 0x16, 0xFF, 0x89, 0x11, dat_0809CDBF
+    csc_spawn 0x20, dat_0809CDC6
+    csc_b1 0x0A, 0x20
+    csc_b3 0x27, 0xFF, 0x89, 0x11
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809CDC6..0x0809CDD8
+    csc_b3 0x3C, 0x04, 0x06, 0xFF
+    csc_b3 0x43, 0x01, 0xFF, 0x10
+    csc_b4 0x3E, 0x07, 0xFF, 0x10, 0x00
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_thread_end
+    @ cutscene script 0x0809CDD8..0x0809CDDB
+    csc_b1 0x04, 0x00
+    csc_end
+    incrom 0x9CDDB, 0x35
+    @ cutscene script 0x0809CE10..0x0809CE13
+    csc_b1 0x04, 0x00
+    csc_end
+    incrom 0x9CE13, 0xB5
     .global dat_0809CEC8
 dat_0809CEC8:
     incrom 0x9CEC8, 0x348
     .global dat_0809D210
 dat_0809D210:
-    incrom 0x9D210, 0xB0
+    @ cutscene script 0x0809D210..0x0809D242
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x3A, dat_08756A48
+    csc_b3 0x26, 0xFF, 0x62, 0x11
+    csc_b3 0x27, 0xFF, 0x7E, 0x11
+    csc_b3 0x43, 0x00, 0xFF, 0x04
+    csc_b3 0x3C, 0x04, 0xFF, 0x04
+    csc_ptr 0x47, dat_0809D2A9
+    csc_b1 0x36, 0x05
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b3_ptr 0x16, 0xFF, 0x7E, 0x11, dat_0809D242
+    csc_b2 0x49, 0x75, 0x00
+    csc_jump dat_0809D245
+    incrom 0x9D242, 0x3
+    @ cutscene script 0x0809D245..0x0809D29C
+    csc_b1 0x04, 0x80
+    csc_b3_ptr 0x16, 0xFF, 0x7E, 0x11, dat_0809D29C
+    csc_ptr 0x33, dat_0809CDD8
+    csc_ptr 0x33, dat_0809CE10
+    csc_b2 0x02, 0xFF, 0x0A
+    csc_b3 0x43, 0x00, 0xFF, 0x19
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x03
+    csc_b2 0x49, 0xAB, 0x00
+    csc_b1 0x05, 0x01
+    csc_b2 0x4A, 0xFF, 0x00
+    csc_b2 0x49, 0x77, 0x00
+    csc_b1 0x05, 0x02
+    csc_45_13 0x10, 0x00, 0x0000, 0x0000, 0x0000, 0x00000003
+    csc_b1 0x05, 0x80
+    csc_b2 0x02, 0xFF, 0x0C
+    csc_b3 0x24, 0xFF, 0x04, 0x10
+    csc_op 0x07
+    csc_b3 0x27, 0xFF, 0x64, 0x11
+    csc_b2 0x02, 0xFF, 0x0F
+    .byte 0x48, 0x81, 0x00, 0x00, 0x00, 0x00, 0x00
+    csc_jump dat_0809D2A0
+    incrom 0x9D29C, 0x4
+    @ cutscene script 0x0809D2A0..0x0809D2A7
+    csc_b3 0x27, 0xFF, 0x62, 0x11
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9D2A7, 0x19
     .global dat_0809D2C0
 dat_0809D2C0:
-    incrom 0x9D2C0, 0x68
+    incrom 0x9D2C0, 0x51
+    @ cutscene script 0x0809D311..0x0809D31A
+    csc_b3 0x27, 0xFF, 0x7E, 0x11
+    csc_b1 0x04, 0x80
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9D31A, 0xE
     .global dat_0809D328
 dat_0809D328:
-    incrom 0x9D328, 0x30
+    @ cutscene script 0x0809D328..0x0809D33C
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x3B, 0x34
+    csc_op 0x07
+    csc_spawn 0x20, dat_0809D33C
+    csc_b1 0x0A, 0x20
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809D33C..0x0809D358
+    csc_b1 0x3B, 0x30
+    csc_b3 0x43, 0x00, 0xFF, 0x19
+    csc_b2 0x49, 0x76, 0x00
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_b3 0x43, 0x01, 0xFF, 0x08
+    csc_b4 0x3E, 0xFF, 0x14, 0x10, 0x00
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_thread_end
     .global dat_0809D358
 dat_0809D358:
-    incrom 0x9D358, 0x32
+    @ cutscene script 0x0809D358..0x0809D376
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x3B, 0x34
+    csc_op 0x07
+    csc_ptr 0x47, dat_080A5355
+    csc_ptr 0x47, dat_080A536D
+    csc_spawn 0x20, dat_0809D376
+    csc_b1 0x0A, 0x20
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809D376..0x0809D386
+    csc_b1 0x3B, 0x30
+    csc_b3 0x43, 0x01, 0xFF, 0x08
+    csc_b4 0x3E, 0xFF, 0x14, 0x10, 0x00
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_thread_end
+    incrom 0x9D386, 0x4
     .global dat_0809D38A
 dat_0809D38A:
-    incrom 0x9D38A, 0x19
+    @ cutscene script 0x0809D38A..0x0809D3A3
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x00, 0xFF, 0x1E
+    csc_b2 0x49, 0x76, 0x00
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_b3 0x24, 0xFF, 0x0C, 0x10
+    csc_op 0x07
+    csc_b1 0x48, 0x40
+    csc_b1 0x3B, 0x04
+    csc_end
     .global dat_0809D3A3
 dat_0809D3A3:
-    incrom 0x9D3A3, 0x35
+    @ cutscene script 0x0809D3A3..0x0809D3C7
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x00, 0xFF, 0x1E
+    csc_b2 0x49, 0x76, 0x00
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_b3 0x24, 0xFF, 0x04, 0x10
+    csc_op 0x07
+    csc_b2 0x25, 0x00, 0x10
+    csc_b2 0x02, 0xFF, 0x1E
+    csc_b2_ptr 0x48, 0x01, 0x01, dat_0809D3C8
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9D3C7, 0x11
     .global dat_0809D3D8
 dat_0809D3D8:
-    incrom 0x9D3D8, 0x60
+    @ cutscene script 0x0809D3D8..0x0809D418
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x00, 0xFF, 0x1E
+    csc_b2 0x49, 0x76, 0x00
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_b1 0x3B, 0x34
+    csc_b1 0x3B, 0x1C
+    csc_b1 0x3B, 0x14
+    csc_ptr 0x47, dat_0809D455
+    csc_b1_ptr 0x50, 0x00, dat_0809D388
+    csc_op 0x08
+    csc_b1 0x50, 0x01
+    csc_b1 0x3B, 0x18
+    csc_b1 0x3B, 0x10
+    csc_b1 0x3B, 0x30
+    csc_b3 0x43, 0x00, 0xFF, 0x19
+    csc_b2 0x49, 0x76, 0x00
+    csc_b2 0x02, 0xFF, 0x01
+    csc_b1 0x05, 0x80
+    csc_spawn 0x20, dat_0809D418
+    csc_b1 0x0A, 0x20
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809D418..0x0809D426
+    csc_b3 0x43, 0x01, 0xFF, 0x08
+    csc_b4 0x3E, 0xFF, 0x14, 0x10, 0x00
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_thread_end
+    incrom 0x9D426, 0x12
     .global dat_0809D438
 dat_0809D438:
-    incrom 0x9D438, 0x1C
+    @ cutscene script 0x0809D438..0x0809D451
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b2 0x02, 0xFF, 0x01
+    csc_ptr 0x47, dat_080A5355
+    csc_ptr 0x47, dat_080A536D
+    csc_b3 0x26, 0xFF, 0x86, 0x11
+    csc_b1 0x48, 0x40
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9D451, 0x3
 
     .global sub_0809D454
     .thumb_func
@@ -1763,7 +2065,10 @@ _0809D4C8:
     incrom 0x9D546, 0x32
     .global dat_0809D578
 dat_0809D578:
-    incrom 0x9D578, 0x18
+    @ cutscene script 0x0809D578..0x0809D57B
+    csc_b1 0x05, 0x00
+    csc_end
+    incrom 0x9D57B, 0x15
     @ cutscene script 0x0809D590..0x0809D5C6
     csc_b1 0x3B, 0x00
     csc_op 0x06
@@ -1895,7 +2200,17 @@ sub_0809D67C:
     .hword 0x0000
     .global dat_0809D694
 dat_0809D694:
-    incrom 0x9D694, 0x1C
+    @ cutscene script 0x0809D694..0x0809D6AD
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x00, 0xFF, 0x04
+    csc_ptr 0x47, dat_0809D6B1
+    csc_b1 0x04, 0x80
+    csc_b3 0x3C, 0x04, 0xFF, 0x04
+    csc_b3 0x43, 0x00, 0xFF, 0x04
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9D6AD, 0x3
 
     .global sub_0809D6B0
     .thumb_func
@@ -2003,10 +2318,31 @@ sub_0809DA4C:
     pop {r4, r5, r6, r7, pc}
     .global dat_0809DA60
 dat_0809DA60:
-    incrom 0x9DA60, 0x10
+    @ cutscene script 0x0809DA60..0x0809DA6F
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x3A, dat_086E5C18
+    csc_b1 0x36, 0x04
+    csc_b1 0x04, 0x80
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9DA6F, 0x1
     .global dat_0809DA70
 dat_0809DA70:
-    incrom 0x9DA70, 0x24
+    @ cutscene script 0x0809DA70..0x0809DA92
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_ptr 0x47, dat_0809DA95
+    csc_b3 0x24, 0xFF, 0x08, 0x0C
+    csc_op 0x07
+    csc_ptr 0x3A, dat_087585A0
+    csc_ptr 0x47, dat_0809DB11
+    csc_b1 0x36, 0x04
+    csc_b1 0x04, 0x80
+    csc_b3 0x27, 0xFF, 0x6A, 0x11
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9DA92, 0x2
 
     .global sub_0809DA94
     .thumb_func
@@ -2041,7 +2377,10 @@ _0809DACC:
     .word dat_0809DAD0
     .global dat_0809DAD0
 dat_0809DAD0:
-    incrom 0x9DAD0, 0x40
+    @ cutscene script 0x0809DAD0..0x0809DAD6
+    csc_ptr 0x40, 0xFF0000FF
+    csc_end
+    incrom 0x9DAD6, 0x3A
 
     .global sub_0809DB10
     .thumb_func
@@ -2376,7 +2715,10 @@ _0809DE24:
     .word dat_0809DE28
     .global dat_0809DE28
 dat_0809DE28:
-    incrom 0x9DE28, 0x20
+    @ cutscene script 0x0809DE28..0x0809DE2A
+    csc_op 0x06
+    csc_end
+    incrom 0x9DE2A, 0x1E
 
     .global sub_0809DE48
     .thumb_func
@@ -2452,7 +2794,24 @@ _0809DED0:
     .word dat_08703A50
     .global dat_0809DED4
 dat_0809DED4:
-    incrom 0x9DED4, 0x34
+    @ cutscene script 0x0809DED4..0x0809DF07
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_ptr 0x47, dat_0809DF09
+    csc_b3 0x24, 0xFF, 0x08, 0x0C
+    csc_op 0x07
+    csc_ptr 0x3A, dat_08703A50
+    csc_b1 0x36, 0x04
+    csc_ptr 0x47, dat_0809DF45
+    csc_ptr 0x47, dat_0809DF69
+    csc_b2 0x02, 0xFF, 0x01
+    csc_ptr 0x47, dat_0809DF9D
+    csc_op 0x37
+    csc_ptr 0x47, dat_0809DFC5
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9DF07, 0x1
 
     .global sub_0809DF08
     .thumb_func
@@ -2573,7 +2932,39 @@ _0809DFD8:
     .word 0x0200B190
     .global dat_0809DFDC
 dat_0809DFDC:
-    incrom 0x9DFDC, 0x74
+    @ cutscene script 0x0809DFDC..0x0809DFFE
+    csc_b1 0x3B, 0x00
+    csc_op 0x06
+    csc_b3 0x43, 0x01, 0xFF, 0x00
+    csc_ptr 0x47, dat_0809E051
+    csc_ptr 0x47, dat_0809E071
+    csc_b2_ptr 0x1B, 0x08, 0x01, dat_0809DFFE
+    csc_b1 0x04, 0x80
+    csc_ptr 0x47, dat_0809E289
+    csc_b1 0x3B, 0x04
+    csc_end
+    @ cutscene script 0x0809DFFE..0x0809E026
+    csc_b1 0x04, 0x08
+    csc_ptr 0x47, dat_0809E0B1
+    csc_b2_ptr 0x1B, 0x08, 0x01, dat_0809DFE8
+    csc_b2_ptr 0x1B, 0x08, 0x03, dat_0809E026
+    csc_b2_ptr 0x1B, 0x08, 0x04, dat_0809DFF4
+    csc_b1 0x04, 0x08
+    csc_ptr 0x47, dat_0809E1D9
+    csc_jump dat_0809DFF4
+    @ cutscene script 0x0809E026..0x0809E04F
+    csc_b1 0x04, 0x88
+    csc_ptr 0x47, dat_0809E1F1
+    csc_b2_ptr 0x1B, 0x08, 0x00, dat_0809DFF4
+    csc_ptr 0x47, dat_0809E20D
+    csc_ptr 0x47, dat_0809E221
+    csc_b2 0x02, 0xFF, 0x01
+    csc_ptr 0x47, dat_0809E259
+    csc_op 0x37
+    csc_ptr 0x47, dat_0809E289
+    csc_b1 0x3B, 0x04
+    csc_end
+    incrom 0x9E04F, 0x1
 
     .global sub_0809E050
     .thumb_func
@@ -3078,13 +3469,39 @@ _0809E414:
     csc_b3 0x27, 0xFF, 0x75, 0x11
     csc_b1 0x3B, 0x04
     csc_end
-    incrom 0x9E463, 0x731
+    incrom 0x9E463, 0x9
+    @ cutscene script 0x0809E46C..0x0809E46F
+    csc_b1 0x04, 0x07
+    csc_end
+    incrom 0x9E46F, 0xD
+    @ cutscene script 0x0809E47C..0x0809E47F
+    csc_b1 0x04, 0x07
+    csc_end
+    incrom 0x9E47F, 0x151
+    @ ptr table 0x0809E5D0..0x0809E5E0 (4 entries)
+    .4byte dat_0809E5E0
+    .4byte dat_0809E5FD
+    .4byte dat_0809E62A
+    .4byte dat_0809E657
+    incrom 0x9E5E0, 0x3B4
+    @ ptr table 0x0809E994..0x0809E9A4 (4 entries)
+    .4byte dat_0809E9A4
+    .4byte dat_0809EA01
+    .4byte dat_0809EA3E
+    .4byte dat_0809EA6B
+    incrom 0x9E9A4, 0x1F0
     .global dat_0809EB94
 dat_0809EB94:
-    incrom 0x9EB94, 0x1C
+    @ cutscene script 0x0809EB94..0x0809EB97
+    csc_b1 0x04, 0x00
+    csc_end
+    incrom 0x9EB97, 0x19
     .global dat_0809EBB0
 dat_0809EBB0:
-    incrom 0x9EBB0, 0x2C
+    @ cutscene script 0x0809EBB0..0x0809EBB3
+    csc_b1 0x04, 0x00
+    csc_end
+    incrom 0x9EBB3, 0x29
 
     .global sub_0809EBDC
     .thumb_func
@@ -3362,7 +3779,10 @@ _0809EE40:
     .word dat_0809EE44
     .global dat_0809EE44
 dat_0809EE44:
-    incrom 0x9EE44, 0x8
+    @ cutscene script 0x0809EE44..0x0809EE47
+    csc_b1 0x0A, 0x00
+    csc_end
+    incrom 0x9EE47, 0x5
 
     .global sub_0809EE4C
     .thumb_func
@@ -3598,7 +4018,11 @@ _0809F1C0:
     .word dat_0809F1C4
     .global dat_0809F1C4
 dat_0809F1C4:
-    incrom 0x9F1C4, 0x10
+    @ ptr table 0x0809F1C4..0x0809F1D4 (4 entries)
+    .4byte dat_0806B740
+    .4byte dat_0806BA94
+    .4byte dat_0806BF6C
+    .4byte dat_0806C860
 
     .global sub_0809F1D4
     .thumb_func
@@ -3722,7 +4146,11 @@ _0809F2A4:
     .word dat_0809F2A8
     .global dat_0809F2A8
 dat_0809F2A8:
-    incrom 0x9F2A8, 0x8
+    @ cutscene script 0x0809F2A8..0x0809F2AC
+    csc_b1 0x59, 0x01
+    csc_op 0x5D
+    csc_end_alt
+    incrom 0x9F2AC, 0x4
 _0809F2B0:
     .word dat_0809F0B8
 
@@ -3756,14 +4184,23 @@ _0809F2E0:
     .word dat_0809F2E4
     .global dat_0809F2E4
 dat_0809F2E4:
-    incrom 0x9F2E4, 0x8
+    @ cutscene script 0x0809F2E4..0x0809F2E8
+    csc_b1 0x59, 0x01
+    csc_op 0x5D
+    csc_end_alt
+    incrom 0x9F2E8, 0x4
 _0809F2EC:
     .word dat_0809F0BC
 _0809F2F0:
     .word dat_0809F2F4
     .global dat_0809F2F4
 dat_0809F2F4:
-    incrom 0x9F2F4, 0x8
+    @ cutscene script 0x0809F2F4..0x0809F2FA
+    csc_b1 0x04, 0x00
+    csc_b1 0x05, 0x00
+    csc_op 0x06
+    csc_end
+    incrom 0x9F2FA, 0x2
 
     .global sub_0809F2FC
     .thumb_func
@@ -3922,7 +4359,10 @@ _0809F444:
     .word dat_0809F448
     .global dat_0809F448
 dat_0809F448:
-    incrom 0x9F448, 0x8
+    @ cutscene script 0x0809F448..0x0809F44A
+    csc_op 0x4D
+    csc_end_alt
+    incrom 0x9F44A, 0x6
 _0809F450:
     .word dat_0809F454
     .global dat_0809F454
@@ -3937,7 +4377,12 @@ _0809F478:
     .word dat_0809F47C
     .global dat_0809F47C
 dat_0809F47C:
-    incrom 0x9F47C, 0x10
+    @ cutscene script 0x0809F47C..0x0809F482
+    csc_b1 0x59, 0x01
+    csc_b1 0x04, 0x00
+    csc_op 0x5D
+    csc_end_alt
+    incrom 0x9F482, 0xA
 _0809F48C:
     .word dat_0809F490
     .global dat_0809F490
@@ -4097,7 +4542,12 @@ _0809F5C0:
     .word dat_0809F5C4
     .global dat_0809F5C4
 dat_0809F5C4:
-    incrom 0x9F5C4, 0x14
+    @ ptr table 0x0809F5C4..0x0809F5D8 (5 entries)
+    .4byte dat_0809F61D
+    .4byte dat_0809F639
+    .4byte dat_0809F655
+    .4byte dat_0809F671
+    .4byte dat_0809F675
 
     .global sub_0809F5D8
     .thumb_func
@@ -4126,7 +4576,12 @@ _0809F600:
     .word dat_0809F604
     .global dat_0809F604
 dat_0809F604:
-    incrom 0x9F604, 0x14
+    @ ptr table 0x0809F604..0x0809F618 (5 entries)
+    .4byte dat_0809F679
+    .4byte dat_0809F6B5
+    .4byte dat_0809F6ED
+    .4byte dat_0809F731
+    .4byte dat_0809F765
 _0809F618:
     .word 0x02002128
 
@@ -4352,10 +4807,22 @@ dat_0809F788:
     incrom 0x9F788, 0x14
     .global dat_0809F79C
 dat_0809F79C:
-    incrom 0x9F79C, 0xA0
+    @ ptr table 0x0809F79C..0x0809F7BC (8 entries)
+    .4byte dat_0809F7BC
+    .4byte dat_0809F7CC
+    .4byte dat_0809F7DC
+    .4byte dat_0809F7EC
+    .4byte dat_0809F7FC
+    .4byte dat_0809F80C
+    .4byte dat_0809F81C
+    .4byte dat_0809F82C
+    incrom 0x9F7BC, 0x80
     .global dat_0809F83C
 dat_0809F83C:
-    incrom 0x9F83C, 0x54
+    @ cutscene script 0x0809F83C..0x0809F83F
+    csc_b1 0x05, 0x08
+    csc_end
+    incrom 0x9F83F, 0x51
 
     .global sub_0809F890
     .thumb_func
@@ -4433,7 +4900,11 @@ _0809F920:
     .word dat_0809F924
     .global dat_0809F924
 dat_0809F924:
-    incrom 0x9F924, 0x10
+    @ ptr table 0x0809F924..0x0809F934 (4 entries)
+    .4byte dat_0809F939
+    .4byte dat_0809FA21
+    .4byte dat_0809FB25
+    .4byte dat_0809FB51
 _0809F934:
     .word 0x020001B0
 
@@ -4741,7 +5212,10 @@ sub_0809FB58:
     pop {r4, r5, r6, r7, pc}
     .global dat_0809FB90
 dat_0809FB90:
-    incrom 0x9FB90, 0xC
+    @ cutscene script 0x0809FB90..0x0809FB94
+    csc_b2 0x0E, 0x00, 0x00
+    csc_end
+    incrom 0x9FB94, 0x8
     .global dat_0809FB9C
 dat_0809FB9C:
     incrom 0x9FB9C, 0xC0
@@ -5948,14 +6422,25 @@ _080A07F0:
     .word dat_080A07F4
     .global dat_080A07F4
 dat_080A07F4:
-    incrom 0xA07F4, 0x8
+    @ cutscene script 0x080A07F4..0x080A07F7
+    csc_b1 0x0A, 0x00
+    csc_end
+    incrom 0xA07F7, 0x5
 _080A07FC:
     .word 0x00000060
 _080A0800:
     .word 0x000000E3
 _080A0804:
     .word 0x000000E4
-    incrom 0xA0808, 0xB0
+    @ ptr table 0x080A0808..0x080A0824 (7 entries)
+    .4byte dat_080A0828
+    .4byte dat_080A0850
+    .4byte dat_080A087A
+    .4byte dat_080A08A4
+    .4byte dat_0807C766
+    .4byte dat_0807C771
+    .4byte dat_0807C77C
+    incrom 0xA0824, 0x94
 
     .global sub_080A08B8
     .thumb_func
@@ -5972,7 +6457,18 @@ sub_080A08B8:
     pop {r7, pc}
 _080A08D0:
     .word 0x0200A610
-    incrom 0xA08D4, 0x1E4
+    @ ptr table 0x080A08D4..0x080A08FC (10 entries)
+    .4byte dat_080A0900
+    .4byte dat_080A0945
+    .4byte dat_080A0964
+    .4byte dat_080A0983
+    .4byte dat_080A09A2
+    .4byte dat_080A09C1
+    .4byte dat_080A09E0
+    .4byte dat_080A09FF
+    .4byte dat_080A0A1E
+    .4byte dat_080A0A3D
+    incrom 0xA08FC, 0x1BC
 
     .global sub_080A0AB8
     .thumb_func
@@ -6422,7 +6918,49 @@ _080A0E84:
     .word dat_080A0E88
     .global dat_080A0E88
 dat_080A0E88:
-    incrom 0xA0E88, 0x540
+    incrom 0xA0E88, 0xCC
+    @ ptr table 0x080A0F54..0x080A0F80 (11 entries)
+    .4byte dat_080A0F84
+    .4byte dat_080A0F98
+    .4byte dat_080A0FAC
+    .4byte dat_080A0FCB
+    .4byte dat_080A0FF6
+    .4byte dat_080A1015
+    .4byte dat_080A1056
+    .4byte dat_080A106A
+    .4byte dat_080A1075
+    .4byte dat_080A1080
+    .4byte dat_080A108B
+    incrom 0xA0F80, 0x118
+    @ ptr table 0x080A1098..0x080A10C0 (10 entries)
+    .4byte dat_080A10C4
+    .4byte dat_080A10F5
+    .4byte dat_080A1136
+    .4byte dat_080A114A
+    .4byte dat_080A117B
+    .4byte dat_080A11A6
+    .4byte dat_080A11C5
+    .4byte dat_080A11D0
+    .4byte dat_080A11DB
+    .4byte dat_080A11E6
+    incrom 0xA10C0, 0x134
+    @ ptr table 0x080A11F4..0x080A1230 (15 entries)
+    .4byte dat_080A1234
+    .4byte dat_080A1253
+    .4byte dat_080A1267
+    .4byte dat_080A1286
+    .4byte dat_080A12C4
+    .4byte dat_080A12F5
+    .4byte dat_080A1309
+    .4byte dat_080A1334
+    .4byte dat_080A134E
+    .4byte dat_080A136B
+    .4byte dat_080A138E
+    .4byte dat_080A1399
+    .4byte dat_080A13A4
+    .4byte dat_080A13AF
+    .4byte dat_080A13BA
+    incrom 0xA1230, 0x198
 
     .global sub_080A13C8
     .thumb_func
@@ -6661,7 +7199,55 @@ _080A1574:
     .word 0x00000126
 _080A1578:
     .word 0x00000136
-    incrom 0xA157C, 0x5DC
+    incrom 0xA157C, 0x8
+    @ ptr table 0x080A1584..0x080A15AC (10 entries)
+    .4byte dat_080A15B0
+    .4byte dat_080A15E4
+    .4byte dat_080A1618
+    .4byte dat_080A164C
+    .4byte dat_080A1680
+    .4byte dat_080A16B4
+    .4byte dat_080A16F3
+    .4byte dat_080A16FE
+    .4byte dat_080A1709
+    .4byte dat_080A1714
+    incrom 0xA15AC, 0x174
+    @ ptr table 0x080A1720..0x080A1748 (10 entries)
+    .4byte dat_080A174C
+    .4byte dat_080A1780
+    .4byte dat_080A17B5
+    .4byte dat_080A17E9
+    .4byte dat_080A181E
+    .4byte dat_080A1853
+    .4byte dat_080A18AA
+    .4byte dat_080A18B5
+    .4byte dat_080A18C0
+    .4byte dat_080A18CB
+    incrom 0xA1748, 0xD6
+    @ cutscene script 0x080A181E..0x080A182E
+    csc_op 0x08
+    csc_b5 0x41, 0x1F, 0x13, 0x0E, 0x27, 0x25
+    csc_b2 0x2F, 0x10, 0x14
+    csc_b1 0x52, 0x00
+    csc_b2 0x38, 0xFF, 0x40
+    csc_end
+    incrom 0xA182E, 0xAA
+    @ ptr table 0x080A18D8..0x080A1910 (14 entries)
+    .4byte dat_080A1914
+    .4byte dat_080A1948
+    .4byte dat_080A197C
+    .4byte dat_080A19B0
+    .4byte dat_080A19E4
+    .4byte dat_080A1A4C
+    .4byte dat_080A1A80
+    .4byte dat_080A1AB5
+    .4byte dat_080A1AD5
+    .4byte dat_080A1B20
+    .4byte dat_080A1B2B
+    .4byte dat_080A1B36
+    .4byte dat_080A1B41
+    .4byte dat_080A1B4C
+    incrom 0xA1910, 0x248
 
     .global sub_080A1B58
     .thumb_func
@@ -6984,7 +7570,12 @@ sub_080A2418:
     .hword 0x0000
     .global dat_080A2420
 dat_080A2420:
-    incrom 0xA2420, 0xB0
+    @ ptr table 0x080A2420..0x080A2430 (4 entries)
+    .4byte dat_080A2430
+    .4byte dat_080A2450
+    .4byte dat_080A2478
+    .4byte dat_080A24A0
+    incrom 0xA2430, 0xA0
     .global dat_080A24D0
 dat_080A24D0:
     incrom 0xA24D0, 0x68
@@ -7186,7 +7777,11 @@ _080A28C0:
     .word dat_080A28C4
     .global dat_080A28C4
 dat_080A28C4:
-    incrom 0xA28C4, 0x10
+    @ ptr table 0x080A28C4..0x080A28D4 (4 entries)
+    .4byte dat_0808D308
+    .4byte dat_0808D3AF
+    .4byte dat_0808D468
+    .4byte dat_0808D521
 
     .global sub_080A28D4
     .thumb_func
@@ -7290,7 +7885,12 @@ _080A2974:
     .word dat_080A2978
     .global dat_080A2978
 dat_080A2978:
-    incrom 0xA2978, 0x14
+    @ ptr table 0x080A2978..0x080A298C (5 entries)
+    .4byte dat_080A29AD
+    .4byte dat_080A29E5
+    .4byte dat_080A2A7D
+    .4byte dat_080A2AB1
+    .4byte dat_080A2AF1
 
     .global sub_080A298C
     .thumb_func
@@ -7955,7 +8555,10 @@ _080A2E40:
     .hword 0x0000
     .global dat_080A2E54
 dat_080A2E54:
-    incrom 0xA2E54, 0xB0
+    @ cutscene script 0x080A2E54..0x080A2E59
+    csc_b3 0x24, 0x2A, 0x7E, 0x01
+    csc_end
+    incrom 0xA2E59, 0xAB
 
     .global sub_080A2F04
     .thumb_func
@@ -7987,7 +8590,14 @@ _080A2F2C:
     .word dat_080A2F30
     .global dat_080A2F30
 dat_080A2F30:
-    incrom 0xA2F30, 0x1C
+    @ ptr table 0x080A2F30..0x080A2F4C (7 entries)
+    .4byte dat_080A2F55
+    .4byte dat_080A2FAD
+    .4byte dat_080A2FCB
+    .4byte dat_080A2FE1
+    .4byte dat_080A3091
+    .4byte dat_080A30AF
+    .4byte dat_080A30C9
 _080A2F4C:
     .word dat_080A2E54
 _080A2F50:
@@ -9473,7 +10083,12 @@ _080A3AC0:
     .word dat_080A3AC4
     .global dat_080A3AC4
 dat_080A3AC4:
-    incrom 0xA3AC4, 0x14
+    @ ptr table 0x080A3AC4..0x080A3AD8 (5 entries)
+    .4byte dat_080A3AE1
+    .4byte dat_080A3B77
+    .4byte dat_080A3B9F
+    .4byte dat_080A3BB5
+    .4byte dat_080A3BF3
 _080A3AD8:
     .word dat_080A3A40
 _080A3ADC:
@@ -9766,13 +10381,24 @@ _080A3D04:
     .word dat_080A3D08
     .global dat_080A3D08
 dat_080A3D08:
-    incrom 0xA3D08, 0x28
+    @ ptr table 0x080A3D08..0x080A3D18 (4 entries)
+    .4byte dat_080A3D18
+    .4byte dat_080A3D1E
+    .4byte dat_080A3D24
+    .4byte dat_080A3D2A
+    incrom 0xA3D18, 0x18
     .global dat_080A3D30
 dat_080A3D30:
     incrom 0xA3D30, 0x38
     .global dat_080A3D68
 dat_080A3D68:
-    incrom 0xA3D68, 0x1F4
+    @ ptr table 0x080A3D68..0x080A3D7C (5 entries)
+    .4byte dat_080A3D78
+    .4byte dat_080A3D88
+    .4byte dat_080A3D98
+    .4byte dat_080A3DA8
+    .4byte dat_080A3DD8
+    incrom 0xA3D7C, 0x1E0
 
     .global sub_080A3F5C
     .thumb_func
@@ -9895,7 +10521,14 @@ _080A4028:
     .word dat_080A402C
     .global dat_080A402C
 dat_080A402C:
-    incrom 0xA402C, 0x1C
+    @ ptr table 0x080A402C..0x080A4048 (7 entries)
+    .4byte dat_080A4049
+    .4byte dat_080A4061
+    .4byte dat_080A40C9
+    .4byte dat_080A413D
+    .4byte dat_080A414D
+    .4byte dat_080A416D
+    .4byte dat_080A4195
 
     .global sub_080A4048
     .thumb_func
@@ -10336,7 +10969,12 @@ _080A4334:
     .word dat_080A4338
     .global dat_080A4338
 dat_080A4338:
-    incrom 0xA4338, 0x14
+    @ ptr table 0x080A4338..0x080A434C (5 entries)
+    .4byte dat_080A4351
+    .4byte dat_080A437F
+    .4byte dat_080A43A3
+    .4byte dat_080A43C7
+    .4byte dat_080A4411
 _080A434C:
     .word 0x02000870
 
@@ -10614,19 +11252,29 @@ _080A4560:
     .word 0x02036800
     .global dat_080A4564
 dat_080A4564:
-    incrom 0xA4564, 0x18
+    @ cutscene script 0x080A4564..0x080A4567
+    csc_b1 0x04, 0x00
+    csc_end
+    incrom 0xA4567, 0x15
     .global dat_080A457C
 dat_080A457C:
     incrom 0xA457C, 0x30
     .global dat_080A45AC
 dat_080A45AC:
-    incrom 0xA45AC, 0x220
+    @ cutscene script 0x080A45AC..0x080A45B6
+    csc_ptr2 0x2E, 0x01071D74, 0x00FFFF00
+    csc_end
+    incrom 0xA45B6, 0x216
     .global dat_080A47CC
 dat_080A47CC:
     incrom 0xA47CC, 0x20
     .global dat_080A47EC
 dat_080A47EC:
-    incrom 0xA47EC, 0x30
+    @ cutscene script 0x080A47EC..0x080A47F0
+    csc_b1 0x0A, 0x00
+    csc_op 0x5A
+    csc_end_alt
+    incrom 0xA47F0, 0x2C
     .global dat_080A481C
 dat_080A481C:
     incrom 0xA481C, 0x3BC
@@ -11635,7 +12283,10 @@ _080A5330:
     .word 0x020014E0
     .global dat_080A5334
 dat_080A5334:
-    incrom 0xA5334, 0x20
+    @ cutscene script 0x080A5334..0x080A5339
+    csc_b3 0x3C, 0x00, 0xC4, 0x00
+    csc_end
+    incrom 0xA5339, 0x1B
 
     .global sub_080A5354
     .thumb_func
@@ -11680,7 +12331,11 @@ _080A5398:
     .word dat_080A539C
     .global dat_080A539C
 dat_080A539C:
-    incrom 0xA539C, 0x10
+    @ ptr table 0x080A539C..0x080A53AC (4 entries)
+    .4byte dat_080A5529
+    .4byte dat_080A544D
+    .4byte dat_080A55DB
+    .4byte dat_080A53B5
 _080A53AC:
     .word dat_080A5334
 _080A53B0:
@@ -11988,7 +12643,11 @@ _080A55E8:
     .word dat_080A55EC
     .global dat_080A55EC
 dat_080A55EC:
-    incrom 0xA55EC, 0x10
+    @ ptr table 0x080A55EC..0x080A55FC (4 entries)
+    .4byte dat_080A55FD
+    .4byte dat_080A5643
+    .4byte dat_080A5659
+    .4byte dat_080A56A3
 
     .global sub_080A55FC
     .thumb_func
@@ -12294,7 +12953,29 @@ _080A5808:
     .word dat_080A580C
     .global dat_080A580C
 dat_080A580C:
-    incrom 0xA580C, 0x38
+    @ ptr table 0x080A580C..0x080A581C (4 entries)
+    .4byte dat_080A581C
+    .4byte dat_080A5826
+    .4byte dat_080A5830
+    .4byte dat_080A583A
+    @ cutscene script 0x080A581C..0x080A5824
+    csc_b3 0x03, 0x00, 0x04, 0x00
+    csc_b1 0x05, 0x00
+    csc_op 0x06
+    csc_end
+    incrom 0xA5824, 0x2
+    @ cutscene script 0x080A5826..0x080A5828
+    csc_op 0x07
+    csc_end
+    incrom 0xA5828, 0x8
+    @ cutscene script 0x080A5830..0x080A5832
+    csc_op 0x0B
+    csc_end
+    incrom 0xA5832, 0x8
+    @ cutscene script 0x080A583A..0x080A583C
+    csc_op 0x0F
+    csc_end
+    incrom 0xA583C, 0x8
 _080A5844:
     .word dat_080A5848
     .global dat_080A5848
@@ -12328,7 +13009,26 @@ _080A58A0:
     .word 0x0200F980
     .global dat_080A58A4
 dat_080A58A4:
-    incrom 0xA58A4, 0x3C0
+    @ cutscene script 0x080A58A4..0x080A58A6
+    csc_op 0x08
+    csc_end
+    incrom 0xA58A6, 0x5E
+    @ cutscene script 0x080A5904..0x080A5906
+    csc_op 0x08
+    csc_end
+    incrom 0xA5906, 0x11E
+    @ cutscene script 0x080A5A24..0x080A5A26
+    csc_op 0x0C
+    csc_end
+    incrom 0xA5A26, 0x5E
+    @ cutscene script 0x080A5A84..0x080A5A86
+    csc_op 0x0C
+    csc_end
+    incrom 0xA5A86, 0x11E
+    @ cutscene script 0x080A5BA4..0x080A5BA6
+    csc_op 0x08
+    csc_end
+    incrom 0xA5BA6, 0xBE
 
     .global sub_080A5C64
     .thumb_func
@@ -12773,7 +13473,11 @@ _080A5FE4:
     .word dat_080A5FE8
     .global dat_080A5FE8
 dat_080A5FE8:
-    incrom 0xA5FE8, 0x10
+    @ ptr table 0x080A5FE8..0x080A5FF8 (4 entries)
+    .4byte dat_080A58A4
+    .4byte dat_080A5904
+    .4byte dat_080A5A24
+    .4byte dat_080A5A84
 
     .global sub_080A5FF8
     .thumb_func
@@ -12936,7 +13640,11 @@ _080A6128:
     .word dat_080A612C
     .global dat_080A612C
 dat_080A612C:
-    incrom 0xA612C, 0x10
+    @ ptr table 0x080A612C..0x080A613C (4 entries)
+    .4byte dat_080A5964
+    .4byte dat_080A59C4
+    .4byte dat_080A5AE4
+    .4byte dat_080A5B44
 
     .global sub_080A613C
     .thumb_func
@@ -13184,7 +13892,13 @@ _080A62D4:
     .hword 0x0000
     .global dat_080A62DC
 dat_080A62DC:
-    incrom 0xA62DC, 0xC
+    @ cutscene script 0x080A62DC..0x080A62E4
+    csc_b1 0x04, 0x00
+    csc_b1 0x04, 0x00
+    csc_b1 0x04, 0x0C
+    csc_op 0x08
+    csc_end
+    incrom 0xA62E4, 0x4
 _080A62E8:
     .word dat_080A62DC
 _080A62EC:
@@ -14059,10 +14773,37 @@ dat_080A6940:
     incrom 0xA6940, 0x18
     .global dat_080A6958
 dat_080A6958:
-    incrom 0xA6958, 0xE0
+    @ ptr table 0x080A6958..0x080A6978 (8 entries)
+    .4byte dat_080A6978
+    .4byte dat_080A6990
+    .4byte dat_080A69A8
+    .4byte dat_080A69C0
+    .4byte dat_080A69D8
+    .4byte dat_080A69F0
+    .4byte dat_080A6A08
+    .4byte dat_080A6A20
+    incrom 0xA6978, 0x30
+    @ cutscene script 0x080A69A8..0x080A69B1
+    csc_b3 0x26, 0xA8, 0x05, 0x00
+    csc_b3 0x26, 0xA8, 0x05, 0x00
+    csc_end
+    incrom 0xA69B1, 0x87
     .global dat_080A6A38
 dat_080A6A38:
-    incrom 0xA6A38, 0xE0
+    @ ptr table 0x080A6A38..0x080A6A58 (8 entries)
+    .4byte dat_080A6A58
+    .4byte dat_080A6A70
+    .4byte dat_080A6A88
+    .4byte dat_080A6AA0
+    .4byte dat_080A6AB8
+    .4byte dat_080A6AD0
+    .4byte dat_080A6AE8
+    .4byte dat_080A6B00
+    @ cutscene script 0x080A6A58..0x080A6A63
+    csc_ptr 0x13, 0xED0002D4
+    csc_ptr 0x2B, 0x0000FFFD
+    csc_end
+    incrom 0xA6A63, 0xB5
 
     .global sub_080A6B18
     .thumb_func
@@ -15240,10 +15981,26 @@ sub_080A7270:
     pop {pc}
 _080A72A0:
     .word dat_080A72C0
-    incrom 0xA72A4, 0x1C
+    @ ptr table 0x080A72A4..0x080A72C0 (7 entries)
+    .4byte dat_080A72C4
+    .4byte dat_080A72C8
+    .4byte dat_080A72CC
+    .4byte dat_080A72D0
+    .4byte dat_080A72D4
+    .4byte dat_080A72D8
+    .4byte dat_080A72DC
     .global dat_080A72C0
 dat_080A72C0:
-    incrom 0xA72C0, 0x5E0
+    @ ptr table 0x080A72C0..0x080A72E0 (8 entries)
+    .4byte dat_080A7820
+    .4byte dat_080A7860
+    .4byte dat_080A77E0
+    .4byte dat_080A77A0
+    .4byte dat_080A76E0
+    .4byte dat_080A7680
+    .4byte dat_080A7620
+    .4byte dat_080A72E0
+    incrom 0xA72E0, 0x5C0
 
     .global sub_080A78A0
     .thumb_func
@@ -15254,7 +16011,14 @@ sub_080A78A0:
     .hword 0x0000
 _080A78A8:
     .word dat_080A78C8
-    incrom 0xA78AC, 0x1C
+    @ ptr table 0x080A78AC..0x080A78C8 (7 entries)
+    .4byte dat_080A78CC
+    .4byte dat_080A78D0
+    .4byte dat_080A78D4
+    .4byte dat_080A78D8
+    .4byte dat_080A78DC
+    .4byte dat_080A78E0
+    .4byte dat_080A78E4
     .global dat_080A78C8
 dat_080A78C8:
     .word dat_080A78E8
@@ -15495,7 +16259,14 @@ sub_080A7C32:
     .hword 0x0000
 _080A7C40:
     .word dat_080A7C60
-    incrom 0xA7C44, 0x1C
+    @ ptr table 0x080A7C44..0x080A7C60 (7 entries)
+    .4byte dat_080A7C64
+    .4byte dat_080A7C68
+    .4byte dat_080A7C6C
+    .4byte dat_080A7C70
+    .4byte dat_080A7C74
+    .4byte dat_080A7C78
+    .4byte dat_080A7C7C
     .global dat_080A7C60
 dat_080A7C60:
     .word dat_080A7C80
@@ -15662,13 +16433,93 @@ sub_080A7EC0:
     pop {pc}
 _080A7ECC:
     .word dat_080A7EEC
-    incrom 0xA7ED0, 0x1C
+    @ ptr table 0x080A7ED0..0x080A7EEC (7 entries)
+    .4byte dat_080A7EF0
+    .4byte dat_080A7EF4
+    .4byte dat_080A7EF8
+    .4byte dat_080A7EFC
+    .4byte dat_080A7F00
+    .4byte dat_080A7F04
+    .4byte dat_080A7F08
     .global dat_080A7EEC
 dat_080A7EEC:
-    incrom 0xA7EEC, 0x170
+    @ ptr table 0x080A7EEC..0x080A7F7C (36 entries)
+    .4byte dat_080A7F0C
+    .4byte dat_080A7F14
+    .4byte dat_080A7F1C
+    .4byte dat_080A7F24
+    .4byte dat_080A7F2C
+    .4byte dat_080A7F34
+    .4byte dat_080A7F3C
+    .4byte dat_080A7F44
+    .4byte dat_080A7F8C
+    .4byte dat_080A7F94
+    .4byte dat_080A7F7C
+    .4byte dat_080A7F84
+    .4byte dat_080A7F9C
+    .4byte dat_080A7FA4
+    .4byte dat_080A7FAC
+    .4byte dat_080A7FB4
+    .4byte dat_080A7FBC
+    .4byte dat_080A7FC4
+    .4byte dat_080A7FCC
+    .4byte dat_080A7FD4
+    .4byte dat_080A7FDC
+    .4byte dat_080A7FE4
+    .4byte dat_080A7FEC
+    .4byte dat_080A7FF4
+    .4byte dat_080A7FFC
+    .4byte dat_080A8004
+    .4byte dat_080A800C
+    .4byte dat_080A8014
+    .4byte dat_080A801C
+    .4byte dat_080A8024
+    .4byte dat_080A802C
+    .4byte dat_080A8034
+    .4byte dat_080A803C
+    .4byte dat_080A8044
+    .4byte dat_080A804C
+    .4byte dat_080A8054
+    incrom 0xA7F7C, 0x10
+    @ cutscene script 0x080A7F8C..0x080A7F90
+    csc_b2 0x4A, 0xFF, 0xAC
+    csc_end_alt
+    incrom 0xA7F90, 0x4
+    @ cutscene script 0x080A7F94..0x080A7F99
+    csc_b3 0x24, 0xFF, 0x26, 0x01
+    csc_end
+    incrom 0xA7F99, 0x4B
+    @ cutscene script 0x080A7FE4..0x080A7FE6
+    csc_op 0x5C
+    csc_end
+    incrom 0xA7FE6, 0x1E
+    @ cutscene script 0x080A8004..0x080A800E
+    csc_b3 0x3C, 0xFE, 0xFA, 0xFF
+    csc_ptr 0x40, 0x7CFFFF00
+    csc_end
+    incrom 0xA800E, 0x1E
+    @ cutscene script 0x080A802C..0x080A8031
+    csc_b3 0x3C, 0x00, 0x0C, 0x01
+    csc_end
+    incrom 0xA8031, 0xB
+    @ cutscene script 0x080A803C..0x080A8040
+    csc_b2 0x66, 0xFF, 0x64
+    csc_end
+    incrom 0xA8040, 0x4
+    @ cutscene script 0x080A8044..0x080A8049
+    csc_b3 0x3C, 0x00, 0xBE, 0x00
+    csc_end
+    incrom 0xA8049, 0xB
+    @ cutscene script 0x080A8054..0x080A8059
+    csc_b3 0x3C, 0xFF, 0x3C, 0x00
+    csc_end
+    incrom 0xA8059, 0x3
     .global dat_080A805C
 dat_080A805C:
-    incrom 0xA805C, 0x68
+    @ cutscene script 0x080A805C..0x080A805F
+    csc_b1 0x05, 0x18
+    csc_end
+    incrom 0xA805F, 0x65
 
     .global sub_080A80C4
     .thumb_func
@@ -15818,7 +16669,14 @@ _080A81EA:
     pop {pc}
     .global dat_080A81EC
 dat_080A81EC:
-    incrom 0xA81EC, 0x1C
+    @ ptr table 0x080A81EC..0x080A8208 (7 entries)
+    .4byte dat_080A8211
+    .4byte dat_080A8225
+    .4byte dat_080A839D
+    .4byte dat_080A8405
+    .4byte dat_080A843D
+    .4byte dat_080A844B
+    .4byte dat_080A8469
 _080A8208:
     .word dat_080A81EC
 _080A820C:
@@ -23478,7 +24336,11 @@ _080AE69C:
     .word dat_080AE6A0
     .global dat_080AE6A0
 dat_080AE6A0:
-    incrom 0xAE6A0, 0x10
+    @ ptr table 0x080AE6A0..0x080AE6B0 (4 entries)
+    .4byte dat_080AE6B5
+    .4byte dat_080AE70D
+    .4byte dat_080AE73B
+    .4byte dat_080AE757
 _080AE6B0:
     .word dat_080AE634
 
@@ -23968,7 +24830,10 @@ _080AEFFC:
     .word dat_080AF000
     .global dat_080AF000
 dat_080AF000:
-    incrom 0xAF000, 0x18
+    @ cutscene script 0x080AF000..0x080AF002
+    csc_op 0x37
+    csc_end
+    incrom 0xAF002, 0x16
 
     .global sub_080AF018
     .thumb_func
@@ -24007,7 +24872,12 @@ _080AF048:
     .word dat_080AF04C
     .global dat_080AF04C
 dat_080AF04C:
-    incrom 0xAF04C, 0x14
+    @ ptr table 0x080AF04C..0x080AF060 (5 entries)
+    .4byte dat_080AF065
+    .4byte dat_080AF0C9
+    .4byte dat_080AF1C1
+    .4byte dat_080AF1C9
+    .4byte dat_080AF1DD
 _080AF060:
     .word 0x020001B0
 
@@ -24366,7 +25236,13 @@ _080AF3D0:
     .word dat_080AF3D4
     .global dat_080AF3D4
 dat_080AF3D4:
-    incrom 0xAF3D4, 0x18
+    @ ptr table 0x080AF3D4..0x080AF3EC (6 entries)
+    .4byte dat_080AF3F1
+    .4byte dat_080AF43D
+    .4byte dat_080AF485
+    .4byte dat_080AF4A5
+    .4byte dat_080AF4E5
+    .4byte dat_080AF515
 _080AF3EC:
     .word dat_080AF318
 
@@ -24557,7 +25433,83 @@ _080AF54C:
     .word dat_080AF368
     .global dat_080AF550
 dat_080AF550:
-    incrom 0xAF550, 0x58E
+    @ ptr table 0x080AF550..0x080AF5BC (27 entries)
+    .4byte dat_080AF5BC
+    .4byte dat_080AF5E4
+    .4byte dat_080AF5FA
+    .4byte dat_080AF610
+    .4byte dat_080AF65C
+    .4byte dat_080AF672
+    .4byte dat_080AF6AC
+    .4byte dat_080AF6C2
+    .4byte dat_080AF720
+    .4byte dat_080AF75A
+    .4byte dat_080AF794
+    .4byte dat_080AF7CE
+    .4byte dat_080AF7F6
+    .4byte dat_080AF830
+    .4byte dat_080AF858
+    .4byte dat_080AF8A4
+    .4byte dat_080AF8DE
+    .4byte dat_080AF906
+    .4byte dat_080AF91C
+    .4byte dat_080AF932
+    .4byte dat_080AF990
+    .4byte dat_080AF9CA
+    .4byte dat_080AFA16
+    .4byte dat_080AFA2C
+    .4byte dat_080AFA42
+    .4byte dat_080AFA58
+    .4byte dat_080AFAB6
+    incrom 0xAF5BC, 0x54
+    @ cutscene script 0x080AF610..0x080AF612
+    csc_op 0x5A
+    csc_end
+    incrom 0xAF612, 0x9A
+    @ cutscene script 0x080AF6AC..0x080AF6B6
+    csc_ptr2 0x2E, 0x40FFE001, 0x00000000
+    csc_end
+    incrom 0xAF6B6, 0xC
+    @ cutscene script 0x080AF6C2..0x080AF6CC
+    csc_ptr2 0x2E, 0x40FF3E01, 0x00000000
+    csc_end
+    incrom 0xAF6CC, 0x54
+    @ cutscene script 0x080AF720..0x080AF727
+    csc_ptr_b1 0x2C, 0x40FEE400, 0x00
+    csc_end
+    incrom 0xAF727, 0x109
+    @ cutscene script 0x080AF830..0x080AF832
+    csc_op 0x5C
+    csc_end
+    incrom 0xAF832, 0xD4
+    @ cutscene script 0x080AF906..0x080AF90D
+    csc_b1_ptr 0x46, 0x00, 0x00400036
+    csc_end
+    incrom 0xAF90D, 0xF
+    @ cutscene script 0x080AF91C..0x080AF923
+    csc_b1_ptr 0x46, 0x00, 0x0040FF96
+    csc_end
+    incrom 0xAF923, 0xF
+    @ cutscene script 0x080AF932..0x080AF939
+    csc_b1_ptr 0x46, 0x00, 0x0040FF56
+    csc_end
+    incrom 0xAF939, 0x91
+    @ cutscene script 0x080AF9CA..0x080AF9D1
+    csc_b1_ptr 0x46, 0xFF, 0x00400012
+    csc_end
+    incrom 0xAF9D1, 0x45
+    @ cutscene script 0x080AFA16..0x080AFA1D
+    csc_b1_ptr 0x46, 0xFF, 0x0040005E
+    csc_end
+    incrom 0xAFA1D, 0xF
+    @ cutscene script 0x080AFA2C..0x080AFA32
+    csc_ptr 0x40, 0x40005EFF
+    csc_end
+    incrom 0xAFA32, 0x84
+    @ cutscene script 0x080AFAB6..0x080AFABA
+    csc_b2 0x44, 0xFE, 0xB8
+    csc_end
+    incrom 0xAFABA, 0x24
 
     .global sub_080AFADE
     .thumb_func
@@ -24956,4 +25908,36 @@ _080AFDC4:
     .word 0x0200AAB0
     .global dat_080AFDC8
 dat_080AFDC8:
-    incrom 0xAFDC8, 0x416
+    @ ptr table 0x080AFDC8..0x080AFE34 (27 entries)
+    .4byte dat_080AFE34
+    .4byte dat_080AFE50
+    .4byte dat_080AFE5E
+    .4byte dat_080AFE6C
+    .4byte dat_080AFEA4
+    .4byte dat_080AFEB2
+    .4byte dat_080AFEDC
+    .4byte dat_080AFEEA
+    .4byte dat_080AFF30
+    .4byte dat_080AFF5A
+    .4byte dat_080AFF84
+    .4byte dat_080AFFAE
+    .4byte dat_080AFFCA
+    .4byte dat_080AFFF4
+    .4byte dat_080B0010
+    .4byte dat_080B0048
+    .4byte dat_080B0072
+    .4byte dat_080B008E
+    .4byte dat_080B009C
+    .4byte dat_080B00AA
+    .4byte dat_080B00F0
+    .4byte dat_080B011A
+    .4byte dat_080B0160
+    .4byte dat_080B016E
+    .4byte dat_080B017C
+    .4byte dat_080B018A
+    .4byte dat_080B01C2
+    incrom 0xAFE34, 0x33A
+    @ cutscene script 0x080B016E..0x080B0172
+    csc_b2 0x02, 0x00, 0x04
+    csc_end
+    incrom 0xB0172, 0x6C

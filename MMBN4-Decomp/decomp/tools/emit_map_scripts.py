@@ -256,7 +256,7 @@ def main() -> None:
             a = int(m.group(1), 16)
             if in_target(a):
                 seeds.add(a)
-        for m in re.finditer(r"\.word\s+(?:dat_|unk_)([0-9A-Fa-f]{8})", txt):
+        for m in re.finditer(r"\.(?:word|4byte)\s+(?:dat_|unk_)([0-9A-Fa-f]{8})", txt):
             a = int(m.group(1), 16)
             if in_target(a):
                 seeds.add(a)
@@ -286,13 +286,15 @@ def main() -> None:
 
     # Trace reachable blocks
     visited: set[int] = set()
+    seen_starts: set[int] = set()
     queue = sorted(seeds)
     blocks_by_seg: dict[str, list[tuple[int, int, list[str]]]] = {s[0]: [] for s in TARGET_SEGS}
 
     while queue:
         start = queue.pop()
-        if start in visited:
+        if start in visited or start in seen_starts:
             continue
+        seen_starts.add(start)
         tinfo = in_target(start)
         if not tinfo:
             continue
@@ -301,9 +303,11 @@ def main() -> None:
         decoded: list[tuple[int, int, str]] = []
         ok = True
         all_fmt_ok = True
-        while True:
-            if cur in visited:
+        block_seen: set[int] = set()
+        while len(decoded) < 200:
+            if cur in visited or cur in block_seen:
                 break
+            block_seen.add(cur)
             t2 = in_target(cur)
             if not t2 or t2[0] != seg_name:
                 ok = False

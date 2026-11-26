@@ -274,14 +274,22 @@ def main() -> None:
     rs = (DECOMP / "../roms/bn4_rs_us.gba").read_bytes()
     bm = (DECOMP / "../roms/bn4_bm_us.gba").read_bytes()
 
-    # Gather cutscene script seeds from ms_start_cutscene in code_04..code_05
-    seeds: set[int] = set()
+    # Gather cutscene script seeds from ms_start_cutscene + all asm/*.s dat_ refs
+    direct_seeds: set[int] = set()
     for s in ["code_04", "code_04b", "code_04c", "code_04d", "code_05"]:
         txt = (DECOMP / f"asm/{s}.s").read_text()
         for m in re.finditer(r"ms_start_cutscene\s+(?:dat_|0x)([0-9A-Fa-f]{8})", txt):
             a = int(m.group(1), 16)
             if in_target(a):
-                seeds.add(a)
+                direct_seeds.add(a)
+
+    ref_seeds: set[int] = set()
+    for p in sorted((DECOMP / "asm").glob("*.s")):
+        txt = p.read_text()
+        for m in re.finditer(r"\bdat_([0-9A-Fa-f]{8})\b", txt):
+            a = int(m.group(1), 16)
+            if in_target(a) and a not in direct_seeds:
+                ref_seeds.add(a)
 
     # Collect shared incrom ranges in code_05 and code_06
     inc_re = re.compile(r"^(\s*)incrom\s+0x([0-9A-Fa-f]+),\s*0x([0-9A-Fa-f]+)(.*)$")
@@ -304,13 +312,15 @@ def main() -> None:
         return any(s >= r0 and e <= r1 for r0, r1, _, _ in shared_incroms)
 
     visited: set[int] = set()
-    queue = sorted(seeds)
+    seen_starts: set[int] = set()
+    queue = [(a, 1) for a in sorted(direct_seeds)] + [(a, 2) for a in sorted(ref_seeds)]
     blocks_by_seg: dict[str, list[tuple[int, int, list[str]]]] = {s[0]: [] for s in TARGET_SEGS}
 
     while queue:
-        start = queue.pop()
-        if start in visited:
+        start, min_ops = queue.pop()
+        if start in visited or start in seen_starts:
             continue
+        seen_starts.add(start)
         ti = in_target(start)
         if not ti:
             continue
@@ -319,9 +329,11 @@ def main() -> None:
         decoded: list[tuple[int, int, str]] = []
         ok = True
         all_fmt_ok = True
-        while True:
-            if cur in visited:
+        block_seen: set[int] = set()
+        while len(decoded) < 200:
+            if cur in visited or cur in block_seen:
                 break
+            block_seen.add(cur)
             t2 = in_target(cur)
             if not t2 or t2[0] != seg_name:
                 ok = False
@@ -340,8 +352,8 @@ def main() -> None:
                 break
             for bo in branches:
                 tgt = struct.unpack_from("<I", rs, cur - BASE + bo)[0]
-                if tgt not in visited:
-                    queue.append(tgt)
+                if tgt not in visited and tgt not in seen_starts:
+                    queue.append((tgt, min_ops))
             fmt = format_instr(rs, bm, cur, d)
             if fmt is None:
                 all_fmt_ok = False
@@ -351,7 +363,7 @@ def main() -> None:
             if is_term:
                 break
 
-        if ok and all_fmt_ok and decoded:
+        if ok and all_fmt_ok and len(decoded) >= min_ops:
             b0 = decoded[0][0]
             b1 = decoded[-1][0] + decoded[-1][1]
             if in_shared_incrom(b0, b1):
