@@ -70,7 +70,7 @@ Goal: Decompile the combat system, chip behaviors, Souls, and boss/virus AI.
 | Task | Scope | Target |
 |---|---|---|
 | **E1** | **100% matching RS & BM verification:** Both `make -B compare VERSION=rs` and `VERSION=bm` pass with 0 `incrom` code bytes left. | 100% matching decomp |
-| **E2** | **Non-matching / portable C build (`MODERN` target):** Guard GBA-specific inline asm/register idioms so the decompiled C can also compile natively for PC / Wii U / 3DS / future ports (bridging Phase 2 emulation layer → Phase 3 native port). | Native C port readiness |
+| **E2** | **Non-matching / portable C build (`MODERN` target):** *(Started 2026-11-26: `make modern-check` [ARM7TDMI Thumb `-Wall -Wextra -Werror`] + `make modern-test` [native host `tests/test_modern.c` — ALL PASSED across 5 modules / 32 functions].)* Guard GBA-specific idioms so decompiled C compiles natively for PC / Wii U / 3DS / future ports. | Native C port readiness |
 
 ## Recommended Execution Order
 

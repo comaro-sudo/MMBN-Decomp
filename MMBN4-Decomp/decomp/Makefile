@@ -35,7 +35,7 @@ ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork -I $(BUILD) -I include -I . \
            --defsym VERSION_RS=$(if $(filter rs,$(VERSION)),1,0) \
            --defsym VERSION_BM=$(if $(filter bm,$(VERSION)),1,0)
 
-.PHONY: all compare modern-check clean
+.PHONY: all compare modern-check modern-test clean
 all: $(ROM)
 
 # baserom.gba inside the build dir, so .incbin "baserom.gba" finds it via -I.
@@ -119,6 +119,11 @@ modern-check: $(MODERN_SRCS)
 	  $(PREFIX)gcc -mcpu=arm7tdmi -mthumb -O2 -Wall -Wextra -Werror -I include -c $$f -o build/modern/$$(basename $$f .c).o || exit 1; \
 	done
 	@echo "modern-check: OK ($(words $(MODERN_SRCS)) files)"
+
+modern-test: $(MODERN_SRCS) tests/test_modern.c
+	@mkdir -p build/modern
+	gcc -O2 -Wall -Wextra -Werror -I include $(MODERN_SRCS) tests/test_modern.c -o build/modern/test_modern
+	./build/modern/test_modern
 
 clean:
 	rm -rf build
