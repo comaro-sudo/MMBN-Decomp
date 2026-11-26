@@ -1211,3 +1211,17 @@
 080005DA 080005DA code   GEMINI       SoundQueue_MPlayFadeOut          enqueues MPlayFadeOut via gMusicPlayerPtrTable
 08000654 08000654 data   GEMINI       gMusicPlayerPtrTable             array of MusicPlayerInfo* indexed by player slot
 08111878 0811188C code   GEMINI       BgAffineSet                      bios_swi.c: GBA BIOS SWI 0x0E (BgAffineSet)
+080006D4 080006D4 code   GEMINI       SoundQueue_StopAllAndClearBgm    enqueues m4aMPlayAllStop and sets gameState->currentBgm = 0xFF
+080006F0 080006F0 code   GEMINI       SoundQueue_SongNumStop           enqueues m4aSongNumStop on the deferred sound queue
+08000790 08000790 code   GEMINI       DmaStartChannel                  waits for DMA channel r3 idle and starts transfer (SAD=r0, DAD=r1, CNT=r2|r4)
+080007B0 080007B0 data   GEMINI       gDmaChannelRegs                  4-word table of GBA DMA0..DMA3 base I/O register addresses
+080007C0 080007C0 code   GEMINI       DmaWaitChannels                  busy-waits until all GBA DMA channels in bitmask r0 complete
+08000800 08000800 code   GEMINI       DmaQueue_Clear                   resets deferred DMA queue count at 0x0200B134 to 0
+08000808 08000808 code   GEMINI       DmaQueue_Process                 drains queued transfers at 0x0200D120 (DMA3 / mode1 / mode2) and clears queue
+08000874 08000874 code   GEMINI       DmaQueue_PushDma3                enqueues a mode-0 DMA3 transfer (src=r0, dst=r1, len=r2)
+08000878 08000878 code   GEMINI       DmaQueue_PushMode1               enqueues a mode-1 deferred transfer (src=r0, dst=r1, len=r2)
+0800087C 0800087C code   GEMINI       DmaQueue_PushMode2               enqueues a mode-2 deferred transfer (src=r0, dst=r1, len=r2)
+080008B0 080008B0 data   GEMINI       gDmaQueueModeControl             3-word DMA control flags table for DmaQueue modes 0..2
+080008C4 080008C4 code   GEMINI       DmaQueue_PushListDma3            enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 0
+080008DC 080008DC code   GEMINI       DmaQueue_PushListMode1           enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 1
+080008F4 080008F4 code   GEMINI       DmaQueue_PushListMode2           enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 2

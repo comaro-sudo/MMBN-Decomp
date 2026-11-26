@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after A6 +9 core symbols, B2 `bios_sound_bias.c` + 50 modern C modules — **63 matching C + 200 portable C = 263 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **63 byte-identical C functions** across 16 files + `include/gba_types.h`; **200 portable C functions** across 50 `src/modern/` files packaged as `libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` = **263 C functions combined**; **1,188** verified symbols; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after A6 +9 core symbols, B2 `bios_sound_bias.c` + 50 modern C modules — **63 matching C + 200 portable C = 263 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **63 byte-identical C functions** across 16 files + `include/gba_types.h`; **200 portable C functions** across 50 `src/modern/` files packaged as `libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` = **263 C functions combined**; **1,202** verified symbols; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
