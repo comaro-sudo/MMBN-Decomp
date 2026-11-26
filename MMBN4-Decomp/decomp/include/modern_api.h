@@ -650,6 +650,46 @@ void NpcVmInit(struct NpcVmState *vm, const u8 *code, u32 len);
 u32 NpcVmStep(struct NpcVmState *vm, struct Toolkit *tk);
 u32 NpcVmRun(struct NpcVmState *vm, struct Toolkit *tk, u32 maxSteps);
 
+/* --- core_map_script_vm.c --- */
+struct MapScriptVmState {
+    const u8 *code;
+    u32 len;
+    u32 pc;
+    u8 halted;
+    u32 flagsTouched;
+};
+
+void MapScriptVmInit(struct MapScriptVmState *vm, const u8 *code, u32 len);
+u32 MapScriptVmStep(struct MapScriptVmState *vm, struct Toolkit *tk);
+u32 MapScriptVmRun(struct MapScriptVmState *vm, struct Toolkit *tk, u32 maxSteps);
+
+/* --- core_pa_catalog.c --- */
+const struct ProgramAdvanceRecipe *PaCatalogGetRecipes(u32 *outCount);
+u16 PaCatalogMatch(const struct CustomChipSlot *selected, u32 selectedCount,
+                   u32 *outStart);
+
+/* --- core_soul_navi_ai2.c --- */
+s8 BossWindApplyGust(s8 playerX, s8 dir);
+void BossThunderOrbStep(s8 *orbX, s8 *orbY, s8 playerX, s8 playerY);
+u32 BossRollDestroyChip(u8 *queuedChips);
+u16 BossNumberRollDiceDamage(u32 *rngSeed, u16 basePerPip);
+u32 BossAquaHoseHits(s8 hitX, s8 hitY, s8 playerX, s8 playerY);
+
+/* --- core_battle_sim.c --- */
+struct BattleSimState {
+    struct BattlePanel grid[18];
+    struct BattleTurnState turn;
+    struct BattleActorState player;
+    struct BattleActorState enemy;
+    struct BattleStatusState playerStatus;
+    struct BattleStatusState enemyStatus;
+};
+
+void BattleSimInit(struct BattleSimState *sim, s16 playerHp, s16 enemyHp, u16 gaugeSpeed);
+s32 BattleSimPlayerAttack(struct BattleSimState *sim, s32 damage, u32 hitFlags);
+s32 BattleSimEnemyAttack(struct BattleSimState *sim, s32 damage, u32 hitFlags);
+u32 BattleSimTick(struct BattleSimState *sim);
+
 #ifdef __cplusplus
 }
 #endif

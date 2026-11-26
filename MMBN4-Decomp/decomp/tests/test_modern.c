@@ -1035,6 +1035,47 @@ static void test_soul_navi_ai_and_npc_vm(void) {
     assert(EventFlagTest(&tk, 0x0210) == 1);
 }
 
+static void test_map_vm_pa_catalog_and_battle_sim(void) {
+    struct Toolkit tk;
+    struct MapScriptVmState mvm;
+    /* SetFlag(0x0155), ClearFlag(0x0156), End */
+    const u8 mscript[] = { 0x1C, 0xFF, 0x55, 0x01, 0x1D, 0xFF, 0x56, 0x01, 0x00 };
+    const struct CustomChipSlot ls[3] = { { 35, 18, 1 }, { 36, 18, 1 }, { 37, 18, 1 } };
+    u32 paStart = 99;
+    s8 ox = 5, oy = 1;
+    u8 chips = 3;
+    u32 seed = 0x55AA1234u;
+    struct BattleSimState sim;
+
+    /* MapScript VM */
+    memset(&tk, 0, sizeof(tk));
+    memset(gTestSaveBlock, 0, sizeof(gTestSaveBlock));
+    RebuildSavePointers(&tk, gTestSaveBlock, 0x040);
+    EventFlagSet(&tk, 0x0156);
+    MapScriptVmInit(&mvm, mscript, sizeof(mscript));
+    assert(MapScriptVmRun(&mvm, &tk, 16) == 3u && mvm.flagsTouched == 2u);
+    assert(EventFlagTest(&tk, 0x0155) == 1 && EventFlagTest(&tk, 0x0156) == 0);
+
+    /* Built-in P.A. Catalog (LifeSword) */
+    assert(PaCatalogMatch(ls, 3, &paStart) == 501u && paStart == 0u);
+
+    /* Extended Soul Navi AI */
+    assert(BossWindApplyGust(3, 1) == 3 && BossWindApplyGust(2, -1) == 1);
+    BossThunderOrbStep(&ox, &oy, 2, 2);
+    assert(ox == 4 && oy == 1);
+    assert(BossRollDestroyChip(&chips) == 1u && chips == 2u);
+    assert(BossNumberRollDiceDamage(&seed, 30) >= 30u);
+    assert(BossAquaHoseHits(3, 2, 2, 2) == 1u && BossAquaHoseHits(3, 2, 1, 2) == 0u);
+
+    /* End-to-end 1v1 headless battle simulation */
+    BattleSimInit(&sim, 500, 300, 0x2000u);
+    BattleTurnEnterCustom(&sim.turn);
+    BattleTurnStartCombat(&sim.turn, 0);
+    assert(BattleSimTick(&sim) == 0u);
+    assert(BattleSimPlayerAttack(&sim, 300, 0) == 300 && sim.enemy.deleted == 1u);
+    assert(BattleSimTick(&sim) == 0u && sim.turn.phase == 3u); /* VICTORY */
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1066,6 +1107,7 @@ int main(void) {
     test_chip_attacks_and_duo_bass();
     test_map_collision_and_pet_menu();
     test_soul_navi_ai_and_npc_vm();
+    test_map_vm_pa_catalog_and_battle_sim();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
