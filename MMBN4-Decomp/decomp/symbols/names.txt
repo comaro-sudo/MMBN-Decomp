@@ -1225,3 +1225,12 @@
 080008C4 080008C4 code   GEMINI       DmaQueue_PushListDma3            enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 0
 080008DC 080008DC code   GEMINI       DmaQueue_PushListMode1           enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 1
 080008F4 080008F4 code   GEMINI       DmaQueue_PushListMode2           enqueues NULL-terminated array of 12-byte {src, dst, len} descriptors via mode 2
+08000A24 08000A24 code   GEMINI       GetVCountPlusFrameCounter        returns REG_VCOUNT + frameCounter (0x0200A4D0) as entropy value
+08000A6C 08000A6C data   GEMINI       gBcdPowersOfTen                  8-word table of powers of ten (10^7..10^0) for memory_bcdConvert
+08000A94 08000A94 code   GEMINI       CountBcdDigits                   counts non-zero BCD nibbles in r0 (returns 1 if r0 == 0)
+08000ADE 08000ADE code   GEMINI       ShuffleByteList_SecondaryRNG     swaps r2 random u8 pairs in r0[0..r1) using GetSecondaryPositiveSignedRNG
+08000B12 08000B12 code   GEMINI       ShuffleHalfwordList_PrimaryRNG   swaps r2 random u16 pairs in r0[0..r1) using GetPositiveSignedRNG
+08000B4A 08000B4A code   GEMINI       ShuffleHalfwordList_SecondaryRNG swaps r2 random u16 pairs in r0[0..r1) using GetSecondaryPositiveSignedRNG
+08000B82 08000B82 code   GEMINI       PickRandomByte_PrimaryRNG        returns r0[GetPositiveSignedRNG() % r1]
+08000B96 08000B96 code   GEMINI       SortByteArrayAscending           in-place ascending sort of u8 array r0[0..r1)
+08000C00 08000C00 data   GEMINI       gBcdTimeDivisors                 frame-count divisor table (10h..1s) for BN4_BCD_TIME
