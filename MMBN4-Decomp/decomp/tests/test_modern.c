@@ -1027,6 +1027,89 @@ static void test_mail_stats_and_projectiles(void) {
     assert(ProjectileStep(&proj) == 0u && proj.active == 0u);
 }
 
+/* core_camera.c */
+struct CameraState {
+    s32 x;
+    s32 y;
+    s32 mapWidth;
+    s32 mapHeight;
+    u16 shakeFrames;
+    s8 shakeAmp;
+};
+
+void CameraCenterOn(struct CameraState *cam, s32 targetX, s32 targetY);
+void CameraStartShake(struct CameraState *cam, s8 amp, u16 frames);
+s32 CameraTickShakeOffset(struct CameraState *cam);
+
+/* core_battle_rewards.c */
+struct SpPlusReward {
+    u32 zenny;
+    u32 bugFrags;
+};
+
+u8 BattleRewardTierFromBusting(u8 bustingLevel);
+u32 BattleScaleZenny(u32 baseZenny, u8 violetEclipse);
+struct SpPlusReward BattleRollSpPlusReward(u32 *rngSeed);
+
+/* core_virus_ai.c */
+struct VirusAiState {
+    s8 x;
+    s8 y;
+    u16 attackCooldown;
+    u16 moveCooldown;
+    u8 guarding;
+};
+
+u32 VirusIsAlignedRow(const struct VirusAiState *v, s8 playerY);
+u32 VirusTrackRow(struct VirusAiState *v, s8 playerY);
+u32 VirusTickMettaurCycle(struct VirusAiState *v, u16 resetFrames);
+void VirusPickRandomEnemyPanel(u32 *rngSeed, s8 *outX, s8 *outY);
+
+static void test_camera_rewards_and_virus_ai(void) {
+    struct CameraState cam;
+    struct SpPlusReward rew;
+    struct VirusAiState met;
+    u32 seed = 0x13572468u;
+    s8 rx = 0, ry = 0;
+
+    /* Camera clamping & screen shake */
+    memset(&cam, 0, sizeof(cam));
+    cam.mapWidth = 480;
+    cam.mapHeight = 320;
+    CameraCenterOn(&cam, 50, 40);
+    assert(cam.x == 0 && cam.y == 0);
+    CameraCenterOn(&cam, 450, 300);
+    assert(cam.x == 240 && cam.y == 160);
+    CameraStartShake(&cam, 4, 2);
+    assert(CameraTickShakeOffset(&cam) == -4);
+    assert(CameraTickShakeOffset(&cam) == 4);
+    assert(CameraTickShakeOffset(&cam) == 0);
+
+    /* Battle rewards & Violet Eclipse 1.5x Zenny / SP+ roll */
+    assert(BattleRewardTierFromBusting(3) == 0u);
+    assert(BattleRewardTierFromBusting(6) == 1u);
+    assert(BattleRewardTierFromBusting(8) == 2u);
+    assert(BattleRewardTierFromBusting(10) == 3u);
+    assert(BattleRewardTierFromBusting(11) == 4u);
+    assert(BattleScaleZenny(1000u, 0) == 1000u);
+    assert(BattleScaleZenny(1000u, 1) == 1500u);
+    rew = BattleRollSpPlusReward(&seed);
+    assert((rew.zenny == 15000u && rew.bugFrags == 0u)
+        || (rew.zenny == 0u && rew.bugFrags == 50u));
+
+    /* Virus AI row tracking, Mettaur guard cycle & enemy-side hop */
+    memset(&met, 0, sizeof(met));
+    met.x = 5; met.y = 1; met.attackCooldown = 1;
+    assert(VirusIsAlignedRow(&met, 3) == 0u);
+    assert(VirusTrackRow(&met, 3) == 1u && met.y == 2);
+    assert(VirusTrackRow(&met, 3) == 1u && met.y == 3);
+    assert(VirusIsAlignedRow(&met, 3) == 1u);
+    assert(VirusTickMettaurCycle(&met, 60) == 0u && met.guarding == 1u);
+    assert(VirusTickMettaurCycle(&met, 60) == 1u && met.guarding == 0u && met.attackCooldown == 60u);
+    VirusPickRandomEnemyPanel(&seed, &rx, &ry);
+    assert(rx >= 4 && rx <= 6 && ry >= 1 && ry <= 3);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -1046,6 +1129,7 @@ int main(void) {
     test_subchips_and_battle_turn();
     test_sound_and_trader();
     test_mail_stats_and_projectiles();
+    test_camera_rewards_and_virus_ai();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
