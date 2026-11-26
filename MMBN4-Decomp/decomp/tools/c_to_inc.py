@@ -53,7 +53,7 @@ def main() -> None:
             sys.exit(f"missing agbcc at {cc}")
         tmp_i = dst.with_suffix(".i")
         tmp_s = dst.with_suffix(".raw.s")
-        subprocess.run(["arm-none-eabi-cpp", "-nostdinc", str(src), "-o", str(tmp_i)], check=True)
+        subprocess.run(["arm-none-eabi-cpp", "-nostdinc", "-I", str(DECOMP / "include"), str(src), "-o", str(tmp_i)], check=True)
         subprocess.run([str(cc), opt, "-mthumb-interwork", "-fhex-asm", str(tmp_i), "-o", str(tmp_s)], check=True)
         raw_asm = tmp_s.read_text(encoding="utf-8")
         tmp_i.unlink(missing_ok=True)

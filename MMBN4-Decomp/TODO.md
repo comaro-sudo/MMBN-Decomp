@@ -1,6 +1,6 @@
 # Violet Eclipse (MMBN4) TODO
 
-Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **74.4% decomp + 33 DC-5 C functions**.
+Updated: 2026-11-26 by Gemini, after Wii U WU-6 (`a3f14ed`), New 3DS port (`e01a011`), and **74.4% decomp + 38 DC-5 C functions**.
 This file is Gemini's (see [`AGENTS.md`](../AGENTS.md)).
 
 Handoffs:
@@ -15,14 +15,14 @@ Decisions waiting for the owner: [`docs/pending/`](docs/pending/). The patch pac
 - **Claude** owns `plan/`, `docs/`, `patch/` and `ports/` (normal ownership resumes after Friday 2026-11-27).
 - New game folders (BN1, 2, … and the Principia Trilogy) are Claude's.
 - Stage by explicit path, never `git add -A`. Never commit ROM bytes.
-- [x] **Push to GitHub:** `origin/main` is up to date through PC (`27b37ef`), Wii U WU-6 (`a3f14ed`), New 3DS (`e01a011`), and **74.4% decomp + 33 DC-5 C functions**.
+- [x] **Push to GitHub:** `origin/main` is up to date through PC (`27b37ef`), Wii U WU-6 (`a3f14ed`), New 3DS (`e01a011`), and **74.4% decomp + 38 DC-5 C functions**.
 - [ ] **Merge Round 13 + EL-0/PC-2/Wii U commits into `docs/handoff-violet-eclipse.md`** (Claude, when back).
 
 ## Done (through 2026-11-25)
 
 | Area | What | Where |
 |---|---|---|
-| Decomp | RS and BM build from one shared tree (DC-4) + **DC-5 C (`pret/agbcc` + `old_agbcc` + `arm-none-eabi-gcc`, 7 C files: `bios_swi.c` [8], complete `agb_sram.c` [6], `m4a_api.c` [6], `m4a_cmds.c` [9], `m4a_init.c` [2], `m4a_stop.c` [1], `m4a_cgb.c` [1] — 33 C functions total, 100% byte-identical on RS & BM)** + **396 dispatch tables + 1,344 `map_scripts_commands` blocks + 458 `BN4_CUTSCENE_COMMANDS` blocks + 839 pointer tables + 3,009 `NpcRunScript` lists/blocks (`145,080B`) emitted across `code_00`–`code_10` (zero new version blocks)**; **74.4% coverage** (`877,392 / 1,179,456` bytes, `77.7%` excl. `code_10` audio tail, `13,704` externs); `1,110` symbols; ordered roadmap in [`decomp/notes/decomp-plan.md`](decomp/notes/decomp-plan.md) | `95c6e92`, `a3884fb`, `a57a907`, `5c46201`, `d6d09e3`, `9217f19`, `2e4f9f9`, `8be104c`, `e2a7d4b`, `5650bea`, `41d1b47`, `af631ec` |
+| Decomp | RS and BM build from one shared tree (DC-4) + **DC-5 C (`pret/agbcc` + `old_agbcc` + `arm-none-eabi-gcc`, `include/gba_types.h`, 9 C files: `bios_swi.c` [8], complete `agb_sram.c` [6], `m4a_api.c` [6], `m4a_cmds.c` [9], `m4a_init.c` [2], `m4a_stop.c` [1], `m4a_cgb.c` [1], `m4a_ctrl.c` [3], `m4a_lfo.c` [2] — 38 C functions total, 100% byte-identical on RS & BM)** + **396 dispatch tables + 1,344 `map_scripts_commands` blocks + 458 `BN4_CUTSCENE_COMMANDS` blocks + 839 pointer tables + 3,009 `NpcRunScript` lists/blocks (`145,080B`) emitted across `code_00`–`code_10` (zero new version blocks)**; **74.4% coverage** (`877,392 / 1,179,456` bytes, `77.7%` excl. `code_10` audio tail, `13,709` externs); `1,110` symbols; ordered roadmap in [`decomp/notes/decomp-plan.md`](decomp/notes/decomp-plan.md) | `95c6e92`, `a3884fb`, `a57a907`, `5c46201`, `d6d09e3`, `9217f19`, `2e4f9f9`, `8be104c`, `e2a7d4b`, `5650bea`, `41d1b47`, `af631ec`, `daf671d` |
 | Ports (PC / EL-0..PC-6) | **EL-0 through PC-6 complete**: shared `ports/common/` (`gba_mem.h`, `emu_backend.h`, `emu_mgba.c` with idle-loop detection, `game.c` for **both RS & BM** + map names, `ui_draw.h`, `pet_model.c` with live ROM chip ATK/element, `pet_ui.c` with **Status / Folder / NetMap / Custom tabs**, live Tuner write, touch input injection, `bench.c`) + SDL3 PC frontend (`ui_draw_sdl3.c`, `config.c` `mmbn4.ini` remappable keys, `F2` Off-TV single-window mode, `--bench`, `--pet-tab`, `package_pc.py`); **ARM64 & x64 builds + release zips verified** | `c934453`, `8094af4`, `288d986`, `27b37ef` |
 | Ports (Wii U / WU-1..6) | **WU-1 through WU-6 built & verified in Cemu ARM64**: static big-endian PPC `libmgba.a` (`MINIMAL_CORE=1`) + `build/wiiu/mmbn4.wuhb` (1.1 MB) via `python3 ports/wiiu/build_wiiu.py`; **dual-screen TV (6× centered) + GamePad touch PET (`ui_draw_sdl2.c` + calibrated VPAD touch + `ZR` Off-TV) + Pro Controller (`KPAD`) + original Violet Eclipse icon/TV/DRC splash art**; verified booting `bn4_rs_overhaul.gba` (`AGB-B4WE`) + 600-frame `bench.log` in Cemu | `07232d6`, `7fe5a68`, `d5625d0`, `a3f14ed` |
 | Ports (New 3DS / 3DS-1..3) | **New 3DS port (`ports/3ds/`) written on `ports/common/`**: `citro2d` bottom-screen PET + touchscreen (`ui_draw_c2d.c`), 804 MHz speedup, top-screen GBA blit, `L+R` / `bench.txt` hardware benchmark, `build_3ds.py` (awaiting `devkitARM` + `libctru` + `citro2d` in `/opt/devkitpro` to compile `.3dsx`) | `e01a011` |
@@ -43,7 +43,7 @@ Owner decisions marked ⚠ come first.
 | 2 | ⚠ **Public-release chip art (`--public`):** placeholder/original art for Duo & Grand Prix Power | Local `ref/chip-art/` is Capcom art (gitignored); `--public` currently omits it |
 | 3 | **Full-playthrough testing (human/long-run C1–C5)** on the PC port (RS & BM) | Automated 16/16 RS & BM C1–C5 matrix **PASS** (`patch-test-results-7-c1-c5.md`); full continuous playthrough still to run |
 | 4 | **Ports:** Real Wii U `bench.log` (Gate G-WU) → compile & test New 3DS `.3dsx` (install devkitPro `3ds-dev` interactively — `apt.devkitpro.org` is Cloudflare-gated for CLI) → DSi | **PC (EL-0..PC-6 ARM64+x64), Wii U (WU-1..WU-6 in Cemu), and New 3DS source (`ports/3ds/`) done**; hardware confirmed (**Wii U, New 3DS, DSi**); **GPL-3.0 OK** (`D-EL1`/`D-EL3`). ⚠ Only `D-EL5` (GBARunner licence for DSi/NDS) remains |
-| 5 | **Decomp, long term ([`decomp-plan.md`](decomp/notes/decomp-plan.md)):** Finish Phase A (**A3–A5** remaining descriptor structs) & Phase B (**B1**: remaining `m4a` C functions), then Phases C–E (core engine & battle C) | **A1 & A2 done; A3 Parts 1–2 & A4/A5 ptr tables done (+50.4 KB)**, **B1 in progress (`33` C functions across 7 files)**, **74.4%** coverage (`877,392 / 1,179,456` B; `77.7%` excl. `code_10` audio tail), RS & BM byte-identical |
+| 5 | **Decomp, long term ([`decomp-plan.md`](decomp/notes/decomp-plan.md)):** Finish Phase A (**A3–A5** remaining descriptor structs) & Phase B (**B1**: remaining `m4a` C functions), then Phases C–E (core engine & battle C) | **A1 & A2 done; A3 Parts 1–2 & A4/A5 ptr tables done (+50.4 KB)**, **B1 in progress (`38` C functions across 9 files + `gba_types.h`)**, **74.4%** coverage (`877,392 / 1,179,456` B; `77.7%` excl. `code_10` audio tail), RS & BM byte-identical |
 | 6 | **The collection:** BN1, 2, 3, 5 and 6 decomps → the MMBN Principia Trilogy (ports only) | After BN4 (Principia Trilogy design deferred) |
 
 ## Owner decisions still open
