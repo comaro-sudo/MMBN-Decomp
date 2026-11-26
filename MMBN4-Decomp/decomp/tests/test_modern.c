@@ -123,6 +123,22 @@ u16 BattleCalcHitDamage(u16 baseDamage, u8 attackerElem, u8 defenderElem, u8 pan
 void BattlePanelCrack(struct BattlePanel *panel, int forceBreak);
 int BattlePanelIsWalkable(const struct BattlePanel *panel, u8 hasAirShoes, u8 hasFloatShoes);
 
+/* core_custom_screen.c */
+struct CustomChipSlot {
+    u16 chipId;
+    u8 code;
+    u8 selected;
+};
+struct ProgramAdvanceRecipe {
+    u16 paChipId;
+    u16 chips[3];
+    u8 codes[3];
+};
+int CustomGaugeStep(u16 *gauge, u16 step);
+int CustomCanSelectChip(const struct CustomChipSlot *selected, u32 selectedCount, u16 chipId, u8 code);
+int CustomMatchesPA(const struct CustomChipSlot *seq, const struct ProgramAdvanceRecipe *recipe);
+u16 CustomFindPA(const struct CustomChipSlot *selected, u32 selectedCount, const struct ProgramAdvanceRecipe *recipes, u32 recipeCount, u32 *outStart);
+
 static u8 gTestSaveBlock[SAVE_BLOCK_SIZE + 0x200];
 static u8 gTestEwramImage[0x73D2];
 
@@ -395,6 +411,36 @@ static void test_battle_grid_and_damage(void) {
     assert(BattlePanelIsWalkable(&grid[0], 1, 0) == 1);
 }
 
+static void test_custom_screen_and_pa(void) {
+    u16 gauge = 0x3FE0u;
+    struct CustomChipSlot sel[4] = {
+        {1, 0, 1},  /* Cannon A */
+        {1, 1, 1},  /* Cannon B */
+        {1, 2, 1},  /* Cannon C */
+        {29, 26, 1} /* AreaGrab * */
+    };
+    struct ProgramAdvanceRecipe recipes[1] = {
+        {500, {1, 1, 1}, {0xFF, 0xFF, 0xFF}}, /* GigaCannon (Cannon A-B-C) */
+    };
+    u32 paStart = 99;
+
+    /* Custom Gauge */
+    assert(CustomGaugeStep(&gauge, 16) == 0 && gauge == 0x3FF0u);
+    assert(CustomGaugeStep(&gauge, 32) == 1 && gauge == 0x4000u);
+
+    /* Selection compatibility */
+    assert(CustomCanSelectChip(sel, 1, 1, 1) == 1);   /* same ID, diff code */
+    assert(CustomCanSelectChip(sel, 1, 29, 0) == 1);  /* diff ID, same code A */
+    assert(CustomCanSelectChip(sel, 1, 29, 26) == 1); /* diff ID, '*' wildcard */
+    assert(CustomCanSelectChip(sel, 1, 29, 1) == 0);  /* diff ID, diff code B */
+    assert(CustomCanSelectChip(sel, 2, 29, 26) == 0); /* already mixed codes A+B -> must stay same ID */
+
+    /* Program Advance detection */
+    assert(CustomFindPA(sel, 4, recipes, 1, &paStart) == 500 && paStart == 0);
+    sel[2].code = 4; /* break A-B-C sequence */
+    assert(CustomFindPA(sel, 4, recipes, 1, &paStart) == 0);
+}
+
 int main(void) {
     test_progress_and_flags();
     test_input_and_memory();
@@ -403,6 +449,7 @@ int main(void) {
     test_world_tournaments_and_md();
     test_shop_and_navicust();
     test_battle_grid_and_damage();
+    test_custom_screen_and_pa();
     printf("modern-test: ALL PASSED\n");
     return 0;
 }
