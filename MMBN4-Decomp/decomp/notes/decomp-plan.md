@@ -1,6 +1,6 @@
 # MMBN4 Decompilation Plan (Ordered Roadmap)
 
-*Updated (2026-11-26 after C3/D2 `core_obstacle.c`, `core_save_slots.c`, `core_cutscene_vm.c` — **50 modern modules / 200 portable C functions / 262 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **62 byte-identical C functions** across 15 files + `include/gba_types.h`; **200 portable C functions** across 50 `src/modern/` files packaged as `libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` = **262 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
+*Updated (2026-11-26 after B2 `bios_sound_bias.c` + 50 modern C modules — **63 matching C + 200 portable C = 263 C functions combined & 82.6% total / 86.3% excl. audio!**): **82.6% code ownership** (`974,351 / 1,179,456` bytes, `205,105` bytes `incrom` remaining — **86.3%** excluding `code_10`'s `49,992 B` audio tail; **63 byte-identical C functions** across 16 files + `include/gba_types.h`; **200 portable C functions** across 50 `src/modern/` files packaged as `libmmbn4_modern.a` + C/C++-verified `include/modern_api.h` = **263 C functions combined**; **1,179** verified symbols; RS & BM 100% byte-identical).*
 
 ## Where the Remaining `393,394 B` of `incrom` Lives
 
@@ -36,7 +36,7 @@ Goal: Finish all third-party/SDK C libraries first — they are cleanly compiled
 | Task | Scope | Target |
 |---|---|---|
 | **B1** | **Complete `m4a` C (`src/m4a_*.c`):** *(48 C funcs done — ~92% of all `m4a.c` bytes!: `m4a_api.c` [11: `m4aSoundInit`..`m4aMPlayFadeOut`], `m4a_body.c` [3], complete `m4a_cgb.c` [3: `CgbOscOff`, `CgbModVol`, `CgbSound`], `m4a_cmds.c` [9], `m4a_ctrl.c` [3], `m4a_freq.c` [1], `m4a_imminit.c` [2], `m4a_init.c` [9], `m4a_lfo.c` [2], `m4a_start.c` [1], `m4a_stop.c` [1], `m4a_xcmd.c` [2], `m4a_xwave.c` [1].)* Remaining: 7 tiny `old_agbcc` register-order quirks (`MPlayContinue`, `MPlayFadeOut`, `m4aMPlayFadeOutTemporarily`, `m4aMPlayFadeIn`, `m4aMPlayTempoControl`, `ClearModM`, `ply_memacc`); `MPlayMain`/`TrackStop`/`ply_note` are hand-written `m4a_1.s` asm. | `code_10` (~7 small funcs left) |
-| **B2** | **GBA BIOS / libc / libgcc helpers (`code_10`):** Verify `bios_swi.c` (8 done), `agb_sram.c` (6/6 done), and decompile/document remaining runtime helpers (`__aeabi`/div/mod/call_via_rX, `MultiBoot` if present). | `code_10` SDK complete |
+| **B2** | **GBA BIOS / libc / libgcc helpers (`code_10`):** *(All 9 GBA BIOS SWI wrappers matching C: `bios_swi.c` [8] + `bios_sound_bias.c` [1: SWI `0x2A` `SoundBias`], plus `agb_sram.c` [6/6].)* Remaining: runtime `libgcc` helpers (`__divsi3`/`_call_via_rX` stay asm). | `code_10` SDK complete |
 
 ---
 

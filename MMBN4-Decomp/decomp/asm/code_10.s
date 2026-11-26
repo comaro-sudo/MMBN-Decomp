@@ -17142,11 +17142,7 @@ _08112A34:
     .set gMaxLines_0, 0
     .include "c/m4a_imminit.s"
 
-    .global sub_08112B98
-    .thumb_func
-sub_08112B98:
-    svc #0x2a
-    bx lr
+    .include "c/bios_sound_bias.s"
 
     .thumb_set _call_via_r1, sub_08111A34
     .thumb_set __divsi3, sub_08111A6C
