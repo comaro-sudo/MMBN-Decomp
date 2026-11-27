@@ -4,6 +4,14 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+
+.macro event_spawn x, y, z, unk, params
+    .hword \x, \y, \z, \unk
+    .word \params
+.endm
+.macro event_spawn_end
+    .word 0, 0, 0
+.endm
     .include "desc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"
@@ -14765,11 +14773,247 @@ _080A1C30:
     movs r0, #1
     pop {r4, r5, r6, r7, pc}
     .global dat_080A1C34
-dat_080A1C34:
+dat_080A1C34:   @ BN4_EVENT_SPAWN_LISTS
     .4byte dat_080A1C40
     .4byte dat_080A1D30
     .4byte dat_080A1E6C
-    incrom 0xA1C40, 0x3E8
+    .global dat_080A1C40
+dat_080A1C40:
+    event_spawn -326, 180, 0, 0x0000, dat_080A1CE8
+    event_spawn -154, 148, 0, 0x0002, dat_080A1CEE
+    event_spawn -154, 84, 0, 0x0002, dat_080A1CF4
+    event_spawn -292, 52, 0, 0x0001, dat_080A1CFA
+    event_spawn -316, 52, 0, 0x0000, dat_080A1D00
+    event_spawn -292, -92, 0, 0x0001, dat_080A1D06
+    event_spawn -132, -16, 0, 0x0001, dat_080A1D0C
+    event_spawn -132, -72, 0, 0x0001, dat_080A1D12
+    event_spawn -132, -100, 0, 0x0001, dat_080A1D15
+    event_spawn -132, -128, 0, 0x0001, dat_080A1D18
+    event_spawn -104, -204, 0, 0x0002, dat_080A1D1B
+    event_spawn -68, -234, 0, 0x0001, dat_080A1D21
+    event_spawn -68, -330, 0, 0x0001, dat_080A1D27
+    event_spawn_end
+    .global dat_080A1CE8
+dat_080A1CE8:
+    .byte 0x00, 0x20, 0x40, 0x60, 0x80, 0x00
+    .global dat_080A1CEE
+dat_080A1CEE:
+    .byte 0x00, 0x40, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1CF4
+dat_080A1CF4:
+    .byte 0x00, 0x20, 0x2C, 0x20, 0x44, 0x00
+    .global dat_080A1CFA
+dat_080A1CFA:
+    .byte 0x00, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1D00
+dat_080A1D00:
+    .byte 0x00, 0x80, 0x80, 0x80, 0x80, 0x00
+    .global dat_080A1D06
+dat_080A1D06:
+    .byte 0x00, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1D0C
+dat_080A1D0C:
+    .byte 0x00, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1D12
+dat_080A1D12:
+    .byte 0x1E, 0x18, 0x00
+    .global dat_080A1D15
+dat_080A1D15:
+    .byte 0x2C, 0x18, 0x00
+    .global dat_080A1D18
+dat_080A1D18:
+    .byte 0x3A, 0x18, 0x00
+    .global dat_080A1D1B
+dat_080A1D1B:
+    .byte 0x00, 0x20, 0x20, 0x30, 0x20, 0x00
+    .global dat_080A1D21
+dat_080A1D21:
+    .byte 0x00, 0xDC, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1D27
+dat_080A1D27:
+    .byte 0x00, 0x04, 0x04, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00
+    .global dat_080A1D30
+dat_080A1D30:
+    event_spawn 124, 180, 0, 0x0002, dat_080A1E14
+    event_spawn 156, 180, 0, 0x0002, dat_080A1E1A
+    event_spawn 220, 180, 0, 0x0002, dat_080A1E20
+    event_spawn 252, 180, 0, 0x0002, dat_080A1E26
+    event_spawn 64, 52, 0, 0x0002, dat_080A1E2C
+    event_spawn 96, 52, 0, 0x0002, dat_080A1E2F
+    event_spawn 128, 52, 0, 0x0002, dat_080A1E32
+    event_spawn 156, -98, 0, 0x0001, dat_080A1E35
+    event_spawn 156, -122, 0, 0x0001, dat_080A1E38
+    event_spawn -178, 180, 64, 0x0002, dat_080A1E3B
+    event_spawn -146, 180, 64, 0x0002, dat_080A1E41
+    event_spawn -224, 20, 64, 0x0002, dat_080A1E47
+    event_spawn -288, 20, 64, 0x0002, dat_080A1E4D
+    event_spawn -352, 20, 64, 0x0002, dat_080A1E52
+    event_spawn -68, -158, 64, 0x0001, dat_080A1E57
+    event_spawn 20, -204, 64, 0x0002, dat_080A1E5C
+    event_spawn 74, -268, 64, 0x0002, dat_080A1E61
+    event_spawn 106, -268, 64, 0x0002, dat_080A1E65
+    event_spawn_end
+    .global dat_080A1E14
+dat_080A1E14:
+    .byte 0x2C, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1E1A
+dat_080A1E1A:
+    .byte 0x1E, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1E20
+dat_080A1E20:
+    .byte 0x48, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1E26
+dat_080A1E26:
+    .byte 0x3A, 0x20, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1E2C
+dat_080A1E2C:
+    .byte 0x00, 0x34, 0x00
+    .global dat_080A1E2F
+dat_080A1E2F:
+    .byte 0x00, 0x34, 0x00
+    .global dat_080A1E32
+dat_080A1E32:
+    .byte 0x00, 0x34, 0x00
+    .global dat_080A1E35
+dat_080A1E35:
+    .byte 0x00, 0x20, 0x00
+    .global dat_080A1E38
+dat_080A1E38:
+    .byte 0x20, 0x20, 0x00
+    .global dat_080A1E3B
+dat_080A1E3B:
+    .byte 0x00, 0x28, 0x28, 0x04, 0x04, 0x00
+    .global dat_080A1E41
+dat_080A1E41:
+    .byte 0x00, 0x28, 0x28, 0x04, 0x04, 0x00
+    .global dat_080A1E47
+dat_080A1E47:
+    .byte 0x00, 0x04, 0x04, 0x04, 0x32, 0x00
+    .global dat_080A1E4D
+dat_080A1E4D:
+    .byte 0x00, 0x04, 0x04, 0x20, 0x00
+    .global dat_080A1E52
+dat_080A1E52:
+    .byte 0x00, 0x04, 0x04, 0x32, 0x00
+    .global dat_080A1E57
+dat_080A1E57:
+    .byte 0x00, 0x40, 0x04, 0x04, 0x00
+    .global dat_080A1E5C
+dat_080A1E5C:
+    .byte 0x00, 0x40, 0x10, 0x10, 0x00
+    .global dat_080A1E61
+dat_080A1E61:
+    .byte 0x00, 0x20, 0x20, 0x00
+    .global dat_080A1E65
+dat_080A1E65:
+    .byte 0x00, 0x20, 0x20, 0x00, 0x00, 0x00, 0x00
+    .global dat_080A1E6C
+dat_080A1E6C:
+    event_spawn 4, 360, 0, 0x0003, dat_080A1FB0
+    event_spawn -124, 172, 0, 0x0001, dat_080A1FB6
+    event_spawn -124, 140, 0, 0x0001, dat_080A1FBB
+    event_spawn -124, 108, 0, 0x0001, dat_080A1FC0
+    event_spawn 68, 212, 0, 0x0001, dat_080A1FC5
+    event_spawn 68, 188, 0, 0x0001, dat_080A1FC8
+    event_spawn 68, 164, 0, 0x0001, dat_080A1FCB
+    event_spawn 132, -30, 0, 0x0001, dat_080A1FCE
+    event_spawn 292, 90, 0, 0x0001, dat_080A1FD6
+    event_spawn 388, 10, 0, 0x0001, dat_080A1FDC
+    event_spawn 388, -22, 0, 0x0001, dat_080A1FDF
+    event_spawn 388, -54, 0, 0x0001, dat_080A1FE2
+    event_spawn 324, -124, 0, 0x0001, dat_080A1FE5
+    event_spawn 324, -148, 0, 0x0001, dat_080A1FE8
+    event_spawn 324, -172, 0, 0x0001, dat_080A1FEB
+    event_spawn 324, -196, 0, 0x0001, dat_080A1FEE
+    event_spawn 324, -220, 0, 0x0001, dat_080A1FF1
+    event_spawn -92, -148, 64, 0x0002, dat_080A1FF4
+    event_spawn -60, -148, 64, 0x0002, dat_080A1FF9
+    event_spawn -66, -84, 64, 0x0002, dat_080A1FFE
+    event_spawn -34, -84, 64, 0x0002, dat_080A2003
+    event_spawn -92, 84, 64, 0x0001, dat_080A2008
+    event_spawn 4, -32, 64, 0x0001, dat_080A200E
+    event_spawn 4, 32, 64, 0x0001, dat_080A2015
+    event_spawn 132, -78, 128, 0x0001, dat_080A201C
+    event_spawn 132, 2, 128, 0x0001, dat_080A2022
+    event_spawn_end
+    .global dat_080A1FB0
+dat_080A1FB0:
+    .byte 0x00, 0x1E, 0x04, 0x1E, 0x04, 0x00
+    .global dat_080A1FB6
+dat_080A1FB6:
+    .byte 0x00, 0x34, 0x04, 0x04, 0x00
+    .global dat_080A1FBB
+dat_080A1FBB:
+    .byte 0x00, 0x34, 0x04, 0x04, 0x00
+    .global dat_080A1FC0
+dat_080A1FC0:
+    .byte 0x00, 0x34, 0x04, 0x04, 0x00
+    .global dat_080A1FC5
+dat_080A1FC5:
+    .byte 0x1E, 0x20, 0x00
+    .global dat_080A1FC8
+dat_080A1FC8:
+    .byte 0x2C, 0x20, 0x00
+    .global dat_080A1FCB
+dat_080A1FCB:
+    .byte 0x3A, 0x20, 0x00
+    .global dat_080A1FCE
+dat_080A1FCE:
+    .byte 0x00, 0x20, 0x20, 0x04, 0x04, 0x04, 0x04, 0x00
+    .global dat_080A1FD6
+dat_080A1FD6:
+    .byte 0x00, 0x28, 0x04, 0x04, 0x04, 0x00
+    .global dat_080A1FDC
+dat_080A1FDC:
+    .byte 0x0E, 0x20, 0x00
+    .global dat_080A1FDF
+dat_080A1FDF:
+    .byte 0x1C, 0x20, 0x00
+    .global dat_080A1FE2
+dat_080A1FE2:
+    .byte 0x2A, 0x20, 0x00
+    .global dat_080A1FE5
+dat_080A1FE5:
+    .byte 0x10, 0x5C, 0x00
+    .global dat_080A1FE8
+dat_080A1FE8:
+    .byte 0x20, 0x5C, 0x00
+    .global dat_080A1FEB
+dat_080A1FEB:
+    .byte 0x30, 0x5C, 0x00
+    .global dat_080A1FEE
+dat_080A1FEE:
+    .byte 0x40, 0x5C, 0x00
+    .global dat_080A1FF1
+dat_080A1FF1:
+    .byte 0x50, 0x5C, 0x00
+    .global dat_080A1FF4
+dat_080A1FF4:
+    .byte 0x00, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1FF9
+dat_080A1FF9:
+    .byte 0x02, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A1FFE
+dat_080A1FFE:
+    .byte 0x00, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A2003
+dat_080A2003:
+    .byte 0x02, 0x20, 0x20, 0x20, 0x00
+    .global dat_080A2008
+dat_080A2008:
+    .byte 0x00, 0x20, 0x04, 0x04, 0x04, 0x00
+    .global dat_080A200E
+dat_080A200E:
+    .byte 0x00, 0x04, 0x04, 0x04, 0x04, 0x20, 0x00
+    .global dat_080A2015
+dat_080A2015:
+    .byte 0x04, 0x04, 0x04, 0x04, 0x04, 0x20, 0x00
+    .global dat_080A201C
+dat_080A201C:
+    .byte 0x00, 0x20, 0x04, 0x04, 0x04, 0x00
+    .global dat_080A2022
+dat_080A2022:
+    .byte 0x00, 0x20, 0x04, 0x04, 0x04, 0x00
 
     .global sub_080A2028
     .thumb_func
