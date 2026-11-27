@@ -1480,3 +1480,25 @@
 080042F4 080042F4 code   GEMINI       ObjectKind2_RenderAll            projects & queues OAM sprites for all 16 kind 2 NPCs and records palette slot 2
 08004370 08004370 code   GEMINI       ObjectKind2_RecordPaletteSlot    records current OBJ palette count for object kind 2 via 0x08002A04
 0800437A 0800437A code   GEMINI       ObjectKind2_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for all 16 kind 2 NPC slots
+0800439C 0800439C data   GEMINI       gObjectKind5Types                49-entry handler table for object kind 5 (overworld props/effects)
+08004460 08004460 code   GEMINI       ObjectKind5_Spawn                allocates & initializes kind 5 object in 0x0200B820 (32 slots, stride 0xB8)
+0800449A 0800449A code   GEMINI       ObjectKind5_Delete               frees kind 5 object alloc bit, clears [r5], and releases OAM affine
+080044B6 080044B6 code   GEMINI       ObjectKind5_UpdateAll            updates active kind 5 objects via gObjectKind5Types unless event flag 0x1163 is set
+08004518 08004518 code   GEMINI       ObjectKind5_RenderAll            projects & queues OAM sprites for all 32 kind 5 slots and records palette slot 5
+08004594 08004594 code   GEMINI       ObjectKind5_RecordPaletteSlot    records current OBJ palette count for object kind 5 via 0x08002A04
+0800459E 0800459E code   GEMINI       ObjectKind5_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for all 32 kind 5 slots
+080045C0 080045C0 code   GEMINI       DebugPrint_Init                  clears 0x400-byte debug printf staging buffer and resets write pointer
+080045DC 080045DC code   GEMINI       DebugPrint_Printf                formats {x, y, fmt...} string (%d/%x/%s/%b/width/%%) into debug print staging buffer
+080046A0 080046A0 data   GEMINI       gDebugPrintFmtTable              19-entry format specifier handler table for DebugPrint_Printf
+080046F4 080046F4 data   GEMINI       gDebugPrintFmtChars              null-terminated ASCII format specifier characters matching gDebugPrintFmtTable
+08004708 08004708 code   GEMINI       DebugPrint_FlushToBg0            flushes queued debug print text entries to BG0 tilemap via SetBgTileEntry
+08004752 08004752 code   GEMINI       DebugPrint_FmtDecimal            DebugPrint_Printf handler for signed decimal (%d/%D)
+08004780 08004780 data   GEMINI       gDebugPrintDecDivisors           10-word powers-of-10 divisor table for DebugPrint_FmtDecimal
+080047A8 080047A8 code   GEMINI       DebugPrint_FmtHex                DebugPrint_Printf handler for hexadecimal (%x/%X)
+080047BC 080047BC data   GEMINI       gDebugPrintHexDivisors           8-word powers-of-16 divisor table for DebugPrint_FmtHex
+080047DC 080047DC code   GEMINI       DebugPrint_EmitRadix             shared radix digit-emitter loop for DebugPrint_FmtDecimal/FmtHex
+08004842 08004842 code   GEMINI       DebugPrint_FmtString             DebugPrint_Printf handler for null-terminated ASCII strings (%s/%S)
+08004870 08004870 code   GEMINI       DebugPrint_FmtWidthDigit         DebugPrint_Printf handler accumulating field-width decimal digits (0..9)
+0800488E 0800488E code   GEMINI       DebugPrint_FmtPercent            DebugPrint_Printf handler emitting literal '%' (tile 0x05)
+0800489E 0800489E code   GEMINI       DebugPrint_FmtBinary             DebugPrint_Printf handler for 32-bit binary (%b/%B)
+080048AC 080048AC code   GEMINI       DebugPrint_EmitBinary            bit-by-bit binary digit emitter for DebugPrint_FmtBinary
