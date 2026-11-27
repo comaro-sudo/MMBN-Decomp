@@ -1447,3 +1447,36 @@
 0800366C 0800366C code   GEMINI       CylinderCol_Push                 enqueues 20-byte 3D cylinder hitbox into 0x02008930 (max 32 entries)
 080036B8 080036B8 code   GEMINI       CylinderCol_ResolveAll           O(N^2) pairwise 3D cylinder overlap check, ORing hit masks into *outFlagsPtr, then resets queue
 08003728 08003728 code   GEMINI       CylinderCol_TestOverlap          tests 3D vertical-cylinder overlap: dx^2+dy^2 < (rA+rB)^2 and Z intervals overlap
+0800377C 0800377C data   GEMINI       gOverlayTaskTable                16-byte descriptor table {updateFn, endFn, param, keepFlag} for 0x020004D0 overlay task
+080037FC 080037FC code   GEMINI       OverlayTask_Clear                zeroes 0x48-byte overlay task state at 0x020004D0
+08003808 08003808 code   GEMINI       OverlayTask_Start                clears 0x020004D0 and starts overlay task r0 from gOverlayTaskTable
+08003834 08003834 code   GEMINI       OverlayTask_Stop                 calls overlay task endFn if non-NULL and zeroes 0x020004D0
+08003856 08003856 code   GEMINI       OverlayTask_ResetIfTransient     zeroes 0x020004D0 if keepFlag ([+2]) == 0, then sets [+3] = 1
+0800386E 0800386E code   GEMINI       OverlayTask_MarkDirty            sets [0x020004D0 + 3] = 1
+08003878 08003878 code   GEMINI       OverlayTask_Pause                sets pause bit 0x80 in [0x020004D0] if active
+0800388E 0800388E code   GEMINI       OverlayTask_Resume               clears pause bit 0x80 in [0x020004D0]
+0800389E 0800389E code   GEMINI       OverlayTask_Update               runs gOverlayTaskTable[id].updateFn when [0x020004D0] is active and unpaused
+080038C0 080038C0 code   GEMINI       OverlayTask_IsActive             returns active byte [0x020004D0] (flags set)
+080038D0 080038D0 data   GEMINI       gObjectKind0Types                object kind 0 (overworld player) handler table
+080038D4 080038D4 code   GEMINI       ObjectKind0_Spawn                allocates & initializes kind 0 object in 0x0200A610 (1 slot, stride 0xA8)
+0800390E 0800390E code   GEMINI       ObjectKind0_Delete               frees kind 0 object alloc bit, clears [r5], and releases OAM affine
+0800392A 0800392A code   GEMINI       ObjectKind0_UpdateAll            updates active kind 0 objects via gObjectKind0Types
+0800397C 0800397C code   GEMINI       ObjectKind0_RenderAll            projects & queues OAM sprites for kind 0 objects and records palette slot 0
+080039F8 080039F8 code   GEMINI       ObjectKind0_RecordPaletteSlot    records current OBJ palette count for object kind 0 via 0x08002A04
+08003A02 08003A02 code   GEMINI       ObjectKind0_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for kind 0 pool
+08003BA0 08003BA0 code   GEMINI       ObjectKind1_RenderAll            projects & queues OAM sprites for kind 1 (8 slots, 0x0203B180, stride 0xD8)
+08003C1C 08003C1C code   GEMINI       ObjectKind1_RecordPaletteSlot    records current OBJ palette count for object kind 1 via 0x08002A04
+08003C26 08003C26 code   GEMINI       ObjectKind1_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for all 8 kind 1 slots
+08003ED4 08003ED4 code   GEMINI       ObjectKind3_RenderAll            projects & queues OAM sprites for kind 3 (32 slots, 0x0203C080, stride 0xD8)
+08003F50 08003F50 code   GEMINI       ObjectKind3_RecordPaletteSlot    records current OBJ palette count for object kind 3 via 0x08002A04
+08003F5A 08003F5A code   GEMINI       ObjectKind3_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for kind 3 pool
+08004180 08004180 code   GEMINI       ObjectKind4_RenderAll            projects & queues OAM sprites for kind 4 (32 slots, 0x02037D10, stride 0xC8)
+080041FC 080041FC code   GEMINI       ObjectKind4_RecordPaletteSlot    records current OBJ palette count for object kind 4 via 0x08002A04
+08004206 08004206 code   GEMINI       ObjectKind4_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for all 32 kind 4 slots
+08004220 08004220 data   GEMINI       gObjectKind2Types                object kind 2 (overworld NPCs) handler table
+08004224 08004224 code   GEMINI       ObjectKind2_Spawn                allocates & initializes kind 2 NPC in 0x02006140 (16 slots, stride 0xD8)
+0800427A 0800427A code   GEMINI       ObjectKind2_Delete               frees kind 2 NPC alloc bit, clears [r5], and releases OAM affine
+08004296 08004296 code   GEMINI       ObjectKind2_UpdateAll            updates active kind 2 NPCs via gObjectKind2Types unless event flag 0x1162 is set
+080042F4 080042F4 code   GEMINI       ObjectKind2_RenderAll            projects & queues OAM sprites for all 16 kind 2 NPCs and records palette slot 2
+08004370 08004370 code   GEMINI       ObjectKind2_RecordPaletteSlot    records current OBJ palette count for object kind 2 via 0x08002A04
+0800437A 0800437A code   GEMINI       ObjectKind2_ClearSpriteTileCache clears sprite+0x24 cached tile pointers for all 16 kind 2 NPC slots
