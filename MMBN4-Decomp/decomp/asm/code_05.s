@@ -339,15 +339,56 @@ dat_0807158C:
     .word dat_08071740
     .word dat_08071744
     .word dat_08071748
-    incrom 0x715CC, 0xC
+    .global dat_080715CC
+dat_080715CC:
+    obj_spawn_end
+    .global dat_080715D0
+dat_080715D0:
+    obj_spawn_end
+    .global dat_080715D4
+dat_080715D4:
+    obj_spawn_end
     @ cutscene script 0x080715D8..0x080715DB
     csc_b1 0x05, 0x06
     csc_end
-    incrom 0x715DB, 0x111
+    incrom 0x715DB, 0xF1
+    .global dat_080716CC
+dat_080716CC:
+    obj_spawn_end
+    .global dat_080716D0
+dat_080716D0:
+    obj_spawn_end
+    .global dat_080716D4
+dat_080716D4:
+    obj_spawn_end
+    .global dat_080716D8
+dat_080716D8:
+    obj_spawn_end
+    .global dat_080716DC
+dat_080716DC:
+    obj_spawn_end
+    .global dat_080716E0
+dat_080716E0:
+    obj_spawn_end
+    .global dat_080716E4
+dat_080716E4:
+    obj_spawn_end
+    .global dat_080716E8
+dat_080716E8:
+    obj_spawn_end
     @ cutscene script 0x080716EC..0x080716EF
     csc_b1 0x05, 0x06
     csc_end
-    incrom 0x716EF, 0x5D
+    incrom 0x716EF, 0x51
+    .global dat_08071740
+dat_08071740:
+    obj_spawn_end
+    .global dat_08071744
+dat_08071744:
+    obj_spawn_end
+    .global dat_08071748
+dat_08071748:
+    obj_spawn_end
     .word dat_0807188C
     .word dat_08071924
     .word dat_08071A10
@@ -3117,7 +3158,15 @@ dat_08073BA0:
     .4byte dat_08074030
     .4byte dat_08074034
     .4byte dat_08074038
-    incrom 0x73BD0, 0xC
+    .global dat_08073BD0
+dat_08073BD0:
+    obj_spawn_end
+    .global dat_08073BD4
+dat_08073BD4:
+    obj_spawn_end
+    .global dat_08073BD8
+dat_08073BD8:
+    obj_spawn_end
     @ cutscene script 0x08073BDC..0x08073BDF
     csc_b1 0x05, 0x06
     csc_end
@@ -3141,7 +3190,19 @@ dat_08073BA0:
     @ cutscene script 0x08073F74..0x08073F77
     csc_b1 0x05, 0x06
     csc_end
-    incrom 0x73F77, 0xC5
+    incrom 0x73F77, 0xB5
+    .global dat_0807402C
+dat_0807402C:
+    obj_spawn_end
+    .global dat_08074030
+dat_08074030:
+    obj_spawn_end
+    .global dat_08074034
+dat_08074034:
+    obj_spawn_end
+    .global dat_08074038
+dat_08074038:
+    obj_spawn_end
     .word dat_08074138
     .word dat_0807414C
     .word dat_08074160
@@ -4939,7 +5000,10 @@ dat_08075BDC:
     @ cutscene script 0x08075D50..0x08075D53
     csc_b1 0x05, 0x00
     csc_end
-    incrom 0x75D53, 0x2D
+    incrom 0x75D53, 0x29
+    .global dat_08075D7C
+dat_08075D7C:
+    obj_spawn_end
     @ cutscene script 0x08075D80..0x08075D83
     csc_b1 0x05, 0x00
     csc_end
@@ -4947,7 +5011,10 @@ dat_08075BDC:
     @ cutscene script 0x08075DAC..0x08075DAF
     csc_b1 0x05, 0x00
     csc_end
-    incrom 0x75DAF, 0x2D
+    incrom 0x75DAF, 0x29
+    .global dat_08075DD8
+dat_08075DD8:
+    obj_spawn_end
     @ cutscene script 0x08075DDC..0x08075DDF
     csc_b1 0x05, 0x00
     csc_end
@@ -6536,7 +6603,12 @@ dat_080773B8:
     incrom 0x77404, 0x28
     @ npc script 0x0807742C..0x08077430
     .4byte 0x000000FF   @ npc list end
-    incrom 0x77430, 0x40
+    .global dat_08077430
+dat_08077430:
+    obj_spawn 0x05, 0x03, 0x0000, (-108 << 16), (-78 << 16), (0 << 16), 0x2
+    obj_spawn 0x05, 0x04, 0x0000, (290 << 16), (64 << 16), (0 << 16), 0x20303
+    obj_spawn 0x05, 0x04, 0x0000, (-222 << 16), (-162 << 16), (0 << 16), 0x20104
+    obj_spawn_end
     @ ptr table 0x08077470..0x080774A0 (12 entries)
     .4byte dat_080774D4
     .4byte dat_080776B0
@@ -9211,9 +9283,82 @@ dat_08079908:
     incrom 0x79908, 0xDE
     .global dat_080799E6
 dat_080799E6:
-    incrom 0x799E6, 0x1C2
+    incrom 0x799E6, 0x26
+    .global dat_08079A0C
+dat_08079A0C:
+    obj_spawn 0x05, 0x03, 0x0000, (-164 << 16), (220 << 16), (0 << 16), 0x3
+    obj_spawn 0x05, 0x04, 0x0000, (-44 << 16), (-278 << 16), (0 << 16), 0x30108
+    obj_spawn 0x05, 0x04, 0x0000, (274 << 16), (-278 << 16), (0 << 16), 0x30109
+    obj_spawn_end
+    .global dat_08079A4C
+dat_08079A4C:
+    obj_spawn 0x05, 0x04, 0x0000, (158 << 16), (148 << 16), (64 << 16), 0x2000A
+    obj_spawn 0x05, 0x04, 0x0000, (192 << 16), (-482 << 16), (0 << 16), 0x2050D
+    obj_spawn 0x05, 0x06, 0x0000, (234 << 16), (164 << 16), (64 << 16), 0xB
+    obj_spawn 0x05, 0x06, 0x0000, (300 << 16), (126 << 16), (64 << 16), 0xC
+    obj_spawn 0x05, 0x06, 0x0000, (252 << 16), (100 << 16), (64 << 16), 0xD
+    obj_spawn 0x05, 0x06, 0x0000, (206 << 16), (62 << 16), (64 << 16), 0xE
+    obj_spawn 0x05, 0x06, 0x0000, (266 << 16), (36 << 16), (64 << 16), 0xF
+    obj_spawn 0x05, 0x06, 0x0000, (302 << 16), (-2 << 16), (64 << 16), 0x10
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn_end
+    .global dat_08079BA4
+dat_08079BA4:
+    obj_spawn_end
     .else
-    incrom 0x79908, 0x2A0
+    incrom 0x79908, 0x10
+    .global dat_08079918
+dat_08079918:
+    obj_spawn 0x05, 0x04, 0x0000, (-152 << 16), (-156 << 16), (0 << 16), 0x20207
+    obj_spawn 0x05, 0x04, 0x0000, (-308 << 16), (-32 << 16), (0 << 16), 0x20314
+    obj_spawn 0x05, 0x06, 0x0000, (-328 << 16), (-10 << 16), (0 << 16), 0x15
+    obj_spawn 0x05, 0x06, 0x0000, (-328 << 16), (54 << 16), (0 << 16), 0x16
+    obj_spawn 0x05, 0x06, 0x0000, (-328 << 16), (118 << 16), (0 << 16), 0x17
+    obj_spawn 0x05, 0x06, 0x0000, (-328 << 16), (182 << 16), (0 << 16), 0x18
+    obj_spawn 0x05, 0x06, 0x0000, (-196 << 16), (-10 << 16), (0 << 16), 0x19
+    obj_spawn 0x05, 0x06, 0x0000, (-196 << 16), (54 << 16), (0 << 16), 0x1A
+    obj_spawn 0x05, 0x06, 0x0000, (-196 << 16), (118 << 16), (0 << 16), 0x1B
+    obj_spawn 0x05, 0x06, 0x0000, (-196 << 16), (182 << 16), (0 << 16), 0x1C
+    obj_spawn 0x05, 0x06, 0x0000, (-294 << 16), (280 << 16), (0 << 16), 0x1D
+    obj_spawn 0x05, 0x06, 0x0000, (-230 << 16), (280 << 16), (0 << 16), 0x1E
+    obj_spawn_end
+    .global dat_08079A0C
+dat_08079A0C:
+    obj_spawn 0x05, 0x03, 0x0000, (-164 << 16), (220 << 16), (0 << 16), 0x3
+    obj_spawn 0x05, 0x04, 0x0000, (-44 << 16), (-278 << 16), (0 << 16), 0x30108
+    obj_spawn 0x05, 0x04, 0x0000, (274 << 16), (-278 << 16), (0 << 16), 0x30109
+    obj_spawn_end
+    .global dat_08079A4C
+dat_08079A4C:
+    obj_spawn 0x05, 0x04, 0x0000, (158 << 16), (148 << 16), (64 << 16), 0x2000A
+    obj_spawn 0x05, 0x04, 0x0000, (192 << 16), (-482 << 16), (0 << 16), 0x2050D
+    obj_spawn 0x05, 0x06, 0x0000, (234 << 16), (164 << 16), (64 << 16), 0xB
+    obj_spawn 0x05, 0x06, 0x0000, (300 << 16), (126 << 16), (64 << 16), 0xC
+    obj_spawn 0x05, 0x06, 0x0000, (252 << 16), (100 << 16), (64 << 16), 0xD
+    obj_spawn 0x05, 0x06, 0x0000, (206 << 16), (62 << 16), (64 << 16), 0xE
+    obj_spawn 0x05, 0x06, 0x0000, (266 << 16), (36 << 16), (64 << 16), 0xF
+    obj_spawn 0x05, 0x06, 0x0000, (302 << 16), (-2 << 16), (64 << 16), 0x10
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-314 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-346 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x06, 0x0000, (-64 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn 0x05, 0x06, 0x0000, (-52 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn 0x05, 0x06, 0x0000, (-40 << 16), (-378 << 16), (0 << 16), 0x13
+    obj_spawn_end
+    .global dat_08079BA4
+dat_08079BA4:
+    obj_spawn_end
     .endif
     .word dat_08079C2C
     .word dat_08079D98
@@ -12920,7 +13065,10 @@ dat_0807CC88:
     incrom 0x7CCAC, 0x28
     @ npc script 0x0807CCD4..0x0807CCD8
     .4byte 0x000000FF   @ npc list end
-    incrom 0x7CCD8, 0x18
+    .global dat_0807CCD8
+dat_0807CCD8:
+    obj_spawn 0x05, 0x04, 0x0000, (150 << 16), (-130 << 16), (0 << 16), 0x3000C
+    obj_spawn_end
     @ ptr table 0x0807CCF0..0x0807CD20 (12 entries)
     .4byte dat_0807CD54
     .4byte dat_0807D078

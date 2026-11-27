@@ -7578,13 +7578,28 @@ dat_08054388:
     .4byte dat_080543C8
     .4byte dat_080543CC
     .4byte dat_080543D0
-    incrom 0x543A4, 0x4
+    .global dat_080543A4
+dat_080543A4:
+    obj_spawn_end
     @ npc script 0x080543A8..0x080543AC
     .4byte 0x000000FF   @ npc list end
-    incrom 0x543AC, 0x20
+    .global dat_080543AC
+dat_080543AC:
+    obj_spawn 0x05, 0x00, 0x0000, (-74 << 16), (2 << 16), (16 << 16), 0x1
+    obj_spawn_end
+    .global dat_080543C4
+dat_080543C4:
+    obj_spawn_end
+    .global dat_080543C8
+dat_080543C8:
+    obj_spawn_end
     @ npc script 0x080543CC..0x080543D0
     .4byte 0x000000FF   @ npc list end
-    incrom 0x543D0, 0x2C
+    .global dat_080543D0
+dat_080543D0:
+    obj_spawn 0x05, 0x00, 0x0000, (-108 << 16), (6 << 16), (0 << 16), 0x1B
+    obj_spawn 0x05, 0x06, 0x0000, (-122 << 16), (4 << 16), (0 << 16), 0x31
+    obj_spawn_end
     .word dat_08054540
     .word dat_08054734
     .word dat_080549E0
@@ -10538,7 +10553,13 @@ dat_08056ED4:
     incrom 0x56EE0, 0x14
     @ npc script 0x08056EF4..0x08056EF8
     .4byte 0x000000FF   @ npc list end
-    incrom 0x56EF8, 0x1C
+    .global dat_08056EF8
+dat_08056EF8:
+    obj_spawn 0x05, 0x06, 0x0000, (-140 << 16), (-34 << 16), (0 << 16), 0x130
+    obj_spawn_end
+    .global dat_08056F10
+dat_08056F10:
+    obj_spawn_end
     @ ptr table 0x08056F14..0x08056F44 (12 entries)
     .4byte dat_08056FA0
     .4byte dat_08057004
@@ -13381,13 +13402,22 @@ dat_0805931C:
     .4byte dat_0805936C
     .4byte dat_08059370
     .4byte dat_08059388
-    incrom 0x5932C, 0x40
+    .global dat_0805932C
+dat_0805932C:
+    obj_spawn 0x05, 0x06, 0x0000, (-172 << 16), (122 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x06, 0x0000, (132 << 16), (26 << 16), (64 << 16), 0x1
+    obj_spawn 0x05, 0x06, 0x0000, (-28 << 16), (-70 << 16), (64 << 16), 0x2
+    obj_spawn_end
     @ npc script 0x0805936C..0x08059370
     .4byte 0x000000FF   @ npc list end
     incrom 0x59370, 0x14
     @ npc script 0x08059384..0x08059388
     .4byte 0x000000FF   @ npc list end
-    incrom 0x59388, 0x2C
+    .global dat_08059388
+dat_08059388:
+    obj_spawn 0x05, 0x00, 0x0000, (4 << 16), (-68 << 16), (32 << 16), 0x4
+    obj_spawn 0x05, 0x00, 0x0000, (4 << 16), (-68 << 16), (32 << 16), 0x5
+    obj_spawn_end
     .word dat_0805946C
     .word dat_08059620
     .word dat_08059828

@@ -134,7 +134,18 @@ dat_08067C50:
     .4byte dat_08067C64
     .4byte dat_08067C68
     .4byte dat_08067C6C
-    incrom 0x67C60, 0x10
+    .global dat_08067C60
+dat_08067C60:
+    obj_spawn_end
+    .global dat_08067C64
+dat_08067C64:
+    obj_spawn_end
+    .global dat_08067C68
+dat_08067C68:
+    obj_spawn_end
+    .global dat_08067C6C
+dat_08067C6C:
+    obj_spawn_end
     .word dat_08067D28
     .word dat_08067E58
     .word dat_08067F9C
@@ -2216,7 +2227,11 @@ dat_0806957C:
     incrom 0x69584, 0x28
     @ npc script 0x080695AC..0x080695B0
     .4byte 0x000000FF   @ npc list end
-    incrom 0x695B0, 0x2C
+    .global dat_080695B0
+dat_080695B0:
+    obj_spawn 0x05, 0x00, 0x0000, (-92 << 16), (12 << 16), (0 << 16), 0x2
+    obj_spawn 0x05, 0x04, 0x0000, (244 << 16), (-2 << 16), (0 << 16), 0x20006
+    obj_spawn_end
     @ ptr table 0x080695DC..0x080695FC (8 entries)
     .4byte dat_08069620
     .4byte dat_080696E4
@@ -3570,7 +3585,18 @@ dat_0806AA9C:
     .4byte dat_0806AAB0
     .4byte dat_0806AAB4
     .4byte dat_0806AAB8
-    incrom 0x6AAAC, 0x10
+    .global dat_0806AAAC
+dat_0806AAAC:
+    obj_spawn_end
+    .global dat_0806AAB0
+dat_0806AAB0:
+    obj_spawn_end
+    .global dat_0806AAB4
+dat_0806AAB4:
+    obj_spawn_end
+    .global dat_0806AAB8
+dat_0806AAB8:
+    obj_spawn_end
     .word dat_0806AB40
     .word dat_0806AD4C
     .word dat_0806AF78
@@ -6296,7 +6322,10 @@ dat_0806D92C:
     incrom 0x6D9B0, 0x28
     @ npc script 0x0806D9D8..0x0806D9DC
     .4byte 0x000000FF   @ npc list end
-    incrom 0x6D9DC, 0x18
+    .global dat_0806D9DC
+dat_0806D9DC:
+    obj_spawn 0x05, 0x1C, 0x0000, (-402 << 16), (76 << 16), (8 << 16), 0x0
+    obj_spawn_end
     .word dat_0806DA9C
     .word dat_0806DAE4
     .word dat_0806DAF8
@@ -8346,7 +8375,10 @@ dat_0806FF24:
     incrom 0x7009C, 0x28
     @ npc script 0x080700C4..0x080700C8
     .4byte 0x000000FF   @ npc list end
-    incrom 0x700C8, 0x18
+    .global dat_080700C8
+dat_080700C8:
+    obj_spawn 0x05, 0x06, 0x0000, (-270 << 16), (-66 << 16), (-32 << 16), 0x42
+    obj_spawn_end
     .word dat_080701E8
     .word dat_0807030C
     .word dat_0807036C

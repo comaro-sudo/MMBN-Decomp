@@ -265,7 +265,15 @@ dat_0805D5D8:
     .4byte dat_0805D638
     .4byte dat_0805D664
     .4byte dat_0805D6CC
-    incrom 0x5D5F0, 0x44
+    .global dat_0805D5F0
+dat_0805D5F0:
+    obj_spawn_end
+    .global dat_0805D5F4
+dat_0805D5F4:
+    obj_spawn 0x05, 0x00, 0x0000, (-170 << 16), (10 << 16), (0 << 16), 0xC
+    obj_spawn 0x05, 0x00, 0x0000, (-184 << 16), (-166 << 16), (0 << 16), 0xD
+    obj_spawn 0x05, 0x00, 0x0000, (124 << 16), (-18 << 16), (-32 << 16), 0xE
+    obj_spawn_end
     @ npc script 0x0805D634..0x0805D638
     .4byte 0x000000FF   @ npc list end
     incrom 0x5D638, 0x28
@@ -274,7 +282,16 @@ dat_0805D5D8:
     incrom 0x5D664, 0x64
     @ npc script 0x0805D6C8..0x0805D6CC
     .4byte 0x000000FF   @ npc list end
-    incrom 0x5D6CC, 0x90
+    .global dat_0805D6CC
+dat_0805D6CC:
+    obj_spawn 0x05, 0x00, 0x0000, (98 << 16), (-156 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (70 << 16), (-8 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (-90 << 16), (-8 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (-54 << 16), (12 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (2 << 16), (100 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (-78 << 16), (100 << 16), (0 << 16), 0x0
+    obj_spawn 0x05, 0x00, 0x0000, (-246 << 16), (-52 << 16), (0 << 16), 0x0
+    obj_spawn_end
     .word dat_0805D870
     .word dat_0805D990
     .word dat_0805DD88
