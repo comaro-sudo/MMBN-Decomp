@@ -1422,3 +1422,28 @@
 0800307C 0800307C code   GEMINI       SpriteObj_SetFlag16Bits23        sets bits 2-3 of sprite+0x16 to r0 << 2 and sets bit 6 of sprite+3
 0800309C 0800309C code   GEMINI       SpriteObj_SetPaletteBankIdx      sets high nibble of sprite+0x15 (OAM Attr2 palette bank) to r0 << 4
 0800312C 0800312C code   GEMINI       ObjectList_Init                  clears current object ptr (0x0200B48C) and links sentinel nodes 0x02009E40 <-> 0x0200A4C0
+080030B4 080030B4 data   GEMINI       gObjectSpawnTable                6-entry spawner function pointer table indexed by object kind (0..5)
+080030CC 080030CC data   GEMINI       gObjectDeleteTable               6-entry destructor function pointer table indexed by object kind (0..5)
+080030E4 080030E4 data   GEMINI       gObjectPoolBaseTable             6-entry EWRAM object pool base address table (kinds 0..5)
+080030FC 080030FC data   GEMINI       gObjectAllocMaskPtrTable         6-entry allocation bitmask pointer table (kinds 0..5)
+08003114 08003114 data   GEMINI       gObjectStrideTable               6-word object struct byte-stride table (kinds 0..5)
+0800337C 0800337C code   GEMINI       ObjectList_InsertAfterCurrent    inserts object node (r5-0x10) after current runner [0x0200B48C], or at tail if none/self
+080033A4 080033A4 code   GEMINI       ObjectList_InsertTail            inserts object node (r5-0x10) before tail sentinel 0x0200A4C0
+080033BC 080033BC code   GEMINI       ObjectList_InsertHead            inserts object node (r5-0x10) after head sentinel 0x02009E40
+080033D4 080033D4 code   GEMINI       Object_Delete                    clears [r5], clears kind alloc bit, unlinks node (r5-0x10), frees OAM affine
+0800340C 0800340C code   GEMINI       ObjectPool_ClearKind             zeroes alloc bitmask & pool for kind r0 via gObjectPoolInitDescs and stamps kind/slot indices
+08003444 08003444 data   GEMINI       gObjectPoolInitDescs             6x16-byte object pool clear/init descriptor table for ObjectPool_ClearKind
+080034A8 080034A8 code   GEMINI       ObjectPool_ClearKind0            clears object pool kind 0 via ObjectPool_ClearKind
+080034B2 080034B2 code   GEMINI       ObjectPool_ClearKind1            clears object pool kind 1 via ObjectPool_ClearKind
+080034BC 080034BC code   GEMINI       ObjectPool_ClearKind3            clears object pool kind 3 via ObjectPool_ClearKind
+080034C6 080034C6 code   GEMINI       ObjectPool_ClearKind4            clears object pool kind 4 via ObjectPool_ClearKind
+080034D0 080034D0 code   GEMINI       ObjectPool_ClearKind2            clears object pool kind 2 via ObjectPool_ClearKind
+080034DA 080034DA code   GEMINI       ObjectPool_ClearKind5            clears object pool kind 5 via ObjectPool_ClearKind
+080034E4 080034E4 code   GEMINI       Object_SpawnList                 spawns 0xFF-terminated 20-byte object list via gObjectSpawnTable; returns count spawned
+08003516 08003516 code   GEMINI       Object_DeleteKindsByMask         deletes all allocated objects whose kind bit is set in r0 via gObjectDeleteTable
+08003578 08003578 code   GEMINI       WorldToScreen_Ortho              orthographic projection of Q16.16 (x,y,z) relative to camera sl[+0xC]+0x38..0x40 (battle)
+080035E0 080035E0 code   GEMINI       WorldToScreen_Iso                isometric projection (dx+dy, (dy-dx)/2 - dz) relative to camera sl[+0xC]+0x38..0x40 (overworld)
+08003650 08003650 code   GEMINI       CylinderCol_Clear                resets 3D cylinder collision queue count (0x0200B130) & clears first entry (0x02008930)
+0800366C 0800366C code   GEMINI       CylinderCol_Push                 enqueues 20-byte 3D cylinder hitbox into 0x02008930 (max 32 entries)
+080036B8 080036B8 code   GEMINI       CylinderCol_ResolveAll           O(N^2) pairwise 3D cylinder overlap check, ORing hit masks into *outFlagsPtr, then resets queue
+08003728 08003728 code   GEMINI       CylinderCol_TestOverlap          tests 3D vertical-cylinder overlap: dx^2+dy^2 < (rA+rB)^2 and Z intervals overlap
