@@ -19,7 +19,7 @@ Violet Eclipse is a fan patch for **Mega Man Battle Network 4**. It lets you fin
 
 **All 13 Double Souls in one game**
 - All 12 Souls can be earned in either version. Each Navi you'd normally meet only in the other version now gives its Soul in a **friendly match** at the tournaments (3 per tournament, before the final). You can retry if you lose.
-- A new 13th Soul, the **Duo Soul**, unlocks when you beat Duo. It has its own colours, a meteor-fist charge shot, AirShoes + FloatShoes, and a Reflect shield.
+- A new 13th Soul, the **Duo Soul**, unlocks when you beat Duo. It has its own colours, a 180-damage fist charge shot, AirShoes + FloatShoes, and a Reflect shield.
 - The status screen shows every Soul (R / L switches pages), and the Souls completion star needs all 12.
 
 **Every chip**
