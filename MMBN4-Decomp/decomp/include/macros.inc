@@ -31,3 +31,5 @@
         .incbin "baserom.gba", \off, \size
     .endif
     .endm
+
+    .include "include/data_macros.inc"   @ decoded-table macros (Claude)

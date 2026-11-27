@@ -16,14 +16,7 @@ import re
 DECOMP = Path(__file__).resolve().parents[1]
 S, E = 0xFB47C, 0xFC138
 BASE = 0x08000000
-MACROS = """
-.macro formation id, col, row, kind
-    .byte \\id, \\col, \\row, \\kind
-.endm
-.macro formation_end
-    .byte 0xFF
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def main() -> None:
@@ -67,8 +60,6 @@ def main() -> None:
 
     lines[first:last] = out
     text = "\n".join(lines) + "\n"
-    if ".macro formation " not in text:
-        text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
     path.write_text(text, encoding="utf-8", newline="\n")
     print(f"emitted formation lists 0x{BASE + S:08X}-0x{BASE + E:08X} ({E - S} bytes), {len(refs)} labels")
 

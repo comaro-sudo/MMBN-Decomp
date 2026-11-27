@@ -21,16 +21,7 @@ BASE = 0x08000000
 BLOCKS = [  # (segment, rs offset, size, bm delta, terminated)
     ("code_06", 0x9CEC8, 0x348, 0xC, False),
 ]
-MACROS = """
-.macro obj_spawn kind, arg, unk, x, y, z, param
-    .byte \\kind, \\arg
-    .hword \\unk
-    .word \\x, \\y, \\z, \\param
-.endm
-.macro obj_spawn_end
-    .word 0xFF
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def fx(v: int) -> str:
@@ -64,8 +55,6 @@ def main() -> None:
             p += 20
         assert p == end, f"block {off:#x} isn't a whole number of records"
         text = text.replace(line + "\n", "\n".join(out) + "\n", 1)
-        if ".macro obj_spawn " not in text:
-            text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
         path.write_text(text, encoding="utf-8", newline="\n")
         print(f"{seg} 0x{BASE + off:08X}: {len(out)} lines")
 

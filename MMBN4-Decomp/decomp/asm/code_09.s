@@ -5,16 +5,7 @@
 
     .thumb
 
-.macro formation id, col, row, kind
-    .byte \id, \col, \row, \kind
-.endm
-.macro formation_end
-    .byte 0xFF
-.endm
 
-.macro chip_code id, code
-    .hword (\id) | ((\code) << 9)
-.endm
 
     .global sub_080F0012
     .thumb_func

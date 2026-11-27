@@ -5,10 +5,6 @@
 
     .thumb
 
-.macro chip_codes id, c0, c1, c2, c3
-    .hword \id
-    .byte \c0, \c1, \c2, \c3
-.endm
     .include "desc_macros.inc"
 
     .global sub_08035088

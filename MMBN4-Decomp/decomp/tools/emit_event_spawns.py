@@ -17,15 +17,7 @@ S, E = 0xA1C40, 0xA2028
 BASE = 0x08000000
 DELTA = 0xC
 LINE = f"    incrom 0x{S:X}, 0x{E - S:X}"
-MACROS = """
-.macro event_spawn x, y, z, unk, params
-    .hword \\x, \\y, \\z, \\unk
-    .word \\params
-.endm
-.macro event_spawn_end
-    .word 0, 0, 0
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def main() -> None:
@@ -82,8 +74,6 @@ def main() -> None:
     flush()
 
     text = text.replace(LINE + "\n", "\n".join(out) + "\n", 1)
-    if ".macro event_spawn " not in text:
-        text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
     path.write_text(text, encoding="utf-8", newline="\n")
     n = sum(1 for v in records.values() if v)
     print(f"emitted {n} spawn records in {len(heads)} lists, {len(labels)} labels")

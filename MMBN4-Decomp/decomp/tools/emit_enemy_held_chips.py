@@ -15,11 +15,7 @@ import struct
 DECOMP = Path(__file__).resolve().parents[1]
 OFF, SIZE, REC = 0xF8A80, 0x1E80, 0x20
 LINE = f"    incrom 0x{OFF:X}, 0x{SIZE:X}"
-MACROS = """
-.macro chip_code id, code
-    .hword (\\id) | ((\\code) << 9)
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def main() -> None:
@@ -44,8 +40,6 @@ def main() -> None:
             else:
                 out.append(f"    chip_code 0x{v & 0x1FF:03X}, {v >> 9}")
     text = text.replace(LINE + "\n", "\n".join(out) + "\n", 1)
-    if ".macro chip_code" not in text:
-        text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
     path.write_text(text, encoding="utf-8", newline="\n")
     print(f"emitted {SIZE // REC} records ({SIZE} bytes)")
 

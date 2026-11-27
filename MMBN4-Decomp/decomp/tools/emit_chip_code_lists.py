@@ -17,12 +17,7 @@ DECOMP = Path(__file__).resolve().parents[1]
 S, R, E = 0x4CFF4, 0x4CFF8, 0x4DAF0
 BASE = 0x08000000
 LINE = "    incrom 0x4CFF4, 0xAFC"
-MACROS = """
-.macro chip_codes id, c0, c1, c2, c3
-    .hword \\id
-    .byte \\c0, \\c1, \\c2, \\c3
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def main() -> None:
@@ -48,8 +43,6 @@ def main() -> None:
     bad = [hex(x) for x in refs if (x - R) % 6]
     assert not bad, f"references inside a record: {bad}"
     text = text.replace(LINE + "\n", "\n".join(out) + "\n", 1)
-    if ".macro chip_codes" not in text:
-        text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
     path.write_text(text, encoding="utf-8", newline="\n")
     print(f"emitted {(E - R) // 6} records, {len(refs)} labels")
 

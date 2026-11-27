@@ -5,28 +5,8 @@
 
     .thumb
 
-.macro obj_spawn kind, arg, unk, x, y, z, param
-    .byte \kind, \arg
-    .hword \unk
-    .word \x, \y, \z, \param
-.endm
-.macro obj_spawn_end
-    .word 0xFF
-.endm
 
-.macro flag_prop list, sprite, anim, pal, attr, test, flag_a, flag_b, unk
-    .byte \list, \sprite, \anim, \pal
-    .word \attr
-    .hword \test, \flag_a, \flag_b, \unk
-.endm
 
-.macro event_spawn x, y, z, unk, params
-    .hword \x, \y, \z, \unk
-    .word \params
-.endm
-.macro event_spawn_end
-    .word 0, 0, 0
-.endm
     .include "desc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"

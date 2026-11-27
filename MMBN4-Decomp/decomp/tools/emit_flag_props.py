@@ -15,13 +15,7 @@ import struct
 DECOMP = Path(__file__).resolve().parents[1]
 S, SIZE = 0xAEA00, 0x4A0
 LINE = f"    incrom 0x{S:X}, 0x{SIZE:X}"
-MACROS = """
-.macro flag_prop list, sprite, anim, pal, attr, test, flag_a, flag_b, unk
-    .byte \\list, \\sprite, \\anim, \\pal
-    .word \\attr
-    .hword \\test, \\flag_a, \\flag_b, \\unk
-.endm
-"""
+# Macros: include/data_macros.inc (loaded by include/macros.inc for every segment).
 
 
 def main() -> None:
@@ -37,8 +31,6 @@ def main() -> None:
         out.append(f"    flag_prop 0x{lst:02X}, 0x{spr:02X}, {anim}, 0x{pal:02X}, 0x{attr:X}, "
                    f"0x{t:04X}, 0x{a:04X}, 0x{b:04X}, 0x{u:04X}   @ {i}")
     text = text.replace(LINE + "\n", "\n".join(out) + "\n", 1)
-    if ".macro flag_prop" not in text:
-        text = text.replace("    .thumb\n", "    .thumb\n" + MACROS, 1)
     path.write_text(text, encoding="utf-8", newline="\n")
     print(f"emitted {SIZE // 16} flag_prop records")
 
