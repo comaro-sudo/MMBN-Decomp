@@ -1507,3 +1507,5 @@
 080F8A80 080F8A8C rom    CLAUDE       BN4_ENEMY_HELD_CHIPS             244 x 16 u16 chip|code<<9 (0xFFFF none), by enemy id; RS == BM content
 0804CFF8 0804D000 rom    CLAUDE       BN4_CHIP_CODE_LISTS              4 ascending lists of {u16 chip, u8 code[4]} (0xFF none), via dat_0804DE0C; use not traced
 080A1C34 080A1C40 rom    CLAUDE       BN4_EVENT_SPAWN_LISTS            3 map lists of 12-byte {s16 x,y,z, u16, ptr params} records (ptr 0 ends), spawned as object kind 0x16 by sub_080A203A (group 0x92, flags 9:0x52..0x53)
+080AEA00 080AEA0C rom    CLAUDE       BN4_FLAG_PROPS                   74 x 16 B map props {list, sprite, anim, pal, u32 attr, u16 test flag, u16 flag_a, u16 flag_b, u16}; by obj+4
+080AEEA0 080AEEAC code   CLAUDE       FlagProp_Update                  object for BN4_FLAG_PROPS[obj+4]: load sprite, then set/clear flag_a/flag_b as the test flag is set/clear
