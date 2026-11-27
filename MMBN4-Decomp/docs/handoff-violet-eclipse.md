@@ -1,57 +1,78 @@
-# Handoff: Claude, Violet Eclipse patches (updated 2026-11-23, late)
+# Handoff: Claude, Violet Eclipse patch, ports and docs (updated 2026-11-27)
 
-Claude's current handoff for `patch/` and the Violet Eclipse design. Paths are inside `MMBN4-Decomp/` unless they start with `/`. The ordered backlog is `TODO.md` (Gemini's file); the status of every package is in `patch/README.md`. Read both first.
+Claude's handoff for `patch/`, `ports/`, `plan/` and `docs/`. Paths are inside `MMBN4-Decomp/` unless they start with `/`. Read with it:
+- `TODO.md` (Gemini's tracker, the ordered backlog);
+- `patch/README.md` (every package and its test status);
+- `decomp/notes/handoff-2026-11-26-gemini-decomp.md` (the decomp).
 
 ## Goal & Current Status
 
-**Goal:** *Mega Man Battle Network 4: Violet Eclipse* (`plan/DEFINITIVE-EDITION.md`): every Soul, chip and boss in one save, as a ROM patch first (`patch/`), then on the ports.
+**Goal:** *Mega Man Battle Network 4: Violet Eclipse* (`plan/DEFINITIVE-EDITION.md`; the owner confirmed the name on 2026-11-25): every Soul, chip and boss in one save. First as a ROM patch (`patch/`), then on the ports.
 
-**Repo:** `main` is **32 commits ahead of `origin/main`** (GitHub `comaro-sudo/MMBN-Decomp`). The owner hasn't asked for a push; ask before pushing.
+**Repo:** `main` = `origin/main`. Verified 2026-11-27 by Claude:
+- `python patch/build.py` and `--check` PASS for both versions;
+- the decomp `make -B compare` is OK for both RS and BM.
 
-**This session's commits (Claude, all `python patch/build.py` + `--check` PASS, bytes checked in both builds):**
+**Ownership:** from 2026-11-23 to Friday 2026-11-27, Gemini led and could edit `patch/` and `docs/` (`AGENTS.md` §1). **After Friday, the normal tables apply again:** Claude owns `patch/`, `docs/`, `plan/`, `ports/`; Gemini owns `decomp/` and `TODO.md`.
 
-| Commit | What | In-game |
-|---|---|---|
-| `933f853` | Duo and Grand Prix Power **chip art** (`wp_d2_special_chip_art.asm`; `build.py` runs `tools/chipart.py` on the local `ref/chip-art/` PNGs; `--public` leaves it out) | Not tested |
-| `c3a787f` | Lobby trash can drawn with animation 0 (Gemini round 10 found the white-circle bug) | Visual re-check pending |
-| `999ec92` | **Beating Duo in the story gives Duo D** (`wp_d2_duo_story_grant.asm`: Duo's defeat handler `sub_080C4780` thunked to free space; grants once, while flag `0x006F` is still clear) | Not tested (needs a save before Duo) |
-| `24786cd` | **Grand Prix Power Blue Mystery Data** in ACDC Area 2 (`wp_d2_gpp_md.asm`, flag `0x0D0B`) | Not tested |
-| `a16ea98` | **Duo rematches** in Meteor Comp 1 `(82,00)` (`wp_d3_duo_rematch.asm`, `FC 0D 00`; Duo → α → β → Ω on S ranks; flags `0x0E5A`–`0x0E5B`) | Not tested |
+**Patch (Phase 1):** every package PASSes in-game (`patch/README.md`, `decomp/notes/patch-test-results-6.md`). The automated C1–C5 matrix is 16/16 on RS and BM (`patch-test-results-7-c1-c5.md`). What's in it:
+- **Economy:** WoodMan fix; battle Zenny ×1.5; key-item and upgrade prices at 40% (option 2), with existing saves synced on load; random RS/BM drops; Bass gives both chips.
+- **Souls:** all 12 + the **Duo Soul**: unite, MetalSoul sprite with a Duo palette, AirShoes/FloatShoes + Reflect passive, a 3-page status screen. The completion star needs 12.
+- **Tournaments:** fixed canon pairs; the Free Tournament fields all 12 Soul Navis; **9 friendly matches** (`FC 0E`).
+- **Rematches:** a lobby with 11 operators and the trash can to JunkMan, climbing V1 → V2 → V3 → SP → **SP+**. **Duo rematches** in Meteor Comp 1 climb V1 → α → β → Ω → SP+ on S ranks. The Duo story/rematch grant gives the Duo Soul and Duo D.
+- **SP+:** 4,095 HP, ATK ×1.5, speed ×1.25, reward 80% 15,000Z / 20% 50 BugFrags.
+- **Chips & Mystery Data:**
+  - Z-Saver and GP Power Blue Mystery Data;
+  - Duo and GP Power names and descriptions, plus local chip art (`--public` leaves it out);
+  - the Frequency Tuner, and GMDs that follow it.
+- **Safety & infrastructure:** the Waiting Room slot guard; lazy LZ77 NPC sprites; the battle-exit clear.
 
-**Gemini round 10** (`decomp/notes/task-gemini-round10.md`) is running. Task 1 is done (`decomp/notes/patch-test-results-3.md`, uncommitted, Gemini's): lobby gates, sprites, warp and rematch PASS; status two pages, Free Tournament, Frequency Tuner, Z-Saver PASS. Tasks 2–7 (names merge + regeneration, record carving, friendly-match / SP+ / Duo Soul / chip-text designs) were in progress: `decomp/asm/` and `decomp/symbols/names.txt` had uncommitted changes. **Don't touch them.**
+**Ports:**
+- **PC:** EL-0 to PC-6 done (`ports/common/`, the SDL3 frontend, ARM64 + x64 zips).
+- **Wii U:** WU-1 to WU-6 verified in Cemu.
+- **New 3DS:** source written (`ports/3ds/`); not compiled yet (needs devkitPro `3ds-dev`).
+
+**Owner decisions recorded since 2026-11-24:**
+- RS/BM = **Option C**: two complete patches, RS and BM;
+- hardware `D-EL1` = Wii U, New 3DS, DSi;
+- ports licence `D-EL3` = GPL-3.0;
+- Principia Trilogy later;
+- Tier A leftovers saved for later (`docs/pending/tier-a-leftovers-and-qol.md`).
 
 ## Key Decisions & Constraints
 
-- Owner decisions are in `docs/pending/*.md` and `docs/completion/*.md`. Today's: Duo Soul = MetalSoul recolour granted by beating Duo V1 (`docs/pending/duo-soul.md`); Duo rematches in the Meteor Comp, climbing versions, replaying the final battle as a plain battle (`docs/completion/bosses.md`).
-- **Chip art is Capcom art, local only** (`ref/` is gitignored). Never commit the PNGs or converted bins. A public release builds with `--public` (placeholder art still to decide).
-- armips gotchas met today: labels are **case-insensitive** (a label `duo_defeat_state` clashed with the equ `DUO_DEFEAT_STATE`); `.macro` can't be defined inside a false `.if`; `.incbin` names are resolved even inside a false `.if` (`build.py` points them at an empty `build/chipart/<v>/none.bin`).
-- Lobby dialogue archive (in `wp_d3_lobby_rematches.asm`): entries `0x00`–`0x0F` = talk index `0xF0`–`0xFF`. `0x0D` is now Duo's prompt; the shared "No" target moved to `0x0F`.
-- Lobby marker byte `0x020015EF` = `0x80 | id`; id 0–11 Navis, **13 = Duo** (so `0x0E40 + id*2` gives Duo's flags `0x0E5A`). `0x0E5C` is reserved for Duo's SP+ step; `0x020015EE` for the SP+ flag (Gemini).
-- Free space: next free slot **`0x087FB9C8`** (plus a 0x60 hole at `0x087FB670`); code/data must stay below `FS_TEXT` `0x087FC000`.
-- Rules: stage by explicit path; never commit ROM bytes; LF line endings (the Edit tool left CRLF in `defines.asm` once: run `sed -i 's/\r$//'` if git warns).
+- **Owner decisions:** `docs/pending/*.md` (latest: `owner-decisions-2026-11-24.md`), `docs/completion/*.md`, `plan/00-decisions-and-feasibility.md`.
+- **Patch conventions:** see `decomp/notes/handoff-claude-to-gemini-2026-11-23.md`.
+  - No ROM bytes; both versions.
+  - A free-space slot with an overrun guard in `defines.asm`.
+  - Veneers in the verified dead pools `sub_0800A144` and `sub_08001784`.
+  - `FS_TEXT` is now `0x087FD000`.
+  - The FC commands are `09`–`0E`.
+  - armips labels are case-insensitive.
+  - `*.tpl` only under `patch/src/scripts/`.
+- **Chip art is Capcom art:** local only (`ref/chip-art/`); public builds use `--public` until placeholder art is decided.
+- **Decomp metrics:** only the 63 functions in `decomp/src/*.c` are matching decompilation. Most of `decomp/src/modern/` (247 functions) is re-implemented game logic that isn't traced to ROM routines (the provenance note in Gemini's 2026-11-26 handoff), so count it as port scaffolding, not decomp progress.
 
 ## Modified & Relevant Files
 
-- `patch/build.py`: `VERSIONS[..]["icon_pal"]`, `chip_art(key, public)`, `--public`.
-- `patch/src/common/`: new `wp_d2_special_chip_art.asm`, `wp_d2_duo_story_grant.asm`, `wp_d3_duo_rematch.asm`; `wp_d3_lobby_rematches.asm` (FC 0D entry, Duo prompt, "No" → `0x0F`, Duo skips the secret-chip award, trash-can anim 0); `defines.asm` (`CHIP_GPP`, `FS_CHIP_ART`, `FS_DUO_GRANT`, `FS_DUO_REMATCH`).
-- `patch/src/{rs,bm}/version.asm`: `DUO_DEFEAT_STATE` (RS `0x080C4780` / BM `0x080C478C`), `NPC_SLOT/LIST/COUNT_METEOR1`.
-- `patch/README.md`, `docs/completion/chips.md`, `docs/completion/bosses.md`: updated.
-- Uncommitted, not Claude's: `decomp/asm/*`, `decomp/symbols/names.txt`, `decomp/asm/bm/`, `decomp/notes/patch-test-results-3.md` (Gemini round 10).
+- `patch/`: see `patch/README.md` (its package table is the reference). Round-13 commits: `4de9524` (prices), `71d149e` (Waiting Room guard), `acf65ad` (Duo S-rank climb), `a6cf221` (results-screen fix), `ede0993` (lazy sprites, existing-save prices).
+- `ports/common/`, `ports/pc/`, `ports/wiiu/`, `ports/3ds/`: see each folder's README and TODO "Done".
+- `docs/pending/`: open and recorded owner decisions.
 
 ## Open Issues / Blockers
 
-- **Stale rematch marker (pre-existing, slightly wider now):** `0x020015EF` is cleared only by a *won* battle's results. After a lost or fled rematch (the Duo rematch allows running), the next ordinary win could climb that Navi's or Duo's tier on an S rank and (for Navis) award a secret chip. Needs a test (does a game over / reload clear EWRAM there?) and probably a clear at battle start or exit. Good Gemini task.
-- In-game tests pending: chip art (Library, folder, pack), Duo story grant, Duo rematch (spot (212, 112), sprite `list[6] 0x63`, battle start from a static record, S-rank climb, results), trash-can sprite.
-- Duo and Grand Prix Power **names/descriptions** are still blank: waits for Gemini's task 7 (`decomp/notes/chip-text-design.md`) and the TextPet one-script question.
-- Owner questions open: RS/BM version choice (§7 q1), SP+ reward amount, key-item prices, Duo Soul colours/charge/passive/unite chips (Claude proposes defaults from Gemini's task 6).
+- **Owner:**
+  - placeholder art for `--public`;
+  - the GBARunner licence for DSi/NDS (`D-EL5`, ask Gericom);
+  - Tier A leftovers (later).
+- **Needs the owner's hardware or setup:**
+  - a real Wii U `bench.log` (gate G-WU);
+  - devkitPro `3ds-dev` for the `.3dsx` (`apt.devkitpro.org` blocks CLI installs).
+- **Not yet done:** a full continuous human playthrough (C1–C5) on the PC port, RS and BM.
 
 ## Immediate Next Steps
 
-0. **WP-B4 built** (GMD contents follow the Frequency Tuner, `wp_b4_gmd_tier.asm`): add it to the next Gemini test round (set the Tuner to Tier 3 on a first playthrough, jack in, open a GMD, compare with the Super Hard table in `decomp/notes/re07-mystery-data.md`).
-
-1. **Later commits (after the table above):** `8ba3c18` chip names/descriptions (TextPet `--patch`; sources in `patch/src/scripts/text/`, the only place `.gitignore` allows `*.tpl`); `146b2a8` **Duo Soul** + grant on any Duo version (`0x006F` is only set for α/β/Ω, `r5[4]` = version); `653233d` status page 3. Gemini round 10 is done and committed (`95c6e92`, `92538c0`, `adc7fdd`).
-2. **Gemini round 11 is written** (`decomp/notes/task-gemini-round11.md`): an in-game test of everything above, the battle-exit clear point, the form palette hook, a verified Duo passive, the SP+ gaps, friendly matches renumbered to `FC 0E`, names. Give it to Gemini when the owner says so.
-3. **SP+** (Gemini's `sp-plus-design.md`): don't build until round 11 task 2 gives a verified battle-exit clear, otherwise a lost/fled SP+ battle leaves the next battle SP+. Planned hook sites: HP at `0x08006802` (replace `ldrh r1,[r7]; adds r2,r1,#0`), attack after `bl sub_08013410` at `0x08013A5A`, veneers in the 20 dead bytes after Duo's thunk (RS `0x080C4788` / BM `0x080C4794`). Reward `0xC032` (50 BugFrags) unless the owner picks Zenny. Duo SP+ flag `0x0E5C`.
-4. **Friendly matches:** after round 11 task 6 (`FC 0E`, talk indices `0xE0`+).
-5. Duo palette and passive: after round 11 tasks 3–4.
-6. Owner decisions (2026-11-23): GP Power's description approved; SP+ reward random: 80% 15,000 Zenny, 20% 50 BugFrags; pushed to `origin/main`. Gemini round 11 assigned.
+1. Full playthrough testing on the PC port (TODO step 3).
+2. Ports: the 3DS build once devkitPro is installed; the Wii U hardware bench; DSi after `D-EL5`.
+3. Public-release prep: placeholder Duo/GP Power art, a release checklist, the patch README for players.
+4. Decomp (Gemini): Phase A, and matching C traced to ROM addresses.
