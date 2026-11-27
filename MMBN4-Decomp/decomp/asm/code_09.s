@@ -5,6 +5,10 @@
 
     .thumb
 
+.macro chip_code id, code
+    .hword (\id) | ((\code) << 9)
+.endm
+
     .global sub_080F0012
     .thumb_func
 sub_080F0012:
@@ -12116,7 +12120,7 @@ _080F5768:
 
     .global sub_080F576C
     .thumb_func
-sub_080F576C:
+sub_080F576C:   @ BattleAssignEnemyHeldChip
     push {r4, r5, r6, r7, lr}
     sub sp, #8
     bl sub_08001B16   @ GetPositiveSignedRNG
@@ -13932,7 +13936,7 @@ dat_080F5F50:   @ BN4_REWARD_ROWS
 
     .global sub_080F8A70
     .thumb_func
-sub_080F8A70:
+sub_080F8A70:   @ GetEnemyHeldChips
     movs r1, #0x20
     muls r0, r1, r0
     ldr r1, _080F8A7C
@@ -13942,8 +13946,1003 @@ sub_080F8A70:
 _080F8A7C:
     .word dat_080F8A80
     .global dat_080F8A80
-dat_080F8A80:
-    incrom 0xF8A80, 0x1E80
+dat_080F8A80:   @ BN4_ENEMY_HELD_CHIPS
+    .fill 16, 2, 0xFFFF   @ enemy 0x00: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x01: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x02: none
+    @ enemy 0x03
+    chip_code 0x085, 26
+    chip_code 0x085, 26
+    chip_code 0x085, 26
+    chip_code 0x081, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x04
+    chip_code 0x070, 26
+    chip_code 0x070, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x05
+    chip_code 0x070, 26
+    chip_code 0x070, 26
+    chip_code 0x085, 26
+    chip_code 0x085, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x06
+    chip_code 0x085, 26
+    chip_code 0x085, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x0D0, 26
+    chip_code 0x0D0, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x07: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x08: none
+    @ enemy 0x09
+    chip_code 0x062, 26
+    chip_code 0x062, 26
+    chip_code 0x062, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x0A
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x08D, 26
+    chip_code 0x08D, 26
+    chip_code 0x08D, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x0B
+    chip_code 0x062, 26
+    chip_code 0x062, 26
+    chip_code 0x085, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x0C
+    chip_code 0x062, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x08D, 26
+    chip_code 0x08D, 26
+    chip_code 0x08D, 26
+    chip_code 0x085, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x0D: none
+    @ enemy 0x0E
+    chip_code 0x08D, 26
+    chip_code 0x08C, 26
+    chip_code 0x08F, 26
+    chip_code 0x08F, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x0F
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x10
+    chip_code 0x081, 26
+    chip_code 0x08D, 26
+    chip_code 0x08C, 26
+    chip_code 0x08F, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x11: none
+    @ enemy 0x12
+    chip_code 0x081, 26
+    chip_code 0x08D, 26
+    chip_code 0x08C, 26
+    chip_code 0x08F, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x13: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x14: none
+    @ enemy 0x15
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x061, 26
+    chip_code 0x061, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x16
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x078, 26
+    chip_code 0x078, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x17
+    chip_code 0x061, 26
+    chip_code 0x061, 26
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x18
+    chip_code 0x075, 26
+    chip_code 0x061, 26
+    chip_code 0x078, 26
+    chip_code 0x07B, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x19: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x1F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x20: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x21: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x22: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x23: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x24: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x25: none
+    @ enemy 0x26
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x27
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x28
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x29
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x2A
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x2B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x2C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x2D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x2E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x2F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x30: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x31: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x32: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x33: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x34: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x35: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x36: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x37: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x38: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x39: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x3A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x3B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x3C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x3D: none
+    @ enemy 0x3E
+    chip_code 0x074, 26
+    chip_code 0x074, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x3F
+    chip_code 0x074, 26
+    chip_code 0x085, 26
+    chip_code 0x062, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x40
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x062, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x41
+    chip_code 0x085, 26
+    chip_code 0x085, 26
+    chip_code 0x062, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x42
+    chip_code 0x075, 26
+    chip_code 0x085, 26
+    chip_code 0x062, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x43: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x44: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x45: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x46: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x47: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x48: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x49: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x4F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x50: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x51: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x52: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x53: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x54: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x55: none
+    @ enemy 0x56
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x57
+    chip_code 0x05F, 26
+    chip_code 0x05F, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x58
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x08E, 26
+    chip_code 0x08E, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x59
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x05F, 26
+    chip_code 0x05F, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x5A
+    chip_code 0x081, 26
+    chip_code 0x07B, 26
+    chip_code 0x05F, 26
+    chip_code 0x08E, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x5B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x5C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x5D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x5E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x5F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x60: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x61: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x62: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x63: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x64: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x65: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x66: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x67: none
+    @ enemy 0x68
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x06E, 26
+    chip_code 0x06E, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x69
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x06E, 26
+    chip_code 0x06E, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x6A
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x070, 26
+    chip_code 0x070, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x6B
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x070, 26
+    chip_code 0x070, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    @ enemy 0x6C
+    chip_code 0x07B, 26
+    chip_code 0x07B, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x070, 26
+    chip_code 0x070, 26
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .hword 0xFFFF
+    .fill 16, 2, 0xFFFF   @ enemy 0x6D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x6E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x6F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x70: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x71: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x72: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x73: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x74: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x75: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x76: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x77: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x78: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x79: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x7F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x80: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x81: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x82: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x83: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x84: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x85: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x86: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x87: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x88: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x89: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x8F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x90: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x91: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x92: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x93: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x94: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x95: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x96: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x97: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x98: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x99: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9A: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9B: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9C: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9D: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9E: none
+    .fill 16, 2, 0xFFFF   @ enemy 0x9F: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA3: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA4: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA5: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA6: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA7: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA8: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xA9: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAA: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAB: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAC: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAD: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAE: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xAF: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB3: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB4: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB5: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB6: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB7: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB8: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xB9: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBA: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBB: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBC: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBD: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBE: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xBF: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xC0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xC1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xC2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xC3: none
+    @ enemy 0xC4
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xC5
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xC6
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xC7
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xC8
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    chip_code 0x06D, 26
+    @ enemy 0xC9
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    chip_code 0x081, 26
+    @ enemy 0xCA
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    chip_code 0x090, 26
+    .fill 16, 2, 0xFFFF   @ enemy 0xCB: none
+    @ enemy 0xCC
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xCD
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xCE
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    @ enemy 0xCF
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    chip_code 0x075, 26
+    .fill 16, 2, 0xFFFF   @ enemy 0xD0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD3: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD4: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD5: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD6: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD7: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD8: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xD9: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDA: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDB: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDC: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDD: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDE: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xDF: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE3: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE4: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE5: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE6: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE7: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE8: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xE9: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xEA: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xEB: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xEC: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xED: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xEE: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xEF: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xF0: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xF1: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xF2: none
+    .fill 16, 2, 0xFFFF   @ enemy 0xF3: none
     .global dat_080FA900
 dat_080FA900:   @ BN4_STORY_BATTLES
     .byte 0x00, 0x00, 0x64, 0x21, 0x40, 0x03, 0x5F, 0x00

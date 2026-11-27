@@ -1502,3 +1502,6 @@
 0800488E 0800488E code   GEMINI       DebugPrint_FmtPercent            DebugPrint_Printf handler emitting literal '%' (tile 0x05)
 0800489E 0800489E code   GEMINI       DebugPrint_FmtBinary             DebugPrint_Printf handler for 32-bit binary (%b/%B)
 080048AC 080048AC code   GEMINI       DebugPrint_EmitBinary            bit-by-bit binary digit emitter for DebugPrint_FmtBinary
+080F576C 080F5778 code   CLAUDE       BattleAssignEnemyHeldChip        battle start: up to 4 enemies; a random one gets a random BN4_ENEMY_HELD_CHIPS entry at obj+0x2A
+080F8A70 080F8A7C code   CLAUDE       GetEnemyHeldChips                r0 enemy id -> r0 = BN4_ENEMY_HELD_CHIPS + id * 0x20
+080F8A80 080F8A8C rom    CLAUDE       BN4_ENEMY_HELD_CHIPS             244 x 16 u16 chip|code<<9 (0xFFFF none), by enemy id; RS == BM content
