@@ -5,6 +5,13 @@
 
     .thumb
 
+.macro formation id, col, row, kind
+    .byte \id, \col, \row, \kind
+.endm
+.macro formation_end
+    .byte 0xFF
+.endm
+
 .macro chip_code id, code
     .hword (\id) | ((\code) << 9)
 .endm
@@ -15435,14 +15442,1488 @@ dat_080FA900:   @ BN4_STORY_BATTLES
     .word dat_080FC07B
     .byte 0x00, 0x00, 0x64, 0x15, 0x19, 0xFF, 0x1F, 0x00
     .word dat_080FC12E
-    incrom 0xFB47C, 0x464
-    .4byte dat_08010304
-    .4byte dat_08010205
-    incrom 0xFB8E8, 0x344
-    .4byte 0x02000202
-    .4byte 0x02010304
-    .4byte 0x02010105
-    incrom 0xFBC38, 0x500
+    formation_end
+    .global dat_080FB47D
+dat_080FB47D:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 4, 1, 1
+    formation 0x01, 5, 3, 1
+    formation_end
+    .global dat_080FB48A
+dat_080FB48A:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 3, 1
+    formation 0x01, 5, 1, 1
+    formation 0x01, 6, 2, 1
+    formation_end
+    .global dat_080FB49B
+dat_080FB49B:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 1
+    formation 0x01, 6, 3, 1
+    formation 0x01, 6, 1, 1
+    formation_end
+    .global dat_080FB4AC
+dat_080FB4AC:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 5, 2, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FB4BD
+dat_080FB4BD:
+    formation 0x00, 2, 2, 0
+    formation 0xB4, 5, 2, 1
+    formation_end
+    .global dat_080FB4C6
+dat_080FB4C6:
+    formation 0x00, 2, 2, 0
+    formation 0xCB, 5, 2, 1
+    formation_end
+    .global dat_080FB4CF
+dat_080FB4CF:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 4, 2, 1
+    formation 0x19, 5, 3, 1
+    formation 0xC4, 6, 1, 1
+    formation_end
+    .global dat_080FB4E0
+dat_080FB4E0:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 4, 3, 1
+    formation 0x01, 5, 1, 1
+    formation 0x02, 6, 2, 1
+    formation_end
+    .global dat_080FB4F1
+dat_080FB4F1:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 5, 3, 1
+    formation 0x19, 5, 1, 1
+    formation_end
+    .global dat_080FB4FE
+dat_080FB4FE:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x0D, 5, 1, 1
+    formation 0x25, 6, 2, 1
+    formation_end
+    .global dat_080FB50F
+dat_080FB50F:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation 0x25, 5, 2, 1
+    formation_end
+    .global dat_080FB520
+dat_080FB520:
+    formation 0x00, 2, 2, 0
+    formation 0x0D, 5, 2, 1
+    formation 0x37, 6, 3, 1
+    formation 0x37, 6, 1, 1
+    formation_end
+    .global dat_080FB531
+dat_080FB531:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x37, 5, 1, 1
+    formation 0x25, 6, 2, 1
+    formation_end
+    .global dat_080FB542
+dat_080FB542:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 5, 3, 1
+    formation 0x1A, 5, 1, 1
+    formation 0x1A, 6, 2, 1
+    formation_end
+    .global dat_080FB553
+dat_080FB553:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FB564
+dat_080FB564:
+    formation 0x00, 2, 2, 0
+    formation 0x84, 5, 2, 1
+    formation_end
+    .global dat_080FB56D
+dat_080FB56D:
+    formation 0x00, 2, 2, 0
+    formation 0x07, 4, 3, 1
+    formation 0x07, 5, 1, 1
+    formation_end
+    .global dat_080FB57A
+dat_080FB57A:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 5, 2, 1
+    formation 0x19, 6, 3, 1
+    formation 0x19, 6, 1, 1
+    formation_end
+    .global dat_080FB58B
+dat_080FB58B:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 4, 2, 1
+    formation 0x19, 5, 3, 1
+    formation 0x07, 6, 1, 1
+    formation_end
+    .global dat_080FB59C
+dat_080FB59C:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 5, 3, 1
+    formation 0x19, 5, 1, 1
+    formation 0x1A, 6, 2, 1
+    formation 0x00, 2, 3, 3
+    formation 0x00, 4, 1, 3
+    formation_end
+    .global dat_080FB5B5
+dat_080FB5B5:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 4, 3, 1
+    formation 0x1A, 4, 1, 1
+    formation 0x07, 5, 2, 1
+    formation_end
+    .global dat_080FB5C6
+dat_080FB5C6:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 4, 2, 1
+    formation 0x07, 5, 1, 1
+    formation 0x07, 6, 3, 1
+    formation 0x00, 2, 3, 3
+    formation 0x00, 4, 1, 3
+    formation_end
+    .global dat_080FB5DF
+dat_080FB5DF:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 4, 2, 1
+    formation 0x19, 5, 1, 1
+    formation 0x0A, 6, 3, 1
+    formation_end
+    .global dat_080FB5F0
+dat_080FB5F0:
+    formation 0x00, 2, 2, 0
+    formation 0x90, 5, 2, 1
+    formation_end
+    .global dat_080FB5F9
+dat_080FB5F9:
+    formation 0x00, 2, 2, 0
+    formation 0xC0, 5, 2, 1
+    formation_end
+    .global dat_080FB602
+dat_080FB602:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x3D, 5, 2, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FB613
+dat_080FB613:
+    formation 0x00, 2, 2, 0
+    formation 0x37, 4, 1, 1
+    formation 0x37, 5, 3, 1
+    formation 0x3D, 6, 2, 1
+    formation_end
+    .global dat_080FB624
+dat_080FB624:
+    formation 0x00, 2, 2, 0
+    formation 0xB0, 5, 2, 1
+    formation_end
+    .global dat_080FB62D
+dat_080FB62D:
+    formation 0x00, 2, 2, 0
+    formation 0xA8, 5, 2, 1
+    formation_end
+    .global dat_080FB636
+dat_080FB636:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 6, 3, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FB643
+dat_080FB643:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x25, 6, 2, 1
+    formation_end
+    .global dat_080FB654
+dat_080FB654:
+    formation 0x00, 1, 2, 0
+    formation 0x37, 5, 3, 1
+    formation 0x37, 5, 1, 1
+    formation_end
+    .global dat_080FB661
+dat_080FB661:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x7A, 6, 2, 1
+    formation_end
+    .global dat_080FB672
+dat_080FB672:
+    formation 0x00, 2, 2, 0
+    formation 0xC8, 5, 2, 1
+    formation_end
+    .global dat_080FB67B
+dat_080FB67B:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB688
+dat_080FB688:
+    formation 0x00, 2, 2, 0
+    formation 0x0D, 4, 1, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB695
+dat_080FB695:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 4, 3, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB6A2
+dat_080FB6A2:
+    formation 0x00, 2, 2, 0
+    formation 0x37, 4, 3, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB6AF
+dat_080FB6AF:
+    formation 0x00, 2, 2, 0
+    formation 0x25, 6, 2, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB6BC
+dat_080FB6BC:
+    formation 0x00, 2, 2, 0
+    formation 0x07, 4, 2, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB6C9
+dat_080FB6C9:
+    formation 0x00, 2, 2, 0
+    formation 0xC4, 4, 1, 1
+    formation 0xC4, 5, 3, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FB6DA
+dat_080FB6DA:
+    formation 0x00, 2, 2, 0
+    formation 0xC4, 5, 3, 1
+    formation 0xC4, 5, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FB6EB
+dat_080FB6EB:
+    formation 0x00, 2, 2, 0
+    formation 0xC4, 4, 3, 1
+    formation 0xC4, 4, 1, 1
+    formation 0xC4, 5, 2, 1
+    formation_end
+    .global dat_080FB6FC
+dat_080FB6FC:
+    formation 0x00, 2, 2, 0
+    formation 0xCC, 5, 2, 1
+    formation_end
+    .global dat_080FB705
+dat_080FB705:
+    formation 0x00, 2, 2, 0
+    formation 0x9C, 6, 2, 1
+    formation_end
+    .global dat_080FB70E
+dat_080FB70E:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation 0x02, 5, 2, 1
+    formation_end
+    .global dat_080FB71F
+dat_080FB71F:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 5, 3, 1
+    formation 0x38, 5, 1, 1
+    formation_end
+    .global dat_080FB72C
+dat_080FB72C:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x38, 5, 2, 1
+    formation 0x13, 6, 3, 1
+    formation_end
+    .global dat_080FB73D
+dat_080FB73D:
+    formation 0x00, 2, 2, 0
+    formation 0xC8, 5, 2, 1
+    formation_end
+    .global dat_080FB746
+dat_080FB746:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FB757
+dat_080FB757:
+    formation 0x00, 1, 2, 0
+    formation 0x1F, 4, 3, 1
+    formation 0x1F, 5, 1, 1
+    formation 0x1F, 6, 2, 1
+    formation 0x00, 2, 2, 3
+    formation_end
+    .global dat_080FB76C
+dat_080FB76C:
+    formation 0x00, 2, 2, 0
+    formation 0x0E, 5, 2, 1
+    formation 0x38, 6, 2, 1
+    formation_end
+    .global dat_080FB779
+dat_080FB779:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 2, 1
+    formation 0x0E, 6, 3, 1
+    formation 0x0E, 6, 1, 1
+    formation_end
+    .global dat_080FB78A
+dat_080FB78A:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 4, 2, 1
+    formation 0x38, 6, 3, 1
+    formation 0x38, 6, 1, 1
+    formation_end
+    .global dat_080FB79B
+dat_080FB79B:
+    formation 0x00, 2, 2, 0
+    formation 0x19, 4, 3, 1
+    formation 0x1A, 5, 1, 1
+    formation 0x3D, 6, 2, 1
+    formation_end
+    .global dat_080FB7AC
+dat_080FB7AC:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x08, 5, 2, 1
+    formation 0x13, 6, 1, 1
+    formation_end
+    .global dat_080FB7BD
+dat_080FB7BD:
+    formation 0x00, 2, 2, 0
+    formation 0xB4, 5, 2, 1
+    formation_end
+    .global dat_080FB7C6
+dat_080FB7C6:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FB7CF
+dat_080FB7CF:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FB7D8
+dat_080FB7D8:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x56, 6, 2, 1
+    formation_end
+    .global dat_080FB7E9
+dat_080FB7E9:
+    formation 0x00, 2, 2, 0
+    formation 0x37, 4, 3, 1
+    formation 0x37, 5, 1, 1
+    formation 0x56, 6, 2, 1
+    formation_end
+    .global dat_080FB7FA
+dat_080FB7FA:
+    formation 0x00, 2, 2, 0
+    formation 0x0D, 4, 3, 1
+    formation 0x0D, 4, 1, 1
+    formation 0x56, 6, 2, 1
+    formation_end
+    .global dat_080FB80B
+dat_080FB80B:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x0E, 5, 1, 1
+    formation 0x2C, 6, 2, 1
+    formation_end
+    .global dat_080FB81C
+dat_080FB81C:
+    formation 0x00, 2, 2, 0
+    formation 0x49, 4, 2, 1
+    formation 0xC4, 5, 1, 1
+    formation 0xC4, 6, 3, 1
+    formation_end
+    .global dat_080FB82D
+dat_080FB82D:
+    formation 0x00, 2, 2, 0
+    formation 0xCD, 5, 2, 1
+    formation_end
+    .global dat_080FB836
+dat_080FB836:
+    formation 0x00, 2, 2, 0
+    formation 0x80, 5, 2, 1
+    formation_end
+    .global dat_080FB83F
+dat_080FB83F:
+    formation 0x00, 2, 2, 0
+    formation 0x49, 4, 2, 1
+    formation 0x56, 5, 1, 1
+    formation 0x56, 6, 3, 1
+    formation_end
+    .global dat_080FB850
+dat_080FB850:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x49, 5, 1, 1
+    formation 0x7A, 6, 3, 1
+    formation_end
+    .global dat_080FB861
+dat_080FB861:
+    formation 0x00, 2, 2, 0
+    formation 0x88, 5, 2, 1
+    formation_end
+    .global dat_080FB86A
+dat_080FB86A:
+    formation 0x00, 1, 2, 0
+    formation 0xA0, 6, 2, 1
+    formation_end
+    .global dat_080FB873
+dat_080FB873:
+    formation 0x00, 2, 2, 0
+    formation 0xD8, 5, 2, 1
+    formation_end
+    .global dat_080FB87C
+dat_080FB87C:
+    formation 0x00, 2, 2, 0
+    formation 0x31, 4, 2, 1
+    formation 0x67, 6, 3, 1
+    formation 0x67, 6, 1, 1
+    formation_end
+    .global dat_080FB88D
+dat_080FB88D:
+    formation 0x00, 2, 2, 0
+    formation 0xAC, 5, 2, 1
+    formation_end
+    .global dat_080FB896
+dat_080FB896:
+    formation 0x00, 2, 2, 0
+    formation 0xB8, 6, 2, 1
+    formation_end
+    .global dat_080FB89F
+dat_080FB89F:
+    formation 0x00, 2, 2, 0
+    formation 0x31, 4, 3, 1
+    formation 0x31, 5, 1, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FB8B0
+dat_080FB8B0:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x0E, 5, 1, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FB8C1
+dat_080FB8C1:
+    formation 0x00, 2, 2, 0
+    formation 0x1F, 5, 3, 1
+    formation 0x1F, 5, 1, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FB8D2
+dat_080FB8D2:
+    formation 0x00, 2, 2, 0
+    formation 0xC9, 5, 2, 1
+    formation_end
+    .global dat_080FB8DB
+dat_080FB8DB:
+    formation 0x00, 2, 2, 0
+    formation 0x32, 4, 3, 1
+    formation 0x08, 5, 2, 1
+    formation 0x08, 6, 1, 1
+    formation_end
+    .global dat_080FB8EC
+dat_080FB8EC:
+    formation 0x00, 2, 2, 0
+    formation 0x0E, 4, 2, 1
+    formation 0x0E, 5, 3, 1
+    formation 0x26, 6, 1, 1
+    formation_end
+    .global dat_080FB8FD
+dat_080FB8FD:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 1, 1
+    formation 0x32, 5, 2, 1
+    formation 0x56, 6, 3, 1
+    formation_end
+    .global dat_080FB90E
+dat_080FB90E:
+    formation 0x00, 2, 2, 0
+    formation 0x20, 4, 1, 1
+    formation 0x20, 5, 2, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FB91F
+dat_080FB91F:
+    formation 0x00, 2, 2, 0
+    formation 0x67, 5, 3, 1
+    formation 0x67, 5, 1, 1
+    formation 0x14, 6, 2, 1
+    formation_end
+    .global dat_080FB930
+dat_080FB930:
+    formation 0x00, 2, 2, 0
+    formation 0x43, 4, 3, 1
+    formation 0x43, 5, 1, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FB941
+dat_080FB941:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 4, 3, 1
+    formation 0x38, 5, 2, 1
+    formation 0x44, 6, 1, 1
+    formation_end
+    .global dat_080FB952
+dat_080FB952:
+    formation 0x00, 2, 2, 0
+    formation 0x32, 4, 3, 1
+    formation 0x32, 4, 1, 1
+    formation 0x08, 5, 2, 1
+    formation_end
+    .global dat_080FB963
+dat_080FB963:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x68, 5, 3, 1
+    formation 0x68, 6, 2, 1
+    formation_end
+    .global dat_080FB974
+dat_080FB974:
+    formation 0x00, 2, 2, 0
+    formation 0x68, 4, 3, 1
+    formation 0x14, 5, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FB985
+dat_080FB985:
+    formation 0x00, 2, 2, 0
+    formation 0xD0, 5, 2, 1
+    formation_end
+    .global dat_080FB98E
+dat_080FB98E:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FB997
+dat_080FB997:
+    formation 0x00, 2, 2, 0
+    formation 0xE0, 5, 2, 1
+    formation_end
+    .global dat_080FB9A0
+dat_080FB9A0:
+    formation 0x00, 2, 2, 0
+    formation 0xE3, 5, 2, 1
+    formation_end
+    .global dat_080FB9A9
+dat_080FB9A9:
+    formation 0x00, 2, 2, 0
+    formation 0x31, 4, 3, 1
+    formation 0x31, 4, 1, 1
+    formation 0x26, 6, 1, 1
+    formation_end
+    .global dat_080FB9BA
+dat_080FB9BA:
+    formation 0x00, 2, 2, 0
+    formation 0x67, 5, 2, 1
+    formation 0x26, 6, 1, 1
+    formation_end
+    .global dat_080FB9C7
+dat_080FB9C7:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 1, 1
+    formation 0x20, 5, 2, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FB9D8
+dat_080FB9D8:
+    formation 0x00, 2, 2, 0
+    formation 0xC8, 5, 2, 1
+    formation_end
+    .global dat_080FB9E1
+dat_080FB9E1:
+    formation 0x00, 2, 2, 0
+    formation 0x61, 4, 3, 1
+    formation 0x61, 4, 1, 1
+    formation 0x62, 6, 2, 1
+    formation_end
+    .global dat_080FB9F2
+dat_080FB9F2:
+    formation 0x00, 2, 2, 0
+    formation 0x94, 6, 2, 1
+    formation_end
+    .global dat_080FB9FB
+dat_080FB9FB:
+    formation 0x00, 2, 2, 0
+    formation 0xC9, 5, 2, 1
+    formation_end
+    .global dat_080FBA04
+dat_080FBA04:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 2, 1
+    formation 0x26, 5, 2, 1
+    formation_end
+    .global dat_080FBA11
+dat_080FBA11:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 5, 2, 1
+    formation 0x68, 6, 2, 1
+    formation_end
+    .global dat_080FBA1E
+dat_080FBA1E:
+    formation 0x00, 2, 2, 0
+    formation 0x32, 4, 2, 1
+    formation 0x56, 6, 2, 1
+    formation_end
+    .global dat_080FBA2B
+dat_080FBA2B:
+    formation 0x00, 2, 2, 0
+    formation 0x20, 4, 1, 1
+    formation 0x56, 5, 3, 1
+    formation_end
+    .global dat_080FBA38
+dat_080FBA38:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 4, 3, 1
+    formation 0x56, 6, 1, 1
+    formation_end
+    .global dat_080FBA45
+dat_080FBA45:
+    formation 0x00, 2, 2, 0
+    formation 0xA4, 6, 2, 1
+    formation_end
+    .global dat_080FBA4E
+dat_080FBA4E:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x0E, 5, 3, 1
+    formation 0x26, 6, 2, 1
+    formation_end
+    .global dat_080FBA5F
+dat_080FBA5F:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 5, 1, 1
+    formation 0x08, 6, 3, 1
+    formation_end
+    .global dat_080FBA6C
+dat_080FBA6C:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 4, 2, 1
+    formation 0x1A, 6, 3, 1
+    formation 0x20, 6, 1, 1
+    formation_end
+    .global dat_080FBA7D
+dat_080FBA7D:
+    formation 0x00, 2, 2, 0
+    formation 0x32, 4, 1, 1
+    formation 0x44, 5, 2, 1
+    formation 0x68, 6, 3, 1
+    formation_end
+    .global dat_080FBA8E
+dat_080FBA8E:
+    formation 0x00, 2, 2, 0
+    formation 0xD4, 6, 2, 1
+    formation_end
+    .global dat_080FBA97
+dat_080FBA97:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x01, 5, 2, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FBAA8
+dat_080FBAA8:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 4, 1, 1
+    formation 0x19, 5, 2, 1
+    formation 0x1A, 6, 3, 1
+    formation_end
+    .global dat_080FBAB9
+dat_080FBAB9:
+    formation 0x00, 2, 2, 0
+    formation 0x08, 4, 1, 1
+    formation 0x07, 6, 3, 1
+    formation_end
+    .global dat_080FBAC6
+dat_080FBAC6:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x56, 6, 3, 1
+    formation_end
+    .global dat_080FBAD3
+dat_080FBAD3:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 1, 1
+    formation 0x56, 6, 3, 1
+    formation_end
+    .global dat_080FBAE0
+dat_080FBAE0:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x56, 5, 2, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FBAF1
+dat_080FBAF1:
+    formation 0x00, 2, 2, 0
+    formation 0x20, 5, 3, 1
+    formation 0x20, 5, 1, 1
+    formation 0x2B, 6, 2, 1
+    formation_end
+    .global dat_080FBB02
+dat_080FBB02:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 1, 1
+    formation 0x20, 5, 2, 1
+    formation 0x2B, 6, 3, 1
+    formation_end
+    .global dat_080FBB13
+dat_080FBB13:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation 0x38, 6, 2, 1
+    formation_end
+    .global dat_080FBB24
+dat_080FBB24:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 5, 2, 1
+    formation 0x56, 6, 1, 1
+    formation_end
+    .global dat_080FBB35
+dat_080FBB35:
+    formation 0x00, 2, 2, 0
+    formation 0x56, 4, 1, 1
+    formation 0x56, 6, 2, 1
+    formation_end
+    .global dat_080FBB42
+dat_080FBB42:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x02, 6, 2, 1
+    formation_end
+    .global dat_080FBB4F
+dat_080FBB4F:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FBB5C
+dat_080FBB5C:
+    formation 0x00, 1, 2, 0
+    formation 0x20, 4, 1, 1
+    formation 0x3E, 6, 3, 1
+    formation_end
+    .global dat_080FBB69
+dat_080FBB69:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FBB76
+dat_080FBB76:
+    formation 0x00, 1, 2, 0
+    formation 0x38, 4, 2, 1
+    formation 0x08, 6, 2, 1
+    formation_end
+    .global dat_080FBB83
+dat_080FBB83:
+    formation 0x00, 2, 2, 0
+    formation 0x43, 5, 3, 1
+    formation 0x2B, 6, 1, 1
+    formation_end
+    .global dat_080FBB90
+dat_080FBB90:
+    formation 0x00, 2, 2, 0
+    formation 0x08, 5, 1, 1
+    formation 0x08, 6, 3, 1
+    formation_end
+    .global dat_080FBB9D
+dat_080FBB9D:
+    formation 0x00, 2, 2, 0
+    formation 0x67, 6, 3, 1
+    formation 0x4F, 6, 1, 1
+    formation_end
+    .global dat_080FBBAA
+dat_080FBBAA:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x67, 6, 2, 1
+    formation_end
+    .global dat_080FBBBB
+dat_080FBBBB:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 5, 3, 1
+    formation 0x1A, 5, 1, 1
+    formation_end
+    .global dat_080FBBC8
+dat_080FBBC8:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x2C, 5, 2, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FBBD9
+dat_080FBBD9:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x0E, 5, 1, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FBBEA
+dat_080FBBEA:
+    formation 0x00, 2, 2, 0
+    formation 0xCD, 5, 2, 1
+    formation_end
+    .global dat_080FBBF3
+dat_080FBBF3:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FBC00
+dat_080FBC00:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x02, 6, 3, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FBC11
+dat_080FBC11:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FBC1E
+dat_080FBC1E:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation_end
+    .global dat_080FBC2B
+dat_080FBC2B:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x02, 6, 2, 1
+    formation_end
+    .global dat_080FBC3C
+dat_080FBC3C:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x26, 6, 1, 1
+    formation_end
+    .global dat_080FBC49
+dat_080FBC49:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 6, 3, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FBC56
+dat_080FBC56:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation_end
+    .global dat_080FBC67
+dat_080FBC67:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x26, 6, 2, 1
+    formation_end
+    .global dat_080FBC74
+dat_080FBC74:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x67, 6, 2, 1
+    formation_end
+    .global dat_080FBC81
+dat_080FBC81:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 4, 1, 1
+    formation_end
+    .global dat_080FBC8E
+dat_080FBC8E:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 1, 1
+    formation 0x02, 5, 2, 1
+    formation 0x02, 6, 3, 1
+    formation_end
+    .global dat_080FBC9F
+dat_080FBC9F:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 2, 1
+    formation 0x26, 6, 2, 1
+    formation_end
+    .global dat_080FBCAC
+dat_080FBCAC:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x67, 6, 1, 1
+    formation_end
+    .global dat_080FBCB9
+dat_080FBCB9:
+    formation 0x00, 2, 2, 0
+    formation 0x67, 4, 1, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FBCC6
+dat_080FBCC6:
+    formation 0x00, 2, 2, 0
+    formation 0xBC, 6, 2, 1
+    formation_end
+    .global dat_080FBCCF
+dat_080FBCCF:
+    formation 0x00, 2, 2, 0
+    formation 0x49, 4, 3, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FBCDC
+dat_080FBCDC:
+    formation 0x00, 2, 2, 0
+    formation 0x49, 4, 1, 1
+    formation 0x08, 6, 3, 1
+    formation_end
+    .global dat_080FBCE9
+dat_080FBCE9:
+    formation 0x00, 2, 2, 0
+    formation 0x49, 4, 2, 1
+    formation 0x02, 5, 1, 1
+    formation 0x08, 6, 3, 1
+    formation_end
+    .global dat_080FBCFA
+dat_080FBCFA:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation_end
+    .global dat_080FBD07
+dat_080FBD07:
+    formation 0x00, 2, 2, 0
+    formation 0x0E, 4, 2, 1
+    formation 0x02, 5, 1, 1
+    formation 0x26, 6, 3, 1
+    formation_end
+    .global dat_080FBD18
+dat_080FBD18:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 5, 3, 1
+    formation 0x3E, 6, 1, 1
+    formation_end
+    .global dat_080FBD25
+dat_080FBD25:
+    formation 0x00, 2, 2, 0
+    formation 0x1A, 4, 3, 1
+    formation 0x1A, 4, 1, 1
+    formation 0x20, 6, 2, 1
+    formation_end
+    .global dat_080FBD36
+dat_080FBD36:
+    formation 0x00, 2, 2, 0
+    formation 0x32, 4, 3, 1
+    formation 0x08, 5, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FBD47
+dat_080FBD47:
+    formation 0x00, 2, 2, 0
+    formation 0x8C, 6, 2, 1
+    formation 0x00, 3, 1, 3
+    formation 0x00, 5, 3, 3
+    formation_end
+    .global dat_080FBD58
+dat_080FBD58:
+    formation 0x00, 2, 2, 0
+    formation 0x08, 5, 3, 1
+    formation 0x08, 5, 1, 1
+    formation 0xC4, 6, 2, 1
+    formation_end
+    .global dat_080FBD69
+dat_080FBD69:
+    formation 0x00, 2, 2, 0
+    formation 0x02, 4, 3, 1
+    formation 0x02, 5, 2, 1
+    formation 0x02, 6, 1, 1
+    formation_end
+    .global dat_080FBD7A
+dat_080FBD7A:
+    formation 0x00, 2, 1, 0
+    formation 0x56, 5, 1, 1
+    formation 0x56, 6, 3, 1
+    formation_end
+    .global dat_080FBD87
+dat_080FBD87:
+    formation 0x00, 2, 2, 0
+    formation 0x38, 6, 3, 1
+    formation 0x38, 6, 1, 1
+    formation_end
+    .global dat_080FBD94
+dat_080FBD94:
+    formation 0x00, 2, 2, 0
+    formation 0x62, 5, 2, 1
+    formation 0x62, 6, 1, 1
+    formation_end
+    .global dat_080FBDA1
+dat_080FBDA1:
+    formation 0x00, 1, 2, 0
+    formation 0x02, 5, 3, 1
+    formation 0x02, 5, 1, 1
+    formation 0x7A, 6, 2, 1
+    formation_end
+    .global dat_080FBDB2
+dat_080FBDB2:
+    formation 0x00, 2, 2, 0
+    formation 0x98, 5, 2, 1
+    formation_end
+    .global dat_080FBDBB
+dat_080FBDBB:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FBDC4
+dat_080FBDC4:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FBDCD
+dat_080FBDCD:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FBDD6
+dat_080FBDD6:
+    formation 0x00, 1, 2, 0
+    formation 0x01, 6, 2, 4
+    formation_end
+    .global dat_080FBDDF
+dat_080FBDDF:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 6, 2, 4
+    formation_end
+    .global dat_080FBDE8
+dat_080FBDE8:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FBDF1
+dat_080FBDF1:
+    formation 0x00, 2, 2, 0
+    formation 0x01, 5, 2, 4
+    formation_end
+    .global dat_080FBDFA
+dat_080FBDFA:
+    formation 0x00, 2, 2, 0
+    formation 0xE4, 5, 2, 1
+    formation_end
+    .global dat_080FBE03
+dat_080FBE03:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 3, 1
+    formation 0x06, 5, 2, 1
+    formation 0x2A, 6, 1, 1
+    formation_end
+    .global dat_080FBE14
+dat_080FBE14:
+    formation 0x00, 1, 2, 0
+    formation 0x1E, 4, 3, 1
+    formation 0x1E, 4, 1, 1
+    formation 0x48, 6, 3, 1
+    formation 0x00, 2, 2, 3
+    formation 0x00, 5, 2, 3
+    formation_end
+    .global dat_080FBE2D
+dat_080FBE2D:
+    formation 0x00, 2, 2, 0
+    formation 0x3C, 4, 2, 1
+    formation 0x5A, 5, 1, 1
+    formation 0x5A, 6, 3, 1
+    formation_end
+    .global dat_080FBE3E
+dat_080FBE3E:
+    formation 0x00, 2, 2, 0
+    formation 0x36, 4, 1, 1
+    formation 0x36, 5, 2, 1
+    formation 0x0C, 6, 3, 1
+    formation_end
+    .global dat_080FBE4F
+dat_080FBE4F:
+    formation 0x00, 1, 2, 0
+    formation 0x12, 4, 2, 1
+    formation 0x06, 6, 3, 1
+    formation 0x06, 6, 1, 1
+    formation_end
+    .global dat_080FBE60
+dat_080FBE60:
+    formation 0x00, 2, 2, 0
+    formation 0x1E, 4, 2, 1
+    formation 0x72, 5, 3, 1
+    formation 0x0C, 6, 1, 1
+    formation_end
+    .global dat_080FBE71
+dat_080FBE71:
+    formation 0x00, 2, 2, 0
+    formation 0x60, 4, 1, 1
+    formation 0x18, 5, 2, 1
+    formation 0x60, 6, 3, 1
+    formation_end
+    .global dat_080FBE82
+dat_080FBE82:
+    formation 0x00, 2, 2, 0
+    formation 0x6C, 5, 2, 1
+    formation 0x2A, 6, 2, 1
+    formation_end
+    .global dat_080FBE8F
+dat_080FBE8F:
+    formation 0x00, 2, 2, 0
+    formation 0x12, 4, 3, 1
+    formation 0x12, 4, 1, 1
+    formation 0x78, 6, 2, 1
+    formation_end
+    .global dat_080FBEA0
+dat_080FBEA0:
+    formation 0x00, 2, 2, 0
+    formation 0x4E, 4, 3, 1
+    formation 0x4E, 4, 1, 1
+    formation 0xC7, 6, 2, 1
+    formation_end
+    .global dat_080FBEB1
+dat_080FBEB1:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 3, 1
+    formation 0x06, 5, 2, 1
+    formation 0x6C, 6, 3, 1
+    formation_end
+    .global dat_080FBEC2
+dat_080FBEC2:
+    formation 0x00, 1, 2, 0
+    formation 0x3C, 4, 1, 1
+    formation 0x24, 6, 3, 1
+    formation_end
+    .global dat_080FBECF
+dat_080FBECF:
+    formation 0x00, 2, 2, 0
+    formation 0x42, 5, 1, 1
+    formation 0x42, 6, 3, 1
+    formation_end
+    .global dat_080FBEDC
+dat_080FBEDC:
+    formation 0x00, 2, 2, 0
+    formation 0x3C, 4, 1, 1
+    formation 0x3C, 6, 3, 1
+    formation_end
+    .global dat_080FBEE9
+dat_080FBEE9:
+    formation 0x00, 2, 2, 0
+    formation 0x54, 5, 2, 1
+    formation 0x60, 6, 3, 1
+    formation_end
+    .global dat_080FBEF6
+dat_080FBEF6:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 1, 1
+    formation 0x2A, 6, 3, 1
+    formation_end
+    .global dat_080FBF03
+dat_080FBF03:
+    formation 0x00, 2, 2, 0
+    formation 0x12, 4, 2, 1
+    formation 0x78, 6, 3, 1
+    formation 0x78, 6, 1, 1
+    formation_end
+    .global dat_080FBF14
+dat_080FBF14:
+    formation 0x00, 1, 2, 0
+    formation 0x54, 6, 2, 1
+    formation_end
+    .global dat_080FBF1D
+dat_080FBF1D:
+    formation 0x00, 1, 2, 0
+    formation 0x54, 6, 3, 1
+    formation 0x18, 6, 1, 1
+    formation_end
+    .global dat_080FBF2A
+dat_080FBF2A:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 2, 1
+    formation 0x54, 6, 3, 1
+    formation 0xC7, 6, 1, 1
+    formation_end
+    .global dat_080FBF3B
+dat_080FBF3B:
+    formation 0x00, 2, 2, 0
+    formation 0x66, 5, 3, 1
+    formation 0x66, 6, 1, 1
+    formation_end
+    .global dat_080FBF48
+dat_080FBF48:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 1, 1
+    formation 0x06, 5, 2, 1
+    formation 0x06, 6, 3, 1
+    formation_end
+    .global dat_080FBF59
+dat_080FBF59:
+    formation 0x00, 2, 2, 0
+    formation 0x72, 4, 3, 1
+    formation 0x72, 5, 1, 1
+    formation 0x72, 6, 2, 1
+    formation_end
+    .global dat_080FBF6A
+dat_080FBF6A:
+    formation 0x00, 2, 2, 0
+    formation 0x1E, 4, 3, 1
+    formation 0x24, 5, 2, 1
+    formation 0x1E, 6, 1, 1
+    formation_end
+    .global dat_080FBF7B
+dat_080FBF7B:
+    formation 0x00, 1, 2, 0
+    formation 0x5A, 4, 1, 1
+    formation 0x2A, 6, 3, 1
+    formation_end
+    .global dat_080FBF88
+dat_080FBF88:
+    formation 0x00, 2, 2, 0
+    formation 0x06, 4, 3, 1
+    formation 0x3C, 5, 2, 1
+    formation 0x30, 6, 1, 1
+    formation_end
+    .global dat_080FBF99
+dat_080FBF99:
+    formation 0x00, 2, 2, 0
+    formation 0x54, 6, 3, 1
+    formation 0x18, 6, 1, 1
+    formation_end
+    .global dat_080FBFA6
+dat_080FBFA6:
+    formation 0x00, 2, 2, 0
+    formation 0x6C, 5, 2, 1
+    formation_end
+    .global dat_080FBFAF
+dat_080FBFAF:
+    formation 0x00, 1, 2, 0
+    formation 0x12, 5, 3, 1
+    formation 0x12, 5, 1, 1
+    formation 0x7E, 6, 2, 1
+    formation_end
+    .global dat_080FBFC0
+dat_080FBFC0:
+    formation 0x00, 2, 2, 0
+    formation 0x18, 5, 3, 1
+    formation 0x54, 5, 1, 1
+    formation 0xC7, 6, 2, 1
+    formation_end
+    .global dat_080FBFD1
+dat_080FBFD1:
+    formation 0x00, 2, 2, 0
+    formation 0x81, 5, 2, 1
+    formation_end
+    .global dat_080FBFDA
+dat_080FBFDA:
+    formation 0x00, 2, 2, 0
+    formation 0x85, 5, 2, 1
+    formation_end
+    .global dat_080FBFE3
+dat_080FBFE3:
+    formation 0x00, 2, 2, 0
+    formation 0x9D, 6, 2, 1
+    formation_end
+    .global dat_080FBFEC
+dat_080FBFEC:
+    formation 0x00, 2, 2, 0
+    formation 0xB1, 5, 2, 1
+    formation_end
+    .global dat_080FBFF5
+dat_080FBFF5:
+    formation 0x00, 2, 2, 0
+    formation 0x91, 5, 2, 1
+    formation_end
+    .global dat_080FBFFE
+dat_080FBFFE:
+    formation 0x00, 2, 2, 0
+    formation 0xA9, 5, 2, 1
+    formation_end
+    .global dat_080FC007
+dat_080FC007:
+    formation 0x00, 2, 2, 0
+    formation 0xC1, 5, 2, 1
+    formation_end
+    .global dat_080FC010
+dat_080FC010:
+    formation 0x00, 2, 2, 0
+    formation 0xAD, 5, 2, 1
+    formation_end
+    .global dat_080FC019
+dat_080FC019:
+    formation 0x00, 2, 2, 0
+    formation 0xB9, 6, 2, 1
+    formation_end
+    .global dat_080FC022
+dat_080FC022:
+    formation 0x00, 2, 2, 0
+    formation 0xD9, 5, 2, 1
+    formation_end
+    .global dat_080FC02B
+dat_080FC02B:
+    formation 0x00, 2, 2, 0
+    formation 0x89, 5, 2, 1
+    formation_end
+    .global dat_080FC034
+dat_080FC034:
+    formation 0x00, 2, 2, 0
+    formation 0x95, 6, 2, 1
+    formation_end
+    .global dat_080FC03D
+dat_080FC03D:
+    formation 0x00, 2, 2, 0
+    formation 0xD5, 6, 2, 1
+    formation_end
+    .global dat_080FC046
+dat_080FC046:
+    formation 0x00, 2, 2, 0
+    formation 0xBD, 6, 2, 1
+    formation_end
+    .global dat_080FC04F
+dat_080FC04F:
+    formation 0x00, 2, 2, 0
+    formation 0x8D, 6, 2, 1
+    formation 0x00, 3, 1, 3
+    formation 0x00, 5, 3, 3
+    formation_end
+    .global dat_080FC060
+dat_080FC060:
+    formation 0x00, 2, 2, 0
+    formation 0xA5, 6, 2, 1
+    formation_end
+    .global dat_080FC069
+dat_080FC069:
+    formation 0x00, 1, 2, 0
+    formation 0xA1, 6, 2, 1
+    formation_end
+    .global dat_080FC072
+dat_080FC072:
+    formation 0x00, 2, 2, 0
+    formation 0xD1, 5, 2, 1
+    formation_end
+    .global dat_080FC07B
+dat_080FC07B:
+    formation 0x00, 2, 2, 0
+    formation 0x99, 5, 2, 1
+    formation_end
+    .global dat_080FC084
+dat_080FC084:
+    formation 0x00, 2, 2, 0
+    formation 0x82, 5, 2, 1
+    formation_end
+    .global dat_080FC08D
+dat_080FC08D:
+    formation 0x00, 2, 2, 0
+    formation 0x86, 5, 2, 1
+    formation_end
+    .global dat_080FC096
+dat_080FC096:
+    formation 0x00, 2, 2, 0
+    formation 0x9E, 6, 2, 1
+    formation_end
+    .global dat_080FC09F
+dat_080FC09F:
+    formation 0x00, 2, 2, 0
+    formation 0xB2, 5, 2, 1
+    formation_end
+    .global dat_080FC0A8
+dat_080FC0A8:
+    formation 0x00, 2, 2, 0
+    formation 0x92, 5, 2, 1
+    formation_end
+    .global dat_080FC0B1
+dat_080FC0B1:
+    formation 0x00, 2, 2, 0
+    formation 0xAA, 5, 2, 1
+    formation_end
+    .global dat_080FC0BA
+dat_080FC0BA:
+    formation 0x00, 2, 2, 0
+    formation 0xC2, 5, 2, 1
+    formation_end
+    .global dat_080FC0C3
+dat_080FC0C3:
+    formation 0x00, 2, 2, 0
+    formation 0xAE, 5, 2, 1
+    formation_end
+    .global dat_080FC0CC
+dat_080FC0CC:
+    formation 0x00, 2, 2, 0
+    formation 0xBA, 6, 2, 1
+    formation_end
+    .global dat_080FC0D5
+dat_080FC0D5:
+    formation 0x00, 2, 2, 0
+    formation 0xDA, 5, 2, 1
+    formation_end
+    .global dat_080FC0DE
+dat_080FC0DE:
+    formation 0x00, 2, 2, 0
+    formation 0x8A, 5, 2, 1
+    formation_end
+    .global dat_080FC0E7
+dat_080FC0E7:
+    formation 0x00, 2, 2, 0
+    formation 0x96, 6, 2, 1
+    formation_end
+    .global dat_080FC0F0
+dat_080FC0F0:
+    formation 0x00, 2, 2, 0
+    formation 0xD6, 6, 2, 1
+    formation_end
+    .global dat_080FC0F9
+dat_080FC0F9:
+    formation 0x00, 2, 2, 0
+    formation 0xBE, 6, 2, 1
+    formation_end
+    .global dat_080FC102
+dat_080FC102:
+    formation 0x00, 2, 2, 0
+    formation 0x8E, 6, 2, 1
+    formation 0x00, 3, 1, 3
+    formation 0x00, 5, 3, 3
+    formation_end
+    .global dat_080FC113
+dat_080FC113:
+    formation 0x00, 2, 2, 0
+    formation 0xA6, 6, 2, 1
+    formation_end
+    .global dat_080FC11C
+dat_080FC11C:
+    formation 0x00, 1, 2, 0
+    formation 0xA2, 6, 2, 1
+    formation_end
+    .global dat_080FC125
+dat_080FC125:
+    formation 0x00, 2, 2, 0
+    formation 0xD2, 5, 2, 1
+    formation_end
+    .global dat_080FC12E
+dat_080FC12E:
+    formation 0x00, 2, 2, 0
+    formation 0x9A, 5, 2, 1
+    formation_end
+    .byte 0x00
     .global dat_080FC138
 dat_080FC138:
     .word 0x14640020
