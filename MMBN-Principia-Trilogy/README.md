@@ -2,6 +2,8 @@
 
 **Status: vision and plan only (owner decision, 2026-11-23).** No code yet. It depends on the BN1, BN2 and BN3 decomps, which haven't started; the collection's order is BN4 first, then BN1, 2, 3 (see the root [README](../README.md) and [AGENTS.md](../AGENTS.md) §0).
 
+The detailed design outline (scope per game, how saves and progression merge, what each decomp must provide, risks, owner questions) is in [design-outline.md](design-outline.md).
+
 ## 1. The goal
 
 *Mega Man Battle Network* 1, 2 and 3 become **one big, continuous game**: one engine, one save, one story from the WWW's first attack through the end of the Gospel and WWW arcs. All three games' content goes in: areas, scenarios, chips, viruses, Navis and bosses.
