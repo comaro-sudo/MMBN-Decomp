@@ -18,7 +18,9 @@
   - `dbe86c0`: **`BN4_EVENT_SPAWN_LISTS`** (`code_06`, RS `0x080A1C34`, 1,000 B): 3 lists of 57 `event_spawn x, y, z, unk, params` records plus labelled parameter blobs. `EventSpawnListObjects` (`0x080A203A`) spawns them as object kind `0x16` in map group `0x92` between flags 9:`0x52` and 9:`0x53`. Tool: `tools/emit_event_spawns.py`.
   - `5f85c4c`: **`BN4_FLAG_PROPS`** (`code_06`, RS `0x080AEA00`, 1,184 B): 74 `flag_prop` records (sprite, animation, palette, attribute, a tested flag and two mirrored flags). `FlagProp_Update` is `0x080AEEA0`. Tool: `tools/emit_flag_props.py`.
   - `5ef49e4`: the 8 `u16` step tables of `dat_080A72C0` (`code_06`, 1,472 B), as labelled `.hword` arrays. Tool: `tools/emit_u16_curves.py`.
-- **Coverage:** 82.6% → **84.1%**. `code_09` 85.7% → 96.1%; `code_03` 86.0% → 88.7%; `code_06` 71.4% → 74.6%.
+  - (next commit): **`BN4_CUTSCENE_ACTOR_SPAWNS`** (`code_06`, RS `0x0809CEC8`, 840 B): 42 `obj_spawn` records in `Object_SpawnList` format, without a terminator. `GetCutsceneActorSpawn` (`0x0802A760`) returns entry n, and cutscene code keeps it at `[r5,#0x34]`. Tool: `tools/emit_spawn_records.py`, which is general (a `BLOCKS` list, terminated or fixed arrays).
+  - A scan for whole `incrom` blocks that parse as spawn lists found only 16 small blocks (1.1 KB, `code_04*`–`code_06`), none confirmed by a reader. Left alone.
+- **Coverage:** 82.6% → **84.1%**+. `code_09` 85.7% → 96.1%; `code_03` 86.0% → 88.7%; `code_06` 71.4% → 74.6%.
 
 ## Key Decisions & Constraints
 - All three are edited **in place** (the current convention since the emitters, see below). Each tool asserts the exact `incrom` line(s) it replaces and that RS == BM content, so it can't run twice or on a changed file.
