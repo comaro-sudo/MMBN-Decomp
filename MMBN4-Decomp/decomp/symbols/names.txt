@@ -1372,3 +1372,53 @@
 08002C54 08002C54 code   CLAUDE       SpriteCache_ClearNextSlot        next cache slot (count at +0): key = 0xFF7F, pointer = -1
 08002CBE 08002CBE code   CLAUDE       SpriteObj_SetMode2Bits           sprite r5 (with sub-offset): byte +0x11 bits 2-3 = 2
 08002CD4 08002CD4 code   CLAUDE       SpriteObj_ClearModeBits          sprite r5 (with sub-offset): clears byte +0x11 bits 2-3
+08002C90 08002C90 code   GEMINI       SpriteObj_SetAffineParams        sprite r5 (with sub-offset): if affine active (+0x11 & 3), updates affine matrix slot ((+0x13 & 0x3E) >> 1) via 0x08025CD6
+08002C9E 08002C9E code   GEMINI       SpriteObj_SetAffineParams_Raw    SpriteObj_SetAffineParams without object sub-offset adjust
+08002CE6 08002CE6 code   GEMINI       SpriteObj_EnableAlphaBlend       enables OAM semi-transparent mode (r2=4) and configures shadow BLDALPHA (EVA=r0, EVB=16-r0)
+08002CEA 08002CEA code   GEMINI       SpriteObj_SetBlendMode           sets OAM Attr0 mode bits (+0x11) to r2 and writes shadow BLDALPHA/BLDCNT at sl[+0x20]
+08002D22 08002D22 code   GEMINI       SpriteObj_SetSemiTransparent     sets sprite+0x11 OAM OBJ mode bits 2-3 to 0x04 without touching shadow BLDCNT/BLDALPHA
+08002D3A 08002D3A code   GEMINI       SpriteObj_DisableAlphaBlend      clears sprite+0x11 OAM OBJ mode bits 2-3 (0x0C)
+08002D4C 08002D4C code   GEMINI       SpriteObj_GetBlendState          for object r0: returns r2 = (sprite+0x11 & 0x0C) and r0 = shadow BLDALPHA EVA
+08002D62 08002D62 code   GEMINI       SpriteObj_IsSemiTransparent      for object r0: returns sprite+0x11 & 4
+08002D72 08002D72 code   GEMINI       IwramSpriteCall_5DC0             trampoline calling IWRAM sprite helper at 0x03005DC1
+08002D80 08002D80 code   GEMINI       SpriteObj_AllocAffine            allocates OAM affine slot via 0x08025CA4, sets sprite+0x11 |= 3 and +0x13 bits 1-5 = slot<<1
+08002D8C 08002D8C code   GEMINI       SpriteObj_AllocAffine_Raw        SpriteObj_AllocAffine without object sub-offset adjust
+08002DBE 08002DBE code   GEMINI       SpriteObj_FreeAffine             clears sprite+0x11 affine bits and frees affine slot via 0x08025CC6
+08002DCA 08002DCA code   GEMINI       SpriteObj_FreeAffine_Raw         SpriteObj_FreeAffine without object sub-offset adjust
+08002DF8 08002DF8 code   GEMINI       SpriteObj_GetPaletteIndex        for object r0: returns sprite+4 palette index
+08002E04 08002E04 code   GEMINI       SpriteObj_SetAnimIndex           for object r5: writes r0 to sprite+0 animation index
+08002E10 08002E10 code   GEMINI       SpriteObj_SetAnimIndex_Alt       alternate entry point writing r0 to sprite+0 animation index
+08002E1C 08002E1C code   GEMINI       SpriteObj_SetPaletteBankMax      sets sprite+0x15 OAM Attr2 palette bank nibble to 0xF0
+08002E20 08002E20 code   GEMINI       SpriteObj_SetPaletteBank         sets high nibble of sprite+0x15 (OAM Attr2 palette bank) to r1
+08002E34 08002E34 code   GEMINI       SpriteObj_GetPaletteBank         for object r0: returns sprite+0x15 & 0xF0 in r1
+08002E44 08002E44 code   GEMINI       SpriteObj_ClearPaletteBank       clears high nibble (0xF0) of sprite+0x15
+08002E56 08002E56 code   GEMINI       SpriteObj_GetAnimFrameStatus     returns sprite+2 (masked of 0xC0 if +1 != 0) in r0 and sprite+0 in r1/r2
+08002E70 08002E70 code   GEMINI       SpriteObj_IsFlagBit3Set          returns sprite+3 & 8
+08002E80 08002E80 code   GEMINI       SpriteObj_SetPriority            sets OAM Attr2 priority bits 2-3 of sprite+0x15 to r0 << 2
+08002E96 08002E96 code   GEMINI       SpriteObj_PauseAnim              sets bit 0 and clears bit 2 of sprite+3
+08002EAC 08002EAC code   GEMINI       SpriteObj_ResumeAnim             clears bits 0 and 2 of sprite+3
+08002EC2 08002EC2 code   GEMINI       SpriteObj_GetFrameTileCount      returns current frame's 4bpp tile count (byte size >> 5)
+08002ED0 08002ED0 code   GEMINI       SpriteObj_GetScreenPos           if [r5] != 0, returns r0=1, r1=(sprite+0x0C & 0x1FF), r2=(sprite+0x0E & 0xFF); else 0,0,0
+08002EFE 08002EFE code   GEMINI       SpriteObj_SetFlag16Bit1          sets bit 1 of sprite+0x16
+08002F10 08002F10 code   GEMINI       SpriteObj_ClearFlag16Bit1        clears bit 1 of sprite+0x16
+08002F22 08002F22 code   GEMINI       SpriteObj_SetFlashColor          writes u16 r0 to sprite+6 palette flash/tint color
+08002F2E 08002F2E code   GEMINI       SpriteObj_GetFlashColor          for object r0: returns u16 sprite+6
+08002F3A 08002F3A code   GEMINI       SpriteObj_ClearFlashColor        zeroes u16 sprite+6
+08002F48 08002F48 code   GEMINI       SpriteObj_SetMosaicHV            packs OBJ mosaic (H=r0, V=r1) and enables mosaic via SpriteObj_EnableMosaic
+08002F54 08002F54 code   GEMINI       SpriteObj_EnableMosaic           sets OAM mosaic bit (0x10) in sprite+0x11 and updates shadow REG_MOSAIC high byte
+08002F7E 08002F7E code   GEMINI       SpriteObj_DisableMosaic          clears OAM mosaic bit (0x10) in sprite+0x11
+08002F90 08002F90 code   GEMINI       SpriteObj_GetMosaic              for object r0: returns r2 = (sprite+0x11 & 0x10) and r0 = (shadow REG_MOSAIC >> 8)
+08002FAE 08002FAE code   GEMINI       SpriteObj_SetFlip                writes 2-bit H/V flip r0 into bits 4-5 of sprite+0x13 (OAM Attr1) and sprite+0x16
+08002FD0 08002FD0 code   GEMINI       SpriteObj_GetFlip                for object r0: returns (sprite+0x16 & 0x30) >> 4
+08002FE2 08002FE2 code   GEMINI       SpriteObj_SetFlag3Bit2           sets bit 2 and clears bit 0 of sprite+3
+08002FF8 08002FF8 code   GEMINI       SpriteObj_SetSubOamMask          writes u32 r0 to sprite+0x2C
+08003004 08003004 code   GEMINI       SpriteObj_GetSubOamMask          returns u32 sprite+0x2C
+08003010 08003010 code   GEMINI       SpriteObj_SetSubOamBit           ORs (0x80000000 >> r0) into sprite+0x2C
+08003026 08003026 code   GEMINI       SpriteObj_ClearSubOamBit         clears (0x80000000 >> r0) in sprite+0x2C
+0800303E 0800303E code   GEMINI       SpriteObj_SetField30             writes u32 r0 to sprite+0x30
+0800304C 0800304C code   GEMINI       SpriteObj_SetCustomPalettePtr    writes u32 r0 to sprite+0x34 (override palette pointer used by SpriteCopyPaletteToShadow)
+08003058 08003058 code   GEMINI       SpriteObj_SetFlag3Bit5           sets bit 5 of sprite+3
+0800306A 0800306A code   GEMINI       SpriteObj_ClearFlag3Bit5         clears bit 5 of sprite+3
+0800307C 0800307C code   GEMINI       SpriteObj_SetFlag16Bits23        sets bits 2-3 of sprite+0x16 to r0 << 2 and sets bit 6 of sprite+3
+0800309C 0800309C code   GEMINI       SpriteObj_SetPaletteBankIdx      sets high nibble of sprite+0x15 (OAM Attr2 palette bank) to r0 << 4
+0800312C 0800312C code   GEMINI       ObjectList_Init                  clears current object ptr (0x0200B48C) and links sentinel nodes 0x02009E40 <-> 0x0200A4C0
