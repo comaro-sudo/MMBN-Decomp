@@ -18,29 +18,29 @@ Violet Eclipse is a fan patch for **Mega Man Battle Network 4**. It lets you fin
 ## What changes
 
 **All 13 Double Souls in one game**
-- All 12 Souls can be earned in either version. Each Navi you'd normally meet only in the other version now gives its Soul in a **friendly match** at the tournaments (3 per tournament, before the final). You can retry if you lose.
-- A new 13th Soul, the **Duo Soul**, unlocks when you beat Duo. It has its own colours, a 180-damage fist charge shot, AirShoes + FloatShoes, and a Reflect shield.
+- All 12 Souls can be earned in either version. Nine **friendly matches** at the tournaments (3 per tournament, in the rounds before the final) give the Soul of the Navi you fight: Guts, Fire, Number, Wind, Metal, Wood, Search, Thunder and Junk. A Navi stops appearing once you own its Soul. You can retry if you lose. The other three (Aqua, Roll, Proto) are the fixed Navi of each tournament, the same in both versions.
+- A new 13th Soul, the **Duo Soul**, is granted when you beat Duo (the story fight or any rematch), together with the Duo chip (D, once). It has its own colours, a 180-damage fist charge shot, AirShoes + FloatShoes, and a Reflect shield.
 - The status screen shows every Soul (R / L switches pages), and the Souls completion star needs all 12.
 
 **Every chip**
 - Drops that differ between versions now come from either version's table, 50/50.
-- Bass gives both versions' Bass chips.
+- Bass gives both versions' Bass chips (the results screen names only one; the other is added silently).
 - The Free Tournament fields all 12 Soul Navis without link trades, so all 36 secret chips can be won.
-- **Duo** and **Grand Prix Power**, once event-only chips, are now in the game with names, descriptions and pictures. The pictures are missing in public builds, see "Known issues".
+- **Duo** and **Grand Prix Power**, once event-only chips, are now in the game with names and descriptions. Public builds have no picture for them, see "Known issues".
 - **Z-Saver** and **Grand Prix Power** each wait in a Blue Mystery Data in an out-of-the-way corner.
 
 **Every boss, as often as you like**
-- **Rematches in Higsby's shop:** the operators of all 12 Soul Navis wait in and outside Higsby's. JunkMan has no operator: jack into the trash can on the ACDC street.
+- **Rematches in Higsby's shop:** the operators of all 12 Soul Navis wait in and outside Higsby's. Each one appears once you own that Navi's Soul. JunkMan has no operator: jack into the trash can on the ACDC street.
   - Each Navi climbs V1 → V2 → V3 → SP → **SP+** as you beat it with an S rank.
 - **Duo rematches:** after the ending, find Duo's crest in Meteor Comp 1. It climbs Duo → α → β → Ω → SP+ with S ranks.
-- **SP+**, the new top difficulty: 4,095 HP, more damage, faster. Winning pays 15,000 Zenny (80%) or 50 BugFrags (20%).
+- **SP+**, the new top difficulty, after an S rank on the SP (or Duo Ω) fight: 4,095 HP, damage to you ×1.5, speed ×1.25. It also covers the roaming SP bosses. Winning pays 15,000 Zenny (80%) or 50 BugFrags (20%).
 
 **Quality of life**
 - A **Frequency Tuner** in Higsby's sets the virus tier (Auto / V1 / V2 / V3). Green Mystery Data follow the same setting, so every reward is reachable on any playthrough.
 - Battle Zenny ×1.5.
-- HP Memory, NaviCust programs, Unlocker and LocEnemy cost 40% of their old price.
+- HP Memory, the Zenny NaviCust programs, Unlocker and LocEnemy cost about 40% of their old price (rounded per item).
 - The WoodMan scenario fix (by Prof. 9) is included.
-- The Waiting Room rejects a corrupt link transfer instead of writing it into your save.
+- The Waiting Room rejects a link transfer with an out-of-range Navi slot instead of writing it into your save.
 
 ## Where to find the new content
 
