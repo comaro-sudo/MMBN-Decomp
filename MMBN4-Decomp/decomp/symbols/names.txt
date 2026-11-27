@@ -1505,3 +1505,4 @@
 080F576C 080F5778 code   CLAUDE       BattleAssignEnemyHeldChip        battle start: up to 4 enemies; a random one gets a random BN4_ENEMY_HELD_CHIPS entry at obj+0x2A
 080F8A70 080F8A7C code   CLAUDE       GetEnemyHeldChips                r0 enemy id -> r0 = BN4_ENEMY_HELD_CHIPS + id * 0x20
 080F8A80 080F8A8C rom    CLAUDE       BN4_ENEMY_HELD_CHIPS             244 x 16 u16 chip|code<<9 (0xFFFF none), by enemy id; RS == BM content
+0804CFF8 0804D000 rom    CLAUDE       BN4_CHIP_CODE_LISTS              4 ascending lists of {u16 chip, u8 code[4]} (0xFF none), via dat_0804DE0C; use not traced
