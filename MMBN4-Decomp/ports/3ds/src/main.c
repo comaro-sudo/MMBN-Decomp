@@ -149,6 +149,7 @@ int main(int argc, char** argv) {
     pet_ui_init(&pet_ui);
     PetModel pet_model = { 0 };
     const char* message = NULL;
+    static int16_t audio_drain[4096 * 2];
 
     while (aptMainLoop()) {
         hidScanInput();
@@ -167,8 +168,16 @@ int main(int argc, char** argv) {
         emu_set_keys(emu, keys);
         emu_run_frame(emu);
 
+        /* Nothing reads the GBA audio yet (no ndsp output): drain it so the
+         * blip buffers never fill up and overflow. */
+        (void) emu_read_audio(emu, audio_drain, 4096);
+
         blit_top_fb(emu_video(emu));
         gfxFlushBuffers();
+        /* citro3d only swaps screens that have a render target linked to them
+         * (the bottom one), so the top framebuffer we write by hand must be
+         * swapped here or it is never shown. */
+        gfxScreenSwapBuffers(GFX_TOP, false);
 
         PetStatus st = { 59.7, false, keys, message };
         pet_model_update(&pet_model, emu, game, code, &st);

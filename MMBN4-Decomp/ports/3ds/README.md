@@ -26,4 +26,6 @@ sdmc:/3ds/mmbn4/
   saves/                (mGBA-compatible .sav shared with PC & Wii U)
 ```
 
+There is no sound yet: the GBA audio is drained but not played (an `ndsp` output is still to write).
+
 Hold **L + R** on launch (or create `sdmc:/3ds/mmbn4/bench.txt`) to run 600 unthrottled frames and write `sdmc:/3ds/mmbn4/bench.log` (Gate G-3DS: `< 14.0 ms` mean).
