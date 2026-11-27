@@ -1361,3 +1361,14 @@
 0800283C 0800283C code   CLAUDE       IwramSpriteCall_632C_Obj         adds object r5's sprite sub-offset ([r5+2] & 0xF0) and calls IWRAM 0x0300632D
 0800284E 0800284E code   CLAUDE       IwramSpriteCall_632C             trampoline calling IWRAM sprite helper at 0x0300632D
 0800286E 0800286E code   CLAUDE       IwramSpriteUpdate_Raw            BN4_SPRITE_UPDATE without the object sub-offset adjust (IWRAM 0x03006377)
+080028C4 080028C4 code   CLAUDE       SpriteObj_InitFromData           sprite r5: data = r0+4 at +0x18, clears frame/anim fields, +0x28 = -1, +0x15 = 8, +0x16 = 8
+080028F2 080028F2 code   CLAUDE       SpriteObj_SetMugshot             sprite r5 from BN4_SPRITE_LIST_MUGSHOTS[r0], then +0x16 = 0x80
+0800290C 0800290C code   CLAUDE       MenuSprite_SetNoFlag             BN4_MENU_SPRITE_SET with byte +3 = 0 instead of 0x80 (sprite at r5+0x20)
+08002934 08002934 code   CLAUDE       MenuSprite_SetMugshot            sprite at r5+0x20 from BN4_SPRITE_LIST_MUGSHOTS[r0], then +0x16 = 0x80
+080029B8 080029B8 code   CLAUDE       SpriteObj_QueueTileUpload        when sprite r5's frame tile pointer changes, queues a mode-2 copy to OBJ VRAM 0x06010000 + tile(+8)*32
+08002A18 08002A18 code   CLAUDE       SpriteCache_Init                 clears the sprite cache at 0x0200F720 (0x38 B), heap pointer +0x34 = r0, 8 keys = 0x7FFF, 8 pointers = 0xFF bytes
+08002A4A 08002A4A code   CLAUDE       SpriteCache_LoadList             for each {list, index} byte pair until 0xFF: LZ77-decompresses the sprite into the cache heap; 0 if heap (0x02040000) or 8 slots full
+08002BA6 08002BA6 code   CLAUDE       SpriteCache_LoadEnemyTemp        enemy r0 (BN4_ENEMY_RECORD): if not cached, decompresses its sprite into the next slot without counting it; 1 loaded
+08002C54 08002C54 code   CLAUDE       SpriteCache_ClearNextSlot        next cache slot (count at +0): key = 0xFF7F, pointer = -1
+08002CBE 08002CBE code   CLAUDE       SpriteObj_SetMode2Bits           sprite r5 (with sub-offset): byte +0x11 bits 2-3 = 2
+08002CD4 08002CD4 code   CLAUDE       SpriteObj_ClearModeBits          sprite r5 (with sub-offset): clears byte +0x11 bits 2-3
