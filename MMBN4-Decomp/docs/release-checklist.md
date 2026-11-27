@@ -1,0 +1,47 @@
+# Violet Eclipse: public release checklist (draft, 2026-11-27)
+
+What has to be true before a public `.bps` of *Mega Man Battle Network 4: Violet Eclipse* goes out. Release model (owner, 2026-11-25, Option C): **two complete patches**, one for each US ROM. Items marked ⚠ need an owner decision.
+
+## 1. Content and legal
+
+- [ ] **No Capcom data in the release.** Build with `python patch/build.py --public`, which leaves out the Duo / Grand Prix Power art from `ref/chip-art/`. Check that the `.bps` contains no copied ROM data beyond what BPS needs to describe the changes.
+- [ ] ⚠ **Duo and Grand Prix Power art for public builds:** original placeholder art, or blank chips (today's `--public` result).
+- [ ] **Credits:**
+  - Prof. 9 (the WoodMan scenario fix, WP-A1, byte-identical to his IPS);
+  - the authors of the tools the build uses: armips, TextPet, Flips;
+  - the community chip tables (`ext/mmbn-chip-tables`);
+  - the decomp symbol sources (`CE`, `BN6F` names);
+  - the community saves used for testing.
+- [ ] ⚠ **Licence:** the ports are GPL-3.0 (`D-EL3`); choose one for the patch sources and the `.bps`.
+
+## 2. Build and verification
+
+- [ ] `python patch/build.py --public` and `--check` PASS for both versions.
+- [ ] Record each output's SHA-1 in the release notes.
+- [ ] Input ROMs (`build.py` checks them):
+  - Red Sun (USA): `a97e96a7da03abd70f7953328e511b9fa29179f1`
+  - Blue Moon (USA): `5e017c803ddc768efb8010314b46bc17e9757f71`
+- [ ] The `.bps` round-trip (`build.py` does it) and one apply with Flips on a clean ROM for each version.
+
+## 3. Testing
+
+- [ ] Automated C1–C5 matrix: 16/16 (done, `decomp/notes/patch-test-results-7-c1-c5.md`; re-run on the release build).
+- [ ] **A full continuous playthrough** of each version on the PC port, from a new game to the post-game. Check the story, the 13 Souls, the friendly matches, the lobby and Duo rematches through SP+, and the completion stars.
+- [ ] Existing saves: load a vanilla mid-game save and a post-game save. Check the price sync, Souls and the status pages.
+- [ ] Real hardware or an accurate emulator (mGBA) for each `.bps`, not only the PC port.
+
+## 4. Player documentation
+
+- [ ] A player README:
+  - what Violet Eclipse changes (the package list in plain words);
+  - which ROM to use and its SHA-1;
+  - how to apply the patch (Flips);
+  - save compatibility;
+  - known issues;
+  - credits.
+- [ ] A short list of where the new content is: the lobby operators, the trash can to JunkMan, the Frequency Tuner, the Duo signal in Meteor Comp 1, the Z-Saver and GP Power Mystery Data, the friendly matches.
+
+## 5. After release
+
+- [ ] Tag the release commit; keep the release notes in `docs/`.
+- [ ] Ports (`ports/`) ship separately, under GPL-3.0, with their own READMEs.
