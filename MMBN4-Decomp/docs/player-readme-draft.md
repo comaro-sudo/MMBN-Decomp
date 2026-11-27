@@ -63,4 +63,14 @@ Existing saves from the same version work. Shop prices update when you load one.
 
 ## Credits
 
-*(To complete before release: Prof. 9's WoodMan fix; armips, TextPet, Flips; the community chip tables, symbol sources and test saves.)*
+- **Prof. 9**: the WoodMan scenario fix ("WoodMan Glitch Fix v2.0", free to use), and **TextPet** (MIT), the text tool the patch is built with.
+- **Kingcom**: **armips** (MIT), the assembler.
+- **Alcaro**: **Flips** (GPL-3.0 or later), which creates and applies `.bps` patches.
+- **StraDaMa**: the community Mega Man Battle Network chip tables, used as a build-time check.
+- **Sascha Becker** (*Cyberworld Endless*, MIT), the **nettai** project and the **dism-exe** disassembly community: the symbol names and engine notes that made finding addresses possible.
+- The uploaders of the community GameShark saves on GameFAQs, used for testing.
+- **Jeffrey Pfau** and the mGBA contributors, whose emulator the test builds run on.
+
+*Mega Man Battle Network* is a trademark of **Capcom**. Violet Eclipse is an unofficial fan patch, not affiliated with or endorsed by Capcom. It contains no Capcom data: you supply your own ROM. The patch's own licence is still to be chosen.
+
+Full list with licences: `docs/credits.md`.
