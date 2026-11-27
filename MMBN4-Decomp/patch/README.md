@@ -16,6 +16,8 @@ python patch/build.py --hello    # test patch (Cannon 40 -> 99) instead of the o
 python patch/build.py --public   # leave out the local-only Duo / Grand Prix Power art (shareable patch)
 ```
 
+Release package: `python patch/tools/release.py` builds `--public` for both versions, runs the `--check` tests and writes `build/release/` (the two `.bps`, `RELEASE-SHA1.txt` with the input-ROM, patch and patched-ROM SHA-1s, and a copy of `docs/player-readme-draft.md` as `README.md`), then zips it to `build/violet-eclipse-<date>.zip`. Options: `--no-zip`, `--name NAME`. It never includes a patched ROM.
+
 Needs:
 - **Both US ROMs** in `../roms/`, `bn4_rs_us.gba` and `bn4_bm_us.gba`, which are hash-checked. The random-drop package copies the other version's drop table from the player's other ROM at build time, so building either version needs both.
 - `tools/armips/armips.exe` and `tools/flips/` ([`../docs/reference/toolchain.md`](../docs/reference/toolchain.md)).
