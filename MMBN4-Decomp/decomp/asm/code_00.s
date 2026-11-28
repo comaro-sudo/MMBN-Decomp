@@ -273,7 +273,7 @@ sub_0800045E:   @ GameInit
 
     .global sub_08000464
     .thumb_func
-sub_08000464:
+sub_08000464:   @ GameInitCommon
     push {r5, lr}
     push {r0}
     bl sub_080060CC
@@ -332,9 +332,9 @@ _08000500:
     .thumb_func
 sub_08000504:   @ InitSoundAndVCountIntr
     push {lr}
-    bl sub_081127C4
+    bl sub_081127C4   @ m4aSoundInit
     ldr r0, _08000530
-    bl sub_08112D60
+    bl sub_08112D60   @ m4aSoundMode
     movs r0, #0x10
     ldr r1, _0800053C
     bl sub_08000284
@@ -360,7 +360,7 @@ _0800053C:
 
     .global sub_08000540
     .thumb_func
-sub_08000540:
+sub_08000540:   @ SoundMainWrapper
     push {lr}
     bl sub_0811283C   @ m4aSoundMain
     pop {pc}
@@ -368,7 +368,7 @@ sub_08000540:
 
     .global sub_08000558
     .thumb_func
-sub_08000558:
+sub_08000558:   @ SoundVSyncWrapper
     push {lr}
     bl sub_08112168
     pop {pc}
@@ -417,7 +417,7 @@ _0800059C:
 
     .global sub_0800059E
     .thumb_func
-sub_0800059E:
+sub_0800059E:   @ SoundQueue_SongNumStart
     push {lr}
     mov r1, sl
     push {r1}
@@ -429,7 +429,7 @@ sub_0800059E:
 
     .global sub_080005B0
     .thumb_func
-sub_080005B0:
+sub_080005B0:   @ SoundQueue_MPlayAllStop
     push {lr}
     mov r1, sl
     push {r1}
@@ -441,7 +441,7 @@ sub_080005B0:
 
     .global sub_080005C2
     .thumb_func
-sub_080005C2:
+sub_080005C2:   @ SoundQueue_MPlayVolumeControl
     push {r4, r5, r6, r7, lr}
     lsls r0, r0, #2
     ldr r7, _08000650
@@ -456,7 +456,7 @@ sub_080005C2:
 
     .global sub_080005DA
     .thumb_func
-sub_080005DA:
+sub_080005DA:   @ SoundQueue_MPlayFadeOut
     push {r4, r5, r6, r7, lr}
     ldr r7, _08000650
     lsls r0, r0, #2
@@ -515,9 +515,9 @@ _08000600:
     pop {r4, r5, r6, r7, pc}
     .word 0x02011AA0
 _08000650:
-    .word dat_08000654
+    .word dat_08000654   @ gMusicPlayerPtrTable
     .global dat_08000654
-dat_08000654:
+dat_08000654:   @ gMusicPlayerPtrTable
     .4byte 0x020118A0
     .4byte 0x02011B20
     .4byte 0x02011B60
@@ -553,7 +553,7 @@ dat_08000654:
 
     .global sub_080006D4
     .thumb_func
-sub_080006D4:
+sub_080006D4:   @ SoundQueue_StopAllAndClearBgm
     push {r7, lr}
     mov r1, sl
     push {r1}
@@ -570,7 +570,7 @@ sub_080006D4:
 
     .global sub_080006F0
     .thumb_func
-sub_080006F0:
+sub_080006F0:   @ SoundQueue_SongNumStop
     push {r1, r2, r3, r4, r5, r6, r7, lr}
     mov r1, sl
     push {r1}
@@ -642,29 +642,29 @@ _08000760:
 _08000764:
     .word sub_0811297C   @ m4aSongNumStop
 _08000768:
-    .word sub_081137F0
+    .word sub_081137F0   @ m4aMPlayVolumeControl
 _0800076C:
-    .word sub_081127A4
+    .word sub_081127A4   @ MPlayFadeOut
 _08000770:
     .word sub_08112848   @ m4aSongNumStart
 _08000774:
-    .word sub_08112A38
+    .word sub_08112A38   @ m4aMPlayImmInit
 _08000778:
-    .word sub_081137F0
+    .word sub_081137F0   @ m4aMPlayVolumeControl
 _0800077C:
-    .word sub_08112914
+    .word sub_08112914   @ m4aSongNumStop_Real
 _08000780:
-    .word sub_08112A10
+    .word sub_08112A10   @ m4aMPlayFadeIn
 _08000784:
     .word sub_0811297C   @ m4aSongNumStop
 _08000788:
-    .word sub_08112914
+    .word sub_08112914   @ m4aSongNumStop_Real
 _0800078C:
     .word 0x00000204
 
     .global sub_08000790
     .thumb_func
-sub_08000790:
+sub_08000790:   @ DmaStartChannel
     push {r4, r5, r6, r7, lr}
     lsls r3, r3, #2
     ldr r5, _080007AC
@@ -681,14 +681,14 @@ _0800079C:
     str r4, [r5, #8]
     pop {r4, r5, r6, r7, pc}
 _080007AC:
-    .word dat_080007B0
+    .word dat_080007B0   @ gDmaChannelRegs
     .global dat_080007B0
-dat_080007B0:
+dat_080007B0:   @ gDmaChannelRegs
     incrom 0x7B0, 0x10
 
     .global sub_080007C0
     .thumb_func
-sub_080007C0:
+sub_080007C0:   @ DmaWaitChannels
     push {r4, lr}
     ldr r3, _080007F8
 _080007C4:
@@ -729,7 +729,7 @@ _080007FC:
 
     .global sub_08000800
     .thumb_func
-sub_08000800:
+sub_08000800:   @ DmaQueue_Clear
     ldr r0, _080008BC
     movs r1, #0
     str r1, [r0]
@@ -737,7 +737,7 @@ sub_08000800:
 
     .global sub_08000808
     .thumb_func
-sub_08000808:
+sub_08000808:   @ DmaQueue_Process
     push {lr}
     mov r0, r8
     mov r1, sb
@@ -795,19 +795,19 @@ _08000866:
 
     .global sub_08000874
     .thumb_func
-sub_08000874:
+sub_08000874:   @ DmaQueue_PushDma3
     movs r3, #0
     b _0800087E
 
     .global sub_08000878
     .thumb_func
-sub_08000878:
+sub_08000878:   @ DmaQueue_PushMode1
     movs r3, #1
     b _0800087E
 
     .global sub_0800087C
     .thumb_func
-sub_0800087C:
+sub_0800087C:   @ DmaQueue_PushMode2
     movs r3, #2
 _0800087E:
     push {r4, r5, r6, r7}
@@ -835,9 +835,9 @@ _080008A8:
     pop {r4, r5, r6, r7}
     mov pc, lr
 _080008AC:
-    .word dat_080008B0
+    .word dat_080008B0   @ gDmaQueueModeControl
     .global dat_080008B0
-dat_080008B0:
+dat_080008B0:   @ gDmaQueueModeControl
     incrom 0x8B0, 0xC
 _080008BC:
     .word 0x0200B134
@@ -846,7 +846,7 @@ _080008C0:
 
     .global sub_080008C4
     .thumb_func
-sub_080008C4:
+sub_080008C4:   @ DmaQueue_PushListDma3
     push {r4, r5, r6, r7, lr}
     adds r7, r0, #0
 _080008C8:
@@ -863,7 +863,7 @@ _080008DA:
 
     .global sub_080008DC
     .thumb_func
-sub_080008DC:
+sub_080008DC:   @ DmaQueue_PushListMode1
     push {r4, r5, r6, r7, lr}
     adds r7, r0, #0
 _080008E0:
@@ -880,7 +880,7 @@ _080008F2:
 
     .global sub_080008F4
     .thumb_func
-sub_080008F4:
+sub_080008F4:   @ DmaQueue_PushListMode2
     push {r4, r5, r6, r7, lr}
     adds r7, r0, #0
 _080008F8:
@@ -1077,7 +1077,7 @@ _08000A20:
 
     .global sub_08000A24
     .thumb_func
-sub_08000A24:
+sub_08000A24:   @ GetVCountPlusFrameCounter
     ldr r0, _08000A30
     ldrh r0, [r0]
     ldr r1, _08000A34
@@ -1122,9 +1122,9 @@ _08000A64:
     pop {r4, r7, pc}
     .hword 0x0000
 _08000A68:
-    .word dat_08000A6C
+    .word dat_08000A6C   @ gBcdPowersOfTen
     .global dat_08000A6C
-dat_08000A6C:
+dat_08000A6C:   @ gBcdPowersOfTen
     incrom 0xA6C, 0x20
 _08000A8C:
     .word 0x05F5E0FF
@@ -1133,7 +1133,7 @@ _08000A90:
 
     .global sub_08000A94
     .thumb_func
-sub_08000A94:
+sub_08000A94:   @ CountBcdDigits
     movs r1, #1
     tst r0, r0
     beq _08000AA6
@@ -1179,7 +1179,7 @@ _08000AAC:
 
     .global sub_08000ADE
     .thumb_func
-sub_08000ADE:
+sub_08000ADE:   @ ShuffleByteList_SecondaryRNG
     push {r4, r5, r6, lr}
 _08000AE0:
     push {r0, r2}
@@ -1208,7 +1208,7 @@ _08000AE0:
 
     .global sub_08000B12
     .thumb_func
-sub_08000B12:
+sub_08000B12:   @ ShuffleHalfwordList_PrimaryRNG
     push {r4, r5, r6, lr}
 _08000B14:
     push {r0, r2}
@@ -1239,7 +1239,7 @@ _08000B14:
 
     .global sub_08000B4A
     .thumb_func
-sub_08000B4A:
+sub_08000B4A:   @ ShuffleHalfwordList_SecondaryRNG
     push {r4, r5, r6, lr}
 _08000B4C:
     push {r0, r2}
@@ -1270,7 +1270,7 @@ _08000B4C:
 
     .global sub_08000B82
     .thumb_func
-sub_08000B82:
+sub_08000B82:   @ PickRandomByte_PrimaryRNG
     push {r7, lr}
     adds r7, r0, #0
     push {r1, r7}
@@ -1282,7 +1282,7 @@ sub_08000B82:
 
     .global sub_08000B96
     .thumb_func
-sub_08000B96:
+sub_08000B96:   @ SortByteArrayAscending
     push {r4, r6, lr}
     cmp r1, #2
     bmi _08000BBA
@@ -1346,9 +1346,9 @@ _08000BDE:
     pop {r4, r7, pc}
     .hword 0x0000
 _08000BFC:
-    .word dat_08000C00
+    .word dat_08000C00   @ gBcdTimeDivisors
     .global dat_08000C00
-dat_08000C00:
+dat_08000C00:   @ gBcdTimeDivisors
     incrom 0xC00, 0x20
 _08000C20:
     .word 0x01499700
@@ -1409,7 +1409,7 @@ _08000C68:
 
     .global sub_08000C6A
     .thumb_func
-sub_08000C6A:
+sub_08000C6A:   @ FramesToHoursMinutesSeconds
     push {r4, lr}
     sub sp, #8
     ldr r1, _08000C94
@@ -1470,7 +1470,7 @@ _08000CD2:
 
     .global sub_08000CD6
     .thumb_func
-sub_08000CD6:
+sub_08000CD6:   @ CompactByteArrayFF
     push {r5, r6, lr}
     adds r5, r0, r1
     adds r6, r0, #0
@@ -1497,7 +1497,7 @@ _08000CFA:
 
     .global sub_08000CFC
     .thumb_func
-sub_08000CFC:
+sub_08000CFC:   @ CompactHalfwordArrayFFFF
     push {r5, r6, r7, lr}
     adds r2, r1, r1
     adds r5, r0, r2
@@ -1697,7 +1697,7 @@ _08000EBC:
 
     .global sub_08000EC0
     .thumb_func
-sub_08000EC0:
+sub_08000EC0:   @ NgPlus_BackupEventFlags
     push {r4, r5, r6, lr}
     ldr r0, _08000F58
     mov r1, sl
@@ -1735,7 +1735,7 @@ sub_08000EC0:
 
     .global sub_08000F0C
     .thumb_func
-sub_08000F0C:
+sub_08000F0C:   @ NgPlus_RestoreEventFlags
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _08000F58
@@ -1781,7 +1781,7 @@ _08000F64:
 
     .global sub_08000F68
     .thumb_func
-sub_08000F68:
+sub_08000F68:   @ NgPlus_BackupTournamentFlags
     push {r4, r5, r6, lr}
     movs r4, #0
     ldr r5, _08000FAC
@@ -1822,7 +1822,7 @@ _08000FAC:
 
     .global sub_08000FB0
     .thumb_func
-sub_08000FB0:
+sub_08000FB0:   @ NgPlus_RestoreTournamentFlags
     push {r4, r5, r6, lr}
     movs r4, #0
     movs r6, #0x75
@@ -1858,7 +1858,7 @@ _08000FEC:
 
     .global sub_08000FEE
     .thumb_func
-sub_08000FEE:
+sub_08000FEE:   @ NgPlus_BackupLibraryBits
     push {r4, r5, r6, lr}
     ldr r0, _08001064
     mov r1, sl
@@ -1888,7 +1888,7 @@ sub_08000FEE:
 
     .global sub_08001028
     .thumb_func
-sub_08001028:
+sub_08001028:   @ NgPlus_RestoreLibraryBits
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _08001064
@@ -1931,7 +1931,7 @@ _08001078:
 
     .global sub_0800107C
     .thumb_func
-sub_0800107C:
+sub_0800107C:   @ NgPlus_BackupPaLibraryBits
     push {r4, r5, r6, lr}
     ldr r0, _080010A8
     mov r1, sl
@@ -1945,7 +1945,7 @@ sub_0800107C:
 
     .global sub_08001092
     .thumb_func
-sub_08001092:
+sub_08001092:   @ NgPlus_RestorePaLibraryBits
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _080010A8
@@ -1963,7 +1963,7 @@ _080010AC:
 
     .global sub_080010B0
     .thumb_func
-sub_080010B0:
+sub_080010B0:   @ NgPlus_BackupNaviCustAndRecords
     push {r4, r5, r6, lr}
     mov r0, sl
     ldr r0, [r0, #0x78]
@@ -2012,7 +2012,7 @@ sub_080010B0:
 
     .global sub_0800111A
     .thumb_func
-sub_0800111A:
+sub_0800111A:   @ NgPlus_RestoreNaviCustAndRecords
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     mov r1, sl
@@ -2089,7 +2089,7 @@ _080011B8:
 
     .global sub_080011BC
     .thumb_func
-sub_080011BC:
+sub_080011BC:   @ NgPlus_BackupLinkAndVsData
     push {r4, r5, r6, lr}
     ldr r0, _0800120C
     adds r1, r7, #0
@@ -2110,7 +2110,7 @@ sub_080011BC:
 
     .global sub_080011E4
     .thumb_func
-sub_080011E4:
+sub_080011E4:   @ NgPlus_RestoreLinkAndVsData
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _0800120C
@@ -2143,7 +2143,7 @@ _08001220:
 
     .global sub_08001224
     .thumb_func
-sub_08001224:
+sub_08001224:   @ NgPlus_BackupShopAndMailData
     push {r4, r5, r6, lr}
     mov r0, sl
     ldr r0, [r0, #0x5c]
@@ -2190,7 +2190,7 @@ sub_08001224:
 
     .global sub_08001288
     .thumb_func
-sub_08001288:
+sub_08001288:   @ NgPlus_RestoreShopAndMailData
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     mov r1, sl
@@ -2251,7 +2251,7 @@ _08001304:
 
     .global sub_08001308
     .thumb_func
-sub_08001308:
+sub_08001308:   @ NgPlus_BackupSoulIcons
     push {r4, r5, r6, lr}
     ldr r0, _08001340
     adds r1, r7, #0
@@ -2267,7 +2267,7 @@ sub_08001308:
 
     .global sub_08001324
     .thumb_func
-sub_08001324:
+sub_08001324:   @ NgPlus_RestoreSoulIcons
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _08001340
@@ -2291,7 +2291,7 @@ _0800134C:
 
     .global sub_08001350
     .thumb_func
-sub_08001350:
+sub_08001350:   @ NgPlus_BackupSoulPool
     push {r4, r5, r6, lr}
     movs r0, #0
     movs r1, #NGPLUS_POOL_SOUL_FLAG
@@ -2307,7 +2307,7 @@ _08001368:
 
     .global sub_0800136A
     .thumb_func
-sub_0800136A:
+sub_0800136A:   @ NgPlus_RestoreSoulPool
     push {r4, r5, r6, lr}
     movs r0, #0
     movs r1, #NGPLUS_POOL_SOUL_FLAG
@@ -2327,7 +2327,7 @@ _08001388:
 
     .global sub_0800138C
     .thumb_func
-sub_0800138C:
+sub_0800138C:   @ NgPlus_BackupMysteryData
     push {r4, r5, r6, lr}
     mov r0, sl
     ldr r0, [r0, #0x58]
@@ -2339,7 +2339,7 @@ sub_0800138C:
 
     .global sub_0800139E
     .thumb_func
-sub_0800139E:
+sub_0800139E:   @ NgPlus_RestoreMysteryData
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     mov r1, sl
@@ -2353,7 +2353,7 @@ _080013B0:
 
     .global sub_080013B4
     .thumb_func
-sub_080013B4:
+sub_080013B4:   @ NgPlus_BackupFoldersAndPack
     push {r4, r5, r6, lr}
     mov r0, sl
     ldr r0, [r0, #0x4c]
@@ -2381,7 +2381,7 @@ sub_080013B4:
 
     .global sub_080013EC
     .thumb_func
-sub_080013EC:
+sub_080013EC:   @ NgPlus_RestoreFoldersAndPack
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     mov r1, sl
@@ -2421,7 +2421,7 @@ _08001438:
 
     .global sub_0800143C
     .thumb_func
-sub_0800143C:
+sub_0800143C:   @ NgPlus_BackupItemsAndSubChips
     push {r4, r5, r6, lr}
     ldr r0, _08001484
     mov r1, sl
@@ -2441,7 +2441,7 @@ sub_0800143C:
 
     .global sub_08001460
     .thumb_func
-sub_08001460:
+sub_08001460:   @ NgPlus_RestoreItemsAndSubChips
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _08001484
@@ -2467,7 +2467,7 @@ _0800148C:
 
     .global sub_08001490
     .thumb_func
-sub_08001490:
+sub_08001490:   @ NgPlus_BackupKeyItems
     push {r4, r5, r6, lr}
     ldr r0, _080014BC
     mov r1, sl
@@ -2481,7 +2481,7 @@ sub_08001490:
 
     .global sub_080014A6
     .thumb_func
-sub_080014A6:
+sub_080014A6:   @ NgPlus_RestoreKeyItems
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _080014BC
@@ -2499,7 +2499,7 @@ _080014C0:
 
     .global sub_080014C4
     .thumb_func
-sub_080014C4:
+sub_080014C4:   @ NgPlus_BackupExtraSaveSlots
     push {r4, r5, r6, lr}
     ldr r0, _08001654
     adds r1, r7, #0
@@ -2589,7 +2589,7 @@ sub_080014C4:
 
     .global sub_0800158C
     .thumb_func
-sub_0800158C:
+sub_0800158C:   @ NgPlus_RestoreExtraSaveSlots
     push {r4, r5, r6, lr}
     adds r0, r7, #0
     ldr r1, _08001654
@@ -2701,7 +2701,7 @@ _0800167C:
 
     .global sub_08001680
     .thumb_func
-sub_08001680:
+sub_08001680:   @ NgPlus_BackupCoreStats
     push {r4, r5, r6, lr}
     mov r4, sl
     ldr r3, [r4, #0x40]
@@ -2760,7 +2760,7 @@ sub_08001680:
 
     .global sub_080016F0
     .thumb_func
-sub_080016F0:
+sub_080016F0:   @ NgPlus_RestoreCoreStats
     push {r4, r5, r6, lr}
     mov r4, sl
     ldr r3, [r4, #0x40]
@@ -2819,7 +2819,7 @@ sub_080016F0:
 
     .global sub_08001760
     .thumb_func
-sub_08001760:
+sub_08001760:   @ Atan2_8Bit
     push {lr}
     asrs r2, r0, #0x10
     asrs r0, r1, #0x10
@@ -2830,7 +2830,7 @@ sub_08001760:
 
     .global sub_0800176E
     .thumb_func
-sub_0800176E:
+sub_0800176E:   @ VecToCardinalDir4
     push {lr}
     adds r2, r0, #0
     orrs r2, r1
@@ -2845,7 +2845,7 @@ _08001782:
 
     .global sub_08001784
     .thumb_func
-sub_08001784:
+sub_08001784:   @ AngleDiffToPlayer
     push {r5, lr}
     push {r0}
     ldr r0, [r5, #0x38]
@@ -2866,7 +2866,7 @@ sub_08001784:
 
     .global sub_080017A8
     .thumb_func
-sub_080017A8:
+sub_080017A8:   @ PolarToCartesian
     lsls r0, r0, #1
     ldr r2, _080017C0
     ldrsh r3, [r2, r0]
@@ -2886,7 +2886,7 @@ _080017C4:
 
     .global sub_080017C8
     .thumb_func
-sub_080017C8:
+sub_080017C8:   @ CardinalDirToVec
     push {lr}
     tst r0, r0
     beq _080017D8
@@ -2901,7 +2901,7 @@ _080017D8:
 
     .global sub_080017DE
     .thumb_func
-sub_080017DE:
+sub_080017DE:   @ IsPointInSquareRadius
     subs r0, r0, r2
     adds r0, r0, r4
     lsls r2, r4, #1
@@ -2919,7 +2919,7 @@ _080017F4:
 
     .global sub_080017F8
     .thumb_func
-sub_080017F8:
+sub_080017F8:   @ IsPointInCircleRadius
     subs r0, r0, r2
     subs r1, r1, r3
     adds r2, r4, #0
@@ -2939,7 +2939,7 @@ _08001812:
 
     .global sub_08001816
     .thumb_func
-sub_08001816:
+sub_08001816:   @ IsActorWithinPlayerRadius
     push {lr}
     ldr r0, [r5, #0x34]
     asrs r0, r0, #0xc
@@ -2957,7 +2957,7 @@ sub_08001816:
 
     .global sub_08001834
     .thumb_func
-sub_08001834:
+sub_08001834:   @ CalcParabolaVzAndFrames
     push {r5, lr}
     tst r4, r4
     bne _08001862
@@ -3022,7 +3022,7 @@ _08001890:
 
     .global sub_080018AE
     .thumb_func
-sub_080018AE:
+sub_080018AE:   @ CalcParabolaVelFromVz
     push {lr}
     ldr r7, [r0]
     subs r1, r1, r7
@@ -3055,7 +3055,7 @@ _080018CA:
 
     .global sub_080018EC
     .thumb_func
-sub_080018EC:
+sub_080018EC:   @ CalcArcVelocityByApex
     push {lr}
     mov r7, r8
     push {r7}
@@ -3109,7 +3109,7 @@ sub_080018EC:
 
     .global sub_08001956
     .thumb_func
-sub_08001956:
+sub_08001956:   @ CalcArcVelocityByFrames
     push {r4, r5, r6, lr}
     push {r3, r4, r6}
     adds r6, r4, #0
@@ -3152,7 +3152,7 @@ sub_08001956:
 
     .global sub_080019A8
     .thumb_func
-sub_080019A8:   @ BN4_APPEAR_BITS_SET
+sub_080019A8:   @ AppearBits_Set
     mov r1, sl
     ldr r1, [r1, #0x18]
     ldr r2, [r1, #0x64]
@@ -3162,7 +3162,7 @@ sub_080019A8:   @ BN4_APPEAR_BITS_SET
 
     .global sub_080019B4
     .thumb_func
-sub_080019B4:
+sub_080019B4:   @ AppearBits_Clear
     mov r1, sl
     ldr r1, [r1, #0x18]
     ldr r2, [r1, #0x64]
@@ -3172,7 +3172,7 @@ sub_080019B4:
 
     .global sub_080019C0
     .thumb_func
-sub_080019C0:   @ BN4_APPEAR_BITS
+sub_080019C0:   @ AppearBits_Get
     mov r0, sl
     ldr r0, [r0, #0x18]
     ldr r0, [r0, #0x64]
@@ -3180,7 +3180,7 @@ sub_080019C0:   @ BN4_APPEAR_BITS
 
     .global sub_080019C8
     .thumb_func
-sub_080019C8:
+sub_080019C8:   @ AppearBits_Write
     mov r1, sl
     ldr r1, [r1, #0x18]
     str r0, [r1, #0x64]
@@ -3437,7 +3437,7 @@ _08001B94:
 
     .global sub_08001B98
     .thumb_func
-sub_08001B98:
+sub_08001B98:   @ ClearBgTilemapAndQueues
     push {lr}
     ldr r0, _08001BAC
     ldr r1, _08001BB0
@@ -3452,7 +3452,7 @@ _08001BB0:
 
     .global sub_08001BB4
     .thumb_func
-sub_08001BB4:
+sub_08001BB4:   @ CommitBgTilemapBuffer
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x28]
@@ -3480,7 +3480,7 @@ _08001BE4:
 
     .global sub_08001BE8
     .thumb_func
-sub_08001BE8:   @ BN4_BG_PRESETS_SET
+sub_08001BE8:   @ SetBgPreset
     ldr r1, _08001C00
     lsls r0, r0, #3
     adds r1, r1, r0
@@ -3494,14 +3494,14 @@ sub_08001BE8:   @ BN4_BG_PRESETS_SET
     mov pc, lr
     .hword 0x0000
 _08001C00:
-    .word dat_08001C04   @ BN4_BG_PRESETS
+    .word dat_08001C04   @ gBgPresets
     .global dat_08001C04
-dat_08001C04:   @ BN4_BG_PRESETS
+dat_08001C04:   @ gBgPresets
     incrom 0x1C04, 0xB0
 
     .global sub_08001CB4
     .thumb_func
-sub_08001CB4:
+sub_08001CB4:   @ SetMapBgPreset
     push {lr}
     cmp r0, #0x80
     bge _08001CBE
@@ -3564,7 +3564,7 @@ _08001D20:
 
     .global sub_08001D24
     .thumb_func
-sub_08001D24:
+sub_08001D24:   @ ClearBgCharBlocks
     push {lr}
     ldr r0, _08001D48
     movs r1, #0x40
@@ -3590,7 +3590,7 @@ _08001D54:
 
     .global sub_08001D58
     .thumb_func
-sub_08001D58:
+sub_08001D58:   @ ClearPaletteStagingBuffer
     push {lr}
     ldr r0, _08001D78
     movs r1, #2
@@ -3599,7 +3599,7 @@ sub_08001D58:
 
     .global sub_08001D64
     .thumb_func
-sub_08001D64:
+sub_08001D64:   @ ClearPaletteStagingAndHw
     push {lr}
     ldr r0, _08001D78
     movs r1, #2
@@ -3615,7 +3615,7 @@ _08001D7C:
 
     .global sub_08001D80
     .thumb_func
-sub_08001D80:
+sub_08001D80:   @ ClearBlendRegs
     push {lr}
     mov r2, sl
     ldr r0, [r2, #0x20]
@@ -3625,7 +3625,7 @@ sub_08001D80:
 
     .global sub_08001D8E
     .thumb_func
-sub_08001D8E:
+sub_08001D8E:   @ FlushFadePaletteToHw
     push {lr}
     ldr r0, _08001DA0
     ldr r1, _08001DA4
@@ -3641,7 +3641,7 @@ _08001DA4:
 
     .global sub_08001DA8
     .thumb_func
-sub_08001DA8:   @ Clear_iBGTileIdBlocks
+sub_08001DA8:   @ ClearBgTileIdBlocks
     push {lr}
     mov r0, sl
     ldr r0, [r0, #0x28]
@@ -3654,7 +3654,7 @@ _08001DB8:
 
     .global sub_08001DBC
     .thumb_func
-sub_08001DBC:
+sub_08001DBC:   @ LoadDefaultFontAndPalette
     push {lr}
     ldr r0, _08001DD4
     ldr r1, _08001DD8
@@ -3678,7 +3678,7 @@ _08001DE4:
 
     .global sub_08001DE8
     .thumb_func
-sub_08001DE8:
+sub_08001DE8:   @ SetBgTileEntry
     lsls r0, r0, #1
     lsls r1, r1, #6
     lsls r2, r2, #0xb
@@ -3692,7 +3692,7 @@ sub_08001DE8:
 
     .global sub_08001DFC
     .thumb_func
-sub_08001DFC:
+sub_08001DFC:   @ IwramBgCopyTilemap1
     push {r6, r7, lr}
     ldr r7, _08001E10
     mov lr, pc
@@ -3701,7 +3701,7 @@ sub_08001DFC:
 
     .global sub_08001E06
     .thumb_func
-sub_08001E06:
+sub_08001E06:   @ IwramBgCopyTilemap2
     push {r6, r7, lr}
     ldr r7, _08001E14
     mov lr, pc
@@ -3714,7 +3714,7 @@ _08001E14:
 
     .global sub_08001E18
     .thumb_func
-sub_08001E18:   @ BN4_BG_FILL_RECT
+sub_08001E18:   @ BgFillRect
     push {r6, r7, lr}
     ldr r7, _08001E2C
     mov lr, pc
@@ -3723,7 +3723,7 @@ sub_08001E18:   @ BN4_BG_FILL_RECT
 
     .global sub_08001E22
     .thumb_func
-sub_08001E22:
+sub_08001E22:   @ IwramBgFillRect2
     push {r6, r7, lr}
     ldr r7, _08001E30
     mov lr, pc
@@ -3736,7 +3736,7 @@ _08001E30:
 
     .global sub_08001E34
     .thumb_func
-sub_08001E34:
+sub_08001E34:   @ WriteBgTileRowWrap
     push {r6, r7, lr}
     mov r6, sl
     ldr r6, [r6, #0x28]
@@ -3759,7 +3759,7 @@ _08001E42:
 
     .global sub_08001E58
     .thumb_func
-sub_08001E58:
+sub_08001E58:   @ WriteBgTileColWrap
     push {r6, r7, lr}
     mov r6, sl
     ldr r6, [r6, #0x28]
@@ -3782,7 +3782,7 @@ _08001E66:
 
     .global sub_08001E7C
     .thumb_func
-sub_08001E7C:
+sub_08001E7C:   @ SetHBlankAndVBlankCallbacks
     push {lr}
     tst r0, r0
     beq _08001E92
@@ -3798,7 +3798,7 @@ _08001E92:
 
     .global sub_08001E94
     .thumb_func
-sub_08001E94:
+sub_08001E94:   @ ResetHBlankAndVBlankCallbacks
     push {lr}
     ldr r2, _08001ECC
     ldr r0, _08001EAC
@@ -3811,13 +3811,13 @@ sub_08001E94:
     pop {pc}
     .hword 0x0000
 _08001EAC:
-    .word sub_08001FB4
+    .word sub_08001FB4   @ NullCallback_Fade
 _08001EB0:
     .word 0x0300593D
 
     .global sub_08001EB4
     .thumb_func
-sub_08001EB4:
+sub_08001EB4:   @ RunHBlankPrepCallback
     push {lr}
     ldr r1, _08001ECC
     ldr r0, [r1]
@@ -3839,12 +3839,12 @@ _08001ECC:
 
     .global sub_08001ED0
     .thumb_func
-sub_08001ED0:
+sub_08001ED0:   @ NullCallback_BgScroll
     mov pc, lr
 
     .global sub_08001ED2
     .thumb_func
-sub_08001ED2:
+sub_08001ED2:   @ BgScroll_Bg1DiagLeftUp
     ldr r1, _08001FB0
     ldr r2, [r1]
     subs r2, #8
@@ -3862,7 +3862,7 @@ sub_08001ED2:
 
     .global sub_08001EEE
     .thumb_func
-sub_08001EEE:
+sub_08001EEE:   @ BgScroll_Bg3DiagLeftUp
     ldr r1, _08001FB0
     ldr r2, [r1]
     subs r2, #8
@@ -3880,7 +3880,7 @@ sub_08001EEE:
 
     .global sub_08001F0A
     .thumb_func
-sub_08001F0A:
+sub_08001F0A:   @ BgScroll_Bg3Up
     ldr r1, _08001FB0
     ldr r3, [r1]
     subs r3, #4
@@ -3893,7 +3893,7 @@ sub_08001F0A:
 
     .global sub_08001F1C
     .thumb_func
-sub_08001F1C:
+sub_08001F1C:   @ BgScroll_Bg1Up
     ldr r1, _08001FB0
     ldr r3, [r1]
     subs r3, #4
@@ -3906,7 +3906,7 @@ sub_08001F1C:
 
     .global sub_08001F2E
     .thumb_func
-sub_08001F2E:
+sub_08001F2E:   @ BgScroll_Bg1Down
     ldr r1, _08001FB0
     ldr r2, [r1]
     adds r2, #4
@@ -3919,7 +3919,7 @@ sub_08001F2E:
 
     .global sub_08001F40
     .thumb_func
-sub_08001F40:
+sub_08001F40:   @ BgScroll_Bg3Down
     ldr r1, _08001FB0
     ldr r2, [r1]
     adds r2, #4
@@ -3932,7 +3932,7 @@ sub_08001F40:
 
     .global sub_08001F52
     .thumb_func
-sub_08001F52:
+sub_08001F52:   @ BgScroll_Bg1Right
     ldr r1, _08001FB0
     ldr r2, [r1]
     adds r2, #8
@@ -3945,7 +3945,7 @@ sub_08001F52:
 
     .global sub_08001F64
     .thumb_func
-sub_08001F64:
+sub_08001F64:   @ BgScroll_Bg1Left
     ldr r1, _08001FB0
     ldr r2, [r1]
     subs r2, #8
@@ -3958,7 +3958,7 @@ sub_08001F64:
 
     .global sub_08001F76
     .thumb_func
-sub_08001F76:
+sub_08001F76:   @ BgScroll_Bg3Left
     ldr r1, _08001FB0
     ldr r2, [r1]
     subs r2, #8
@@ -3971,7 +3971,7 @@ sub_08001F76:
 
     .global sub_08001F88
     .thumb_func
-sub_08001F88:
+sub_08001F88:   @ BgScroll_Bg1AccelLeft
     ldr r1, _08001FB0
     ldr r2, [r1]
     movs r3, #1
@@ -3998,11 +3998,11 @@ _08001FB0:
 
     .global sub_08001FB4
     .thumb_func
-sub_08001FB4:
+sub_08001FB4:   @ NullCallback_Fade
     mov pc, lr
     .hword 0x0000
     .global dat_08001FB8
-dat_08001FB8:
+dat_08001FB8:   @ gTileAnimScratchBuffers
     .4byte 0x0200F780
     .4byte 0x0200F780
     .4byte 0x0200F780
@@ -4034,7 +4034,7 @@ dat_08001FB8:
 
     .global sub_08002028
     .thumb_func
-sub_08002028:
+sub_08002028:   @ TileAnim_ClearAll
     push {lr}
     ldr r0, _08002164
     ldr r1, _08002034
@@ -4045,7 +4045,7 @@ _08002034:
 
     .global sub_08002038
     .thumb_func
-sub_08002038:
+sub_08002038:   @ TileAnim_GetScratchBuffer
     push {r4, r5, r6, r7, lr}
     ldr r1, _08002044
     lsls r0, r0, #2
@@ -4053,11 +4053,11 @@ sub_08002038:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08002044:
-    .word dat_08001FB8
+    .word dat_08001FB8   @ gTileAnimScratchBuffers
 
     .global sub_08002048
     .thumb_func
-sub_08002048:   @ BN4_PALETTE_ANIM
+sub_08002048:   @ TileAnim_Start
     push {r4, r5, r6, r7, lr}
     mov r1, r8
     mov r2, sb
@@ -4098,11 +4098,11 @@ _08002074:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08002094:
-    .word dat_0800214C
+    .word dat_0800214C   @ gTileAnimHandlers
 
     .global sub_08002098
     .thumb_func
-sub_08002098:
+sub_08002098:   @ TileAnim_Stop
     push {r4, r5, r6, r7, lr}
     push {r0}
     ldr r7, _08002164
@@ -4117,7 +4117,7 @@ sub_08002098:
 
     .global sub_080020B0
     .thumb_func
-sub_080020B0:
+sub_080020B0:   @ TileAnim_IsActive
     push {r4, r5, r6, r7, lr}
     ldr r7, _08002164
     movs r1, #0x18
@@ -4129,7 +4129,7 @@ sub_080020B0:
 
     .global sub_080020C0
     .thumb_func
-sub_080020C0:
+sub_080020C0:   @ TileAnim_UpdateAll
     push {r4, r5, r6, r7, lr}
     mov r1, r8
     mov r2, sb
@@ -4192,14 +4192,14 @@ _08002120:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0800212C:
-    .word dat_08002134
+    .word dat_08002134   @ gTileAnimFrameStrides
 _08002130:
-    .word dat_0800214C
+    .word dat_0800214C   @ gTileAnimHandlers
     .global dat_08002134
-dat_08002134:
+dat_08002134:   @ gTileAnimFrameStrides
     incrom 0x2134, 0x18
     .global dat_0800214C
-dat_0800214C:
+dat_0800214C:   @ gTileAnimHandlers
     @ ptr table 0x0800214C..0x08002164 (6 entries)
     .4byte dat_08002169
     .4byte dat_080021B9
@@ -4212,7 +4212,7 @@ _08002164:
 
     .global sub_08002168
     .thumb_func
-sub_08002168:
+sub_08002168:   @ TileAnimHandler_DmaCopy
     push {lr}
     ldr r0, [r0]
     ldr r1, [r7, #0xc]
@@ -4222,7 +4222,7 @@ sub_08002168:
 
     .global sub_08002176
     .thumb_func
-sub_08002176:
+sub_08002176:   @ TileAnimHandler_PatchMapTiles
     push {lr}
     ldr r5, _080021B4
     ldr r5, [r5, #0xc]
@@ -4259,7 +4259,7 @@ _080021B4:
 
     .global sub_080021B8
     .thumb_func
-sub_080021B8:
+sub_080021B8:   @ TileAnimHandler_ComposeTiles
     push {r4, r7, lr}
     ldr r6, [r0]
     ldr r5, _08002208
@@ -4301,11 +4301,11 @@ _080021CA:
     pop {r4, r7, pc}
     .hword 0x0000
 _08002208:
-    .word dat_08001FB8
+    .word dat_08001FB8   @ gTileAnimScratchBuffers
 _0800220C:
-    .word dat_08002210
+    .word dat_08002210   @ gTileCopyFlipHandlers
     .global dat_08002210
-dat_08002210:
+dat_08002210:   @ gTileCopyFlipHandlers
     @ ptr table 0x08002210..0x08002220 (4 entries)
     .4byte dat_08002221
     .4byte dat_08002243
@@ -4314,7 +4314,7 @@ dat_08002210:
 
     .global sub_08002220
     .thumb_func
-sub_08002220:
+sub_08002220:   @ CopyTile4bpp_Normal
     ldr r0, [r4]
     str r0, [r5]
     ldr r0, [r4, #4]
@@ -4335,7 +4335,7 @@ sub_08002220:
 
     .global sub_08002242
     .thumb_func
-sub_08002242:
+sub_08002242:   @ CopyTile4bpp_HFlip
     ldr r2, _080024B8
     mov sb, r2
     ldr r2, _080024B4
@@ -4487,7 +4487,7 @@ sub_08002242:
 
     .global sub_0800236A
     .thumb_func
-sub_0800236A:
+sub_0800236A:   @ CopyTile4bpp_VFlip
     ldr r0, [r4]
     str r0, [r5, #0x1c]
     ldr r0, [r4, #4]
@@ -4508,7 +4508,7 @@ sub_0800236A:
 
     .global sub_0800238C
     .thumb_func
-sub_0800238C:
+sub_0800238C:   @ CopyTile4bpp_HVFlip
     ldr r2, _080024B8
     mov sb, r2
     ldr r2, _080024B4
@@ -4664,7 +4664,7 @@ _080024B8:
 
     .global sub_080024BC
     .thumb_func
-sub_080024BC:
+sub_080024BC:   @ TileAnimHandler_PaletteEffect
     push {lr}
     push {r4, r7}
     ldr r1, [r0]
@@ -4680,7 +4680,7 @@ sub_080024BC:
 
     .global sub_080024D6
     .thumb_func
-sub_080024D6:
+sub_080024D6:   @ TileAnimHandler_PlaySound
     push {lr}
     ldr r0, [r0]
     cmp r0, #0
@@ -4691,7 +4691,7 @@ _080024E2:
 
     .global sub_080024E4
     .thumb_func
-sub_080024E4:
+sub_080024E4:   @ TileAnimHandler_EventFlag
     push {lr}
     ldr r0, [r0]
     cmp r0, #0
@@ -4709,7 +4709,7 @@ _080024FE:
 
     .global sub_08002500
     .thumb_func
-sub_08002500:
+sub_08002500:   @ TileAnim_StartList
     push {r5, lr}
     adds r5, r0, #0
 _08002504:
@@ -4724,7 +4724,7 @@ _08002512:
 
     .global sub_08002514
     .thumb_func
-sub_08002514:
+sub_08002514:   @ PaletteEffect_ClearAll
     push {lr}
     ldr r0, _08002610
     ldr r1, _08002520
@@ -4735,7 +4735,7 @@ _08002520:
 
     .global sub_08002524
     .thumb_func
-sub_08002524:
+sub_08002524:   @ PaletteEffect_Set
     push {r5, r6, r7, lr}
     ldr r7, _08002610
     movs r6, #0xc
@@ -4757,7 +4757,7 @@ _08002542:
 
     .global sub_08002546
     .thumb_func
-sub_08002546:
+sub_08002546:   @ PaletteEffect_Stop
     ldr r2, _08002610
     movs r1, #0xc
     muls r0, r1, r0
@@ -4768,7 +4768,7 @@ sub_08002546:
 
     .global sub_08002554
     .thumb_func
-sub_08002554:
+sub_08002554:   @ PaletteEffect_ClearFirst18
     push {lr}
     ldr r0, _08002610
     ldr r1, _08002560
@@ -4779,7 +4779,7 @@ _08002560:
 
     .global sub_08002564
     .thumb_func
-sub_08002564:
+sub_08002564:   @ PaletteEffect_IsActive
     ldr r2, _08002610
     movs r1, #0xc
     muls r1, r0, r1
@@ -4790,7 +4790,7 @@ sub_08002564:
 
     .global sub_08002572
     .thumb_func
-sub_08002572:
+sub_08002572:   @ PaletteEffect_AnyActive
     ldr r2, _08002610
     ldr r3, _08002588
 _08002576:
@@ -4809,7 +4809,7 @@ _08002588:
 
     .global sub_0800258C
     .thumb_func
-sub_0800258C:
+sub_0800258C:   @ PaletteEffect_ApplyAll
     push {r5, r6, r7, lr}
     ldr r0, _080025E8
     ldr r1, _080025EC
@@ -4866,9 +4866,9 @@ _080025F0:
 _080025F4:
     .word 0x03002840
 _080025F8:
-    .word dat_080025FC
+    .word dat_080025FC   @ gPaletteEffectIwramHandlers
     .global dat_080025FC
-dat_080025FC:
+dat_080025FC:   @ gPaletteEffectIwramHandlers
     .4byte 0x03005AC9
     .4byte 0x03005AC9
     .4byte 0x03005B51
@@ -4880,7 +4880,7 @@ _08002610:
 
     .global sub_08002614
     .thumb_func
-sub_08002614:
+sub_08002614:   @ ScreenEffect_Start
     push {r4, r5, r6, r7, lr}
     ldr r5, _08002674
     push {r0, r1, r2}
@@ -4897,7 +4897,7 @@ sub_08002614:
 
     .global sub_08002630
     .thumb_func
-sub_08002630:
+sub_08002630:   @ ScreenEffect_Stop
     push {r4, r5, r6, r7, lr}
     ldr r5, _08002674
     ldrb r0, [r5]
@@ -4916,7 +4916,7 @@ _08002644:
 
     .global sub_0800264E
     .thumb_func
-sub_0800264E:
+sub_0800264E:   @ ScreenEffect_Clear
     push {r4, r5, r6, r7, lr}
     ldr r0, _08002674
     movs r1, #0x50
@@ -4925,7 +4925,7 @@ sub_0800264E:
 
     .global sub_0800265A
     .thumb_func
-sub_0800265A:
+sub_0800265A:   @ ScreenEffect_Update
     push {r4, r5, r6, r7, lr}
     ldr r5, _08002674
     ldrb r0, [r5]
@@ -4939,7 +4939,7 @@ _0800266A:
 
     .global sub_0800266C
     .thumb_func
-sub_0800266C:
+sub_0800266C:   @ ScreenEffect_IsActive
     ldr r1, _08002674
     ldrb r0, [r1]
     tst r0, r0
@@ -4949,7 +4949,7 @@ _08002674:
 
     .global sub_08002678
     .thumb_func
-sub_08002678:
+sub_08002678:   @ SetupCenteredWindowBox_B
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -4959,7 +4959,7 @@ sub_08002678:
 
     .global sub_08002684
     .thumb_func
-sub_08002684:
+sub_08002684:   @ SetupCenteredWindowBox_A
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -5090,9 +5090,9 @@ _08002760:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0800276C:
-    .word dat_08002770
+    .word dat_08002770   @ gWindowBoxBgRegOffsets
     .global dat_08002770
-dat_08002770:
+dat_08002770:   @ gWindowBoxBgRegOffsets
     incrom 0x2770, 0x8
     .global dat_08002778
 dat_08002778:
@@ -5100,7 +5100,7 @@ dat_08002778:
 
     .global sub_080027B8
     .thumb_func
-sub_080027B8:
+sub_080027B8:   @ ObjInitAll
     push {r4, lr}
     ldr r0, _080027E8
     ldr r1, _080027EC
@@ -5130,7 +5130,7 @@ _080027F8:
 
     .global sub_080027FC
     .thumb_func
-sub_080027FC:
+sub_080027FC:   @ FlushObjPaletteToHw
     push {lr}
     ldr r0, _0800280C
     ldr r1, _08002810
@@ -5145,7 +5145,7 @@ _08002810:
 
     .global sub_08002814
     .thumb_func
-sub_08002814:
+sub_08002814:   @ LoadDefaultObjPalette
     push {lr}
     ldr r0, _08002824
     ldr r1, _08002828
@@ -5160,7 +5160,7 @@ _08002828:
 
     .global sub_0800282C
     .thumb_func
-sub_0800282C:
+sub_0800282C:   @ IwramSpriteCall_602C
     push {lr}
     ldr r2, _08002838
     mov lr, pc
@@ -5172,7 +5172,7 @@ _08002838:
 
     .global sub_0800283C
     .thumb_func
-sub_0800283C:
+sub_0800283C:   @ IwramSpriteCall_632C_Obj
     push {r4, r5, lr}
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
@@ -5185,7 +5185,7 @@ sub_0800283C:
 
     .global sub_0800284E
     .thumb_func
-sub_0800284E:
+sub_0800284E:   @ IwramSpriteCall_632C
     push {r4, lr}
     ldr r4, _08002858
     mov lr, pc
@@ -5209,7 +5209,7 @@ sub_0800285C:   @ BN4_SPRITE_UPDATE
 
     .global sub_0800286E
     .thumb_func
-sub_0800286E:
+sub_0800286E:   @ IwramSpriteUpdate_Raw
     push {r4, lr}
     ldr r4, _08002878
     mov lr, pc
@@ -5260,7 +5260,7 @@ _080028C0:
 
     .global sub_080028C4
     .thumb_func
-sub_080028C4:
+sub_080028C4:   @ SpriteObj_InitFromData
     adds r0, #4
     str r0, [r5, #0x18]
     movs r0, #0
@@ -5287,7 +5287,7 @@ sub_080028C4:
 
     .global sub_080028F2
     .thumb_func
-sub_080028F2:
+sub_080028F2:   @ SpriteObj_SetMugshot
     push {lr}
     lsls r0, r0, #2
     ldr r1, _08002904
@@ -5307,7 +5307,7 @@ sub_08002908:   @ BN4_MENU_SPRITE_SET
 
     .global sub_0800290C
     .thumb_func
-sub_0800290C:
+sub_0800290C:   @ MenuSprite_SetNoFlag
     movs r2, #0
 _0800290E:
     push {r4, r5, r6, lr}
@@ -5332,7 +5332,7 @@ _08002930:
 
     .global sub_08002934
     .thumb_func
-sub_08002934:
+sub_08002934:   @ MenuSprite_SetMugshot
     push {r5, lr}
     adds r5, #0x20
     lsls r0, r0, #2
@@ -5416,7 +5416,7 @@ sub_080029B0:
 
     .global sub_080029B8
     .thumb_func
-sub_080029B8:
+sub_080029B8:   @ SpriteObj_QueueTileUpload
     push {r5, lr}
     ldr r2, [r5, #0x24]
     ldr r0, [r5, #0x1c]
@@ -5475,7 +5475,7 @@ _08002A14:
 
     .global sub_08002A18
     .thumb_func
-sub_08002A18:
+sub_08002A18:   @ SpriteCache_Init
     push {r5, lr}
     ldr r5, _08002C78
     push {r0}
@@ -5501,7 +5501,7 @@ sub_08002A18:
 
     .global sub_08002A4A
     .thumb_func
-sub_08002A4A:
+sub_08002A4A:   @ SpriteCache_LoadList
     push {r4, r5, r6, r7, lr}
     mov r1, r8
     mov r2, sb
@@ -5695,7 +5695,7 @@ _08002B9A:
 
     .global sub_08002BA6
     .thumb_func
-sub_08002BA6:
+sub_08002BA6:   @ SpriteCache_LoadEnemyTemp
     push {r4, r5, r6, r7, lr}
     mov r1, r8
     mov r2, sb
@@ -5786,7 +5786,7 @@ _08002C50:
 
     .global sub_08002C54
     .thumb_func
-sub_08002C54:
+sub_08002C54:   @ SpriteCache_ClearNextSlot
     push {r0, r1, r2, r3, r4, r5, r6, r7, lr}
     ldrb r3, [r5]
     lsls r7, r3, #1
@@ -5815,7 +5815,7 @@ _08002C78:
 
     .global sub_08002C90
     .thumb_func
-sub_08002C90:
+sub_08002C90:   @ SpriteObj_SetAffineParams
     push {r5, lr}
     push {r0, r1, r2}
     ldrb r3, [r5, #2]
@@ -5826,7 +5826,7 @@ sub_08002C90:
 
     .global sub_08002C9E
     .thumb_func
-sub_08002C9E:
+sub_08002C9E:   @ SpriteObj_SetAffineParams_Raw
     push {r5, lr}
     push {r0, r1, r2}
 _08002CA2:
@@ -5847,7 +5847,7 @@ _08002CBA:
 
     .global sub_08002CBE
     .thumb_func
-sub_08002CBE:
+sub_08002CBE:   @ SpriteObj_SetMode2Bits
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5862,7 +5862,7 @@ sub_08002CBE:
 
     .global sub_08002CD4
     .thumb_func
-sub_08002CD4:
+sub_08002CD4:   @ SpriteObj_ClearModeBits
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5875,13 +5875,13 @@ sub_08002CD4:
 
     .global sub_08002CE6
     .thumb_func
-sub_08002CE6:
+sub_08002CE6:   @ SpriteObj_EnableAlphaBlend
     movs r2, #4
     b sub_08002CEA
 
     .global sub_08002CEA
     .thumb_func
-sub_08002CEA:
+sub_08002CEA:   @ SpriteObj_SetBlendMode
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5913,7 +5913,7 @@ sub_08002CEA:
 
     .global sub_08002D22
     .thumb_func
-sub_08002D22:
+sub_08002D22:   @ SpriteObj_SetSemiTransparent
     movs r0, #0xc
     b _08002D26
 _08002D26:
@@ -5930,7 +5930,7 @@ _08002D26:
 
     .global sub_08002D3A
     .thumb_func
-sub_08002D3A:
+sub_08002D3A:   @ SpriteObj_DisableAlphaBlend
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5943,7 +5943,7 @@ sub_08002D3A:
 
     .global sub_08002D4C
     .thumb_func
-sub_08002D4C:
+sub_08002D4C:   @ SpriteObj_GetBlendState
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5958,7 +5958,7 @@ sub_08002D4C:
 
     .global sub_08002D62
     .thumb_func
-sub_08002D62:
+sub_08002D62:   @ SpriteObj_IsSemiTransparent
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -5970,7 +5970,7 @@ sub_08002D62:
 
     .global sub_08002D72
     .thumb_func
-sub_08002D72:
+sub_08002D72:   @ IwramSpriteCall_5DC0
     push {r5, lr}
     ldr r3, _08002D7C
     mov lr, pc
@@ -5981,7 +5981,7 @@ _08002D7C:
 
     .global sub_08002D80
     .thumb_func
-sub_08002D80:
+sub_08002D80:   @ SpriteObj_AllocAffine
     push {r5, lr}
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
@@ -5991,7 +5991,7 @@ sub_08002D80:
 
     .global sub_08002D8C
     .thumb_func
-sub_08002D8C:
+sub_08002D8C:   @ SpriteObj_AllocAffine_Raw
     push {r5, lr}
 _08002D8E:
     ldrb r0, [r5, #0x11]
@@ -6021,7 +6021,7 @@ _08002DBA:
 
     .global sub_08002DBE
     .thumb_func
-sub_08002DBE:
+sub_08002DBE:   @ SpriteObj_FreeAffine
     push {r5, lr}
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
@@ -6031,7 +6031,7 @@ sub_08002DBE:
 
     .global sub_08002DCA
     .thumb_func
-sub_08002DCA:
+sub_08002DCA:   @ SpriteObj_FreeAffine_Raw
     push {r5, lr}
 _08002DCC:
     ldrb r0, [r5, #0x11]
@@ -6063,7 +6063,7 @@ sub_08002DEC:   @ BN4_SPRITE_PALETTE_SET
 
     .global sub_08002DF8
     .thumb_func
-sub_08002DF8:
+sub_08002DF8:   @ SpriteObj_GetPaletteIndex
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6073,7 +6073,7 @@ sub_08002DF8:
 
     .global sub_08002E04
     .thumb_func
-sub_08002E04:
+sub_08002E04:   @ SpriteObj_SetAnimIndex
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6083,7 +6083,7 @@ sub_08002E04:
 
     .global sub_08002E10
     .thumb_func
-sub_08002E10:
+sub_08002E10:   @ SpriteObj_SetAnimIndex_Alt
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6093,13 +6093,13 @@ sub_08002E10:
 
     .global sub_08002E1C
     .thumb_func
-sub_08002E1C:
+sub_08002E1C:   @ SpriteObj_SetPaletteBankMax
     movs r1, #0xf0
     b sub_08002E20
 
     .global sub_08002E20
     .thumb_func
-sub_08002E20:
+sub_08002E20:   @ SpriteObj_SetPaletteBank
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6113,7 +6113,7 @@ sub_08002E20:
 
     .global sub_08002E34
     .thumb_func
-sub_08002E34:
+sub_08002E34:   @ SpriteObj_GetPaletteBank
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6125,7 +6125,7 @@ sub_08002E34:
 
     .global sub_08002E44
     .thumb_func
-sub_08002E44:
+sub_08002E44:   @ SpriteObj_ClearPaletteBank
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6138,7 +6138,7 @@ sub_08002E44:
 
     .global sub_08002E56
     .thumb_func
-sub_08002E56:
+sub_08002E56:   @ SpriteObj_GetAnimFrameStatus
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6156,7 +6156,7 @@ _08002E6A:
 
     .global sub_08002E70
     .thumb_func
-sub_08002E70:
+sub_08002E70:   @ SpriteObj_IsFlagBit3Set
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6168,7 +6168,7 @@ sub_08002E70:
 
     .global sub_08002E80
     .thumb_func
-sub_08002E80:
+sub_08002E80:   @ SpriteObj_SetPriority
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6183,7 +6183,7 @@ sub_08002E80:
 
     .global sub_08002E96
     .thumb_func
-sub_08002E96:
+sub_08002E96:   @ SpriteObj_PauseAnim
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6198,7 +6198,7 @@ sub_08002E96:
 
     .global sub_08002EAC
     .thumb_func
-sub_08002EAC:
+sub_08002EAC:   @ SpriteObj_ResumeAnim
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6213,7 +6213,7 @@ sub_08002EAC:
 
     .global sub_08002EC2
     .thumb_func
-sub_08002EC2:
+sub_08002EC2:   @ SpriteObj_GetFrameTileCount
     ldr r0, [r5, #0x1c]
     ldr r0, [r0]
     ldr r1, [r5, #0x18]
@@ -6224,7 +6224,7 @@ sub_08002EC2:
 
     .global sub_08002ED0
     .thumb_func
-sub_08002ED0:
+sub_08002ED0:   @ SpriteObj_GetScreenPos
     ldrb r0, [r5]
     tst r0, r0
     beq _08002EF6
@@ -6252,7 +6252,7 @@ _08002EF6:
 
     .global sub_08002EFE
     .thumb_func
-sub_08002EFE:
+sub_08002EFE:   @ SpriteObj_SetFlag16Bit1
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6265,7 +6265,7 @@ sub_08002EFE:
 
     .global sub_08002F10
     .thumb_func
-sub_08002F10:
+sub_08002F10:   @ SpriteObj_ClearFlag16Bit1
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6278,7 +6278,7 @@ sub_08002F10:
 
     .global sub_08002F22
     .thumb_func
-sub_08002F22:
+sub_08002F22:   @ SpriteObj_SetFlashColor
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6288,7 +6288,7 @@ sub_08002F22:
 
     .global sub_08002F2E
     .thumb_func
-sub_08002F2E:
+sub_08002F2E:   @ SpriteObj_GetFlashColor
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6298,7 +6298,7 @@ sub_08002F2E:
 
     .global sub_08002F3A
     .thumb_func
-sub_08002F3A:
+sub_08002F3A:   @ SpriteObj_ClearFlashColor
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6309,7 +6309,7 @@ sub_08002F3A:
 
     .global sub_08002F48
     .thumb_func
-sub_08002F48:
+sub_08002F48:   @ SpriteObj_SetMosaicHV
     lsls r1, r1, #4
     orrs r0, r1
     movs r2, #0x10
@@ -6318,7 +6318,7 @@ sub_08002F48:
 
     .global sub_08002F54
     .thumb_func
-sub_08002F54:
+sub_08002F54:   @ SpriteObj_EnableMosaic
     tst r2, r2
     beq sub_08002F7E
 _08002F58:
@@ -6344,7 +6344,7 @@ _08002F58:
 
     .global sub_08002F7E
     .thumb_func
-sub_08002F7E:
+sub_08002F7E:   @ SpriteObj_DisableMosaic
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6357,7 +6357,7 @@ sub_08002F7E:
 
     .global sub_08002F90
     .thumb_func
-sub_08002F90:
+sub_08002F90:   @ SpriteObj_GetMosaic
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6376,7 +6376,7 @@ sub_08002F90:
 
     .global sub_08002FAE
     .thumb_func
-sub_08002FAE:
+sub_08002FAE:   @ SpriteObj_SetFlip
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6397,7 +6397,7 @@ sub_08002FAE:
 
     .global sub_08002FD0
     .thumb_func
-sub_08002FD0:
+sub_08002FD0:   @ SpriteObj_GetFlip
     ldrb r3, [r0, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6410,7 +6410,7 @@ sub_08002FD0:
 
     .global sub_08002FE2
     .thumb_func
-sub_08002FE2:
+sub_08002FE2:   @ SpriteObj_SetFlag3Bit2
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6425,7 +6425,7 @@ sub_08002FE2:
 
     .global sub_08002FF8
     .thumb_func
-sub_08002FF8:
+sub_08002FF8:   @ SpriteObj_SetSubOamMask
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6435,7 +6435,7 @@ sub_08002FF8:
 
     .global sub_08003004
     .thumb_func
-sub_08003004:
+sub_08003004:   @ SpriteObj_GetSubOamMask
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6445,7 +6445,7 @@ sub_08003004:
 
     .global sub_08003010
     .thumb_func
-sub_08003010:
+sub_08003010:   @ SpriteObj_SetSubOamBit
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6460,7 +6460,7 @@ sub_08003010:
 
     .global sub_08003026
     .thumb_func
-sub_08003026:
+sub_08003026:   @ SpriteObj_ClearSubOamBit
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6476,7 +6476,7 @@ sub_08003026:
 
     .global sub_0800303E
     .thumb_func
-sub_0800303E:
+sub_0800303E:   @ SpriteObj_SetField30
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6487,7 +6487,7 @@ sub_0800303E:
 
     .global sub_0800304C
     .thumb_func
-sub_0800304C:
+sub_0800304C:   @ SpriteObj_SetCustomPalettePtr
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6497,7 +6497,7 @@ sub_0800304C:
 
     .global sub_08003058
     .thumb_func
-sub_08003058:
+sub_08003058:   @ SpriteObj_SetFlag3Bit5
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6510,7 +6510,7 @@ sub_08003058:
 
     .global sub_0800306A
     .thumb_func
-sub_0800306A:
+sub_0800306A:   @ SpriteObj_ClearFlag3Bit5
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6523,7 +6523,7 @@ sub_0800306A:
 
     .global sub_0800307C
     .thumb_func
-sub_0800307C:
+sub_0800307C:   @ SpriteObj_SetFlag16Bits23
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6543,7 +6543,7 @@ sub_0800307C:
 
     .global sub_0800309C
     .thumb_func
-sub_0800309C:
+sub_0800309C:   @ SpriteObj_SetPaletteBankIdx
     ldrb r3, [r5, #2]
     lsrs r3, r3, #4
     lsls r3, r3, #4
@@ -6557,7 +6557,7 @@ sub_0800309C:
     mov pc, lr
     .hword 0x0000
     .global dat_080030B4
-dat_080030B4:
+dat_080030B4:   @ gObjectSpawnTable
     @ ptr table 0x080030B4..0x080030CC (6 entries)
     .4byte dat_080038D5
     .4byte dat_080032B9
@@ -6566,7 +6566,7 @@ dat_080030B4:
     .4byte dat_08003345
     .4byte dat_08004461
     .global dat_080030CC
-dat_080030CC:
+dat_080030CC:   @ gObjectDeleteTable
     @ ptr table 0x080030CC..0x080030E4 (6 entries)
     .4byte dat_0800390F
     .4byte dat_080033D5
@@ -6575,7 +6575,7 @@ dat_080030CC:
     .4byte dat_080033D5
     .4byte dat_0800449B
     .global dat_080030E4
-dat_080030E4:
+dat_080030E4:   @ gObjectPoolBaseTable
     .4byte 0x0200A610
     .4byte 0x0203B180
     .4byte 0x02006140
@@ -6583,7 +6583,7 @@ dat_080030E4:
     .4byte 0x02037D10
     .4byte 0x0200B820
     .global dat_080030FC
-dat_080030FC:
+dat_080030FC:   @ gObjectAllocMaskPtrTable
     .4byte 0x0200A5FC
     .4byte 0x02035800
     .4byte 0x020015D0
@@ -6591,12 +6591,12 @@ dat_080030FC:
     .4byte 0x02037A60
     .4byte 0x0200B140
     .global dat_08003114
-dat_08003114:
+dat_08003114:   @ gObjectStrideTable
     incrom 0x3114, 0x18
 
     .global sub_0800312C
     .thumb_func
-sub_0800312C:
+sub_0800312C:   @ ObjectList_Init
     ldr r0, _08003144
     ldr r1, _08003148
     ldr r2, _08003140
@@ -6877,7 +6877,7 @@ _08003378:
 
     .global sub_0800337C
     .thumb_func
-sub_0800337C:
+sub_0800337C:   @ ObjectList_InsertAfterCurrent
     push {lr}
     movs r0, #0x10
     subs r0, r5, r0
@@ -6902,7 +6902,7 @@ _080033A0:
 
     .global sub_080033A4
     .thumb_func
-sub_080033A4:
+sub_080033A4:   @ ObjectList_InsertTail
     movs r0, #0x10
     subs r0, r5, r0
     ldr r1, _080033B8
@@ -6918,7 +6918,7 @@ _080033B8:
 
     .global sub_080033BC
     .thumb_func
-sub_080033BC:
+sub_080033BC:   @ ObjectList_InsertHead
     movs r0, #0x10
     subs r0, r5, r0
     ldr r1, _080033D0
@@ -6934,7 +6934,7 @@ _080033D0:
 
     .global sub_080033D4
     .thumb_func
-sub_080033D4:
+sub_080033D4:   @ Object_Delete
     push {r5, lr}
     movs r1, #0
     strb r1, [r5]
@@ -6961,11 +6961,11 @@ sub_080033D4:
     pop {r5, pc}
     .hword 0x0000
 _08003408:
-    .word dat_080030FC
+    .word dat_080030FC   @ gObjectAllocMaskPtrTable
 
     .global sub_0800340C
     .thumb_func
-sub_0800340C:
+sub_0800340C:   @ ObjectPool_ClearKind
     push {r4, r7, lr}
     lsls r1, r0, #2
     ldr r7, _080034A4
@@ -6993,16 +6993,16 @@ _08003430:
     pop {r4, r7, pc}
     .hword 0x0000
 _08003440:
-    .word dat_08003444
+    .word dat_08003444   @ gObjectPoolInitDescs
     .global dat_08003444
-dat_08003444:
+dat_08003444:   @ gObjectPoolInitDescs
     incrom 0x3444, 0x60
 _080034A4:
-    .word dat_080030FC
+    .word dat_080030FC   @ gObjectAllocMaskPtrTable
 
     .global sub_080034A8
     .thumb_func
-sub_080034A8:
+sub_080034A8:   @ ObjectPool_ClearKind0
     push {lr}
     movs r0, #0
     bl sub_0800340C
@@ -7010,7 +7010,7 @@ sub_080034A8:
 
     .global sub_080034B2
     .thumb_func
-sub_080034B2:
+sub_080034B2:   @ ObjectPool_ClearKind1
     push {lr}
     movs r0, #1
     bl sub_0800340C
@@ -7018,7 +7018,7 @@ sub_080034B2:
 
     .global sub_080034BC
     .thumb_func
-sub_080034BC:
+sub_080034BC:   @ ObjectPool_ClearKind3
     push {lr}
     movs r0, #3
     bl sub_0800340C
@@ -7026,7 +7026,7 @@ sub_080034BC:
 
     .global sub_080034C6
     .thumb_func
-sub_080034C6:
+sub_080034C6:   @ ObjectPool_ClearKind4
     push {lr}
     movs r0, #4
     bl sub_0800340C
@@ -7034,7 +7034,7 @@ sub_080034C6:
 
     .global sub_080034D0
     .thumb_func
-sub_080034D0:
+sub_080034D0:   @ ObjectPool_ClearKind2
     push {lr}
     movs r0, #2
     bl sub_0800340C
@@ -7042,7 +7042,7 @@ sub_080034D0:
 
     .global sub_080034DA
     .thumb_func
-sub_080034DA:
+sub_080034DA:   @ ObjectPool_ClearKind5
     push {lr}
     movs r0, #5
     bl sub_0800340C
@@ -7050,7 +7050,7 @@ sub_080034DA:
 
     .global sub_080034E4
     .thumb_func
-sub_080034E4:
+sub_080034E4:   @ Object_SpawnList
     push {r4, r5, r6, r7, lr}
     adds r7, r0, #0
     movs r4, #0
@@ -7082,7 +7082,7 @@ _08003512:
 
     .global sub_08003516
     .thumb_func
-sub_08003516:
+sub_08003516:   @ Object_DeleteKindsByMask
     push {r4, r5, r6, r7, lr}
     ldr r1, _08003568
     ldr r2, _0800356C
@@ -7131,17 +7131,17 @@ _0800355A:
 _08003566:
     pop {r4, r5, r6, r7, pc}
 _08003568:
-    .word dat_080030CC
+    .word dat_080030CC   @ gObjectDeleteTable
 _0800356C:
-    .word dat_080030E4
+    .word dat_080030E4   @ gObjectPoolBaseTable
 _08003570:
-    .word dat_080030FC
+    .word dat_080030FC   @ gObjectAllocMaskPtrTable
 _08003574:
-    .word dat_08003114
+    .word dat_08003114   @ gObjectStrideTable
 
     .global sub_08003578
     .thumb_func
-sub_08003578:
+sub_08003578:   @ WorldToScreen_Ortho
     push {r4, r5, r6, r7, lr}
     mov r3, sl
     ldr r3, [r3, #0xc]
@@ -7199,7 +7199,7 @@ _080035DC:
 
     .global sub_080035E0
     .thumb_func
-sub_080035E0:
+sub_080035E0:   @ WorldToScreen_Iso
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     push {r4}
@@ -7256,11 +7256,11 @@ _0800363E:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0800364C:
-    .word dat_080030B4
+    .word dat_080030B4   @ gObjectSpawnTable
 
     .global sub_08003650
     .thumb_func
-sub_08003650:
+sub_08003650:   @ CylinderCol_Clear
     push {lr}
     ldr r0, _08003664
     movs r1, #0x14
@@ -7277,7 +7277,7 @@ _08003668:
 
     .global sub_0800366C
     .thumb_func
-sub_0800366C:
+sub_0800366C:   @ CylinderCol_Push
     push {lr}
     movs r7, #0x80
     lsls r7, r7, #8
@@ -7320,7 +7320,7 @@ _080036B4:
 
     .global sub_080036B8
     .thumb_func
-sub_080036B8:
+sub_080036B8:   @ CylinderCol_ResolveAll
     push {r5, lr}
     movs r0, #0
 _080036BC:
@@ -7383,7 +7383,7 @@ _08003724:
 
     .global sub_08003728
     .thumb_func
-sub_08003728:
+sub_08003728:   @ CylinderCol_TestOverlap
     push {lr}
     movs r6, #0
     ldrsh r2, [r0, r6]
@@ -7430,12 +7430,12 @@ _08003778:
     movs r0, #1
     pop {pc}
     .global dat_0800377C
-dat_0800377C:
+dat_0800377C:   @ gOverlayTaskTable
     incrom 0x377C, 0x80
 
     .global sub_080037FC
     .thumb_func
-sub_080037FC:
+sub_080037FC:   @ OverlayTask_Clear
     push {r4, r5, r6, r7, lr}
     ldr r0, _080038C8
     movs r1, #0x48
@@ -7444,7 +7444,7 @@ sub_080037FC:
 
     .global sub_08003808
     .thumb_func
-sub_08003808:
+sub_08003808:   @ OverlayTask_Start
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     push {r0}
@@ -7469,7 +7469,7 @@ sub_08003808:
 
     .global sub_08003834
     .thumb_func
-sub_08003834:
+sub_08003834:   @ OverlayTask_Stop
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     ldr r7, _080038CC
@@ -7490,7 +7490,7 @@ _0800384C:
 
     .global sub_08003856
     .thumb_func
-sub_08003856:
+sub_08003856:   @ OverlayTask_ResetIfTransient
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     ldrb r0, [r5, #2]
@@ -7506,7 +7506,7 @@ _08003868:
 
     .global sub_0800386E
     .thumb_func
-sub_0800386E:
+sub_0800386E:   @ OverlayTask_MarkDirty
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     movs r0, #1
@@ -7515,7 +7515,7 @@ sub_0800386E:
 
     .global sub_08003878
     .thumb_func
-sub_08003878:
+sub_08003878:   @ OverlayTask_Pause
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     movs r0, #1
@@ -7531,7 +7531,7 @@ _0800388C:
 
     .global sub_0800388E
     .thumb_func
-sub_0800388E:
+sub_0800388E:   @ OverlayTask_Resume
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     movs r0, #1
@@ -7543,7 +7543,7 @@ sub_0800388E:
 
     .global sub_0800389E
     .thumb_func
-sub_0800389E:
+sub_0800389E:   @ OverlayTask_Update
     push {r4, r5, r6, r7, lr}
     ldr r5, _080038C8
     ldrb r0, [r5]
@@ -7565,7 +7565,7 @@ _080038BE:
 
     .global sub_080038C0
     .thumb_func
-sub_080038C0:
+sub_080038C0:   @ OverlayTask_IsActive
     ldr r1, _080038C8
     ldrb r0, [r1]
     tst r0, r0
@@ -7573,14 +7573,14 @@ sub_080038C0:
 _080038C8:
     .word 0x020004D0
 _080038CC:
-    .word dat_0800377C
+    .word dat_0800377C   @ gOverlayTaskTable
     .global dat_080038D0
-dat_080038D0:
+dat_080038D0:   @ gObjectKind0Types
     .word dat_080A5C65
 
     .global sub_080038D4
     .thumb_func
-sub_080038D4:
+sub_080038D4:   @ ObjectKind0_Spawn
     push {r0, r1, r2, r3, r4, lr}
     ldr r0, _08003A18
     ldr r2, [r0]
@@ -7616,7 +7616,7 @@ _0800390A:
 
     .global sub_0800390E
     .thumb_func
-sub_0800390E:
+sub_0800390E:   @ ObjectKind0_Delete
     push {lr}
     movs r0, #0x80
     lsls r0, r0, #0x18
@@ -7633,7 +7633,7 @@ sub_0800390E:
 
     .global sub_0800392A
     .thumb_func
-sub_0800392A:
+sub_0800392A:   @ ObjectKind0_UpdateAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -7677,11 +7677,11 @@ _08003964:
     mov ip, r6
     pop {r4, r5, r6, r7, pc}
 _08003978:
-    .word dat_080038D0
+    .word dat_080038D0   @ gObjectKind0Types
 
     .global sub_0800397C
     .thumb_func
-sub_0800397C:
+sub_0800397C:   @ ObjectKind0_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -7749,7 +7749,7 @@ _080039F4:
 
     .global sub_080039F8
     .thumb_func
-sub_080039F8:
+sub_080039F8:   @ ObjectKind0_RecordPaletteSlot
     push {lr}
     movs r0, #0
     bl sub_08002A04
@@ -7757,7 +7757,7 @@ sub_080039F8:
 
     .global sub_08003A02
     .thumb_func
-sub_08003A02:
+sub_08003A02:   @ ObjectKind0_ClearSpriteTileCache
     movs r0, #0
     ldr r3, _08003A1C
 _08003A06:
@@ -7874,7 +7874,7 @@ _08003A20:
 
     .global sub_08003BA0
     .thumb_func
-sub_08003BA0:
+sub_08003BA0:   @ ObjectKind1_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -7942,7 +7942,7 @@ _08003C18:
 
     .global sub_08003C1C
     .thumb_func
-sub_08003C1C:
+sub_08003C1C:   @ ObjectKind1_RecordPaletteSlot
     push {lr}
     movs r0, #1
     bl sub_08002A04
@@ -7950,7 +7950,7 @@ sub_08003C1C:
 
     .global sub_08003C26
     .thumb_func
-sub_08003C26:
+sub_08003C26:   @ ObjectKind1_ClearSpriteTileCache
     movs r0, #0
     ldr r3, _08003C3C
 _08003C2A:
@@ -8133,7 +8133,7 @@ _08003C3C:
 
     .global sub_08003ED4
     .thumb_func
-sub_08003ED4:
+sub_08003ED4:   @ ObjectKind3_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8201,7 +8201,7 @@ _08003F4C:
 
     .global sub_08003F50
     .thumb_func
-sub_08003F50:
+sub_08003F50:   @ ObjectKind3_RecordPaletteSlot
     push {lr}
     movs r0, #3
     bl sub_08002A04
@@ -8209,7 +8209,7 @@ sub_08003F50:
 
     .global sub_08003F5A
     .thumb_func
-sub_08003F5A:
+sub_08003F5A:   @ ObjectKind3_ClearSpriteTileCache
     movs r0, #0x30
     ldr r3, _08003F74
 _08003F5E:
@@ -8359,7 +8359,7 @@ _08003F74:
 
     .global sub_08004180
     .thumb_func
-sub_08004180:
+sub_08004180:   @ ObjectKind4_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8427,7 +8427,7 @@ _080041F8:
 
     .global sub_080041FC
     .thumb_func
-sub_080041FC:
+sub_080041FC:   @ ObjectKind4_RecordPaletteSlot
     push {lr}
     movs r0, #4
     bl sub_08002A04
@@ -8435,7 +8435,7 @@ sub_080041FC:
 
     .global sub_08004206
     .thumb_func
-sub_08004206:
+sub_08004206:   @ ObjectKind4_ClearSpriteTileCache
     movs r0, #0
     ldr r3, _0800421C
 _0800420A:
@@ -8451,12 +8451,12 @@ _0800420A:
 _0800421C:
     .word 0x02037D10
     .global dat_08004220
-dat_08004220:
+dat_08004220:   @ gObjectKind2Types
     .word dat_080A80C5
 
     .global sub_08004224
     .thumb_func
-sub_08004224:
+sub_08004224:   @ ObjectKind2_Spawn
     push {r0, r1, r2, r3, r4, lr}
     ldr r0, _08004390
     ldr r2, [r0]
@@ -8505,7 +8505,7 @@ _08004276:
 
     .global sub_0800427A
     .thumb_func
-sub_0800427A:
+sub_0800427A:   @ ObjectKind2_Delete
     push {lr}
     movs r0, #0x80
     lsls r0, r0, #0x18
@@ -8522,7 +8522,7 @@ sub_0800427A:
 
     .global sub_08004296
     .thumb_func
-sub_08004296:
+sub_08004296:   @ ObjectKind2_UpdateAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8572,11 +8572,11 @@ _080042E4:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _080042F0:
-    .word dat_08004220
+    .word dat_08004220   @ gObjectKind2Types
 
     .global sub_080042F4
     .thumb_func
-sub_080042F4:
+sub_080042F4:   @ ObjectKind2_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8644,7 +8644,7 @@ _0800436C:
 
     .global sub_08004370
     .thumb_func
-sub_08004370:
+sub_08004370:   @ ObjectKind2_RecordPaletteSlot
     push {lr}
     movs r0, #2
     bl sub_08002A04
@@ -8652,7 +8652,7 @@ sub_08004370:
 
     .global sub_0800437A
     .thumb_func
-sub_0800437A:
+sub_0800437A:   @ ObjectKind2_ClearSpriteTileCache
     movs r0, #0
     ldr r3, _08004394
 _0800437E:
@@ -8672,14 +8672,14 @@ _08004394:
 _08004398:
     .word 0x02006EC0
     .global dat_0800439C
-dat_0800439C:
+dat_0800439C:   @ gObjectKind5Types
     .word sub_080AE3C8
     .word sub_080AE48C
     .word sub_080AE5AC
     .word sub_080AE684
     .word sub_080AE838
     .word sub_080AE910
-    .word sub_080AEEA0
+    .word sub_080AEEA0   @ FlagProp_Update
     .word sub_080AEF64
     .word sub_080AF02C
     .word sub_080AF214
@@ -8725,7 +8725,7 @@ dat_0800439C:
 
     .global sub_08004460
     .thumb_func
-sub_08004460:
+sub_08004460:   @ ObjectKind5_Spawn
     push {r0, r1, r2, r3, r4, lr}
     ldr r0, _080045B4
     ldr r2, [r0]
@@ -8761,7 +8761,7 @@ _08004496:
 
     .global sub_0800449A
     .thumb_func
-sub_0800449A:
+sub_0800449A:   @ ObjectKind5_Delete
     push {lr}
     movs r0, #0x80
     lsls r0, r0, #0x18
@@ -8778,7 +8778,7 @@ sub_0800449A:
 
     .global sub_080044B6
     .thumb_func
-sub_080044B6:
+sub_080044B6:   @ ObjectKind5_UpdateAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8828,12 +8828,12 @@ _08004504:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08004510:
-    .word dat_0800439C
+    .word dat_0800439C   @ gObjectKind5Types
     .word 0x0200CF20
 
     .global sub_08004518
     .thumb_func
-sub_08004518:
+sub_08004518:   @ ObjectKind5_RenderAll
     push {r4, r5, r6, r7, lr}
     mov r4, r8
     mov r5, sb
@@ -8901,7 +8901,7 @@ _08004590:
 
     .global sub_08004594
     .thumb_func
-sub_08004594:
+sub_08004594:   @ ObjectKind5_RecordPaletteSlot
     push {lr}
     movs r0, #5
     bl sub_08002A04
@@ -8909,7 +8909,7 @@ sub_08004594:
 
     .global sub_0800459E
     .thumb_func
-sub_0800459E:
+sub_0800459E:   @ ObjectKind5_ClearSpriteTileCache
     movs r0, #0
     ldr r3, _080045B8
 _080045A2:
@@ -8931,7 +8931,7 @@ _080045BC:
 
     .global sub_080045C0
     .thumb_func
-sub_080045C0:
+sub_080045C0:   @ DebugPrint_Init
     push {lr}
     ldr r0, _0800490C
     ldr r1, _080045D4
@@ -8952,7 +8952,7 @@ sub_080045D8:
 
     .global sub_080045DC
     .thumb_func
-sub_080045DC:
+sub_080045DC:   @ DebugPrint_Printf
     push {r0, r1, r2, r3, r4, r5, r6, r7}
     sub sp, #0x24
     str r1, [sp]
@@ -9059,39 +9059,39 @@ _08004690:
     pop {pc}
     .hword 0x0000
 _0800469C:
-    .word dat_080046A0
+    .word dat_080046A0   @ gDebugPrintFmtTable
     .global dat_080046A0
-dat_080046A0:
-    .word sub_08004752
-    .word sub_08004752
-    .word sub_080047A8
-    .word sub_080047A8
-    .word sub_08004842
-    .word sub_08004842
-    .word sub_0800488E
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_08004870
-    .word sub_0800489E
-    .word sub_0800489E
+dat_080046A0:   @ gDebugPrintFmtTable
+    .word sub_08004752   @ DebugPrint_FmtDecimal
+    .word sub_08004752   @ DebugPrint_FmtDecimal
+    .word sub_080047A8   @ DebugPrint_FmtHex
+    .word sub_080047A8   @ DebugPrint_FmtHex
+    .word sub_08004842   @ DebugPrint_FmtString
+    .word sub_08004842   @ DebugPrint_FmtString
+    .word sub_0800488E   @ DebugPrint_FmtPercent
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_08004870   @ DebugPrint_FmtWidthDigit
+    .word sub_0800489E   @ DebugPrint_FmtBinary
+    .word sub_0800489E   @ DebugPrint_FmtBinary
 _080046EC:
     .word 0x02007806
 _080046F0:
-    .word dat_080046F4
+    .word dat_080046F4   @ gDebugPrintFmtChars
     .global dat_080046F4
-dat_080046F4:
+dat_080046F4:   @ gDebugPrintFmtChars
     incrom 0x46F4, 0x14
 
     .global sub_08004708
     .thumb_func
-sub_08004708:
+sub_08004708:   @ DebugPrint_FlushToBg0
     push {r4, r5, r6, r7, lr}
     ldr r4, _0800490C
     movs r7, #0xf2
@@ -9138,7 +9138,7 @@ _0800474A:
 
     .global sub_08004752
     .thumb_func
-sub_08004752:
+sub_08004752:   @ DebugPrint_FmtDecimal
     push {r0, r5, r6, r7, lr}
     cmp r2, #0
     bge _0800476E
@@ -9162,14 +9162,14 @@ _08004776:
     pop {r0, r5, r6, r7, pc}
     .hword 0x0000
 _0800477C:
-    .word dat_08004780
+    .word dat_08004780   @ gDebugPrintDecDivisors
     .global dat_08004780
-dat_08004780:
+dat_08004780:   @ gDebugPrintDecDivisors
     incrom 0x4780, 0x28
 
     .global sub_080047A8
     .thumb_func
-sub_080047A8:
+sub_080047A8:   @ DebugPrint_FmtHex
     push {r0, r5, r6, r7, lr}
     subs r3, #2
     ldr r0, _080047B8
@@ -9178,14 +9178,14 @@ sub_080047A8:
     movs r4, #1
     pop {r0, r5, r6, r7, pc}
 _080047B8:
-    .word dat_080047BC
+    .word dat_080047BC   @ gDebugPrintHexDivisors
     .global dat_080047BC
-dat_080047BC:
+dat_080047BC:   @ gDebugPrintHexDivisors
     incrom 0x47BC, 0x20
 
     .global sub_080047DC
     .thumb_func
-sub_080047DC:
+sub_080047DC:   @ DebugPrint_EmitRadix
     mov r7, r8
     cmp r7, #0
     beq _080047E6
@@ -9250,7 +9250,7 @@ _08004840:
 
     .global sub_08004842
     .thumb_func
-sub_08004842:
+sub_08004842:   @ DebugPrint_FmtString
     push {r0, r5, r6, r7, lr}
     mov r7, r8
     cmp r7, #0
@@ -9279,7 +9279,7 @@ _0800486C:
 
     .global sub_08004870
     .thumb_func
-sub_08004870:
+sub_08004870:   @ DebugPrint_FmtWidthDigit
     ldr r2, [sp, #0x1c]
     subs r2, #4
     str r2, [sp, #0x1c]
@@ -9299,7 +9299,7 @@ _0800487A:
 
     .global sub_0800488E
     .thumb_func
-sub_0800488E:
+sub_0800488E:   @ DebugPrint_FmtPercent
     ldr r2, [sp, #0x1c]
     subs r2, #4
     str r2, [sp, #0x1c]
@@ -9311,7 +9311,7 @@ sub_0800488E:
 
     .global sub_0800489E
     .thumb_func
-sub_0800489E:
+sub_0800489E:   @ DebugPrint_FmtBinary
     push {r0, r5, r6, r7, lr}
     subs r3, #0x11
     movs r6, #0x20
@@ -9321,7 +9321,7 @@ sub_0800489E:
 
     .global sub_080048AC
     .thumb_func
-sub_080048AC:
+sub_080048AC:   @ DebugPrint_EmitBinary
     mov r7, r8
     cmp r7, #0
     beq _080048B6
@@ -12577,7 +12577,7 @@ sub_08006744:
     ldr r0, [r5, #0x3c]
     ldr r0, [r0, #8]
     bl sub_08006754
-    bl sub_080F576C
+    bl sub_080F576C   @ BattleAssignEnemyHeldChip
     pop {pc}
 
     .global sub_08006754

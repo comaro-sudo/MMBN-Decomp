@@ -13,9 +13,111 @@ dat_0806765C:
     incrom 0x6766C, 0x20
     @ map script 0x0806768C..0x0806768D
     ms_end
-    incrom 0x6768D, 0x4AF
+    incrom 0x6768D, 0x57
+    anim_frame 0xFFFF0000, dat_0857651C
+    anim_frame 0x0000000C, dat_08609498
+    anim_frame 0x0000000C, dat_086094B8
+    anim_frame 0x0000000C, dat_086094D8
+    anim_frame 0x0000000C, dat_086094F8
+    anim_frame 0x0000000C, dat_086094D8
+    anim_frame 0x0000000C, dat_086094B8
+    anim_frame 0x0000000C, dat_08609498
+    incrom 0x67724, 0x10
+    anim_frame 0xFFFF0100, dat_0857653C
+    anim_frame 0x00000320, dat_0860951C
+    anim_frame 0x00000008, dat_0860953C
+    anim_frame 0x00000008, dat_0860955C
+    anim_frame 0x00000008, dat_0860957C
+    anim_frame 0x00000008, dat_0860959C
+    anim_frame 0x00000008, dat_086095BC
+    anim_frame 0x00000008, dat_086095DC
+    incrom 0x67774, 0x10
+    anim_frame 0xFFFF0200, dat_085764FC
+    anim_frame 0x00000012, dat_08609600
+    anim_frame 0x0000000E, dat_08609620
+    anim_frame 0x0000000E, dat_08609640
+    anim_frame 0x0000000E, dat_08609660
+    anim_frame 0x0000000E, dat_08609680
+    incrom 0x677B4, 0x10
+    anim_frame 0xFFFF0300, dat_0857655C
+    anim_frame 0x0000000A, dat_086096A4
+    anim_frame 0x0000000A, dat_086096C4
+    incrom 0x677DC, 0x10
+    anim_frame 0xFFFF0400, dat_085764DC
+    anim_frame 0x00000010, dat_086096E8
+    anim_frame 0x00000010, dat_08609708
+    anim_frame 0x00000010, dat_08609728
+    anim_frame 0x00000010, dat_08609748
+    anim_frame 0x00000010, dat_08609728
+    anim_frame 0x00000010, dat_08609708
+    anim_frame 0x00000010, dat_086096E8
+    incrom 0x6782C, 0x10
+    anim_frame 0xFFFF0000, dat_08609D6C
+    anim_frame 0x00000008, dat_08609D8C
+    anim_frame 0x00000008, dat_08609DAC
+    anim_frame 0x00000008, dat_08609DCC
+    anim_frame 0x00000008, dat_08609DEC
+    anim_frame 0x00000008, dat_08609E0C
+    anim_frame 0x00000008, dat_08609E2C
+    anim_frame 0x00000008, dat_08609E4C
+    anim_frame 0x00000008, dat_08609E6C
+    incrom 0x67884, 0x28
+    anim_frame 0xFFFF0100, dat_08609E90
+    anim_frame 0x00000008, dat_08609EB0
+    anim_frame 0x00000008, dat_08609ED0
+    anim_frame 0x00000008, dat_08609EF0
+    anim_frame 0x00000008, dat_08609F10
+    anim_frame 0x00000008, dat_08609F30
+    anim_frame 0x00000008, dat_08609F50
+    anim_frame 0x00000008, dat_08609F70
+    anim_frame 0x00000008, dat_08609F90
+    incrom 0x678F4, 0x28
+    anim_frame 0xFFFF0200, dat_08609FB4
+    anim_frame 0x0000000A, dat_08609FD4
+    anim_frame 0x0000000A, dat_08609FF4
+    anim_frame 0x0000000A, dat_0860A014
+    anim_frame 0x0000000A, dat_0860A034
+    anim_frame 0x0000000A, dat_0860A054
+    incrom 0x6794C, 0x28
+    anim_frame 0xFFFF0300, dat_0857B084
+    anim_frame 0x0000000A, dat_0860A078
+    anim_frame 0x0000000A, dat_0860A098
+    anim_frame 0x0000000A, dat_0860A0B8
+    incrom 0x67994, 0x28
+    anim_frame 0xFFFF0400, dat_0857B044
+    anim_frame 0x0000000A, dat_0860A0DC
+    anim_frame 0x0000000A, dat_0860A0FC
+    incrom 0x679D4, 0x10
+    anim_frame 0xFFFF0500, dat_0860A120
+    anim_frame 0x00000008, dat_0860A140
+    anim_frame 0x00000008, dat_0860A160
+    anim_frame 0x00000008, dat_0860A180
+    anim_frame 0x00000008, dat_0860A1A0
+    anim_frame 0x00000008, dat_0860A1C0
+    anim_frame 0x00000008, dat_0860A1E0
+    anim_frame 0x00000008, dat_0860A200
+    anim_frame 0x00000008, dat_0860A220
+    incrom 0x67A2C, 0x58
+    anim_frame 0xFFFF0700, dat_0857B004
+    anim_frame 0x0000000E, dat_0860A268
+    anim_frame 0x0000000E, dat_0860A288
+    anim_frame 0x0000000E, dat_0860A2A8
+    incrom 0x67AA4, 0x28
+    anim_frame 0xFFFF0000, dat_08580658
+    anim_frame 0x0000000A, dat_0860A2F0
+    anim_frame 0x0000000A, dat_0860A310
+    anim_frame 0x0000000A, dat_0860A330
+    anim_frame 0x0000000A, dat_0860A350
+    anim_frame 0x0000000A, dat_0860A330
+    anim_frame 0x0000000A, dat_0860A310
+    incrom 0x67B04, 0x10
+    anim_frame 0xFFFF0000, dat_0858528C
+    anim_frame 0x00000008, dat_0860A374
+    anim_frame 0x00000008, dat_0860A394
+    anim_frame 0x00000008, dat_0860A3B4
+    incrom 0x67B34, 0x8
     .thumb
-    .include "desc_macros.inc"
+    .include "npc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -45,12 +147,12 @@ sub_08067B3C:
     bl sub_08025DA8
     bl sub_080261BA
     ldr r0, _08067B9C
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _08067BA4
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_08067C38
     ldr r0, _08067BA0
@@ -84,7 +186,7 @@ sub_08067BC8:
     lsls r1, r1, #2
     ldr r0, _08067BD8
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
     .hword 0x0000
 _08067BD8:
@@ -123,7 +225,7 @@ sub_08067C38:
     lsls r0, r0, #2
     ldr r1, _08067C4C
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _08067C4C:
     .word dat_08067C50
@@ -293,8 +395,10 @@ dat_08067CF0:
     ms_clear_flag 0xFF, 0x01EA
     ms_start_cutscene dat_0808CDF8, 0x00000000
     ms_jump dat_08067F6E
-    incrom 0x67F6E, 0xF
-    @ map script 0x08067F7D..0x08067F7E
+    @ map script 0x08067F6E..0x08067F7E
+    ms_jump_if_flag2_set 0xFF, 0x01EA, dat_08067F7D
+    ms_u16 0x2C, 0x0189
+    ms_clear_flag 0xFF, 0x01EA
     ms_end
     @ map script 0x08067F7E..0x08067F9A
     ms_set_flag 0xFF, 0x1151
@@ -311,8 +415,10 @@ dat_08067CF0:
     @ map-init dispatch 0x08067FA8..0x08067FB4
     cs_range 0x26, 0x26, dat_08067FB4
     cs_jump dat_08067FE6
-    incrom 0x67FB4, 0x15
-    @ map script 0x08067FC9..0x08067FE6
+    @ map script 0x08067FB4..0x08067FE6
+    ms_jump_if_flag_set 0xFF, 0x050E, dat_08067FC9
+    ms_write_u32 0x0200B6D4, 0x08050001
+    ms_set_flag 0xFF, 0x1151
     ms_jump_if_flag_set 0xFF, 0x050D, dat_08067FE6
     ms_set_flag 0xFF, 0x050D
     ms_u8x2 0x1B, 0x0C, 0xFF
@@ -327,8 +433,11 @@ dat_08067CF0:
     ms_jump dat_08068005
     @ map script 0x08068005..0x08068006
     ms_end
-    incrom 0x68006, 0x11
-    @ map script 0x08068017..0x08068018
+    incrom 0x68006, 0x2
+    @ map script 0x08068008..0x08068018
+    ms_jump_if_flag2_set 0xFF, 0x01EA, dat_08068017
+    ms_u16 0x2C, 0x0189
+    ms_clear_flag 0xFF, 0x01EA
     ms_end
     @ map script 0x08068018..0x0806803F
     ms_write_u32 0x0200B6D8, 0x00000000
@@ -2089,12 +2198,12 @@ sub_08069404:
     bl sub_080261BA
     bl sub_080694B0
     ldr r0, _08069460
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _08069464
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_08069564
     bl sub_0802A338
@@ -2118,7 +2227,7 @@ sub_0806947E:
     lsls r1, r1, #2
     ldr r0, _0806948C
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
 _0806948C:
     .word dat_08069490
@@ -2147,7 +2256,7 @@ sub_080694B0:
     ldr r0, [r7]
     ldr r1, [r7, #4]
     ldr r2, [r7, #8]
-    bl sub_08001E7C
+    bl sub_08001E7C   @ SetHBlankAndVBlankCallbacks
     mov r1, sl
     ldr r1, [r1, #8]
     ldrh r2, [r1]
@@ -2216,7 +2325,7 @@ sub_08069564:
     lsls r0, r0, #2
     ldr r1, _08069578
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _08069578:
     .word dat_0806957C
@@ -2224,9 +2333,11 @@ _08069578:
 dat_0806957C:
     .4byte dat_08069584
     .4byte dat_080695B0
-    incrom 0x69584, 0x28
-    @ npc script 0x080695AC..0x080695B0
-    .4byte 0x000000FF   @ npc list end
+    .global dat_08069584
+dat_08069584:
+    obj_spawn 0x05, 0x00, 0x0000, (36 << 16), (-36 << 16), (0 << 16), 0x2
+    obj_spawn 0x05, 0x04, 0x0000, (212 << 16), (-50 << 16), (0 << 16), 0x20005
+    obj_spawn_end
     .global dat_080695B0
 dat_080695B0:
     obj_spawn 0x05, 0x00, 0x0000, (-92 << 16), (12 << 16), (0 << 16), 0x2
@@ -2241,11 +2352,11 @@ dat_080695B0:
     .4byte dat_080699D8
     .4byte dat_080695FC
     .4byte dat_0806960C
-    @ map script 0x080695FC..0x080695FD
-    ms_end
+    @ npc script 0x080695FC..0x080695FD
+    npc_end
     incrom 0x695FD, 0xF
-    @ map script 0x0806960C..0x0806960D
-    ms_end
+    @ npc script 0x0806960C..0x0806960D
+    npc_end
     incrom 0x6960D, 0x13
     @ map-init dispatch 0x08069620..0x0806962C
     cs_range 0x00, 0x0F, dat_0806962C
@@ -3378,12 +3489,12 @@ sub_0806A830:
     bl sub_080261BA
     bl sub_0806A978
     ldr r0, _0806A88C
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _0806A890
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_0806AA84
     bl sub_0802A338
@@ -3410,7 +3521,7 @@ sub_0806A8D2:
     lsls r1, r1, #2
     ldr r0, _0806A8E0
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
 _0806A8E0:
     .word dat_0806A8E4
@@ -3471,7 +3582,7 @@ sub_0806A978:
     ldr r0, [r7]
     ldr r1, [r7, #4]
     ldr r2, [r7, #8]
-    bl sub_08001E7C
+    bl sub_08001E7C   @ SetHBlankAndVBlankCallbacks
     mov r1, sl
     ldr r1, [r1, #8]
     ldrh r2, [r1]
@@ -3574,7 +3685,7 @@ sub_0806AA84:
     lsls r0, r0, #2
     ldr r1, _0806AA98
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _0806AA98:
     .word dat_0806AA9C
@@ -4527,7 +4638,204 @@ dat_0806AAB8:
     npc_jump dat_0806BB6E
     @ npc script 0x0806BB8B..0x0806BB8C
     npc_hide
-    incrom 0x6BB8C, 0x21C
+    @ npc script 0x0806BB8C..0x0806BBC7
+    npc_jump_if_flag_set 0x0412, dat_0806BBC7
+    npc_jump_if_flag_set 0x0132, dat_0806BBC7
+    npc_op 0x08
+    npc_set_talk 0x04
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFE4C, 0x0044, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0132, dat_0806BBAA
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0132, dat_0806BBB6
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BBAA
+    @ npc script 0x0806BBC7..0x0806BBC8
+    npc_hide
+    @ npc script 0x0806BBC8..0x0806BC03
+    npc_jump_if_flag_set 0x0412, dat_0806BC03
+    npc_jump_if_flag_set 0x0133, dat_0806BC03
+    npc_op 0x08
+    npc_set_talk 0x05
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFE4C, 0x0004, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0133, dat_0806BBE6
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0133, dat_0806BBF2
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BBE6
+    @ npc script 0x0806BC03..0x0806BC04
+    npc_hide
+    @ npc script 0x0806BC04..0x0806BC3F
+    npc_jump_if_flag_set 0x0412, dat_0806BC3F
+    npc_jump_if_flag_set 0x0134, dat_0806BC3F
+    npc_op 0x08
+    npc_set_talk 0x06
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00CA, 0xFF82, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0134, dat_0806BC22
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0134, dat_0806BC2E
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BC22
+    @ npc script 0x0806BC3F..0x0806BC40
+    npc_hide
+    @ npc script 0x0806BC40..0x0806BC7B
+    npc_jump_if_flag_set 0x0412, dat_0806BC7B
+    npc_jump_if_flag_set 0x0135, dat_0806BC7B
+    npc_op 0x08
+    npc_set_talk 0x07
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x010C, 0xFF82, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0135, dat_0806BC5E
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0135, dat_0806BC6A
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BC5E
+    @ npc script 0x0806BC7B..0x0806BC7C
+    npc_hide
+    @ npc script 0x0806BC7C..0x0806BCB7
+    npc_jump_if_flag_set 0x0412, dat_0806BCB7
+    npc_jump_if_flag_set 0x0136, dat_0806BCB7
+    npc_op 0x08
+    npc_set_talk 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x008C, 0xFF82, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0136, dat_0806BC9A
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0136, dat_0806BCA6
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BC9A
+    @ npc script 0x0806BCB7..0x0806BCB8
+    npc_hide
+    @ npc script 0x0806BCB8..0x0806BCF3
+    npc_jump_if_flag_set 0x0412, dat_0806BCF3
+    npc_jump_if_flag_set 0x0137, dat_0806BCF3
+    npc_op 0x08
+    npc_set_talk 0x09
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF4C, 0xFF44, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0137, dat_0806BCD6
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0137, dat_0806BCE2
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BCD6
+    @ npc script 0x0806BCF3..0x0806BCF4
+    npc_hide
+    @ npc script 0x0806BCF4..0x0806BD2F
+    npc_jump_if_flag_set 0x0412, dat_0806BD2F
+    npc_jump_if_flag_set 0x0138, dat_0806BD2F
+    npc_op 0x08
+    npc_set_talk 0x13
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF2C, 0xFF04, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0138, dat_0806BD12
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0138, dat_0806BD1E
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BD12
+    @ npc script 0x0806BD2F..0x0806BD30
+    npc_hide
+    @ npc script 0x0806BD30..0x0806BD6B
+    npc_jump_if_flag_set 0x0412, dat_0806BD6B
+    npc_jump_if_flag_set 0x0139, dat_0806BD6B
+    npc_op 0x08
+    npc_set_talk 0x14
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF0C, 0xFF44, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0139, dat_0806BD4E
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0139, dat_0806BD5A
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BD4E
+    @ npc script 0x0806BD6B..0x0806BD6C
+    npc_hide
+    @ npc script 0x0806BD6C..0x0806BDA7
+    npc_jump_if_flag_set 0x0412, dat_0806BDA7
+    npc_jump_if_flag_set 0x013A, dat_0806BDA7
+    npc_op 0x08
+    npc_set_talk 0x15
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF6C, 0xFF04, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013A, dat_0806BD8A
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013A, dat_0806BD96
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806BD8A
+    @ npc script 0x0806BDA7..0x0806BDA8
+    npc_hide
     @ npc script 0x0806BDA8..0x0806BDD7
     npc_op 0x08
     npc_set_sprite 0x4A
@@ -4750,7 +5058,248 @@ dat_0806AAB8:
     npc_jump dat_0806C056
     @ npc script 0x0806C073..0x0806C074
     npc_hide
-    incrom 0x6C074, 0x294
+    @ npc script 0x0806C074..0x0806C0AF
+    npc_jump_if_flag_set 0x0413, dat_0806C0AF
+    npc_jump_if_flag_set 0x0132, dat_0806C0AF
+    npc_op 0x08
+    npc_set_talk 0x04
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF3C, 0xFEF4, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0132, dat_0806C092
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0132, dat_0806C09E
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C092
+    @ npc script 0x0806C0AF..0x0806C0B0
+    npc_hide
+    @ npc script 0x0806C0B0..0x0806C0EB
+    npc_jump_if_flag_set 0x0413, dat_0806C0EB
+    npc_jump_if_flag_set 0x0133, dat_0806C0EB
+    npc_op 0x08
+    npc_set_talk 0x05
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFF3C, 0xFF34, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0133, dat_0806C0CE
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0133, dat_0806C0DA
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C0CE
+    @ npc script 0x0806C0EB..0x0806C0EC
+    npc_hide
+    @ npc script 0x0806C0EC..0x0806C127
+    npc_jump_if_flag_set 0x0413, dat_0806C127
+    npc_jump_if_flag_set 0x0134, dat_0806C127
+    npc_op 0x08
+    npc_set_talk 0x06
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFEFC, 0xFF34, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0134, dat_0806C10A
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0134, dat_0806C116
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C10A
+    @ npc script 0x0806C127..0x0806C128
+    npc_hide
+    @ npc script 0x0806C128..0x0806C163
+    npc_jump_if_flag_set 0x0413, dat_0806C163
+    npc_jump_if_flag_set 0x0135, dat_0806C163
+    npc_op 0x08
+    npc_set_talk 0x07
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x009C, 0x0134, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0135, dat_0806C146
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0135, dat_0806C152
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C146
+    @ npc script 0x0806C163..0x0806C164
+    npc_hide
+    @ npc script 0x0806C164..0x0806C19F
+    npc_jump_if_flag_set 0x0413, dat_0806C19F
+    npc_jump_if_flag_set 0x0136, dat_0806C19F
+    npc_op 0x08
+    npc_set_talk 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00DC, 0x00F4, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0136, dat_0806C182
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0136, dat_0806C18E
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C182
+    @ npc script 0x0806C19F..0x0806C1A0
+    npc_hide
+    @ npc script 0x0806C1A0..0x0806C1DB
+    npc_jump_if_flag_set 0x0413, dat_0806C1DB
+    npc_jump_if_flag_set 0x0137, dat_0806C1DB
+    npc_op 0x08
+    npc_set_talk 0x09
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00DC, 0x00B4, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0137, dat_0806C1BE
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0137, dat_0806C1CA
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C1BE
+    @ npc script 0x0806C1DB..0x0806C1DC
+    npc_hide
+    @ npc script 0x0806C1DC..0x0806C217
+    npc_jump_if_flag_set 0x0413, dat_0806C217
+    npc_jump_if_flag_set 0x0138, dat_0806C217
+    npc_op 0x08
+    npc_set_talk 0x13
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x009C, 0x0074, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0138, dat_0806C1FA
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0138, dat_0806C206
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C1FA
+    @ npc script 0x0806C217..0x0806C218
+    npc_hide
+    @ npc script 0x0806C218..0x0806C253
+    npc_jump_if_flag_set 0x0413, dat_0806C253
+    npc_jump_if_flag_set 0x0139, dat_0806C253
+    npc_op 0x08
+    npc_set_talk 0x14
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x017C, 0xFFB4, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0139, dat_0806C236
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0139, dat_0806C242
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C236
+    @ npc script 0x0806C253..0x0806C254
+    npc_hide
+    @ npc script 0x0806C254..0x0806C28F
+    npc_jump_if_flag_set 0x0413, dat_0806C28F
+    npc_jump_if_flag_set 0x013A, dat_0806C28F
+    npc_op 0x08
+    npc_set_talk 0x15
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00DC, 0xFFF4, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013A, dat_0806C272
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013A, dat_0806C27E
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C272
+    @ npc script 0x0806C28F..0x0806C290
+    npc_hide
+    @ npc script 0x0806C290..0x0806C2CB
+    npc_jump_if_flag_set 0x0413, dat_0806C2CB
+    npc_jump_if_flag_set 0x013B, dat_0806C2CB
+    npc_op 0x08
+    npc_set_talk 0x16
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x01BC, 0xFF54, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013B, dat_0806C2AE
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013B, dat_0806C2BA
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C2AE
+    @ npc script 0x0806C2CB..0x0806C2CC
+    npc_hide
+    @ npc script 0x0806C2CC..0x0806C307
+    npc_jump_if_flag_set 0x0413, dat_0806C307
+    npc_jump_if_flag_set 0x013C, dat_0806C307
+    npc_op 0x08
+    npc_set_talk 0x17
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x019C, 0xFED4, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013C, dat_0806C2EA
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013C, dat_0806C2F6
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806C2EA
+    @ npc script 0x0806C307..0x0806C308
+    npc_hide
     @ npc script 0x0806C308..0x0806C337
     npc_op 0x08
     npc_set_sprite 0x4B
@@ -5427,7 +5976,270 @@ _0806C83A:
     npc_b1 0x10, 0x01
     npc_jump_if_flag_clear 0x0890, dat_0806CA4D
     npc_hide
-    incrom 0x6CA57, 0x2D0
+    @ npc script 0x0806CA57..0x0806CA92
+    npc_jump_if_flag_set 0x0417, dat_0806CA92
+    npc_jump_if_flag_set 0x0131, dat_0806CA92
+    npc_op 0x08
+    npc_set_talk 0x03
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0xFFC4, 0xFE7A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0131, dat_0806CA75
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0131, dat_0806CA81
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CA75
+    @ npc script 0x0806CA92..0x0806CA93
+    npc_hide
+    @ npc script 0x0806CA93..0x0806CACE
+    npc_jump_if_flag_set 0x0417, dat_0806CACE
+    npc_jump_if_flag_set 0x0132, dat_0806CACE
+    npc_op 0x08
+    npc_set_talk 0x04
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0046, 0xFEDC, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0132, dat_0806CAB1
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0132, dat_0806CABD
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CAB1
+    @ npc script 0x0806CACE..0x0806CACF
+    npc_hide
+    @ npc script 0x0806CACF..0x0806CB0A
+    npc_jump_if_flag_set 0x0417, dat_0806CB0A
+    npc_jump_if_flag_set 0x0133, dat_0806CB0A
+    npc_op 0x08
+    npc_set_talk 0x05
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0024, 0xFE1A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0133, dat_0806CAED
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0133, dat_0806CAF9
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CAED
+    @ npc script 0x0806CB0A..0x0806CB0B
+    npc_hide
+    @ npc script 0x0806CB0B..0x0806CB46
+    npc_jump_if_flag_set 0x0417, dat_0806CB46
+    npc_jump_if_flag_set 0x0134, dat_0806CB46
+    npc_op 0x08
+    npc_set_talk 0x06
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0004, 0xFEDC, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0134, dat_0806CB29
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0134, dat_0806CB35
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CB29
+    @ npc script 0x0806CB46..0x0806CB47
+    npc_hide
+    @ npc script 0x0806CB47..0x0806CB82
+    npc_jump_if_flag_set 0x0417, dat_0806CB82
+    npc_jump_if_flag_set 0x0135, dat_0806CB82
+    npc_op 0x08
+    npc_set_talk 0x07
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00C4, 0xFF1C, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0135, dat_0806CB65
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0135, dat_0806CB71
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CB65
+    @ npc script 0x0806CB82..0x0806CB83
+    npc_hide
+    @ npc script 0x0806CB83..0x0806CBBE
+    npc_jump_if_flag_set 0x0417, dat_0806CBBE
+    npc_jump_if_flag_set 0x0136, dat_0806CBBE
+    npc_op 0x08
+    npc_set_talk 0x08
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00C4, 0xFF9C, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0136, dat_0806CBA1
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0136, dat_0806CBAD
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CBA1
+    @ npc script 0x0806CBBE..0x0806CBBF
+    npc_hide
+    @ npc script 0x0806CBBF..0x0806CBFA
+    npc_jump_if_flag_set 0x0417, dat_0806CBFA
+    npc_jump_if_flag_set 0x0137, dat_0806CBFA
+    npc_op 0x08
+    npc_set_talk 0x09
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00C4, 0xFF5A, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0137, dat_0806CBDD
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0137, dat_0806CBE9
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CBDD
+    @ npc script 0x0806CBFA..0x0806CBFB
+    npc_hide
+    @ npc script 0x0806CBFB..0x0806CC36
+    npc_jump_if_flag_set 0x0417, dat_0806CC36
+    npc_jump_if_flag_set 0x0138, dat_0806CC36
+    npc_op 0x08
+    npc_set_talk 0x13
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00C4, 0xFFDA, 0x0000
+    npc_set_facing 0x01
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0138, dat_0806CC19
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0138, dat_0806CC25
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CC19
+    @ npc script 0x0806CC36..0x0806CC37
+    npc_hide
+    @ npc script 0x0806CC37..0x0806CC72
+    npc_jump_if_flag_set 0x0417, dat_0806CC72
+    npc_jump_if_flag_set 0x0139, dat_0806CC72
+    npc_op 0x08
+    npc_set_talk 0x14
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0084, 0x015A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x0139, dat_0806CC55
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x0139, dat_0806CC61
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CC55
+    @ npc script 0x0806CC72..0x0806CC73
+    npc_hide
+    @ npc script 0x0806CC73..0x0806CCAE
+    npc_jump_if_flag_set 0x0417, dat_0806CCAE
+    npc_jump_if_flag_set 0x013A, dat_0806CCAE
+    npc_op 0x08
+    npc_set_talk 0x15
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x00C6, 0x005A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013A, dat_0806CC91
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013A, dat_0806CC9D
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CC91
+    @ npc script 0x0806CCAE..0x0806CCAF
+    npc_hide
+    @ npc script 0x0806CCAF..0x0806CCEA
+    npc_jump_if_flag_set 0x0417, dat_0806CCEA
+    npc_jump_if_flag_set 0x013B, dat_0806CCEA
+    npc_op 0x08
+    npc_set_talk 0x16
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0046, 0x015A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013B, dat_0806CCCD
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013B, dat_0806CCD9
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CCCD
+    @ npc script 0x0806CCEA..0x0806CCEB
+    npc_hide
+    @ npc script 0x0806CCEB..0x0806CD26
+    npc_jump_if_flag_set 0x0417, dat_0806CD26
+    npc_jump_if_flag_set 0x013C, dat_0806CD26
+    npc_op 0x08
+    npc_set_talk 0x17
+    npc_op 0x13
+    npc_b2 0x25, 0x16, 0x1C
+    npc_set_pos 0x0104, 0x005A, 0x0000
+    npc_set_facing 0x00
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_clear 0x013C, dat_0806CD09
+    npc_op 0x09
+    npc_op 0x1F
+    npc_op 0x0E
+    npc_b1 0x10, 0x01
+    npc_jump_if_flag_set 0x013C, dat_0806CD15
+    npc_op 0x08
+    npc_op 0x20
+    npc_op 0x0D
+    npc_jump dat_0806CD09
+    @ npc script 0x0806CD26..0x0806CD27
+    npc_hide
     @ npc script 0x0806CD27..0x0806CD5D
     npc_op 0x08
     npc_set_sprite 0x4C
@@ -5500,7 +6312,51 @@ _0806C83A:
     npc_set_pos 0xFEE0, 0x00D0, 0xFFFE
     npc_set_facing 0x03
     npc_call dat_080A8EE8
-    incrom 0x6CE2C, 0x234
+    incrom 0x6CE2C, 0x195
+    @ npc script 0x0806CFC1..0x0806CFF3
+    npc_op 0x08
+    npc_op 0x1F
+    npc_set_sprite 0x4C
+    npc_set_pos 0xFE44, 0x00B8, 0x0000
+    npc_set_facing 0x03
+    npc_ptr 0x35, dat_0806C5FD
+    npc_ptr 0x35, dat_0806C627
+    npc_b1 0x10, 0x0A
+    npc_ptr 0x35, dat_0806C5FD
+    npc_ptr 0x35, dat_0806C627
+    npc_ptr 0x35, dat_0806C649
+    npc_ptr 0x35, dat_0806C673
+    npc_jump dat_0806CFCE
+    @ npc script 0x0806CFF3..0x0806D02B
+    npc_op 0x08
+    npc_op 0x1F
+    npc_b2 0x25, 0x14, 0x1C
+    npc_set_pos 0xFE4E, 0x00A6, 0xFFFE
+    npc_set_facing 0x01
+    npc_ptr 0x32, dat_0806C525
+    npc_ptr 0x35, dat_0806C7A5
+    npc_ptr 0x35, dat_0806C7CF
+    npc_b1 0x10, 0x0A
+    npc_ptr 0x35, dat_0806C7A5
+    npc_ptr 0x35, dat_0806C7CF
+    npc_ptr 0x35, dat_0806C7F1
+    npc_ptr 0x35, dat_0806C81B
+    npc_jump dat_0806D001
+    @ npc script 0x0806D02B..0x0806D05D
+    npc_op 0x08
+    npc_op 0x1F
+    npc_set_sprite 0x40
+    npc_set_pos 0xFE44, 0x00AC, 0x0000
+    npc_set_facing 0x03
+    npc_ptr 0x35, dat_0806C6D1
+    npc_ptr 0x35, dat_0806C6FB
+    npc_b1 0x10, 0x0A
+    npc_ptr 0x35, dat_0806C6D1
+    npc_ptr 0x35, dat_0806C6FB
+    npc_ptr 0x35, dat_0806C71D
+    npc_ptr 0x35, dat_0806C747
+    npc_jump dat_0806D038
+    incrom 0x6D05D, 0x3
     @ ptr table 0x0806D060..0x0806D084 (9 entries)
     .4byte dat_0806D088
     .4byte dat_0806D101
@@ -5810,11 +6666,11 @@ sub_0806D37C:
     ldr r0, [r7, #0x64]
     cmp r0, #0xd
     blt _0806D3B0
-    bl sub_08002EAC
+    bl sub_08002EAC   @ SpriteObj_ResumeAnim
 _0806D3B0:
     pop {r4, r5, r6, r7, pc}
 _0806D3B2:
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     str r0, [r7, #0x64]
     bl sub_080A9038
@@ -6108,12 +6964,12 @@ sub_0806D6E8:
     bl sub_080261BA
     bl sub_0806D810
     ldr r0, _0806D744
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _0806D748
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_0806D912
     bl sub_0802A338
@@ -6141,7 +6997,7 @@ sub_0806D79C:
     lsls r1, r1, #2
     ldr r0, _0806D7AC
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
     .hword 0x0000
 _0806D7AC:
@@ -6187,7 +7043,7 @@ sub_0806D810:
     ldr r0, [r7]
     ldr r1, [r7, #4]
     ldr r2, [r7, #8]
-    bl sub_08001E7C
+    bl sub_08001E7C   @ SetHBlankAndVBlankCallbacks
     mov r1, sl
     ldr r1, [r1, #8]
     ldrh r2, [r1]
@@ -6297,7 +7153,7 @@ sub_0806D912:
     lsls r0, r0, #2
     ldr r1, _0806D928
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
     .hword 0x0000
 _0806D928:
@@ -6310,18 +7166,25 @@ dat_0806D92C:
     .4byte dat_0806D984
     .4byte dat_0806D9B0
     .4byte dat_0806D9DC
-    incrom 0x6D940, 0x14
-    @ npc script 0x0806D954..0x0806D958
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x6D958, 0x28
-    @ npc script 0x0806D980..0x0806D984
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x6D984, 0x28
-    @ npc script 0x0806D9AC..0x0806D9B0
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x6D9B0, 0x28
-    @ npc script 0x0806D9D8..0x0806D9DC
-    .4byte 0x000000FF   @ npc list end
+    .global dat_0806D940
+dat_0806D940:
+    obj_spawn 0x05, 0x06, 0x0000, (260 << 16), (126 << 16), (-4 << 16), 0x1F
+    obj_spawn_end
+    .global dat_0806D958
+dat_0806D958:
+    obj_spawn 0x05, 0x00, 0x0000, (-414 << 16), (28 << 16), (8 << 16), 0x2B
+    obj_spawn 0x05, 0x06, 0x0000, (-12 << 16), (16 << 16), (-4 << 16), 0x20
+    obj_spawn_end
+    .global dat_0806D984
+dat_0806D984:
+    obj_spawn 0x05, 0x00, 0x0000, (-406 << 16), (68 << 16), (8 << 16), 0x2B
+    obj_spawn 0x05, 0x06, 0x0000, (380 << 16), (56 << 16), (-4 << 16), 0x21
+    obj_spawn_end
+    .global dat_0806D9B0
+dat_0806D9B0:
+    obj_spawn 0x05, 0x00, 0x0000, (-464 << 16), (-20 << 16), (8 << 16), 0x2B
+    obj_spawn 0x05, 0x00, 0x0000, (516 << 16), (-64 << 16), (-4 << 16), 0x49
+    obj_spawn_end
     .global dat_0806D9DC
 dat_0806D9DC:
     obj_spawn 0x05, 0x1C, 0x0000, (-402 << 16), (76 << 16), (8 << 16), 0x0
@@ -7953,12 +8816,12 @@ sub_0806FA4C:
     bl sub_080261BA
     bl sub_0806FBD0
     ldr r0, _0806FAA8
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _0806FAAC
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_0806FF0C
     bl sub_0802A338
@@ -7989,7 +8852,7 @@ sub_0806FAF0:
     lsls r1, r1, #2
     ldr r0, _0806FB00
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
     .hword 0x0000
 _0806FB00:
@@ -8067,7 +8930,7 @@ sub_0806FBD0:
     ldr r0, [r7]
     ldr r1, [r7, #4]
     ldr r2, [r7, #8]
-    bl sub_08001E7C
+    bl sub_08001E7C   @ SetHBlankAndVBlankCallbacks
     mov r1, sl
     ldr r1, [r1, #8]
     ldrh r2, [r1]
@@ -8188,7 +9051,7 @@ sub_0806FE0C:
     pop {pc}
 _0806FE18:
     ldr r0, _0806FEEC
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8205,7 +9068,7 @@ sub_0806FE28:
     pop {pc}
 _0806FE34:
     ldr r0, _0806FEF0
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8222,7 +9085,7 @@ sub_0806FE44:
     pop {pc}
 _0806FE50:
     ldr r0, _0806FEF4
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8239,7 +9102,7 @@ sub_0806FE60:
     pop {pc}
 _0806FE6C:
     ldr r0, _0806FEF8
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8256,7 +9119,7 @@ sub_0806FE7C:
     pop {pc}
 _0806FE88:
     ldr r0, _0806FEFC
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8273,7 +9136,7 @@ sub_0806FE98:
     pop {pc}
 _0806FEA4:
     ldr r0, _0806FF00
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8290,7 +9153,7 @@ sub_0806FEB4:
     pop {pc}
 _0806FEC0:
     ldr r0, _0806FF04
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8307,7 +9170,7 @@ sub_0806FED0:
     pop {pc}
 _0806FEDC:
     ldr r0, _0806FF08
-    bl sub_08002048   @ BN4_PALETTE_ANIM
+    bl sub_08002048   @ TileAnim_Start
     movs r0, #0x11
     movs r1, #0x52
     bl sub_08025048   @ SetEventFlagPair
@@ -8339,7 +9202,7 @@ sub_0806FF0C:
     lsls r0, r0, #2
     ldr r1, _0806FF20
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _0806FF20:
     .word dat_0806FF24
@@ -8354,27 +9217,45 @@ dat_0806FF24:
     .4byte dat_08070070
     .4byte dat_0807009C
     .4byte dat_080700C8
-    incrom 0x6FF44, 0x8C
-    @ npc script 0x0806FFD0..0x0806FFD4
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x6FFD4, 0x14
-    @ npc script 0x0806FFE8..0x0806FFEC
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x6FFEC, 0x28
-    @ npc script 0x08070014..0x08070018
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x70018, 0x28
-    @ npc script 0x08070040..0x08070044
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x70044, 0x28
-    @ npc script 0x0807006C..0x08070070
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x70070, 0x28
-    @ npc script 0x08070098..0x0807009C
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x7009C, 0x28
-    @ npc script 0x080700C4..0x080700C8
-    .4byte 0x000000FF   @ npc list end
+    .global dat_0806FF44
+dat_0806FF44:
+    obj_spawn 0x05, 0x06, 0x0000, (16 << 16), (-114 << 16), (-32 << 16), 0x35
+    obj_spawn 0x05, 0x06, 0x0000, (64 << 16), (-114 << 16), (-32 << 16), 0x36
+    obj_spawn 0x05, 0x06, 0x0000, (112 << 16), (-114 << 16), (-32 << 16), 0x37
+    obj_spawn 0x05, 0x06, 0x0000, (-8 << 16), (-26 << 16), (-32 << 16), 0x1038
+    obj_spawn 0x05, 0x06, 0x0000, (40 << 16), (-26 << 16), (-32 << 16), 0x1039
+    obj_spawn 0x05, 0x06, 0x0000, (88 << 16), (-26 << 16), (-32 << 16), 0x103A
+    obj_spawn 0x05, 0x06, 0x0000, (136 << 16), (-26 << 16), (-32 << 16), 0x103B
+    obj_spawn_end
+    .global dat_0806FFD4
+dat_0806FFD4:
+    obj_spawn 0x05, 0x06, 0x0000, (82 << 16), (-210 << 16), (-32 << 16), 0x3C
+    obj_spawn_end
+    .global dat_0806FFEC
+dat_0806FFEC:
+    obj_spawn 0x05, 0x06, 0x0000, (130 << 16), (-164 << 16), (-32 << 16), 0x3D
+    obj_spawn 0x05, 0x00, 0x0000, (-78 << 16), (-164 << 16), (-4 << 16), 0x27
+    obj_spawn_end
+    .global dat_08070018
+dat_08070018:
+    obj_spawn 0x05, 0x06, 0x0000, (-6 << 16), (118 << 16), (-32 << 16), 0x3E
+    obj_spawn 0x05, 0x00, 0x0000, (172 << 16), (68 << 16), (-4 << 16), 0x1C
+    obj_spawn_end
+    .global dat_08070044
+dat_08070044:
+    obj_spawn 0x05, 0x06, 0x0000, (90 << 16), (118 << 16), (-32 << 16), 0x3F
+    obj_spawn 0x05, 0x00, 0x0000, (234 << 16), (-60 << 16), (-4 << 16), 0x27
+    obj_spawn_end
+    .global dat_08070070
+dat_08070070:
+    obj_spawn 0x05, 0x06, 0x0000, (-118 << 16), (166 << 16), (-32 << 16), 0x40
+    obj_spawn 0x05, 0x00, 0x0000, (180 << 16), (-200 << 16), (-32 << 16), 0x27
+    obj_spawn_end
+    .global dat_0807009C
+dat_0807009C:
+    obj_spawn 0x05, 0x06, 0x0000, (322 << 16), (-146 << 16), (-32 << 16), 0x41
+    obj_spawn 0x05, 0x00, 0x0000, (-108 << 16), (60 << 16), (-4 << 16), 0x1C
+    obj_spawn_end
     .global dat_080700C8
 dat_080700C8:
     obj_spawn 0x05, 0x06, 0x0000, (-270 << 16), (-66 << 16), (-32 << 16), 0x42
@@ -8437,8 +9318,24 @@ dat_080700C8:
     @ map-init dispatch 0x0807024E..0x0807025A
     cs_range 0x56, 0x5A, dat_0807025A
     cs_jump dat_0807030A
-    incrom 0x7025A, 0x79
-    @ map script 0x080702D3..0x0807030A
+    @ map script 0x0807025A..0x0807030A
+    ms_jump_if_item 0x69, 0x00, 0x00, dat_0807030A
+    ms_jump_if_flag_set 0xFF, 0x0985, dat_0807030A
+    ms_jump_if_flag_set 0xFF, 0x01CF, dat_0807027F
+    ms_write_u32 0x0200B6DC, 0x18038201
+    ms_set_flag 0xFF, 0x1153
+    ms_jump_if_flag_set 0xFF, 0x01D0, dat_08070294
+    ms_write_u32 0x0200B6E0, 0x18038201
+    ms_set_flag 0xFF, 0x1154
+    ms_jump_if_flag_set 0xFF, 0x01D1, dat_080702A9
+    ms_write_u32 0x0200B6E4, 0x18038201
+    ms_set_flag 0xFF, 0x1155
+    ms_jump_if_flag_set 0xFF, 0x01D3, dat_080702BE
+    ms_write_u32 0x0200B6EC, 0x18078201
+    ms_set_flag 0xFF, 0x1157
+    ms_jump_if_flag_set 0xFF, 0x01D4, dat_080702D3
+    ms_write_u32 0x0200B6F0, 0x18078201
+    ms_set_flag 0xFF, 0x1158
     ms_write_u32 0x0200B6D8, 0x00000000
     ms_clear_flag 0xFF, 0x1152
     ms_jump_if_flag_set 0xFF, 0x09B8, dat_0807030A
@@ -8534,8 +9431,12 @@ dat_080700C8:
     @ map-init dispatch 0x0807047A..0x08070486
     cs_range 0x56, 0x5A, dat_08070486
     cs_jump dat_080704E2
-    incrom 0x70486, 0x25
-    @ map script 0x080704AB..0x080704E2
+    @ map script 0x08070486..0x080704E2
+    ms_jump_if_item 0x69, 0x00, 0x00, dat_080704E2
+    ms_jump_if_flag_set 0xFF, 0x0985, dat_080704E2
+    ms_jump_if_flag_set 0xFF, 0x01D3, dat_080704AB
+    ms_write_u32 0x0200B6DC, 0x18008201
+    ms_set_flag 0xFF, 0x1153
     ms_write_u32 0x0200B6D8, 0x00000000
     ms_clear_flag 0xFF, 0x1152
     ms_jump_if_flag_set 0xFF, 0x09B9, dat_080704E2

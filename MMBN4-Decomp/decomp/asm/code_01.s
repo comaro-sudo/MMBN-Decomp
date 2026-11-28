@@ -59,7 +59,7 @@ _0801006C:
     adds r0, r0, r1
     lsls r0, r0, #5
     adds r0, r0, r1
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     movs r0, #4
     strb r0, [r5, #0xa]
     b _080100B8
@@ -115,14 +115,14 @@ _080100EA:
     adds r1, r1, r0
     lsls r1, r1, #5
     adds r0, r0, r1
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     b _0801010C
 _08010104:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     movs r0, #8
     strh r0, [r5, #0xa]
 _0801010C:
@@ -132,7 +132,7 @@ _0801010C:
     .thumb_func
 sub_0801010E:
     push {lr}
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x44
     beq _08010124
     mov r1, sl
@@ -241,7 +241,7 @@ _080101BA:
 _080101D4:
     lsrs r0, r0, #2
     blo _080101DC
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _080101DC:
     pop {r4, pc}
 
@@ -323,7 +323,7 @@ _08010252:
 _0801026C:
     lsrs r0, r0, #2
     blo _08010274
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _08010274:
     pop {r4, pc}
 
@@ -505,7 +505,7 @@ sub_080103BC:
     ldr r1, _080103E4
     ldrb r0, [r1, r0]
     lsls r0, r0, #5
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
 _080103E0:
     pop {pc}
     .hword 0x0000
@@ -529,7 +529,7 @@ sub_08010408:
     ands r0, r1
     ldr r1, _08010428
     ldrh r0, [r1, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
 _08010426:
     pop {pc}
 _08010428:
@@ -696,10 +696,10 @@ sub_0801052C:
     movs r2, #0
     str r2, [r0, r1]
 _08010550:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     beq _0801055E
 _08010556:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     bl sub_08007990   @ BN4_SIDE_COUNT_DOWN
 _0801055E:
     pop {pc}
@@ -710,14 +710,14 @@ sub_08010560:
     push {lr}
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_0801056E
     .thumb_func
 sub_0801056E:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_08010576
@@ -748,7 +748,7 @@ sub_08010576:
     ands r0, r1
     ldr r1, _080105B4
     ldrh r0, [r1, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
 _080105B2:
     pop {pc}
 _080105B4:
@@ -970,8 +970,8 @@ sub_08010736:   @ BN4_VIRUS_PRESENT
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _08010774
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
 _08010774:
@@ -1011,24 +1011,24 @@ sub_0801079C:   @ BattleMegaManLoadFormSprite
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     pop {r0}
     cmp r0, #0xa
     beq _080107CC
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     b _080107D0
 _080107CC:
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
 _080107D0:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800BFFE
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800B7E8
     bl sub_0800E818
     bl sub_0800DB20
@@ -1036,7 +1036,7 @@ _080107D0:
     bl sub_08012496
     tst r0, r0
     bne _0801080C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _08010846
 _0801080C:
     push {r0}
@@ -1083,7 +1083,7 @@ sub_08010850:
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     cmp r0, #1
     beq _08010876
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldr r1, _0801087C
     ldrb r0, [r5, #0xa]
     ldr r1, [r1, r0]
@@ -1118,7 +1118,7 @@ sub_08010890:
     movs r0, #2
     strb r0, [r5, #0x10]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5, #0x14]
     ldrb r1, [r5, #0x15]
     bl sub_080143CA
@@ -1182,15 +1182,15 @@ sub_08010914:
     lsrs r0, r0, #1
     push {r0}
     adds r1, r0, #0
-    bl sub_08002F48
+    bl sub_08002F48   @ SpriteObj_SetMosaicHV
     pop {r0}
     subs r0, #0x10
     rsbs r0, r0, #0
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     pop {pc}
 _08010936:
-    bl sub_08002F7E
-    bl sub_08002D3A
+    bl sub_08002F7E   @ SpriteObj_DisableMosaic
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
     bl sub_08022218
     ldrb r0, [r5]
     movs r1, #2
@@ -1251,7 +1251,7 @@ _080109B0:
     movs r0, #0xff
     strb r0, [r5, #0x11]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x4c]
     ldrb r0, [r5, #0x16]
@@ -1308,7 +1308,7 @@ sub_080109FA:
     movs r0, #0xff
     strb r0, [r5, #0x11]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x4c]
     movs r0, #4
@@ -1395,7 +1395,7 @@ sub_08010ABC:
     bl sub_0800DD82
     bl sub_08022F2C
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrh r0, [r5, #0x14]
     strh r0, [r5, #0x12]
     bl sub_0800AB64
@@ -1563,7 +1563,7 @@ _08010C36:
 sub_08010C38:
     push {r4, r6, r7, lr}
     sub sp, #0x40
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     blt _08010CBE
     bl sub_0800BFD0
@@ -1728,7 +1728,7 @@ sub_08010D68:
     subs r0, #1
     strh r0, [r5, #0x2a]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012DEC
     movs r0, #4
     strh r0, [r5, #0xa]
@@ -1780,13 +1780,13 @@ _08010DD4:
 _08010DEE:
     lsrs r0, r0, #2
     blo _08010DF6
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _08010DF6:
     pop {r4, pc}
 
     .global sub_08010DF8
     .thumb_func
-sub_08010DF8:
+sub_08010DF8:   @ DuoDeletionState
     push {lr}
     ldr r1, _08010E08
     ldrb r0, [r5, #0xa]
@@ -1838,7 +1838,7 @@ _08010E3C:
 _08010E58:
     lsrs r0, r0, #2
     blo _08010E60
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _08010E60:
     pop {r4, pc}
 
@@ -1859,7 +1859,7 @@ sub_08010E62:
 _08010E7E:
     lsrs r0, r0, #2
     blo _08010E86
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _08010E86:
     pop {r4, pc}
 
@@ -1897,7 +1897,7 @@ _08010EC6:
     movs r0, #0
     str r0, [r5, #0x4c]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x17
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -1948,7 +1948,7 @@ sub_08010F08:
     movs r0, #0xff
     strb r0, [r5, #0x11]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x4c]
     movs r0, #4
@@ -2037,7 +2037,7 @@ sub_08010FCC:
     movs r0, #0xff
     strb r0, [r5, #0x11]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrh r0, [r5, #0x14]
     strh r0, [r5, #0x12]
     bl sub_0800AB64
@@ -6665,7 +6665,7 @@ sub_080135A8:   @ BN4_NAVI_PRESTEP
     movs r1, #1
     tst r0, r1
     beq _0801365C
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -6742,7 +6742,7 @@ sub_08013664:
     movs r1, #1
     tst r0, r1
     beq _080136BE
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -6776,7 +6776,7 @@ sub_080136C0:
     movs r1, #1
     tst r0, r1
     beq _08013748
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -6830,7 +6830,7 @@ sub_0801374A:   @ BN4_NAVI_PRESTEP_DUO
     movs r1, #1
     tst r0, r1
     beq _080137BA
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -6878,7 +6878,7 @@ sub_080137BC:   @ BN4_PRESTEP
     movs r1, #1
     tst r0, r1
     beq _08013856
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -6939,7 +6939,7 @@ sub_08013858:
     movs r1, #1
     tst r0, r1
     beq _0801393C
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -7027,7 +7027,7 @@ sub_0801393E:   @ BN4_STEP_BEGIN
     movs r1, #1
     tst r0, r1
     beq _0801399E
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -7070,7 +7070,7 @@ sub_080139A0:
     movs r1, #1
     tst r0, r1
     beq _080139D6
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -7095,7 +7095,7 @@ sub_080139D8:
     movs r1, #1
     tst r0, r1
     beq _08013A3C
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r7, [r5, #0x54]
     bl sub_080129FC
     bl sub_08007A12
@@ -7167,7 +7167,7 @@ _08013A7E:
     bl sub_0800AB9E   @ BattleMegaManSubHP
     tst r1, r1
     beq _08013AB0
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r1, #0x26
     bl sub_0800D7CA   @ BN4_NAVI_BYTE
     cmp r0, #1
@@ -7326,7 +7326,7 @@ _08013BE0:
     bl sub_0800C0DA   @ BN4_INVISIBLE_STEP
     bl sub_0800C560
 _08013BEC:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     movs r0, #1
     lsls r0, r0, #0xf
     bl sub_08012FA6
@@ -7376,7 +7376,7 @@ sub_08013C48:   @ BN4_STATE_RUNNER
     tst r0, r0
     beq _08013C7C
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0x6d
     bl sub_08000560   @ PlaySoundEffect
     bl sub_0800EE4C
@@ -7498,7 +7498,7 @@ _08013D60:
 _08013D68:
     bl sub_0800AE58
 _08013D6C:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     movs r0, #1
     lsls r0, r0, #0xf
     bl sub_08012FA6
@@ -7543,7 +7543,7 @@ sub_08013DB4:   @ BN4_NAVI_RUNNER
     tst r0, r0
     beq _08013DEA
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0x6d
     bl sub_08000560   @ PlaySoundEffect
     bl sub_0800EE4C
@@ -7673,7 +7673,7 @@ _08013EEE:
     bl sub_0800AE58
     bl sub_0800C0DA   @ BN4_INVISIBLE_STEP
 _08013EF6:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     movs r0, #1
     lsls r0, r0, #0xf
     bl sub_08012FA6
@@ -7715,7 +7715,7 @@ sub_08013F3E:   @ BN4_ACTOR_RUN
     tst r0, r0
     beq _08013F64
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
@@ -7828,7 +7828,7 @@ _08014036:
     movs r0, #0
     strb r0, [r5, #0xd]
 _0801403A:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_080117B6
     ldrb r0, [r5, #9]
     lsls r0, r0, #2
@@ -7855,7 +7855,7 @@ sub_08014058:
     tst r0, r0
     beq _0801407E
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
@@ -7968,7 +7968,7 @@ _08014150:
     movs r0, #0
     strb r0, [r5, #0xd]
 _08014154:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_080117B6
     ldrb r0, [r5, #9]
     lsls r0, r0, #2
@@ -7992,7 +7992,7 @@ sub_0801416C:
     tst r0, r0
     beq _08014192
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
@@ -8102,7 +8102,7 @@ _0801425E:
     movs r0, #0
     strb r0, [r5, #0xd]
 _08014262:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_080117B6
     ldrb r0, [r5, #9]
     lsls r0, r0, #2
@@ -8126,7 +8126,7 @@ sub_0801427A:
     tst r0, r0
     beq _080142A0
     push {r0}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     movs r0, #0xc8
     bl sub_08000560   @ PlaySoundEffect
     pop {r0}
@@ -8239,7 +8239,7 @@ _08014372:
     movs r0, #0
     strb r0, [r5, #0xd]
 _08014376:
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_080117B6
     ldrb r0, [r5, #9]
     lsls r0, r0, #2
@@ -8349,8 +8349,8 @@ _0801442C:
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _08014440
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
 _08014440:
@@ -8376,8 +8376,8 @@ sub_08014446:   @ BN4_T3_SPRITE_STEP
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _08014474
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
     pop {pc}
@@ -8411,8 +8411,8 @@ _080144A0:
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _080144B6
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
     pop {pc}
@@ -8449,8 +8449,8 @@ _080144E4:
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _080144F8
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
 _080144F8:
@@ -8472,8 +8472,8 @@ sub_080144FE:
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _08014522
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
 _08014522:
@@ -8517,8 +8517,8 @@ _08014564:
     ldrb r1, [r5, #0x11]
     cmp r0, r1
     beq _08014578
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
 _08014578:
@@ -8677,7 +8677,7 @@ sub_0801466A:   @ BN4_PAUSED_BLINK
     movs r1, #1
     tst r0, r1
     bne _08014696
-    bl sub_080019C0   @ BN4_APPEAR_BITS
+    bl sub_080019C0   @ AppearBits_Get
     lsrs r0, r0, #1
     bhs _08014696
     ldrb r0, [r5]
@@ -8929,7 +8929,7 @@ sub_08014860:
     ldr r7, [r2, #0x44]
     movs r0, #0x34
     adds r0, r0, r7
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     cmp r2, #0
     bne _0801487A
     subs r0, r2, #1
@@ -8966,7 +8966,7 @@ _080148A2:
     adds r3, r7, #0
     muls r3, r2, r3
     adds r1, r1, r3
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r6, #2
     adds r7, #1
     b _080148A2
@@ -9458,7 +9458,7 @@ _08014BDC:
     adds r0, r0, r1
     ldr r1, _08014C5C
     ldr r2, _08014C60
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     b _08014C28
 _08014BF6:
     subs r0, #5
@@ -9469,7 +9469,7 @@ _08014BF6:
     adds r0, r0, r1
     ldr r1, _08014C5C
     ldr r2, _08014C64
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldrb r1, [r5, #2]
     movs r2, #2
     ands r2, r7
@@ -9484,7 +9484,7 @@ _08014C14:
     adds r0, r0, r1
     ldr r1, _08014CB8
     movs r2, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _08014C28:
     ldrb r1, [r5, #0x14]
     cmp r1, #3
@@ -9506,7 +9506,7 @@ _08014C42:
 _08014C48:
     ldr r1, _08014C6C
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r4, r7, pc}
     .hword 0x0000
 _08014C54:
@@ -9562,7 +9562,7 @@ _08014CDC:
     ldr r0, [r0, r3]
     ldr r1, _08014D08
     ldr r2, _08014D0C
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _08014CF2:
     pop {pc}
 _08014CF4:
@@ -9641,7 +9641,7 @@ sub_08014D98:
     ldrh r0, [r5, #0x22]
     bl sub_08000A38   @ memory_bcdConvert
     adds r2, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     lsls r0, r0, #2
     ldr r1, _08014E10
     lsls r1, r0
@@ -9670,7 +9670,7 @@ _08014DBC:
     adds r3, r6, #0
     movs r4, #4
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     ldrb r0, [r5, #4]
     lsls r0, r0, #5
@@ -9679,7 +9679,7 @@ _08014DBC:
     adds r0, r0, r1
     ldr r1, [r3, #4]
     ldr r2, [r3, #8]
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     add sp, #0x10
     pop {r4, r6, r7, pc}
 _08014DFC:
@@ -9722,7 +9722,7 @@ _08014E30:
     movs r2, #3
     movs r4, #0x10
     movs r5, #1
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #8
     ands r0, r6
     ldr r3, _08014EA0
@@ -9731,7 +9731,7 @@ _08014E30:
     movs r1, #1
     movs r2, #3
     movs r4, #4
-    bl sub_08001E34
+    bl sub_08001E34   @ WriteBgTileRowWrap
     b _08014E90
 _08014E64:
     lsrs r4, r6, #0xa
@@ -9742,7 +9742,7 @@ _08014E64:
     movs r2, #3
     ldr r3, _08014E94
     movs r5, #1
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _08014E78:
     lsrs r6, r6, #7
     movs r0, #7
@@ -9754,7 +9754,7 @@ _08014E78:
     adds r0, r0, r6
     movs r1, #1
     movs r2, #3
-    bl sub_08001DE8
+    bl sub_08001DE8   @ SetBgTileEntry
 _08014E90:
     pop {r4, r5, r6, pc}
     .hword 0x0000
@@ -9790,7 +9790,7 @@ _08014EC4:
     ldrh r0, [r4, #2]
     bl sub_08000A38   @ memory_bcdConvert
     adds r2, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r3, r0, #0
     lsls r0, r0, #2
     movs r1, #0x20
@@ -9828,7 +9828,7 @@ _08014F14:
     pop {r4}
     movs r0, #0x34
     adds r0, r0, r5
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     cmp r2, #0
     beq _08014F4C
     ldr r2, [r4, #8]
@@ -9871,19 +9871,19 @@ sub_08014F5E:
     ldr r1, _08014F94
     adds r1, r1, r2
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r0, #0x20
     adds r1, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r2, r3, pc}
 _08014F7E:
     ldr r0, _08014FC4
     ldr r1, _08014F94
     adds r1, r1, r2
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r1, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r2, r3, pc}
     .hword 0x0000
 _08014F94:
@@ -9924,7 +9924,7 @@ _08014FFC:
     .thumb_func
 sub_08015000:
     push {r4, r5, r6, r7, lr}
-    bl sub_08007EEC
+    bl sub_08007EEC   @ BattleGetModeFlags
     adds r7, r0, #0
     ldrb r2, [r5, #0xc]
     cmp r2, #0
@@ -10005,7 +10005,7 @@ sub_08015078:
     movs r3, #0
     movs r4, #0x11
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     mov r0, sl
     ldr r0, [r0, #0x18]
     ldrb r0, [r0, #0xd]
@@ -10035,13 +10035,13 @@ sub_08015078:
     movs r1, #0x12
     movs r2, #3
     ldr r3, _080151B8
-    bl sub_08001E34
+    bl sub_08001E34   @ WriteBgTileRowWrap
     movs r0, #0
     movs r1, #0x13
     movs r2, #3
     ldr r3, _080151BC
     adds r4, r7, #0
-    bl sub_08001E34
+    bl sub_08001E34   @ WriteBgTileRowWrap
     ldr r5, _080151F8
     ldrb r1, [r5, #0xd]
     cmp r1, #0
@@ -10051,7 +10051,7 @@ sub_08015078:
     strh r0, [r5, #0x28]
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r3, r0, #0
     adds r6, r3, #0
     mov r2, sp
@@ -10080,7 +10080,7 @@ _08015118:
     beq _08015176
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r3, r0, #0
     adds r2, r6, #0
     lsls r2, r2, #1
@@ -10136,7 +10136,7 @@ _080151A0:
     mov r3, sp
     movs r4, #9
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
 _080151B2:
     add sp, #0x28
     pop {r4, r5, r6, r7, pc}
@@ -10252,7 +10252,7 @@ sub_0801528A:
     movs r2, #3
     movs r4, #4
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r4, r5, pc}
 _080152A0:
     .word dat_080152A4
@@ -10306,12 +10306,12 @@ sub_080152EA:
     movs r2, #3
     movs r4, #2
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r4, r5, r6, r7}
     ldrh r0, [r5, #4]
     bl sub_080153A4
     ldrh r0, [r5, #4]
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     cmp r0, #4
     beq _08015378
     cmp r0, #3
@@ -10367,7 +10367,7 @@ _08015378:
     mov r3, sp
     movs r4, #4
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r0, r1, r2, r3}
     movs r0, #0x11
     movs r1, #5
@@ -10375,7 +10375,7 @@ _08015378:
     mov r3, sp
     movs r4, #4
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r0, r1, r2, r3}
     pop {r4, r5, r6, r7, pc}
 
@@ -10384,7 +10384,7 @@ _08015378:
 sub_080153A4:
     adds r4, r0, #0
     mov r7, lr
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r2, r4, #0
     movs r6, #4
     subs r6, r6, r0
@@ -10469,7 +10469,7 @@ sub_0801544C:
     movs r3, #0
     movs r4, #0xc
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _08015468:
     pop {r4, r5, pc}
 
@@ -10664,7 +10664,7 @@ _080155AA:
     movs r4, #9
     movs r5, #2
     push {r1}
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r1}
     adds r1, #2
     adds r6, #1
@@ -10709,7 +10709,7 @@ _080155FC:
     movs r4, #0xb
     movs r5, #2
     push {r1}
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r1}
     adds r1, #2
     adds r6, #1
@@ -10733,7 +10733,7 @@ sub_08015624:
     ldr r3, _08015658
     movs r4, #7
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     b _08015654
 _08015644:
     movs r0, #0x16
@@ -10742,7 +10742,7 @@ _08015644:
     movs r3, #0
     movs r4, #7
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _08015654:
     pop {r4, r5, pc}
     .hword 0x0000
@@ -10763,7 +10763,7 @@ _0801567E:
     cmp r0, #0
     beq _080156C4
     ldr r1, [r7, #0xc]
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x44
     beq _0801569A
     ldrb r0, [r1, #0x16]
@@ -10774,7 +10774,7 @@ _0801567E:
 _0801569A:
     movs r0, #0x34
     adds r0, r0, r1
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     ldr r2, [r7, #4]
     adds r0, r0, r2
     ldr r2, _080156D8
@@ -10819,7 +10819,7 @@ sub_080156DC:
     movs r4, #0x10
     push {r5}
     movs r5, #1
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r5}
     ldrh r6, [r5, #0x24]
     lsrs r4, r6, #0xa
@@ -10831,7 +10831,7 @@ sub_080156DC:
     ldr r3, _08015754
     push {r5}
     movs r5, #1
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r5}
 _08015714:
     ldr r0, _08015768
@@ -10847,7 +10847,7 @@ _08015714:
     adds r0, r0, r6
     movs r1, #1
     movs r2, #3
-    bl sub_08001DE8
+    bl sub_08001DE8   @ SetBgTileEntry
 _08015732:
     ldrb r3, [r5, #0x1d]
     ldrb r2, [r5, #0x1e]
@@ -10863,7 +10863,7 @@ _08015740:
     ldr r0, _08015760
     adds r0, r0, r3
     ldr r1, _08015764
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _08015750:
     pop {r4, r5, r6, pc}
     .hword 0x0000
@@ -10918,7 +10918,7 @@ sub_08015798:
     adds r4, r2, #0
     movs r5, #2
     movs r2, #0
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     adds r6, #1
     ldr r0, _080157FC
     bl sub_080157D4
@@ -10929,7 +10929,7 @@ sub_08015798:
     adds r4, r2, #0
     movs r5, #2
     movs r2, #0
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     add sp, #0x2c
     pop {r4, r5, r6, r7, pc}
 
@@ -10980,7 +10980,7 @@ sub_08015804:
     ldr r3, _08015838
     movs r4, #8
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     b _08015836
 _08015826:
     movs r0, #0xb
@@ -10989,7 +10989,7 @@ _08015826:
     movs r3, #0
     movs r4, #8
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _08015836:
     pop {r4, r5, r6, r7, pc}
 _08015838:
@@ -11086,7 +11086,7 @@ sub_080158D8:
     ldr r3, _0801590C
     movs r4, #7
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     b _08015908
 _080158F8:
     movs r0, #0x16
@@ -11095,7 +11095,7 @@ _080158F8:
     movs r3, #0
     movs r4, #7
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _08015908:
     pop {r4, r5, pc}
     .hword 0x0000
@@ -11237,7 +11237,7 @@ sub_080159F4:
     ldr r0, _08015AB8
     strh r0, [r1, #0xa]
     ldr r0, _08015A08
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     pop {pc}
     .hword 0x0000
 _08015A08:
@@ -11335,7 +11335,7 @@ sub_08015B24:
     ldr r0, _08015B4C
     ldr r1, _08015B50
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #8
     bl sub_0801599C
     movs r0, #8
@@ -11457,7 +11457,7 @@ sub_08015C28:
     movs r3, #0
     movs r4, #6
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #1
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11472,7 +11472,7 @@ sub_08015C42:
     movs r3, #0
     movs r4, #0x12
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #2
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11487,7 +11487,7 @@ sub_08015C5C:
     movs r3, #0
     movs r4, #0x12
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08015C78
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11521,7 +11521,7 @@ sub_08015C90:
     movs r3, #0
     movs r4, #0x11
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #0x10
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11545,7 +11545,7 @@ _08015CB6:
     movs r4, #0xe
     subs r4, r4, r6
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     bl sub_08007A12
     cmp r0, #1
     beq _08015CE4
@@ -11571,7 +11571,7 @@ sub_08015CEC:
     movs r3, #0
     movs r4, #8
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #0x80
     bl sub_080159A6
     pop {r4, r5, pc}
@@ -11589,14 +11589,14 @@ sub_08015D06:
     movs r3, #0
     movs r4, #4
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     movs r0, #0x1a
     movs r1, #2
     movs r2, #3
     movs r3, #0
     movs r4, #4
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08015D38
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11625,7 +11625,7 @@ sub_08015D4C:
     movs r3, #0
     movs r4, #7
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08015D68
     bl sub_08015992
     pop {pc}
@@ -11651,7 +11651,7 @@ _08015D74:
     movs r4, #9
     movs r5, #2
     push {r1}
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r1}
     adds r1, #2
     adds r6, #1
@@ -11746,7 +11746,7 @@ sub_08015E08:
     movs r3, #0
     movs r4, #8
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08015E24
     bl sub_08015992
     pop {r4, r5, pc}
@@ -11797,7 +11797,7 @@ sub_08015E58:
     movs r3, #0
     movs r4, #7
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08015E74
     bl sub_08015992
     pop {pc}
@@ -11867,7 +11867,7 @@ sub_08015EFC:
     ldr r3, _08015F18
     movs r4, #6
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #1
     bl sub_08015988
     pop {r4, r5, pc}
@@ -11881,14 +11881,14 @@ sub_08015F1C:
     ldr r0, _08015F68
     ldr r1, _08015F6C
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #6
     movs r1, #0
     movs r2, #3
     ldr r3, _08015F64
     movs r4, #0x12
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #2
     bl sub_08015988
     pop {r4, r5, pc}
@@ -11900,14 +11900,14 @@ sub_08015F40:
     ldr r0, _08015F70
     ldr r1, _08015F6C
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #6
     movs r1, #0
     movs r2, #3
     ldr r3, _08015F64
     movs r4, #0x12
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     ldr r0, _08015F74
     bl sub_08015988
     pop {r4, r5, pc}
@@ -12021,7 +12021,7 @@ _0801600C:
     movs r4, #0xe
     subs r4, r4, r6
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #0x40
     bl sub_08015988
     pop {r4, r5, r6, pc}
@@ -12043,7 +12043,7 @@ sub_0801602C:
     ldr r3, _08016048
     movs r4, #8
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #0x80
     bl sub_08015988
     pop {r4, r5, pc}
@@ -12072,7 +12072,7 @@ sub_0801605C:
     ldr r0, _0801607C
     ldr r1, _08016080
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _08016070:
     ldr r0, _08016078
     bl sub_08015988
@@ -12147,14 +12147,14 @@ sub_080160D8:
     ldr r0, _080160FC
     ldr r1, _08016100
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #0xb
     movs r1, #0
     movs r2, #3
     movs r3, #0
     movs r4, #8
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     ldr r0, _08016104
     bl sub_08015988
     pop {r4, r5, pc}
@@ -12288,10 +12288,10 @@ _080161C8:
     movs r4, #4
 _080161CA:
     ldr r0, [r7]
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r0, #0x20
     adds r1, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     subs r1, #0x60
     adds r7, #4
     subs r4, #1
@@ -12323,23 +12323,23 @@ _08016206:
     movs r2, #0x20
     ldr r1, _08016270
     adds r0, r6, #0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r1, #0x20
     adds r0, r7, #0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r0, r6, #0
     adds r0, #0x20
     adds r1, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r0, r7, #0
     adds r0, #0x20
     adds r1, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _08016236:
     ldr r0, _08016274
     ldr r1, _08016278
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #0x20
     bl sub_0801599C
     movs r0, #0x20
@@ -12793,7 +12793,7 @@ _08016572:
     adds r0, r2, #0
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     strb r0, [r5, #0xa]
     ldr r1, _0801663C
     lsls r0, r0, #2
@@ -12810,7 +12810,7 @@ _08016572:
     push {r4}
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r1, r0, #1
     strb r1, [r5, #0xb]
     ldr r1, _08016640
@@ -12843,9 +12843,9 @@ _080165CA:
     ldr r0, _08016660
     ldr r1, _08016664
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _0801667C
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     movs r0, #0
     pop {r4, r5, r6, r7, pc}
 _080165FE:
@@ -12865,10 +12865,10 @@ _0801660C:
     ands r0, r4
     lsls r0, r0, #2
     ldr r0, [r6, r0]
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r0, r0, r2
     adds r1, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     subs r1, #0xa0
     lsrs r4, r4, #4
     subs r7, #1
@@ -12937,7 +12937,7 @@ _080166B8:
 sub_080166BC:
     push {lr}
     ldr r0, _080166CC
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     ldr r0, _080166EC
     bl sub_08015E78
     pop {pc}
@@ -12954,7 +12954,7 @@ _080166EC:
 sub_080166F0:
     push {lr}
     ldr r0, _0801670C
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     ldr r1, _08016730
     movs r0, #0x3f
     strb r0, [r1, #0x18]
@@ -13117,7 +13117,7 @@ sub_08016824:
     ldr r0, _0801686C
     ldr r1, _08016870
     ldr r2, _08016874
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #2
     bl sub_08015E78
     pop {pc}
@@ -13130,7 +13130,7 @@ sub_08016842:
     ldr r0, _0801686C
     ldr r1, _08016870
     ldr r2, _08016874
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _08016868
     bl sub_0801599C
     ldr r0, _08016868
@@ -13156,11 +13156,11 @@ sub_08016878:
     ldr r0, _080168A4
     ldr r1, _080168A8
     movs r2, #0xc0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _080168AC
     ldr r1, _080168B0
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _080168B4
     bl sub_0801599C
     ldr r0, _080168B4
@@ -13303,7 +13303,7 @@ _08016974:
     adds r0, r0, r1
     adds r1, r3, #0
     movs r2, #0x40
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r2, r3, r4, r5, r6, r7}
     adds r2, #0x40
     adds r3, #0x40
@@ -13340,7 +13340,7 @@ sub_080169DA:
     ldr r0, _080169F0
     ldr r1, _080169F4
     ldr r2, _080169F8
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _080169FC
     bl sub_08015E78
     pop {r4, r5, r7, pc}
@@ -13464,7 +13464,7 @@ sub_08016A86:
     ldr r0, _08016AA4
     ldr r1, _08016AA8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _08016AA0
     bl sub_0801599C
     ldr r0, _08016AA0
@@ -13484,11 +13484,11 @@ sub_08016AAC:
     ldr r0, _08016ADC
     ldr r1, _08016AE0
     ldr r2, _08016AE4
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _08016AD4
     ldr r1, _08016AD8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _08016AD0
     bl sub_0801599C
     ldr r0, _08016AD0
@@ -13512,7 +13512,7 @@ _08016AE4:
 sub_08016AE8:
     push {lr}
     ldr r0, _08016B04
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     ldr r1, _08016B28
     movs r0, #0x3f
     strb r0, [r1, #0x18]
@@ -14930,7 +14930,7 @@ dat_08018610:
 dat_0801873C:
     incrom 0x1873C, 0x4B
     .global dat_08018787
-dat_08018787:
+dat_08018787:   @ BN4_BATTLE_MODE_FLAGS
     incrom 0x18787, 0x96
     .global dat_0801881D
 dat_0801881D:   @ BN4_BUSTING_TABLE
@@ -15405,7 +15405,7 @@ dat_08019380:   @ BN4_CHIP_POWERS
 sub_0801944C:
     push {r4, lr}
     adds r4, r1, #0
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     bge _08019488
     mov r0, sl
@@ -15688,7 +15688,7 @@ _08019652:
 sub_08019654:
     push {r4, lr}
     adds r4, r1, #0
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     bge _08019682
     movs r0, #0
@@ -18065,7 +18065,7 @@ sub_0801DC28:
     ldr r0, _0801DE38
     ldr r1, _0801DE3C
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     bl sub_0801DE58
     ldr r0, _0801DE44
     movs r1, #0x68
@@ -18092,7 +18092,7 @@ _0801DC6E:
     movs r1, #0x1e
     subs r1, r1, r3
     strb r1, [r5, #0x15]
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     strb r0, [r5, #0x1d]
     mov r0, sl
     ldr r0, [r0, #0x18]
@@ -18256,7 +18256,7 @@ _0801DE54:
 sub_0801DE58:
     push {lr}
     ldr r0, _0801DE64
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     pop {pc}
     .hword 0x0000
 _0801DE64:
@@ -18281,7 +18281,7 @@ sub_0801DE90:
     cmp r0, #0x46
     bge _0801DEE8
     movs r4, #0
-    bl sub_08007EEC
+    bl sub_08007EEC   @ BattleGetModeFlags
     movs r1, #8
     tst r0, r1
     beq _0801DEE8
@@ -18440,7 +18440,7 @@ sub_0801DFBC:
     push {r1}
     ldr r0, _0801E090
     movs r2, #0x40
-    bl sub_08000B4A
+    bl sub_08000B4A   @ ShuffleHalfwordList_SecondaryRNG
     pop {r3}
     ldr r4, _0801E090
     mov r6, sp
@@ -18584,7 +18584,7 @@ sub_0801E0D4:
     ldr r0, _0801E0E4
     ldr r1, _0801E0E8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
     .hword 0x0000
 _0801E0E4:
@@ -18690,12 +18690,12 @@ _0801E18C:
     ldr r1, _0801E1B0
     movs r2, #0xff
     adds r2, #1
-    bl sub_080005C2
+    bl sub_080005C2   @ SoundQueue_MPlayVolumeControl
     movs r0, #0x1f
     ldr r1, _0801E1B0
     movs r2, #0xff
     adds r2, #1
-    bl sub_080005C2
+    bl sub_080005C2   @ SoundQueue_MPlayVolumeControl
     ldrb r0, [r5, #0x16]
     pop {pc}
 _0801E1B0:
@@ -18817,7 +18817,7 @@ _0801E29A:
     push {r0, r1}
     ldrh r3, [r4]
     movs r2, #3
-    bl sub_08001DE8
+    bl sub_08001DE8   @ SetBgTileEntry
     pop {r0, r1}
     adds r1, #1
     adds r4, #0x1e
@@ -18916,7 +18916,7 @@ _0801E348:
     ldr r3, _0801E394
     movs r4, #1
     movs r5, #0x14
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     subs r6, #1
     bne _0801E348
     pop {r0, r4, r5, r6, r7}
@@ -19137,7 +19137,7 @@ sub_0801E528:
     ldrh r2, [r1, r0]
     ldr r1, _0801E57C
     movs r0, #0x1f
-    bl sub_080005C2
+    bl sub_080005C2   @ SoundQueue_MPlayVolumeControl
     ldr r0, [r5, #0x54]
     movs r1, #1
     eors r0, r1
@@ -19152,7 +19152,7 @@ sub_0801E528:
     ldrh r2, [r1, r0]
     ldr r1, _0801E57C
     movs r0, #9
-    bl sub_080005C2
+    bl sub_080005C2   @ SoundQueue_MPlayVolumeControl
 _0801E574:
     movs r1, #0x5d
     ldrb r0, [r5, r1]
@@ -19189,7 +19189,7 @@ sub_0801E59C:
     movs r3, #0
     movs r4, #0xf
     movs r5, #0x14
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     b _0801E5FE
 _0801E5CC:
     mov r0, sl
@@ -19209,7 +19209,7 @@ _0801E5CC:
     ldr r3, _0801E604
     movs r4, #0xf
     movs r5, #0x14
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     b _0801E5FE
 _0801E5F6:
     movs r0, #4
@@ -19288,7 +19288,7 @@ sub_0801E670:
     adds r0, r0, r1
     ldr r1, _0801E688
     movs r2, #8
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r1, r2, r3, pc}
     .hword 0x0000
 _0801E684:
@@ -19455,7 +19455,7 @@ _0801E78C:
     movs r2, #3
     movs r4, #9
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     add sp, #0x24
 _0801E7B0:
     pop {r4, r5, pc}
@@ -19483,7 +19483,7 @@ sub_0801E7B2:
     movs r2, #3
     movs r3, #0
     movs r4, #9
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r4, r5, r6, r7}
     movs r0, #0x14
     strb r0, [r5, #2]
@@ -19542,7 +19542,7 @@ _0801E840:
     movs r3, #0
     movs r4, #9
     movs r5, #0xe
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
 _0801E858:
     pop {pc}
     .hword 0x0000
@@ -19668,7 +19668,7 @@ _0801E920:
     ldr r0, _0801E944
     ldr r1, _0801E948
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _0801E93C:
     pop {r4, r5, pc}
     .hword 0x0000
@@ -20088,7 +20088,7 @@ _0801EE86:
     ldr r3, _0801EE98
     movs r4, #7
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
 _0801EE96:
     pop {r4, r5, pc}
 _0801EE98:
@@ -20107,7 +20107,7 @@ sub_0801EEB8:
     movs r3, #0
     movs r4, #7
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r4, r5, pc}
 
     .global sub_0801EECC
@@ -20161,7 +20161,7 @@ sub_0801EF00:
     ldr r1, _0801EF44
     ldr r2, _0801EF48
     adds r0, r0, r3
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _0801EF28:
     ldr r0, _0801EF38
     ldr r1, _0801EF3C
@@ -21070,7 +21070,7 @@ sub_0801F58C:
     push {r2, r3, lr}
     bl sub_0801F59C
     movs r2, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r1, #0x80
     pop {r2, r3, pc}
 
@@ -21100,7 +21100,7 @@ sub_0801F5BC:
     push {r2, r3, lr}
     bl sub_0801F5CC
     movs r2, #0x40
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r1, #0x40
     pop {r2, r3, pc}
 
@@ -21260,7 +21260,7 @@ _0801F6C2:
     ldr r0, _0801F718
     adds r0, r0, r2
     ldr r2, _0801F71C
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     b _0801F712
 _0801F6D6:
     adds r0, r3, #0
@@ -21841,7 +21841,7 @@ sub_0801FAE0:
     ldr r3, _0801FB60
     movs r4, #0xf
     movs r5, #6
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r4, r5, pc}
 
     .global sub_0801FAF8
@@ -21967,7 +21967,7 @@ _0801FB88:
     ldr r3, _0801FBEC
     movs r4, #0xf
     movs r5, #0xa
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
 _0801FBD4:
     pop {r4, r5, r6, pc}
     .hword 0x0000
@@ -22064,12 +22064,12 @@ _0801FC56:
     beq _0801FCA6
     ldr r1, _0801FD58
     ldr r2, _0801FD5C
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, [sp, #4]
     ldr r0, [r0, #0x28]
     ldr r1, _0801FD60
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
 _0801FCA6:
     ldr r0, [sp]
     lsrs r0, r0, #9
@@ -22079,7 +22079,7 @@ _0801FCA6:
     adds r0, r0, r1
     ldr r1, _0801FD40
     movs r2, #0x40
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, [sp, #4]
     ldrb r1, [r0, #9]
     movs r2, #0x12
@@ -22096,7 +22096,7 @@ _0801FCCC:
     adds r0, r0, r1
     ldr r1, _0801FD48
     movs r2, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, [sp, #8]
     cmp r0, #0
     beq _0801FD02
@@ -22113,7 +22113,7 @@ _0801FCF4:
     ldr r0, [sp, #0xc]
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     str r0, [sp, #8]
 _0801FD02:
     movs r3, #3
@@ -22137,7 +22137,7 @@ _0801FD18:
     adds r0, r0, r2
     movs r2, #0x40
     push {r3}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r3}
     subs r1, #0x40
     subs r3, #1
@@ -22250,7 +22250,7 @@ sub_0801FDEC:
     adds r4, r3, #0
     movs r2, #0x40
 _0801FDF2:
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     adds r1, r1, r2
     subs r4, #1
     bne _0801FDF2
@@ -22273,11 +22273,11 @@ _0801FE14:
     ldr r0, [r0, r1]
     ldr r1, _0801FEBC
     ldr r2, _0801FEC0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _0801FE40
     ldr r1, _0801FEC8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r1, _0801FECC
     ldr r0, _0801FED0
     movs r3, #4
@@ -22303,11 +22303,11 @@ sub_0801FE44:
     ldr r0, _0801FE70
     ldr r1, _0801FEBC
     ldr r2, _0801FEC0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _0801FE74
     ldr r1, _0801FEC8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r1, _0801FECC
     ldr r0, _0801FED0
     movs r3, #4
@@ -22329,11 +22329,11 @@ sub_0801FE78:
     ldr r0, _0801FEB8
     ldr r1, _0801FEBC
     ldr r2, _0801FEC0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r0, _0801FEC4
     ldr r1, _0801FEC8
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r1, _0801FECC
     ldr r0, _0801FED0
     movs r3, #3
@@ -22345,7 +22345,7 @@ sub_0801FE78:
     adds r0, r0, r2
     movs r2, #0x40
     ldr r1, _0801FEE0
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
     .hword 0x0000
 _0801FEB8:
@@ -22595,7 +22595,7 @@ sub_08020028:
     ldr r3, _08020070
     movs r4, #0xf
     movs r5, #3
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
 _08020068:
     adds r0, r6, #1
 _0802006A:
@@ -22673,7 +22673,7 @@ _08020146:
     beq _0802015E
     lsls r3, r3, #1
     adds r0, r0, r3
-    bl sub_08000B4A
+    bl sub_08000B4A   @ ShuffleHalfwordList_SecondaryRNG
 _0802015E:
     ldrb r3, [r5, #0x12]
     ldr r4, [sp]
@@ -22761,7 +22761,7 @@ _080201DE:
     ldr r0, _0802028C
     ldr r1, [sp, #4]
     adds r2, r1, #0
-    bl sub_08000B4A
+    bl sub_08000B4A   @ ShuffleHalfwordList_SecondaryRNG
     ldr r0, _0802028C
     ldrb r1, [r5, #0x15]
     ldrb r2, [r5, #0x11]
@@ -22773,12 +22773,12 @@ _080201DE:
     lsls r2, r2, #1
     adds r0, r0, r2
     adds r2, r1, #0
-    bl sub_08000B4A
+    bl sub_08000B4A   @ ShuffleHalfwordList_SecondaryRNG
 _0802021A:
     ldr r0, _0802028C
     ldr r1, [sp, #4]
     adds r2, r1, #0
-    bl sub_08000B4A
+    bl sub_08000B4A   @ ShuffleHalfwordList_SecondaryRNG
     ldrh r0, [r5, #0x20]
     movs r1, #0x80
     lsls r1, r1, #8
@@ -23217,7 +23217,7 @@ _080205D2:
     strb r1, [r5, #0x18]
     movs r1, #0x1c
     strb r1, [r5, #2]
-    bl sub_08007EEC
+    bl sub_08007EEC   @ BattleGetModeFlags
     movs r1, #0x20
     tst r0, r1
     beq _080205EC
@@ -23539,7 +23539,7 @@ sub_08020844:
     ldr r0, [r0, #0x20]
     ldr r1, _08020878
     movs r2, #0x80
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldrb r0, [r5, #0x12]
     movs r1, #0x10
     muls r0, r1, r0
@@ -23548,7 +23548,7 @@ sub_08020844:
     ldr r0, _0802087C
     ldr r1, _08020880
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
 _08020878:
     .word 0x06017140
@@ -23781,7 +23781,7 @@ sub_08020A0A:
     ldr r0, _08020A1C
     ldr r1, _08020A20
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
 _08020A1C:
     .word dat_0870C360
@@ -23800,7 +23800,7 @@ sub_08020A28:
     ldrb r0, [r5, #3]
     cmp r0, #1
     bne _08020A68
-    bl sub_08053928
+    bl sub_08053928   @ GetDialogueChoiceResult
     cmp r0, #1
     beq _08020A68
     movs r1, #0x14
@@ -23905,7 +23905,7 @@ _08020AEA:
     ldr r0, _08020B24
     ldr r1, _08020B28
     movs r2, #0x20
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
 _08020AFE:
     mov r0, sl

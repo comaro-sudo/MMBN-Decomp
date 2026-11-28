@@ -73,9 +73,9 @@ def main() -> None:
     for t in texts.values():
         lines = t.splitlines()
         for i, l in enumerate(lines):
-            if l.strip() != "bl sub_080034E4":
+            if l.split("@")[0].strip() != "bl sub_080034E4":   # ignore name comments
                 continue
-            prev = [x.strip() for x in lines[max(0, i - 3):i]]
+            prev = [x.split("@")[0].strip() for x in lines[max(0, i - 3):i]]
             if prev and prev[-1] == "ldr r0, [r1, r0]":
                 m = next((re.match(r"ldr r1, (_[0-9A-F]{8})$", x) for x in reversed(prev[:-1])
                           if re.match(r"ldr r1, _", x)), None)

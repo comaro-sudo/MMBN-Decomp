@@ -151,10 +151,6 @@ dat_0805D48C:
     incrom 0x5D48C, 0x20
     .thumb
     .include "npc_macros.inc"
-    .include "npc_macros.inc"
-    .include "npc_macros.inc"
-    .include "npc_macros.inc"
-    .include "cutscene_macros.inc"
     .include "cutscene_macros.inc"
 
     .global sub_0805D4AC
@@ -183,12 +179,12 @@ sub_0805D4AC:
     bl sub_08025DA8
     bl sub_080261BA
     ldr r0, _0805D50C
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _0805D514
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_0805D5C0
     ldr r0, _0805D510
@@ -224,7 +220,7 @@ sub_0805D572:
     lsls r1, r1, #2
     ldr r0, _0805D580
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
 _0805D580:
     .word dat_0805D584
@@ -252,7 +248,7 @@ sub_0805D5C0:
     lsls r0, r0, #2
     ldr r1, _0805D5D4
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _0805D5D4:
     .word dat_0805D5D8
@@ -274,14 +270,22 @@ dat_0805D5F4:
     obj_spawn 0x05, 0x00, 0x0000, (-184 << 16), (-166 << 16), (0 << 16), 0xD
     obj_spawn 0x05, 0x00, 0x0000, (124 << 16), (-18 << 16), (-32 << 16), 0xE
     obj_spawn_end
-    @ npc script 0x0805D634..0x0805D638
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x5D638, 0x28
-    @ npc script 0x0805D660..0x0805D664
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x5D664, 0x64
-    @ npc script 0x0805D6C8..0x0805D6CC
-    .4byte 0x000000FF   @ npc list end
+    .global dat_0805D634
+dat_0805D634:
+    obj_spawn_end
+    .global dat_0805D638
+dat_0805D638:
+    obj_spawn 0x05, 0x00, 0x0000, (-140 << 16), (-38 << 16), (0 << 16), 0x12
+    obj_spawn 0x05, 0x00, 0x0000, (-140 << 16), (-38 << 16), (0 << 16), 0x13
+    obj_spawn_end
+    .global dat_0805D664
+dat_0805D664:
+    obj_spawn 0x05, 0x00, 0x0000, (-172 << 16), (170 << 16), (0 << 16), 0x11
+    obj_spawn 0x05, 0x00, 0x0000, (-122 << 16), (212 << 16), (0 << 16), 0x10
+    obj_spawn 0x05, 0x06, 0x0000, (-12 << 16), (44 << 16), (0 << 16), 0x32
+    obj_spawn 0x05, 0x00, 0x0000, (28 << 16), (44 << 16), (0 << 16), 0x39
+    obj_spawn 0x05, 0x06, 0x0000, (-198 << 16), (-14 << 16), (0 << 16), 0x49
+    obj_spawn_end
     .global dat_0805D6CC
 dat_0805D6CC:
     obj_spawn 0x05, 0x00, 0x0000, (98 << 16), (-156 << 16), (0 << 16), 0x0
@@ -569,9 +573,9 @@ dat_0805D81C:
     ms_jump_if_flag_set 0xFF, 0x0984, dat_0805DD84
     ms_set_flag 0xFF, 0x0984
     ms_clear_flag 0xFF, 0x1154
-    ms_write_u32 0x0200B6D4, 0x08015C01
+    ms_write_u32 0x0200B6D4, dat_08015C01
     ms_set_flag 0xFF, 0x1151
-    ms_write_u32 0x0200B6D8, 0x08015C01
+    ms_write_u32 0x0200B6D8, dat_08015C01
     ms_set_flag 0xFF, 0x1152
     ms_write_u32 0x0200B6DC, 0x08075C01
     ms_set_flag 0xFF, 0x1153
@@ -620,7 +624,7 @@ dat_0805D81C:
     ms_jump dat_0805DF48
     @ map script 0x0805DE2C..0x0805DE46
     ms_jump_if_flag2_set 0xFF, 0x0807, dat_0805DF48
-    ms_write_u32 0x0200B6D4, 0x08010101
+    ms_write_u32 0x0200B6D4, dat_08010101
     ms_set_flag 0xFF, 0x1151
     ms_jump dat_0805DF48
     @ map script 0x0805DE46..0x0805DE63
@@ -959,7 +963,11 @@ dat_0805D81C:
     @ map-init dispatch 0x0805E4D6..0x0805E4E2
     cs_range 0x4F, 0x4F, dat_0805E4E2
     cs_jump dat_0805E4FF
-    incrom 0x5E4E2, 0x1D
+    @ map script 0x0805E4E2..0x0805E4FF
+    ms_jump_if_flag2_set 0xFF, 0x08C7, dat_0805E4FF
+    ms_jump_if_flag_set 0xFF, 0x08C2, dat_0805E4FF
+    ms_set_flag 0xFF, 0x08C2
+    ms_start_cutscene dat_08093F80, 0x00000000
     @ map script 0x0805E4FF..0x0805E500
     ms_end
     incrom 0x5E500, 0x20
@@ -2470,10 +2478,21 @@ _0805EAE0:
     .4byte dat_0805F8C8
     .4byte dat_0805F8F0
     incrom 0x5F868, 0x4
-    @ map script 0x0805F86C..0x0805F871
-    ms_clear_flag2 0x27, 0x1708
-    ms_end
-    incrom 0x5F871, 0x20
+    @ npc script 0x0805F86C..0x0805F891
+    npc_op 0x1F
+    npc_op 0x27
+    npc_op 0x08
+    npc_set_sprite 0x00
+    npc_set_pos 0x0050, 0x0044, 0x0000
+    npc_set_facing 0x05
+    npc_b2 0x3E, 0x0A, 0x01
+    npc_set_facing 0x0D
+    npc_b3 0x15, 0x05, 0x08, 0x0C
+    npc_set_facing 0x05
+    npc_b1 0x10, 0x3C
+    npc_b2 0x3C, 0x0A, 0x02
+    npc_set_facing 0x03
+    npc_call dat_080A8EE8
     @ npc script 0x0805F891..0x0805F8C8
     npc_op 0x1F
     npc_op 0x27

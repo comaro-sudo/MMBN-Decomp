@@ -4,6 +4,7 @@
     .set SEG_BM_DELTA, 0xC   @ Blue Moon = RS + this, inside this segment
 
     .thumb
+    .include "desc_macros.inc"
     .include "npc_macros.inc"
     .include "cutscene_macros.inc"
 
@@ -1112,7 +1113,7 @@ sub_0804F9C8:   @ ScriptCmd_playerFinish
     mov r0, sl
     ldr r0, [r0, #0x40]
     ldr r5, [r0, #0x28]
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     pop {r5}
     movs r1, #0x80
     ands r1, r0
@@ -2028,7 +2029,7 @@ sub_080500A8:   @ ScriptCmd_soundDisableTextSFX
     .thumb_func
 sub_080500B8:   @ ScriptCmd_soundStop
     push {lr}
-    bl sub_080006D4
+    bl sub_080006D4   @ SoundQueue_StopAllAndClearBgm
     adds r4, #2
     movs r0, #1
     pop {pc}
@@ -2039,7 +2040,7 @@ sub_080500C4:   @ ScriptCmd_soundFadeOut
     push {lr}
     ldrb r0, [r4, #2]
     ldrb r1, [r4, #3]
-    bl sub_080005DA
+    bl sub_080005DA   @ SoundQueue_MPlayFadeOut
     mov r1, sl
     ldr r1, [r1, #0x40]
     movs r0, #0xff
@@ -2930,7 +2931,7 @@ sub_080506EC:
     push {r1, r2}
     bl sub_08000A38   @ memory_bcdConvert
     mov r8, r0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     pop {r1, r2}
     movs r6, #0x40
     tst r1, r6
@@ -4826,7 +4827,7 @@ sub_08051490:   @ ScriptCmd_spriteRemove
     bl sub_080A8E92
     push {r5, r7}
     adds r5, r0, #0
-    bl sub_0800427A
+    bl sub_0800427A   @ ObjectKind2_Delete
     pop {r5, r7}
     adds r4, #3
     movs r0, #1
@@ -4844,8 +4845,8 @@ sub_080514A8:   @ ScriptCmd_spriteRotate
     ldrb r1, [r5, #0x14]
     cmp r0, r1
     beq _080514C4
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _080514C4:
     pop {r5}
     adds r4, #4
@@ -4997,8 +4998,67 @@ dat_080515C4:
 dat_080515DC:
     .word 0x020014E2
     .global dat_080515E0
-dat_080515E0:
-    incrom 0x515E0, 0xDC8
+dat_080515E0:   @ BN4_FONT_WIDTHS
+    @ font 0: 441 glyph widths
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 8, 6, 7, 7, 6, 6
+    .word 7, 6, 8, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8
+    .word 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .global dat_08051CC4
+dat_08051CC4:
+    @ font 1: 441 glyph widths
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 8, 6, 7, 7, 6, 6
+    .word 7, 6, 8, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8
+    .word 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+    .word 8, 8, 8, 8, 8, 8, 8, 8, 8
     .global dat_080523A8
 dat_080523A8:
     incrom 0x523A8, 0x18
@@ -6401,7 +6461,7 @@ _08053924:
 
     .global sub_08053928
     .thumb_func
-sub_08053928:
+sub_08053928:   @ GetDialogueChoiceResult
     push {r1}
     ldr r1, _08053938
     ldr r1, [r1]
@@ -6836,7 +6896,7 @@ _08053C98:
     ldr r0, [r6, #0x20]
     adds r2, r0, #0
     subs r2, r7, r2
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {pc}
     .word 0x00000F00
 _08053CD0:
@@ -6986,7 +7046,7 @@ _08053DC8:
 _08053DD0:
     .word sub_08000A38   @ memory_bcdConvert
 _08053DD4:
-    .word sub_08000A94
+    .word sub_08000A94   @ CountBcdDigits
 _08053DD8:
     .word 0x0200A6C0
 
@@ -7229,14 +7289,14 @@ _0805401A:
     beq _0805402A
     push {r5, r7}
     adds r5, #0x20
-    bl sub_080029B8
+    bl sub_080029B8   @ SpriteObj_QueueTileUpload
     pop {r5, r7}
 _0805402A:
     push {r5, r7}
     adds r5, #0x20
     movs r0, #0
     movs r1, #0
-    bl sub_0800282C
+    bl sub_0800282C   @ IwramSpriteCall_602C
     pop {r5, r7}
 _08054038:
     adds r5, #0x58
@@ -7280,7 +7340,7 @@ sub_08054070:
     push {r4, r5, r6, r7, lr}
     movs r0, #0
     strb r0, [r5]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {r4, r5, r6, r7, pc}
 
     .global sub_0805407C
@@ -7293,7 +7353,7 @@ sub_0805407C:
     adds r5, r5, r1
     movs r0, #0
     strb r0, [r5]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {r4, r5, r6, r7, pc}
 
     .global sub_08054090
@@ -7496,12 +7556,12 @@ sub_08054284:
     bl sub_08025DA8
     bl sub_080261BA
     ldr r0, _080542E4
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _080542EC
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_08054370
     ldr r0, _080542E8
@@ -7538,7 +7598,7 @@ sub_08054326:
     lsls r1, r1, #2
     ldr r0, _08054334
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
 _08054334:
     .word dat_08054338
@@ -7564,7 +7624,7 @@ sub_08054370:
     lsls r0, r0, #2
     ldr r1, _08054384
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _08054384:
     .word dat_08054388
@@ -7581,8 +7641,9 @@ dat_08054388:
     .global dat_080543A4
 dat_080543A4:
     obj_spawn_end
-    @ npc script 0x080543A8..0x080543AC
-    .4byte 0x000000FF   @ npc list end
+    .global dat_080543A8
+dat_080543A8:
+    obj_spawn_end
     .global dat_080543AC
 dat_080543AC:
     obj_spawn 0x05, 0x00, 0x0000, (-74 << 16), (2 << 16), (16 << 16), 0x1
@@ -7593,8 +7654,9 @@ dat_080543C4:
     .global dat_080543C8
 dat_080543C8:
     obj_spawn_end
-    @ npc script 0x080543CC..0x080543D0
-    .4byte 0x000000FF   @ npc list end
+    .global dat_080543CC
+dat_080543CC:
+    obj_spawn_end
     .global dat_080543D0
 dat_080543D0:
     obj_spawn 0x05, 0x00, 0x0000, (-108 << 16), (6 << 16), (0 << 16), 0x1B
@@ -7912,7 +7974,7 @@ dat_080544DC:
     cs_jump dat_08054B9A
     @ map script 0x08054A1B..0x08054A4F
     ms_set_flag 0xFF, 0x1130
-    ms_write_u32 0x0200B6D4, 0x08010101
+    ms_write_u32 0x0200B6D4, dat_08010101
     ms_set_flag 0xFF, 0x1151
     ms_u8x2 0x32, 0xFF, 0x00
     ms_jump_if_flag_set 0xFF, 0x0302, dat_08054B9A
@@ -7935,12 +7997,12 @@ dat_080544DC:
     @ map script 0x08054A86..0x08054AA8
     ms_jump_if_flag2_set 0xFF, 0x0405, dat_08054B9A
     ms_jump_if_flag_set 0xFF, 0x0406, dat_08054B9A
-    ms_write_u32 0x0200B6D4, 0x08011F01
+    ms_write_u32 0x0200B6D4, dat_08011F01
     ms_set_flag 0xFF, 0x1151
     ms_jump dat_08054B9A
     @ map script 0x08054AA8..0x08054AC2
     ms_jump_if_flag_set 0xFF, 0x044B, dat_08054B9A
-    ms_write_u32 0x0200B6D4, 0x08012001
+    ms_write_u32 0x0200B6D4, dat_08012001
     ms_set_flag 0xFF, 0x1151
     ms_jump dat_08054B9A
     @ map script 0x08054AC2..0x08054AE1
@@ -7952,7 +8014,7 @@ dat_080544DC:
     ms_op 0x39
     ms_jump dat_08054B9A
     @ map script 0x08054AE1..0x08054AF3
-    ms_write_u32 0x0200B6D4, 0x08012801
+    ms_write_u32 0x0200B6D4, dat_08012801
     ms_set_flag 0xFF, 0x1151
     ms_jump dat_08054B9A
     @ map-init dispatch 0x08054AF3..0x08054AFF
@@ -7975,7 +8037,7 @@ dat_080544DC:
     @ map script 0x08054B44..0x08054B66
     ms_jump_if_flag2_set 0xFF, 0x09B0, dat_08054B9A
     ms_jump_if_flag_set 0xFF, 0x0983, dat_08054B9A
-    ms_write_u32 0x0200B6D4, 0x08010201
+    ms_write_u32 0x0200B6D4, dat_08010201
     ms_set_flag 0xFF, 0x1151
     ms_jump dat_08054B9A
     @ map-init dispatch 0x08054B66..0x08054B72
@@ -8025,7 +8087,7 @@ dat_080544DC:
     ms_jump_if_flag_set 0xFF, 0x0406, dat_08054D06
     ms_set_flag 0xFF, 0x0406
     ms_set_flag 0xFF, 0x1175
-    ms_write_u32 0x0200B6D4, 0x08012001
+    ms_write_u32 0x0200B6D4, dat_08012001
     ms_set_flag 0xFF, 0x1151
     ms_start_cutscene dat_08087D48, 0x00000000
     ms_jump dat_08054D06
@@ -8037,7 +8099,7 @@ dat_080544DC:
     @ map script 0x08054C85..0x08054CB0
     ms_jump_if_flag_set 0xFF, 0x002E, dat_08054D06
     ms_jump_if_flag_set 0xFF, 0x15CC, dat_08054CB0
-    ms_write_u32 0x0200B6D4, 0x08012801
+    ms_write_u32 0x0200B6D4, dat_08012801
     ms_set_flag 0xFF, 0x1151
     ms_start_cutscene dat_0809D480, 0x000C020A
     ms_jump dat_08054D06
@@ -10454,7 +10516,9 @@ dat_08056D6C:
     .4byte dat_08056D78
     .4byte dat_08056DA8
     .4byte dat_08056DE8
-    incrom 0x56D78, 0x90
+    @ map script 0x08056D78..0x08056D79
+    ms_end
+    incrom 0x56D79, 0x8F
 
     .global sub_08056E08
     .thumb_func
@@ -10482,12 +10546,12 @@ sub_08056E08:
     bl sub_08025DA8
     bl sub_080261BA
     ldr r0, _08056E68
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _08056E70
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_08056EBC
     ldr r0, _08056E6C
@@ -10519,7 +10583,7 @@ sub_08056E90:
     lsls r1, r1, #2
     ldr r0, _08056EA0
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
     .hword 0x0000
 _08056EA0:
@@ -10541,7 +10605,7 @@ sub_08056EBC:
     lsls r0, r0, #2
     ldr r1, _08056ED0
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _08056ED0:
     .word dat_08056ED4
@@ -10550,9 +10614,10 @@ dat_08056ED4:
     .4byte dat_08056EE0
     .4byte dat_08056EF8
     .4byte dat_08056F10
-    incrom 0x56EE0, 0x14
-    @ npc script 0x08056EF4..0x08056EF8
-    .4byte 0x000000FF   @ npc list end
+    .global dat_08056EE0
+dat_08056EE0:
+    obj_spawn 0x05, 0x05, 0x0000, (0 << 16), (0 << 16), (0 << 16), 0x0
+    obj_spawn_end
     .global dat_08056EF8
 dat_08056EF8:
     obj_spawn 0x05, 0x06, 0x0000, (-140 << 16), (-34 << 16), (0 << 16), 0x130
@@ -10573,14 +10638,14 @@ dat_08056F10:
     .4byte dat_08056F44
     .4byte dat_08056F54
     .4byte dat_08056F64
-    @ map script 0x08056F44..0x08056F45
-    ms_end
+    @ npc script 0x08056F44..0x08056F45
+    npc_end
     incrom 0x56F45, 0xF
-    @ map script 0x08056F54..0x08056F55
-    ms_end
+    @ npc script 0x08056F54..0x08056F55
+    npc_end
     incrom 0x56F55, 0xF
-    @ map script 0x08056F64..0x08056F65
-    ms_end
+    @ npc script 0x08056F64..0x08056F65
+    npc_end
     incrom 0x56F65, 0xF
     .global dat_08056F74
 dat_08056F74:
@@ -10607,8 +10672,8 @@ dat_08056F74:
     ms_jump dat_08056FF3
     @ map script 0x08056FF3..0x08056FF4
     ms_end
-    @ map script 0x08056FF4..0x08056FF5
-    ms_end
+    @ npc script 0x08056FF4..0x08056FF5
+    npc_end
     incrom 0x56FF5, 0xF
     @ npc script 0x08057004..0x0805700A
     npc_ptr 0x1C, 0x1601C7FF
@@ -13300,7 +13365,14 @@ dat_08059124:
     .4byte dat_080591B4
     @ map script 0x08059134..0x08059135
     ms_end
-    incrom 0x59135, 0xFF
+    incrom 0x59135, 0x97
+    anim_frame 0xFFFF0000, dat_0851DB24
+    anim_frame 0x00000008, dat_08606D54
+    anim_frame 0x00000008, dat_08606D74
+    anim_frame 0x00000008, dat_08606D94
+    anim_frame 0x0000000C, dat_08606D74
+    anim_frame 0x00000008, dat_08606D54
+    incrom 0x591FC, 0x38
 
     .global sub_08059234
     .thumb_func
@@ -13328,12 +13400,12 @@ sub_08059234:
     bl sub_08025DA8
     bl sub_080261BA
     ldr r0, _08059294
-    bl sub_08002A18
+    bl sub_08002A18   @ SpriteCache_Init
     ldrb r1, [r5, #5]
     lsls r1, r1, #2
     ldr r0, _0805929C
     ldr r0, [r0, r1]
-    bl sub_08002A4A
+    bl sub_08002A4A   @ SpriteCache_LoadList
     bl sub_0804E06C
     bl sub_08059304
     ldr r0, _08059298
@@ -13367,7 +13439,7 @@ sub_080592CC:
     lsls r1, r1, #2
     ldr r0, _080592DC
     ldr r0, [r0, r1]
-    bl sub_08002500
+    bl sub_08002500   @ TileAnim_StartList
     pop {pc}
     .hword 0x0000
 _080592DC:
@@ -13391,7 +13463,7 @@ sub_08059304:
     lsls r0, r0, #2
     ldr r1, _08059318
     ldr r0, [r1, r0]
-    bl sub_080034E4
+    bl sub_080034E4   @ Object_SpawnList
     pop {pc}
 _08059318:
     .word dat_0805931C
@@ -13408,11 +13480,13 @@ dat_0805932C:
     obj_spawn 0x05, 0x06, 0x0000, (132 << 16), (26 << 16), (64 << 16), 0x1
     obj_spawn 0x05, 0x06, 0x0000, (-28 << 16), (-70 << 16), (64 << 16), 0x2
     obj_spawn_end
-    @ npc script 0x0805936C..0x08059370
-    .4byte 0x000000FF   @ npc list end
-    incrom 0x59370, 0x14
-    @ npc script 0x08059384..0x08059388
-    .4byte 0x000000FF   @ npc list end
+    .global dat_0805936C
+dat_0805936C:
+    obj_spawn_end
+    .global dat_08059370
+dat_08059370:
+    obj_spawn 0x05, 0x06, 0x0000, (-88 << 16), (-4 << 16), (16 << 16), 0x6
+    obj_spawn_end
     .global dat_08059388
 dat_08059388:
     obj_spawn 0x05, 0x00, 0x0000, (4 << 16), (-68 << 16), (32 << 16), 0x4

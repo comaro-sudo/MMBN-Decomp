@@ -122,7 +122,7 @@ sub_080D0170:
     ldrb r2, [r4]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -130,8 +130,8 @@ sub_080D0170:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r4, #1]
     strh r0, [r5, #0x20]
     ldrb r0, [r4, #4]
@@ -139,7 +139,7 @@ sub_080D0170:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
@@ -181,7 +181,7 @@ _080D021A:
     str r0, [r5, #8]
     pop {r4, pc}
 _080D0228:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r4, pc}
     .hword 0x0000
 _080D0230:
@@ -229,7 +229,7 @@ sub_080D0278:
     ldrb r0, [r5, #0x10]
     cmp r0, #0
     bne _080D028E
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D028E
@@ -266,7 +266,7 @@ _080D02BE:
     .thumb_func
 sub_080D02C0:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D02D8
@@ -325,7 +325,7 @@ sub_080D031C:
     movs r2, #0x12
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -333,8 +333,8 @@ sub_080D031C:
     movs r0, #8
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0xa
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -352,7 +352,7 @@ sub_080D031C:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     bl sub_0800AB64
@@ -360,7 +360,7 @@ sub_080D031C:
     adds r7, r0, #0
     tst r0, r0
     bne _080D0388
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D0388:
     movs r1, #0xc
@@ -1097,20 +1097,20 @@ sub_080D08DC:
     movs r1, #0x10
     movs r2, #0xe
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x48]
     bl sub_08012496
     tst r0, r0
     bne _080D093A
 _080D0934:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D093A:
     movs r1, #4
@@ -1296,12 +1296,12 @@ sub_080D0A94:
     ldrb r0, [r7, #2]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldrb r0, [r5, #5]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
@@ -1315,7 +1315,7 @@ sub_080D0A94:
     bl sub_08012496
     tst r0, r0
     bne _080D0AFA
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D0AFA:
     ldrb r1, [r7, #3]
@@ -1441,8 +1441,8 @@ sub_080D0BE0:
     movs r2, #2
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -1465,7 +1465,7 @@ sub_080D0BE0:
     bl sub_08012496
     tst r0, r0
     bne _080D0C2E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D0C2E:
     movs r1, #4
@@ -1536,7 +1536,7 @@ sub_080D0C9C:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080D0D60
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -1654,7 +1654,7 @@ sub_080D0D88:
     movs r2, #0x2c
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -1662,8 +1662,8 @@ sub_080D0D88:
     movs r0, #1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0x14
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -1674,7 +1674,7 @@ sub_080D0D88:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldr r0, [r5, #0x34]
     ldr r1, _080D0E1C
@@ -1685,7 +1685,7 @@ sub_080D0D88:
     adds r7, r0, #0
     tst r0, r0
     bne _080D0DEC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D0DEC:
     movs r1, #0xc
@@ -1771,7 +1771,7 @@ dat_080D0E8C:
     .thumb_func
 sub_080D0E98:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D0EAC
@@ -2136,7 +2136,7 @@ _080D1122:
     movs r2, #0x13
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -2144,19 +2144,19 @@ _080D1122:
     movs r0, #8
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D1168
 _080D1162:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D1168:
     movs r1, #4
@@ -2373,8 +2373,8 @@ sub_080D12E0:
     movs r2, #0xf
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -2387,7 +2387,7 @@ sub_080D12E0:
     bl sub_08012496
     tst r0, r0
     bne _080D1316
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D1316:
     movs r1, #4
@@ -2575,8 +2575,8 @@ sub_080D146C:
     movs r2, #2
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -2589,7 +2589,7 @@ sub_080D146C:
     bl sub_08012496
     tst r0, r0
     bne _080D14A2
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D14A2:
     movs r1, #0x15
@@ -2660,7 +2660,7 @@ sub_080D1510:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080D1674
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -2853,7 +2853,7 @@ sub_080D169C:
     adds r7, r0, #0
     tst r0, r0
     bne _080D16B2
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D16B2:
     movs r1, #0x16
@@ -2958,7 +2958,7 @@ sub_080D1760:
     movs r2, #0
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -2966,21 +2966,21 @@ sub_080D1760:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #1
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
     movs r1, #1
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D17B4
 _080D17AE:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D17B4:
     movs r1, #7
@@ -3217,8 +3217,8 @@ sub_080D196C:
     movs r2, #0x10
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -3232,11 +3232,11 @@ sub_080D196C:
     strh r0, [r5, #0x26]
     bl sub_0800AB64
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080D19B0
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D19B0:
     movs r1, #0x13
@@ -3608,10 +3608,10 @@ sub_080D1C4C:
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800AB64
     bl sub_0800AB88
     str r0, [r5, #0x40]
@@ -3620,7 +3620,7 @@ sub_080D1C4C:
     bl sub_08012496
     tst r0, r0
     bne _080D1C8C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D1C8C:
     movs r1, #4
@@ -3830,7 +3830,7 @@ sub_080D1DF4:
     movs r2, #0x12
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -3838,8 +3838,8 @@ sub_080D1DF4:
     movs r0, #8
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #5]
     movs r1, #0xf
     muls r0, r1, r0
@@ -3849,14 +3849,14 @@ sub_080D1DF4:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D1E62
 _080D1E5C:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D1E62:
     movs r1, #0xa
@@ -4099,7 +4099,7 @@ dat_080D2018:
     .thumb_func
 sub_080D2024:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D203E
@@ -4121,7 +4121,7 @@ sub_080D2040:
     movs r2, #0x11
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -4129,18 +4129,18 @@ sub_080D2040:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D2088
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D2088:
     movs r1, #4
@@ -4396,8 +4396,8 @@ sub_080D2248:
     movs r2, #0x1b
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -4410,7 +4410,7 @@ sub_080D2248:
     strb r0, [r5, #0x11]
     bl sub_0800AB74
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0xc1
     bl sub_08000560   @ PlaySoundEffect
     ldr r0, [r5, #0x34]
@@ -4569,8 +4569,8 @@ sub_080D2380:
     movs r2, #0x11
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -4593,11 +4593,11 @@ sub_080D2380:
     adds r0, r0, r0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080D23DC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D23DC:
     movs r1, #4
@@ -4831,8 +4831,8 @@ sub_080D258C:
     movs r2, #0xa
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -4845,7 +4845,7 @@ sub_080D258C:
     adds r0, r0, r0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB74
     movs r0, #0
     strb r0, [r5, #7]
@@ -4902,7 +4902,7 @@ _080D2614:
     ldr r6, _080D2764
     movs r0, #0x34
     adds r0, r0, r5
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -5104,8 +5104,8 @@ sub_080D27AC:
     movs r2, #0x12
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -5137,11 +5137,11 @@ sub_080D27AC:
     strb r0, [r5, #7]
     strb r0, [r5, #6]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080D2816
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D2816:
     movs r3, #1
@@ -5578,7 +5578,7 @@ sub_080D2B4C:
     ldrb r0, [r5, #0x10]
     cmp r0, #2
     bne _080D2B5E
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D2B68
@@ -5598,7 +5598,7 @@ sub_080D2B6A:
     movs r2, #0xb
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -5606,8 +5606,8 @@ sub_080D2B6A:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800AB88
     ldr r1, _080D2BF8
     ldrb r2, [r5, #4]
@@ -5623,13 +5623,13 @@ sub_080D2B6A:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D2BCC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D2BCC:
     movs r1, #4
@@ -5740,7 +5740,7 @@ dat_080D2CAC:
     .thumb_func
 sub_080D2CC8:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D2CE4
@@ -5917,7 +5917,7 @@ sub_080D2E14:
     movs r2, #0x13
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -5925,8 +5925,8 @@ sub_080D2E14:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800AB88
     ldr r1, _080D2E90
     ldrb r2, [r5, #4]
@@ -5937,13 +5937,13 @@ sub_080D2E14:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D2E6C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D2E6C:
     movs r1, #4
@@ -6143,14 +6143,14 @@ sub_080D2FFC:
     movs r1, #0xc
     movs r2, #0x17
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #1
     str r0, [r5, #0x60]
     bl sub_0800AB64
@@ -6202,7 +6202,7 @@ _080D308E:
     bl sub_080D30AA
     pop {pc}
 _080D30A4:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D30AA
@@ -6392,7 +6392,7 @@ sub_080D3260:
     movs r2, #0x14
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -6400,8 +6400,8 @@ sub_080D3260:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     movs r1, #0xc
     muls r0, r1, r0
@@ -6428,13 +6428,13 @@ _080D32AA:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D32D2
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D32D2:
     movs r3, #1
@@ -6672,8 +6672,8 @@ sub_080D348C:
     movs r2, #0x10
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -6686,11 +6686,11 @@ sub_080D348C:
     strb r0, [r5, #4]
     bl sub_0800AB64
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080D34CE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D34CE:
     movs r0, #4
@@ -7085,7 +7085,7 @@ sub_080D376C:
     movs r2, #0x10
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -7093,12 +7093,12 @@ sub_080D376C:
     movs r0, #0xb
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     bl sub_0800AB64
@@ -7220,7 +7220,7 @@ sub_080D3870:
     movs r2, #2
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -7228,8 +7228,8 @@ sub_080D3870:
     movs r0, #1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     cmp r0, #2
     beq _080D38A2
@@ -7240,7 +7240,7 @@ _080D38A2:
     bl sub_08012496
     tst r0, r0
     bne _080D38B4
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D38B4:
     movs r1, #4
@@ -7323,7 +7323,7 @@ sub_080D3940:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080D3A78
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -8134,7 +8134,7 @@ sub_080D3F20:
     movs r2, #0x15
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -8142,14 +8142,14 @@ sub_080D3F20:
     movs r0, #8
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB74
     ldr r0, [r5, #0x4c]
     str r5, [r0]
@@ -8323,7 +8323,7 @@ sub_080D4074:
     adds r7, r0, #0
     tst r0, r0
     bne _080D408A
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D408A:
     movs r1, #6
@@ -8471,7 +8471,7 @@ sub_080D418A:
     movs r2, #0x15
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -8479,8 +8479,8 @@ sub_080D418A:
     movs r0, #9
     bl sub_080D4660
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r0, #0
     ldrb r1, [r5, #4]
@@ -8490,7 +8490,7 @@ sub_080D418A:
 _080D41C4:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x64
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -8498,7 +8498,7 @@ _080D41C4:
     adds r7, r0, #0
     tst r0, r0
     bne _080D41E6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D41E6:
     movs r1, #0x3b
@@ -9235,7 +9235,7 @@ sub_080D4708:
     movs r2, #0x15
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -9243,8 +9243,8 @@ sub_080D4708:
     movs r0, #9
     bl sub_080D48E2
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldrb r1, [r5, #4]
     cmp r1, #3
@@ -9258,13 +9258,13 @@ _080D4748:
 _080D474E:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D476A
 _080D4764:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D476A:
     movs r1, #4
@@ -9551,7 +9551,7 @@ sub_080D494C:
     movs r2, #0x1d
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -9559,10 +9559,10 @@ sub_080D494C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     ldr r1, _080D49E4
     ldrb r2, [r5, #4]
@@ -9578,7 +9578,7 @@ sub_080D494C:
     bl sub_08012496
     adds r7, r0, #0
     bne _080D49A6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D49A6:
     movs r3, #3
@@ -9680,7 +9680,7 @@ sub_080D4A7C:
     beq _080D4AC8
     cmp r0, #1
     beq _080D4ABC
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D4AD8
@@ -9775,7 +9775,7 @@ sub_080D4B28:
     movs r2, #0x27
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -9783,10 +9783,10 @@ sub_080D4B28:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #1
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -9816,7 +9816,7 @@ sub_080D4B28:
     bl sub_08012496
     adds r7, r0, #0
     bne _080D4B9C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D4B9C:
     movs r1, #0xc
@@ -9906,7 +9906,7 @@ dat_080D4C50:
     .thumb_func
 sub_080D4C5C:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D4C6C
@@ -10053,7 +10053,7 @@ sub_080D4D68:
     movs r2, #0x1c
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -10061,12 +10061,12 @@ sub_080D4D68:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #1
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -10074,7 +10074,7 @@ sub_080D4D68:
     adds r7, r0, #0
     tst r0, r0
     bne _080D4DB6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D4DB6:
     movs r1, #0xc
@@ -10175,7 +10175,7 @@ sub_080D4E74:
     ldrb r0, [r5, #0x10]
     cmp r0, #0
     bne _080D4E8A
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D4E8A
@@ -10327,7 +10327,7 @@ sub_080D4F72:
     movs r2, #0x36
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -10335,12 +10335,12 @@ sub_080D4F72:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x64
     ldrb r1, [r5, #4]
     cmp r1, #0
@@ -10353,7 +10353,7 @@ _080D4FB4:
     adds r7, r0, #0
     tst r0, r0
     bne _080D4FC8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D4FC8:
     movs r1, #0xc
@@ -10384,7 +10384,7 @@ _080D4FF8:
     strh r0, [r5, #0x20]
     movs r0, #0
     strh r0, [r5, #0x22]
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     movs r0, #0x34
     adds r0, r0, r5
     ldm r0!, {r1, r2, r3}
@@ -10401,7 +10401,7 @@ _080D4FF8:
     .thumb_func
 sub_080D5024:
     push {lr}
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldrh r0, [r5, #0x24]
     ldr r1, [r5, #0x64]
     str r0, [r5, #0x64]
@@ -10449,12 +10449,12 @@ sub_080D5084:
     ldrh r0, [r5, #0x22]
     adds r0, #1
     strh r0, [r5, #0x22]
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     ldrh r0, [r5, #0x20]
     subs r0, #1
     strh r0, [r5, #0x20]
     bge _080D50BC
-    bl sub_08002D3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
     movs r0, #6
     strb r0, [r5, #9]
     movs r0, #0
@@ -10519,7 +10519,7 @@ sub_080D50FE:
     lsrs r0, r0, #2
     ldr r1, _080D51A8
     ldrb r0, [r1, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldrh r0, [r5, #0x20]
     subs r0, #1
     strh r0, [r5, #0x20]
@@ -10888,7 +10888,7 @@ sub_080D53E4:
     movs r2, #0x16
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -10900,17 +10900,17 @@ sub_080D53E4:
     adds r0, r0, r1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D5446
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D5446:
     movs r1, #0xa
@@ -11000,7 +11000,7 @@ sub_080D54EC:
     cmp r0, #0xb
     bne _080D5548
 _080D54F8:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D5548
@@ -11069,7 +11069,7 @@ _080D5580:
     .thumb_func
 sub_080D5584:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D5594
@@ -11153,7 +11153,7 @@ sub_080D55FC:
     movs r2, #0x16
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -11161,17 +11161,17 @@ sub_080D55FC:
     movs r0, #0xe
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D5656
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D5656:
     movs r1, #4
@@ -11240,7 +11240,7 @@ sub_080D56D4:
     ldrb r0, [r5, #0x10]
     cmp r0, #0xe
     bne _080D56F0
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D56F0
@@ -11267,7 +11267,7 @@ _080D5708:
     .thumb_func
 sub_080D570A:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D571A
@@ -11335,7 +11335,7 @@ sub_080D5774:
     movs r2, #0x16
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -11343,17 +11343,17 @@ sub_080D5774:
     movs r0, #0x11
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D57BC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D57BC:
     movs r1, #0xb
@@ -11410,7 +11410,7 @@ sub_080D5828:
     ldrb r0, [r5, #0x10]
     cmp r0, #0x11
     bne _080D5848
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D587A
@@ -11457,7 +11457,7 @@ dat_080D5880:
     .thumb_func
 sub_080D5894:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D58A4
@@ -11547,11 +11547,11 @@ sub_080D5910:
     ldrb r1, [r7]
     ldrb r2, [r7, #1]
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #1
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5, #6]
     ldrb r1, [r5, #7]
@@ -11565,12 +11565,12 @@ sub_080D5910:
     subs r0, r1, r3
     adds r1, r2, #0
     push {r5}
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     pop {r5}
     strb r0, [r5, #0xc]
     ldr r1, _080D59AC
     push {r1}
-    bl sub_080017A8
+    bl sub_080017A8   @ PolarToCartesian
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     pop {r4}
@@ -11578,7 +11578,7 @@ sub_080D5910:
     pop {r1, r2}
     movs r3, #0
     ldr r6, _080D59B4
-    bl sub_08001834
+    bl sub_08001834   @ CalcParabolaVzAndFrames
     str r0, [r5, #0x48]
     strh r1, [r5, #0x20]
     tst r1, r1
@@ -11587,7 +11587,7 @@ _080D5986:
     bl sub_08012496
     tst r0, r0
     bne _080D5994
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D5994:
     movs r1, #4
@@ -11695,7 +11695,7 @@ _080D5A3C:
     movs r1, #0xc
     movs r2, #0x25
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -11759,7 +11759,7 @@ sub_080D5AD8:
     ldr r6, [r5, #0x2c]
     bl sub_080D5C30
 _080D5AF0:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D5B0A
@@ -11798,7 +11798,7 @@ _080D5B2C:
     .thumb_func
 sub_080D5B2E:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D5B42
@@ -11915,7 +11915,7 @@ _080D5BB6:
     strh r0, [r5, #0x22]
     cmp r0, #8
     blt _080D5C14
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080D5C14:
     pop {r4, r6, pc}
     .hword 0x0000
@@ -11975,8 +11975,8 @@ sub_080D5C74:
     movs r2, #0xc
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -11996,7 +11996,7 @@ sub_080D5C74:
     adds r0, r0, r0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -12215,9 +12215,9 @@ sub_080D5E14:
     movs r1, #0xc
     movs r2, #0x26
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -12359,7 +12359,7 @@ _080D5F36:
     ldr r1, [r5, #0x60]
     movs r0, #0
     strb r0, [r1]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r4, r6, r7, pc}
 _080D5F54:
     .word dat_080D5F60
@@ -12388,7 +12388,7 @@ sub_080D5F80:
     .thumb_func
 sub_080D5F8C:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D5FA4
@@ -12429,7 +12429,7 @@ _080D5FCC:
     .thumb_func
 sub_080D5FCE:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D5FD6
@@ -12484,7 +12484,7 @@ sub_080D6018:
     movs r1, #0xc
     movs r2, #0x13
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -12587,7 +12587,7 @@ sub_080D60D4:
     .thumb_func
 sub_080D60E0:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     ands r0, r1
     beq _080D60F0
@@ -12600,7 +12600,7 @@ _080D60F0:
     .thumb_func
 sub_080D60F2:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D60FA
@@ -12659,9 +12659,9 @@ sub_080D6140:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5, #4]
     tst r0, r0
     bne _080D61B2
@@ -12679,12 +12679,12 @@ sub_080D6140:
     subs r0, r1, r3
     adds r1, r2, #0
     push {r5}
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     pop {r5}
     strb r0, [r5, #0xc]
     ldr r1, _080D6218
     push {r1}
-    bl sub_080017A8
+    bl sub_080017A8   @ PolarToCartesian
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     pop {r4}
@@ -12692,7 +12692,7 @@ sub_080D6140:
     pop {r1, r2}
     movs r3, #0
     ldr r6, _080D621C
-    bl sub_08001834
+    bl sub_08001834   @ CalcParabolaVzAndFrames
     str r0, [r5, #0x48]
     strh r1, [r5, #0x20]
     tst r1, r1
@@ -12707,7 +12707,7 @@ _080D61B2:
     tst r0, r0
     bne _080D61CE
     bl sub_0800B272   @ BN4_OBSTACLE_REMOVE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D61CE:
     movs r1, #0xe
@@ -13087,16 +13087,16 @@ sub_080D64A8:
     movs r1, #0xc
     movs r2, #0x21
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -13117,7 +13117,7 @@ sub_080D64A8:
     bl sub_08012496
     tst r0, r0
     bne _080D6510
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D6510:
     movs r1, #0x13
@@ -13142,7 +13142,7 @@ sub_080D6530:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_0800B28E
     ldr r0, _080D6558
@@ -13439,16 +13439,16 @@ _080D6758:
     movs r1, #0xc
     movs r2, #0x2e
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
     ldrb r1, [r5, #4]
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #5
     strb r0, [r5, #0x17]
     ldrb r0, [r5, #4]
@@ -13469,7 +13469,7 @@ _080D6758:
     bl sub_08012496
     tst r0, r0
     bne _080D67B6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D67B6:
     movs r3, #8
@@ -13648,7 +13648,7 @@ sub_080D68F0:
     movs r1, #4
     movs r2, #4
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     ldrb r1, [r5, #4]
     cmp r1, #3
@@ -13658,11 +13658,11 @@ _080D6912:
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0xa
     ldrb r1, [r5, #4]
     cmp r1, #3
@@ -13681,7 +13681,7 @@ _080D6936:
     bl sub_08012496
     tst r0, r0
     bne _080D695A
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D695A:
     movs r1, #0x13
@@ -14083,10 +14083,10 @@ sub_080D6C18:
     adds r0, r0, r0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002E96
-    bl sub_08002EFE
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
+    bl sub_08002EFE   @ SpriteObj_SetFlag16Bit1
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -14106,7 +14106,7 @@ _080D6C62:
     bl sub_08012496
     tst r0, r0
     bne _080D6C74
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D6C74:
     movs r1, #0xe
@@ -14127,7 +14127,7 @@ _080D6C74:
     .thumb_func
 sub_080D6CA0:   @ timebomb_code_actors.update
     push {lr}
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_08007A12
     tst r0, r0
     beq _080D6CB2
@@ -14158,7 +14158,7 @@ dat_080D6CCC:   @ BN4_TIMEBOMB_STATES
     .thumb_func
 sub_080D6CE8:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D6D4E
@@ -14239,7 +14239,7 @@ sub_080D6D7C:
     strh r0, [r5, #0x20]
     bne _080D6D9A
     ldr r0, _080D6D9C
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     movs r0, #0xe3
@@ -14260,7 +14260,7 @@ sub_080D6DA0:
     strh r0, [r5, #0x20]
     bne _080D6DBE
     ldr r0, _080D6DC0
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     movs r0, #0xe3
@@ -14281,7 +14281,7 @@ sub_080D6DC4:
     strh r0, [r5, #0x20]
     bne _080D6DE2
     ldr r0, _080D6DE4
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     movs r0, #0x1e
     strh r0, [r5, #0x20]
     movs r0, #0xe4
@@ -14443,13 +14443,13 @@ sub_080D6EF4:
     movs r1, #0xc
     movs r2, #0x22
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002EFE
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002EFE   @ SpriteObj_SetFlag16Bit1
     ldr r0, _080D6F80
     strh r0, [r5, #0x20]
     movs r0, #0x3c
@@ -14480,7 +14480,7 @@ _080D6F56:
     movs r1, #0x12
     bics r0, r1
     strb r0, [r5]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D6F64:
     movs r1, #0x33
@@ -14500,7 +14500,7 @@ _080D6F80:
     .thumb_func
 sub_080D6F84:
     push {lr}
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     ldr r1, _080D6FA4
     ldrb r0, [r5, #9]
@@ -14632,7 +14632,7 @@ sub_080D7074:
     bl sub_080E18EE
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D7094
@@ -14719,7 +14719,7 @@ sub_080D7120:
     bl sub_08012496
     tst r0, r0
     bne _080D7136
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D7136:
     movs r1, #0
@@ -14771,7 +14771,7 @@ _080D7198:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D71A8:
     .word dat_080D71AC
@@ -14927,10 +14927,10 @@ sub_080D72AC:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800AB64
     movs r0, #0xa0
     lsls r0, r0, #0x10
@@ -15045,7 +15045,7 @@ _080D739A:
     .thumb_func
 sub_080D739C:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D73A4
@@ -15111,13 +15111,13 @@ sub_080D73F8:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     bl sub_0800ACA6
     movs r1, #1
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r1, #0x40
@@ -15138,7 +15138,7 @@ sub_080D73F8:
     bl sub_08012496
     tst r0, r0
     bne _080D7460
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D7460:
     movs r3, #0x10
@@ -15315,8 +15315,8 @@ sub_080D7590:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -15335,7 +15335,7 @@ sub_080D7590:
     pop {r5}
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     str r0, [r5, #0x40]
     ldr r0, [r5, #0x4c]
@@ -15557,7 +15557,7 @@ sub_080D7758:
     ldrb r1, [r0]
     adds r1, #1
     strb r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D776E
@@ -15908,8 +15908,8 @@ sub_080D79DC:
     movs r2, #0x27
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -15922,7 +15922,7 @@ sub_080D79DC:
     movs r0, #0
     str r0, [r5, #0x3c]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     ldr r1, _080D7B5C
     muls r0, r1, r0
@@ -15940,7 +15940,7 @@ _080D7A2C:
     tst r0, r0
     bne _080D7A40
 _080D7A3A:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D7A40:
     movs r1, #4
@@ -16121,19 +16121,19 @@ sub_080D7B88:
     movs r2, #0x24
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r1, #6
@@ -16144,7 +16144,7 @@ sub_080D7B88:
     bl sub_08012496
     tst r0, r0
     bne _080D7BDA
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D7BDA:
     movs r1, #0xc
@@ -16298,13 +16298,13 @@ _080D7D02:
     ldrh r2, [r5, #0x20]
     cmp r2, #0x14
     bge _080D7D1A
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldrh r1, [r5, #0x20]
     movs r0, #3
     ands r1, r0
     cmp r1, #1
     bgt _080D7D1A
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
 _080D7D1A:
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
@@ -16811,7 +16811,7 @@ sub_080D80AE:
     ldr r0, [r5, #0x68]
     movs r1, #0
     strb r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D80BC
@@ -16879,20 +16879,20 @@ sub_080D8104:
     movs r1, #0xc
     movs r2, #0x2c
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x16]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_080D8276
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080D815A
     pop {pc}
 _080D8154:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D815A
@@ -17008,7 +17008,7 @@ sub_080D8200:
     .thumb_func
 sub_080D820C:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D8222
@@ -17063,7 +17063,7 @@ sub_080D8268:
     ldr r1, [r5, #0x68]
     movs r0, #0
     strb r0, [r1]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D8276
@@ -17094,9 +17094,9 @@ _080D8298:
     subs r1, r1, r2
     ldr r2, [sp, #4]
     subs r0, r0, r2
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     ldr r1, _080D82C0
-    bl sub_080017A8
+    bl sub_080017A8   @ PolarToCartesian
 _080D82B6:
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
@@ -17167,15 +17167,15 @@ sub_080D8318:
     ldrb r1, [r7]
     ldrb r2, [r7, #1]
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldr r7, [r5, #0x60]
     ldrb r0, [r7, #3]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0xa0
     lsls r0, r0, #0x10
@@ -17199,7 +17199,7 @@ sub_080D8318:
     bl sub_08012496
     tst r0, r0
     bne _080D838A
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D838A:
     movs r1, #0x13
@@ -17226,7 +17226,7 @@ sub_080D83B0:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_0800B28E
     ldr r0, _080D83D8
@@ -17389,7 +17389,7 @@ sub_080D8504:
     push {lr}
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D8512
@@ -17490,12 +17490,12 @@ sub_080D85C8:
     ldrb r0, [r7, #1]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r1, #0x10
@@ -17518,7 +17518,7 @@ sub_080D85C8:
     bl sub_08012496
     tst r0, r0
     bne _080D863E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D863E:
     movs r3, #3
@@ -17743,7 +17743,7 @@ sub_080D87D0:
     tst r0, r0
     bne _080D87F2
 _080D87EC:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D87F2:
     ldrb r1, [r5, #4]
@@ -17788,7 +17788,7 @@ _080D8844:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D8854
@@ -17847,14 +17847,14 @@ sub_080D8898:
     movs r1, #0xc
     movs r2, #0x14
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #9
     ldrb r1, [r5, #5]
     tst r1, r1
@@ -17888,7 +17888,7 @@ _080D88DE:
     bl sub_080D8930
     b _080D8922
 _080D891E:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080D8922:
     pop {r7, pc}
 _080D8924:
@@ -18012,10 +18012,10 @@ sub_080D89F8:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -18046,7 +18046,7 @@ _080D8A4C:
     bl sub_08012496
     tst r0, r0
     bne _080D8A62
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D8A62:
     movs r1, #0xe
@@ -18074,7 +18074,7 @@ sub_080D8A8C:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_080139D8
     bl sub_08012F44   @ BN4_HIT_EFFECT
     bl sub_0800B28E
@@ -18104,7 +18104,7 @@ sub_080D8AD8:
     ldrb r0, [r5, #6]
     tst r0, r0
     bne _080D8AEA
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D8B18
@@ -18267,7 +18267,7 @@ sub_080D8BE8:
     bl sub_080D8C20
     pop {pc}
 _080D8C1A:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D8C20
@@ -18308,7 +18308,7 @@ sub_080D8C58:
     bl sub_080129FC
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080D8C6A
@@ -18438,7 +18438,7 @@ sub_080D8D32:
     movs r2, #0x17
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -18453,12 +18453,12 @@ sub_080D8D32:
 _080D8D5C:
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #1
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -18466,7 +18466,7 @@ _080D8D5C:
     adds r7, r0, #0
     tst r0, r0
     bne _080D8D8C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080D8D8C:
     movs r1, #0xc
@@ -18559,7 +18559,7 @@ sub_080D8E40:
     push {lr}
     bl sub_08007948   @ BN4_TIME_STOP
     bne _080D8E7E
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D8E7E
@@ -18693,11 +18693,11 @@ sub_080D8F1C:
     movs r1, #0xc
     movs r2, #0x2f
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
     bl sub_0800AB3E
@@ -18713,7 +18713,7 @@ sub_080D8F1C:
     adds r1, r1, r0
     str r1, [r5, #0x34]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     beq _080D8F94
@@ -18728,7 +18728,7 @@ sub_080D8F1C:
     bl sub_080D8F9A
     b _080D8F98
 _080D8F94:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080D8F98:
     pop {pc}
 
@@ -18931,7 +18931,7 @@ sub_080D90EC:
     bl sub_08009E8C
     tst r0, r0
     bne _080D9100
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080D917E
 _080D9100:
     ldr r0, [r5, #0x34]
@@ -18948,7 +18948,7 @@ _080D9100:
     movs r2, #0x17
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -18956,12 +18956,12 @@ _080D9100:
     movs r0, #0xf
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     ldrb r0, [r5, #6]
@@ -19096,7 +19096,7 @@ _080D9238:
     .thumb_func
 sub_080D923A:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D924A
@@ -19214,7 +19214,7 @@ sub_080D92F8:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -19222,17 +19222,17 @@ sub_080D92F8:
     movs r0, #7
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D9340
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D9340:
     movs r1, #0x16
@@ -19305,7 +19305,7 @@ sub_080D93C8:
     ldrb r0, [r5, #0x10]
     cmp r0, #7
     bne _080D93E4
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D93E4
@@ -19338,7 +19338,7 @@ _080D9408:
     .thumb_func
 sub_080D940A:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D941A
@@ -19437,7 +19437,7 @@ sub_080D94A4:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -19445,17 +19445,17 @@ sub_080D94A4:
     movs r0, #0xa
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D94F2
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D94F2:
     movs r1, #0x16
@@ -19516,7 +19516,7 @@ sub_080D9560:
     ldrb r0, [r5, #0x10]
     cmp r0, #0xa
     bne _080D957C
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D957C
@@ -19543,7 +19543,7 @@ _080D9594:
     .thumb_func
 sub_080D9596:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D95A6
@@ -19602,22 +19602,22 @@ sub_080D95F0:
     movs r2, #0x1e
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     tst r0, r0
     bne _080D9632
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D9632:
     movs r1, #0
@@ -19690,7 +19690,7 @@ dat_080D96B0:
     .thumb_func
 sub_080D96C4:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D96D4
@@ -19814,7 +19814,7 @@ sub_080D9784:
     strb r0, [r5, #0xa]
     b _080D97AC
 _080D979A:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080D97AC
@@ -19928,7 +19928,7 @@ sub_080D984C:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -19936,8 +19936,8 @@ sub_080D984C:
     movs r0, #3
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r0, #0
     ldr r1, [r5, #0x4c]
@@ -19948,12 +19948,12 @@ sub_080D984C:
 _080D9886:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080D98A2
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D98A2:
     movs r1, #0xc
@@ -19985,17 +19985,17 @@ sub_080D98C0:
     orrs r0, r1
     strb r0, [r5]
     ldr r0, [r5, #0x4c]
-    bl sub_08002F2E
-    bl sub_08002F22
+    bl sub_08002F2E   @ SpriteObj_GetFlashColor
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldr r0, [r5, #0x4c]
-    bl sub_08002E34
-    bl sub_08002E20
+    bl sub_08002E34   @ SpriteObj_GetPaletteBank
+    bl sub_08002E20   @ SpriteObj_SetPaletteBank
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     ldr r0, [r5, #0x4c]
-    bl sub_08002F90
-    bl sub_08002F54
+    bl sub_08002F90   @ SpriteObj_GetMosaic
+    bl sub_08002F54   @ SpriteObj_EnableMosaic
     ldr r1, _080D9920
     ldrb r0, [r5, #9]
     ldr r1, [r1, r0]
@@ -20292,7 +20292,7 @@ sub_080D9AEC:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -20302,8 +20302,8 @@ sub_080D9AEC:
     subs r0, r0, r1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldr r1, [r5, #0x4c]
     ldrb r1, [r1, #4]
@@ -20313,7 +20313,7 @@ sub_080D9AEC:
 _080D9B3A:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     pop {pc}
@@ -20495,8 +20495,8 @@ sub_080D9C80:
     movs r2, #0x2a
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -20524,11 +20524,11 @@ sub_080D9C80:
     muls r1, r0, r1
     str r1, [r5, #0x40]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080D9CE8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080D9CE8:
     movs r1, #0xc
@@ -20686,7 +20686,7 @@ sub_080D9E00:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -20696,8 +20696,8 @@ sub_080D9E00:
     subs r0, r0, r1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldr r1, [r5, #0x4c]
     ldrb r1, [r1, #4]
@@ -20707,7 +20707,7 @@ sub_080D9E00:
 _080D9E46:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x55
     adds r0, #0xff
     bl sub_08000560   @ PlaySoundEffect
@@ -20915,8 +20915,8 @@ sub_080D9FC8:
     movs r2, #0x2b
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -20941,11 +20941,11 @@ sub_080D9FC8:
 _080DA00A:
     str r1, [r5, #0x44]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080DA022
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DA022:
     movs r1, #0xc
@@ -21253,7 +21253,7 @@ sub_080DA244:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -21263,8 +21263,8 @@ sub_080DA244:
     subs r0, r0, r1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldr r1, [r5, #0x4c]
     ldrb r1, [r1, #4]
@@ -21274,7 +21274,7 @@ sub_080DA244:
 _080DA2AA:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x47
     adds r0, #0xff
     bl sub_08000560   @ PlaySoundEffect
@@ -21520,14 +21520,14 @@ sub_080DA454:
     movs r1, #0x10
     movs r2, #0x2f
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -21554,7 +21554,7 @@ sub_080DA454:
     bl sub_080DA4D2
     b _080DA4D0
 _080DA4CC:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080DA4D0:
     pop {r7, pc}
 
@@ -21856,7 +21856,7 @@ sub_080DA6D8:
     movs r2, #0x18
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -21864,19 +21864,19 @@ sub_080DA6D8:
     movs r0, #4
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x28
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
     bl sub_08012496
     adds r7, r0, #0
     bne _080DA740
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DA740:
     movs r1, #0xc
@@ -22068,7 +22068,7 @@ sub_080DA888:
     movs r2, #0x2c
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -22076,19 +22076,19 @@ sub_080DA888:
     movs r0, #1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #4
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x28
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
     bl sub_08012496
     adds r7, r0, #0
     bne _080DA8E6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DA8E6:
     movs r1, #0xc
@@ -22202,7 +22202,7 @@ sub_080DA9C4:
     ldrb r0, [r5, #0x10]
     cmp r0, #1
     bne _080DA9DA
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DA9DA
@@ -22326,21 +22326,21 @@ sub_080DAAB4:
     movs r2, #0x2d
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x3c]
     bl sub_08012496
     tst r0, r0
     bne _080DAAF0
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DAAF0:
     movs r1, #0
@@ -22430,7 +22430,7 @@ _080DABA4:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080DABB4
@@ -22554,14 +22554,14 @@ sub_080DAC78:
     movs r1, #0x10
     movs r2, #0x2f
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -22590,7 +22590,7 @@ sub_080DAC78:
     bl sub_080DACFC
     b _080DACFA
 _080DACF6:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080DACFA:
     pop {r7, pc}
 
@@ -22928,7 +22928,7 @@ _080DAF64:
     ldr r6, [r5, #0x2c]
     movs r7, #3
     bl sub_080CD81E   @ BN4_REGION_SPAWN_FROZEN
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080DAF82:
     pop {pc}
 _080DAF84:
@@ -22999,10 +22999,10 @@ _080DAFF0:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800AB64
     bl sub_0800AB88
     ldrb r1, [r5, #4]
@@ -23018,7 +23018,7 @@ _080DAFF0:
     bl sub_08012496
     tst r0, r0
     bne _080DB036
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DB036:
     movs r3, #0
@@ -23140,10 +23140,10 @@ sub_080DB10C:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -23164,7 +23164,7 @@ sub_080DB10C:
     bl sub_08012496
     tst r0, r0
     bne _080DB15E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DB15E:
     movs r1, #0xe
@@ -23187,7 +23187,7 @@ sub_080DB178:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_080139A0
     ldr r0, _080DB19C
     bl sub_08014058
@@ -23346,15 +23346,15 @@ sub_080DB2A8:
     movs r2, #0x11
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -23364,7 +23364,7 @@ sub_080DB2A8:
     bl sub_08012496
     tst r0, r0
     bne _080DB2EE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DB2EE:
     movs r1, #3
@@ -23535,15 +23535,15 @@ sub_080DB41C:
     movs r2, #0x2e
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -23714,17 +23714,17 @@ sub_080DB564:
     movs r2, #0x14
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_08001B16   @ GetPositiveSignedRNG
     movs r1, #1
     ands r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -23733,7 +23733,7 @@ sub_080DB564:
     bl sub_08012496
     tst r0, r0
     bne _080DB5AC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DB5AC:
     movs r1, #0xa
@@ -24077,7 +24077,7 @@ dat_080DB800:
     .thumb_func
 sub_080DB80C:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DB81C
@@ -24114,7 +24114,7 @@ sub_080DB81E:
     movs r2, #0x19
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -24122,16 +24122,16 @@ sub_080DB81E:
     movs r0, #0x21
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     bne _080DB88E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DB88E:
     movs r1, #0xa
@@ -24606,7 +24606,7 @@ sub_080DBC0C:
     adds r4, r0, #0
     tst r0, r0
     bne _080DBC26
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DBC26:
     movs r1, #0x23
@@ -24721,7 +24721,7 @@ _080DBCEE:
     bl sub_080DBCFE
     b _080DBCFC
 _080DBCF8:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080DBCFC:
     pop {r7, pc}
 
@@ -24837,10 +24837,10 @@ sub_080DBDB4:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -24895,7 +24895,7 @@ _080DBE2A:
     bl sub_08012496
     tst r0, r0
     bne _080DBE46
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080DBE68
 _080DBE46:
     movs r1, #0xe
@@ -25130,7 +25130,7 @@ sub_080DBFF4:
     bgt _080DC000
     movs r0, #0
 _080DC000:
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     pop {pc}
 
     .global sub_080DC006
@@ -25205,10 +25205,10 @@ sub_080DC068:
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5, #6]
     strb r0, [r5, #0x14]
     ldrb r1, [r5, #7]
@@ -25223,12 +25223,12 @@ sub_080DC068:
     subs r0, r1, r3
     adds r1, r2, #0
     push {r5}
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     pop {r5}
     strb r0, [r5, #0xc]
     ldr r1, _080DC128
     push {r1}
-    bl sub_080017A8
+    bl sub_080017A8   @ PolarToCartesian
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     pop {r4}
@@ -25237,7 +25237,7 @@ sub_080DC068:
     movs r3, #0xa
     lsls r3, r3, #0x10
     ldr r6, _080DC12C
-    bl sub_08001834
+    bl sub_08001834   @ CalcParabolaVzAndFrames
     str r0, [r5, #0x48]
     strh r1, [r5, #0x20]
     movs r0, #0x28
@@ -25246,7 +25246,7 @@ sub_080DC068:
     bl sub_08012496
     tst r0, r0
     bne _080DC0EE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DC0EE:
     movs r1, #0xc
@@ -25573,14 +25573,14 @@ sub_080DC35C:
     movs r1, #4
     movs r2, #8
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -25604,7 +25604,7 @@ sub_080DC35C:
     bl sub_08012496
     tst r0, r0
     bne _080DC3C6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DC3C6:
     movs r1, #0x13
@@ -25635,7 +25635,7 @@ sub_080DC3F0:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_0800B28E
     ldr r0, _080DC418
@@ -26023,7 +26023,7 @@ sub_080DC69C:
     movs r2, #0x38
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -26031,17 +26031,17 @@ sub_080DC69C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080DC6EA
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DC6EA:
     movs r1, #4
@@ -26095,7 +26095,7 @@ dat_080DC748:
     .thumb_func
 sub_080DC74C:
     push {r4, r6, lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DC778
@@ -26174,14 +26174,14 @@ sub_080DC7CC:
     movs r1, #0xc
     movs r2, #0x34
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #1
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB74
     movs r0, #0x32
     strh r0, [r5, #0x24]
@@ -26193,7 +26193,7 @@ sub_080DC7CC:
     bl sub_08012496
     tst r0, r0
     bne _080DC81C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DC81C:
     movs r1, #0xe
@@ -26220,7 +26220,7 @@ sub_080DC844:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_08012F44   @ BN4_HIT_EFFECT
     bl sub_0800B28E
@@ -26272,7 +26272,7 @@ sub_080DC8A4:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080DCA9C
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -26543,21 +26543,21 @@ sub_080DCAC8:
     movs r1, #0xc
     movs r2, #0x38
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r1, #0xa
@@ -26581,7 +26581,7 @@ sub_080DCAC8:
     bl sub_08012496
     tst r0, r0
     bne _080DCB40
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DCB40:
     movs r1, #4
@@ -26783,7 +26783,7 @@ sub_080DCC8E:
     adds r7, r0, #0
     tst r0, r0
     bne _080DCCAC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DCCAC:
     ldrb r1, [r5, #7]
@@ -26950,16 +26950,16 @@ sub_080DCDC8:
     movs r1, #0xc
     movs r2, #0x35
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -26983,7 +26983,7 @@ sub_080DCDC8:
     bl sub_08012496
     tst r0, r0
     bne _080DCE30
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DCE30:
     movs r1, #0xe
@@ -27006,7 +27006,7 @@ sub_080DCE4C:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_0800B28E
     ldr r0, _080DCE74
@@ -27208,7 +27208,7 @@ dat_080DCFDC:
     .thumb_func
 sub_080DCFE4:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DD006
@@ -27364,7 +27364,7 @@ _080DD108:
     ldr r0, [r5, #0x4c]
     movs r1, #0
     strb r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080DD114
@@ -27582,14 +27582,14 @@ sub_080DD274:
     movs r1, #0xc
     movs r2, #0x42
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #3
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldr r0, _080DD2E4
     str r0, [r5, #0x44]
@@ -27612,7 +27612,7 @@ sub_080DD274:
     bl sub_080DD2E8
     pop {pc}
 _080DD2DC:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
     .hword 0x0000
 _080DD2E4:
@@ -27622,7 +27622,7 @@ _080DD2E4:
     .thumb_func
 sub_080DD2E8:
     push {lr}
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_080129FC
     bl sub_08012F44   @ BN4_HIT_EFFECT
     ldr r0, [r5, #0x54]
@@ -27740,20 +27740,20 @@ sub_080DD3C0:
     movs r1, #0xc
     movs r2, #0x3f
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0x34
     adds r0, r0, r5
@@ -27960,14 +27960,14 @@ sub_080DD558:
     movs r1, #0xc
     movs r2, #0x33
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -27983,7 +27983,7 @@ sub_080DD558:
     bl sub_08012496
     tst r0, r0
     bne _080DD5B0
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DD5B0:
     movs r1, #0x13
@@ -28006,7 +28006,7 @@ sub_080DD5CC:
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     bl sub_0801393E   @ BN4_STEP_BEGIN
     bl sub_0800B28E
     ldr r0, _080DD5F4
@@ -28092,7 +28092,7 @@ sub_080DD668:
     beq _080DD67E
     movs r0, #4
 _080DD67E:
-    bl sub_080019B4
+    bl sub_080019B4   @ AppearBits_Clear
     movs r0, #0x69
     lsls r0, r0, #2
     strh r0, [r5, #0x22]
@@ -28126,7 +28126,7 @@ sub_080DD69A:
     beq _080DD6B8
     movs r0, #4
 _080DD6B8:
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
+    bl sub_080019A8   @ AppearBits_Set
     bl sub_080406A4   @ thunderman_derived
     beq _080DD6D4
     mov r0, sl
@@ -28205,7 +28205,7 @@ sub_080DD73C:
     beq _080DD748
     movs r0, #4
 _080DD748:
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
+    bl sub_080019A8   @ AppearBits_Set
     bl sub_080406A4   @ thunderman_derived
     beq _080DD764
     mov r0, sl
@@ -28281,15 +28281,15 @@ sub_080DD7BC:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5, #6]
     cmp r0, #0xa
     beq _080DD7EE
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     b _080DD7F2
 _080DD7EE:
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
 _080DD7F2:
     ldrb r0, [r5]
     movs r1, #2
@@ -28309,7 +28309,7 @@ _080DD7F2:
     pop {r5}
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     str r0, [r5, #0x40]
     movs r7, #0x70
@@ -28494,7 +28494,7 @@ sub_080DD96A:
     ldr r0, [r5, #0x6c]
     movs r1, #0
     strb r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080DD97E
@@ -28589,8 +28589,8 @@ sub_080DDA10:
     movs r2, #0x3e
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -28600,7 +28600,7 @@ sub_080DDA10:
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strb r0, [r5, #0x17]
     bl sub_0800AB74
@@ -28611,7 +28611,7 @@ sub_080DDA10:
     bl sub_08012496
     tst r0, r0
     bne _080DDA5C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DDA5C:
     movs r1, #0x17
@@ -28759,8 +28759,8 @@ sub_080DDB58:
     movs r2, #0x40
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -28770,7 +28770,7 @@ sub_080DDB58:
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strb r0, [r5, #0x17]
     bl sub_0800AB64
@@ -29156,12 +29156,12 @@ sub_080DDE0C:
     ldrb r0, [r7, #1]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r1, #0x14
@@ -29194,7 +29194,7 @@ sub_080DDE0C:
     bl sub_08012496
     tst r0, r0
     bne _080DDE98
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DDE98:
     ldr r7, [r5, #0x60]
@@ -29389,8 +29389,8 @@ sub_080DE010:
     movs r2, #0x41
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -29400,7 +29400,7 @@ sub_080DE010:
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strb r0, [r5, #0x17]
     bl sub_0800AB64
@@ -29613,12 +29613,12 @@ sub_080DE180:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     movs r0, #0
@@ -29787,7 +29787,7 @@ sub_080DE2F4:
     bl sub_08009E8C
     tst r0, r0
     bne _080DE304
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080DE376
 _080DE304:
     movs r0, #1
@@ -29809,7 +29809,7 @@ _080DE322:
     movs r2, #0
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -29817,14 +29817,14 @@ _080DE322:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldr r0, _080DE378
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
@@ -29852,7 +29852,7 @@ sub_080DE37C:
     movs r0, #0
     ldr r1, [r5, #0x48]
     str r0, [r1]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080DE392
@@ -30241,21 +30241,21 @@ sub_080DE638:
     movs r2, #0x22
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #1
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_0800AB88
     rsbs r0, r0, #0
@@ -30572,8 +30572,8 @@ sub_080DE8AC:
     movs r2, #0x22
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #1
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -30583,7 +30583,7 @@ sub_080DE8AC:
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -30721,7 +30721,7 @@ sub_080DE9B8:
     movs r2, #0xd
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -30729,8 +30729,8 @@ sub_080DE9B8:
     movs r0, #3
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldrb r1, [r5, #5]
     cmp r1, #3
@@ -30739,9 +30739,9 @@ sub_080DE9B8:
 _080DE9F0:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldr r0, [r5, #0x48]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldrb r0, [r5, #4]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0x14
     strh r0, [r5, #0x24]
     strh r0, [r5, #0x26]
@@ -30750,7 +30750,7 @@ _080DE9F0:
     tst r0, r0
     bne _080DEA16
 _080DEA10:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DEA16:
     movs r1, #0xc
@@ -30958,8 +30958,8 @@ sub_080DEB98:
     movs r2, #0x2b
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -30979,11 +30979,11 @@ sub_080DEB98:
     str r0, [r5, #0x40]
     ldrb r0, [r5, #4]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_08012496
     tst r0, r0
     bne _080DEBEA
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DEBEA:
     movs r1, #0xc
@@ -31200,8 +31200,8 @@ sub_080DED84:
     movs r2, #0x24
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -31219,7 +31219,7 @@ sub_080DED84:
     bl sub_08012496
     tst r0, r0
     bne _080DEDC6
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DEDC6:
     movs r1, #0xa
@@ -31294,7 +31294,7 @@ sub_080DEE3C:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080DEFE8
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -31549,15 +31549,15 @@ sub_080DF00C:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     bl sub_0800AB64
     bl sub_08012496
     tst r0, r0
     bne _080DF046
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DF046:
     movs r1, #4
@@ -31589,7 +31589,7 @@ sub_080DF068:
     .thumb_func
 sub_080DF080:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DF094
@@ -31699,15 +31699,15 @@ sub_080DF14C:
     movs r2, #9
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0x10
     lsls r0, r0, #0x10
@@ -31715,7 +31715,7 @@ sub_080DF14C:
     bl sub_08012496
     tst r0, r0
     bne _080DF18E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DF18E:
     movs r1, #0
@@ -31770,7 +31770,7 @@ _080DF204:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DF214:
     .word dat_080DF218
@@ -31991,13 +31991,13 @@ sub_080DF38C:
     movs r2, #0x49
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     movs r0, #8
@@ -32192,8 +32192,8 @@ sub_080DF508:
     movs r2, #5
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -32202,8 +32202,8 @@ sub_080DF508:
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800AB64
     bl sub_0800AB88
@@ -32214,7 +32214,7 @@ sub_080DF508:
     bl sub_08012496
     tst r0, r0
     bne _080DF556
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DF556:
     movs r1, #4
@@ -32299,7 +32299,7 @@ sub_080DF5E4:
     bne _080DF600
     movs r0, #1
     strb r0, [r5, #0x10]
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5, #5]
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -32345,7 +32345,7 @@ _080DF63E:
 sub_080DF640:
     push {lr}
     ldr r0, _080DF670
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {pc}
 
     .global sub_080DF64A
@@ -32410,8 +32410,8 @@ sub_080DF6B0:
     ldrb r2, [r7, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -32420,14 +32420,14 @@ sub_080DF6B0:
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800AB64
     bl sub_08012496
     tst r0, r0
     bne _080DF6FE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080DF6FE:
     movs r1, #0xa
@@ -32662,7 +32662,7 @@ _080DF868:
     bne _080DF892
     b _080DF85C
 _080DF88E:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080DF892:
     pop {r7, pc}
 _080DF894:
@@ -32948,7 +32948,7 @@ sub_080DFA9C:
     movs r2, #0x20
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -32956,8 +32956,8 @@ sub_080DFA9C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_080406A4   @ thunderman_derived
     movs r1, #0x32
     cmp r0, #0
@@ -32969,13 +32969,13 @@ _080DFACE:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     bl sub_08012496
     adds r7, r0, #0
     tst r0, r0
     bne _080DFAF4
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DFAF4:
     movs r1, #0xc
@@ -33314,26 +33314,26 @@ sub_080DFD74:
     movs r2, #0x3c
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_08001B16   @ GetPositiveSignedRNG
     lsls r0, r0, #0x1f
     lsrs r0, r0, #0x1f
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
     bl sub_08012496
     tst r0, r0
     bne _080DFDBE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DFDBE:
     movs r1, #0
@@ -33437,7 +33437,7 @@ _080DFE96:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DFEAC:
     .word dat_080DFEB0
@@ -33460,7 +33460,7 @@ sub_080DFEB8:
     movs r0, #4
     strb r0, [r5, #0xb]
 _080DFECE:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080DFEE2
@@ -33591,17 +33591,17 @@ sub_080DFFAC:
     movs r2, #0x3b
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0x12
     lsls r0, r0, #0x10
@@ -33612,7 +33612,7 @@ sub_080DFFAC:
     bl sub_08012496
     tst r0, r0
     bne _080DFFFC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080DFFFC:
     movs r1, #0
@@ -33680,7 +33680,7 @@ _080E008A:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
     .hword 0x0000
 _080E009C:
@@ -33701,7 +33701,7 @@ sub_080E00AC:
     movs r0, #4
     strb r0, [r5, #0xb]
 _080E00B8:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E00E0
@@ -33853,17 +33853,17 @@ sub_080E01AC:
     movs r2, #0x3a
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     str r0, [r5, #0x3c]
     bl sub_0800AB64
@@ -33906,14 +33906,14 @@ sub_080E0214:
     orrs r0, r1
     strb r0, [r5]
     ldr r0, [r5, #0x58]
-    bl sub_08002F2E
-    bl sub_08002F22
+    bl sub_08002F2E   @ SpriteObj_GetFlashColor
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldr r0, [r5, #0x58]
-    bl sub_08002E34
-    bl sub_08002E20
+    bl sub_08002E34   @ SpriteObj_GetPaletteBank
+    bl sub_08002E20   @ SpriteObj_SetPaletteBank
     ldr r0, [r5, #0x58]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     ldr r0, [r5, #0x4c]
     ldrb r0, [r0]
     tst r0, r0
@@ -33976,7 +33976,7 @@ _080E02B6:
     ldrb r1, [r5, #0x13]
     bl sub_080E02D2
 _080E02C0:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E02CE
@@ -34063,14 +34063,14 @@ sub_080E033C:
     movs r2, #0x46
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
@@ -34079,7 +34079,7 @@ sub_080E033C:
     bl sub_0800ACA6
     ldrb r1, [r5, #4]
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0
     str r0, [r5, #0x3c]
@@ -34286,15 +34286,15 @@ sub_080E04C8:
     movs r2, #0x4a
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #5]
     adds r0, r0, r0
     strb r0, [r5, #0x10]
     movs r0, #0xff
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
@@ -34303,7 +34303,7 @@ sub_080E04C8:
     bl sub_0800ACA6
     ldrb r1, [r5, #4]
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldrb r0, [r5, #0x16]
     ldrb r1, [r5, #4]
@@ -34355,7 +34355,7 @@ dat_080E0558:
     .thumb_func
 sub_080E0560:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E057A
@@ -34473,7 +34473,7 @@ sub_080E0618:
     tst r0, r0
     bne _080E063E
 _080E0634:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
     .hword 0x2100
     .hword 0x75E9
@@ -34509,7 +34509,7 @@ _080E067E:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E068E
@@ -34558,13 +34558,13 @@ sub_080E06CC:
     movs r1, #0x10
     movs r2, #0x32
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800AB64
     movs r0, #0
     ldr r0, [r5, #0x3c]
@@ -34577,14 +34577,14 @@ sub_080E06CC:
     movs r0, #0xfd
     strb r0, [r5, #0xf]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     movs r1, #0
     bl sub_08015ABC
     bl sub_08012496
     tst r0, r0
     bne _080E0724
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080E073E
 _080E0724:
     movs r1, #0x29
@@ -34711,11 +34711,11 @@ _080E07F6:
     str r0, [sp, #4]
     b _080E0836
 _080E0814:
-    bl sub_08002E44
+    bl sub_08002E44   @ SpriteObj_ClearPaletteBank
     ldr r0, [sp]
     tst r0, r0
     beq _080E0836
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldr r0, [sp, #8]
     tst r0, r0
     beq _080E082C
@@ -34776,7 +34776,7 @@ dat_080E0874:
     .thumb_func
 sub_080E0880:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E0890
@@ -34792,7 +34792,7 @@ sub_080E0892:
     movs r2, #0xe
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -34800,8 +34800,8 @@ sub_080E0892:
     movs r0, #0xe
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800AB88
     ldrb r1, [r5, #4]
     lsls r1, r1, #2
@@ -34812,7 +34812,7 @@ sub_080E0892:
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     ldrb r0, [r5, #4]
     ldr r1, _080E0934
@@ -34823,7 +34823,7 @@ sub_080E0892:
     adds r7, r0, #0
     tst r0, r0
     bne _080E08F4
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080E08F4:
     movs r1, #0xc
@@ -34912,7 +34912,7 @@ dat_080E09A0:
     .thumb_func
 sub_080E09AC:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E09C4
@@ -35168,7 +35168,7 @@ sub_080E0B64:
     bl sub_08012496
     tst r0, r0
     bne _080E0B8E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080E0B8E:
     movs r1, #0
@@ -35385,14 +35385,14 @@ sub_080E0CF8:
     movs r1, #0xc
     movs r2, #0x4d
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5, #6]
     ldrb r1, [r5, #7]
     bl sub_0800AB3E
@@ -35403,7 +35403,7 @@ sub_080E0CF8:
     movs r0, #0x34
     adds r0, r0, r5
     ldr r6, _080E0E08
-    bl sub_08001956
+    bl sub_08001956   @ CalcArcVelocityByFrames
     str r0, [r5, #0x40]
     str r1, [r5, #0x44]
     str r2, [r5, #0x48]
@@ -35425,7 +35425,7 @@ sub_080E0D54:
     .thumb_func
 sub_080E0D5C:
     push {r7, lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E0D6C
@@ -35541,7 +35541,7 @@ sub_080E0E30:
     movs r2, #0x16
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -35549,8 +35549,8 @@ sub_080E0E30:
     movs r0, #0x11
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     ldrb r1, [r5, #4]
     cmp r1, #0
@@ -35561,12 +35561,12 @@ sub_080E0E30:
 _080E0E68:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5, #4]
     lsls r0, r0, #2
     ldr r1, _080E0E98
     ldr r0, [r1, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     bl sub_0800AB88
     movs r1, #0x40
     lsls r1, r1, #0x10
@@ -35609,7 +35609,7 @@ sub_080E0ED0:
     ldrb r0, [r5, #0x10]
     cmp r0, #0x11
     bne _080E0EEA
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E0F44
@@ -35686,7 +35686,7 @@ dat_080E0F4C:
     .thumb_func
 sub_080E0FC8:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E0FD8
@@ -35770,14 +35770,14 @@ sub_080E104C:
     bl sub_08009E8C
     tst r0, r0
     bne _080E105C
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080E10AA
 _080E105C:
     ldrb r1, [r5, #4]
     ldrb r2, [r5, #5]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -35785,18 +35785,18 @@ _080E105C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800B990
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB64
     movs r0, #0xf
     strh r0, [r5, #0x20]
     movs r0, #0
     strh r0, [r5, #0x22]
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     movs r0, #0xb0
     bl sub_08000560   @ PlaySoundEffect
     movs r0, #4
@@ -35833,12 +35833,12 @@ sub_080E10F4:
     ldrh r0, [r5, #0x22]
     adds r0, #1
     strh r0, [r5, #0x22]
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     ldrh r0, [r5, #0x20]
     subs r0, #1
     strh r0, [r5, #0x20]
     bge _080E1120
-    bl sub_08002D3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
     movs r7, #0x60
     adds r7, r7, r5
     bl sub_0800B812
@@ -36077,7 +36077,7 @@ sub_080E12B0:
     movs r2, #0x43
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -36085,10 +36085,10 @@ sub_080E12B0:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     ldr r1, _080E1324
     muls r0, r1, r0
@@ -36097,7 +36097,7 @@ sub_080E12B0:
     bl sub_08012496
     adds r7, r0, #0
     bne _080E12FA
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080E12FA:
     movs r3, #3
@@ -36263,7 +36263,7 @@ sub_080E1420:
     movs r2, #2
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -36273,10 +36273,10 @@ sub_080E1420:
     muls r0, r1, r0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     ldr r1, _080E1494
     muls r0, r1, r0
@@ -36285,7 +36285,7 @@ sub_080E1420:
     bl sub_08012496
     adds r7, r0, #0
     bne _080E146E
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r7, pc}
 _080E146E:
     movs r1, #0xe
@@ -36346,7 +36346,7 @@ sub_080E14E0:
     ldrb r0, [r5, #4]
     cmp r0, #0
     bne _080E14F8
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E150A
@@ -36488,7 +36488,7 @@ sub_080E15E8:
     bl sub_08012496
     tst r0, r0
     bne _080E15FC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
     .word 0x75E92100
 _080E15FC:
@@ -36540,7 +36540,7 @@ _080E1658:
     bl sub_08012DC0
     ldr r0, [r5, #0x54]
     bl sub_080124C8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080E1668:
     .word dat_080E166C
@@ -36604,20 +36604,20 @@ sub_080E1874:
     ldrb r2, [r7, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r7, #2]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r7, #3]
     ldrb r1, [r5, #6]
     adds r0, r0, r1
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldrb r0, [r5, #5]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -36634,7 +36634,7 @@ sub_080E18C0:
     subs r0, #1
     strh r0, [r5, #0x20]
     beq _080E18DC
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E18E8
@@ -36758,11 +36758,11 @@ _080E19A4:
     strh r0, [r5, #0x20]
     bge _080E19C0
     movs r0, #2
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
+    bl sub_080019A8   @ AppearBits_Set
     movs r0, #0x48
     movs r1, #6
     bl sub_08005AFC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     b _080E19C4
 _080E19C0:
     ldr r3, _080E19C8
@@ -36821,7 +36821,7 @@ _080E19EE:
     strb r0, [r5, #0x12]
     cmp r0, #0x1d
     blt _080E1A2A
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1A2A:
     pop {pc}
 
@@ -36869,7 +36869,7 @@ _080E1A42:
     strb r0, [r5, #0x13]
     cmp r0, #0x13
     blt _080E1A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1A80:
     pop {pc}
 
@@ -36928,7 +36928,7 @@ _080E1ADA:
     strb r0, [r5, #0x13]
     cmp r0, #0x13
     blt _080E1AE8
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1AE8:
     pop {pc}
 
@@ -36960,7 +36960,7 @@ sub_080E1B0C:
     tst r0, r0
     bne _080E1BC0
     ldr r0, _080E1BD4
-    bl sub_080008F4
+    bl sub_080008F4   @ DmaQueue_PushListMode2
     ldr r0, _080E1C54
     movs r1, #8
     lsls r1, r1, #8
@@ -37204,10 +37204,10 @@ _080E1D38:
     lsls r1, r1, #8
     bl sub_08000958   @ ZeroFillByEightWords
     movs r0, #1
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
+    bl sub_080019A8   @ AppearBits_Set
     movs r4, #0
     bl sub_080E1F32
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1D66:
     pop {r4, pc}
     incrom 0xE1D68, 0x4
@@ -37279,7 +37279,7 @@ _080E1E04:
     ldrh r1, [r5, r1]
     cmp r0, r1
     bne _080E1E14
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1E14:
     ldr r2, [r5, #0x60]
     movs r1, #0x20
@@ -37344,7 +37344,7 @@ _080E1E74:
     ldrh r1, [r5, r1]
     cmp r0, r1
     bne _080E1E84
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E1E84:
     ldr r2, [r5, #0x60]
     movs r1, #0x20
@@ -37389,7 +37389,7 @@ sub_080E1EBC:
     tst r0, r0
     bne _080E1F04
     bl sub_08085430
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     mov r2, sl
     ldr r2, [r2, #0x18]
     cmp r0, #0x49
@@ -37425,7 +37425,7 @@ _080E1F04:
     tst r0, r0
     bne _080E1F16
     movs r0, #1
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
+    bl sub_080019A8   @ AppearBits_Set
     movs r0, #4
     strh r0, [r5, #0xa]
 _080E1F16:
@@ -37441,8 +37441,8 @@ sub_080E1F1C:
     tst r0, r0
     bne _080E1F30
     movs r0, #2
-    bl sub_080019A8   @ BN4_APPEAR_BITS_SET
-    bl sub_080033D4
+    bl sub_080019A8   @ AppearBits_Set
+    bl sub_080033D4   @ Object_Delete
 _080E1F30:
     pop {pc}
 
@@ -37671,13 +37671,13 @@ sub_080E20E4:
     ldrb r2, [r7, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r7, #2]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r7, #3]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldrb r0, [r5]
@@ -37692,7 +37692,7 @@ sub_080E20E4:
     .thumb_func
 sub_080E2122:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E213A
@@ -37756,7 +37756,7 @@ sub_080E217C:
     movs r1, #0
     ldr r0, [r5, #0x60]
     str r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080E2196:
     movs r2, #8
@@ -37767,12 +37767,12 @@ _080E219E:
     movs r0, #0x80
     movs r1, #0x14
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -37863,7 +37863,7 @@ _080E2264:
     movs r1, #0
     ldr r0, [r5, #0x60]
     str r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E226E:
     pop {pc}
 _080E2270:
@@ -37940,14 +37940,14 @@ sub_080E22E8:
     ldrb r2, [r4, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
     strb r0, [r5]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E2320
@@ -38020,7 +38020,7 @@ _080E23A0:
     ldr r0, [r5, #0x64]
     movs r1, #0
     str r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {r4, r6, r7, pc}
 _080E23AC:
     bl sub_08014446   @ BN4_T3_SPRITE_STEP
@@ -38090,8 +38090,8 @@ sub_080E243C:
     ldrb r2, [r4, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -38099,8 +38099,8 @@ sub_080E243C:
     ldrb r0, [r4, #2]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r4, #3]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
@@ -38113,8 +38113,8 @@ sub_080E243C:
 _080E2488:
     ldr r0, _080E2660
 _080E248A:
-    bl sub_08002FF8
-    bl sub_08002EFE
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
+    bl sub_08002EFE   @ SpriteObj_SetFlag16Bit1
     movs r0, #0x26
     adds r0, #0xff
     bl sub_08000560   @ PlaySoundEffect
@@ -38283,7 +38283,7 @@ _080E25C2:
     strh r0, [r5, #0xa]
     b _080E2620
 _080E25F2:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E2620
@@ -38293,7 +38293,7 @@ _080E25F2:
     strb r0, [r5]
     b _080E2620
 _080E2606:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E2620
@@ -38304,7 +38304,7 @@ _080E2606:
     movs r2, #0
     str r2, [r0]
 _080E261C:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E2620:
     pop {pc}
 
@@ -38391,15 +38391,15 @@ sub_080E268C:
     ldrb r2, [r0, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     movs r0, #0
@@ -38455,14 +38455,14 @@ sub_080E2704:
     orrs r0, r1
     strb r0, [r5]
     ldr r0, [r5, #0x4c]
-    bl sub_08002F2E
-    bl sub_08002F22
+    bl sub_08002F2E   @ SpriteObj_GetFlashColor
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldr r0, [r5, #0x4c]
-    bl sub_08002E34
-    bl sub_08002E20
+    bl sub_08002E34   @ SpriteObj_GetPaletteBank
+    bl sub_08002E20   @ SpriteObj_SetPaletteBank
     ldr r0, [r5, #0x4c]
-    bl sub_08002F90
-    bl sub_08002F54
+    bl sub_08002F90   @ SpriteObj_GetMosaic
+    bl sub_08002F54   @ SpriteObj_EnableMosaic
     ldr r1, _080E2750
     ldrb r0, [r5, #9]
     ldr r1, [r1, r0]
@@ -38482,8 +38482,8 @@ dat_080E2754:
 sub_080E2760:
     push {lr}
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     bl sub_080E2838
     pop {pc}
 
@@ -38516,7 +38516,7 @@ sub_080E2790:
     adds r6, r0, #0
     ldr r0, [r5, #0x4c]
     adds r0, #0x34
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     adds r3, r0, #0
     adds r4, r1, #0
     movs r0, #0x98
@@ -38544,7 +38544,7 @@ sub_080E2790:
     adds r3, r1, r2
     str r3, [r6]
     adds r0, #4
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r6, [r5, #0x40]
     ldrb r4, [r5, #0xc]
 _080E27E6:
@@ -38570,7 +38570,7 @@ _080E2804:
     .thumb_func
 sub_080E2808:
     push {r6, lr}
-    bl sub_080019C0   @ BN4_APPEAR_BITS
+    bl sub_080019C0   @ AppearBits_Get
     lsrs r0, r0, #1
     bhs _080E282A
     ldr r6, [r5, #0x40]
@@ -38599,7 +38599,7 @@ _080E2836:
     .thumb_func
 sub_080E2838:
     push {lr}
-    bl sub_080019C0   @ BN4_APPEAR_BITS
+    bl sub_080019C0   @ AppearBits_Get
     lsrs r0, r0, #2
     blo _080E2852
     ldrb r0, [r5]
@@ -38618,8 +38618,8 @@ _080E2852:
 sub_080E2854:
     push {lr}
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     ldr r1, _080E2874
     ldrb r0, [r5, #4]
     lsls r0, r0, #2
@@ -38761,18 +38761,18 @@ sub_080E2934:   @ BN4_DEBRIS_INIT
     movs r1, #0x10
     movs r2, #0xe
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #1
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5, #0xc]
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0xa
     strh r0, [r5, #0x20]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E297E
@@ -38859,7 +38859,7 @@ _080E29EE:
     .thumb_func
 sub_080E29F0:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E29F8
@@ -38918,7 +38918,7 @@ _080E2A4A:
     movs r2, #9
     movs r3, #0
     ldr r4, _080E2AA8
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     b _080E2A9C
 _080E2A5A:
     ldrb r0, [r5, #8]
@@ -38948,12 +38948,12 @@ _080E2A84:
     movs r2, #9
     movs r3, #0
     ldr r4, _080E2AA8
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     b _080E2A9C
 _080E2A92:
     movs r0, #0
-    bl sub_08002546
-    bl sub_080033D4
+    bl sub_08002546   @ PaletteEffect_Stop
+    bl sub_080033D4   @ Object_Delete
 _080E2A9C:
     pop {pc}
     .hword 0x0000
@@ -38982,13 +38982,13 @@ _080E2AC2:
     movs r2, #9
     movs r3, #0
     ldr r4, _080E2B30
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     movs r0, #0
     movs r1, #0
     movs r2, #9
     movs r3, #1
     ldr r4, _080E2B34
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     b _080E2B28
 _080E2AE0:
     ldrb r0, [r5, #8]
@@ -39010,20 +39010,20 @@ _080E2AF2:
     movs r2, #0xf
     movs r3, #0
     ldr r4, _080E2B30
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     ldr r1, _080E2B2C
     movs r0, #0
     movs r2, #0xf
     movs r3, #1
     ldr r4, _080E2B34
-    bl sub_08002524
+    bl sub_08002524   @ PaletteEffect_Set
     b _080E2B28
 _080E2B18:
     movs r0, #0
-    bl sub_08002546
+    bl sub_08002546   @ PaletteEffect_Stop
     movs r0, #1
-    bl sub_08002546
-    bl sub_080033D4
+    bl sub_08002546   @ PaletteEffect_Stop
+    bl sub_080033D4   @ Object_Delete
 _080E2B28:
     pop {pc}
     .hword 0x0000
@@ -39211,8 +39211,8 @@ _080E2C56:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -39230,7 +39230,7 @@ _080E2C56:
     pop {r5}
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #3
     ldrb r1, [r5, #7]
     adds r0, r0, r1
@@ -39271,7 +39271,7 @@ _080E2CE6:
     movs r0, #4
     strb r0, [r5, #0xb]
 _080E2CEA:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E2D20
@@ -40309,7 +40309,7 @@ sub_080E33C8:
     push {lr}
     movs r0, #1
     strb r0, [r5, #0xb]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E33D4
@@ -40393,7 +40393,7 @@ _080E344A:
     bge _080E344A
     subs r7, #1
     bge _080E3448
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E3460:
     pop {r4, r6, r7, pc}
 
@@ -40454,7 +40454,7 @@ _080E34C0:
     bge _080E34A6
     subs r7, #1
     bge _080E34A4
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E34CC:
     pop {r4, r6, r7, pc}
 
@@ -40531,7 +40531,7 @@ _080E3544:
     bge _080E351C
     subs r7, #1
     bge _080E351A
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E3550:
     pop {r4, r6, r7, pc}
 
@@ -40618,7 +40618,7 @@ _080E35E8:
     adds r6, #1
     cmp r6, #4
     blt _080E35CE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E35F4:
     pop {r4, r6, r7, pc}
     .hword 0x0000
@@ -40670,19 +40670,19 @@ sub_080E363C:
     ldrb r2, [r5, #4]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
-    bl sub_08002EAC
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
+    bl sub_08002EAC   @ SpriteObj_ResumeAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5, #4]
     ldr r4, _080E36A8
     ldrb r4, [r4, r0]
@@ -40741,7 +40741,7 @@ sub_080E36DC:
     tst r0, r0
     bne _080E36F2
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x16
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -40766,7 +40766,7 @@ _080E3704:
     ands r1, r2
     bl sub_080E37B2
     ldr r0, _080E3720
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
 _080E371C:
     pop {pc}
     .hword 0x0000
@@ -40824,7 +40824,7 @@ sub_080E3766:
     movs r1, #0
     bl sub_080E37B2
     movs r0, #2
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #8
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -40834,7 +40834,7 @@ _080E3784:
     subs r0, #1
     strh r0, [r5, #0x20]
     bge _080E37A8
-    bl sub_08002D3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
     ldrb r0, [r5]
     movs r1, #2
     bics r0, r1
@@ -40850,7 +40850,7 @@ _080E37A2:
 _080E37A8:
     ldrh r0, [r5, #0x20]
     adds r0, r0, r0
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
 _080E37B0:
     pop {pc}
 
@@ -40928,12 +40928,12 @@ sub_080E3818:
     movs r1, #0x14
     movs r2, #2
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #1
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     movs r0, #2
@@ -40953,7 +40953,7 @@ sub_080E3854:
     ldr r1, [r5, #0x48]
     adds r0, r0, r1
     str r0, [r5, #0x3c]
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E3870
@@ -40966,7 +40966,7 @@ _080E3870:
     .thumb_func
 sub_080E3872:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E387A
@@ -41320,7 +41320,7 @@ _080E3AA8:
     bl sub_080E18EE
     b _080E3AD6
 _080E3AD2:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E3AD6:
     pop {pc}
 
@@ -41547,7 +41547,7 @@ sub_080E3C46:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E3C54
@@ -41773,7 +41773,7 @@ sub_080E3DD0:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E3DDE
@@ -41935,7 +41935,7 @@ sub_080E3EDE:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E3EEC
@@ -42028,10 +42028,10 @@ _080E3F7C:
 _080E3F80:
     ldr r3, _080E3FC4
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r3, _080E3FC8
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #0x46
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -42295,7 +42295,7 @@ sub_080E419E:
     movs r0, #0
     ldr r1, [r5, #0x4c]
     strb r0, [r1]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E41AC
@@ -42564,7 +42564,7 @@ sub_080E4484:
     beq _080E4490
     str r0, [r1]
 _080E4490:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E4496
@@ -43280,7 +43280,7 @@ sub_080E494C:
 _080E495C:
     push {r5}
     ldr r5, [r5, #0x4c]
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     pop {r5}
     ldrh r0, [r5, #0x20]
     subs r0, #1
@@ -43330,7 +43330,7 @@ _080E49A8:
 _080E49BA:
     push {r5}
     ldr r5, [r5, #0x4c]
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     pop {r5}
     pop {r4, pc}
     .hword 0x0000
@@ -43450,7 +43450,7 @@ _080E4A90:
     .thumb_func
 sub_080E4A94:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E4A9C
@@ -44167,8 +44167,8 @@ sub_080E4F7C:
     ldrb r0, [r5, #6]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r7, #0x64
     adds r7, r7, r5
@@ -44177,21 +44177,21 @@ sub_080E4F7C:
     ldrb r0, [r7, #2]
     tst r0, r0
     bne _080E4FB6
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     b _080E4FC4
 _080E4FB6:
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r7, #3]
     tst r0, r0
     bne _080E4FC4
-    bl sub_08002EAC
+    bl sub_08002EAC   @ SpriteObj_ResumeAnim
 _080E4FC4:
     ldrb r0, [r5, #7]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strh r0, [r5, #0x20]
     ldr r0, [r5, #0x60]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E4FDE
@@ -44234,7 +44234,7 @@ _080E5016:
     .thumb_func
 sub_080E5018:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E5020
@@ -45024,13 +45024,13 @@ sub_080E55B8:
     movs r2, #0x22
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     movs r0, #3
@@ -45462,19 +45462,19 @@ sub_080E58DC:
     ldrb r2, [r7, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r7, #2]
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r7, #3]
     ldrb r1, [r5, #6]
     adds r0, r0, r1
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldrb r0, [r5, #5]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -45684,7 +45684,7 @@ _080E5A76:
     strb r0, [r5, #9]
     b _080E5A96
 _080E5A88:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E5A96
@@ -45759,11 +45759,11 @@ _080E5AE2:
     strh r0, [r5, #0x12]
     bl sub_0800AB64
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     ldr r0, [r5, #0x4c]
-    bl sub_08002F90
-    bl sub_08002F54
+    bl sub_08002F90   @ SpriteObj_GetMosaic
+    bl sub_08002F54   @ SpriteObj_EnableMosaic
     ldrh r0, [r5, #0x3a]
     subs r0, #1
     strh r0, [r5, #0x3a]
@@ -46277,7 +46277,7 @@ sub_080E5E58:
     bl sub_080E5E98
     pop {pc}
 _080E5E8E:
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 _080E5E94:
     .word dat_080E5E28
@@ -46329,7 +46329,7 @@ _080E5EE0:
     .thumb_func
 sub_080E5EE2:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E5EEA
@@ -46728,10 +46728,10 @@ sub_080E6170:
     bl sub_08001B00   @ GetRNG
     movs r1, #1
     ands r0, r1
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_08001B00   @ GetRNG
@@ -46798,7 +46798,7 @@ sub_080E6208:
     ldm r0!, {r1, r2, r3}
     movs r4, #1
     bl sub_080E18EE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E621C
@@ -46932,16 +46932,16 @@ sub_080E62E0:
     movs r1, #0xc
     movs r2, #0x2e
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_0800AB88
     ldr r1, _080E6330
     muls r1, r0, r1
@@ -46991,7 +46991,7 @@ _080E6364:
     .thumb_func
 sub_080E6368:
     push {lr}
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E6370
@@ -47257,16 +47257,16 @@ sub_080E6520:
     movs r2, #0x2d
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
-    bl sub_08003058
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
+    bl sub_08003058   @ SpriteObj_SetFlag3Bit5
     movs r0, #1
-    bl sub_0800307C
+    bl sub_0800307C   @ SpriteObj_SetFlag16Bits23
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r0, #4
     str r0, [r5, #8]
@@ -47397,7 +47397,7 @@ sub_080E6624:
     bne _080E6650
     movs r0, #0x3c
     strh r0, [r5, #0x20]
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     blt _080E6662
     movs r0, #0
@@ -47551,8 +47551,8 @@ sub_080E673C:
     movs r2, #0x32
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -47560,14 +47560,14 @@ sub_080E673C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldr r0, [r5, #0x4c]
     ldrb r1, [r0, #0x16]
     strb r1, [r5, #0x16]
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E6782
@@ -47784,7 +47784,7 @@ sub_080E68E0:
 _080E68EE:
     movs r0, #0
     str r0, [r5, #0x60]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E68F8
@@ -48157,13 +48157,13 @@ sub_080E6B64:
     movs r2, #0x22
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_080E6D30
@@ -48501,7 +48501,7 @@ sub_080E6DB4:
     bne _080E6E1E
     push {r5}
     movs r4, #3
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     blt _080E6DCA
     movs r4, #1
@@ -48808,12 +48808,12 @@ sub_080E6FB8:
     bl sub_0800287C   @ BN4_SPRITE_LOAD
     ldrb r0, [r5, #4]
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002E96
-    bl sub_08003058
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
+    bl sub_08003058   @ SpriteObj_SetFlag3Bit5
     movs r0, #0
-    bl sub_08003010
+    bl sub_08003010   @ SpriteObj_SetSubOamBit
     movs r0, #0
     ldr r3, [r5, #0x4c]
     ldrb r1, [r3, #4]
@@ -48828,11 +48828,11 @@ _080E6FF0:
 _080E6FF6:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     ldr r0, [r5, #0x60]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldrb r0, [r5, #6]
     movs r1, #1
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #2
     strb r0, [r5, #6]
     ldrb r0, [r5]
@@ -49048,15 +49048,15 @@ sub_080E7154:
     ldrb r2, [r0, #1]
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldrb r0, [r5, #5]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     movs r0, #0
@@ -49412,8 +49412,8 @@ sub_080E7400:
     movs r1, #8
     movs r2, #0x19
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -49421,15 +49421,15 @@ sub_080E7400:
     movs r0, #0x24
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r0, #0
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldr r0, [r4, #4]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E744C
@@ -49488,7 +49488,7 @@ _080E74A8:
     ldr r0, [r5, #0x64]
     movs r1, #0
     str r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E74B2:
     pop {pc}
 
@@ -49554,16 +49554,16 @@ sub_080E7508:
     movs r1, #0x10
     movs r2, #0x37
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldr r0, [r5, #0x4c]
     ldrb r0, [r0, #0x10]
     strh r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     ldrb r0, [r5, #4]
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #4
     str r0, [r5, #8]
     ldrb r0, [r5]
@@ -49616,14 +49616,14 @@ sub_080E756E:
     orrs r0, r1
     strb r0, [r5]
     ldr r0, [r5, #0x4c]
-    bl sub_08002F2E
-    bl sub_08002F22
+    bl sub_08002F2E   @ SpriteObj_GetFlashColor
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     ldr r0, [r5, #0x4c]
-    bl sub_08002E34
-    bl sub_08002E20
+    bl sub_08002E34   @ SpriteObj_GetPaletteBank
+    bl sub_08002E20   @ SpriteObj_SetPaletteBank
     ldr r0, [r5, #0x4c]
-    bl sub_08002F90
-    bl sub_08002F54
+    bl sub_08002F90   @ SpriteObj_GetMosaic
+    bl sub_08002F54   @ SpriteObj_EnableMosaic
     ldr r1, _080E75C0
     ldrb r0, [r5, #9]
     ldr r1, [r1, r0]
@@ -49644,8 +49644,8 @@ dat_080E75C4:
 sub_080E75D0:
     push {lr}
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     bl sub_080E76B0
     bl sub_080E76CC
     pop {pc}
@@ -49680,7 +49680,7 @@ sub_080E7608:
     adds r6, r0, #0
     ldr r0, [r5, #0x4c]
     adds r0, #0x34
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     adds r3, r0, #0
     adds r4, r1, #0
     movs r0, #0x98
@@ -49708,7 +49708,7 @@ sub_080E7608:
     adds r3, r1, r2
     str r3, [r6]
     adds r0, #4
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     ldr r6, [r5, #0x40]
     ldrb r4, [r5, #0xc]
 _080E765E:
@@ -49734,7 +49734,7 @@ _080E767C:
     .thumb_func
 sub_080E7680:
     push {r6, lr}
-    bl sub_080019C0   @ BN4_APPEAR_BITS
+    bl sub_080019C0   @ AppearBits_Get
     lsrs r0, r0, #1
     bhs _080E76A2
     ldr r6, [r5, #0x40]
@@ -49763,7 +49763,7 @@ _080E76AE:
     .thumb_func
 sub_080E76B0:
     push {lr}
-    bl sub_080019C0   @ BN4_APPEAR_BITS
+    bl sub_080019C0   @ AppearBits_Get
     lsrs r0, r0, #2
     blo _080E76CA
     ldrb r0, [r5]
@@ -49782,8 +49782,8 @@ _080E76CA:
 sub_080E76CC:
     push {lr}
     ldr r0, [r5, #0x4c]
-    bl sub_08002D4C
-    bl sub_08002CEA
+    bl sub_08002D4C   @ SpriteObj_GetBlendState
+    bl sub_08002CEA   @ SpriteObj_SetBlendMode
     ldrb r0, [r5, #6]
     tst r0, r0
     bne _080E76E4
@@ -50022,10 +50022,10 @@ sub_080E784C:
 _080E786A:
     ldr r3, _080E78B0
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r3, _080E78B4
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -50040,7 +50040,7 @@ _080E7884:
     movs r0, #0
     str r0, [sp, #8]
     add r0, sp, #0
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     bl sub_08008424
     ldrh r0, [r5, #0x20]
     subs r0, #1
@@ -50678,8 +50678,8 @@ sub_080E7D04:
     movs r1, #0xc
     movs r2, #0x13
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #1
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -50817,9 +50817,9 @@ sub_080E7DFA:
     adds r2, r1, #0
     adds r1, r0, #0
     adds r0, r2, #0
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     ldr r1, [r5, #0x40]
-    bl sub_080017A8
+    bl sub_080017A8   @ PolarToCartesian
     ldr r2, [r5, #0x34]
     adds r2, r2, r0
     str r2, [r5, #0x34]
@@ -51268,12 +51268,12 @@ sub_080E810C:
     movs r1, #0xc
     movs r2, #0x42
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_08002FE2
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     bl sub_0800AB64
     movs r0, #4
@@ -51305,7 +51305,7 @@ dat_080E815C:
     .thumb_func
 sub_080E8168:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E817C
@@ -51334,7 +51334,7 @@ _080E818E:
     .thumb_func
 sub_080E8190:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E81A8
@@ -51676,7 +51676,7 @@ sub_080E83D2:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E83E0
@@ -52313,11 +52313,11 @@ sub_080E87EC:
     push {r4, r6, r7, lr}
     bl sub_080406A4   @ thunderman_derived
     bne _080E8806
-    bl sub_08007EEC
+    bl sub_08007EEC   @ BattleGetModeFlags
     movs r1, #8
     tst r0, r1
     bne _080E888C
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     bge _080E888C
 _080E8806:
@@ -52415,10 +52415,10 @@ sub_080E88B2:
     bne _080E88D4
     ldr r3, _080E8964
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     ldr r3, _080E8968
     ldm r3!, {r0, r1, r2}
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     movs r0, #0x3c
     strh r0, [r5, #0x20]
     movs r0, #4
@@ -52436,7 +52436,7 @@ _080E88D4:
     str r0, [sp]
     str r1, [sp, #4]
     add r0, sp, #0
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     bl sub_08008424
 _080E88F6:
     ldr r2, [r5, #0x68]
@@ -52451,7 +52451,7 @@ _080E88F6:
     str r0, [sp]
     str r1, [sp, #4]
     add r0, sp, #0
-    bl sub_08003578
+    bl sub_08003578   @ WorldToScreen_Ortho
     bl sub_08008424
 _080E8918:
     ldrh r0, [r5, #0x20]
@@ -52977,13 +52977,13 @@ sub_080E8C98:
     movs r1, #0x14
     movs r2, #5
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
@@ -53016,7 +53016,7 @@ _080E8CF0:
     subs r0, #1
     strh r0, [r5, #0x20]
     bge _080E8CFC
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E8CFC:
     pop {pc}
 
@@ -53226,7 +53226,7 @@ sub_080E8E56:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E8E64
@@ -53280,15 +53280,15 @@ sub_080E8E9C:
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     movs r7, #0x64
     adds r7, r7, r5
     ldrh r0, [r7]
     strh r0, [r5, #0x22]
-    bl sub_08002E96
-    bl sub_08002EAC
+    bl sub_08002E96   @ SpriteObj_PauseAnim
+    bl sub_08002EAC   @ SpriteObj_ResumeAnim
     movs r0, #0
     ldrb r1, [r5, #5]
     cmp r1, #3
@@ -53297,11 +53297,11 @@ sub_080E8E9C:
 _080E8EE0:
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strh r0, [r5, #0x20]
     ldr r0, [r5, #0x60]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     movs r0, #4
     str r0, [r5, #8]
     bl sub_080E8F00
@@ -53366,7 +53366,7 @@ sub_080E8F54:
     adds r3, r3, r4
     movs r4, #0x13
     bl sub_080E18EE
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E8F74:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -54023,7 +54023,7 @@ sub_080E93D6:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080E93E4
@@ -54796,13 +54796,13 @@ sub_080E9900:
     movs r1, #0x14
     movs r2, #7
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x11]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     ldrb r0, [r5]
     movs r1, #2
@@ -54842,7 +54842,7 @@ sub_080E9944:
     ldrh r0, [r5, #0x3a]
     adds r0, #1
     strh r0, [r5, #0x3a]
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080E9982
@@ -54960,7 +54960,7 @@ sub_080E99EE:
     subs r0, #1
     strh r0, [r5, #0x22]
     bgt _080E9A34
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
 _080E9A34:
     pop {r4, r6, pc}
 
@@ -55179,11 +55179,11 @@ _080E9B96:
     .thumb_func
 sub_080E9B98:
     push {r4, r6, r7, lr}
-    bl sub_08007EEC
+    bl sub_08007EEC   @ BattleGetModeFlags
     movs r1, #8
     tst r0, r1
     bne _080E9BB0
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x44
     beq _080E9BB0
     cmp r0, #0x46
@@ -55841,7 +55841,7 @@ sub_080EA02E:
     push {lr}
     movs r0, #4
     bl sub_08007A80
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080EA03C
@@ -56205,7 +56205,7 @@ sub_080EA286:
     ldr r0, [r5, #0x40]
     movs r1, #0
     strb r1, [r0]
-    bl sub_080033D4
+    bl sub_080033D4   @ Object_Delete
     pop {pc}
 
     .global sub_080EA294
@@ -56923,8 +56923,8 @@ _080EA758:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5]
     movs r1, #2
     orrs r0, r1
@@ -56942,7 +56942,7 @@ _080EA758:
     pop {r5}
     bl sub_08002DEC   @ BN4_SPRITE_PALETTE_SET
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #0
     strb r0, [r5, #0x10]
     movs r0, #0xff
@@ -59004,7 +59004,7 @@ dat_080EB7E4:
     .thumb_func
 sub_080EB80C:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080EB852
@@ -59318,7 +59318,7 @@ sub_080EBA70:
     push {r4, lr}
     movs r0, #4
     bl sub_08007A74
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldrb r0, [r7, #1]
     tst r0, r0
     bne _080EBAF2
@@ -59436,7 +59436,7 @@ _080EBB68:
 sub_080EBB6C:
     push {r4, lr}
     ldr r4, [r5, #0x58]
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldrb r0, [r7, #1]
     tst r0, r0
     bne _080EBBEE
@@ -59450,15 +59450,15 @@ sub_080EBB6C:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     ldr r0, [r4, #0x48]
     tst r0, r0
     beq _080EBBBE
@@ -59471,7 +59471,7 @@ _080EBBBE:
     movs r0, #0xa
     strh r0, [r7, #0x10]
     bl sub_08013218
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldrb r0, [r4, #0x10]
     adds r0, r0, r0
     ldr r1, _080EBBFC
@@ -59874,7 +59874,7 @@ dat_080EBEA8:
     .thumb_func
 sub_080EBEAC:
     push {r4, lr}
-    bl sub_08002E1C
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldrb r0, [r7, #1]
     tst r0, r0
     bne _080EBF56
@@ -59908,16 +59908,16 @@ sub_080EBEAC:
     bl sub_0800B90A   @ BattleGetFormSprite
     movs r0, #0x80
     bl sub_0800287C   @ BN4_SPRITE_LOAD
-    bl sub_0800283C
-    bl sub_08002E96
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     movs r0, #0
     strb r0, [r5, #0x10]
     strb r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800ACA6
-    bl sub_08002FAE
-    bl sub_08002E1C
+    bl sub_08002FAE   @ SpriteObj_SetFlip
+    bl sub_08002E1C   @ SpriteObj_SetPaletteBankMax
     ldr r0, [r4, #0x48]
     tst r0, r0
     beq _080EBF34
@@ -62385,7 +62385,7 @@ _080ED13C:
     adds r7, r7, r5
     bl sub_080CD6E0   @ BN4_ARM_SPAWN
     pop {r7}
-    bl sub_08007E46
+    bl sub_08007E46   @ BattleGetMode
     cmp r0, #0x46
     blt _080ED176
     push {r5}
@@ -63447,7 +63447,7 @@ _080ED928:
     .thumb_func
 sub_080ED92A:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080ED970

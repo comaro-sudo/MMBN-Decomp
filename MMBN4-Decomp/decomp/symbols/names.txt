@@ -1511,3 +1511,5 @@
 080AEEA0 080AEEAC code   CLAUDE       FlagProp_Update                  object for BN4_FLAG_PROPS[obj+4]: load sprite, then set/clear flag_a/flag_b as the test flag is set/clear
 0809CEC8 0809CED4 rom    CLAUDE       BN4_CUTSCENE_ACTOR_SPAWNS        42 x 20 B Object_SpawnList-format records {kind, arg, u16, x, y, z (16.16), param}, no terminator
 0802A760 0802A764 code   CLAUDE       GetCutsceneActorSpawn            r0 n -> BN4_CUTSCENE_ACTOR_SPAWNS + n * 20 (cutscene code keeps it at [r5, #0x34])
+080515E0 080515EC rom    CLAUDE       BN4_FONT_WIDTHS                  2 fonts x 441 u32 glyph widths (px); font [r5+0x34] via dat_08053C18; read by sub_08053B74 (draw glyph, 11 rows)
+08053B74 08053B80 code   CLAUDE       Text_DrawGlyph                   draws one glyph: width = BN4_FONT_WIDTHS[font][glyph], advances the cursor, blits 11 rows

@@ -5,8 +5,6 @@
 
     .thumb
 
-
-
     .global sub_080F0012
     .thumb_func
 sub_080F0012:
@@ -5186,7 +5184,7 @@ sub_080F255A:
     bl sub_08012D9A
     ldrb r0, [r5, #0x16]
     strb r0, [r7, #0x1b]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #3
     strb r0, [r5, #0x10]
     movs r0, #3
@@ -5488,7 +5486,7 @@ sub_080F2780:
     strb r0, [r7, #1]
     b _080F27AA
 _080F2798:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F27AA
@@ -5615,7 +5613,7 @@ sub_080F2876:
     strb r0, [r7, #1]
     b _080F28DE
 _080F288E:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F28DE
@@ -5676,7 +5674,7 @@ sub_080F28E8:
     movs r1, #1
     eors r0, r1
     strb r0, [r7, #0x1b]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -5713,7 +5711,7 @@ sub_080F292C:
     strb r0, [r7, #1]
     b _080F2964
 _080F294C:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F2964
@@ -5953,7 +5951,7 @@ sub_080F2B0A:
     strb r0, [r7, #1]
     b _080F2B34
 _080F2B22:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F2B34
@@ -6057,7 +6055,7 @@ sub_080F2BCE:
     movs r0, #0
     strb r0, [r5, #0x10]
     bl sub_08012DC0
-    bl sub_08002EAC
+    bl sub_08002EAC   @ SpriteObj_ResumeAnim
     movs r0, #0xc8
     lsls r0, r0, #0x10
     str r0, [r5, #0x3c]
@@ -6114,7 +6112,7 @@ _080F2C40:
     str r0, [r5, #0x3c]
     movs r0, #1
     bl sub_08012DC8
-    bl sub_08002E96
+    bl sub_08002E96   @ SpriteObj_PauseAnim
     ldrb r0, [r5, #0x12]
     ldrb r1, [r5, #0x13]
     ldr r3, _080F2FA4
@@ -6174,7 +6172,7 @@ sub_080F2C96:
     strb r0, [r7, #1]
     b _080F2CC4
 _080F2CB2:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F2CC4
@@ -6415,7 +6413,7 @@ sub_080F2E52:
     bl sub_0800AB64
     bl sub_08012D9A
     ldrb r0, [r7, #0x1b]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #3
     strb r0, [r5, #0x10]
     movs r0, #3
@@ -6528,7 +6526,7 @@ sub_080F2F02:
     ldrb r0, [r5, #0x16]
     movs r1, #1
     eors r0, r1
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     movs r0, #3
     strh r0, [r7, #0x10]
     movs r0, #4
@@ -9236,7 +9234,7 @@ sub_080F42B8:
     strb r0, [r7, #1]
     b _080F42E0
 _080F42D2:
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F42E0
@@ -10905,7 +10903,7 @@ _080F4F04:
     .thumb_func
 sub_080F4F08:
     push {lr}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F4F20
@@ -11192,7 +11190,7 @@ sub_080F5100:
     ldrb r0, [r5, #0x10]
     cmp r0, #0x12
     bne _080F5116
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     movs r1, #0x80
     tst r0, r1
     beq _080F5116
@@ -13942,7 +13940,7 @@ sub_080F8A70:   @ GetEnemyHeldChips
     mov pc, lr
     .hword 0x0000
 _080F8A7C:
-    .word dat_080F8A80
+    .word dat_080F8A80   @ BN4_ENEMY_HELD_CHIPS
     .global dat_080F8A80
 dat_080F8A80:   @ BN4_ENEMY_HELD_CHIPS
     .fill 16, 2, 0xFFFF   @ enemy 0x00: none
@@ -24026,9 +24024,9 @@ sub_08102FEC:
     ldrb r0, [r5, #4]
     ldr r1, _08103100
     ldrb r0, [r1, r0]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldr r1, _08103104
     ldrb r0, [r5, #4]
     ldrb r0, [r1, r0]
@@ -24057,7 +24055,7 @@ _0810303A:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldrb r2, [r5, #4]
     lsls r2, r2, #1
     ldr r0, _081030F0
@@ -24460,8 +24458,8 @@ _0810357C:
     tst r0, r0
     bne _081035D8
     movs r0, #4
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _081035D8:
     movs r0, #8
     strb r0, [r5, #0xa]
@@ -24492,7 +24490,7 @@ sub_081035E4:
     subs r0, r0, r2
     lsls r1, r1, #0x10
     lsls r0, r0, #0x10
-    bl sub_08001760
+    bl sub_08001760   @ Atan2_8Bit
     movs r1, #0xe0
     ands r0, r1
     lsrs r0, r0, #5
@@ -24507,8 +24505,8 @@ sub_081035E4:
     subs r0, #8
     ldrb r0, [r1, r0]
 _08103626:
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     pop {r7, pc}
 _08103630:
     .word 0x0200D908
@@ -25213,13 +25211,13 @@ _08103D64:
     ldr r0, [r0, r6]
     ldr r2, [r2, r6]
     lsrs r2, r2, #3
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     ldr r0, _08103E00
     ldr r1, _08103E30
     ldr r2, _08103E34
     ldr r0, [r0, r6]
     ldr r2, [r2, r6]
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     push {r5}
     movs r0, #9
     movs r1, #2
@@ -25228,7 +25226,7 @@ _08103D64:
     ldr r3, [r3, r6]
     movs r4, #0xc
     movs r5, #0xa
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     pop {r6, pc}
 _08103D9C:
@@ -25369,9 +25367,9 @@ sub_08103F2C:
     movs r0, #0
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0xc
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x60
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -25386,7 +25384,7 @@ sub_08103F2C:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     pop {pc}
 _08103F68:
     .word 0x00000100
@@ -25700,7 +25698,7 @@ _08104232:
     adds r0, r0, r1
     ldr r1, _08104260
     ldrb r0, [r1, r0]
-    bl sub_08002FAE
+    bl sub_08002FAE   @ SpriteObj_SetFlip
     bl sub_081043A8
     pop {pc}
     .hword 0x0000
@@ -25732,13 +25730,13 @@ sub_08104290:   @ BN4_PLATE_SET
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     ldrb r6, [r5, #4]
     ldrb r0, [r5, #6]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #5]
     tst r0, r0
     bne _081042BC
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
 _081042BC:
     ldr r1, _081042FC
     ldrb r0, [r1, r6]
@@ -25758,7 +25756,7 @@ _081042BC:
     adds r0, r0, r1
     strh r0, [r7, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     pop {pc}
     .hword 0x0000
 _081042E8:
@@ -25846,7 +25844,7 @@ sub_081043F0:
     bne _08104400
     movs r0, #1
     strb r0, [r5, #0xb]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
 _08104400:
     ldrb r0, [r5, #0xa]
     tst r0, r0
@@ -25939,7 +25937,7 @@ _0810449E:
     movs r0, #0
     movs r1, #0x40
     ldrh r2, [r5, #0xe]
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -25970,7 +25968,7 @@ _081044D6:
     movs r0, #0
     movs r1, #0x40
     ldrh r2, [r5, #0xe]
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -25994,7 +25992,7 @@ _081044FE:
     movs r0, #0
     movs r1, #0x40
     ldrh r2, [r5, #0xe]
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 _0810450C:
@@ -26143,7 +26141,7 @@ _0810465C:
     cmp r0, #2
     beq _081046CA
     push {r2}
-    bl sub_08002E56
+    bl sub_08002E56   @ SpriteObj_GetAnimFrameStatus
     pop {r2}
     movs r1, #1
     tst r0, r1
@@ -26175,9 +26173,9 @@ _0810468C:
     b _081046CA
 _081046B8:
     strb r0, [r5, #0x12]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r1, #0x23
 _081046C8:
     strb r1, [r5]
@@ -26281,7 +26279,7 @@ sub_0810474C:
     ldr r3, _08104780
     movs r4, #0x1c
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r1, r5}
     movs r0, #4
     strb r0, [r5, #8]
@@ -26310,9 +26308,9 @@ _081047A8:
     movs r0, #6
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -26324,7 +26322,7 @@ _081047A8:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x1e
     strh r0, [r7, #0xc]
     ldrb r1, [r5, #5]
@@ -26443,7 +26441,7 @@ sub_08104870:
     beq _08104894
     b _081048AA
 _08104894:
-    bl sub_08053928
+    bl sub_08053928   @ GetDialogueChoiceResult
     tst r0, r0
     bne _081048AA
     mov r2, sl
@@ -26579,7 +26577,7 @@ sub_0810497C:
     orrs r0, r1
     ldrb r1, [r5, #0xc]
     orrs r0, r1
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     movs r3, #0xc
     ldrsb r2, [r5, r3]
     tst r2, r2
@@ -27748,9 +27746,9 @@ sub_08105224:
     movs r0, #6
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -27762,7 +27760,7 @@ sub_08105224:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x4e
     strh r0, [r7, #0xc]
     movs r0, #0x80
@@ -27926,7 +27924,7 @@ sub_08105354:
     ldr r3, _081053AC
     movs r4, #0x16
     movs r5, #0x13
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     movs r0, #0
     strb r0, [r5, #9]
@@ -28034,11 +28032,11 @@ _08105454:
     ldr r1, _081054B8
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #3
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldr r0, _081054BC
-    bl sub_0800303E
+    bl sub_0800303E   @ SpriteObj_SetField30
     movs r0, #0xc0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -28046,7 +28044,7 @@ _08105454:
     movs r0, #4
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldr r0, _081054C8
     strh r0, [r7, #8]
     movs r0, #0x26
@@ -28154,13 +28152,13 @@ _0810554E:
     ldrb r1, [r5, #0x18]
     tst r1, r1
     beq _08105576
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     strb r0, [r5, #0x19]
     movs r0, #0
     movs r1, #0x40
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
 _08105576:
     ldrb r0, [r5, #9]
     cmp r0, #4
@@ -28219,8 +28217,8 @@ _081055C8:
     movs r0, #0
     movs r1, #0x40
     movs r2, #0x40
-    bl sub_08002C90
-    bl sub_08002DBE
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
 _081055EC:
     movs r0, #4
     ldr r1, [r6, #0x1c]
@@ -28318,7 +28316,7 @@ sub_0810565C:
     .hword 0x1C00   @ adds r0, r0, #0
     bl sub_080250A0   @ TestEventFlag
     beq _081056C0
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     movs r1, #0
     subs r1, #1
     cmp r0, r1
@@ -28343,10 +28341,10 @@ sub_0810565C:
     lsls r1, r1, #0x1c
     eors r0, r1
 _081056BA:
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     b _081056DC
 _081056C0:
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     movs r1, #0
     subs r1, #1
     cmp r0, r1
@@ -28357,7 +28355,7 @@ _081056C0:
     movs r1, #3
     lsls r1, r1, #0x1c
     orrs r0, r1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _081056DC:
     pop {r7, pc}
     .hword 0x0000
@@ -28393,12 +28391,12 @@ sub_081056E8:
     ldr r0, _08105728
     bics r0, r3
     bics r0, r4
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     b _08105726
 _0810571E:
     movs r0, #0
     subs r0, #1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _08105726:
     pop {pc}
 _08105728:
@@ -28409,7 +28407,7 @@ _08105728:
     .thumb_func
 sub_08105734:
     push {lr}
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     movs r1, #0
     subs r1, #1
     cmp r0, r1
@@ -28418,7 +28416,7 @@ sub_08105734:
     ldr r2, _081057B0
     lsrs r2, r1
     bics r0, r2
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     ldrb r2, [r5, #5]
     subs r2, #1
     adds r3, r2, #0
@@ -28440,7 +28438,7 @@ sub_08105734:
     lsls r3, r3, #7
     adds r1, r1, r3
     movs r2, #0x80
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     pop {r0}
     lsls r0, r0, #2
     ldr r1, _081057CC
@@ -28456,14 +28454,14 @@ sub_08105734:
     bl sub_08000994   @ CopyWords
     b _081057AE
 _0810579A:
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     movs r1, #0
     subs r1, #1
     cmp r0, r1
     beq _081057AE
     ldr r1, _081057B4
     orrs r0, r1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _081057AE:
     pop {pc}
 _081057B0:
@@ -28496,7 +28494,7 @@ sub_081057D4:
     strb r0, [r5, #0x19]
     movs r0, #0
     movs r1, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 _081057EC:
@@ -28554,9 +28552,9 @@ sub_0810583C:
     movs r0, #7
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     ldrb r0, [r5, #4]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x90
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -28564,7 +28562,7 @@ sub_0810583C:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldr r0, _0810587C
     ldrb r3, [r5, #4]
     lsls r3, r3, #1
@@ -28636,7 +28634,7 @@ sub_081058B4:
     adds r0, #0x20
     ldr r1, _08105938
     ldr r2, _0810593C
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     bl sub_0810583C
     pop {r0, r2}
     strb r2, [r7, #4]
@@ -28651,7 +28649,7 @@ _081058F0:
     bl sub_0802F714
     ldr r1, _08105938
     ldr r2, _0810593C
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     bl sub_0810583C
     pop {r0, r2}
     strb r2, [r7, #4]
@@ -28669,7 +28667,7 @@ _08105910:
     adds r1, #7
     lsrs r2, r1
     bics r0, r2
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {pc}
 _08105930:
     .word 0x1FFF9400
@@ -28711,7 +28709,7 @@ sub_08105940:
     lsrs r2, r1
     bics r0, r2
 _08105976:
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {pc}
 _0810597C:
     .word 0x7FFFFFFF
@@ -28777,14 +28775,14 @@ sub_081059D4:
     ldr r3, _081059F8
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #3
     movs r1, #5
     movs r2, #3
     movs r3, #0
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r5, pc}
 _081059F8:
     .word dat_086D618C
@@ -28817,9 +28815,9 @@ _08105A24:
     movs r0, #6
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -28831,7 +28829,7 @@ _08105A24:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x36
     strh r0, [r7, #0xc]
     movs r0, #0x50
@@ -29403,7 +29401,7 @@ _08105E40:
     movs r3, #0
     movs r4, #0x20
     movs r5, #2
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r2, r5}
 _08105E74:
     mov r6, sl
@@ -30410,11 +30408,11 @@ sub_08106544:
     movs r2, #0x21
 _08106568:
     strb r2, [r5]
-    bl sub_08002934
+    bl sub_08002934   @ MenuSprite_SetMugshot
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xa0
     strb r0, [r7, #0x15]
     movs r0, #1
@@ -30426,7 +30424,7 @@ _08106568:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x4e
     strh r0, [r7, #0xc]
     movs r0, #0x30
@@ -30466,11 +30464,11 @@ _081065BE:
     movs r1, #0x23
 _081065D8:
     strb r1, [r5]
-    bl sub_08002934
+    bl sub_08002934   @ MenuSprite_SetMugshot
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xa0
     strb r0, [r7, #0x15]
     movs r0, #1
@@ -30478,7 +30476,7 @@ _081065D8:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
 _081065FE:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -30531,9 +30529,9 @@ _08106644:
     ldrb r0, [r1, r0]
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     ldrb r0, [r5, #5]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #4]
     tst r0, r0
     beq _08106680
@@ -30543,13 +30541,13 @@ _08106644:
     lsls r0, r0, #2
     ldr r1, _081066DC
     ldr r0, [r1, r0]
-    bl sub_0800303E
+    bl sub_0800303E   @ SpriteObj_SetField30
 _08106674:
     ldrb r0, [r5, #4]
     lsls r0, r0, #2
     ldr r1, _081066D8
     ldr r0, [r1, r0]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _08106680:
     ldrb r0, [r5, #4]
     ldr r1, _081066D0
@@ -30568,7 +30566,7 @@ _08106680:
     ldrh r0, [r1, r0]
     strh r0, [r7, #8]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0xff
     lsls r1, r0, #8
     orrs r0, r1
@@ -30729,11 +30727,11 @@ _0810683E:
 _08106846:
     movs r0, #0x90
     strb r0, [r5, #6]
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     movs r1, #0x90
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #8
     strb r0, [r5, #9]
     pop {pc}
@@ -30774,13 +30772,13 @@ _0810688A:
     strb r1, [r5, #6]
     movs r1, #0
     strb r1, [r5, #9]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {pc}
 _081068A2:
     adds r1, r0, #0
     movs r0, #0
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 _081068B0:
@@ -30989,7 +30987,7 @@ sub_081069F0:
     ands r3, r1
     orrs r2, r3
     adds r0, r2, #0
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _08106A18:
     pop {r7, pc}
     .hword 0x0000
@@ -31091,7 +31089,7 @@ _08106A80:
     adds r0, r0, r1
     ldr r1, _08106BC0
     movs r2, #0x40
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     pop {r0}
     push {r0}
     ldrb r1, [r0, #9]
@@ -31109,7 +31107,7 @@ _08106B06:
     adds r0, r0, r1
     ldr r1, _08106BC8
     movs r2, #0x80
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     pop {r0}
     adds r0, r5, #0
     tst r0, r0
@@ -31134,7 +31132,7 @@ _08106B3A:
     adds r0, r6, #0
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r6, r0, #0
 _08106B48:
     ldr r1, _08106BE8
@@ -31149,7 +31147,7 @@ _08106B4C:
     adds r0, r0, r2
     movs r2, #0x40
     push {r3}
-    bl sub_08000878
+    bl sub_08000878   @ DmaQueue_PushMode1
     pop {r3}
     subs r1, #0x40
     subs r3, #1
@@ -31176,7 +31174,7 @@ sub_08106B7C:
 _08106B84:
     push {r0, r1}
     ldr r2, _08106BAC
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r0, r1}
     movs r4, #0xe0
     adds r0, r0, r4
@@ -31413,11 +31411,11 @@ sub_08106D3C:
     movs r0, #0xb
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldr r0, _08106DD0
-    bl sub_0800303E
+    bl sub_0800303E   @ SpriteObj_SetField30
     movs r0, #0x90
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -31435,7 +31433,7 @@ sub_08106D3C:
     ldrh r0, [r0, r1]
     strh r0, [r7, #0xe]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x42
     strh r0, [r7, #0xc]
     mov r6, sl
@@ -31601,7 +31599,7 @@ _08106EE4:
     lsls r1, r0, #2
     ldr r0, _08106EF4
     ldr r0, [r0, r1]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {pc}
 _08106EF0:
     .word 0x0201A000
@@ -31668,9 +31666,9 @@ sub_08106F88:
     movs r0, #0xc
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -31680,7 +31678,7 @@ sub_08106F88:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #4
     strb r0, [r5, #8]
     bl sub_08106FC8
@@ -31730,7 +31728,7 @@ sub_08106FE6:
     ldr r0, _08107010
     bics r0, r3
     bics r0, r4
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {pc}
 _08107010:
     .word 0x0FFFFF00
@@ -31767,9 +31765,9 @@ sub_0810703C:
     movs r0, #0xc
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #1
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -31779,7 +31777,7 @@ sub_0810703C:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #4
     strb r0, [r5, #8]
     bl sub_0810707C
@@ -31800,12 +31798,12 @@ sub_0810707C:
     movs r4, #0x23
     ldrb r0, [r6, #8]
     adds r0, #1
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08107096:
     strb r4, [r5]
     ldr r0, _081070C0
-    bl sub_080035E0
+    bl sub_080035E0   @ WorldToScreen_Iso
     ldrb r2, [r6, #8]
     ldr r3, _081070C4
     ldrsb r3, [r3, r2]
@@ -31817,7 +31815,7 @@ _08107096:
     ldrb r1, [r6, #0xb]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
     .hword 0x0000
@@ -31871,9 +31869,9 @@ sub_08107104:
     movs r0, #6
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -31885,7 +31883,7 @@ sub_08107104:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x1e
     strh r0, [r7, #0xc]
     movs r0, #0x80
@@ -31964,7 +31962,7 @@ sub_0810719C:
     ldr r3, _081071C4
     movs r4, #0x1e
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     movs r0, #4
     strb r0, [r5, #8]
@@ -31982,9 +31980,9 @@ sub_081071C8:
     movs r0, #6
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -31996,7 +31994,7 @@ sub_081071C8:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x1e
     strh r0, [r7, #0xc]
     movs r0, #0x80
@@ -32247,9 +32245,9 @@ sub_08107398:
     strb r0, [r5, #0xc]
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x90
     strb r0, [r7, #0x15]
     bl sub_08107440
@@ -32260,7 +32258,7 @@ sub_08107398:
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x38
     strh r0, [r7, #0xc]
     movs r0, #0x50
@@ -32506,14 +32504,14 @@ sub_08107568:
 _08107574:
     strb r1, [r5]
     movs r0, #0xe
-    bl sub_0800290C
+    bl sub_0800290C   @ MenuSprite_SetNoFlag
     ldrb r0, [r5, #4]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb
     bl sub_0802F714
-    bl sub_0800304C
+    bl sub_0800304C   @ SpriteObj_SetCustomPalettePtr
     movs r0, #0xc0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -32550,7 +32548,7 @@ _081075D0:
 _081075D2:
     strh r0, [r7, #0xe]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     bl sub_08107608
     pop {pc}
 _081075E0:
@@ -32662,14 +32660,14 @@ sub_08107698:
     movs r1, #0x23
     strb r1, [r5]
     movs r0, #0xe
-    bl sub_0800290C
+    bl sub_0800290C   @ MenuSprite_SetNoFlag
     ldrb r0, [r5, #4]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb
     bl sub_0802F714
-    bl sub_0800304C
+    bl sub_0800304C   @ SpriteObj_SetCustomPalettePtr
     movs r0, #0xd0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -32705,14 +32703,14 @@ _081076E8:
     movs r1, #0x23
     strb r1, [r5]
     movs r0, #0xe
-    bl sub_0800290C
+    bl sub_0800290C   @ MenuSprite_SetNoFlag
     ldrb r0, [r5, #4]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb
     bl sub_0802F714
-    bl sub_0800304C
+    bl sub_0800304C   @ SpriteObj_SetCustomPalettePtr
     movs r0, #0xc0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -32804,13 +32802,13 @@ sub_081077B4:
     movs r1, #0xc1
     strb r1, [r5]
     movs r0, #0xe
-    bl sub_0800290C
+    bl sub_0800290C   @ MenuSprite_SetNoFlag
     ldr r0, _08107840
     ldrb r1, [r5, #4]
     ldrb r0, [r0, r1]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r1, [r5, #6]
     tst r1, r1
     bne _081077E2
@@ -32835,7 +32833,7 @@ _081077EC:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldrb r0, [r5, #4]
     ldr r1, _08107834
     ldrb r0, [r1, r0]
@@ -32922,7 +32920,7 @@ sub_081078A4:
     movs r0, #0
     movs r1, #0xff
     movs r2, #0xc0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
 _081078C2:
     movs r0, #0xff
     strb r0, [r5, #5]
@@ -32951,7 +32949,7 @@ _081078E0:
     movs r2, #0xc0
     adds r1, r0, #0
     movs r0, #0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
 _081078F0:
     pop {pc}
     .hword 0x0000
@@ -32972,7 +32970,7 @@ sub_081078F4:
     ldrb r1, [r5, #4]
     cmp r1, #3
     beq _08107924
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {pc}
 _08107914:
     ldrb r1, [r5, #4]
@@ -32981,7 +32979,7 @@ _08107914:
     adds r2, r0, #0
     movs r1, #0x40
     movs r0, #0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
 _08107924:
     pop {pc}
     .hword 0x0000
@@ -33151,7 +33149,7 @@ dat_08107B04:
     .thumb_func
 sub_08107B6C:
     push {lr}
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     bl sub_08054070
     pop {pc}
 
@@ -33190,9 +33188,9 @@ sub_08107BA8:
     movs r0, #0xf
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #3]
     adds r0, #1
     lsls r0, r0, #4
@@ -33209,7 +33207,7 @@ sub_08107BA8:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
@@ -33285,7 +33283,7 @@ sub_08107C64:
     strb r0, [r5, #8]
     movs r0, #0
     strb r0, [r5, #9]
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_08107E24
     b _08107C9C
 _08107C7E:
@@ -33356,16 +33354,16 @@ sub_08107CDC:
     strb r0, [r5, #9]
     pop {pc}
 _08107D00:
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     movs r1, #0x40
     movs r2, #0x40
     strb r2, [r5, #7]
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #0xfc
     lsls r0, r0, #0x18
     mvns r0, r0
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     movs r0, #0xc
     strb r0, [r5, #9]
     pop {pc}
@@ -33437,7 +33435,7 @@ _08107D90:
     strb r2, [r5, #7]
     movs r0, #0
     movs r1, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     ldrb r0, [r5, #7]
     cmp r0, #0xff
     bne _08107DBA
@@ -33471,7 +33469,7 @@ _08107DC8:
     strb r2, [r5, #7]
     movs r0, #0
     movs r1, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     ldrb r0, [r5, #7]
     cmp r0, #0x40
     bne _08107DFE
@@ -33483,9 +33481,9 @@ _08107DC8:
     strb r0, [r5, #9]
     movs r3, #0
     strb r3, [r6, #0xe]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     movs r0, #0
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     bl sub_08107E38
     bl sub_08107E58
     bl sub_08107F00
@@ -33649,7 +33647,7 @@ sub_08107F00:
     lsls r1, r1, #2
     ldr r0, _08107F2C
     ldr r0, [r0, r1]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _08107F24:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
@@ -33665,7 +33663,7 @@ dat_08107F30:
     .thumb_func
 sub_08107F58:
     push {r4, r5, r6, r7, lr}
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     ldrh r0, [r6, #0x30]
     adds r0, #2
     ldrb r1, [r5, #3]
@@ -33682,7 +33680,7 @@ sub_08107F58:
     ands r0, r1
     lsls r0, r0, #1
     ldrh r0, [r7, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
 _08107F82:
     pop {r4, r5, r6, r7, pc}
 _08107F84:
@@ -33754,9 +33752,9 @@ sub_08107FF0:
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x90
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -33766,7 +33764,7 @@ sub_08107FF0:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldr r4, _08108054
     ldrb r0, [r6, #0xd]
     lsls r0, r0, #1
@@ -33842,8 +33840,8 @@ sub_081080B0:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _081080CE
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _081080CE:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -33878,8 +33876,8 @@ _081080E6:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108114
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108114:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -33919,8 +33917,8 @@ _08108154:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108164
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108164:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -33939,8 +33937,8 @@ sub_0810816C:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _0810818A
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _0810818A:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -33963,8 +33961,8 @@ sub_08108190:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _081081BA
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _081081BA:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -33982,8 +33980,8 @@ sub_081081C0:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _081081DE
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _081081DE:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -34012,8 +34010,8 @@ _08108204:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108214
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108214:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -34043,8 +34041,8 @@ sub_0810821C:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108250
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108250:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -34063,8 +34061,8 @@ sub_08108258:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108276
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108276:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -34081,8 +34079,8 @@ sub_0810827C:
     ldr r1, [r5, #0x10]
     cmp r0, r1
     beq _08108296
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08108296:
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
@@ -34198,9 +34196,9 @@ sub_08108350:
     movs r0, #0x12
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xa0
     strb r0, [r7, #0x15]
     ldr r0, _081083BC
@@ -34208,7 +34206,7 @@ sub_08108350:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #3
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldr r4, _081083B0
     ldrb r0, [r6, #0xd]
     lsls r0, r0, #1
@@ -34251,8 +34249,8 @@ sub_081083C0:
     mov lr, pc
     bx r0
     bl sub_081085B8
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
     .hword 0x0000
@@ -34314,8 +34312,8 @@ _08108446:
 _08108458:
     movs r0, #4
     str r0, [r5, #0xc]
-    bl sub_08002D3A
-    bl sub_08002F3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     ldrh r0, [r6, #0x30]
     adds r0, #2
     bl sub_080540AA
@@ -34356,8 +34354,8 @@ _081084A8:
     str r0, [r5, #0xc]
     b _081084AE
 _081084AE:
-    bl sub_08002D3A
-    bl sub_08002F3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_08108680
     bl sub_081085DC
     bl sub_08108600
@@ -34377,8 +34375,8 @@ _081084D2:
     movs r0, #0
     str r0, [r5, #0xc]
     movs r0, #0xa
-    bl sub_08002CE6
-    bl sub_08002F3A
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_081086D4
     bl sub_081085DC
     bl sub_08108600
@@ -34398,8 +34396,8 @@ _081084FE:
     movs r0, #0
     str r0, [r5, #0xc]
     movs r0, #0xa
-    bl sub_08002CE6
-    bl sub_08002F3A
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_08108680
     bl sub_081085DC
     bl sub_08108600
@@ -34419,8 +34417,8 @@ _0810852A:
     movs r0, #0
     str r0, [r5, #0xc]
     movs r0, #0xa
-    bl sub_08002CE6
-    bl sub_08002F3A
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_08108680
     bl sub_081085DC
     bl sub_08108600
@@ -34440,7 +34438,7 @@ _08108556:
     movs r0, #0
     str r0, [r5, #0xc]
     movs r0, #0xa
-    bl sub_08002CE6
+    bl sub_08002CE6   @ SpriteObj_EnableAlphaBlend
     bl sub_08108704
     bl sub_08108680
     bl sub_081085DC
@@ -34460,8 +34458,8 @@ _08108582:
     strb r4, [r5]
     movs r0, #0
     str r0, [r5, #0xc]
-    bl sub_08002D3A
-    bl sub_08002F3A
+    bl sub_08002D3A   @ SpriteObj_DisableAlphaBlend
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     bl sub_08108680
     bl sub_081085DC
     bl sub_08108600
@@ -34560,7 +34558,7 @@ _0810862A:
     adds r4, #1
     cmp r4, #0x19
     blt _08108622
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 
@@ -34596,7 +34594,7 @@ _0810866A:
     adds r4, #1
     cmp r4, #0x19
     blt _08108662
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _0810867C:
@@ -34677,7 +34675,7 @@ _081086FE:
     .thumb_func
 sub_08108704:
     push {r4, r5, r6, r7, lr}
-    bl sub_08002F3A
+    bl sub_08002F3A   @ SpriteObj_ClearFlashColor
     ldr r7, _08108720
     mov r0, sl
     ldr r0, [r0, #0x24]
@@ -34686,7 +34684,7 @@ sub_08108704:
     ands r0, r1
     lsls r0, r0, #1
     ldrh r0, [r7, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     pop {r4, r5, r6, r7, pc}
 _08108720:
     .word dat_08108724
@@ -34781,7 +34779,7 @@ sub_081087A8:
     movs r2, #2
     movs r4, #0xc
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     movs r0, #0
     str r0, [r5, #0x10]
@@ -34863,7 +34861,7 @@ _0810884E:
     movs r2, #2
     movs r4, #1
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r0, r1, r2, r3, r4}
     subs r2, #1
     bgt _08108864
@@ -34918,9 +34916,9 @@ sub_081088A8:
     movs r0, #0x11
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xb0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -34930,7 +34928,7 @@ sub_081088A8:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
@@ -35113,7 +35111,7 @@ sub_08108A20:
     ldr r4, _08108A3C
     lsls r0, r0, #1
     ldrh r0, [r4, r0]
-    bl sub_08002F22
+    bl sub_08002F22   @ SpriteObj_SetFlashColor
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08108A3C:
@@ -35154,9 +35152,9 @@ sub_08108A88:
     movs r0, #0x13
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0x80
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -35166,7 +35164,7 @@ sub_08108A88:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #2
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #4
     strb r0, [r5, #8]
     bl sub_08108AC8
@@ -35191,7 +35189,7 @@ sub_08108AC8:
     ldrh r1, [r6, #0x34]
     lsls r1, r1, #2
     ldr r0, [r0, r1]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     bl sub_0800285C   @ BN4_SPRITE_UPDATE
     pop {pc}
     .hword 0x0000
@@ -35243,10 +35241,10 @@ sub_08108B30:
     ldr r1, _08108B80
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #1
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
-    bl sub_08002D80
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0xf0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -35256,7 +35254,7 @@ sub_08108B30:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x78
     strh r0, [r7, #0xc]
     movs r0, #0x4c
@@ -35304,7 +35302,7 @@ sub_08108BAC:
     movs r0, #0
     movs r1, #0xff
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #0xff
     strb r0, [r5, #6]
     movs r0, #4
@@ -35328,7 +35326,7 @@ _08108BDE:
     movs r2, #0x40
     adds r1, r0, #0
     movs r0, #0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -35340,7 +35338,7 @@ sub_08108BEC:
     strb r1, [r5, #8]
     movs r1, #0
     strb r1, [r5, #9]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     bl sub_08108CD4
     movs r0, #0xa1
     strb r0, [r5]
@@ -35377,11 +35375,11 @@ sub_08108C28:
     bl sub_0804E558
     movs r0, #0xa3
     strb r0, [r5]
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     movs r1, #0x40
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #0x40
     strb r0, [r5, #6]
     movs r0, #4
@@ -35407,7 +35405,7 @@ _08108C6C:
     movs r2, #0x40
     adds r1, r0, #0
     movs r0, #0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
 
     .global sub_08108C78
@@ -35419,7 +35417,7 @@ sub_08108C78:
     strb r0, [r5, #6]
     cmp r0, #0x40
     blt _08108C96
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     bl sub_08054070
     movs r0, #0xff
     strb r0, [r6, #0xf]
@@ -35429,7 +35427,7 @@ _08108C96:
     adds r2, r0, #0
     movs r1, #0xff
     movs r0, #0
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -35450,14 +35448,14 @@ sub_08108CAC:
     ldr r3, _08108CD0
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     movs r0, #3
     movs r1, #5
     movs r2, #3
     movs r3, #0
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r4, r5, r6, r7, pc}
 _08108CD0:
     .word dat_086D5FDC
@@ -35474,7 +35472,7 @@ sub_08108CD4:
     ldr r3, _08108CF0
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08108CF0:
@@ -35490,7 +35488,7 @@ sub_08108CF4:
     movs r3, #0
     movs r4, #0x18
     movs r5, #9
-    bl sub_08001E18   @ BN4_BG_FILL_RECT
+    bl sub_08001E18   @ BgFillRect
     pop {r4, r5, r6, r7, pc}
 
     .global sub_08108D08
@@ -35525,9 +35523,9 @@ sub_08108D30:
     movs r0, #0x14
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     ldrb r0, [r6, #0xd]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0xc0
     strb r0, [r7, #0x15]
     movs r0, #0
@@ -35537,8 +35535,8 @@ sub_08108D30:
     movs r0, #1
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
-    bl sub_08002CBE
+    bl sub_08002E80   @ SpriteObj_SetPriority
+    bl sub_08002CBE   @ SpriteObj_SetMode2Bits
     ldr r4, _08108D88
     ldrb r0, [r6, #0xd]
     lsls r0, r0, #1
@@ -35609,10 +35607,10 @@ sub_08108DCC:
     movs r0, #0x12
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     ldrb r0, [r6, #0xd]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
-    bl sub_08002D80
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
@@ -35627,7 +35625,7 @@ sub_08108DCC:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0
     strh r0, [r7, #0xc]
     movs r0, #0
@@ -35681,7 +35679,7 @@ sub_08108E54:
     ldr r3, _08108E90
     movs r4, #0xc
     movs r5, #5
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     movs r0, #0
     str r0, [r5, #0x10]
@@ -35755,7 +35753,7 @@ _08108EE6:
     movs r2, #2
     movs r4, #1
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r0, r1, r2, r3, r4}
     subs r2, #1
     bgt _08108EFA
@@ -35804,10 +35802,10 @@ sub_08108F34:
     movs r0, #0x10
     bl sub_08002908   @ BN4_MENU_SPRITE_SET
     movs r0, #0
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
-    bl sub_08002D80
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
@@ -35822,7 +35820,7 @@ sub_08108F34:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #0
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     ldrh r0, [r6, #0x34]
     lsls r0, r0, #4
     adds r0, #8
@@ -35877,7 +35875,7 @@ sub_08108FC0:
     ldr r3, _08108FFC
     movs r4, #0xc
     movs r5, #5
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r5}
     movs r0, #0
     str r0, [r5, #0x10]
@@ -35948,7 +35946,7 @@ _0810904A:
     movs r2, #2
     movs r4, #1
     movs r5, #2
-    bl sub_08001DFC
+    bl sub_08001DFC   @ IwramBgCopyTilemap1
     pop {r0, r1, r2, r3, r4}
     subs r2, #1
     bgt _0810905E
@@ -36024,9 +36022,9 @@ _081090EC:
     subs r0, #4
     ldr r1, _08109138
     ldrb r0, [r1, r0]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     movs r0, #0
     str r0, [r5, #0xc]
     str r0, [r5, #0x10]
@@ -36044,7 +36042,7 @@ _081090EC:
     movs r0, #0
     strb r0, [r7, #0xa]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #4
     strb r0, [r5, #8]
     movs r0, #0
@@ -36214,8 +36212,8 @@ _0810926E:
     bne _08109286
     movs r0, #1
     str r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _08109286:
     ldrb r0, [r6, #0xc]
     subs r0, #0x51
@@ -36288,8 +36286,8 @@ _081092F6:
     bne _0810930E
     movs r0, #1
     str r0, [r5, #0x10]
-    bl sub_08002E10
-    bl sub_0800283C
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
 _0810930E:
     ldr r0, [r6, #0x30]
     tst r0, r0
@@ -36425,7 +36423,7 @@ _081093F0:
     adds r3, r2, #0
     lsrs r3, r4
     bics r0, r3
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
 _081093FC:
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
@@ -36549,20 +36547,20 @@ _081094FC:
     ldrb r0, [r5, #3]
     ldr r1, _08109578
     ldrb r0, [r1, r0]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldrb r0, [r5, #3]
     tst r0, r0
     bne _08109526
     ldr r0, _0810959C
-    bl sub_0800303E
+    bl sub_0800303E   @ SpriteObj_SetField30
 _08109526:
     ldrb r0, [r5, #3]
     lsls r0, r0, #2
     ldr r1, _0810958C
     ldr r0, [r1, r0]
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     ldrb r0, [r5, #4]
     ldr r1, _08109584
     ldrb r0, [r1, r0]
@@ -36582,7 +36580,7 @@ _08109526:
     ldrh r0, [r1, r0]
     strh r0, [r7, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x2e
     strh r0, [r7, #0xc]
     movs r0, #0x58
@@ -36696,11 +36694,11 @@ sub_08109640:
     push {lr}
     movs r0, #0x90
     strb r0, [r5, #6]
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     movs r1, #0x90
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #8
     strb r0, [r5, #9]
     pop {pc}
@@ -36719,13 +36717,13 @@ sub_0810965C:
     strb r1, [r5, #6]
     movs r1, #0
     strb r1, [r5, #9]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {pc}
 _08109676:
     adds r1, r0, #0
     movs r0, #0
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -36843,10 +36841,10 @@ _08109732:
     bl sub_080540AA
     push {r5}
     adds r5, r1, #0
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _081097F0
     orrs r0, r1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r5}
     movs r0, #1
     bl sub_080540AA
@@ -36882,7 +36880,7 @@ _08109758:
     push {r5}
     adds r5, r1, #0
     bl sub_08109640
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _081097F0
     bics r0, r1
     ldr r1, _081097F4
@@ -36896,7 +36894,7 @@ _081097B8:
     subs r6, #1
     bgt _081097B8
 _081097C0:
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r5}
     movs r0, #1
     bl sub_080540AA
@@ -36952,7 +36950,7 @@ sub_08109804:
 _0810982E:
     push {r0, r1}
     ldr r2, _081099B4
-    bl sub_0800087C
+    bl sub_0800087C   @ DmaQueue_PushMode2
     pop {r0, r1}
     movs r4, #0xe0
     adds r0, r0, r4
@@ -37084,7 +37082,7 @@ _0810990C:
     adds r0, r6, #0
     bl sub_08000A38   @ memory_bcdConvert
     adds r4, r0, #0
-    bl sub_08000A94
+    bl sub_08000A94   @ CountBcdDigits
     adds r6, r0, #0
 _0810991A:
     mov r3, r8
@@ -37394,9 +37392,9 @@ _08109B88:
     lsrs r0, r0, #2
     ldr r1, _08109C08
     ldrb r0, [r1, r0]
-    bl sub_08002E10
-    bl sub_0800283C
-    bl sub_08002FE2
+    bl sub_08002E10   @ SpriteObj_SetAnimIndex_Alt
+    bl sub_0800283C   @ IwramSpriteCall_632C_Obj
+    bl sub_08002FE2   @ SpriteObj_SetFlag3Bit2
     ldr r1, _08109C0C
     ldrb r0, [r5, #4]
     lsrs r0, r0, #2
@@ -37415,7 +37413,7 @@ _08109B88:
     ldrh r0, [r1, r0]
     strh r0, [r7, #8]
     movs r0, #1
-    bl sub_08002E80
+    bl sub_08002E80   @ SpriteObj_SetPriority
     movs r0, #0x2e
     strh r0, [r7, #0xc]
     movs r0, #0x58
@@ -37524,11 +37522,11 @@ sub_08109C94:
     push {lr}
     movs r0, #0x90
     strb r0, [r5, #6]
-    bl sub_08002D80
+    bl sub_08002D80   @ SpriteObj_AllocAffine
     movs r0, #0
     movs r1, #0x90
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     movs r0, #8
     strb r0, [r5, #9]
     pop {pc}
@@ -37547,13 +37545,13 @@ sub_08109CB0:
     strb r1, [r5, #6]
     movs r1, #0
     strb r1, [r5, #9]
-    bl sub_08002DBE
+    bl sub_08002DBE   @ SpriteObj_FreeAffine
     pop {pc}
 _08109CCA:
     adds r1, r0, #0
     movs r0, #0
     movs r2, #0x40
-    bl sub_08002C90
+    bl sub_08002C90   @ SpriteObj_SetAffineParams
     pop {pc}
     .hword 0x0000
 
@@ -37642,21 +37640,21 @@ sub_08109D50:
     subs r0, r0, r4
     ldr r4, _08109D88
     ldrb r4, [r4, r0]
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _08109D8C
     orrs r0, r1
     movs r2, #0x80
     lsrs r2, r4
     bics r0, r2
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
 _08109D74:
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _08109D8C
     bics r0, r1
     ldr r1, _08109D90
     orrs r0, r1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08109D88:
@@ -37677,22 +37675,22 @@ sub_08109D94:
     bne _08109DBC
     adds r4, r2, #0
     adds r4, #1
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _08109DD0
     orrs r0, r1
     movs r2, #0x80
     lsls r2, r2, #6
     lsrs r2, r4
     bics r0, r2
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
 _08109DBC:
-    bl sub_08003004
+    bl sub_08003004   @ SpriteObj_GetSubOamMask
     ldr r1, _08109DD0
     bics r0, r1
     ldr r1, _08109DD4
     orrs r0, r1
-    bl sub_08002FF8
+    bl sub_08002FF8   @ SpriteObj_SetSubOamMask
     pop {r4, r5, r6, r7, pc}
     .hword 0x0000
 _08109DD0:
