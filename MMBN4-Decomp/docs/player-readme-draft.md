@@ -60,6 +60,10 @@ Existing saves from the same version work. Shop prices update when you load one.
 ## Known issues
 
 - **Public builds:** the Duo and Grand Prix Power chips have names and descriptions but no picture.
+- **Chip Library:** Duo and Grand Prix Power can be obtained and used in battle, but they do not appear in the Chip Library (they are not required for any completion star).
+- **Bass drops:** beating Bass awards both versions' Bass chips, though the results screen only names one (the other is added silently).
+
+Full list (including port issues): `docs/known-issues.md`.
 
 ## Credits
 

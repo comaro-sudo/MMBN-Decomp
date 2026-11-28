@@ -10,10 +10,10 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
   - Docs: `decomp/notes/handoff-2026-11-27-claude-decomp.md`.
 - **Patch:** every package PASSes (see `patch/README.md`). Release dry run OK; checklist §2 ticked (`b507de8`).
 - **Parallel agents:** batches 1–3 merged. Batch 4 (`MMBN4-Decomp/docs/tasks-claude-agent-2026-11-27d.md`):
-  - **merged:** tasks 1+2 (`f90e7de` Tuner soft-lock fix; `55edb4f` status page-3 fix, refined to fill `0x18` bytes so `+0x18` is untouched), task 3 Library research (`e565508`), task 4 existing saves (`ba58f86`), task 5 mGBA test (`docs/tests/mgba.md`), task 6 smoke checks (`5c5d86f`, plus `check_status_pages` updated for 2-page 9/11-Soul & 3-page 13-Soul saves — all 5 smoke checks PASS), task 10 BN1 resources (`e0e4d1b`);
-  - **not finished (worktrees were empty/unstarted when previous session ended):** tasks 7+9 (`docs/known-issues.md` + player README in-game checks), task 8 (C1–C5 matrix on the `--public` release build).
+  - **done & merged:** tasks 1+2 (`f90e7de` Tuner soft-lock fix; `55edb4f` + `1d1be30` status page-3 `0x18`-byte fill), task 3 Library research (`e565508`), task 4 existing saves (`ba58f86`), task 5 mGBA test (`565af34`, `docs/tests/mgba.md`), task 6 smoke checks (`5c5d86f` + `1d1be30`, all 5 checks PASS on `--public`), task 8 `--public` release check (`docs/tests/c1-c5-release.md`, 10/10 `smoke.py` checks PASS; C3a/C3b/C4 battle checks not re-run), task 9 known issues (`docs/known-issues.md` + both player README drafts updated), task 10 BN1 resources (`e0e4d1b`);
+  - **remaining:** task 7 (5 in-game "Where to find" visual spot-checks on the PC port).
   - All `d*` worktrees (junctions safely removed first) and `claude-agent/d*` branches have been cleaned up.
-- `main` is ahead of `origin` and **not pushed** (ask the owner before pushing).
+- `origin/main` is synced through `1d1be30` (plus the new `docs/known-issues.md`, `docs/tests/c1-c5-release.md`, checklist §2 refresh commit).
 
 ## Key Decisions & Constraints
 

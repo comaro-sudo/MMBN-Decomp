@@ -60,6 +60,10 @@ Las partidas guardadas existentes de la misma versión funcionan. Los precios de
 ## Problemas conocidos
 
 - **Versiones públicas:** los chips Duo y Grand Prix Power tienen nombre y descripción, pero no imagen.
+- **Biblioteca de chips (Chip Library):** Duo y Grand Prix Power se pueden conseguir y usar en combate, pero no aparecen en la biblioteca (no hacen falta para ninguna estrella de completado).
+- **Botín de Bass:** vencer a Bass da los chips de Bass de ambas versiones, aunque la pantalla de resultados solo nombra uno (el otro se añade en silencio).
+
+Lista completa (incluidos los puertos): `docs/known-issues.md`.
 
 ## Créditos
 
