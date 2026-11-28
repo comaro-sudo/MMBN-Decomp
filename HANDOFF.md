@@ -44,12 +44,9 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
 ## Immediate Next Steps
 
 1. Ask the owner to push `main` to `origin` and confirm the open owner decisions listed above.
-2. Run remaining batch 4 tasks: `d8` (C1–C5 matrix on `--public` release builds → `docs/tests/c1-c5-release.md`, then tick checklist §3) and `d79` (`docs/known-issues.md` + player README in-game checks).
-3. Re-run `python patch/tools/release.py` to refresh `--public` release SHA-1s after the `d12` fixes.
+2. Batch 4 task 7: the 5 in-game "Where to find" spot-checks on the PC port (see `docs/tasks-claude-agent-2026-11-27d.md`).
+3. (Done: release SHA-1s refreshed after the d12 fixes, `docs/release-checklist.md` §2.)
 
-## Still open after the 2026-11-28 merge (Claude, read-only check)
+## Resolved 2026-11-28: the page-3 fill and `0x0201D010` (Claude)
 
-- **Status page 3 fix (`55edb4f`, narrowed to `0x18` in `1d1be30`):** the fill now covers `0x0201D000`–`0x0201D017`, which still includes `0x0201D010`–`0x0201D017`.
-  - `code_03.s` (~lines 1174, 15371, 35785) references `0x0201D010` and `0x0201D020` as separate buffers.
-  - Nobody has checked what `0x0201D010` holds while the status screen is open. Tests pass, so this is a risk, not a confirmed bug.
-  - If `0x0201D010` turns out to be live, fill `0x0D` bytes (13 Souls) and make the page-3 test read `buf[12]` only.
+- **Not a problem.** On the status screen, `0x0201D000`–`0x0201D01F` is one 32-byte status buffer: `sub_08035A7C` (`code_03.s` ~line 1162, next to the status code) restores it as a block with `CopyByEightWords(0x0201D020 -> 0x0201D000, 0x20)`. The `0x0201D000`/`0x0201D010` pointer pair in `dat_0803D4AC` belongs to another screen, which reuses this scratch RAM at another time. The `0x18`-byte fill (`1d1be30`) stays inside the status buffer and before the page byte at `+0x18`.
