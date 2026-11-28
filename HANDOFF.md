@@ -11,7 +11,7 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
 - **Patch:** every package PASSes (see `patch/README.md`). Release dry run OK; checklist §2 ticked (`b507de8`).
 - **Parallel agents:** batches 1–3 merged. Batch 4 (`MMBN4-Decomp/docs/tasks-claude-agent-2026-11-27d.md`):
   - **done & merged:** tasks 1+2 (`f90e7de` Tuner soft-lock fix; `55edb4f` + `1d1be30` status page-3 `0x18`-byte fill), task 3 Library research (`e565508`), task 4 existing saves (`ba58f86`), task 5 mGBA test (`565af34`, `docs/tests/mgba.md`), task 6 smoke checks (`5c5d86f` + `1d1be30`, all 5 checks PASS on `--public`), task 8 `--public` release check (`docs/tests/c1-c5-release.md`, 10/10 `smoke.py` checks PASS; C3a/C3b/C4 battle checks not re-run), task 9 known issues (`docs/known-issues.md` + both player README drafts updated), task 10 BN1 resources (`e0e4d1b`);
-  - **remaining:** task 7 (5 in-game "Where to find" visual spot-checks on the PC port).
+  - **task 7 done** (`f3d5f5b`): 4 of 5 checks confirmed in-game, both READMEs corrected; **open:** the Space Center jack-in route to Meteor Comp 1 after the ending (not found in-game; the README keeps it marked unverified).
   - All `d*` worktrees (junctions safely removed first) and `claude-agent/d*` branches have been cleaned up.
 - `origin/main` is synced through `1d1be30` (plus the new `docs/known-issues.md`, `docs/tests/c1-c5-release.md`, checklist §2 refresh commit).
 
@@ -43,9 +43,9 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
 
 ## Immediate Next Steps
 
-1. Ask the owner to push `main` to `origin` and confirm the open owner decisions listed above.
-2. Batch 4 task 7: the 5 in-game "Where to find" spot-checks on the PC port (see `docs/tasks-claude-agent-2026-11-27d.md`).
-3. (Done: release SHA-1s refreshed after the d12 fixes, `docs/release-checklist.md` §2.)
+1. Verify the Space Center route into Meteor Comp 1 after the ending (find the jack-in point in map `04,09`, or the real route), and fix the player READMEs.
+2. Get the owner's decisions: the patch licence, the public chip art, whether Duo and GP Power appear in the Library (`docs/tests/library-flags.md`: a 3-part feature), the version scheme, the BN1/Principia questions.
+3. Then: the first public release (`docs/release-checklist.md` §1 and §3 leftovers: a full playthrough and credits), or decomp work (`decomp/notes/handoff-2026-11-27-claude-decomp.md`).
 
 ## Resolved 2026-11-28: the page-3 fill and `0x0201D010` (Claude)
 
