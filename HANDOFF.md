@@ -14,7 +14,8 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
   - **done, NOT merged:** tasks 1+2 on branch `claude-agent/d12` (worktree `C:\proyectos\MMBN-wt\d12`):
     - `87510c1`: the Tuner soft-lock fix. FC 0B now ends through the script jump `sub_0804E610` to entry 0x0F;
     - `ce66f09`: the status page 3 fix, widening the game's 0xFF fill of `0x0201D000` from 8 to 0x20 bytes at RS `0x080351AC` / BM `0x080351B4`;
-  - **still running:** task 5 (mGBA, `d5`), task 6 (smoke checks, `d6`), tasks 7+9 (`d79`), task 8 (C1–C5 on the release build, `d8`).
+  - **merged after this was written:** task 6 smoke checks (`a59f2f7` cherry-picked; Tuner in BM + Mystery Data pickups, all 5 checks pass);
+  - **still running:** task 5 (mGBA, `d5`), tasks 7+9 (`d79`), task 8 (C1–C5 on the release build, `d8`).
 - `main` is about 75 commits ahead of `origin`, **not pushed** (ask the owner).
 
 ## Key Decisions & Constraints
