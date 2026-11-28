@@ -56,7 +56,7 @@ freq_tuner_id_raise:
 ; -- FC 0B 00: cycle Frequency Tuner mode (0 -> 1 -> 2 -> 3 -> 0) and play confirm SFX --
 .align 2
 freq_tuner_fc_cycle:
-    push    r4, r5, r6, r7, r14
+    push    r5, r6, r7, r14         ; r4 is not saved: the jump below sets it
     mov     r6, 0
     ldr     r0, =0x0E58
     ldr     r3, =TEST_EVENT_FLAG | 1
@@ -98,8 +98,13 @@ freq_tuner_fc_cycle:
     mov     r0, 0x73                ; confirm SFX
     ldr     r3, =PLAY_SFX | 1
     bl      freq_tuner_call_r3
-    pop     r4, r5, r6, r7
-    add     r4, 3                   ; advance past FC 0B 00
+    ; Leave the script like the "No" answer does: jump to entry 0x0F (a lone E5) with the game's own
+    ; script-jump routine (sub_0804E610; RS 0x0804E610, BM 0x0804E618), which resets the text-box state. Just
+    ; advancing r4 to the E5 left the box open and empty after "Yes" (the choice's state was never cleared).
+    mov     r1, 0x0F
+    ldr     r3, =(CLOSE_DIALOGUE - 0x50) | 1
+    bl      freq_tuner_call_r3
+    pop     r5, r6, r7
     mov     r0, 1
     pop     r15
 
