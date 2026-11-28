@@ -31,16 +31,29 @@
 - `decomp/asm/code_09.s`, `decomp/asm/code_03.s`, `decomp/symbols/names.txt`.
 - New tools: `decomp/tools/emit_enemy_held_chips.py`, `emit_formations.py`, `emit_chip_code_lists.py`.
 
+## Regeneration pipeline (done, `27de1e7`): read this before editing asm
+- **`tools/regen.sh` rebuilds the shared asm tree from the two ROMs alone** and keeps both builds byte-identical:
+  1. a fast `disasm.py` pass over every segment, then a verified pass. The verify loop needs a consistent raw tree, so the passes can't be merged;
+  2. `merge_bm.py`;
+  3. every emitter, repeated until nothing changes (they seed from each other's labels). `emit_spawn_lists.py` runs first, so the cutscene emitters can't claim its lists;
+  4. the single-table emitters, then both compares.
+- **Hand-maintained segments, skipped by default:** `intr_table` (carved by hand) and `code_10` (the matching C in `src/*.c` is wired in as `.include "c/*.s"`). Naming them on the command line regenerates them, and you then redo those hand edits.
+- **What it changed when adopted (84.3% → 86.5%):**
+  - 9 segments are identical except for name comments: `disasm.py` applies `names.txt` at every call and label, so **add names to `names.txt` and regenerate** rather than editing labels by hand;
+  - `code_04`–`code_06` gained 25.9 KB: spawn lists 6,432 B, plus more cutscene and map-script passes;
+  - the only 76 bytes lost were false cutscene decodes of `BN4_MAP_BACKDROPS` data.
+- **Rules for new tools:**
+  - an emitter must only replace `incrom` lines, and must be safe to run again;
+  - add it to `regen.sh` in the right place;
+  - data macros go in `include/data_macros.inc` (loaded once by `macros.inc`: GNU as needs a macro defined before its first use, and `rom.s` assembles the segments in order).
+- New this round: `BN4_FONT_WIDTHS` (2 fonts × 441 glyph widths; `Text_DrawGlyph` `0x08053B74`), via `tools/emit_font_widths.py`.
+
 ## Open Issues / Blockers
-- **The emitters can't be re-run from a clean `disasm.py` output** in a known order: there is no pipeline script. A full regeneration of a segment would drop every emitter's output, mine included. Worth a `tools/regen_segment.sh` that runs `disasm.py rs/bm` + `merge_bm.py` + every emitter in order, then compares.
-- **False positives in `emit_cutscene_scripts.py`** (`code_05`):
-  - About 8 KB of `incrom` right after `csc_end` lines are **`Object_SpawnList` lists** (`0x080034E4`): 20-byte records `{u8 spawn kind, u8 arg, u16 pad, s32 x, s32 y, s32 z (16.16), u32 param}`, ended by a kind of `0xFF`.
-  - The emitter read their `05 06 00` field bytes as `csc_b1 0x05, 0x06; csc_end`, e.g. at `0x080715D8` and `0x080716EC`.
-  - Example: `sub_08071574` → `dat_0807158C`, 16 list pointers indexed by map.
-  - Fixing it needs the cutscene emitter to skip `Object_SpawnList` targets, then a regeneration (see above). Bytes are still identical, so there's no build risk, only wrong labels.
-- `code_03` `0x0804620C` (2,952 B, two pointers from the 16-byte descriptor table at `0x0804563C`) looks like a byte grid (`00`/`01`). Not decoded.
+- Remaining false positives from `emit_cutscene_scripts.py` (e.g. `csc_b1 0x0A, 0x0A` runs inside `BN4_MAP_BACKDROPS` at `0x08085C24`). They're byte-safe, but the labels are wrong. A stricter seed rule (e.g. require a real terminator within N ops, or skip seeds that are entries of known data tables) would remove them; then rerun `regen.sh`.
+- `code_03` `0x0804620C` (2,952 B, two pointers from the 16-byte descriptor table at `0x0804563C`) looks like a byte grid. Not decoded.
 
 ## Immediate Next Steps
-1. A regeneration pipeline script; then fix the `Object_SpawnList` false positives and emit those lists (≈8 KB in `code_05`, likely more in `code_04*`/`code_06`).
-2. The remaining large single tables: `code_05` `0x0808C71A` (1,374 B, after code; looks like mixed bytecode); `code_03` `0x0804620C` (2,952 B, byte grid); `code_06` `0x080A481C` (956 B), `0x080AE050` (888 B), `0x0809CEC8` (840 B).
-3. Trace what `BN4_CHIP_CODE_LISTS`' four lists are for (the readers of `dat_0804DE0C`).
+1. Use `tools/regen.sh` for every regeneration from now on. Commit `asm/` only after both compares are OK.
+2. Tighten the cutscene emitter's seed rule (above), then regenerate.
+3. Remaining single tables: `code_05` `0x0808C71A` (1,374 B, after code, mixed bytecode); `code_03` `0x0804620C`; `code_06` `0x080A481C` (956 B), `0x080AE050` (888 B).
+4. Trace what `BN4_CHIP_CODE_LISTS`' four lists are for (the readers of `dat_0804DE0C`).
