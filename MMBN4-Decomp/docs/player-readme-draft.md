@@ -47,11 +47,11 @@ Violet Eclipse is a fan patch for **Mega Man Battle Network 4**. It lets you fin
 | What | Where |
 |---|---|
 | Rematch operators (9) and the Frequency Tuner | Inside Higsby's shop, ACDC Town |
-| 2 more operators and the trash can (JunkMan) | ACDC Town street; the trash can is on the sidewalk at the front-right corner of Higsby's, under the awning |
-| Friendly matches (9: three per tournament) | DenDome Hall (Den Battle), the Castillo waiting room (Eagle/Hawk), the Colosseum lobby (Red Sun/Blue Moon). They stand there during the first two rounds of each tournament (Dex only after the AquaMan fight, Raika only before the Chaud fight) and disappear once you own that Navi's Soul |
-| Duo's signal, a crest-shaped marker (rematches) | Meteor Comp 1, right by the jack-in point, after the ending (jack in at the Space Center) |
-| Z-Saver | A Blue Mystery Data in a hidden red dead-end spur of Undernet 1, tucked under the western yellow bridge |
-| Grand Prix Power | A Blue Mystery Data on the quiet round dead-end pad on the lower-left peninsula of ACDC Area 2 |
+| 2 more operators (Raika, Raoul) and the trash can (JunkMan) | ACDC Town, on the street just outside Higsby's: the two operators stand on the path to the right of the shop front, and the trash can (a small purple bin) is next to them, at the corner of the plaza with the pink statue |
+| Friendly matches (9: three per tournament) | DenDome Hall (Den Battle), the Castillo waiting room (Eagle/Hawk), and the open-air stone courtyard with sphinx statues where the Red Sun/Blue Moon tournament waits (the patch notes call it the Colosseum lobby). They are there from the start of a tournament until you have won your second match there (they are gone for the Final), and each disappears once you own that Navi's Soul. Two have a tighter window: Dex (Den Battle) appears only after you win your first match, and Raika (Red Sun/Blue Moon) only before it |
+| Duo's signal, a green cube with pink X marks (rematches) | Meteor Comp 1, right next to the white swirl where you arrive, after the ending (jack in at the Space Center) |
+| Z-Saver | A Blue Mystery Data (a pale-blue diamond) on a small round pad at the west end of the long yellow bridge, in the western part of Undernet 1 |
+| Grand Prix Power | A Blue Mystery Data (a pale-blue diamond) on a narrow white side path in the south of ACDC Area 2, right beside a green Mystery Data on a small round pad |
 
 ## Saves
 

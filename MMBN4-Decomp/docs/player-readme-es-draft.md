@@ -47,11 +47,11 @@ Violet Eclipse es un parche de fans para **Mega Man Battle Network 4**. Te permi
 | Qué | Dónde |
 |---|---|
 | Operadores de revancha (9) y el Frequency Tuner | Dentro de la tienda de Higsby, ACDC Town |
-| 2 operadores más y el cubo de basura (JunkMan) | La calle de ACDC Town; el cubo de basura está en la acera, en la esquina delantera derecha de la tienda de Higsby, bajo el toldo |
-| Combates amistosos (9: tres por torneo) | DenDome Hall (Den Battle), la sala de espera del Castillo (Eagle/Hawk), el vestíbulo del Colosseum (Red Sun/Blue Moon). Están allí durante las dos primeras rondas de cada torneo (Dex solo después del combate contra AquaMan, Raika solo antes del combate contra Chaud) y desaparecen cuando posees el Soul de ese Navi |
-| La señal de Duo, un marcador en forma de escudo (revanchas) | Meteor Comp 1, junto al punto de conexión (jack-in), tras el final (conéctate en el Space Center) |
-| Z-Saver | Un Blue Mystery Data en un ramal sin salida rojo y oculto de Undernet 1, bajo el puente amarillo del oeste |
-| Grand Prix Power | Un Blue Mystery Data en la plataforma redonda, tranquila y sin salida, de la península inferior izquierda de ACDC Area 2 |
+| 2 operadores más (Raika, Raoul) y el cubo de basura (JunkMan) | La calle de ACDC Town, justo fuera de la tienda de Higsby: los dos operadores están en el camino a la derecha del frente de la tienda, y el cubo de basura (un pequeño contenedor morado) está junto a ellos, en la esquina de la plaza de la estatua rosa |
+| Combates amistosos (9: tres por torneo) | DenDome Hall (Den Battle), la sala de espera del Castillo (Eagle/Hawk) y el patio de piedra al aire libre con estatuas de esfinge donde espera el torneo Red Sun/Blue Moon (las notas del parche lo llaman el vestíbulo del Colosseum). Están allí desde que empieza un torneo hasta que ganas tu segundo combate en él (para la Final ya no están), y cada uno desaparece cuando posees el Soul de ese Navi. Dos tienen una ventana más estrecha: Dex (Den Battle) solo aparece después de ganar tu primer combate, y Raika (Red Sun/Blue Moon) solo antes de él |
+| La señal de Duo, un cubo verde con marcas X rosas (revanchas) | Meteor Comp 1, justo al lado del remolino blanco donde apareces, tras el final (conéctate en el Space Center) |
+| Z-Saver | Un Blue Mystery Data (un diamante azul pálido) en una pequeña plataforma redonda en el extremo oeste del largo puente amarillo, en la parte occidental de Undernet 1 |
+| Grand Prix Power | Un Blue Mystery Data (un diamante azul pálido) en un camino lateral blanco y estrecho, en el sur de ACDC Area 2, justo al lado de un Mystery Data verde sobre una pequeña plataforma redonda |
 
 ## Partidas guardadas
 
