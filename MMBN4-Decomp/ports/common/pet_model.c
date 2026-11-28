@@ -34,7 +34,7 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
     m->battle_hp_p2 = (uint16_t) emu_read16(emu, game->ram_battle_navi + 0x40 + 0x30);
 
     if (!game->ram_save_base) return;
-    uint32_t shift = emu_read32(emu, game->ram_save_shift) & 0x1FEu;
+    uint32_t shift = emu_read32(emu, game->ram_save_shift) & 0x1FEu; /* u32 in RAM */
     uint32_t sb = game->ram_save_base + shift;
 
     uint16_t cur_hp = (uint16_t) emu_read16(emu, sb + game->off_cur_hp);
@@ -75,7 +75,7 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
                 uint16_t cid = (uint16_t) (w & 0x1FFu);
                 m->folder[i].chip_id = cid;
                 m->folder[i].code    = (uint8_t) ((w >> 9) & 0x1Fu);
-                if (game->rom_chip_table && cid > 0 && cid < 389) {
+                if (game->rom_chip_table && cid > 0 && cid < game->rom_chip_count) {
                     uint32_t entry = game->rom_chip_table + (uint32_t) cid * 0x2Cu;
                     m->folder[i].element = (uint8_t) emu_read8(emu, entry + 0x04u);
                     m->folder[i].damage  = (uint16_t) emu_read16(emu, entry + 0x1Au);
@@ -87,7 +87,7 @@ void pet_model_update(PetModel* m, Emu* emu, const GameInfo* game, const char* c
 
 bool pet_model_set_tuner(Emu* emu, const GameInfo* game, uint8_t mode) {
     if (!emu || !game || !game->ram_save_base || !(emu_caps(emu) & EMU_CAP_MEMORY)) return false;
-    uint32_t shift = emu_read32(emu, game->ram_save_shift) & 0x1FEu;
+    uint32_t shift = emu_read32(emu, game->ram_save_shift) & 0x1FEu; /* u32 in RAM */
     uint32_t flags_base = game->ram_save_base + shift + game->off_flags;
     write_event_flag(emu, flags_base, 0x0E58u, (mode & 1u) != 0);
     write_event_flag(emu, flags_base, 0x0E59u, (mode & 2u) != 0);

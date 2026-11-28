@@ -45,6 +45,7 @@ Emu* emu_open(const char* rom_path, const char* save_path, int sample_rate) {
     struct mCore* core = emu->core;
     if (!core->init(core)) {
         fprintf(stderr, "emu: core init failed\n");
+        free(core);  /* mCoreFind() allocated it; a failed init() does not free it (deinit would) */
         free(emu);
         return NULL;
     }

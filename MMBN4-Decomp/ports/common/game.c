@@ -23,6 +23,7 @@ static const GameInfo GAMES[] = {
         0x0118,     /* off_flags */
         0x04FC,     /* off_folder1 */
         0x080197EC, /* rom_chip_table */
+        389,        /* rom_chip_count (ROM table ends after id 388; checked in RS US) */
     },
     {
         GAME_BN4_BM_US,
@@ -42,10 +43,11 @@ static const GameInfo GAMES[] = {
         0x0118,     /* off_flags */
         0x04FC,     /* off_folder1 */
         0x080197EC, /* rom_chip_table */
+        389,        /* rom_chip_count (ROM table ends after id 388; checked in RS US) */
     },
 };
 
-static const GameInfo UNKNOWN = { GAME_UNKNOWN, "Unknown game", "Unknown", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+static const GameInfo UNKNOWN = { GAME_UNKNOWN, "Unknown game", "Unknown", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 const GameInfo* game_identify(const char* code) {
     const char* c = strrchr(code, '-');

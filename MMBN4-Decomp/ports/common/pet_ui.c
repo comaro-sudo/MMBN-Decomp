@@ -82,6 +82,18 @@ static void draw_button(const UiDraw* ui, int x, int y, int w, int h, const char
     ui->text(ui->ctx, tx, ty, label, fg);
 }
 
+/* Status tab footer help: the controls differ per platform. */
+#if defined(__3DS__)
+#define PET_HELP_1 "Pad/A/B/L/R/Start/Select = GBA"
+#define PET_HELP_2 "Start+Select = quit"
+#elif defined(__WIIU__)
+#define PET_HELP_1 "Pad/A/B/L/R = GBA  + = Start"
+#define PET_HELP_2 "- = Select"
+#else
+#define PET_HELP_1 "Arrows move  X=A  Z=B  A/S=L/R"
+#define PET_HELP_2 "Tab=fast  F5/F7=state  F1=PET"
+#endif
+
 static void draw_status_tab(const UiDraw* ui, const PetModel* m, int w, int h) {
     const UiColor border   = ui_rgb(40, 120, 190);
     const UiColor cyan     = ui_rgb(0, 210, 255);
@@ -151,8 +163,8 @@ static void draw_status_tab(const UiDraw* ui, const PetModel* m, int w, int h) {
 
     int fy = h - 4 - LINE * 4;
     ui->line(ui->ctx, 6, fy - 4, w - 6, fy - 4, border);
-    draw_line(ui, 6, &fy, "Arrows move  X=A  Z=B  A/S=L/R", muted);
-    draw_line(ui, 6, &fy, "Tab=fast  F5/F7=state  F1=PET", muted);
+    draw_line(ui, 6, &fy, PET_HELP_1, muted);
+    draw_line(ui, 6, &fy, PET_HELP_2, muted);
     draw_line(ui, 6, &fy, "Click tabs / Tuner / Custom chips", muted);
     if (m->status.message) draw_line(ui, 6, &fy, m->status.message, yellow);
 }
