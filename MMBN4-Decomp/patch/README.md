@@ -35,6 +35,25 @@ Text (see [`../plan/text-insertion.md`](../plan/text-insertion.md)):
 - TextPet rewrites only those archives: in place when they still fit, otherwise into `FS_TEXT` (`0x087FC000`–`0x08800000`, set in `defines.asm`);
 - it needs `tools/textpet/` (TextPet with its BN4 plugins and US indexes).
 
+## Smoke test
+
+`patch/test/smoke/smoke.py` drives the PC port headlessly (`mmbn4.exe --test`, scripted input, EWRAM dump) and checks a few packages end to end in both versions, each against the vanilla ROM where that makes sense:
+
+```powershell
+python patch/build.py                      # the patched ROMs
+python ports/pc/build_pc.py                # mmbn4.exe
+python patch/test/smoke/smoke.py           # all checks; -k NAME for one, --list to list them
+```
+
+| Check | What it verifies |
+|---|---|
+| `shop-table` | The new-game shop stock table in the patched ROM: HP Memory 207,700Z → about 83,000Z (83,100Z with the per-line rounding), 34 of 34 WP-A3 prices at 40%, nothing else changed |
+| `shop-migrate` | An existing save loaded in the patched ROM gets its HP Memory prices at 40% (the `SaveLoad` hook) |
+| `status-pages` | On the MegaMan status screen R shows page 2, a second R page 3, L goes back, a third R wraps; vanilla ignores R |
+| `tuner` | Talking to the Frequency Tuner in Higsby's sets flag `0x0E58` (Auto → Tier 1); vanilla sets nothing. Red Sun only: the Blue Moon save edit that moves Lan into Higsby's loads an empty room |
+
+It reads the ROMs from `roms/` and `build/`, and the saves from the gitignored `ref/saves/*.sps`; a check whose save is missing is skipped. Everything it makes (converted and edited saves, dumps, screenshots) lives in a temporary folder that is deleted at the end. Nothing from a ROM is committed. Not covered yet: a Mystery Data pickup (it needs a scripted route through a net map). The inputs are frame-timed, so a check can fail on a very different boot speed.
+
 ## What's in it
 
 | File (`src/common/`) | Package | What it does | Status |
