@@ -46,3 +46,10 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
 1. Ask the owner to push `main` to `origin` and confirm the open owner decisions listed above.
 2. Run remaining batch 4 tasks: `d8` (C1–C5 matrix on `--public` release builds → `docs/tests/c1-c5-release.md`, then tick checklist §3) and `d79` (`docs/known-issues.md` + player README in-game checks).
 3. Re-run `python patch/tools/release.py` to refresh `--public` release SHA-1s after the `d12` fixes.
+
+## Still open after the 2026-11-28 merge (Claude, read-only check)
+
+- **Status page 3 fix (`55edb4f`, narrowed to `0x18` in `1d1be30`):** the fill now covers `0x0201D000`–`0x0201D017`, which still includes `0x0201D010`–`0x0201D017`.
+  - `code_03.s` (~lines 1174, 15371, 35785) references `0x0201D010` and `0x0201D020` as separate buffers.
+  - Nobody has checked what `0x0201D010` holds while the status screen is open. Tests pass, so this is a risk, not a confirmed bug.
+  - If `0x0201D010` turns out to be live, fill `0x0D` bytes (13 Souls) and make the page-3 test read `buf[12]` only.
