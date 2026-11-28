@@ -15,7 +15,7 @@ python3 ports/wiiu/build_wiiu.py
 
 Output: `build/wiiu/mmbn4.rpx` and `build/wiiu/mmbn4.wuhb`. The first run also builds a static GBA-only `build/mgba-wiiu/libmgba.a`. From PowerShell: `wsl.exe -d Ubuntu-24.04 -- bash -lc "cd /mnt/c/proyectos/MMBN-Decomp/MMBN4-Decomp && python3 ports/wiiu/build_wiiu.py"`. To test on a PC, open the `.wuhb` in Cemu (`Cemu.exe -g build/wiiu/mmbn4.wuhb`).
 
-To make a release zip without ROMs, run `python3 ports/wiiu/package_wiiu.py` after building. It writes `build/mmbn4-wiiu.zip` with the `.wuhb`, `NOTICE.txt` and a `LICENSES/` folder (mGBA MPL-2.0 with its source pointer, plus the licences of the mGBA bundled libraries that are linked: inih and blip-buf), read from the gitignored `ext/mgba`. The devkitPro libraries' licences are not confirmed yet (`docs/credits.md` row 14), so check them before a public Wii U release.
+To make a release zip without ROMs, run `python3 ports/wiiu/package_wiiu.py` after building. It writes `build/mmbn4-wiiu.zip` with the `.wuhb`, `NOTICE.txt` and a `LICENSES/` folder (the GPL-3.0 text from `ports/LICENSE`, mGBA MPL-2.0 with its source pointer, plus the licences of the mGBA bundled libraries that are linked: inih and blip-buf), read from the gitignored `ext/mgba`. The devkitPro libraries' licences are not confirmed yet (`docs/credits.md` row 14), so check them before a public Wii U release.
 
 ## SD Card Layout (Aroma)
 

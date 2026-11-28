@@ -20,7 +20,7 @@ Needs VS 2022 Build Tools (ARM64 target), CMake, `ext/mgba` (tag 0.10.5) and `to
 build\pc-arm64\Release\mmbn4.exe [rom.gba]
 ```
 
-Without an argument, run from `MMBN4-Decomp/`: it uses `build/bn4_rs_overhaul.gba`, then `roms/bn4_rs_us.gba`. (Blue Moon needs an explicit path, e.g. `build/bn4_bm_overhaul.gba`.) To make a release zip without ROMs, run `python ports/pc/package_pc.py [--arch x64]` after building: it writes `build/mmbn4-pc-<arch>.zip`, which also holds `NOTICE.txt` and a `LICENSES/` folder (mGBA MPL-2.0, inih, blip-buf, SDL3 zlib), read from the gitignored `ext/` and `tools/` at package time.
+Without an argument, run from `MMBN4-Decomp/`: it uses `build/bn4_rs_overhaul.gba`, then `roms/bn4_rs_us.gba`. (Blue Moon needs an explicit path, e.g. `build/bn4_bm_overhaul.gba`.) To make a release zip without ROMs, run `python ports/pc/package_pc.py [--arch x64]` after building: it writes `build/mmbn4-pc-<arch>.zip`, which also holds `NOTICE.txt` and a `LICENSES/` folder (the GPL-3.0 text from `ports/LICENSE`, mGBA MPL-2.0, inih, blip-buf, SDL3 zlib), read from the gitignored `ext/` and `tools/` at package time.
 
 | Keyboard | Gamepad | GBA |
 |---|---|---|
@@ -65,4 +65,4 @@ mmbn4.exe rom.gba --bench STATE.ss 600 [--save f.sav]
 
 - mGBA is MPL-2.0. It is linked unmodified from `ext/mgba`. Binary releases must ship its licence and point to its source.
 - SDL3 is zlib.
-- The release zip ships `NOTICE.txt` and `LICENSES/`: mGBA's licence with its source pointer, the licences of the mGBA bundled libraries that are linked (inih BSD-3-Clause, blip-buf LGPL-2.1) and SDL3's zlib licence. `package_pc.py` stops if one of them is missing.
+- The release zip ships `NOTICE.txt` and `LICENSES/`: the GPL-3.0 text of the port itself (`ports/LICENSE`), mGBA's licence with its source pointer, the licences of the mGBA bundled libraries that are linked (inih BSD-3-Clause, blip-buf LGPL-2.1) and SDL3's zlib licence. `package_pc.py` stops if one of them is missing.

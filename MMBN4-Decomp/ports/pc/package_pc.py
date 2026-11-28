@@ -12,6 +12,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+GPL_TEXT = ROOT / "ports" / "LICENSE"  # official GPL-3.0 text, unmodified
 
 MGBA_SRC = ROOT / "ext" / "mgba"
 MGBA_URL = "https://github.com/mgba-emu/mgba"
@@ -20,6 +21,10 @@ PROJECT_URL = "https://github.com/comaro-sudo/MMBN-Decomp"
 NOTICE = """Third-party notices (binary release of the MMBN4 Violet Eclipse port)
 
 This package contains no ROM. The licence texts are in the LICENSES folder.
+
+The port's own code is licensed under the GNU GPL v3.0.
+  Licence: LICENSES/GPL-3.0.txt
+  Source:  {project_url}
 
 mGBA 0.10.5 (MPL-2.0), statically linked and unmodified
   Copyright 2013-2022 Jeffrey Pfau and mGBA contributors.
@@ -57,6 +62,7 @@ def add_notices(zf: zipfile.ZipFile, top: str, sdl: bool) -> list[str]:
         found = sorted((ROOT / "tools" / "sdl3").glob("SDL3-*/LICENSE.txt"))
         files.append((found[-1] if found else ROOT / "tools" / "sdl3" / "SDL3-?" / "LICENSE.txt",
                       "LICENSES/SDL3-zlib.txt"))
+    files.insert(0, (GPL_TEXT, "LICENSES/GPL-3.0.txt"))
     missing = [str(src) for src, _ in files if not src.exists()]
     if missing:
         sys.exit("missing licence files (ext/ and tools/ must be present): " + ", ".join(missing))

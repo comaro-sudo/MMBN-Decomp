@@ -3,7 +3,7 @@
 
     python3 ports/wiiu/package_wiiu.py       # after build_wiiu.py
 
-Packs build/wiiu/mmbn4.wuhb with the third-party licence notices (mGBA MPL-2.0 and
+Packs build/wiiu/mmbn4.wuhb with the GPL-3.0 text (ports/LICENSE) and the third-party licence notices (mGBA MPL-2.0 and
 its linked bundled libraries) read from the gitignored ext/mgba. Output:
 build/mmbn4-wiiu.zip. The devkitPro libraries (WUT, wiiu-sdl2) are not covered here:
 their licences are still unconfirmed (docs/credits.md row 14).
