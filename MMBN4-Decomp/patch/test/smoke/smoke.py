@@ -18,9 +18,11 @@ and screenshots never reach the repo. Checks:
   at 40% (207,700Z -> 83,000Z) and the other WP-A3 lines at 40%, and nothing else changed;
 - shop-migrate: an existing save loaded in the patched ROM has its HP Memory prices at 40% of vanilla's;
 - status-pages: on the MegaMan status screen R/L change the Soul page (vanilla: R does nothing);
-- tuner: talking to the Frequency Tuner in Higsby's sets flag 0x0E58 (vanilla: nothing happens); Red Sun only;
+- tuner: talking to the Frequency Tuner in Higsby's sets flag 0x0E58 (vanilla: nothing happens); RS and BM;
 
-Not covered yet: a Mystery Data pickup (it needs a scripted route through a net map).
+- mystery-data: the Blue Mystery Data of WP-D2 (Z-Saver in Undernet 1, GP Power in ACDC Area 2): a save placed
+  next to each one, walk onto it, open it; its taken flag (0x0E04 / 0x0D0B) is set (vanilla: not); RS and BM.
+  It checks the flag only, not the chip that goes into the pack.
 
 The inputs are frame-timed (`--input`), so a check can fail when the ROM boots at a different speed; the
 timings have margin. Exit code 0 = all run checks passed (skips are listed), 1 = a check failed.
@@ -50,6 +52,22 @@ SAVE_FILES = {                                           # ref/saves/index.md
 BOOT = "600=START,606=,700=A,706=,800=A,806=,900=A,906=,1000=A,1006="
 BOOT_FRAMES = 1300
 HIGSBYS = (0x00, 0x06)                                   # map group, id (wp_b2_frequency_tuner.asm)
+# Game-state bytes that put Lan in Higsby's: the map (+4, +5), the real-world mode (+2) and Lan's position
+# (+0x38 X, +0x3C Y, 16.16 fixed point, saved with the game state). The Red Sun "souls" save is already
+# in ACDC Town at (-22.25, 26), which is a spot inside Higsby's too; the Blue Moon one was saved in the net,
+# so its X/Y are net coordinates and the room loads but Lan stands outside it (an "empty room": only the
+# background colour and Lan). Setting the same X/Y for both makes the one walk script work in both.
+HIGSBYS_STATE = ((2, 0), (4, HIGSBYS[0]), (5, HIGSBYS[1])) + tuple(
+    (0x38 + i, b) for i, b in enumerate(struct.pack("<ii", int(-22.25 * 65536), 26 * 65536)))
+# Blue Mystery Data added by WP-D2 (patch/src/common/wp_d2_*_md.asm): net map (group, id), the MD's own
+# position, and its "taken" event flag.
+MYSTERY_DATA = (
+    ("Z-Saver, Undernet 1", (0x94, 0x00), (-282, 56), 0x0E04),
+    ("GP Power, ACDC Area 2", (0x90, 0x01), (106, 326), 0x0D0B),
+)
+# A save that was already in the net, so the game-state handler (+0x34) fits a net map: the Red Sun "souls"
+# save was in ACDC Town (real world) and a net map edited into it does not work.
+NET_SAVE = {"rs": "early", "bm": "souls"}
 
 
 class Skip(Exception):
@@ -260,8 +278,8 @@ def check_tuner(s):
     msg = []
     walk = ",1200=LEFT,1500=DOWN,1700="                       # to the Tuner (the room's walls stop the player)
     talk = "," + presses(1750, ["A", "A", "A", "A"])
-    for ver in ("rs",):          # Blue Moon: map (00,06) loads as an empty room from a saved map edit; untested
-        sav = s.save(ver, "souls", state=((4, HIGSBYS[0]), (5, HIGSBYS[1])))
+    for ver in VERSIONS:
+        sav = s.save(ver, "souls", state=HIGSBYS_STATE)
         pat, _ = s.run(s.rom(ver, True), sav, 2000, BOOT + walk + talk)
         van, _ = s.run(s.rom(ver, False), sav, 2000, BOOT + walk + talk)
         idle, _ = s.run(s.rom(ver, True), sav, 2000, BOOT)
@@ -276,11 +294,36 @@ def check_tuner(s):
     return "; ".join(msg)
 
 
+def check_mystery_data(s):
+    """The two Blue Mystery Data (Z-Saver in Undernet 1, GP Power in ACDC Area 2): walk to each and open it."""
+    msg = []
+    for ver in VERSIONS:
+        for name, (grp, mid), (x, y), fl in MYSTERY_DATA:
+            # a save moved next to the Mystery Data (map, X, Y in 16.16 fixed point; 30 units left of it)
+            state = ((4, grp), (5, mid)) + tuple(
+                (0x38 + i, b) for i, b in enumerate(struct.pack("<ii", int((x - 30) * 65536), int(y * 65536))))
+            sav = s.save(ver, NET_SAVE[ver], state=state)
+            # walk right onto the data (frames 1300-1342), then press A (opens it, text boxes) 8 times
+            walk = ",1300=RIGHT,1342=," + presses(1360, ["A"] * 8, gap=25)
+            idle, _ = s.run(s.rom(ver, True), sav, 1700, BOOT)
+            pat, _ = s.run(s.rom(ver, True), sav, 1700, BOOT + walk)
+            van, _ = s.run(s.rom(ver, False), sav, 1700, BOOT + walk)
+            if flag(idle, fl):
+                raise AssertionError(f"{ver}: {name}: flag 0x{fl:04X} already set before the pickup")
+            if flag(van, fl):
+                raise AssertionError(f"{ver}: {name}: the vanilla ROM set flag 0x{fl:04X}")
+            if not flag(pat, fl):
+                raise AssertionError(f"{ver}: {name}: flag 0x{fl:04X} not set, the Mystery Data was not picked up")
+        msg.append(f"{ver.upper()} Z-Saver and GP Power picked up (taken flags set)")
+    return "; ".join(msg)
+
+
 CHECKS = [
     ("shop-table", check_shop_table),
     ("shop-migrate", check_shop_migrate),
     ("status-pages", check_status_pages),
     ("tuner", check_tuner),
+    ("mystery-data", check_mystery_data),
 ]
 
 
