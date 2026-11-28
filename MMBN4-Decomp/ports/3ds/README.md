@@ -28,4 +28,6 @@ sdmc:/3ds/mmbn4/
 
 **Audio** (`src/audio_ndsp.c`, untested on hardware): GBA stereo s16 at 32768 Hz goes to `ndsp` channel 0 through two wave buffers, one emulated frame each. It needs the DSP firmware dump `sdmc:/3ds/dspfirm.cdc` (made with DSP1); without it `ndspInit` fails and the port runs silent (the audio is still drained). If both buffers are busy the frame's audio is dropped (`audio_dropped()` counts these). If it crackles from underruns, raise `AUDIO_NBUF` to 3 or 4.
 
+**Sleep and HOME menu** (untested on hardware): `aptMainLoop()` blocks while the app is suspended, so emulation pauses by itself. `audio_init()` registers an `aptHook`; after the lid is reopened or the HOME menu is left, `audio_pump()` clears the ndsp queue and restarts the channel (`audio_resyncs()` counts this). To test on a 3DS: (1) play, close the lid, reopen: the game continues and sound returns within a moment; (2) press HOME, return: same; (3) press HOME, close the app from the HOME menu: the save is not flushed by the port (see `docs/ports-3ds-review.md`), so check that the last in-game save survived. If the audio stays silent after a resume, report whether it was a cancelled wake-up (libctru stops ndsp then).
+
 Hold **L + R** on launch (or create `sdmc:/3ds/mmbn4/bench.txt`) to run 600 unthrottled frames and write `sdmc:/3ds/mmbn4/bench.log` (Gate G-3DS: `< 14.0 ms` mean).

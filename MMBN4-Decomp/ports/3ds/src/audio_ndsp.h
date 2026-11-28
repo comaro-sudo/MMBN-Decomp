@@ -11,6 +11,9 @@
  * then still work and just drain the emulator's audio. Call once, after
  * emu_open(). */
 bool audio_init(void);
+/* audio_init() also registers an aptHook (when ndsp is up) so audio_pump()
+ * restarts the channel after sleep or the HOME menu. Emulation itself pauses
+ * because aptMainLoop() does not return while the app is suspended. */
 
 /* Call once per emu_run_frame(): moves that frame's audio into a free wave
  * buffer and queues it. If both buffers are still busy the frame's audio is
@@ -19,6 +22,9 @@ void audio_pump(Emu* emu);
 
 /* Frames of audio dropped because the queue was full (diagnostics). */
 unsigned audio_dropped(void);
+
+/* Times the channel was rebuilt after sleep / HOME menu (diagnostics). */
+unsigned audio_resyncs(void);
 
 void audio_exit(void);
 

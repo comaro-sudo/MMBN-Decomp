@@ -7,6 +7,14 @@
  * libctru reports it NDSP_WBUF_FREE or NDSP_WBUF_DONE; otherwise the frame is
  * dropped. The main loop is paced by the display, so emulation and playback
  * stay locked on average, and the drop path absorbs the small rate mismatch.
+ *
+ * Sleep / HOME menu: libctru's ndsp already puts the DSP to sleep and wakes it
+ * itself (dspHook in source/ndsp/ndsp.c), restoring the channel parameters.
+ * What it does not do is keep our wave buffer queue meaningful: the buffers
+ * that were queued or playing when the DSP went away have an undefined status
+ * afterwards. So an aptHook only sets a flag, and the next audio_pump() (on
+ * the main thread, after aptMainLoop() has returned) clears the queue and
+ * restarts the channel from scratch. No ndsp call is made inside the hook.
  */
 #include <3ds.h>
 
@@ -21,11 +29,55 @@
 #define AUDIO_CHANS  2
 
 static bool g_ok;
+static volatile bool g_resync;   /* set by the APT hook, cleared by audio_pump */
+static unsigned g_resyncs;
+static aptHookCookie g_cookie;
 static int g_next;
 static unsigned g_dropped;
 static int16_t* g_pcm; /* linear memory, AUDIO_NBUF * AUDIO_CAP * 2 s16 */
 static ndspWaveBuf g_wb[AUDIO_NBUF];
 static int16_t g_scratch[AUDIO_CAP * AUDIO_CHANS];
+
+static void chn_setup(void) {
+    ndspChnReset(0);
+    ndspChnSetInterp(0, NDSP_INTERP_LINEAR);
+    ndspChnSetRate(0, AUDIO_RATE);
+    ndspChnSetFormat(0, NDSP_FORMAT_STEREO_PCM16);
+
+    float mix[12];
+    memset(mix, 0, sizeof mix);
+    mix[0] = 1.0f; /* front left  */
+    mix[1] = 1.0f; /* front right */
+    ndspChnSetMix(0, mix);
+}
+
+/* Runs on the main thread, inside aptMainLoop() (aptHandleSleep,
+ * aptJumpToHomeMenu / aptWaitForWakeUp in libctru source/services/apt.c), so
+ * it must only record the event. */
+static void apt_event(APT_HookType hook, void* param) {
+    (void) param;
+    switch (hook) {
+    case APTHOOK_ONSUSPEND:
+    case APTHOOK_ONSLEEP:
+    case APTHOOK_ONRESTORE:
+    case APTHOOK_ONWAKEUP:
+        g_resync = true;
+        break;
+    default:
+        break; /* APTHOOK_ONEXIT: audio_exit() runs right after the loop */
+    }
+}
+
+/* Drop everything queued before the DSP went away and start again. */
+static void resync(void) {
+    g_resync = false;
+    ndspChnWaveBufClear(0); /* marks queued buffers NDSP_WBUF_DONE */
+    chn_setup();            /* ndspChnReset + parameters */
+    for (int i = 0; i < AUDIO_NBUF; ++i) g_wb[i].status = NDSP_WBUF_FREE;
+    memset(g_pcm, 0, (size_t) AUDIO_NBUF * AUDIO_CAP * AUDIO_CHANS * sizeof(int16_t));
+    g_next = 0;
+    ++g_resyncs;
+}
 
 bool audio_init(void) {
     const size_t bytes = (size_t) AUDIO_NBUF * AUDIO_CAP * AUDIO_CHANS * sizeof(int16_t);
@@ -44,28 +96,30 @@ bool audio_init(void) {
     memset(g_pcm, 0, bytes);
 
     ndspSetOutputMode(NDSP_OUTPUT_STEREO);
-    ndspChnReset(0);
-    ndspChnSetInterp(0, NDSP_INTERP_LINEAR);
-    ndspChnSetRate(0, AUDIO_RATE);
-    ndspChnSetFormat(0, NDSP_FORMAT_STEREO_PCM16);
-
-    float mix[12];
-    memset(mix, 0, sizeof mix);
-    mix[0] = 1.0f; /* front left  */
-    mix[1] = 1.0f; /* front right */
-    ndspChnSetMix(0, mix);
+    chn_setup();
 
     memset(g_wb, 0, sizeof g_wb);
     for (int i = 0; i < AUDIO_NBUF; ++i) {
         g_wb[i].data_pcm16 = g_pcm + (size_t) i * AUDIO_CAP * AUDIO_CHANS;
         g_wb[i].status = NDSP_WBUF_FREE;
     }
+    g_resync = false;
+    g_resyncs = 0;
+    aptHook(&g_cookie, apt_event, NULL);
     g_ok = true;
     return true;
 }
 
 void audio_pump(Emu* emu) {
     if (!g_ok) {
+        (void) emu_read_audio(emu, g_scratch, AUDIO_CAP);
+        return;
+    }
+
+    if (g_resync) {
+        /* Back from sleep or the HOME menu: this frame's audio is dropped too,
+         * so the first buffer is queued on a clean channel next frame. */
+        resync();
         (void) emu_read_audio(emu, g_scratch, AUDIO_CAP);
         return;
     }
@@ -90,8 +144,13 @@ unsigned audio_dropped(void) {
     return g_dropped;
 }
 
+unsigned audio_resyncs(void) {
+    return g_resyncs;
+}
+
 void audio_exit(void) {
     if (!g_ok) return;
+    aptUnhook(&g_cookie);
     ndspChnWaveBufClear(0);
     ndspExit();
     linearFree(g_pcm);

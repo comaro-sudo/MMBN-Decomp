@@ -152,6 +152,11 @@ int main(int argc, char** argv) {
     const char* message = NULL;
     audio_init(); /* no dspfirm.cdc: runs silent, audio_pump() just drains */
 
+    /* Sleep and HOME menu: aptMainLoop() handles both and does not return
+     * until the app is running again, so emulation is paused for free (the
+     * pacing is vsync-based, there is no wall-clock catch-up). audio_init()
+     * hooks the APT events so the ndsp queue is rebuilt on resume; citro3d
+     * hooks them itself for the GPU. */
     while (aptMainLoop()) {
         hidScanInput();
         u32 kdown = hidKeysDown();
