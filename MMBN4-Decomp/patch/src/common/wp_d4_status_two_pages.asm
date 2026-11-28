@@ -43,6 +43,18 @@ SFX_PAGE        equ 0x6E
 .org FS_STATUS_OAM
     .byte 0x00, 0x10, 0x20, 0x30, 0x40, 0x50                                            ; OAM slot offsets (slots 0-5)
 
+; ---- the buffer is filled with 0xFF to the end -----------------------------------------------
+; StatusCollectOwnedSouls starts with ByteFill(SOUL_BUF, 8, 0xFF): enough for the vanilla six slots, but now the
+; buffer is read up to index 12. The bytes past 8 were whatever the scratch area held (zeros), so "is there a
+; 7th / 13th Soul?" (buf[6] / buf[12] != 0xFF) was true with 9 or 11 Souls and page 3 showed up empty.
+; Fill all 32 bytes: the `movs r1, 8` of that ByteFill call (in sub_080351A8, only the status screen calls it).
+.if STATUS_LIST_PTR == 0x08034A6C
+    .org 0x080351AC                 ; RS
+.else
+    .org 0x080351B4                 ; BM (the function sits 8 bytes later)
+.endif
+    .halfword 0x2120                ; movs r1, 0x20
+
 ; ---- the icon reads buf[slot + page] ---------------------------------------------------------
 .org ICON_FLAG_READ                 ; movs r2,1 / ldrb r6,[r5,4] / ldr r1,=SOUL_BUF / ldrb r4,[r1,r6]
     bl      StatusSoulLoadFlag
