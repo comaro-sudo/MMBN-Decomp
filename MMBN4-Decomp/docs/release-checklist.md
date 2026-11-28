@@ -16,12 +16,14 @@ What has to be true before a public `.bps` of *Mega Man Battle Network 4: Violet
 
 ## 2. Build and verification
 
-- [ ] `python patch/build.py --public` and `--check` PASS for both versions.
-- [ ] Record each output's SHA-1 in the release notes.
-- [ ] Input ROMs (`build.py` checks them):
+- [x] `python patch/build.py --public` and `--check` PASS for both versions. (2026-11-27: `python patch/tools/release.py` built `--public` for both and ran the identity tests; all PASS.)
+- [x] Record each output's SHA-1 in the release notes. (2026-11-27, `build/release/RELEASE-SHA1.txt`; the release notes still have to copy them.)
+  - Red Sun: `.bps` `d1e7ed3b780bf04797ff0549dc7995acfabb760d`, patched ROM `8ccc929a05411169c4ece2f056474bcc727f13ed`
+  - Blue Moon: `.bps` `21bd7b8a30a679806dedab0fffa54140084367d8`, patched ROM `a2c5295d86fdecf18003f6ccbe018982d9de3edb`
+- [x] Input ROMs (`build.py` checks them; both verified 2026-11-27):
   - Red Sun (USA): `a97e96a7da03abd70f7953328e511b9fa29179f1`
   - Blue Moon (USA): `5e017c803ddc768efb8010314b46bc17e9757f71`
-- [ ] The `.bps` round-trip (`build.py` does it) and one apply with Flips on a clean ROM for each version.
+- [x] The `.bps` round-trip (`build.py` does it) and one apply with Flips on a clean ROM for each version. (2026-11-27: `flips --apply` of each `.bps` on a clean copy of its US ROM gave Red Sun `8ccc929a...ed` and Blue Moon `a2c5295d...db`, both equal to `RELEASE-SHA1.txt`.)
 
 ## 3. Testing
 
