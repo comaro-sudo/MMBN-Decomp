@@ -6,6 +6,33 @@
 
 This goal outranks the rest of the plan. Phase 1 work packages, the emulation-layer ports and the decompilation are all judged by whether they move toward it.
 
+## Status (2026-11-27)
+
+What is built and tested, from [`patch/README.md`](../patch/README.md) (each package's test status) and the Done table in [`TODO.md`](../TODO.md). Test evidence: `decomp/notes/patch-test-results*.md` (Gemini). **Built and tested** = PASS in-game on the PC port, RS and BM unless noted.
+
+| Criterion | State | Built and tested | Open |
+|---|---|---|---|
+| C1 Souls | **Built, tested** | All 12 Souls unite in both versions (WP-D4); Duo Soul as the 13th, granted by beating Duo; fixed tournament pairs and the Free Tournament fielding the 12 Soul Navis (WP-B1, WP-D4); 9 friendly matches grant Souls; 3-page Status screen; completion star needs 12 | Black Earth gate keeps 6 Souls (owner: no patch) |
+| C2 Chips | **Mostly built** | Random RS/BM drops (WP-D2); Bass gives both chips (WP-D3); Free Tournament covers the 36 secret chips; Z-Saver and Grand Prix Power in Blue Mystery Data; Duo and GP Power names and descriptions; shop prices cut (WP-A3) | Duo and GP Power picture in `--public` builds (owner); chips from other event, code and accessory sources: recheck against [`docs/completion/chips.md`](../docs/completion/chips.md) |
+| C3 Bosses and rematches | **Built, tested** for Souls' Navis, Duo and SP+ | 12 lobby operators + 10 roaming SP bosses, rematch climb V1 -> V2 -> V3 -> SP -> SP+ on S ranks; Duo rematch and the Duo story grant; SP+ difficulty (4,095 HP, ATK x1.5, Speed x1.25) | Tier A leftovers: story-battle rewards, ToyRobo, remaining non-Soul boss rematches ([`docs/pending/tier-a-leftovers-and-qol.md`](../docs/pending/tier-a-leftovers-and-qol.md)) |
+| C4 No missables | **Partly** | Frequency Tuner (WP-B2) and Green Mystery Data by tier (WP-B4); Waiting Room guard (WP-B6, bounds check only) | **Persistent Mystery Data (WP-B3) is not built**; no completion test from a late save beyond the automated matrix |
+| C5 Same on every port | **Open** | The content is in the ROM, so any port that runs the patched ROM has it. PC (Windows ARM64 and x64) and Wii U (in Cemu) boot and bench the patched ROM | Real Wii U `bench.log` (gate G-WU); New 3DS source written but not compiled; DSi/NDS not started (GBARunner licence, `D-EL5`) |
+| Verification (§5) | **Partly** | Automated C1-C5 matrix 16/16 PASS (RS and BM); `build.py --check` | A full continuous playthrough per version; the same test on each port; re-run on the `--public` release build; a committed smoke test is in progress |
+
+Also built: the WoodMan fix (WP-A1), Zenny x1.5 (WP-A2), on-demand sprite loading and NPC lists in free space (infrastructure). Release work (licence, public art, playthrough, hardware tests) is in [`docs/release-checklist.md`](../docs/release-checklist.md).
+
+**Where each owner decision is recorded**
+
+| Decision | Date | Recorded in |
+|---|---|---|
+| Goal and the name *Violet Eclipse* | 2026-11-22 | This file (top) |
+| Cross-version approach: Option A (merged data in one ROM), delivered as **two complete patches, one per ROM (Option C)** (answers §7 q1) | 2026-11-25 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md); [`docs/release-checklist.md`](../docs/release-checklist.md) |
+| Version drop codes and the Bass order (§7 q4) | 2026-11-23 | §7 below; [`docs/completion/bosses.md`](../docs/completion/bosses.md) §3 |
+| Duo Soul as the 13th Soul | 2026-11-23 | [`docs/pending/duo-soul.md`](../docs/pending/duo-soul.md) (built) |
+| Duo rematch climb on S ranks; key-item prices at 40% (WP-A3); Waiting Room guard A only | 2026-11-24 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md) |
+| Hardware owned (`D-EL1`), ports licence GPL-3.0 (`D-EL3`), Principia Trilogy deferred | 2026-11-25 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md); [`plan/emulation-layer/06-milestones-and-risks.md`](emulation-layer/06-milestones-and-risks.md) |
+| Open: patch licence; Duo/GP Power art for `--public`; Tier A leftovers; §7 q2 and q3; GBARunner licence (`D-EL5`) | n/a | [`docs/pending/`](../docs/pending/), [`TODO.md`](../TODO.md) "Owner decisions still open" |
+
 ## 1. Completion criteria (testable)
 
 A port is "definitive" when a single save can reach all of these, without trading, link play, a second cartridge, event distributions or repeating the game three times:
@@ -75,9 +102,9 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 
 ## 7. Open questions for the owner
 
-1. **Version choice:** in the definitive ROM, does the player still pick Red Sun or Blue Moon (story and rival differ), with the other version's exclusives added as extra content? Or should both stories merge into one?
-2. **Stronger Navi tiers and post-game:** keep the original requirements (they are part of the challenge) as long as they're reachable in one save?
-3. **Dark Chips and Karma:** "every chip" includes Dark Chips, and using them changes Karma. Should collecting them be possible without being forced into Dark Karma?
+1. ~~**Version choice**~~: **decided 2026-11-25: Option C, two complete patched ROMs** (see Status above). Original question: in the definitive ROM, does the player still pick Red Sun or Blue Moon (story and rival differ), with the other version's exclusives added as extra content? Or should both stories merge into one?
+2. **Open.** **Stronger Navi tiers and post-game:** keep the original requirements (they are part of the challenge) as long as they're reachable in one save?
+3. **Open.** **Dark Chips and Karma:** "every chip" includes Dark Chips, and using them changes Karma. Should collecting them be possible without being forced into Dark Karma?
 4. ~~**Version drop codes**~~: **decided by the owner, 2026-11-23** ([docs/completion/bosses.md](../docs/completion/bosses.md) §3).
    - **Rule (a):** every drop that differs between versions (61 virus families, Bass, BassΩ, BassXX) gives the Red Sun or the Blue Moon item **at random, each time it drops**.
    - **Bass can be fought again and again**, so the player can collect all four Bass chips (Bass, BassAnly, BlakBarr, DeltaRay). This is part of the rematch system (WP-D3).
