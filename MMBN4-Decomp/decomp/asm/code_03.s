@@ -46650,7 +46650,7 @@ _0804E280:
     .word 0x03006A4D
     incrom 0x4E284, 0x10
 _0804E294:
-    .word dat_080515E0
+    .word dat_080515E0   @ BN4_FONT_WIDTHS
 _0804E298:
     .word 0x00000800
 _0804E29C:

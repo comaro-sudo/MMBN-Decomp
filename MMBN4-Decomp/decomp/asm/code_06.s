@@ -1462,10 +1462,7 @@ sub_0809573C:
     @ cutscene script 0x08095868..0x0809586D
     csc_b3 0x03, 0x01, 0x00, 0x07
     csc_end
-    incrom 0x9586D, 0xB
-    @ cutscene script 0x08095878..0x0809587E
-    csc_ptr 0x40, 0x02006164
-    csc_op 0x08
+    incrom 0x9586D, 0x11
     @ cutscene script 0x0809587E..0x08095880
     csc_op 0x08
     csc_end
@@ -2049,10 +2046,7 @@ sub_0809573C:
     @ cutscene script 0x08095FD5..0x08095FDD
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_08095FA9
-    incrom 0x95FDD, 0x13
-    @ cutscene script 0x08095FF0..0x08095FF6
-    csc_ptr 0x40, 0x02006164
-    csc_op 0x08
+    incrom 0x95FDD, 0x19
     @ cutscene script 0x08095FF6..0x08095FF9
     csc_b1 0x04, 0x40
     csc_end
@@ -3570,10 +3564,7 @@ sub_080973D4:
     @ cutscene script 0x0809740A..0x0809740D
     csc_b1 0x04, 0x18
     csc_end
-    incrom 0x9740D, 0x7
-    @ cutscene script 0x08097414..0x0809741A
-    csc_ptr 0x40, 0x02006164
-    csc_op 0x08
+    incrom 0x9740D, 0xD
     @ cutscene script 0x0809741A..0x0809741D
     csc_b1 0x04, 0x18
     csc_end
@@ -5402,10 +5393,7 @@ sub_08098688:
     @ cutscene script 0x08098D54..0x08098D57
     csc_b1 0x04, 0x03
     csc_end
-    incrom 0x98D57, 0xD
-    @ cutscene script 0x08098D64..0x08098D6A
-    csc_ptr 0x40, 0x02006164
-    csc_op 0x08
+    incrom 0x98D57, 0x13
     @ cutscene script 0x08098D6A..0x08098D6D
     csc_b1 0x04, 0xD4
     csc_end
@@ -7206,10 +7194,7 @@ sub_08098688:
     @ cutscene script 0x0809A71B..0x0809A723
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_0809A6EB
-    incrom 0x9A723, 0x1
-    @ cutscene script 0x0809A724..0x0809A72A
-    csc_ptr 0x40, 0x02006164
-    csc_op 0x08
+    incrom 0x9A723, 0x7
     @ cutscene script 0x0809A72A..0x0809A72D
     csc_b1 0x04, 0x88
     csc_end
@@ -7874,10 +7859,7 @@ sub_08098688:
     @ cutscene script 0x0809AFE3..0x0809AFEB
     csc_b2 0x38, 0x00, 0x40
     csc_jump dat_0809AFAD
-    incrom 0x9AFEB, 0x1
-    @ cutscene script 0x0809AFEC..0x0809AFF2
-    csc_ptr 0x40, 0x0200623C
-    csc_op 0x08
+    incrom 0x9AFEB, 0x7
     @ cutscene script 0x0809AFF2..0x0809AFF5
     csc_b1 0x04, 0x20
     csc_end

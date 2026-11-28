@@ -6716,7 +6716,7 @@ _08053B70:
 
     .global sub_08053B74
     .thumb_func
-sub_08053B74:
+sub_08053B74:   @ Text_DrawGlyph
     push {r0, r3, lr}
     mov r3, sl
     push {r3}

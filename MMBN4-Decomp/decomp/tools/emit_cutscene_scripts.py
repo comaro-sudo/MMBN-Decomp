@@ -372,6 +372,7 @@ def main() -> None:
         ok = True
         all_fmt_ok = True
         block_seen: set[int] = set()
+        ended = False   # reached a terminator (end / alt end / thread end / jump)
         while len(decoded) < 200:
             if cur in visited or cur in block_seen:
                 break
@@ -403,9 +404,13 @@ def main() -> None:
                 decoded.append((cur, fmt[0], fmt[1]))
             cur += sz
             if is_term:
+                ended = True
                 break
 
-        if ok and all_fmt_ok and len(decoded) >= min_ops:
+        # A seed known only from a label reference (min_ops 2) must reach a terminator of its
+        # own: blocks that merely run into another script were data (Claude, 2026-11-27:
+        # e.g. rows of `csc_b1 0x04, 0x04` over BN4_MAP_BACKDROPS, Object_SpawnList records).
+        if ok and all_fmt_ok and len(decoded) >= min_ops and (min_ops < 2 or ended):
             b0 = decoded[0][0]
             b1 = decoded[-1][0] + decoded[-1][1]
             if in_shared_incrom(b0, b1):
