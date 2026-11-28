@@ -26,6 +26,6 @@ sdmc:/3ds/mmbn4/
   saves/                (mGBA-compatible .sav shared with PC & Wii U)
 ```
 
-There is no sound yet: the GBA audio is drained but not played (an `ndsp` output is still to write).
+**Audio** (`src/audio_ndsp.c`, untested on hardware): GBA stereo s16 at 32768 Hz goes to `ndsp` channel 0 through two wave buffers, one emulated frame each. It needs the DSP firmware dump `sdmc:/3ds/dspfirm.cdc` (made with DSP1); without it `ndspInit` fails and the port runs silent (the audio is still drained). If both buffers are busy the frame's audio is dropped (`audio_dropped()` counts these). If it crackles from underruns, raise `AUDIO_NBUF` to 3 or 4.
 
 Hold **L + R** on launch (or create `sdmc:/3ds/mmbn4/bench.txt`) to run 600 unthrottled frames and write `sdmc:/3ds/mmbn4/bench.log` (Gate G-3DS: `< 14.0 ms` mean).

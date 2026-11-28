@@ -11,13 +11,13 @@ No missing includes, wrong types or wrong signatures were found in `ports/3ds/`.
 ## Fixed in `ports/3ds/src/main.c`
 
 1. **High: the top screen would never be presented.** The GBA frame is written straight into `gfxGetFramebuffer(GFX_TOP, ...)`, then `gfxFlushBuffers()` is called, but nothing swaps the top buffers. citro3d only calls `gfxScreenSwapBuffers` for screens that a render target is linked to (`needSwapTop` / `needSwapBot` in `renderqueue.c`), and `C2D_CreateScreenTarget(GFX_BOTTOM, ...)` links only the bottom one. Added `gfxScreenSwapBuffers(GFX_TOP, false)` after `gfxFlushBuffers()`. (`gfxSwapBuffers()` would also swap the bottom screen behind citro3d's back, so it is not used.) Not tested on hardware.
-2. **High: the GBA audio was never read.** `emu_open()` sets up mGBA's blip buffers (4096 samples), but `main.c` never called `emu_read_audio()`. The PC and Wii U mains read it every frame, and `bench_run()` does too. Without reading, the blip buffers fill after a few frames, and blip_buf only guards this with an `assert` that release builds drop, so this can write past the buffer. Added a per-frame drain into a scratch buffer. There is still no sound: an `ndsp` output is future work (the 32768 Hz rate is already what `ndsp` would want). The README now says so.
+2. **High: the GBA audio was never read.** `emu_open()` sets up mGBA's blip buffers (4096 samples), but `main.c` never called `emu_read_audio()`. The PC and Wii U mains read it every frame, and `bench_run()` does too. Without reading, the blip buffers fill after a few frames, and blip_buf only guards this with an `assert` that release builds drop, so this can write past the buffer. Added a per-frame drain into a scratch buffer. This drain was later replaced by the ndsp backend (see "Audio backend" below).
 
 ## Open findings in `ports/3ds/` (not fixed: not clear errors, or need hardware)
 
 | Sev | Finding |
 |---|---|
-| Medium | No audio output (see above). |
+| Done | Audio output: ndsp backend written 2026-11-27 (see "Audio backend" below), untested on hardware. |
 | Medium | `n3ds_now_ns()` uses `osGetTime()`, which has 1 ms resolution. For the G-3DS gate (mean below 14 ms) the mean is fine over 600 frames, but p90, p99 and max are quantised to whole milliseconds. `svcGetSystemTick()` / `SYSCLOCK_ARM11` is finer. Careful: `ticks * 1000000000` overflows u64 after about 68 s of uptime, so split it into seconds and remainder. |
 | Medium | The main-thread stack size is not set. `bench_run()` puts a 16 KB `int16_t samples[4096*2]` on the stack and `qsort` runs there too. I could not confirm the default stack size of a 3dsx from the public headers. If it is 32 KB this is tight. Fix: make the array `static` in `bench.c` (common) or raise the stack with the libctru `__stacksize__` global. |
 | Low | `main()` returns 1 or 2 with no message when no ROM is found or the ROM fails to load; the user just sees the app close. A `consoleInit()` message or an error screen would help. |
@@ -47,3 +47,12 @@ No missing includes, wrong types or wrong signatures were found in `ports/3ds/`.
 | Low | `emu_mgba.c`: `emu_open()` leaks `emu->fb` and `emu` on the `core->init` failure path. It does not matter in practice (the app exits). |
 | Info | `bench.c`: 16 KB stack buffer (see the stack note above). |
 | Info | No missing includes or type problems found in `emu_mgba.c`, `game.c`, `pet_model.c`, `pet_ui.c`, `bench.c`, `gba_mem.h`. `ui_draw.h` is plain C99 with no platform dependency. The hard-coded layout offsets used by `pet_ui_click()` (Tuner buttons, Custom grid) match what the draw functions compute. |
+
+## Audio backend (ndsp, added 2026-11-27)
+
+`src/audio_ndsp.[ch]` replaces the per-frame drain. `main.c` calls `audio_init()` after the benchmark, `audio_pump(emu)` once per frame and `audio_exit()` at shutdown. Checked against `devkitPro/libctru` master (`include/3ds/ndsp/ndsp.h`, `ndsp/channel.h`, `services/dsp.h`, `allocator/linear.h`, `source/ndsp/ndsp.c`) and the `devkitPro/3ds-examples` `audio/streaming` example.
+
+- **Format and sync.** Channel 0, `NDSP_FORMAT_STEREO_PCM16`, linear interpolation, mix[0] = mix[1] = 1.0 (front L/R). Two wave buffers of 1024 sample frames in one `linearAlloc` block; each takes one emulated frame (about 549 frames at 32768 Hz), and `nsamples` is the frame count `emu_read_audio` returned. A buffer is refilled only when its `status` is `NDSP_WBUF_FREE` or `NDSP_WBUF_DONE` (the pattern of the streaming example); otherwise the frame is dropped and counted. The data cache is flushed with `DSP_FlushDataCache(ptr, bytes)` before `ndspChnWaveBufAdd`.
+- **Sample rate.** The GBA core runs at 32768 Hz (`SAMPLE_RATE` in `main.c`), set with `ndspChnSetRate(0, 32768.0f)`. ndsp resamples from its native `NDSP_SAMPLE_RATE` (SYSCLOCK_SOC/512, about 32728.5 Hz). The main loop follows the display (about 59.8 Hz), slightly faster than the GBA's 59.7275 fps, so the queue fills slowly and a frame of audio is dropped now and then. If that is audible, raise `AUDIO_RATE` a little or `AUDIO_NBUF`.
+- **No firmware.** `ndspInit` fails without `sdmc:/3ds/dspfirm.cdc` (`source/ndsp/ndsp.c` loads that path). `audio_init` then returns false and the port runs silent, still draining the emulator.
+- **Not verified.** The mix array meaning is a "working hypothesis" in the libctru docs (the streaming example uses the same two values). Everything else needs a real 3DS (see the README).

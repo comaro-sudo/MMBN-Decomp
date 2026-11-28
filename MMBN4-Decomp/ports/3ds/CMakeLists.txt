@@ -15,6 +15,7 @@ add_executable(mmbn4
     ../common/pet_ui.c
     ${MGBA_DIR}/src/util/vfs/vfs-fd.c
     ${MGBA_DIR}/src/util/vfs/vfs-dirent.c
+    src/audio_ndsp.c
     src/ui_draw_c2d.c
     src/main.c
 )

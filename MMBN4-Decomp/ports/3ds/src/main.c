@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "audio_ndsp.h"
 #include "bench.h"
 #include "emu_backend.h"
 #include "game.h"
@@ -149,7 +150,7 @@ int main(int argc, char** argv) {
     pet_ui_init(&pet_ui);
     PetModel pet_model = { 0 };
     const char* message = NULL;
-    static int16_t audio_drain[4096 * 2];
+    audio_init(); /* no dspfirm.cdc: runs silent, audio_pump() just drains */
 
     while (aptMainLoop()) {
         hidScanInput();
@@ -168,9 +169,8 @@ int main(int argc, char** argv) {
         emu_set_keys(emu, keys);
         emu_run_frame(emu);
 
-        /* Nothing reads the GBA audio yet (no ndsp output): drain it so the
-         * blip buffers never fill up and overflow. */
-        (void) emu_read_audio(emu, audio_drain, 4096);
+        /* Move this frame's audio to ndsp (also drains the blip buffers). */
+        audio_pump(emu);
 
         blit_top_fb(emu_video(emu));
         gfxFlushBuffers();
@@ -187,6 +187,7 @@ int main(int argc, char** argv) {
         C3D_FrameEnd(0);
     }
 
+    audio_exit();
     C2D_TextBufDelete(c2d.text_buf);
     emu_close(emu);
     C2D_Fini();
