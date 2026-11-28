@@ -9,14 +9,11 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
   - The stricter cutscene-seed rule is adopted (`94a58f7`).
   - Docs: `decomp/notes/handoff-2026-11-27-claude-decomp.md`.
 - **Patch:** every package PASSes (see `patch/README.md`). Release dry run OK; checklist §2 ticked (`b507de8`).
-- **Parallel agents:** batches 1–3 merged. Batch 4 (`MMBN4-Decomp/docs/tasks-claude-agent-2026-11-27d.md`) is partly merged:
-  - **merged:** task 3 Library research (`e565508`), task 4 existing saves (`ba58f86`), task 10 BN1 resources (`e0e4d1b`);
-  - **done, NOT merged:** tasks 1+2 on branch `claude-agent/d12` (worktree `C:\proyectos\MMBN-wt\d12`):
-    - `87510c1`: the Tuner soft-lock fix. FC 0B now ends through the script jump `sub_0804E610` to entry 0x0F;
-    - `ce66f09`: the status page 3 fix, widening the game's 0xFF fill of `0x0201D000` from 8 to 0x20 bytes at RS `0x080351AC` / BM `0x080351B4`;
-  - **merged after this was written:** task 6 smoke checks (`a59f2f7` cherry-picked; Tuner in BM + Mystery Data pickups, all 5 checks pass);
-  - **still running:** task 5 (mGBA, `d5`), tasks 7+9 (`d79`), task 8 (C1–C5 on the release build, `d8`).
-- `main` is about 75 commits ahead of `origin`, **not pushed** (ask the owner).
+- **Parallel agents:** batches 1–3 merged. Batch 4 (`MMBN4-Decomp/docs/tasks-claude-agent-2026-11-27d.md`):
+  - **merged:** tasks 1+2 (`f90e7de` Tuner soft-lock fix; `55edb4f` status page-3 fix, refined to fill `0x18` bytes so `+0x18` is untouched), task 3 Library research (`e565508`), task 4 existing saves (`ba58f86`), task 5 mGBA test (`docs/tests/mgba.md`), task 6 smoke checks (`5c5d86f`, plus `check_status_pages` updated for 2-page 9/11-Soul & 3-page 13-Soul saves — all 5 smoke checks PASS), task 10 BN1 resources (`e0e4d1b`);
+  - **not finished (worktrees were empty/unstarted when previous session ended):** tasks 7+9 (`docs/known-issues.md` + player README in-game checks), task 8 (C1–C5 matrix on the `--public` release build).
+  - All `d*` worktrees (junctions safely removed first) and `claude-agent/d*` branches have been cleaned up.
+- `main` is ahead of `origin` and **not pushed** (ask the owner before pushing).
 
 ## Key Decisions & Constraints
 
@@ -41,19 +38,11 @@ Cross-area handoff: decomp, patch, ports, docs, and parallel agents. Resume with
 
 ## Open Issues / Blockers
 
-1. **Check `ce66f09` before merging.** `0x0201D010`+ appears as a second buffer: `code_03.s` lines ~15371 and ~35785 have `.4byte 0x0201D000, 0x0201D010` pairs, and line ~1174 has `0x0201D020`. Filling 0x20 bytes from `0x0201D000` may clobber `0x0201D010`–`0x0201D01F`, and the page byte at `+0x18`. Find out what `0x0201D010` holds on the status screen.
-   - The tests passed, but if it's shared, fill only 0x0D bytes (13 Souls) instead of 0x20.
-2. **Once `d12` is merged, `smoke.py`'s `check_status_pages` must be updated** (the agent's edit was blocked as outside its brief). It should expect:
-   - 2 pages with the 11/9-Soul saves, R wrapping;
-   - 3 pages with flags 0x17–0x23 set.
-
-   Agent `d6` also edits `smoke.py`, so merge `d6` first, then adjust.
-3. Release checklist §3: tick from the `docs/tests/*` reports once `d5` and `d8` land. The "Existing saves" item can be ticked after the page-3 fix is merged.
+1. **Batch 4 remaining tasks (`d79`, `d8`):** `d79` (in-game "Where to find" checks + `docs/known-issues.md`) and `d8` (C1–C5 matrix on `--public` release builds) had empty worktrees when the previous session ended and still need to be run.
+2. **Release dry-run SHA-1s:** `docs/release-checklist.md` §2 SHA-1s were recorded before the `d12` Tuner & status page-3 fixes landed; re-run `python patch/tools/release.py` once ready to refresh `RELEASE-SHA1.txt` and §2.
 
 ## Immediate Next Steps
 
-1. Wait for the agents in `d5`, `d6`, `d79` and `d8`, then review and cherry-pick each.
-2. Resolve Open Issue 1, then cherry-pick `87510c1` and `ce66f09` from `claude-agent/d12`. Rebuild (`python patch/build.py`, `--check`), then update `smoke.py` (Open Issue 2) and run it.
-3. Tick release checklist §3 from the reports.
-4. Remove the `d*` worktrees (junction check first) and delete the `claude-agent/*` branches.
-5. Ask the owner to push. Report the open owner decisions.
+1. Ask the owner to push `main` to `origin` and confirm the open owner decisions listed above.
+2. Run remaining batch 4 tasks: `d8` (C1–C5 matrix on `--public` release builds → `docs/tests/c1-c5-release.md`, then tick checklist §3) and `d79` (`docs/known-issues.md` + player README in-game checks).
+3. Re-run `python patch/tools/release.py` to refresh `--public` release SHA-1s after the `d12` fixes.

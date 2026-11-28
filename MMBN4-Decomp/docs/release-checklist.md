@@ -29,8 +29,8 @@ What has to be true before a public `.bps` of *Mega Man Battle Network 4: Violet
 
 - [ ] Automated C1–C5 matrix: 16/16 (done, `decomp/notes/patch-test-results-7-c1-c5.md`; re-run on the release build).
 - [ ] **A full continuous playthrough** of each version on the PC port, from a new game to the post-game. Check the story, the 13 Souls, the friendly matches, the lobby and Duo rematches through SP+, and the completion stars.
-- [ ] Existing saves: load a vanilla mid-game save and a post-game save. Check the price sync, Souls and the status pages.
-- [ ] Real hardware or an accurate emulator (mGBA) for each `.bps`, not only the PC port.
+- [x] Existing saves: load a vanilla mid-game save and a post-game save. Check the price sync, Souls and the status pages. (2026-11-27: `docs/tests/existing-saves.md` + status page-3 `0x18`-byte fill fix merged and verified by `smoke.py` on RS & BM.)
+- [x] Real hardware or an accurate emulator (mGBA) for each `.bps`, not only the PC port. (2026-11-27: `docs/tests/mgba.md`, PASS in standalone mGBA 0.10.5 for both `--public` builds; real hardware not yet tested.)
 
 ## 4. Player documentation
 

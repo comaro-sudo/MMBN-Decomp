@@ -248,7 +248,7 @@ def status_icons(s, ver, rom_patched, sav, keys):
 
 
 def check_status_pages(s):
-    """The status screen shows the Souls in pages of 6: R next, L back, a third page after the second."""
+    """The status screen shows the Souls in pages of 6: 2 pages with 9/11 Souls (R wraps), 3 pages with 13 Souls."""
     msg = []
     for ver in VERSIONS:
         sav = s.save(ver, "souls")
@@ -258,18 +258,27 @@ def check_status_pages(s):
             raise AssertionError(f"{ver}: vanilla changed on R (the check is not valid)")
         p1 = status_icons(s, ver, True, sav, [])
         p2 = status_icons(s, ver, True, sav, ["R"])
-        p3 = status_icons(s, ver, True, sav, ["R", "R"])
         back = status_icons(s, ver, True, sav, ["R", "L"])
-        wrap = status_icons(s, ver, True, sav, ["R", "R", "R"])
+        wrap2 = status_icons(s, ver, True, sav, ["R", "R"])
         if p2 == p1:
             raise AssertionError(f"{ver}: R did not change the page")
-        if p3 in (p1, p2):
-            raise AssertionError(f"{ver}: the third page looks like page 1 or 2")
         if back != p1:
             raise AssertionError(f"{ver}: R then L did not return to page 1")
-        if wrap != p1:
-            raise AssertionError(f"{ver}: three R presses did not wrap to page 1")
-        msg.append(f"{ver.upper()} 3 pages, L returns, wraps")
+        if wrap2 != p1:
+            raise AssertionError(f"{ver}: two R presses did not wrap to page 1 (9/11 Souls)")
+
+        sav13 = s.save(ver, "souls", flags=range(0x17, 0x24))
+        q1 = status_icons(s, ver, True, sav13, [])
+        q2 = status_icons(s, ver, True, sav13, ["R"])
+        q3 = status_icons(s, ver, True, sav13, ["R", "R"])
+        wrap3 = status_icons(s, ver, True, sav13, ["R", "R", "R"])
+        if q2 == q1:
+            raise AssertionError(f"{ver} (13 Souls): R did not change the page")
+        if q3 in (q1, q2):
+            raise AssertionError(f"{ver} (13 Souls): the third page looks like page 1 or 2")
+        if wrap3 != q1:
+            raise AssertionError(f"{ver} (13 Souls): three R presses did not wrap to page 1")
+        msg.append(f"{ver.upper()} 2 pages (9/11 Souls), 3 pages (13 Souls)")
     return "; ".join(msg)
 
 
