@@ -1,6 +1,6 @@
 # Plan: a Duo Soul (13th Double Soul) — owner request, 2026-11-23
 
-**Status: idea → research.** The owner wants to add the Duo Soul that Capcom planned but cut for cartridge space. Wiki trivia: *"A Duo Soul was planned to be added to Mega Man Battle Network 4, but there wasn't enough space on the game cartridge. Within the game files, the framework for the soul still exists."*
+**Status (2026-11-27): built and PASS in-game** (owner decisions below, 2026-11-23). Packages `wp_d4_duo_soul.asm` (13th Soul: transform, Duo palette, charge shot, passives, emotion window), `wp_d4_status_two_pages.asm` (3-page Status screen) and `wp_d2_duo_story_grant.asm` (beating Duo grants it), all WP-D4/D2 in `patch/README.md`; tests in Round 13 of the PC-port playthrough tests. The text below is the original plan and research record (status then: idea → research). The owner wants to add the Duo Soul that Capcom planned but cut for cartridge space. Wiki trivia: *"A Duo Soul was planned to be added to Mega Man Battle Network 4, but there wasn't enough space on the game cartridge. Within the game files, the framework for the soul still exists."*
 
 ## What we already know
 

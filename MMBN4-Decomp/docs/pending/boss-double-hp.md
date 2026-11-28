@@ -1,6 +1,6 @@
 # Plan: an extra difficulty for every boss, with double HP (owner request, 2026-11-23)
 
-**Status: plan, with open decisions.** The owner asked for "an additional difficulty for each boss, double the health".
+**Status (2026-11-27): built and PASS in-game, as "SP+".** The owner answered the open decisions below on 2026-11-23: option A (5th lobby step), 4,095 HP, ATK x1.5, Speed x1.25, random reward. Packages: `wp_d3_sp_plus.asm` (the difficulty and reward), `wp_d3_lobby_rematches.asm` (the V1 -> V2 -> V3 -> SP -> SP+ climb, roaming SP ghosts) and `wp_d3_duo_rematch.asm` (Duo), WP-D3 in `patch/README.md`; tests: SP+ 4,095 HP, ATK x1.5, Speed x1.25 and reward verified in-game. The original "2x HP" idea below is the record; it became a fixed 4,095 HP and no HP hook was needed. The owner asked for "an additional difficulty for each boss, double the health".
 
 ## What it means
 

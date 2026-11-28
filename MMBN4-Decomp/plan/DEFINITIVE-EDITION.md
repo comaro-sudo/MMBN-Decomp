@@ -26,7 +26,7 @@ Also built: the WoodMan fix (WP-A1), Zenny x1.5 (WP-A2), on-demand sprite loadin
 | Decision | Date | Recorded in |
 |---|---|---|
 | Goal and the name *Violet Eclipse* | 2026-11-22 | This file (top) |
-| Cross-version approach: Option A (merged data in one ROM), delivered as **two complete patches, one per ROM (Option C)** (answers §7 q1) | 2026-11-25 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md); [`docs/release-checklist.md`](../docs/release-checklist.md) |
+| Cross-version approach: Option C: **two complete patches, one per ROM**, each with both versions' content (the merged-ROM Option A was not used) (answers §7 q1) | 2026-11-25 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md); [`docs/release-checklist.md`](../docs/release-checklist.md) |
 | Version drop codes and the Bass order (§7 q4) | 2026-11-23 | §7 below; [`docs/completion/bosses.md`](../docs/completion/bosses.md) §3 |
 | Duo Soul as the 13th Soul | 2026-11-23 | [`docs/pending/duo-soul.md`](../docs/pending/duo-soul.md) (built) |
 | Duo rematch climb on S ranks; key-item prices at 40% (WP-A3); Waiting Room guard A only | 2026-11-24 | [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md) |
@@ -68,7 +68,9 @@ The completion lists are **generated from the ROMs, not written from memory**:
 
 **Rule:** completion content goes in the **ROM patch**, not in the director. The NDS port (hypervisor) and real GBA hardware can only run what's in the ROM, and C5 requires the same content everywhere. The director adds convenience, such as a PET checklist showing what's still missing.
 
-## 4. The cross-version decision (must be made early)
+## 4. The cross-version decision
+
+**Decided by the owner, 2026-11-25: Option C, two complete patched ROMs** (a Red Sun patch and a Blue Moon patch, each with 100% of both versions' content), built and verified 16/16 in the C1-C5 matrix. There is no merged ROM and no 8 -> 16 MB expansion. The options and the earlier recommendation of A below are kept as the record. See [`docs/pending/owner-decisions-2026-11-24.md`](../docs/pending/owner-decisions-2026-11-24.md).
 
 *Update (RE-06, 2026-11-22):* both ROMs already contain **every** Navi's records, battles and roaming-ghost tables, and these are identical in RS and BM. What a version lacks is the game state that fields the other version's Navis (tournament pools, flags, scripts), plus 64 drop rows with version-specific codes ([docs/completion/bosses.md](../docs/completion/bosses.md)). So Option A needs less imported data than assumed below: mostly Soul data, graphics and scripts still to be checked.
 
@@ -76,15 +78,15 @@ Red Sun and Blue Moon each contain only their own exclusives. The fingerprint su
 
 | Option | How | Works on | Cost |
 |---|---|---|---|
-| **A. Merged ROM** (*Violet Eclipse*, recommended) | One patched ROM built from Red Sun that **also contains Blue Moon's exclusive data** (Navi graphics, AI, records, Soul data, scripts), added in expanded ROM space (8 → 16 MB; GBA max 32 MB). A version choice at New Game, or both sets of exclusives in one story | **Every port, and GBA hardware** | Highest: needs the BM-only data identified and relocated. The disassembly's RS/BM variant work (DC-4) is exactly that inventory |
+| A. Merged ROM (*Violet Eclipse*, the earlier recommendation; **not chosen**) | One patched ROM built from Red Sun that **also contains Blue Moon's exclusive data** (Navi graphics, AI, records, Soul data, scripts), added in expanded ROM space (8 → 16 MB; GBA max 32 MB). A version choice at New Game, or both sets of exclusives in one story | **Every port, and GBA hardware** | Highest: needs the BM-only data identified and relocated. The disassembly's RS/BM variant work (DC-4) is exactly that inventory |
 | B. Two-ROM runtime (Cyberworld Endless model) | The director loads both ROMs and pulls the other version's content in at runtime | PC / Wii U / 3DS only. **Not NDS, not GBA hardware** | Medium, but breaks C5 |
-| C. Two patched ROMs, each complete | Each version patched to include the other's exclusives | Every port | About the same as A, twice the testing |
+| **C. Two patched ROMs, each complete (chosen, 2026-11-25)** | Each version patched to include the other's exclusives | Every port | About the same as A, twice the testing |
 
 **Update 2026-11-22: much of A's data is already in both ROMs.** Both versions carry all twelve Souls' code, tables and sprites, and the chip table is identical. A Blue Moon Soul runs in Red Sun once a 12-byte table is filled ([docs/re/soul-merge-experiment.md](../docs/re/soul-merge-experiment.md)). Red Sun also fields Blue Moon's Navis in tournaments when it has their traded data ([docs/re/tournaments.md](../docs/re/tournaments.md)). What still has to move or be written is the grants, the encounters and the version-specific story data.
 
-**Recommendation: A.** It is the only option that satisfies C5 on NDS and hardware. The decompilation stops being optional: DC-1 (done: RS/BM map), DC-2/DC-3 (names) and DC-4 (BM variant = the list of what differs) feed the merge directly.
+**Earlier recommendation: A (superseded by the owner's choice of C, 2026-11-25).** It is the only option that satisfies C5 on NDS and hardware. The decompilation stops being optional: DC-1 (done: RS/BM map), DC-2/DC-3 (names) and DC-4 (BM variant = the list of what differs) feed the merge directly.
 
-Legal note: like everything else, the merged ROM is produced on the player's machine from **both** of their own ROMs (patch + build script). Nothing from either ROM is distributed.
+Legal note: like everything else, each patched ROM is produced on the player's machine from their own ROM (patch + build script). Nothing from either ROM is distributed.
 
 ## 5. Verification
 
@@ -95,7 +97,7 @@ Legal note: like everything else, the merged ROM is produced on the player's mac
 
 | Area | Change |
 |---|---|
-| [03 Phase 1](03-phase1-rom-overhaul.md) | New work packages: **WP-D1** content inventory, **WP-D2** in-game sources for every chip, **WP-D3** boss rematch system, **WP-D4** cross-version merge (Option A). WP-B1 now aims at *all* Souls of both versions |
+| [03 Phase 1](03-phase1-rom-overhaul.md) | New work packages: **WP-D1** content inventory, **WP-D2** in-game sources for every chip, **WP-D3** boss rematch system, **WP-D4** cross-version merge (built as Option C, two complete patches). WP-B1 now aims at *all* Souls of both versions |
 | [decomp](decomp/README.md) | DC-4 (Blue Moon variant) becomes the cross-version diff for WP-D4. Priority up |
 | [emulation-layer](emulation-layer/README.md) | Every port loads the definitive ROM. PET gets a completion checklist screen |
 | [09 milestones](09-milestones.md) | "Definitive" release criteria = C1–C5 |

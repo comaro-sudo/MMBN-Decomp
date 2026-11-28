@@ -49,7 +49,7 @@ All are static reading of the decomp, checked against the ROMs and the community
 | [pending/tier-a-leftovers-and-qol.md](pending/tier-a-leftovers-and-qol.md) | Story-battle rewards, ToyRobo, cutscene skip, other boss rematches | **Open** (saved for later) |
 | [pending/free-tournament-secret-chips.md](pending/free-tournament-secret-chips.md) | The Free Tournament fix for the 36 secret chips | Historical: built (WP-D4, PASS in-game); read for the reasoning |
 | [pending/duo-soul.md](pending/duo-soul.md) | Plan for a 13th Soul | Historical: built (WP-D4 Duo, PASS in-game) |
-| [pending/boss-double-hp.md](pending/boss-double-hp.md) | Extra difficulty with double boss HP | Historical, status line stale: the SP+ tier (WP-D3, 4,095 HP, ATK x1.5) covers the request; check it against this plan |
+| [pending/boss-double-hp.md](pending/boss-double-hp.md) | Extra difficulty with double boss HP | Historical: built as SP+ (WP-D3, PASS in-game; 4,095 HP, ATK x1.5, Speed x1.25) |
 
 ## Design inputs: [design/](design/design-document.md)
 

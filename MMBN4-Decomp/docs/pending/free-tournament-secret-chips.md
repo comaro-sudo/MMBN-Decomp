@@ -1,6 +1,6 @@
 # Pending owner decision: the Free Tournament fix for the 36 secret chips
 
-Written by Claude, 2026-11-23, from Gemini's RE-04 note ([`decomp/notes/re04-tournaments-remainder.md`](../../decomp/notes/re04-tournaments-remainder.md)) and RE-06. **The owner hasn't decided yet.** See also [`../completion/chips.md`](../completion/chips.md) §3.
+Written by Claude, 2026-11-23, from Gemini's RE-04 note ([`decomp/notes/re04-tournaments-remainder.md`](../../decomp/notes/re04-tournaments-remainder.md)) and RE-06. **Status (2026-11-27): built and PASS in-game.** Package `wp_d4_free_tournament.asm` (WP-D4, `patch/README.md`, "Fixed brackets, the Free Tournament and the friendly matches"); test: 7 Soul Navis fielded with no traded Navis, RS and BM (Gemini, `c9d36cf`; `decomp/notes/patch-test-results*.md`). The text below is the original design record, written before the decision. See also [`../completion/chips.md`](../completion/chips.md) §3.
 
 ## How the Free Tournament works today
 
