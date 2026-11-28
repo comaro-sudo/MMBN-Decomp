@@ -28,6 +28,8 @@ To record during identification (BN4's DC-1 checklist): header title and game co
 | Fan wikis, chip/enemy data sheets | Cross-checks for tables | Not searched yet |
 | Other public BN1 disassemblies or decomps | GitHub repository search (`battle network disassembly`, `rockman exe decomp`, read 2026-11-27) returned only Silenthal/bn1, dism-exe/bn6f (BN6) and LanHikari22/bn6f-modding (BN6). No other BN1 disassembly or decomp found; a search by that API is not exhaustive | Negative result, not proof of absence |
 
+A fuller list of public documentation (RAM/ROM maps, text formats, tables, save format, tools), with licences and unconfirmed points, is in [resources.md](resources.md).
+
 First action of B1-0: read Silenthal/bn1 fully (licence, symbol coverage, build method) and decide with the owner whether to **import its work, fork it, or start from our own pipeline**. This matters for licence and attribution.
 
 ## 3. What BN4's toolchain gives us
