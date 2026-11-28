@@ -32,7 +32,7 @@ Violet Eclipse is a fan patch for **Mega Man Battle Network 4**. It lets you fin
 **Every boss, as often as you like**
 - **Rematches in Higsby's shop:** the operators of all 12 Soul Navis wait in and outside Higsby's. Each one appears once you own that Navi's Soul. JunkMan has no operator: jack into the trash can on the ACDC street.
   - Each Navi climbs V1 → V2 → V3 → SP → **SP+** as you beat it with an S rank.
-- **Duo rematches:** after the ending, find Duo's crest in Meteor Comp 1. It climbs Duo → α → β → Ω → SP+ with S ranks.
+- **Duo rematches:** after the ending, find Duo's signal in Meteor Comp 1. It climbs Duo → α → β → Ω → SP+ with S ranks.
 - **SP+**, the new top difficulty, after an S rank on the SP (or Duo Ω) fight: 4,095 HP, damage to you ×1.5, speed ×1.25. It also covers the roaming SP bosses. Winning pays 15,000 Zenny (80%) or 50 BugFrags (20%).
 
 **Quality of life**
@@ -47,11 +47,11 @@ Violet Eclipse is a fan patch for **Mega Man Battle Network 4**. It lets you fin
 | What | Where |
 |---|---|
 | Rematch operators (9) and the Frequency Tuner | Inside Higsby's shop, ACDC Town |
-| 2 more operators and the trash can (JunkMan) | The ACDC Town street outside Higsby's |
-| Friendly matches | DenDome Hall, the Castillo waiting room, the Colosseum lobby (during each tournament, before the final) |
-| Duo's crest (rematches) | Meteor Comp 1, after the ending |
-| Z-Saver | A Blue Mystery Data in a hidden dead end of Undernet 1 |
-| Grand Prix Power | A Blue Mystery Data on a quiet round pad in ACDC Area 2 |
+| 2 more operators and the trash can (JunkMan) | ACDC Town street; the trash can is on the sidewalk at the front-right corner of Higsby's, under the awning |
+| Friendly matches (9: three per tournament) | DenDome Hall (Den Battle), the Castillo waiting room (Eagle/Hawk), the Colosseum lobby (Red Sun/Blue Moon). They stand there during the first two rounds of each tournament (Dex only after the AquaMan fight, Raika only before the Chaud fight) and disappear once you own that Navi's Soul |
+| Duo's signal, a crest-shaped marker (rematches) | Meteor Comp 1, right by the jack-in point, after the ending (jack in at the Space Center) |
+| Z-Saver | A Blue Mystery Data in a hidden red dead-end spur of Undernet 1, tucked under the western yellow bridge |
+| Grand Prix Power | A Blue Mystery Data on the quiet round dead-end pad on the lower-left peninsula of ACDC Area 2 |
 
 ## Saves
 
